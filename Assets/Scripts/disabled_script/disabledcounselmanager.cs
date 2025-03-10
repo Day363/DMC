@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class artlikeuscounselmanage : MonoBehaviour
+public class disabledcounselmanager : MonoBehaviour
 {
     public GameObject player;
-    public GameObject artlikeuscam;
+    public GameObject disabledcam;
     public GameObject slashcore;
     public float distance;
 
     private void Start()
     {
-        artlikeuscam.SetActive(true);
+        disabledcam.SetActive(true);
     }
     private void Update()
     {
@@ -21,8 +21,8 @@ public class artlikeuscounselmanage : MonoBehaviour
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<Animator>().ResetTrigger("running");
             player.GetComponent<Animator>().SetBool("idle", true);
-            artlikeuscam.GetComponent<Animator>().SetBool("counsel", true);
-            artlikeuscam.GetComponent<Animator>().SetBool("playerlook", false);
+            disabledcam.GetComponent<Animator>().SetBool("counsel", true);
+            disabledcam.GetComponent<Animator>().SetBool("playerlook", false);
             slashcore.GetComponent<playerslashtest>().canattack = false;
         }
     }

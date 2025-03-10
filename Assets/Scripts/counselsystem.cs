@@ -15,25 +15,37 @@ public class counselsystem : MonoBehaviour
     public TMP_Text counseltext;
     public float delay;
     public bool telling = false;
+    public bool counseling = true;
     public GameObject playerchat;
     public GameObject selfchat;
 
-
-    IEnumerator Typing(string text, float d)
+    private void Update()
     {
-        int count = 0;
-
-        while (count != text.Length)
+        if (counseling)
         {
-            if (count < text.Length)
+            if (Input.GetMouseButtonDown(0) && !telling)
             {
-                counseltext.text += text[count].ToString();
-                count++;
+                counseltext.text = null;
+                telling = true;
             }
-
-            yield return new WaitForSeconds(d);
         }
 
-        telling = false;
+        IEnumerator Typing(string text, float d)
+        {
+            int count = 0;
+
+            while (count != text.Length)
+            {
+                if (count < text.Length)
+                {
+                    counseltext.text += text[count].ToString();
+                    count++;
+                }
+
+                yield return new WaitForSeconds(d);
+            }
+
+            telling = false;
+        }
     }
 }

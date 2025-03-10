@@ -7,10 +7,14 @@ using System.Text.RegularExpressions;
 [System.Serializable]
 public class RowArray
 {
+    [TextArea]
     public string[] text;
 }
 public class counseltext_test : MonoBehaviour
 {
+    public GameObject player;
+    public GameObject slashcore;
+    public GameObject cam;
     public GameObject self;
     public TMP_Text counseltext;
     public GameObject answerbuttonset;
@@ -25,7 +29,7 @@ public class counseltext_test : MonoBehaviour
     public int textnumber = 0;
     public float delay;
     public bool telling = false;
-    public bool counselling = true;
+    public bool counselling = false;
     public bool answeringnow = false;
     private string[] textbundle;
     private string[] answerbundle;
@@ -41,11 +45,13 @@ public class counseltext_test : MonoBehaviour
     public string answerroutetext;
     public int answerroute;
     public int animationcontrol;
+    public int cinemachinecontrol;
     public bool end = false;
 
     private void Awake()
     {
         counselmanager.GetComponent<CounselManager_test>().counselingentity = self;
+        counseltext.text = "...";
     }
 
     private void Update()
@@ -69,6 +75,20 @@ public class counseltext_test : MonoBehaviour
                 {
                     animationcontrol = int.Parse(Regex.Replace(textbundle[textnumber], @"\D", ""));
                     GetComponent<entityanimation>().Animationtrigger(animationcontrol);
+                    textnumber++;
+                }
+
+                if (textbundle[textnumber].Contains("$"))
+                {
+                    cinemachinecontrol = int.Parse(Regex.Replace(textbundle[textnumber], @"\D", ""));
+                    GetComponent<cinemachinecontrol>().Cinemachinetrigger(cinemachinecontrol);
+                    textnumber++;
+                }
+
+                if (textbundle[textnumber].Contains("Sn"))
+                {
+                    cinemachinecontrol = int.Parse(Regex.Replace(textbundle[textnumber], @"\D", ""));
+                    GetComponent<cinemachinecontrol>().Cinemachinetriggern(cinemachinecontrol);
                     textnumber++;
                 }
 
@@ -101,6 +121,8 @@ public class counseltext_test : MonoBehaviour
                     counselling = false;
                     counsellngbar.SetActive(false);
                     end = true;
+                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    counselling = false;
                 }
 
                 if (textbundle[textnumber].Contains("cLear"))
@@ -110,6 +132,10 @@ public class counseltext_test : MonoBehaviour
                     self.SetActive(false);
                     end = true;
                     TV.SetActive(true);
+                    player.GetComponent<PlayerMove>().canmove = true;
+                    cam.SetActive(false);
+                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    counselling = false;
                 }
 
                 if (textbundle[textnumber].Contains("fAil"))
@@ -119,6 +145,10 @@ public class counseltext_test : MonoBehaviour
                     self.SetActive(false);
                     end = true;
                     TV.SetActive(true);
+                    player.GetComponent<PlayerMove>().canmove = true;
+                    cam.SetActive(false);
+                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    counselling = false;
                 }
 
                 if (!answeringnow && !end)
