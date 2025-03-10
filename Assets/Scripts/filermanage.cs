@@ -13,6 +13,7 @@ public class filermanage : MonoBehaviour
     {
         background.SetActive(true);
         player.GetComponent<PlayerMove>().canmove = false;
+        filercamera.SetActive(true);
     }
 
     private void Update()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerslashtest : MonoBehaviour
 {
     public GameObject[] slashs;
+    public bool canattack = true;
     public int slashnumber = 0;
     
     public void Update()
@@ -22,16 +23,20 @@ public class playerslashtest : MonoBehaviour
         // 오브젝트 회전 적용
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        if (Input.GetMouseButtonDown(0))
+        if (canattack)
         {
-            if (slashnumber == 2)
+            if (Input.GetMouseButtonDown(0))
             {
-                slashnumber = 0;
+                if (slashnumber == 2)
+                {
+                    slashnumber = 0;
+                }
+                slashs[slashnumber].SetActive(true);
+                slashs[slashnumber].GetComponent<Animator>().SetBool("attack", true);
+                slashnumber = slashnumber + 1;
             }
-            slashs[slashnumber].SetActive(true);
-            slashs[slashnumber].GetComponent<Animator>().SetBool("attack", true);
-            slashnumber = slashnumber + 1;
         }
+        
     }
 }
 
