@@ -18,14 +18,7 @@ public class disabledattack : MonoBehaviour
         {
             if(collision.gameObject.tag == "playerattack")
             {
-                float angle1 = Random.Range(0, 361);
-                float angle2 = Random.Range(0, 361);
-                Vector3 collisionsite = new Vector3(collision.transform.position.x, collision.transform.position.y, 0);
-                Debug.Log("Ãæµ¹");
-                self.SetActive(false);
-                Instantiate(effect1, collisionsite, Quaternion.Euler(0, 0, angle1));
-                Instantiate(effect2, collisionsite, Quaternion.Euler(0, 0, angle2));
-
+                self.GetComponent<PolygonCollider2D>().enabled = false;
             }
         }
 

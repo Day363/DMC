@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower;
     public bool isJump = false;
     public bool canmove = true;
+    public int dir = 1;
 
     Rigidbody2D rigid;
 
@@ -25,11 +26,13 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 GetComponent<SpriteRenderer>().flipX = true;
+                dir = -1;
             }
 
             if (Input.GetAxisRaw("Horizontal") > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;
+                dir = 1;
             }
 
             //Jump

@@ -121,7 +121,7 @@ public class counseltext_test : MonoBehaviour
                     counselling = false;
                     counsellngbar.SetActive(false);
                     end = true;
-                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    slashcore.GetComponent<attackcore>().canattack = true;
                     counselling = false;
                 }
 
@@ -134,7 +134,7 @@ public class counseltext_test : MonoBehaviour
                     TV.SetActive(true);
                     player.GetComponent<PlayerMove>().canmove = true;
                     cam.SetActive(false);
-                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    slashcore.GetComponent<attackcore>().canattack = true;
                     counselling = false;
                 }
 
@@ -147,7 +147,7 @@ public class counseltext_test : MonoBehaviour
                     TV.SetActive(true);
                     player.GetComponent<PlayerMove>().canmove = true;
                     cam.SetActive(false);
-                    slashcore.GetComponent<playerslashtest>().canattack = true;
+                    slashcore.GetComponent<attackcore>().canattack = true;
                     counselling = false;
                 }
 
