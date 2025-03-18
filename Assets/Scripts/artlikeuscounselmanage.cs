@@ -23,7 +23,7 @@ public class artlikeuscounselmanage : MonoBehaviour
             player.GetComponent<Animator>().SetBool("idle", true);
             artlikeuscam.GetComponent<Animator>().SetBool("counsel", true);
             artlikeuscam.GetComponent<Animator>().SetBool("playerlook", false);
-            slashcore.GetComponent<playerslashtest>().canattack = false;
+            slashcore.GetComponent<attackcore>().canattack = false;
         }
     }
 }

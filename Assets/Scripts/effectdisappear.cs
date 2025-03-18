@@ -6,8 +6,13 @@ public class effectdisappear : MonoBehaviour
 {
     public GameObject self;
 
+    public void Awake()
+    {
+        self = gameObject;
+    }
+
     public void EffectDisappear()
     {
-        self.SetActive(false);
+        Destroy(self);
     }
 }

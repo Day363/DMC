@@ -23,7 +23,7 @@ public class disabledcounselmanager : MonoBehaviour
             player.GetComponent<Animator>().SetBool("idle", true);
             disabledcam.GetComponent<Animator>().SetBool("counsel", true);
             disabledcam.GetComponent<Animator>().SetBool("playerlook", false);
-            slashcore.GetComponent<playerslashtest>().canattack = false;
+            slashcore.GetComponent<attackcore>().canattack = false;
         }
     }
 }

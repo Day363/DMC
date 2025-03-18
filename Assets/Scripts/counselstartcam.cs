@@ -23,7 +23,7 @@ public class counselstartcam : MonoBehaviour
             player.GetComponent<Animator>().SetBool("idle", true);
             cam.GetComponent<Animator>().SetBool("counsel", true);
             cam.GetComponent<Animator>().SetBool("playerlook", false);
-            slashcore.GetComponent<playerslashtest>().canattack = false;
+            slashcore.GetComponent<attackcore>().canattack = false;
         }
     }
 }
