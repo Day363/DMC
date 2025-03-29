@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        //maxSpeed = GetComponent<playerhealth>().speed;
+
         if (canmove)
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
@@ -94,8 +96,21 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Animator>().SetBool("jump", false);
             GetComponent<Animator>().SetBool("jumpend", true);
             GetComponent<Animator>().SetBool("knockback", false);
-            canmove = true;
         }
+    }
+
+    public void Stiff(int second)
+    {
+        canmove = false;
+        GetComponent<Animator>().SetBool("stiffness", true);
+        StartCoroutine(Waitforstiff(second));
+    }
+
+    IEnumerator Waitforstiff(int csecond)
+    {
+        yield return new WaitForSeconds(csecond);
+        GetComponent<Animator>().SetBool("stiffness", false);
+        canmove = true;
     }
 
 }

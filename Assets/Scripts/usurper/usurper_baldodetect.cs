@@ -10,6 +10,7 @@ public class usurper_baldodetect : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            usurper.GetComponent<usurper_script>().Counselcam();
             usurper.GetComponent<usurper_script>().BaldoDetected();
         }
     }
