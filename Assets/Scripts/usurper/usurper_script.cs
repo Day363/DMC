@@ -15,9 +15,14 @@ public class usurper_script : MonoBehaviour
     public GameObject baldowaring2;
     public GameObject baldoeffect;
     public GameObject usurpercam;
+    public GameObject star;
+    public GameObject range;
+    public int rangecooltime;
+    public int rangecool = 0;
     public bool whileattack = false;
     public bool walk = false;
     public int direction;
+    public float movespeed;
     public int attackrushpower;
     public int attackrange;
     public int rushattackrange;
@@ -31,12 +36,19 @@ public class usurper_script : MonoBehaviour
     public int walkspeed;
     public Vector2 baldopos;
     public Vector2 rushpos;
+    public Vector2 playerposition;
 
     public void Update()
     {
 
         Transform playerpos = player.GetComponent<Transform>();
         Transform disabledpos = GetComponent<Transform>();
+
+        rangecool = rangecool + 1;
+        if (rangecool >= rangecooltime)
+        {
+            GetComponent<Animator>().SetBool("rangeready", true);
+        }
 
         if (!whileattack)
         {
@@ -53,11 +65,12 @@ public class usurper_script : MonoBehaviour
             }
         }
 
-        if (whileattack)
+        if (!whileattack)
         {
             if (walk)
             {
-
+                playerposition = new Vector2(player.transform.position.x, gameObject.transform.position.y);
+                gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, playerposition, movespeed);
             }
         }
 
@@ -95,10 +108,12 @@ public class usurper_script : MonoBehaviour
         if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > attackrange)
         {
             gameObject.GetComponent<Animator>().SetBool("walk", true);
+            walk = true;
         }
         else
         {
             gameObject.GetComponent<Animator>().SetBool("walk", false);
+            walk = false;
         }
 
         if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > baldorange)
@@ -109,6 +124,11 @@ public class usurper_script : MonoBehaviour
         {
             gameObject.GetComponent<Animator>().SetBool("baldo", false);
         }
+    }
+
+    public void Starappear()
+    {
+        star.SetActive(true);
     }
 
     public void startRush()
@@ -236,6 +256,21 @@ public class usurper_script : MonoBehaviour
     public void Rushendrush()
     {
         GetComponent<Rigidbody2D>().AddForce(Vector2.right * direction * -1 * rushpower, ForceMode2D.Impulse);
+    }
+
+    public void Misile()
+    {
+        star.GetComponent<usurper_star_script>().Attack4();
+    }
+
+    public void Rangeready()
+    {
+        range.SetActive(true);
+    }
+
+    public void Range()
+    {
+        range.GetComponent<usurper_range>().StartShoot();
     }
 
     public void Walk()
