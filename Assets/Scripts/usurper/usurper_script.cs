@@ -17,6 +17,8 @@ public class usurper_script : MonoBehaviour
     public GameObject usurpercam;
     public GameObject star;
     public GameObject range;
+    public int awaypower;
+    public int uppower;
     public int rangecooltime;
     public int rangecool = 0;
     public bool whileattack = false;
@@ -261,6 +263,18 @@ public class usurper_script : MonoBehaviour
     public void Misile()
     {
         star.GetComponent<usurper_star_script>().Attack4();
+    }
+
+    public void GoAway()
+    {
+        if (direction == -1)
+        {
+            player.GetComponent<playerhit>().FlyAway(-awaypower, uppower);
+        }
+        else
+        {
+            player.GetComponent<playerhit>().FlyAway(awaypower, uppower);
+        }
     }
 
     public void Rangeready()

@@ -29,11 +29,11 @@ public class slowdown : Effect
 
     public override void ApplyEffect()
     {
-        player.GetComponent<playerhealth>().speed = player.GetComponent<playerhealth>().speed - slowint;
+        player.GetComponent<playerstatus>().speed = player.GetComponent<playerstatus>().speed - slowint;
     }
 
     public override void RemoveEffect()
     {
-        player.GetComponent<playerhealth>().speed = player.GetComponent<playerhealth>().speed + slowint;
+        player.GetComponent<playerstatus>().speed = player.GetComponent<playerstatus>().speed + slowint;
     }
 }

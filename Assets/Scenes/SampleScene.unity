@@ -2947,81 +2947,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &22745952
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 22745953}
-  - component: {fileID: 22745955}
-  - component: {fileID: 22745954}
-  m_Layer: 5
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &22745953
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22745952}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1241872582}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &22745954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22745952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &22745955
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22745952}
-  m_CullTransparentMesh: 1
 --- !u!1 &24057768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6970,6 +6895,7 @@ GameObject:
   - component: {fileID: 61392322}
   - component: {fileID: 61392323}
   - component: {fileID: 61392324}
+  - component: {fileID: 61392325}
   m_Layer: 10
   m_Name: brightbaldohitbox
   m_TagString: playerattack
@@ -7042,6 +6968,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &61392325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61392321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &61581646
 GameObject:
   m_ObjectHideFlags: 0
@@ -13547,7 +13491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &117313734
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13711,6 +13655,8 @@ MonoBehaviour:
   usurpercam: {fileID: 1506650649}
   star: {fileID: 534520040}
   range: {fileID: 2092201848}
+  awaypower: 500
+  uppower: 30
   rangecooltime: 0
   rangecool: 0
   whileattack: 0
@@ -31658,7 +31604,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 267807655}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &268145643
@@ -34174,11 +34120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 43.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 21.73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34234,27 +34180,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 43.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 21.73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 21.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.865
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
@@ -34269,6 +34215,7 @@ GameObject:
   - component: {fileID: 290418996}
   - component: {fileID: 290418997}
   - component: {fileID: 290418998}
+  - component: {fileID: 290418999}
   m_Layer: 10
   m_Name: brightslash1hotbox
   m_TagString: playerattack
@@ -34346,6 +34293,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &290418999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290418995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &291597334
 GameObject:
   m_ObjectHideFlags: 0
@@ -35892,7 +35857,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 299815679}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &299870878
@@ -41879,7 +41844,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 360190445}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &360377841
@@ -42274,6 +42239,7 @@ GameObject:
   - component: {fileID: 362323204}
   - component: {fileID: 362323205}
   - component: {fileID: 362323206}
+  - component: {fileID: 362323207}
   m_Layer: 10
   m_Name: swordbigslash2_hitbox
   m_TagString: playerattack
@@ -42349,6 +42315,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &362323207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362323203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &362574823
 GameObject:
   m_ObjectHideFlags: 0
@@ -43674,7 +43658,8 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 712102144}
   m_Instructions: []
   m_DefaultBlend:
     m_Style: 1
@@ -52473,7 +52458,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -52490,7 +52475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -57360,7 +57345,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 478783756}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &479244539
@@ -59928,7 +59913,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 497269720}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &497491400
@@ -60964,6 +60949,7 @@ GameObject:
   - component: {fileID: 504462225}
   - component: {fileID: 504462226}
   - component: {fileID: 504462227}
+  - component: {fileID: 504462228}
   m_Layer: 10
   m_Name: swordrepeat_hitbox1
   m_TagString: playerattack
@@ -61038,6 +61024,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 3343015552716755810, guid: 16ed00252f308ad4b97bdd6d77ff05f0, type: 3}
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
+--- !u!114 &504462228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504462224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &505083761
 GameObject:
   m_ObjectHideFlags: 0
@@ -64376,7 +64380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &534520041
 Animator:
   serializedVersion: 3
@@ -73575,6 +73579,7 @@ GameObject:
   - component: {fileID: 604271110}
   - component: {fileID: 604271111}
   - component: {fileID: 604271112}
+  - component: {fileID: 604271113}
   m_Layer: 10
   m_Name: swordrepeat_hitbox2
   m_TagString: playerattack
@@ -73650,6 +73655,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
+--- !u!114 &604271113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604271109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &604919666
 GameObject:
   m_ObjectHideFlags: 0
@@ -78634,7 +78657,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 641570786}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &642181193
@@ -80757,7 +80780,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 655858335}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &656714569
@@ -85891,7 +85914,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 696447950}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &696939431
@@ -91271,7 +91294,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 748861204}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &749704297
@@ -91559,6 +91582,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 204581571}
+  - {fileID: 1525473929}
   m_Father: {fileID: 1995604084}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -91836,7 +91860,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 759426411}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &759444680
@@ -92485,6 +92509,7 @@ GameObject:
   - component: {fileID: 762444027}
   - component: {fileID: 762444028}
   - component: {fileID: 762444029}
+  - component: {fileID: 762444030}
   m_Layer: 10
   m_Name: swordslash2_hitbox
   m_TagString: playerattack
@@ -92555,6 +92580,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 3343015552716755810, guid: 16ed00252f308ad4b97bdd6d77ff05f0, type: 3}
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
+--- !u!114 &762444030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762444026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &762592485
 GameObject:
   m_ObjectHideFlags: 0
@@ -96155,7 +96198,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 793033859}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &794179393
@@ -97131,7 +97174,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 800594667}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &802030946
@@ -98448,6 +98491,7 @@ GameObject:
   - component: {fileID: 811322617}
   - component: {fileID: 811322618}
   - component: {fileID: 811322619}
+  - component: {fileID: 811322620}
   m_Layer: 10
   m_Name: brightstinghitbox
   m_TagString: playerattack
@@ -98518,6 +98562,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &811322620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811322616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &811717730
 GameObject:
   m_ObjectHideFlags: 0
@@ -104102,6 +104164,7 @@ GameObject:
   - component: {fileID: 856363886}
   - component: {fileID: 856363887}
   - component: {fileID: 856363888}
+  - component: {fileID: 856363889}
   m_Layer: 10
   m_Name: swordrepeat_hitbox3
   m_TagString: playerattack
@@ -104177,6 +104240,24 @@ MonoBehaviour:
   - {fileID: 3343015552716755810, guid: 16ed00252f308ad4b97bdd6d77ff05f0, type: 3}
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
+--- !u!114 &856363889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856363885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &856793905
 GameObject:
   m_ObjectHideFlags: 0
@@ -104441,8 +104522,8 @@ GameObject:
   m_Component:
   - component: {fileID: 859976443}
   - component: {fileID: 859976444}
-  m_Layer: 6
-  m_Name: disabledhitbox
+  m_Layer: 11
+  m_Name: disabledfloor
   m_TagString: enemyhitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104472,10 +104553,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03855419, y: 0.13088322}
+  m_Offset: {x: -0.03855419, y: 0.1089738}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -104486,7 +104567,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3855429, y: 2.1870694}
+  m_Size: {x: 1.3855429, y: 2.2308884}
   m_EdgeRadius: 0
 --- !u!1 &860006172
 GameObject:
@@ -107687,7 +107768,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 877548817}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &878458412
@@ -111949,6 +112030,7 @@ GameObject:
   - component: {fileID: 902126974}
   - component: {fileID: 902126975}
   - component: {fileID: 902126976}
+  - component: {fileID: 902126977}
   m_Layer: 10
   m_Name: swordrepeat_hitbox4
   m_TagString: playerattack
@@ -112024,6 +112106,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &902126977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902126973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &902497731
 GameObject:
   m_ObjectHideFlags: 0
@@ -119287,7 +119387,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 951490569}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &952875237
@@ -120190,6 +120290,7 @@ GameObject:
   - component: {fileID: 959725178}
   - component: {fileID: 959725179}
   - component: {fileID: 959725180}
+  - component: {fileID: 959725181}
   m_Layer: 10
   m_Name: sworddownslash_hitbox
   m_TagString: playerattack
@@ -120269,6 +120370,24 @@ MonoBehaviour:
   - {fileID: 3343015552716755810, guid: 16ed00252f308ad4b97bdd6d77ff05f0, type: 3}
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
+--- !u!114 &959725181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959725177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &961469887
 GameObject:
   m_ObjectHideFlags: 0
@@ -127271,7 +127390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: -4.9999847, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1019358728
@@ -134419,7 +134538,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1067617640}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1067846042
@@ -135867,6 +135986,7 @@ GameObject:
   - component: {fileID: 1075368674}
   - component: {fileID: 1075368675}
   - component: {fileID: 1075368676}
+  - component: {fileID: 1075368677}
   m_Layer: 10
   m_Name: brightslash3hitbox
   m_TagString: playerattack
@@ -135947,6 +136067,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &1075368677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075368673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1077496394
 GameObject:
   m_ObjectHideFlags: 0
@@ -146470,7 +146608,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1153814254}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1154746710
@@ -155503,12 +155641,12 @@ GameObject:
   - component: {fileID: 1233421493}
   - component: {fileID: 1233421492}
   - component: {fileID: 1233421495}
-  - component: {fileID: 1233421499}
   - component: {fileID: 1233421496}
   - component: {fileID: 1233421497}
   - component: {fileID: 1233421500}
   - component: {fileID: 1233421501}
   - component: {fileID: 1233421502}
+  - component: {fileID: 1233421498}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -155667,7 +155805,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1233421499
+--- !u!114 &1233421498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155676,11 +155814,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1233421491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b0c0f2bba26915469df0ad7c325d7d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 02724dd2f8c262b46905ce054f2c3faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 0
-  currenthp: 0
+  hpslider: {fileID: 1810738775}
+  max_health: 300
+  health: 0
+  speed: 0
+  attackpower: 10
 --- !u!114 &1233421500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156637,42 +156778,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1241872581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1241872582}
-  m_Layer: 5
-  m_Name: Handle Slide Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1241872582
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241872581}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 22745953}
-  m_Father: {fileID: 1810738774}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1242902273
 GameObject:
   m_ObjectHideFlags: 0
@@ -162108,7 +162213,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1281531392}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1281852800
@@ -165325,7 +165430,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -165342,7 +165447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -166557,7 +166662,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1324991513}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1325361821
@@ -167927,7 +168032,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1339946681}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1340537240
@@ -174593,7 +174698,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1393794984}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1394196047
@@ -180066,6 +180171,7 @@ GameObject:
   - component: {fileID: 1443167546}
   - component: {fileID: 1443167547}
   - component: {fileID: 1443167548}
+  - component: {fileID: 1443167549}
   m_Layer: 10
   m_Name: swordbigslash1_hitbox
   m_TagString: playerattack
@@ -180143,6 +180249,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &1443167549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443167545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1443688830
 GameObject:
   m_ObjectHideFlags: 0
@@ -180994,7 +181118,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1455148532}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1456114391
@@ -183409,7 +183533,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1461468146}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1461540310
@@ -184840,7 +184964,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1472332317}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1472946265
@@ -188321,7 +188445,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1497700135}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1501385870
@@ -190731,7 +190855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1525473929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -190739,19 +190863,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525473928}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_Children:
   - {fileID: 524770308}
   - {fileID: 1018620497}
-  m_Father: {fileID: 1804542038}
-  m_RootOrder: 7
+  m_Father: {fileID: 755688138}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.4841, y: 204.71}
-  m_SizeDelta: {x: 660.82, y: 40.5788}
+  m_AnchoredPosition: {x: 7.3721, y: -31.931}
+  m_SizeDelta: {x: 183.4128, y: 26.609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525473930
 MonoBehaviour:
@@ -190800,7 +190924,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -194186,7 +194310,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1552232765}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1552892529
@@ -201136,6 +201260,7 @@ GameObject:
   - component: {fileID: 1617561660}
   - component: {fileID: 1617561661}
   - component: {fileID: 1617561662}
+  - component: {fileID: 1617561663}
   m_Layer: 10
   m_Name: swordslash1_hitbox
   m_TagString: playerattack
@@ -201207,6 +201332,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 3343015552716755810, guid: 16ed00252f308ad4b97bdd6d77ff05f0, type: 3}
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
+--- !u!114 &1617561663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617561659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1618233942
 GameObject:
   m_ObjectHideFlags: 0
@@ -224087,7 +224230,6 @@ RectTransform:
   - {fileID: 1053991426}
   - {fileID: 847118724}
   - {fileID: 1070813378}
-  - {fileID: 1525473929}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -224549,7 +224691,7 @@ GameObject:
   - component: {fileID: 1810738774}
   - component: {fileID: 1810738775}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: playerhp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224568,14 +224710,13 @@ RectTransform:
   m_Children:
   - {fileID: 508485950}
   - {fileID: 152627889}
-  - {fileID: 1241872582}
   m_Father: {fileID: 2010219123}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 0, y: -161}
+  m_SizeDelta: {x: 227.1008, y: 64.928}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810738775
 MonoBehaviour:
@@ -224617,14 +224758,14 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 22745954}
+  m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 437321640}
-  m_HandleRect: {fileID: 22745953}
+  m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -229365,6 +229506,7 @@ GameObject:
   - component: {fileID: 1850431603}
   - component: {fileID: 1850431604}
   - component: {fileID: 1850431605}
+  - component: {fileID: 1850431606}
   m_Layer: 10
   m_Name: brightslash2hitbox
   m_TagString: playerattack
@@ -229439,6 +229581,24 @@ MonoBehaviour:
   attackeffect:
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &1850431606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850431602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1851313638
 GameObject:
   m_ObjectHideFlags: 0
@@ -235489,7 +235649,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1899662073}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1901666074
@@ -236801,7 +236961,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1907600370}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1907703292
@@ -239104,7 +239264,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1918503820}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1918944010
@@ -242964,6 +243124,7 @@ GameObject:
   - component: {fileID: 1951787832}
   - component: {fileID: 1951787833}
   - component: {fileID: 1951787834}
+  - component: {fileID: 1951787835}
   m_Layer: 10
   m_Name: swordbaldo_hitbox
   m_TagString: playerattack
@@ -243043,6 +243204,24 @@ MonoBehaviour:
   - {fileID: 4706940174425252434, guid: 383e631e9d261d645bba91c0997f6acf, type: 3}
   - {fileID: 1452762499616018365, guid: 24a4fe5efe0d26d459de409b82168fd4, type: 3}
   - {fileID: 344796846634854955, guid: db16371d94dcf0841af3b5296128a7e5, type: 3}
+--- !u!114 &1951787835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951787831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damagenum: 1
+  damage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1951964360
 GameObject:
   m_ObjectHideFlags: 0
@@ -248363,7 +248542,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 1994420322}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &1995448642
@@ -248512,13 +248691,15 @@ GameObject:
   - component: {fileID: 1995604089}
   - component: {fileID: 1995604091}
   - component: {fileID: 1995604092}
+  - component: {fileID: 1995604093}
+  - component: {fileID: 1995604094}
   m_Layer: 6
   m_Name: disabled
   m_TagString: client
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1995604082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248683,7 +248864,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -3.75}
@@ -248809,6 +248990,80 @@ MonoBehaviour:
   disabledcam: {fileID: 2110617226}
   slashcore: {fileID: 1092093709}
   distance: 8
+--- !u!114 &1995604093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995604081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1bb3c4578731b45825987f8f294e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rush1s:
+  - {fileID: 1328811476}
+  rush2s:
+  - {fileID: 763203533}
+  attack1s:
+  - {fileID: 693286142}
+  - {fileID: 1339946681}
+  - {fileID: 793033859}
+  - {fileID: 655858335}
+  - {fileID: 759426411}
+  - {fileID: 2010917517}
+  - {fileID: 1281531392}
+  - {fileID: 641570786}
+  attack2s:
+  - {fileID: 1552232765}
+  - {fileID: 1907600370}
+  - {fileID: 360190445}
+  - {fileID: 1067617640}
+  attack3s:
+  - {fileID: 1899662073}
+  - {fileID: 1153814254}
+  - {fileID: 1497700135}
+  - {fileID: 478783756}
+  attack4s:
+  - {fileID: 1461468146}
+  - {fileID: 1994420322}
+  - {fileID: 800594667}
+  - {fileID: 748861204}
+  - {fileID: 951490569}
+  - {fileID: 1472332317}
+  - {fileID: 1455148532}
+  attack5s: []
+  attack6s:
+  - {fileID: 299815679}
+  attack7s:
+  - {fileID: 1918503820}
+  - {fileID: 877548817}
+  attack8s:
+  - {fileID: 497269720}
+  - {fileID: 1393794984}
+  - {fileID: 267807655}
+  - {fileID: 696447950}
+  - {fileID: 1324991513}
+--- !u!114 &1995604094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995604081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpbar: {fileID: 1525473928}
+  canvas: {fileID: 755688137}
+  hpbarhp: {fileID: 1525473930}
+  maxhealth: 3000
+  currenthealth: 0
+  height: 0
+  side: 0
 --- !u!1 &1995909656
 GameObject:
   m_ObjectHideFlags: 0
@@ -250037,7 +250292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2010219123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -250055,8 +250310,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.00054932, y: 0.0010071}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2010357555
 GameObject:
@@ -250269,7 +250524,7 @@ MonoBehaviour:
   effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
   player: {fileID: 1233421491}
   self: {fileID: 2010917517}
-  damage: 0
+  damage: 10
   lightattack: 0
   heavyattack: 0
 --- !u!1 &2013675888

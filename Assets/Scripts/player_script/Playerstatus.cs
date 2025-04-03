@@ -1,14 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Playerstatus : MonoBehaviour
+public class playerstatus : MonoBehaviour
 {
-    public int maxhp;
-    public int currenthp;
+    [SerializeField]
+    public Slider hpslider;
 
-    public void Start()
+    public float max_health;
+    public float health;
+    public float speed;
+    public int attackpower;
+
+    public void CheckHp()
     {
-        currenthp = maxhp;
+        if (hpslider != null)
+            hpslider.value = health / max_health;
     }
+
+    public void Damage(int damage) 
+    {
+        if (max_health == 0 || health <= 0) 
+            return;
+        health -= damage;
+        CheckHp();
+        if (health <= 0)
+        {
+            //* 체력이 0 이하라 죽음
+        }
+    }
+
+    public void Awake()
+    {
+        health = max_health;
+
+    }
+
 }

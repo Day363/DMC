@@ -18,7 +18,7 @@ public class disabledattack : MonoBehaviour
         {
             if(collision.gameObject.tag == "playerattack")
             {
-                self.GetComponent<PolygonCollider2D>().enabled = false;
+                self.SetActive(false);
             }
         }
 
@@ -35,4 +35,5 @@ public class disabledattack : MonoBehaviour
             player.GetComponent<playerhit>().Hit(damage);
         }
     }
+
 }
