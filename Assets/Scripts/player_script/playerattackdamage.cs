@@ -7,6 +7,7 @@ public class playerattackdamage : MonoBehaviour
     public GameObject player;
     public float damagenum;
     public int damage;
+    public bool fixdam;
     public bool slash;
     public bool penetrate;
     public bool blow;
@@ -15,9 +16,29 @@ public class playerattackdamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "client")
         {
-            damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-            Debug.Log(collision.name);
-            collision.GetComponent<boss_hpbar>().Damage(damage);
+            if (fixdam)
+            {
+                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                collision.GetComponent<boss_hpbar>().Damage(damage);
+            }
+
+            if (slash)
+            {
+                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                collision.GetComponent<boss_hpbar>().SlashDamage(damage);
+            }
+
+            if (penetrate)
+            {
+                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                collision.GetComponent<boss_hpbar>().PenetrateDamage(damage);
+            }
+
+            if (blow)
+            {
+                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                collision.GetComponent<boss_hpbar>().BlowDamage(damage);
+            }
         }
         
     }

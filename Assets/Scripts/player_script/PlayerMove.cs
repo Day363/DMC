@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
         isJump = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //maxSpeed = GetComponent<playerhealth>().speed;
 
@@ -63,17 +63,13 @@ public class PlayerMove : MonoBehaviour
                 GetComponent<Animator>().SetBool("idle", false);
             }
         }
-    }
 
-
-    void FixedUpdate()      
-    {
         if (canmove)
         {
             float h = Input.GetAxisRaw("Horizontal");
             rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
-            
+
 
             if (rigid.velocity.x > maxSpeed)
             {
@@ -86,8 +82,6 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
-
-
 
     void OnCollisionEnter2D(Collision2D collision2D)
     {
