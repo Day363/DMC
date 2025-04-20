@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class playerstatus : MonoBehaviour
 {
     [SerializeField]
     public Slider hpslider;
+    public TMP_Text hptext;
 
     public float max_health;
     public float health;
@@ -16,7 +18,10 @@ public class playerstatus : MonoBehaviour
     public void CheckHp()
     {
         if (hpslider != null)
+        {
             hpslider.value = health / max_health;
+            hptext.text = health.ToString();
+        }
     }
 
     public void Damage(int damage) 

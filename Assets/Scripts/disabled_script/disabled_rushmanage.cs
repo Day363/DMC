@@ -34,10 +34,17 @@ public class disabled_rushmanage : MonoBehaviour
     public float attack4speed;
     public bool nowflying = false;
 
+    public bool phase2 = false;
+    public float phase2rushpower;
+    public float phase2rushdistance;
+    public int phase2skillselec;
+    public float phase2attackrush;
+    public float phase2attacbigkrush;
+    public int deathattackcooltime;
+    public int deathattckcool;
 
-    public void Update()
+    public void FixedUpdate()
     {
-        
         Transform playerpos = player.GetComponent<Transform>();
         Transform disabledpos = GetComponent<Transform>();
 
@@ -55,7 +62,7 @@ public class disabled_rushmanage : MonoBehaviour
                 hitbox.GetComponent<disabledhitboxscript>().direction = 1;
             }
         }
-            
+
         if (!whileattack)
         {
             if (direction < 0)
@@ -69,141 +76,203 @@ public class disabled_rushmanage : MonoBehaviour
             }
         }
 
-        if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) > rushrange)
+        if (!phase2)
         {
-            attack4cool = attack4cool + 1;
-            attack5cool = attack5cool + 1;
-            tomove = true;
-            if (attack5cool > attack5cooldown)
+            if (GetComponent<boss_hpbar>().maxhealth / 2 >= GetComponent<boss_hpbar>().currenthealth)
             {
-                GetComponent<Animator>().SetBool("attack5", true);
+                Start2Phase();
             }
 
-            if (attack4cool > attack4cooldown)
+            if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) > rushrange)
             {
-                GetComponent<Animator>().SetBool("attack4", true);
-            }
-        }
-
-        if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) < rushrange)
-        {
-            tomove = false;
-            
-            if (skillselec == 1)
-            {
-                GetComponent<Animator>().SetBool("attack1", true);
-            }
-
-            if (skillselec == 2)
-            {
-                GetComponent<Animator>().SetBool("attack2", true);
-            }
-
-            if (skillselec == 3)
-            {
-                GetComponent<Animator>().SetBool("attack6", true);
-            }
-
-            if (skillselec == 4)
-            {
-                GetComponent<Animator>().SetBool("attack7", true);
-            }
-
-            if (skillselec == 5)
-            {
-                GetComponent<Animator>().SetBool("attack8", true);
-            }
-        }
-
-
-        if (attack4move)
-        {
-            attack4speed = Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) / attack4speedlow;
-            
-            if (direction == -1)
-            {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.left * attack4speed, ForceMode2D.Impulse);
-            }
-            
-            if (direction == 1)
-            {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * attack4speed, ForceMode2D.Impulse);
-            }
-            
-
-            if (nowflying)
-            {
-                if (Vector2.Distance(new Vector2(0, self.GetComponent<Transform>().position.y), new Vector2(0, floor.GetComponent<Transform>().position.y)) < 10.6)
+                attack4cool = attack4cool + 1;
+                attack5cool = attack5cool + 1;
+                tomove = true;
+                if (attack5cool > attack5cooldown)
                 {
-                    GetComponent<Animator>().SetBool("attack4end", true);
+                    GetComponent<Animator>().SetBool("attack5", true);
+                }
+
+                if (attack4cool > attack4cooldown)
+                {
+                    GetComponent<Animator>().SetBool("attack4", true);
                 }
             }
-            
-        }
 
-        if (tomove)
-        {
-            if (rushselec < 2)
+            if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) < rushrange)
             {
-                GetComponent<Animator>().SetBool("rush1", true);
+                tomove = false;
+
+                if (skillselec == 1)
+                {
+                    GetComponent<Animator>().SetBool("attack1", true);
+                }
+
+                if (skillselec == 2)
+                {
+                    GetComponent<Animator>().SetBool("attack2", true);
+                }
+
+                if (skillselec == 3)
+                {
+                    GetComponent<Animator>().SetBool("attack6", true);
+                }
+
+                if (skillselec == 4)
+                {
+                    GetComponent<Animator>().SetBool("attack7", true);
+                }
+
+                if (skillselec == 5)
+                {
+                    GetComponent<Animator>().SetBool("attack8", true);
+                }
             }
 
-            if (rushselec > 1)
+
+            if (attack4move)
             {
-                GetComponent<Animator>().SetBool("rush2", true);
+                attack4speed = Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) / attack4speedlow;
+
+                if (direction == -1)
+                {
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * attack4speed, ForceMode2D.Impulse);
+                }
+
+                if (direction == 1)
+                {
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * attack4speed, ForceMode2D.Impulse);
+                }
+
+
+                if (nowflying)
+                {
+                    if (Vector2.Distance(new Vector2(0, self.GetComponent<Transform>().position.y), new Vector2(0, floor.GetComponent<Transform>().position.y)) < 10.6)
+                    {
+                        GetComponent<Animator>().SetBool("attack4end", true);
+                    }
+                }
+
+            }
+
+            if (tomove)
+            {
+                if (rushselec < 2)
+                {
+                    GetComponent<Animator>().SetBool("rush1", true);
+                }
+
+                if (rushselec > 1)
+                {
+                    GetComponent<Animator>().SetBool("rush2", true);
+                }
+            }
+
+            if (attack3cool > attack3cooldown)
+            {
+                GetComponent<Animator>().SetBool("attack3", true);
+            }
+
+
+
+            if (bombtime)
+            {
+                bombgo = bombgo + 1;
+
+                if (bombgo == 100)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 130)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 190)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 230)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 240)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 250)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                }
+
+                if (bombgo == 300)
+                {
+                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
+                    bombtime = false;
+                    bombgo = 0;
+                }
+            }
+
+            attack3cool = attack3cool + 1;
+        }
+
+        if (phase2)
+        {
+            deathattckcool = deathattckcool + 1;
+
+            if(Vector2.Distance(player.transform.position, gameObject.transform.position) > phase2rushdistance)
+            {
+                tomove = true;
+            }
+
+            if (tomove)
+            {
+                if (rushselec < 2)
+                {
+                    GetComponent<Animator>().SetBool("2phase_rush1", true);
+                }
+
+                if (rushselec > 1)
+                {
+                    GetComponent<Animator>().SetBool("2phase_rush2", true);
+                }
+            }
+
+            if (Vector2.Distance(player.transform.position, gameObject.transform.position) < phase2rushdistance)
+            {
+                tomove = false;
+                if(deathattckcool >= deathattackcooltime)
+                {
+                    GetComponent<Animator>().SetBool("2phase_deathattack", true);
+                }
+
+                if (phase2skillselec == 1)
+                {
+                    GetComponent<Animator>().SetBool("2phase_attack1", true);
+                }
+
+                if (phase2skillselec == 2)
+                {
+                    GetComponent<Animator>().SetBool("2phase_attack2", true);
+                }
+
+                if (phase2skillselec == 3)
+                {
+                    GetComponent<Animator>().SetBool("2phase_attack3", true);
+                }
+
+                if (phase2skillselec == 4)
+                {
+                    GetComponent<Animator>().SetBool("2phase_attack4", true);
+                }
+
             }
         }
-
-        if (attack3cool > attack3cooldown)
-        {
-            GetComponent<Animator>().SetBool("attack3", true);
-        }
-
         
-
-        if (bombtime)
-        {
-            bombgo = bombgo + 1;
-
-            if (bombgo == 100)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 130)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 190)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 230)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 240)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 250)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-            }
-
-            if (bombgo == 300)
-            {
-                Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                bombtime = false;
-                bombgo = 0;
-            }
-        }
-
-        attack3cool = attack3cool + 1;
     }
 
     public void Rush1()
@@ -244,6 +313,11 @@ public class disabled_rushmanage : MonoBehaviour
     public void Whileattack()
     {
         whileattack = true;
+    }
+
+    public void Endattack()
+    {
+        whileattack = false;
     }
 
     public void Rushend()
@@ -332,5 +406,94 @@ public class disabled_rushmanage : MonoBehaviour
         attack4cool = 0;
         GetComponent<Animator>().SetBool("attack4end", false);
         GetComponent<Animator>().SetBool("attack4", false);
+    }
+
+    public void Start2Phase()
+    {
+        GetComponent<Animator>().SetBool("2phase", true);
+        phase2 = true;
+    }
+
+    public void Phase2Rush()
+    {
+        rushselec = Random.Range(1, 3);
+
+        if (direction < 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2rushpower, ForceMode2D.Impulse);
+            GetComponent<Animator>().SetBool("2phase_rush1", false);
+            GetComponent<Animator>().SetBool("2phase_rush2", false);
+
+        }
+
+        if (direction > 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2rushpower, ForceMode2D.Impulse);
+            GetComponent<Animator>().SetBool("2phase_rush1", false);
+            GetComponent<Animator>().SetBool("2phase_rush2", false);
+
+        }
+    }
+
+    public void Phase2Attack1end()
+    {
+        whileattack = false;
+        GetComponent<Animator>().SetBool("2phase_attack1", false);
+        phase2skillselec = Random.Range(1, 5);
+    }
+
+    public void Phase2Attack2end()
+    {
+        whileattack = false;
+        GetComponent<Animator>().SetBool("2phase_attack2", false);
+        phase2skillselec = Random.Range(1, 5);
+    }
+
+    public void Phase2Attack3end()
+    {
+        whileattack = false;
+        GetComponent<Animator>().SetBool("2phase_attack3", false);
+        phase2skillselec = Random.Range(1, 5);
+    }
+
+    public void Phase2Attack4end()
+    {
+        whileattack = false;
+        GetComponent<Animator>().SetBool("2phase_attack4", false);
+        phase2skillselec = Random.Range(1, 5);
+    }
+
+    public void DeathAttackend()
+    {
+        whileattack = false;
+        GetComponent<Animator>().SetBool("2phase_deathattack", false);
+        GetComponent<Animator>().SetBool("2phase_deathattack_success", false);
+        deathattckcool = 0;
+    }
+
+    public void Phase2Attackrush()
+    {
+        if (direction < 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2attackrush, ForceMode2D.Impulse);
+        }
+
+        if (direction > 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attackrush, ForceMode2D.Impulse);
+        }
+    }
+
+    public void Phase2AttackBigrush()
+    {
+        if (direction < 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2attacbigkrush, ForceMode2D.Impulse);
+        }
+
+        if (direction > 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attacbigkrush, ForceMode2D.Impulse);
+        }
     }
 }

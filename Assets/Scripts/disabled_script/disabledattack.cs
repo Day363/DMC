@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class disabledattack : MonoBehaviour
 {
-    public GameObject effect1;
-    public GameObject effect2;
     public GameObject player;
-    public GameObject self;
     public int damage;
     public bool lightattack = false;
     public bool heavyattack = false;
@@ -18,7 +15,7 @@ public class disabledattack : MonoBehaviour
         {
             if(collision.gameObject.tag == "playerattack")
             {
-                self.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
 

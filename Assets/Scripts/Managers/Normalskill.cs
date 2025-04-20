@@ -6,5 +6,11 @@ using UnityEngine;
 public class Normalskill : ScriptableObject
 {
     public string normalskillname;
-    public GameObject skillprefap;
+    public GameObject skill;
+    public bool slash;
+    public bool blow;
+    public bool penetrate;
+
+    public float attackpower;
+    public float boutpower;
 }

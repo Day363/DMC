@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class Weapon : ScriptableObject
 {
     public string weaponname;
-    public Sprite weaponimage;
-    public float damageCoe;
-    public GameObject core;
+    public Image weaponimage;
+    public bool slash;
+    public bool blow;
+    public bool penetrate;
+    public bool core;
+
 }

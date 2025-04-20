@@ -40,7 +40,7 @@ public class usurper_script : MonoBehaviour
     public Vector2 rushpos;
     public Vector2 playerposition;
 
-    public void Update()
+    public void FixedUpdate()
     {
 
         Transform playerpos = player.GetComponent<Transform>();

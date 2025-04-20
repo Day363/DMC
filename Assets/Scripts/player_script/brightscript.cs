@@ -12,13 +12,14 @@ public class brightscript : MonoBehaviour
         if (attackcore.GetComponent<attackcore>().isdelay)
         {
             attackcore.GetComponent<attackcore>().canattack = false;
+            attackcore.GetComponent<attackcore>().canrotate = false;
         }
     }
 
     public void SetCoolEnd()
     {
         attackcore.GetComponent<attackcore>().canattack = true;
-        
+        attackcore.GetComponent<attackcore>().canrotate = true;
     }
 
     public void Setdisappear()
