@@ -496,4 +496,5 @@ public class disabled_rushmanage : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attacbigkrush, ForceMode2D.Impulse);
         }
     }
+
 }

@@ -15,6 +15,14 @@ public class disabledAttackActive : MonoBehaviour
     public GameObject[] attack7s;
     public GameObject[] attack8s;
 
+    public GameObject[] phase2rush1;
+    public GameObject[] phase2rush2;
+    public GameObject[] phase2attack1;
+    public GameObject[] phase2attack2;
+    public GameObject[] phase2attack3;
+    public GameObject[] phase2attack4;
+    public GameObject[] deathattack;
+
     public void ActiveRush1()
     {
         for (int i = 0; i < rush1s.Length; i++)
@@ -30,6 +38,7 @@ public class disabledAttackActive : MonoBehaviour
             rush2s[i].SetActive(true);
         }
     }
+
     public void ActiveAttack1()
     {
         for (int i = 0; i < attack1s.Length; i++)
@@ -91,6 +100,62 @@ public class disabledAttackActive : MonoBehaviour
         for (int i = 0; i < attack8s.Length; i++)
         {
             attack8s[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Rush1()
+    {
+        for (int i = 0; i < phase2rush1.Length; i++)
+        {
+            phase2rush1[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Rush2()
+    {
+        for (int i = 0; i < phase2rush2.Length; i++)
+        {
+            phase2rush2[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Attack1()
+    {
+        for (int i = 0; i < phase2attack1.Length; i++)
+        {
+            phase2attack1[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Attack2()
+    {
+        for (int i = 0; i < phase2attack2.Length; i++)
+        {
+            phase2attack2[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Attack3()
+    {
+        for (int i = 0; i < phase2attack3.Length; i++)
+        {
+            phase2attack3[i].SetActive(true);
+        }
+    }
+
+    public void ActivePhase2Attack4()
+    {
+        for (int i = 0; i < phase2attack4.Length; i++)
+        {
+            phase2attack4[i].SetActive(true);
+        }
+    }
+
+    public void ActiveDeathattack()
+    {
+        for (int i = 0; i < deathattack.Length; i++)
+        {
+            deathattack[i].SetActive(true);
         }
     }
 }

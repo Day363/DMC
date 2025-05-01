@@ -12,13 +12,17 @@ public class disabled_deathattack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            disabled.GetComponent<Animator>().SetBool("2phase_deathattack_success", true);
-            Color color = player.GetComponent<SpriteRenderer>().color;
-            color.a = 0f;
-            player.GetComponent<SpriteRenderer>().color = color;
-            player.GetComponent<PlayerMove>().canmove = false;
-            attackcore.GetComponent<attackcore>().canattack = false;
-            attackcore.SetActive(false);
+            if (collision.gameObject.GetComponent<playerstatus>().max_health / 2 > collision.gameObject.GetComponent<playerstatus>().health)
+            {
+                disabled.GetComponent<disabledcam>().Deathattack();
+                disabled.GetComponent<Animator>().SetBool("2phase_deathattack_success", true);
+                Color color = player.GetComponent<SpriteRenderer>().color;
+                color.a = 0f;
+                player.GetComponent<SpriteRenderer>().color = color;
+                player.GetComponent<PlayerMove>().canmove = false;
+                attackcore.GetComponent<attackcore>().canattack = false;
+                attackcore.SetActive(false);
+            }
         }
         
     }
