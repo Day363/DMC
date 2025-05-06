@@ -24,12 +24,30 @@ public class indexer0_script : MonoBehaviour
     public int rush2power;
     public int backrushpower;
     public int backweakrushpower;
+    public bool run = false;
+    public float runspeed;
+    public int teleportcooltime;
+    public int teleportcool = 0;
+    public int teleportrange;
+    public int teleportposition;
+    public int rangeteleportposition;
+    public Vector2 teleportpos;
+    public bool canmove = true;
 
     public void FixedUpdate()
     {
         if (weapons.Count == 0)
         {
             raincool++;
+        }
+
+        if (teleportcool< teleportcooltime)
+        {
+            teleportcool++;
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("teleport", true);
         }
 
         if (raincool >= rainmincooltime)
@@ -70,25 +88,45 @@ public class indexer0_script : MonoBehaviour
 
         if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > range)
         {
-            gameObject.GetComponent<Animator>().SetBool("walk", true);
+            if (run)
+            {
+                walk = false;
+            }
+            if (!run)
+            {
+                gameObject.GetComponent<Animator>().SetBool("walk", true);
+                walk = true;
+            }
             GetComponent<Animator>().SetBool("range", true);
             GetComponent<Animator>().SetBool("melee", false);
-            walk = true;
         }
         else
         {
             gameObject.GetComponent<Animator>().SetBool("walk", false);
+            gameObject.GetComponent<Animator>().SetBool("run", false);
             GetComponent<Animator>().SetBool("range", false);
             GetComponent<Animator>().SetBool("melee", true);
             walk = false;
+            run = false;
         }
 
-        if (!whileattack)
+        if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > teleportrange)
+        {
+            GetComponent<Animator>().SetBool("teleport", true);
+        }
+
+        if (!whileattack && canmove)
         {
             if (walk)
             {
                 playerposition = new Vector2(player.transform.position.x, gameObject.transform.position.y);
                 gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, playerposition, movespeed);
+            }
+
+            if (!walk && run)
+            {
+                playerposition = new Vector2(player.transform.position.x, gameObject.transform.position.y);
+                gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, playerposition, runspeed);
             }
         }
 
@@ -152,7 +190,7 @@ public class indexer0_script : MonoBehaviour
 
     IEnumerator LandTime()
     {
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.15f);
         rainmanager.GetComponent<indexer0_rainmanager>().land = false;
         yield return new WaitForSeconds(5f);
         GetComponent<Animator>().SetBool("landend", true);
@@ -160,6 +198,14 @@ public class indexer0_script : MonoBehaviour
         whileattack = false;
         GetComponent<Animator>().SetBool("landend", false);
         
+    }
+
+    public void StartRun()
+    {
+        walk = false;
+        gameObject.GetComponent<Animator>().SetBool("walk", false);
+        run = true;
+        gameObject.GetComponent<Animator>().SetBool("run", true);
     }
 
     public void WeakRush()
@@ -323,5 +369,70 @@ public class indexer0_script : MonoBehaviour
         weapons.Remove("shootgun");
         GetComponent<Animator>().SetBool("spear", false);
         GetComponent<Animator>().SetBool("shootgun", false);
+    }
+
+    public void PosTeleport()
+    {
+        if (direction == -1)
+        {
+            teleportpos = new Vector2(player.transform.position.x, gameObject.transform.position.y);
+        }
+        if (direction == 1)
+        {
+            teleportpos = new Vector2(player.transform.position.x, gameObject.transform.position.y);
+        }
+
+        gameObject.transform.position = teleportpos;
+    }
+
+    public void Teleport()
+    {
+        if (direction == -1)
+        {
+            teleportpos = new Vector2(player.transform.position.x + teleportposition, gameObject.transform.position.y);
+        }
+        if (direction == 1)
+        {
+            teleportpos = new Vector2(player.transform.position.x - teleportposition, gameObject.transform.position.y);
+        }
+
+        gameObject.transform.position = teleportpos;
+    }
+
+    public void RangeTeleport()
+    {
+        if (direction == -1)
+        {
+            teleportpos = new Vector2(player.transform.position.x + rangeteleportposition, gameObject.transform.position.y);
+        }
+        if (direction == 1)
+        {
+            teleportpos = new Vector2(player.transform.position.x - rangeteleportposition, gameObject.transform.position.y);
+        }
+
+        gameObject.transform.position = teleportpos;
+    }
+
+    public void TeleportEnd()
+    {
+        teleportcool = 0;
+        GetComponent<Animator>().SetBool("teleport", false);
+    }
+
+    public void AttackEnd()
+    {
+        whileattack = false;
+        canmove = false;
+    }
+
+    public void AttackStart()
+    {
+        whileattack = true;
+        canmove = true;
+    }
+
+    public void RainmanagerCount()
+    {
+        rainmanager.GetComponent<indexer0_rainmanager>().passiverainint++;
     }
 }

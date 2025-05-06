@@ -8,6 +8,7 @@ public class indexer0_weaponland : MonoBehaviour
     public int landangle;
     public float dividnum = 4.5f;
     public string weaponname;
+    public GameObject rainmanager;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +17,8 @@ public class indexer0_weaponland : MonoBehaviour
             if (!collision.gameObject.GetComponent<indexer0_script>().weapons.Contains(weaponname))
             {
                 collision.gameObject.GetComponent<indexer0_script>().weapons.Add(weaponname);
-                Destroy(gameObject);
+                collision.gameObject.GetComponent<indexer0_script>().RainmanagerCount();
+                GetComponent<Animator>().SetBool("teleport", true);
             }
             
         }
@@ -51,5 +53,10 @@ public class indexer0_weaponland : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y + landangle / dividnum, 0);
         }
         transform.rotation = Quaternion.Euler(0, 0, landangle);
+    }
+
+    public void Destroyself()
+    {
+        Destroy(gameObject);
     }
 }

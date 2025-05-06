@@ -16,25 +16,56 @@ public class indexer0_rainmanager : MonoBehaviour
     public Vector2 endpos1;
     public Vector2 endpos2;
     public Vector3 whereshoot;
+    public Vector3 indexerpos;
     public int raincount = 0;
     public bool land = false;
-   
+    public int passiverainint = 1;
+    public int passivecooltime;
+    public int passivecool = 0;
+
+
 
     public void FixedUpdate()
     {
+        indexerpos = indexer.transform.position;
+
         if (rain)
         {
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2  && whereshoot.x <indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain1, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain2, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain3, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain4, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain2, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
+            {
+                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+            }
             Instantiate(rain3, whereshoot, Quaternion.identity);
         }
 
@@ -51,6 +82,18 @@ public class indexer0_rainmanager : MonoBehaviour
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
             Instantiate(weaponland[4], whereshoot, Quaternion.identity);
         }
+
+        passivecool++;
+
+        if (passivecool >= passivecooltime / (passiverainint + 10))
+        {
+            Debug.Log("ºñ");
+            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            Instantiate(rain2, whereshoot, Quaternion.identity);
+            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
+            Instantiate(rain3, whereshoot, Quaternion.identity);
+            passivecool = 0;
+        }
     }
 
     IEnumerator Rain1Start()
@@ -63,6 +106,7 @@ public class indexer0_rainmanager : MonoBehaviour
         rain = false;
         yield return new WaitForSeconds(7f);
         indexer.GetComponent<Animator>().SetBool("rainend", true);
+        passiverainint = 0;
     }
 
     IEnumerator Rain2Start()
@@ -75,6 +119,7 @@ public class indexer0_rainmanager : MonoBehaviour
         rain = false;
         yield return new WaitForSeconds(7f);
         indexer.GetComponent<Animator>().SetBool("rainend", true);
+        passiverainint = 0;
     }
 
     IEnumerator Rain3Start()
@@ -87,6 +132,7 @@ public class indexer0_rainmanager : MonoBehaviour
         rain = false;
         yield return new WaitForSeconds(7f);
         indexer.GetComponent<Animator>().SetBool("rainend", true);
+        passiverainint = 0;
     }
 
     IEnumerator Rain4Start()
@@ -99,6 +145,7 @@ public class indexer0_rainmanager : MonoBehaviour
         rain = false;
         yield return new WaitForSeconds(7f);
         indexer.GetComponent<Animator>().SetBool("rainend", true);
+        passiverainint = 0;
     }
 
     public void DoRain()
