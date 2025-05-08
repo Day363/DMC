@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class indexer_rain_script : MonoBehaviour
 {
+    public float delay = 5f;
+
     IEnumerator ShootDelay()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(delay);
         GetComponent<Animator>().SetBool("shoot", true);
     }
 

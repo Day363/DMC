@@ -32837,7 +32837,7 @@ GameObject:
   - component: {fileID: 259060149}
   m_Layer: 6
   m_Name: inxexer0_hitbox
-  m_TagString: Untagged
+  m_TagString: enemyhitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44746,6 +44746,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &313819838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313819839}
+  m_Layer: 6
+  m_Name: bulletspawnpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &313819839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313819838}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1872885569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315155857
 GameObject:
   m_ObjectHideFlags: 0
@@ -46685,9 +46716,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337060393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bigswordready
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52688,7 +52719,7 @@ Transform:
   m_GameObject: {fileID: 385122738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.229215, y: 2.2792544, z: -10.005846}
+  m_LocalPosition: {x: -3.769215, y: 3.0492544, z: -10.005846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55995,9 +56026,10 @@ GameObject:
   m_Component:
   - component: {fileID: 415675796}
   - component: {fileID: 415675797}
-  m_Layer: 0
+  - component: {fileID: 415675798}
+  m_Layer: 8
   m_Name: spearattack-1
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56069,6 +56101,22 @@ PolygonCollider2D:
       - {x: 3.5541806, y: 0.2919057}
       - {x: 8.475725, y: 0.8894326}
   m_UseDelaunayMesh: 0
+--- !u!114 &415675798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415675795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &416081059
 GameObject:
   m_ObjectHideFlags: 0
@@ -57151,6 +57199,8 @@ MonoBehaviour:
   rain2: {fileID: 2052448271757934950, guid: 63015b5eefa6e7c458cdb36d1f07d991, type: 3}
   rain3: {fileID: 739074871197938854, guid: 60ed3cad94015d241a3ee454640c4407, type: 3}
   rain4: {fileID: 3768750098124646950, guid: a89a70b29431b0342ab2930c94293e9c, type: 3}
+  rain5: {fileID: 2052448271757934950, guid: c322715f0d7972a47b6936f0899fcd19, type: 3}
+  rain6: {fileID: 739074871197938854, guid: 77a38bb125432e94fa5d327fdcdb79e1, type: 3}
   shaders:
   - {fileID: 309615957}
   - {fileID: 2125843561}
@@ -69041,9 +69091,10 @@ GameObject:
   m_Component:
   - component: {fileID: 501557340}
   - component: {fileID: 501557341}
-  m_Layer: 0
+  - component: {fileID: 501557342}
+  m_Layer: 8
   m_Name: bigswordattack-2
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69122,6 +69173,22 @@ PolygonCollider2D:
       - {x: 3.51852, y: -1.3506454}
       - {x: 4.580367, y: -0.16470093}
   m_UseDelaunayMesh: 0
+--- !u!114 &501557342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501557339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &502041706
 GameObject:
   m_ObjectHideFlags: 0
@@ -71090,7 +71157,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3, y: 0, z: -10}
+  m_LocalPosition: {x: 2.84, y: -0.77, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71989,9 +72056,10 @@ GameObject:
   m_Component:
   - component: {fileID: 526169830}
   - component: {fileID: 526169831}
-  m_Layer: 0
+  - component: {fileID: 526169832}
+  m_Layer: 8
   m_Name: spearattack-3
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72100,6 +72168,22 @@ PolygonCollider2D:
       - {x: 0.5082309, y: 3.0597506}
       - {x: -0.26369548, y: 2.933433}
   m_UseDelaunayMesh: 0
+--- !u!114 &526169832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526169829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &528108721
 GameObject:
   m_ObjectHideFlags: 0
@@ -80986,9 +81070,10 @@ GameObject:
   m_Component:
   - component: {fileID: 584011868}
   - component: {fileID: 584011869}
-  m_Layer: 0
+  - component: {fileID: 584011870}
+  m_Layer: 8
   m_Name: bigswordready-1
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81072,6 +81157,22 @@ PolygonCollider2D:
       - {x: 4.7663283, y: -0.28669894}
       - {x: 1.7054352, y: 0.92538726}
   m_UseDelaunayMesh: 0
+--- !u!114 &584011870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584011867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &584439688
 GameObject:
   m_ObjectHideFlags: 0
@@ -81684,7 +81785,7 @@ GameObject:
   - component: {fileID: 588020364}
   - component: {fileID: 588020363}
   - component: {fileID: 588020362}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: floor (1)
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -87396,9 +87497,10 @@ GameObject:
   m_Component:
   - component: {fileID: 633422510}
   - component: {fileID: 633422511}
-  m_Layer: 0
+  - component: {fileID: 633422512}
+  m_Layer: 8
   m_Name: spearattack-4
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87502,6 +87604,22 @@ PolygonCollider2D:
       - {x: 4.242524, y: 1.3979405}
       - {x: 3.7184327, y: 1.8857323}
   m_UseDelaunayMesh: 0
+--- !u!114 &633422512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633422509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &634577482
 GameObject:
   m_ObjectHideFlags: 0
@@ -89968,6 +90086,176 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &649006364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 649006365}
+  m_Layer: 8
+  m_Name: spearshootgunattack
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &649006365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649006364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1225772986}
+  - {fileID: 1609862720}
+  - {fileID: 796773262}
+  - {fileID: 1908313880}
+  - {fileID: 650113936}
+  - {fileID: 1085671925}
+  - {fileID: 1780914027}
+  m_Father: {fileID: 1872885569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &650113935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650113936}
+  - component: {fileID: 650113937}
+  - component: {fileID: 650113938}
+  m_Layer: 8
+  m_Name: spearshootgunattack-5
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650113936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650113935}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &650113937
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650113935}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 5.2507553, y: 3.1975312}
+      - {x: 4.5380535, y: 3.9585123}
+      - {x: 3.7992148, y: 4.4710093}
+      - {x: 2.4974256, y: 4.8434944}
+      - {x: 1.5444794, y: 4.950265}
+      - {x: -0.060147047, y: 4.7652893}
+      - {x: -1.2033925, y: 4.494319}
+      - {x: -2.3935695, y: 4.0860004}
+      - {x: -2.796143, y: 3.8578296}
+      - {x: -2.528376, y: 3.8509276}
+      - {x: -1.6212659, y: 4.1802845}
+      - {x: -0.47634268, y: 4.409464}
+      - {x: 0.69698286, y: 4.55291}
+      - {x: 2.0571706, y: 4.3826833}
+      - {x: 2.927773, y: 4.0249033}
+      - {x: 3.5634356, y: 3.589467}
+      - {x: 3.9497266, y: 3.0466897}
+      - {x: 4.076932, y: 2.6384041}
+      - {x: 4.026679, y: 2.2241392}
+      - {x: 3.5781617, y: 1.8328364}
+      - {x: -4.5702667, y: -0.29777056}
+      - {x: -4.25648, y: -0.7380358}
+      - {x: -3.5697823, y: -1.3104012}
+      - {x: -2.5891566, y: -1.7803261}
+      - {x: -0.96882004, y: -2.2119212}
+      - {x: 0.7635336, y: -2.207095}
+      - {x: 1.8064418, y: -2.0246263}
+      - {x: 3.0675178, y: -1.5639448}
+      - {x: 3.2479858, y: -1.4400237}
+      - {x: 2.301151, y: -1.6159813}
+      - {x: 1.3955247, y: -1.7911949}
+      - {x: 0.33166265, y: -1.8565712}
+      - {x: -1.0214648, y: -1.6719751}
+      - {x: -1.9512334, y: -1.4084921}
+      - {x: -2.7553926, y: -0.91926694}
+      - {x: -3.128478, y: -0.48111677}
+      - {x: -3.0592685, y: -0.2690351}
+      - {x: 5.7674394, y: 2.2240856}
+  m_UseDelaunayMesh: 0
+--- !u!114 &650113938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650113935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &650640356
 GameObject:
   m_ObjectHideFlags: 0
@@ -104374,9 +104662,10 @@ GameObject:
   m_Component:
   - component: {fileID: 769571570}
   - component: {fileID: 769571571}
-  m_Layer: 0
+  - component: {fileID: 769571572}
+  m_Layer: 8
   m_Name: bigswordrifle-4
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104456,6 +104745,22 @@ PolygonCollider2D:
       - {x: 4.152093, y: -0.7296798}
       - {x: 4.54149, y: -0.14831823}
   m_UseDelaunayMesh: 0
+--- !u!114 &769571572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769571569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &770083966
 GameObject:
   m_ObjectHideFlags: 0
@@ -107588,6 +107893,144 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &796773261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796773262}
+  - component: {fileID: 796773263}
+  - component: {fileID: 796773264}
+  m_Layer: 8
+  m_Name: spearshootgunattack-3
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &796773262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796773261}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &796773263
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796773261}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.69001913, y: 2.890111}
+      - {x: 1.5028186, y: 2.7165399}
+      - {x: 2.3576193, y: 2.434084}
+      - {x: 3.1111746, y: 1.8558747}
+      - {x: 3.4026, y: 1.1059395}
+      - {x: 3.1285741, y: 0.45687544}
+      - {x: 2.7202594, y: 0.049021482}
+      - {x: 2.199658, y: -0.31963974}
+      - {x: 1.6653976, y: -0.5337428}
+      - {x: 0.99055576, y: -0.18487251}
+      - {x: -1.5695622, y: 2.0313263}
+      - {x: -3.3053315, y: 3.6442654}
+      - {x: -4.23001, y: 2.967401}
+      - {x: -4.879739, y: 2.2413127}
+      - {x: -5.2756805, y: 1.4115908}
+      - {x: -5.363719, y: 0.7441401}
+      - {x: -5.252638, y: -0.06459987}
+      - {x: -4.8983803, y: -0.91143}
+      - {x: -4.2752743, y: -1.6716161}
+      - {x: -3.506055, y: -2.282946}
+      - {x: -2.7197855, y: -2.7532182}
+      - {x: -1.6118448, y: -3.1234987}
+      - {x: -0.80509686, y: -3.2673414}
+      - {x: -1.9894803, y: -2.8584545}
+      - {x: -2.8140094, y: -2.4123015}
+      - {x: -3.5178978, y: -1.8777335}
+      - {x: -4.0518637, y: -1.0730864}
+      - {x: -4.2095146, y: -0.14555907}
+      - {x: -4.054145, y: 0.7312074}
+      - {x: -3.6686766, y: 1.4913237}
+      - {x: -3.146036, y: 2.1821795}
+      - {x: -2.3738246, y: 2.525137}
+      - {x: 2.163916, y: -1.5465931}
+      - {x: 3.4248927, y: -1.1765313}
+      - {x: 3.96425, y: -0.87155807}
+      - {x: 4.5781074, y: -0.35811603}
+      - {x: 4.707206, y: 0.23262608}
+      - {x: 4.5963984, y: 0.9376687}
+      - {x: 4.1493855, y: 1.5390102}
+      - {x: 3.418166, y: 2.1618063}
+      - {x: 2.3570306, y: 2.750999}
+      - {x: 1.2590625, y: 3.0202107}
+      - {x: 0.5082309, y: 3.0597506}
+      - {x: -0.26369548, y: 2.933433}
+  m_UseDelaunayMesh: 0
+--- !u!114 &796773264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796773261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &797024573
 GameObject:
   m_ObjectHideFlags: 0
@@ -109446,9 +109889,10 @@ GameObject:
   m_Component:
   - component: {fileID: 810438574}
   - component: {fileID: 810438575}
-  m_Layer: 0
+  - component: {fileID: 810438576}
+  m_Layer: 8
   m_Name: bigswordattack-1
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109540,6 +109984,22 @@ PolygonCollider2D:
       - {x: 4.580271, y: 0.74716306}
       - {x: 4.1645484, y: 2.174742}
   m_UseDelaunayMesh: 0
+--- !u!114 &810438576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810438573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &811322616
 GameObject:
   m_ObjectHideFlags: 0
@@ -112685,9 +113145,6 @@ MonoBehaviour:
   - {fileID: 157695432}
   - {fileID: 1381963642}
   - {fileID: 1358398058}
-  - {fileID: 377116825}
-  - {fileID: 1712817397}
-  - {fileID: 263253293}
   cyclecount: []
   testattackcore: {fileID: 1092093709}
   canattack: 1
@@ -128728,9 +129185,10 @@ GameObject:
   m_Component:
   - component: {fileID: 941307086}
   - component: {fileID: 941307087}
-  m_Layer: 0
+  - component: {fileID: 941307088}
+  m_Layer: 8
   m_Name: bigswordattack-4
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128813,6 +129271,22 @@ PolygonCollider2D:
       - {x: 1.2857087, y: 2.6400664}
       - {x: 4.0945563, y: 4.4238334}
   m_UseDelaunayMesh: 0
+--- !u!114 &941307088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941307085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &941571474
 GameObject:
   m_ObjectHideFlags: 0
@@ -132040,9 +132514,10 @@ GameObject:
   m_Component:
   - component: {fileID: 960670804}
   - component: {fileID: 960670805}
-  m_Layer: 0
+  - component: {fileID: 960670806}
+  m_Layer: 8
   m_Name: bigswordrifle-1
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132139,6 +132614,22 @@ PolygonCollider2D:
       - {x: 5.1309285, y: 3.156591}
       - {x: 4.2637267, y: 4.412942}
   m_UseDelaunayMesh: 0
+--- !u!114 &960670806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960670803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &961469887
 GameObject:
   m_ObjectHideFlags: 0
@@ -137185,9 +137676,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 998343628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: katanaattack
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149120,6 +149611,132 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1085671924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1085671925}
+  - component: {fileID: 1085671926}
+  - component: {fileID: 1085671927}
+  m_Layer: 8
+  m_Name: spearshootgunattack-6
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1085671925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085671924}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1085671926
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085671924}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 5.700047, y: 2.4014525}
+      - {x: 5.1585555, y: 3.381816}
+      - {x: 4.5836964, y: 3.9857852}
+      - {x: 3.7821882, y: 4.4676027}
+      - {x: 2.8892138, y: 4.806535}
+      - {x: 2.2223516, y: 4.8934326}
+      - {x: 1.2949, y: 4.9041834}
+      - {x: 2.2655654, y: 4.7152376}
+      - {x: 2.9900835, y: 4.5200353}
+      - {x: 3.596059, y: 4.1854405}
+      - {x: 4.2039523, y: 3.7185788}
+      - {x: 4.551439, y: 3.0599942}
+      - {x: 4.726822, y: 2.4501777}
+      - {x: 4.6485596, y: 1.7342398}
+      - {x: 4.33814, y: 1.3938849}
+      - {x: -5.0111074, y: 0.4798638}
+      - {x: -4.8961267, y: -0.07178867}
+      - {x: -4.4764357, y: -0.6292584}
+      - {x: -3.6554947, y: -1.2502866}
+      - {x: -2.7240443, y: -1.6937599}
+      - {x: -1.8376174, y: -2.0201063}
+      - {x: -0.7486696, y: -2.2447426}
+      - {x: 0.18331969, y: -2.2533174}
+      - {x: 0.6077132, y: -2.1551194}
+      - {x: -0.0034861565, y: -2.024889}
+      - {x: -1.0268896, y: -1.918011}
+      - {x: -2.0050478, y: -1.6341047}
+      - {x: -2.8452845, y: -1.2637872}
+      - {x: -3.4982448, y: -0.7579446}
+      - {x: -3.8862386, y: -0.26402885}
+      - {x: -3.9678102, y: 0.07450509}
+      - {x: 5.7981424, y: 1.361955}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1085671927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085671924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1085852177
 GameObject:
   m_ObjectHideFlags: 0
@@ -160172,9 +160789,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1165030695}
   - component: {fileID: 1165030696}
-  m_Layer: 0
+  - component: {fileID: 1165030697}
+  m_Layer: 8
   m_Name: bigswordattack-3
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160272,6 +160890,22 @@ PolygonCollider2D:
       - {x: 2.966415, y: -1.919044}
       - {x: 1.5400505, y: -0.6424346}
   m_UseDelaunayMesh: 0
+--- !u!114 &1165030697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165030694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1165861827
 GameObject:
   m_ObjectHideFlags: 0
@@ -167635,6 +168269,107 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1225772985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225772986}
+  - component: {fileID: 1225772987}
+  - component: {fileID: 1225772988}
+  m_Layer: 8
+  m_Name: spearshootgunattack-1
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1225772986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225772985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1225772987
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225772985}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 7.591538, y: 0.80386055}
+      - {x: 7.6509447, y: 1.1416824}
+      - {x: -7.1778803, y: 0.5713818}
+      - {x: -7.185491, y: 0.121875644}
+      - {x: 8.430657, y: -0.5044023}
+      - {x: 8.445452, y: -0.17979991}
+      - {x: 3.4891315, y: 0.3543301}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1225772988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225772985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1226166983
 GameObject:
   m_ObjectHideFlags: 0
@@ -168753,7 +169488,7 @@ Transform:
   m_GameObject: {fileID: 1233421491}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3, y: -0, z: 0}
+  m_LocalPosition: {x: 2.84, y: -0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172808,9 +173543,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1259348962}
   - component: {fileID: 1259348963}
-  m_Layer: 0
+  - component: {fileID: 1259348964}
+  m_Layer: 8
   m_Name: katanaattack-4
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172888,6 +173624,22 @@ PolygonCollider2D:
       - {x: 2.7792678, y: 0.6360083}
       - {x: 3.3471847, y: 0.83791775}
   m_UseDelaunayMesh: 0
+--- !u!114 &1259348964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259348961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1264846233
 GameObject:
   m_ObjectHideFlags: 0
@@ -179209,9 +179961,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1320097827}
   - component: {fileID: 1320097828}
-  m_Layer: 0
+  - component: {fileID: 1320097829}
+  m_Layer: 8
   m_Name: bigswordrifle-2
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179304,6 +180057,22 @@ PolygonCollider2D:
       - {x: 4.0723805, y: -1.1912763}
       - {x: 4.244746, y: -0.41914576}
   m_UseDelaunayMesh: 0
+--- !u!114 &1320097829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320097826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1321310250
 GameObject:
   m_ObjectHideFlags: 0
@@ -185082,9 +185851,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360181302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bigswordattack
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185118,9 +185887,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1360283994}
   - component: {fileID: 1360283995}
-  m_Layer: 0
+  - component: {fileID: 1360283996}
+  m_Layer: 8
   m_Name: spearattack-6
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185217,6 +185987,22 @@ PolygonCollider2D:
       - {x: -3.9678102, y: 0.07450509}
       - {x: 5.7981424, y: 1.361955}
   m_UseDelaunayMesh: 0
+--- !u!114 &1360283996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360283993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1360575846
 GameObject:
   m_ObjectHideFlags: 0
@@ -201400,6 +202186,7 @@ GameObject:
   - component: {fileID: 1486460261}
   - component: {fileID: 1486460262}
   - component: {fileID: 1486460263}
+  - component: {fileID: 1486460264}
   m_Layer: 6
   m_Name: indexer0
   m_TagString: Untagged
@@ -201512,6 +202299,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e406ff0485607eb48b6812822331b472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  katana: {fileID: 1418012350560818833, guid: 5f154f9f05a014f4a9f8fd78a5dcf2c4, type: 3}
+  spear: {fileID: 1606066993971790548, guid: f25fe9f740ef63646abe4dd9f4b9a549, type: 3}
+  bulletpos: {fileID: 313819838}
+  bullet: {fileID: 1814224328938717487, guid: eb2fa8a5ad7c3eb478cca36d815944d8, type: 3}
   cam: {fileID: 1786368417}
   rainmanager: {fileID: 420299334}
   rainshader: []
@@ -201546,6 +202337,13 @@ MonoBehaviour:
   rangeteleportposition: 13
   teleportpos: {x: 0, y: 0}
   canmove: 1
+  playerfloorpos: {x: 0, y: 0, z: 0}
+  spearpos: {x: 0, y: 0, z: 0}
+  spearteleportpos: {x: 0, y: 0, z: 0}
+  currentspear: {fileID: 0}
+  katanapos: {x: 0, y: 0, z: 0}
+  katanateleportpos: {x: 0, y: 0, z: 0}
+  currentkatana: {fileID: 0}
 --- !u!61 &1486460262
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201617,7 +202415,53 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &1486460264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486460257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254b85cc8164bd24eb4f90b654de2a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack1s:
+  - {fileID: 810438573}
+  - {fileID: 501557339}
+  - {fileID: 1165030694}
+  - {fileID: 941307085}
+  attack2s:
+  - {fileID: 584011867}
+  attack3s:
+  - {fileID: 960670803}
+  - {fileID: 1320097826}
+  - {fileID: 2030519058}
+  - {fileID: 769571569}
+  - {fileID: 1717710611}
+  attack4s:
+  - {fileID: 1908713785}
+  - {fileID: 1678114384}
+  - {fileID: 1725398333}
+  - {fileID: 1259348961}
+  - {fileID: 1747959654}
+  attack5s:
+  - {fileID: 415675795}
+  - {fileID: 1827760854}
+  - {fileID: 526169829}
+  - {fileID: 633422509}
+  - {fileID: 2079776132}
+  - {fileID: 1360283993}
+  attack6s:
+  - {fileID: 1225772985}
+  - {fileID: 1609862719}
+  - {fileID: 796773261}
+  - {fileID: 1908313879}
+  - {fileID: 650113935}
+  - {fileID: 1085671924}
+  - {fileID: 1780914026}
 --- !u!1 &1486490694
 GameObject:
   m_ObjectHideFlags: 0
@@ -216126,6 +216970,132 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1609862719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1609862720}
+  - component: {fileID: 1609862721}
+  - component: {fileID: 1609862722}
+  m_Layer: 8
+  m_Name: spearshootgunattack-2
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1609862720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609862719}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1609862721
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609862719}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.4968412, y: 3.0143697}
+      - {x: -0.0882957, y: 3.042052}
+      - {x: -1.6036813, y: 2.8369908}
+      - {x: -3.185465, y: 2.4487817}
+      - {x: -3.9283712, y: 2.0527005}
+      - {x: -2.22949, y: 2.4386706}
+      - {x: -0.75795865, y: 2.6707046}
+      - {x: 0.11240363, y: 2.7153778}
+      - {x: 1.2392676, y: 2.5309796}
+      - {x: 1.318255, y: 2.2623472}
+      - {x: 0.652539, y: 1.7374558}
+      - {x: -4.6925597, y: -1.1073076}
+      - {x: -3.8934462, y: -2.0255854}
+      - {x: -3.138036, y: -2.4671862}
+      - {x: -2.2083814, y: -2.902564}
+      - {x: -1.0511563, y: -3.2476382}
+      - {x: 0.15631199, y: -3.392443}
+      - {x: 1.326571, y: -3.4947994}
+      - {x: 2.5643156, y: -3.4696393}
+      - {x: 3.5566218, y: -3.3344893}
+      - {x: 4.431325, y: -2.8756828}
+      - {x: 3.8981724, y: -2.9973853}
+      - {x: 2.7725856, y: -3.1633317}
+      - {x: 1.3268106, y: -3.2535183}
+      - {x: -0.07255006, y: -3.0502203}
+      - {x: -1.3087246, y: -2.7048535}
+      - {x: -2.1770813, y: -2.212582}
+      - {x: -2.9094412, y: -1.587421}
+      - {x: -3.1483834, y: -1.1825103}
+      - {x: -3.2170937, y: -0.7016685}
+      - {x: -2.978425, y: -0.31757295}
+      - {x: 2.6456478, y: 2.5171216}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1609862722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609862719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1611002976
 GameObject:
   m_ObjectHideFlags: 0
@@ -218400,9 +219370,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1628672185}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bigswordrifle
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223738,9 +224708,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1678114385}
   - component: {fileID: 1678114386}
-  m_Layer: 0
+  - component: {fileID: 1678114387}
+  m_Layer: 8
   m_Name: katanaattack-2
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223833,6 +224804,22 @@ PolygonCollider2D:
       - {x: 0.92067003, y: 0.94109994}
       - {x: 2.779687, y: 1.4254581}
   m_UseDelaunayMesh: 0
+--- !u!114 &1678114387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678114384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1678963980
 GameObject:
   m_ObjectHideFlags: 0
@@ -228889,9 +229876,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1717710612}
   - component: {fileID: 1717710613}
-  m_Layer: 0
+  - component: {fileID: 1717710614}
+  m_Layer: 8
   m_Name: bigswordrifle-5
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228992,6 +229980,22 @@ PolygonCollider2D:
       - {x: 1.324825, y: 2.487467}
       - {x: 4.5736094, y: 2.0556326}
   m_UseDelaunayMesh: 0
+--- !u!114 &1717710614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717710611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1719872541
 GameObject:
   m_ObjectHideFlags: 0
@@ -230166,9 +231170,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1725398334}
   - component: {fileID: 1725398335}
-  m_Layer: 0
+  - component: {fileID: 1725398336}
+  m_Layer: 8
   m_Name: katanaattack-3
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230261,6 +231266,22 @@ PolygonCollider2D:
       - {x: 3.2562163, y: 0.1959331}
       - {x: 3.530051, y: 0.38037255}
   m_UseDelaunayMesh: 0
+--- !u!114 &1725398336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725398333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1725697018
 GameObject:
   m_ObjectHideFlags: 0
@@ -233394,9 +234415,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1747959655}
   - component: {fileID: 1747959656}
-  m_Layer: 0
+  - component: {fileID: 1747959657}
+  m_Layer: 8
   m_Name: katanaattack-5
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233476,6 +234498,22 @@ PolygonCollider2D:
       - {x: 2.9651337, y: 0.30247056}
       - {x: 3.4519036, y: 0.6280549}
   m_UseDelaunayMesh: 0
+--- !u!114 &1747959657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747959654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1750954479
 GameObject:
   m_ObjectHideFlags: 0
@@ -237767,6 +238805,110 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1780914026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1780914027}
+  - component: {fileID: 1780914028}
+  - component: {fileID: 1780914029}
+  m_Layer: 8
+  m_Name: spearshootgunattack-7
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1780914027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780914026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1780914028
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780914026}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4294293, y: 3.4073272}
+      - {x: -0.052767754, y: 5.472869}
+      - {x: -0.7385807, y: 3.5695958}
+      - {x: -3.2776413, y: 1.8683238}
+      - {x: -5.8388224, y: 0.5427195}
+      - {x: -6.38126, y: -0.6293614}
+      - {x: -6.5606337, y: -0.9032811}
+      - {x: 6.067111, y: -0.9105027}
+      - {x: 5.888801, y: -0.6033509}
+      - {x: 4.1375, y: 1.9985015}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1780914029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780914026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1781698002
 GameObject:
   m_ObjectHideFlags: 0
@@ -244581,9 +245723,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1827760855}
   - component: {fileID: 1827760856}
-  m_Layer: 0
+  - component: {fileID: 1827760857}
+  m_Layer: 8
   m_Name: spearattack-2
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244680,6 +245823,22 @@ PolygonCollider2D:
       - {x: -2.978425, y: -0.31757295}
       - {x: 2.6456478, y: 2.5171216}
   m_UseDelaunayMesh: 0
+--- !u!114 &1827760857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827760854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!114 &1827811885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3986315665184121733, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
@@ -249738,6 +250897,8 @@ Transform:
   - {fileID: 1628672185}
   - {fileID: 998343628}
   - {fileID: 2049908713}
+  - {fileID: 649006365}
+  - {fileID: 313819839}
   m_Father: {fileID: 1486460260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1872885570
@@ -254846,6 +256007,139 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1908313879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908313880}
+  - component: {fileID: 1908313881}
+  - component: {fileID: 1908313882}
+  m_Layer: 8
+  m_Name: spearshootgunattack-4
+  m_TagString: enemyattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908313880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908313879}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649006365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1908313881
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908313879}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.256585, y: 1.0930411}
+      - {x: 4.40148, y: 0.5598677}
+      - {x: 4.4022274, y: 0.057397187}
+      - {x: 4.069662, y: -0.51103926}
+      - {x: 3.4775333, y: -0.90093327}
+      - {x: 2.1790287, y: -1.2925082}
+      - {x: 0.7266495, y: -1.4318523}
+      - {x: -0.44998813, y: -1.3534985}
+      - {x: -1.376107, y: -1.2005187}
+      - {x: -1.9150488, y: -0.9326811}
+      - {x: 3.8925064, y: 4.3001547}
+      - {x: 3.1765163, y: 4.7227077}
+      - {x: 2.3659344, y: 4.8735514}
+      - {x: 0.7260492, y: 4.8609757}
+      - {x: -0.9511726, y: 4.5851564}
+      - {x: -2.6306083, y: 4.028162}
+      - {x: -3.964584, y: 3.2168334}
+      - {x: -4.8340197, y: 2.3912897}
+      - {x: -5.266968, y: 1.5019644}
+      - {x: -5.306793, y: 0.51752454}
+      - {x: -5.1847897, y: 1.2363864}
+      - {x: -4.7049513, y: 2.1543016}
+      - {x: -3.8772018, y: 2.8459625}
+      - {x: -2.7555234, y: 3.4227402}
+      - {x: -1.7644379, y: 3.750853}
+      - {x: -0.5094416, y: 3.9391875}
+      - {x: 0.9799223, y: 3.9766617}
+      - {x: 1.8724971, y: 3.753097}
+      - {x: 2.4208193, y: 3.300736}
+      - {x: -3.1354423, y: -1.4586118}
+      - {x: -1.9058001, y: -1.9870162}
+      - {x: -0.87179446, y: -2.1913779}
+      - {x: 0.50945383, y: -2.2575326}
+      - {x: 2.6773455, y: -1.8348957}
+      - {x: 4.0849037, y: -1.0214914}
+      - {x: 4.639222, y: -0.2721216}
+      - {x: 4.7399197, y: 0.61241686}
+      - {x: 4.242524, y: 1.3979405}
+      - {x: 3.7184327, y: 1.8857323}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1908313882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908313879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1908672189
 GameObject:
   m_ObjectHideFlags: 0
@@ -254985,9 +256279,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1908713786}
   - component: {fileID: 1908713787}
-  m_Layer: 0
+  - component: {fileID: 1908713788}
+  m_Layer: 8
   m_Name: katanaattack-1
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255063,6 +256358,22 @@ PolygonCollider2D:
       - {x: 1.815944, y: -1.2615268}
       - {x: 2.4915218, y: -0.8968714}
   m_UseDelaunayMesh: 0
+--- !u!114 &1908713788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908713785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &1909702347
 GameObject:
   m_ObjectHideFlags: 0
@@ -267262,9 +268573,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1995909657}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FloorManager
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271610,9 +272921,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2030519059}
   - component: {fileID: 2030519060}
-  m_Layer: 0
+  - component: {fileID: 2030519061}
+  m_Layer: 8
   m_Name: bigswordrifle-3
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271705,6 +273017,22 @@ PolygonCollider2D:
       - {x: 4.6195235, y: -0.8667443}
       - {x: 4.5574946, y: 0.7362734}
   m_UseDelaunayMesh: 0
+--- !u!114 &2030519061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030519058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &2031832149
 GameObject:
   m_ObjectHideFlags: 0
@@ -274539,9 +275867,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2049908713}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: spearattack
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277624,9 +278952,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2079776133}
   - component: {fileID: 2079776134}
-  m_Layer: 0
+  - component: {fileID: 2079776135}
+  m_Layer: 8
   m_Name: spearattack-5
-  m_TagString: Untagged
+  m_TagString: enemyattack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277729,6 +279058,22 @@ PolygonCollider2D:
       - {x: -3.0592685, y: -0.2690351}
       - {x: 5.7674394, y: 2.2240856}
   m_UseDelaunayMesh: 0
+--- !u!114 &2079776135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079776132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a087c915e416410409098fcc73dab5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  damage: 0
+  lightattack: 0
+  heavyattack: 0
 --- !u!1 &2080061870
 GameObject:
   m_ObjectHideFlags: 0
@@ -278765,6 +280110,7 @@ GameObject:
   - component: {fileID: 2089705742}
   - component: {fileID: 2089705741}
   - component: {fileID: 2089705743}
+  - component: {fileID: 2089705744}
   m_Layer: 9
   m_Name: floor
   m_TagString: Floor
@@ -278884,6 +280230,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &2089705744
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089705740}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &2089954744
 GameObject:
   m_ObjectHideFlags: 0

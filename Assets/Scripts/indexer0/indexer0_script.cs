@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class indexer0_script : MonoBehaviour
 {
+    public GameObject katana;
+    public GameObject spear;
+    public GameObject bulletpos;
+    public GameObject bullet;
     public GameObject cam;
     public GameObject rainmanager;
     public GameObject[] rainshader;
@@ -33,9 +37,27 @@ public class indexer0_script : MonoBehaviour
     public int rangeteleportposition;
     public Vector2 teleportpos;
     public bool canmove = true;
+    public Vector3 playerfloorpos;
+    public Vector3 spearpos;
+    public Vector3 spearteleportpos;
+    public GameObject currentspear;
+    public Vector3 katanapos;
+    public Vector3 katanateleportpos;
+    public GameObject currentkatana;
 
     public void FixedUpdate()
     {
+        playerfloorpos = new Vector3(player.transform.position.x, 2, 0);
+        spearpos = new Vector3(transform.position.x, transform.position.y + 1, 0);
+        if (direction == -1)
+        {
+            katanapos = new Vector3(transform.position.x - 3, transform.position.y + 0.7f, 0);
+        }
+        else
+        {
+            katanapos = new Vector3(transform.position.x + 3, transform.position.y + 0.7f, 0);
+        }
+
         if (weapons.Count == 0)
         {
             raincool++;
@@ -419,6 +441,28 @@ public class indexer0_script : MonoBehaviour
         GetComponent<Animator>().SetBool("teleport", false);
     }
 
+    public void spearteleport()
+    {
+        spearteleportpos = new Vector3(currentspear.transform.position.x, transform.position.y, 0);
+        gameObject.transform.position = spearteleportpos;
+    }
+
+    public void Speardisapear()
+    {
+        Destroy(currentspear);
+    }
+
+    public void Katanateleport()
+    {
+        katanateleportpos = new Vector3(currentkatana.transform.position.x, transform.position.y, 0);
+        gameObject.transform.position = katanateleportpos;
+    }
+
+    public void Katanadisapear()
+    {
+        Destroy(currentkatana);
+    }
+
     public void AttackEnd()
     {
         whileattack = false;
@@ -434,5 +478,33 @@ public class indexer0_script : MonoBehaviour
     public void RainmanagerCount()
     {
         rainmanager.GetComponent<indexer0_rainmanager>().passiverainint++;
+    }
+
+    public void Shoot()
+    {
+        if (direction == 1)
+        {
+            Instantiate(bullet, bulletpos.transform.position, Quaternion.identity);
+        }
+
+        if (direction == -1)
+        {
+            Instantiate(bullet, bulletpos.transform.position, Quaternion.Euler(0, 0, 180));
+        }
+    }
+
+    public void Spearshoot()
+    {
+        Vector3 dir = playerfloorpos - spearpos;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        currentspear = Instantiate(spear, spearpos, Quaternion.AngleAxis(angle + 180, Vector3.back));
+        
+    }
+
+    public void KatanaShoot()
+    {
+        Vector3 dir = playerfloorpos - katanapos;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        currentkatana = Instantiate(katana, katanapos, Quaternion.AngleAxis(angle + 180, Vector3.back));
     }
 }

@@ -10,6 +10,8 @@ public class indexer0_rainmanager : MonoBehaviour
     public GameObject rain2;
     public GameObject rain3;
     public GameObject rain4;
+    public GameObject rain5;
+    public GameObject rain6;
     public GameObject[] shaders;
     public GameObject[] weaponland;
     public bool rain = false;
@@ -87,11 +89,10 @@ public class indexer0_rainmanager : MonoBehaviour
 
         if (passivecool >= passivecooltime / (passiverainint + 10))
         {
-            Debug.Log("ºñ");
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            Instantiate(rain2, whereshoot, Quaternion.identity);
+            Instantiate(rain5, whereshoot, Quaternion.identity);
             whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            Instantiate(rain3, whereshoot, Quaternion.identity);
+            Instantiate(rain6, whereshoot, Quaternion.identity);
             passivecool = 0;
         }
     }

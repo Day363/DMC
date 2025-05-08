@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
         isJump = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //maxSpeed = GetComponent<playerhealth>().speed;
 
