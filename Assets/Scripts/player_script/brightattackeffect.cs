@@ -15,12 +15,15 @@ public class brightattackeffect : MonoBehaviour
             float angle1 = Random.Range(0, 361);
             float angle2 = Random.Range(0, 361);
 
-            Instantiate(effect1, transform.position, Quaternion.Euler(0, 0, angle1));
-            Instantiate(effect2, transform.position, Quaternion.Euler(0, 0, angle2));
+            Vector2 midpoint = (transform.position + collision.gameObject.transform.position) / 2f;
+
+            Instantiate(effect1, midpoint, Quaternion.Euler(0, 0, angle1));
+            Instantiate(effect2, midpoint, Quaternion.Euler(0, 0, angle2));
         }
 
         if (collision.gameObject.tag == "enemyhitbox")
         {
+            Debug.Log("asas");
             int attackeffectnum = Random.Range(0, attackeffect.Length);
             Vector3 eposition = collision.transform.position;
             eposition.z = 0;
@@ -29,7 +32,7 @@ public class brightattackeffect : MonoBehaviour
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            Instantiate(attackeffect[attackeffectnum], collision.transform.position, Quaternion.Euler(0, 0, angle));
+            Instantiate(attackeffect[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
         }
     }
 }

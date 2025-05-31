@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class trapal_gun : MonoBehaviour
 {
-    public float radius = 5f;                  // 반지름
-    public float moveDuration = 2f;            // 이동 시간 (초)
-    public Transform player;
+    public float radius = 5f;                  
+    public float moveDuration = 2f;            
+    public GameObject player;
+    public GameObject bullet;
+    public float power;
+    public GameObject trail;
+    public bool trigger = false;
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
+    public Quaternion bulletrot;
     private float elapsedTime = 0f;
     private bool moving = true;
     private Quaternion startRotation;
 
     void Start()
     {
+        GetComponent<trapal_gun_rotate>().target = player.transform;
         // 상단 반원에서 랜덤 각도
         float angle = Random.Range(0f, 180f) * Mathf.Deg2Rad;
         Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
 
         startPosition = transform.position;
-        targetPosition = player.position + offset;
+        targetPosition = player.transform.position + offset;
 
-        Vector2 toPlayer = (player.position - transform.position).normalized;
+        Vector2 toPlayer = (player.transform.position - transform.position).normalized;
         Vector2 awayFromPlayer = -toPlayer;
         float awayAngle = Mathf.Atan2(awayFromPlayer.y, awayFromPlayer.x) * Mathf.Rad2Deg + 90;
         startRotation = Quaternion.Euler(0f, 0f, awayAngle);
@@ -31,7 +37,7 @@ public class trapal_gun : MonoBehaviour
         transform.rotation = startRotation;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!moving) return;
 
@@ -46,12 +52,27 @@ public class trapal_gun : MonoBehaviour
         if (t >= 1f)
         {
             moving = false;
-            OnArrival();
+            StartCoroutine(ShootDelay());
+            
         }
     }
 
-    void OnArrival()
+    IEnumerator ShootDelay()
     {
-        Debug.Log("지정된 시간에 감속하며 도착 완료");
+        yield return new WaitForSeconds(1.4f);
+        GetComponent<trapal_gun_rotate>().shoot = true;
+        bulletrot = Quaternion.Euler(0, 0, transform.eulerAngles.z - 90f);
+        GameObject currentbullet = Instantiate(bullet, transform.position, bulletrot);
+        currentbullet.GetComponent<trapal_bullet>().player = player;
+        float angle = currentbullet.transform.eulerAngles.z;
+        GetComponent<Animator>().SetBool("shoot", true);
+        yield return new WaitForSeconds(0.7f);
+        trail.SetActive(true);
+        float radians = angle * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+        trigger = true;
+        GetComponent<Rigidbody2D>().AddForce(direction * power, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }

@@ -17,7 +17,15 @@ public class sword1attackeffect : MonoBehaviour
             Instantiate(effect1, transform.position, Quaternion.Euler(0, 0, angle1));
             Instantiate(effect2, transform.position, Quaternion.Euler(0, 0, angle2));
         }
-        
+
+        if (collision.gameObject.tag == "enemybullet")
+        {
+            float angle1 = Random.Range(0, 361);
+            float angle2 = Random.Range(0, 361);
+            Instantiate(effect1, transform.position, Quaternion.Euler(0, 0, angle1));
+            Instantiate(effect2, transform.position, Quaternion.Euler(0, 0, angle2));
+        }
+
         if (collision.gameObject.tag == "enemyhitbox")
         {
             int attackeffectnum = Random.Range(0, attackeffect.Length);

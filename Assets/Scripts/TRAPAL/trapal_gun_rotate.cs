@@ -4,46 +4,33 @@ using UnityEngine;
 
 public class trapal_gun_rotate : MonoBehaviour
 {
-    public Transform target;
-    public float rotationDuration = 1f;
+    public Transform target;        
+    public float rotationSpeed = 180f; 
+    public float duration = 5f; 
+    private float timer = 0f;
+    public bool shoot = false;
 
-    private float rotationTimeElapsed = 0f;
-    private float startAngle;
-    private float targetAngle;
-    private bool isRotating = false;
-
-    private void Start()
+    void FixedUpdate()
     {
-        StartRotation();
-    }
-
-    void Update()
-    {
-        if (isRotating)
+        if (!shoot)
         {
-            rotationTimeElapsed += Time.deltaTime;
-            float t = rotationTimeElapsed / rotationDuration;
-            t = Mathf.Clamp01(t);
+            Vector2 direction = target.position - transform.position;
 
-            // Ease-out 보간: 빠르게 시작해서 천천히 끝남
-            float easedT = 1f - Mathf.Pow(1f - t, 2f); // Quadratic ease-out
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
 
-            float angle = Mathf.LerpAngle(startAngle, targetAngle, easedT);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            float currentAngle = transform.eulerAngles.z;
 
-            if (t >= 1f)
+            float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
+
+            transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+
+            if (timer < duration)
             {
-                isRotating = false;
+                timer += Time.deltaTime;
+                float t = Mathf.Clamp01(timer / duration);
+                rotationSpeed = Mathf.Lerp(0f, 100f, t);
             }
         }
-    }
-
-    public void StartRotation()
-    {
-        Vector2 direction = target.position - transform.position;
-        targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
-        startAngle = transform.eulerAngles.z;
-        rotationTimeElapsed = 0f;
-        isRotating = true;
+        
     }
 }
