@@ -23,7 +23,6 @@ public class brightattackeffect : MonoBehaviour
 
         if (collision.gameObject.tag == "enemyhitbox")
         {
-            Debug.Log("asas");
             int attackeffectnum = Random.Range(0, attackeffect.Length);
             Vector3 eposition = collision.transform.position;
             eposition.z = 0;

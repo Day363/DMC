@@ -6,7 +6,7 @@ public class normalskillselect : MonoBehaviour
 {
     public GameObject skilldisplay;
     public GameObject skillset;
-    public Normalskill selectedskill;
+    public Skill selectedskill;
 
     public void SkillSelect()
     {

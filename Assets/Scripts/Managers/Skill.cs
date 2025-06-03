@@ -3,9 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Enforceskill : ScriptableObject
+public class Skill : ScriptableObject
 {
-    public string enforceskillname;
+    public bool normalskill;
+    public bool enforceskill;
+
+    public string skillmarkname;
+    public string skillcode;
+
+    public bool prefabskill;
+    public bool animationskill;
+
+    public List<GameObject> skillprefab;
+    public string animationtrigger;
+
+    public bool backlink;
+    public bool frontlink;
+    public bool amalagam;
 
     public bool repeat;
     public bool speed;

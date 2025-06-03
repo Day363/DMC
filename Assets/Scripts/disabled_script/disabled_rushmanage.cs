@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class disabled_rushmanage : MonoBehaviour
 {
+    public CinemachineVirtualCamera virtualCam;
     public float rushpower;
     public float attackrushpower;
     public float jumppower;
@@ -495,6 +497,20 @@ public class disabled_rushmanage : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attacbigkrush, ForceMode2D.Impulse);
         }
+    }
+
+    IEnumerator CameraShake()
+    {
+        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 13;
+        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.1f);
+        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+    }
+
+    public void CamreaShackmethod()
+    {
+        StartCoroutine(CameraShake());
     }
 
 }

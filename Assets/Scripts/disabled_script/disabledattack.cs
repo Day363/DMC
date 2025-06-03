@@ -42,7 +42,7 @@ public class disabledattack : MonoBehaviour
             if (heavyattack)
             {
                 heavyattack = false;
-                player.GetComponent<playerhit>().StrongHit(damage, collision.transform);
+                player.GetComponent<playerhit>().StrongHit(damage, transform);
 
             }
 
