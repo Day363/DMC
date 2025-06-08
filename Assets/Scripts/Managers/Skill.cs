@@ -18,9 +18,9 @@ public class Skill : ScriptableObject
     public string animationtrigger;
 
     public bool backlink;
-    public bool frontlink;
     public bool amalagam;
-
+    
+    
     public bool repeat;
     public bool speed;
     public bool force;

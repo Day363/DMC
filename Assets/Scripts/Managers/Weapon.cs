@@ -11,6 +11,7 @@ public class Weapon : ScriptableObject
     public bool slash;
     public bool blow;
     public bool penetrate;
-    public bool core;
 
+    public List<Skill> skilllist;
+    public List<cynthskill> cynthskilllist;
 }
