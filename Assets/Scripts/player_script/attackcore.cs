@@ -23,6 +23,10 @@ public class attackcore : MonoBehaviour
 {
     public bool testbool;
 
+    public SkillQueUi skillQueueUI;
+    
+    public GameObject waitskillslider;
+    public GameObject waitskillprefap;
     public GameObject skillwaittext;
     public GameObject cycletext;
     public GameObject player;
@@ -56,6 +60,7 @@ public class attackcore : MonoBehaviour
     private void Start()
     {
         attacklist = new();
+        
     }
 
     public void Copy()
@@ -270,7 +275,8 @@ public class attackcore : MonoBehaviour
                         string skillname = $"{attacklist_notset[arrayindex + 1].skillmarkname}{skillnameint}";
 
                         frontlinkenforceskills.Add(attacklist_notset[arrayindex]);
-                        SkillReady skillready = new SkillReady(skillname, frontlinkenforceskills, attacklist_notset[arrayindex + 1], null);
+                        List<Skill> newforces = new List<Skill>(frontlinkenforceskills);
+                        SkillReady skillready = new SkillReady(skillname, newforces, attacklist_notset[arrayindex + 1], null);
                         attacklist.Add(skillready);
                         attacklist_notset.RemoveAt(arrayindex + 1);
                         attacklist_notset.RemoveAt(arrayindex);
@@ -284,7 +290,8 @@ public class attackcore : MonoBehaviour
                         string skillname = $"{attacklist_notset[arrayindex + 1].skillmarkname}{skillnameint}";
 
                         frontlinkenforceskills.Add(attacklist_notset[arrayindex]);
-                        SkillReady skillready = new SkillReady(skillname, frontlinkenforceskills, attacklist_notset[arrayindex + 1], attacklist_notset[arrayindex + 3]);
+                        List<Skill> newforces = new List<Skill>(frontlinkenforceskills);
+                        SkillReady skillready = new SkillReady(skillname, newforces, attacklist_notset[arrayindex + 1], attacklist_notset[arrayindex + 3]);
                         attacklist.Add(skillready);
                         attacklist_notset.RemoveAt(arrayindex + 3);
                         attacklist_notset.RemoveAt(arrayindex + 2);
@@ -316,7 +323,8 @@ public class attackcore : MonoBehaviour
 
                     string skillname = $"{attacklist_notset[arrayindex].skillmarkname}{skillnameint}";
 
-                    SkillReady skillready = new SkillReady(skillname, frontlinkenforceskills, attacklist_notset[normalskillindex], amalgamskill);
+                    List<Skill> newforces = new List<Skill>(frontlinkenforceskills);
+                    SkillReady skillready = new SkillReady(skillname, newforces, attacklist_notset[normalskillindex], amalgamskill);
                     attacklist.Add(skillready);
 
                     if (amalgamskill = null)
@@ -353,6 +361,66 @@ public class attackcore : MonoBehaviour
             attacklist_notset.RemoveAt(arrayindex);
             skillsets = attacklist_notset;
         }
+    }
+
+    public void Waitskillarray()
+    {
+        foreach (List<SkillReady> skillReadies in lastlist)
+        {
+            foreach (SkillReady skillReady in skillReadies)
+            {
+                GameObject waittext = Instantiate(waitskillprefap, waitskillslider.transform);
+                waittext.GetComponent<TMP_Text>().text = SkillWaitText(skillReady);
+            }
+        }
+    }
+
+    public string SkillWaitText(SkillReady skillReady)
+    {
+        string waittext;
+        if (skillReady.Enforceskills == null && skillReady.Amalgamed == null)
+        {
+            waittext = $"[{skillReady.Normalskill.skillmarkname}]";
+            return waittext;
+        }
+        else if (skillReady.Amalgamed == null && skillReady.Enforceskills != null)
+        {
+            waittext = "";
+            foreach (Skill enforceskill in skillReady.Enforceskills)
+            {
+                waittext += $"[{enforceskill.skillmarkname}";
+            }
+            waittext += $"[{skillReady.Normalskill.skillmarkname}]";
+            foreach (Skill enforceskill in skillReady.Enforceskills)
+            {
+                waittext += "]";
+            }
+            return waittext;
+        }
+        else if (skillReady.Amalgamed != null && skillReady.Enforceskills == null)
+        {
+            waittext = $"[[{skillReady.Normalskill.skillmarkname}]-[특수-융합]-[{skillReady.Amalgamed.skillmarkname}]]";
+            return waittext;
+        }
+        else if (skillReady.Amalgamed != null && skillReady.Enforceskills != null)
+        {
+            waittext = "";
+            foreach (Skill enforceskill in skillReady.Enforceskills)
+            {
+                waittext += $"[{enforceskill.skillmarkname}";
+            }
+            waittext += $"[[{skillReady.Normalskill.skillmarkname}]-[특수-융합]-[{skillReady.Amalgamed.skillmarkname}]]";
+            foreach (Skill enforceskill in skillReady.Enforceskills)
+            {
+                waittext += "]";
+            }
+            return waittext;
+        }
+        else
+        {
+            return "오류";
+        }
+
     }
 
     public void TextReplace()
@@ -408,6 +476,8 @@ public class attackcore : MonoBehaviour
 
             TextReplace();
             CycleReplace();
+            Waitskillarray();
+            skillQueueUI.InitializeSkillList(lastlist);
         }
 
         
@@ -423,7 +493,13 @@ public class attackcore : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log(lastlist[listnumber].Count);
+                if (attacknumber < lastlist[listnumber].Count)
+                {
+                    // UI 갱신
+                    skillQueueUI.UseNextSkill();
+                }
+
+                    Debug.Log(lastlist[listnumber].Count);
                 if (lastlist[listnumber][attacknumber].Normalskill)
                 {
                     if (lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -520,6 +596,7 @@ public class attackcore : MonoBehaviour
                 if (listnumber == lastlist.Count)
                 {
                     listnumber = 0;
+                    skillQueueUI.InitializeSkillList(lastlist);
                 }
 
                 TextReplace();

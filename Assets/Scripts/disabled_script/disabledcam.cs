@@ -6,23 +6,20 @@ public class disabledcam : MonoBehaviour
 {
     public GameObject cam;
 
+    public GameObject deathattackobject;
+
     public void LookSelf()
     {
-        cam.GetComponent<Animator>().SetBool("lookself", true);
+        cam.GetComponent<CameraManager>().LookEnemy();
     }
 
-    public void LookSelfFalse()
+    public void LookPlayer()
     {
-        cam.GetComponent<Animator>().SetBool("lookself", false);
-    }
-
-    public void Lookplayer()
-    {
-        cam.GetComponent<Animator>().SetBool("playerlook", true);
+        cam.GetComponent<CameraManager>().LookPlayer();
     }
 
     public void Deathattack()
     {
-        cam.GetComponent<Animator>().SetBool("deathattack", true);
+        cam.GetComponent<CameraManager>().Looksmallpoint(deathattackobject);
     }
 }

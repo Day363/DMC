@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class disabled_rushmanage : MonoBehaviour
 {
-    public CinemachineVirtualCamera virtualCam;
+    public GameObject cammanager;
     public float rushpower;
     public float attackrushpower;
     public float jumppower;
@@ -44,6 +44,11 @@ public class disabled_rushmanage : MonoBehaviour
     public float phase2attacbigkrush;
     public int deathattackcooltime;
     public int deathattckcool;
+
+    public void Start()
+    {
+        cammanager.GetComponent<CameraManager>().enemy = gameObject;
+    }
 
     public void FixedUpdate()
     {
@@ -501,11 +506,11 @@ public class disabled_rushmanage : MonoBehaviour
 
     IEnumerator CameraShake()
     {
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 13;
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 13;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.1f);
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
     }
 
     public void CamreaShackmethod()

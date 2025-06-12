@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class playerhit : MonoBehaviour
 {
-    public CinemachineVirtualCamera virtualCam;
+    public GameObject cammanager;
 
     public void Hit(int damage)
     {
@@ -53,11 +53,11 @@ public class playerhit : MonoBehaviour
 
     IEnumerator Hitcamera()
     {
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 7;
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 7;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.1f);
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
     }
 
 }
