@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CameraManager : MonoBehaviour
     public GameObject playercam;
     public GameObject enemycam;
     public GameObject smallpointcam;
+    public GameObject skillcam;
 
     public void Awake()
     {
@@ -35,5 +37,12 @@ public class CameraManager : MonoBehaviour
         maincam = smallpointcam;
         smallpointcam.GetComponent<CinemachineVirtualCamera>().Follow = target.transform;
         GetComponent<Animator>().SetTrigger("smallpoint");
+    }
+
+    public void LookSkillposition(GameObject target)
+    {
+        maincam = skillcam;
+        skillcam.GetComponent<CinemachineVirtualCamera>().Follow = target.transform;
+        GetComponent<Animator>().SetTrigger("skillcam");
     }
 }

@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class disabled_rushmanage : MonoBehaviour
 {
+    public GameObject battalemanager;
     public GameObject cammanager;
     public float rushpower;
     public float attackrushpower;
@@ -48,6 +49,7 @@ public class disabled_rushmanage : MonoBehaviour
     public void Start()
     {
         cammanager.GetComponent<CameraManager>().enemy = gameObject;
+        battalemanager.GetComponent<battalemanager>().currentenemy = gameObject;
     }
 
     public void FixedUpdate()

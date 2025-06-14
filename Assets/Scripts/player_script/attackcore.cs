@@ -57,6 +57,8 @@ public class attackcore : MonoBehaviour
     public List<List<SkillReady>> lastlist = new List<List<SkillReady>> { };
     public List<Skill> skillsets = new List<Skill> { };
 
+    public List<string> standbyskills = new List<string> { };
+
     private void Start()
     {
         attacklist = new();
