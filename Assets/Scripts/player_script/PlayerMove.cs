@@ -27,13 +27,13 @@ public class PlayerMove : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                GetComponent<SpriteRenderer>().flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
                 dir = -1;
             }
 
             if (Input.GetAxisRaw("Horizontal") > 0)
             {
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.localScale = new Vector3(1, 1, 1);
                 dir = 1;
             }
 

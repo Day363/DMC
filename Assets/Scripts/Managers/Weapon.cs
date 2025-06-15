@@ -14,4 +14,5 @@ public class Weapon : ScriptableObject
 
     public List<Skill> skilllist;
     public List<cynthskill> cynthskilllist;
+    public List<standbyskill> standbyskilllist;
 }

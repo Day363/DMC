@@ -6,6 +6,8 @@ using TMPro;
 
 public class boss_hpbar : MonoBehaviour
 {
+    public GameObject attackcore;
+
     public GameObject damagepos;
 
     public GameObject balancebar;
@@ -55,14 +57,14 @@ public class boss_hpbar : MonoBehaviour
         if (currentbalance >= maxbalance)
         {
             currentbalance = 0;
-            StartCoroutine(Collapsetime());
+            GetComponent<Animator>().SetBool("collapse", true);
+            attackcore.GetComponent<attackcore>().UseStandbySkill();
             // ±ÕÇüºØ±«
         }
     }
 
-    IEnumerator Collapsetime()
+    IEnumerator Collapsetimeout()
     {
-        GetComponent<Animator>().SetBool("collapse", true);
         yield return new WaitForSeconds(collapsefloat);
         GetComponent<Animator>().SetBool("collapse", false);
     }

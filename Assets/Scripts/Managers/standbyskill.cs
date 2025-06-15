@@ -12,4 +12,6 @@ public class standbyskill : ScriptableObject
     //대기페시브
 
     public string animationtrigger;
+
+    public float length;
 }
