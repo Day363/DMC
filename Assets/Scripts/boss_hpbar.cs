@@ -50,15 +50,19 @@ public class boss_hpbar : MonoBehaviour
         balancebarint.value = currentbalance;
     }
 
-    public void BalanceDamage(int balance)
+    public void BalanceDamage(float balance)
     {
         currentbalance += balance;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
             currentbalance = 0;
+            if (attackcore.GetComponent<attackcore>().standbyskills.Count > 0)
+            {
+                attackcore.GetComponent<attackcore>().UseStandbySkill();
+            }
+
             GetComponent<Animator>().SetBool("collapse", true);
-            attackcore.GetComponent<attackcore>().UseStandbySkill();
             // ±ÕÇüºØ±«
         }
     }
@@ -74,8 +78,7 @@ public class boss_hpbar : MonoBehaviour
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage;
-        currentbalance += damage * 0.1f;
-        BalanceCheck();
+        BalanceDamage(damage * 0.1f);
         if (currenthealth <= 0)
         {
             //* Ã¼·ÂÀÌ 0 ÀÌÇÏ¶ó Á×À½
@@ -87,8 +90,7 @@ public class boss_hpbar : MonoBehaviour
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * slashtolerance;
-        currentbalance += damage * 0.1f;
-        BalanceCheck();
+        BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;
@@ -103,8 +105,7 @@ public class boss_hpbar : MonoBehaviour
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * penetratetolerance;
-        currentbalance += damage * 0.1f;
-        BalanceCheck();
+        BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;
@@ -119,8 +120,7 @@ public class boss_hpbar : MonoBehaviour
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * blowtolerance;
-        currentbalance += damage * 0.1f;
-        BalanceCheck();
+        BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;

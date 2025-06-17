@@ -24,6 +24,8 @@ public class attackcore : MonoBehaviour
 {
     public bool testbool;
 
+    public GameObject letterbox;
+
     public GameObject gamemanager;
 
     public SkillQueUi skillQueueUI;
@@ -71,8 +73,16 @@ public class attackcore : MonoBehaviour
         
     }
 
+    public void LetterBoxDown()
+    {
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+    }
+
     public void UseStandbySkill()
     {
+        LetterBoxDown();
+
+        canattack = false;
         curstandbyskill = standbyskills[0];
 
         if (player.transform.position.x < gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
@@ -82,6 +92,7 @@ public class attackcore : MonoBehaviour
 
             player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
 
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             StartCoroutine(UseStandby());
         }
         if (player.transform.position.x > gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
@@ -91,12 +102,14 @@ public class attackcore : MonoBehaviour
 
             player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
 
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             StartCoroutine(UseStandby());
         }
     }
 
     IEnumerator UseStandby()
     {
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         yield return new WaitForSeconds(1.5f);
         player.GetComponent<Animator>().SetTrigger(curstandbyskill.animationtrigger);
         standbyskills.RemoveAt(0);
@@ -131,7 +144,8 @@ public class attackcore : MonoBehaviour
             skillsets = new List<Skill>(skilllists);
             for (int i = 0; i < normal - amalgam; i++)
             {
-                Array(skillsets); 
+                Array(skillsets);
+                Debug.Log(attacklist.Count);
             }
 
             lastlist.Add(new List<SkillReady>(attacklist));
@@ -251,12 +265,17 @@ public class attackcore : MonoBehaviour
             }
         }
 
-        if (avaliablecycles.Count <= 1)
+        if (avaliablecycles.Count == 1)
         {
             LCM = avaliablecycles[0];
         }
 
-            attacklists.Clear();
+        if (avaliablecycles.Count < 1)
+        {
+            LCM = 10;
+        }
+
+        attacklists.Clear();
         for (int i = 1; i <= LCM; i++)
         {
             attacklists.Add(new List<Skill>(attacklist_notset));
@@ -419,14 +438,20 @@ public class attackcore : MonoBehaviour
                         normalskillindex = i + 1;
                     }
 
-                    if (attacklist_notset[normalskillindex + 1].amalagam)
+                    if (attacklist_notset.Count > normalskillindex + 1)
                     {
-                        amalgamskill = attacklist_notset[normalskillindex + 2];
+                        if (attacklist_notset[normalskillindex + 1].amalagam)
+                        {
+                            Debug.Log("y");
+                            amalgamskill = attacklist_notset[normalskillindex + 2];
+                        }
+                        else
+                        {
+                            amalgamskill = null;
+                        }
                     }
-                    else
-                    {
-                        amalgamskill = null;
-                    }
+                    
+                    
 
                     string skillname = $"{attacklist_notset[arrayindex].skillmarkname}{skillnameint}";
 
@@ -434,7 +459,7 @@ public class attackcore : MonoBehaviour
                     SkillReady skillready = new SkillReady(skillname, newforces, attacklist_notset[normalskillindex], amalgamskill);
                     attacklist.Add(skillready);
 
-                    if (amalgamskill = null)
+                    if (amalgamskill == null)
                     {
                         for (int i = normalskillindex; i >= 0; i--)
                         {
@@ -443,8 +468,10 @@ public class attackcore : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log(amalgamskill.skillmarkname);
                         for (int i = normalskillindex + 2; i >= 0; i--)
                         {
+                            
                             attacklist_notset.RemoveAt(i);
                         }
                     }
@@ -696,15 +723,13 @@ public class attackcore : MonoBehaviour
 
                 if (attacknumber == lastlist[listnumber].Count)
                 {
-                    Debug.Log(attacknumber);
-                    Debug.Log(attacklist.Count);
                     listnumber++;
                     attacknumber = 0;
                     cycle++;
                     CycleReplace();
                 }
 
-                if (listnumber == lastlist.Count)
+                if (listnumber == lastlist.Count - 1)
                 {
                     listnumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
