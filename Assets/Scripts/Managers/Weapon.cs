@@ -6,6 +6,11 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class Weapon : ScriptableObject
 {
+    public bool range;
+
+    public int magazine;
+    public int magazinecycle;
+
     public string weaponname;
     public Image weaponimage;
     public bool slash;
