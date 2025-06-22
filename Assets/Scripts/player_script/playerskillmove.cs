@@ -95,6 +95,12 @@ public class playerskillmove : MonoBehaviour
         DOTween.To(() => camerasize, x => camerasize = x, 3f, 0.1f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
+    public void CameraLongZoomin2()
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 3f, 0.8f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
     public void CameraShortZoomout()
     {
         DOTween.Kill("CameraZoom");

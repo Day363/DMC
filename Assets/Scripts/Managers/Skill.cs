@@ -8,6 +8,8 @@ public class Skill : ScriptableObject
     public bool normalskill;
     public bool enforceskill;
 
+    public bool prefabspawntoenemy = false;
+
     public string skillmarkname;
     public string skillcode;
 

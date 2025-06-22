@@ -67,6 +67,8 @@ public class attackcore : MonoBehaviour
     public List<string> skillstring_1 = new List<string> { };
     public standbyskill curstandbyskill;
 
+    public bool iscycle = false;
+
     private void Start()
     {
         attacklist = new();
@@ -145,7 +147,6 @@ public class attackcore : MonoBehaviour
             for (int i = 0; i < normal - amalgam; i++)
             {
                 Array(skillsets);
-                Debug.Log(attacklist.Count);
             }
 
             lastlist.Add(new List<SkillReady>(attacklist));
@@ -557,6 +558,13 @@ public class attackcore : MonoBehaviour
 
     }
 
+    public void AttcknumberPlus()
+    {
+        
+        attacknumber = attacknumber + 1;
+      
+    }
+
     public void TextReplace()
     {
         if (lastlist[listnumber][attacknumber].Enforceskills == null && lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -642,72 +650,79 @@ public class attackcore : MonoBehaviour
                     {
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill != true)
                         {
-                            currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
-                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy == false)
+                            {
+                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            }
+                            else if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy)
+                            {
+                                float randomint = Random.Range(0, 361);
+                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+                            }
 
                             if (lastlist[listnumber][attacknumber].Enforceskills != null)
                             {
-                                if (attacklist[attacknumber].Normalskill.repeat)
+                                if (lastlist[listnumber][attacknumber].Normalskill.repeat)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.speed)
+                                if (lastlist[listnumber][attacknumber].Normalskill.speed)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.force)
+                                if (lastlist[listnumber][attacknumber].Normalskill.force)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.bout)
+                                if (lastlist[listnumber][attacknumber].Normalskill.bout)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.wide)
+                                if (lastlist[listnumber][attacknumber].Normalskill.wide)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.mental)
+                                if (lastlist[listnumber][attacknumber].Normalskill.mental)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.weight)
+                                if (lastlist[listnumber][attacknumber].Normalskill.weight)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.heat)
+                                if (lastlist[listnumber][attacknumber].Normalskill.heat)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.reversal)
+                                if (lastlist[listnumber][attacknumber].Normalskill.reversal)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.space)
+                                if (lastlist[listnumber][attacknumber].Normalskill.space)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.vibration)
+                                if (lastlist[listnumber][attacknumber].Normalskill.vibration)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.crack)
+                                if (lastlist[listnumber][attacknumber].Normalskill.crack)
                                 {
 
                                 }
-                                if (attacklist[attacknumber].Normalskill.explosion)
+                                if (lastlist[listnumber][attacknumber].Normalskill.explosion)
                                 {
 
                                 }
                             }
+
                         }
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
                         {
                             player.GetComponent<Animator>().SetTrigger("running");
                             player.GetComponent<Animator>().SetBool(lastlist[listnumber][attacknumber].Normalskill.animationtrigger, true);
                         }
-
-                        attacknumber = attacknumber + 1;
                     }
 
                     else if (lastlist[listnumber][attacknumber].Amalgamed != null)
@@ -716,27 +731,37 @@ public class attackcore : MonoBehaviour
                         currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
                         currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
-                        attacknumber = attacknumber + 1;
+
                     }
                 }
+
                 
+
+                AttcknumberPlus();
 
                 if (attacknumber == lastlist[listnumber].Count)
                 {
+                    Debug.Log("e");
                     listnumber++;
                     attacknumber = 0;
                     cycle++;
+                    //iscycle = true;
                     CycleReplace();
                 }
 
-                if (listnumber == lastlist.Count - 1)
+                if (listnumber == lastlist.Count)
                 {
+                    Debug.Log("t");
                     listnumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
                 }
 
+
                 TextReplace();
+                
+
             }
+            
 
         }
     }

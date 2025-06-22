@@ -7,6 +7,10 @@ public class playerbullet : MonoBehaviour
     public int bulletspeed;
     public int damage = 0;
 
+
+    public bool playercanreflect = false;
+    public bool canselftarget = false;
+
     public bool penetrate;
 
     public bool truedam;
@@ -59,6 +63,24 @@ public class playerbullet : MonoBehaviour
                 {
                     Destroy(gameObject);
                 }
+            }
+        }
+        if (canselftarget)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<playerstatus>().Damage(damage);
+                if (!penetrate)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+        if (playercanreflect)
+        {
+            if (collision.gameObject.CompareTag("playerattack"))
+            {
+                bulletspeed = -bulletspeed;
             }
         }
     }
