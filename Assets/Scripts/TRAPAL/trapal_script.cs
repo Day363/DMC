@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class trapal_script : MonoBehaviour
 {
+    public GameObject gamemanager;
     public GameObject player;
     public GameObject lazer;
     public GameObject pointattack;
@@ -12,6 +14,9 @@ public class trapal_script : MonoBehaviour
     public GameObject eye;
     public GameObject eyeflash;
     public GameObject eyeslash;
+    public GameObject lazer1;
+    public float lazer1cool = 0;
+    public float lazer1cooltime;
     public float lazercool = 0;
     public float lazercooltime;
     public float pointattackcool = 0;
@@ -29,47 +34,96 @@ public class trapal_script : MonoBehaviour
     public int randomeyeint;
     public float eyerandomx;
     public float eyerandomy;
+    public bool canattack = true;
+
+    public Vector3 targetPosition = new Vector3(0f, 3.46f, 0f);  
+    public float duration = 2f;
+    public bool backtrigger = false;
+
+    public void Start()
+    {
+        gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
+    }
 
     private void FixedUpdate()
     {
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+            canattack = false;
+            backtrigger = true;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+            canattack = true;
+            if (backtrigger)
+            {
+                Returntopos();
+            }
+        }
+
+        lazer1cool++;
         lazercool++;
         pointattackcool++;
         barriercool++;
         guncool++;
         eyecool++;
-
-        if (lazercool >= lazercooltime)
+        if (canattack)
         {
-            lazercool = 0;
-            lazer.GetComponent<trapal_lazer>().LazerStart();
+            if (lazer1cool >= lazer1cooltime)
+            {
+                lazer1cool = 0;
+                GameObject curlazer1 = Instantiate(lazer1, transform.position, Quaternion.identity);
+                curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
+                Vector2 direction = player.transform.position - transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                curlazer1.transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+
+
+            if (lazercool >= lazercooltime)
+            {
+                lazercool = 0;
+                lazer.GetComponent<trapal_lazer>().LazerStart();
+            }
+
+            if (pointattackcool >= pointattackcooltime)
+            {
+                pointattackcool = 0;
+                Instantiate(pointattack, new Vector3(Random.Range(-15, 16), 0, 0), Quaternion.identity);
+            }
+
+            if (barriercool >= barriercooltime)
+            {
+                barriercool = 0;
+                barrier.GetComponent<trapal_barreirtext>().StartBarrier();
+            }
+
+            if (guncool >= guncooltime)
+            {
+                guncool = 0;
+                gunint = Random.Range(3, gunmaxint);
+                StartCoroutine(GunSpawn());
+            }
+
+            if (eyecool >= eyecooltime)
+            {
+                eyecool = 0;
+                randomeyeint = Random.Range(1, 4);
+                eye.GetComponent<Animator>().SetBool("ready", true);
+                StartCoroutine(Eye());
+            }
         }
 
-        if (pointattackcool >= pointattackcooltime)
-        {
-            pointattackcool = 0;
-            Instantiate(pointattack, new Vector3(Random.Range(-15, 16), 0, 0), Quaternion.identity);
-        }
+        
+    }
 
-        if (barriercool >= barriercooltime)
-        {
-            barriercool = 0;
-            barrier.GetComponent<trapal_barreirtext>().StartBarrier();
-        }
-
-        if (guncool >= guncooltime)
-        {
-            guncool = 0;
-            gunint = Random.Range(3, gunmaxint);
-            StartCoroutine(GunSpawn());
-        }
-
-        if (eyecool >= eyecooltime)
-        {
-            eyecool = 0;
-            randomeyeint = Random.Range(1, 4);
-            eye.GetComponent<Animator>().SetBool("ready", true);
-            StartCoroutine(Eye());
-        }
+    public void Returntopos()
+    {
+        backtrigger = false;
+        transform.DOMove(targetPosition, duration).SetEase(Ease.OutCubic);
+        
     }
 
     IEnumerator GunSpawn()

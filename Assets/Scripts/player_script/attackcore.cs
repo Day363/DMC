@@ -83,9 +83,9 @@ public class attackcore : MonoBehaviour
     public void UseStandbySkill()
     {
         LetterBoxDown();
-
-        canattack = false;
         curstandbyskill = standbyskills[0];
+        canattack = false;
+        player.GetComponent<PlayerMove>().canmove = false;
 
         if (player.transform.position.x < gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
         {
@@ -109,10 +109,19 @@ public class attackcore : MonoBehaviour
         }
     }
 
+    public void EndStandbySkill()
+    {
+        gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
+        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+        canattack = true;
+        player.GetComponent<PlayerMove>().canmove = true;
+    }
+
     IEnumerator UseStandby()
     {
+        
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.1f);
         player.GetComponent<Animator>().SetTrigger(curstandbyskill.animationtrigger);
         standbyskills.RemoveAt(0);
     }

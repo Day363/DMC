@@ -62,7 +62,8 @@ public class boss_hpbar : MonoBehaviour
                 attackcore.GetComponent<attackcore>().UseStandbySkill();
             }
 
-            GetComponent<Animator>().SetBool("collapse", true);
+            GetComponent<Animator>().SetTrigger("collapse");
+            GetComponent<Animator>().SetBool("idle", false);
             // ±ÕÇüºØ±«
         }
     }

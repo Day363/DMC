@@ -16,15 +16,23 @@ public class letterboxin : MonoBehaviour
     public float targetY1 = 0f;
     public float targetY2 = 0f;
 
+    public bool whilein = false;
+
     public void PlayLetterboxIn()
     {
-        // 시작 위치 설정
-        topBar.anchoredPosition = new Vector2(0, topStartY);
-        bottomBar.anchoredPosition = new Vector2(0, bottomStartY);
+        if (!whilein)
+        {
+            // 시작 위치 설정
+            topBar.anchoredPosition = new Vector2(0, topStartY);
+            bottomBar.anchoredPosition = new Vector2(0, bottomStartY);
 
-        // 지정된 위치로 이동
-        topBar.DOAnchorPos(new Vector2(0, targetY1), animationDuration).SetEase(Ease.OutQuart);
-        bottomBar.DOAnchorPos(new Vector2(0, targetY2), animationDuration).SetEase(Ease.OutQuart);
+            // 지정된 위치로 이동
+            topBar.DOAnchorPos(new Vector2(0, targetY1), animationDuration).SetEase(Ease.OutQuart);
+            bottomBar.DOAnchorPos(new Vector2(0, targetY2), animationDuration).SetEase(Ease.OutQuart);
+
+            whilein = true;
+        }
+        
     }
 
     public void PlayLetterboxOut()
@@ -32,5 +40,6 @@ public class letterboxin : MonoBehaviour
         // 다시 시작 위치로 이동
         topBar.DOAnchorPos(new Vector2(0, topStartY), animationDuration).SetEase(Ease.InQuart);
         bottomBar.DOAnchorPos(new Vector2(0, bottomStartY), animationDuration).SetEase(Ease.InQuart);
+        whilein = false;
     }
 }

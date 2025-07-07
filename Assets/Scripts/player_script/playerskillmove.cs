@@ -6,6 +6,8 @@ using Cinemachine;
 
 public class playerskillmove : MonoBehaviour
 {
+    public GameObject attackcore;
+
     public GameObject cameramanager;
     public GameObject Gamemanager;
 
@@ -119,6 +121,17 @@ public class playerskillmove : MonoBehaviour
         DOTween.To(() => camerasize, x => camerasize = x, 5.8f, 0.2f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
+    public void CameraLongZoomout2()
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 5.8f, 0.8f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
+    public void CamVib1()
+    {
+        cameramanager.GetComponent<CameraManager>().CamVibration1();
+    }
+
     public void CantMove()
     {
         GetComponent<PlayerMove>().canmove = false;
@@ -177,5 +190,18 @@ public class playerskillmove : MonoBehaviour
             Vector3 tomove = new Vector3(Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - distance, transform.position.y, 0);
             transform.DOMove(tomove, time).SetEase(Ease.OutCubic);
         }
+    }
+
+    public void EndORStartAttack()
+    {
+        if (attackcore.GetComponent<attackcore>().standbyskills.Count < 1)
+        {
+            attackcore.GetComponent<attackcore>().EndStandbySkill();
+        }
+        if (attackcore.GetComponent<attackcore>().standbyskills.Count >= 1)
+        {
+            attackcore.GetComponent<attackcore>().UseStandbySkill();
+        }
+        
     }
 }

@@ -8,7 +8,6 @@ public class trapal_barrier : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ãæµ¹");
         if (collision.gameObject.CompareTag("enemybullet"))
         {
             if (collision.gameObject.GetComponent<trapal_bullet>().reflected)
