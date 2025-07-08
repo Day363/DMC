@@ -75,8 +75,8 @@ public class playerskillmove : MonoBehaviour
 
     public void CameraReturn()
     {
-        cameraset = false;
         cameramanager.GetComponent<CameraManager>().LookPlayer();
+        cameraset = false;
     }
 
     public void CameraShortZoomin()
@@ -140,6 +140,7 @@ public class playerskillmove : MonoBehaviour
     public void CanMove()
     {
         GetComponent<PlayerMove>().canmove = true;
+
     }
 
     public void FixSight()

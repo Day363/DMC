@@ -15,43 +15,60 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        isJump = false;
-    }
-
-    void Update()
-    {
-        //maxSpeed = GetComponent<playerhealth>().speed;
-
         if (canmove)
         {
-            if (Input.GetAxisRaw("Horizontal") < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                dir = -1;
-            }
+            rigid = GetComponent<Rigidbody2D>();
+            isJump = false;
+        }
+        
+    }
 
-            if (Input.GetAxisRaw("Horizontal") > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                dir = 1;
-            }
+    public void LookLeft()
+    {
+        if (canmove)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            dir = -1;
+        }
+        
+    }
 
-            //Jump
-            if (Input.GetButtonDown("Jump") && !isJump)
+    public void LookRight()
+    {
+        if (canmove)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            dir = 1;
+        }
+        
+    }
+
+    public void Jump()
+    {
+        if (canmove)
+        {
+            if (!isJump)
             {
                 isJump = true;
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 GetComponent<Animator>().SetBool("jumpend", false);
                 GetComponent<Animator>().SetBool("jump", true);
             }
+        }
+        
+    }
 
-            //stopspeed
-            if (Input.GetButtonUp("Horizontal"))
-            {
-                rigid.velocity = new Vector2(0, rigid.velocity.y);
-            }
+    public void Stop()
+    {
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+    }
 
+    void FixedUpdate()
+    {
+        //maxSpeed = GetComponent<playerhealth>().speed;
+
+        if (canmove)
+        {
             if (GetComponent<Rigidbody2D>().velocity.normalized.x == 0)
             {
                 GetComponent<Animator>().SetBool("running", false);
@@ -66,10 +83,8 @@ public class PlayerMove : MonoBehaviour
 
         if (canmove)
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
-
-
+            
+            rigid.AddForce(Vector2.right * GetComponent<playerinput>().h, ForceMode2D.Impulse);
 
             if (rigid.velocity.x > maxSpeed)
             {

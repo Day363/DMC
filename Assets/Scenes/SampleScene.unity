@@ -63804,6 +63804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1098fcf9d10d6a24399c894894aede59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priorcamera: {fileID: 519420028}
   maincam: {fileID: 0}
   enemy: {fileID: 0}
   playercam: {fileID: 275650087}
@@ -84279,7 +84280,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -225696,6 +225697,7 @@ GameObject:
   - component: {fileID: 1233421493}
   - component: {fileID: 1233421492}
   - component: {fileID: 1233421495}
+  - component: {fileID: 1233421506}
   - component: {fileID: 1233421496}
   - component: {fileID: 1233421497}
   - component: {fileID: 1233421500}
@@ -225996,6 +225998,19 @@ MonoBehaviour:
   effectpos: {fileID: 453935495}
   effects:
   - {fileID: 6463201702245943663, guid: 04f3cbb4eeecd8f47a9fc204be237666, type: 3}
+--- !u!114 &1233421506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233421491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe0d8f1e9af3e14cabb6bf29d16de8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  h: 0
 --- !u!1 &1236055598
 GameObject:
   m_ObjectHideFlags: 0

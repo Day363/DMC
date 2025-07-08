@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
+    public GameObject priorcamera;
+
     public GameObject maincam;
     public GameObject enemy;
 
@@ -14,6 +16,7 @@ public class CameraManager : MonoBehaviour
     public GameObject smallpointcam;
     public GameObject skillcam;
 
+    
     public void Awake()
     {
         maincam = playercam;
@@ -51,6 +54,19 @@ public class CameraManager : MonoBehaviour
         StartCoroutine(CamVib1());
     }
 
+    public void CamStable()
+    {
+        StartCoroutine(FuckCinemachine());
+    }
+    
+    IEnumerator FuckCinemachine()
+    {
+        priorcamera.GetComponent<CinemachineBrain>().enabled = false;
+        yield return new WaitForEndOfFrame();
+        priorcamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+        priorcamera.GetComponent<CinemachineBrain>().enabled = true;
+    }
+
     IEnumerator CamVib1()
     {
         maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 12;
@@ -58,5 +74,8 @@ public class CameraManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        CamStable();
     }
+
+    
 }
