@@ -69,7 +69,7 @@ public class playerbullet : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.GetComponent<playerstatus>().Damage(damage);
+                collision.gameObject.GetComponent<playerstatus>().BalanceDamage(damage);
                 if (!penetrate)
                 {
                     Destroy(gameObject);

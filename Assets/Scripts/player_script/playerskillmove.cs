@@ -135,11 +135,14 @@ public class playerskillmove : MonoBehaviour
     public void CantMove()
     {
         GetComponent<PlayerMove>().canmove = false;
+        attackcore.GetComponent<attackcore>().canattack = false;
     }
 
     public void CanMove()
     {
         GetComponent<PlayerMove>().canmove = true;
+        attackcore.GetComponent<attackcore>().AmalgamedAnimation();
+        attackcore.GetComponent<attackcore>().canattack = true;
 
     }
 

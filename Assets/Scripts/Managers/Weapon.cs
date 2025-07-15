@@ -12,11 +12,12 @@ public class Weapon : ScriptableObject
     public int magazinecycle;
 
     public string weaponname;
-    public Image weaponimage;
+    public Sprite weaponimage;
     public bool slash;
     public bool blow;
     public bool penetrate;
 
+    public DefenseSkill defenseskill;
     public List<Skill> skilllist;
     public List<cynthskill> cynthskilllist;
     public List<standbyskill> standbyskilllist;

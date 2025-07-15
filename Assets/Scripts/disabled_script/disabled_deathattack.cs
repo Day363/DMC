@@ -12,7 +12,7 @@ public class disabled_deathattack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<playerstatus>().max_health / 2 > collision.gameObject.GetComponent<playerstatus>().health)
+            if (collision.gameObject.GetComponent<playerstatus>().maxbalance / 2 > collision.gameObject.GetComponent<playerstatus>().currentbalance)
             {
                 disabled.GetComponent<disabledcam>().Deathattack();
                 disabled.GetComponent<Animator>().SetBool("2phase_deathattack_success", true);

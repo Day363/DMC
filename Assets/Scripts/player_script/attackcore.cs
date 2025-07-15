@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
+
 
 public class SkillReady
 {
@@ -24,12 +26,18 @@ public class attackcore : MonoBehaviour
 {
     public bool testbool;
 
+    public GameObject skilllistUi;
+    public GameObject weaponimageUi;
+    public GameObject weaponlistUi;
+
     public GameObject letterbox;
 
     public GameObject gamemanager;
 
     public SkillQueUi skillQueueUI;
 
+    public GameObject defenseskilltest;
+    public GameObject weaponimage;
     public GameObject standbyskillslider;
     public GameObject waitskillslider;
     public GameObject waitskillprefap;
@@ -69,10 +77,50 @@ public class attackcore : MonoBehaviour
 
     public bool iscycle = false;
 
+    public string amalgamedanimationtrigger;
+
     private void Start()
     {
         attacklist = new();
         
+    }
+
+    public void WeaponListUI()
+    {
+        foreach (Weapon weapon in weaponlist)
+        {
+            GameObject currentweaponimage = Instantiate(weaponimageUi, weaponlistUi.transform);
+            currentweaponimage.GetComponent<weaponskillUi>().weapon = weapon;
+            currentweaponimage.GetComponent<weaponskillUi>().skilllistUi = skilllistUi;
+            currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
+            currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
+            if (weapon.penetrate == true)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+            else if (weapon.penetrate == false)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+            }
+
+            if (weapon.slash == true)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+            else if (weapon.slash == false)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+            }
+
+            if (weapon.blow == true)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+            else if (weapon.blow == false)
+            {
+                currentweaponimage.transform.GetChild(0).GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+            }
+        }
     }
 
     public void LetterBoxDown()
@@ -82,30 +130,37 @@ public class attackcore : MonoBehaviour
 
     public void UseStandbySkill()
     {
-        LetterBoxDown();
-        curstandbyskill = standbyskills[0];
-        canattack = false;
-        player.GetComponent<PlayerMove>().canmove = false;
-
-        if (player.transform.position.x < gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+        if (standbyskills.Count > 0)
         {
-            player.transform.localScale = new Vector3(1, 1, 1);
-            player.GetComponent<PlayerMove>().dir = 1;
+            LetterBoxDown();
+            curstandbyskill = standbyskills[0];
+            canattack = false;
+            player.GetComponent<PlayerMove>().canmove = false;
 
-            player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
+            if (player.transform.position.x < gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+            {
+                player.transform.localScale = new Vector3(1, 1, 1);
+                player.GetComponent<PlayerMove>().dir = 1;
 
-            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            StartCoroutine(UseStandby());
+                player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
+
+                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                StartCoroutine(UseStandby());
+            }
+            if (player.transform.position.x > gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+            {
+                player.transform.localScale = new Vector3(-1, 1, 1);
+                player.GetComponent<PlayerMove>().dir = -1;
+
+                player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
+
+                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                StartCoroutine(UseStandby());
+            }
         }
-        if (player.transform.position.x > gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+        else
         {
-            player.transform.localScale = new Vector3(-1, 1, 1);
-            player.GetComponent<PlayerMove>().dir = -1;
-
-            player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
-
-            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            StartCoroutine(UseStandby());
+            StartCoroutine(NoStandByskills());
         }
     }
 
@@ -119,11 +174,16 @@ public class attackcore : MonoBehaviour
 
     IEnumerator UseStandby()
     {
-        
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         yield return new WaitForSeconds(0.1f);
         player.GetComponent<Animator>().SetTrigger(curstandbyskill.animationtrigger);
         standbyskills.RemoveAt(0);
+    }
+
+    IEnumerator NoStandByskills()
+    {
+        yield return new WaitForSeconds(4f);
+        gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
     }
 
     public void Copy()
@@ -574,6 +634,18 @@ public class attackcore : MonoBehaviour
       
     }
 
+    public void WeaponimageReplace()
+    {
+        weaponimage.GetComponent<Image>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage;
+
+
+    }
+
+    public void DefenseTextReplace()
+    {
+        defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
+    }
+
     public void TextReplace()
     {
         if (lastlist[listnumber][attacknumber].Enforceskills == null && lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -622,11 +694,15 @@ public class attackcore : MonoBehaviour
         if (testbool)
         {
             testbool = false;
-            
+
+            WeaponListUI();
+
             Organize();
             StandBySkillFind();
             Array2();
 
+            WeaponimageReplace();
+            DefenseTextReplace();
             TextReplace();
             CycleReplace();
             Waitskillarray();
@@ -644,6 +720,41 @@ public class attackcore : MonoBehaviour
 
         if (canattack)
         {
+            if (Input.GetMouseButtonDown(1))
+            {
+
+                if (attacknumber < lastlist[listnumber].Count)
+                {
+                    // UI °»½Å
+                    skillQueueUI.UseNextSkill();
+                }
+
+                player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+                AttcknumberPlus();
+
+                if (attacknumber == lastlist[listnumber].Count)
+                {
+                    Debug.Log("e");
+                    listnumber++;
+                    attacknumber = 0;
+                    cycle++;
+                    //iscycle = true;
+                    CycleReplace();
+                }
+
+                if (listnumber == lastlist.Count)
+                {
+                    
+                    listnumber = 0;
+                    skillQueueUI.InitializeSkillList(lastlist);
+                }
+
+                WeaponimageReplace();
+                DefenseTextReplace();
+                TextReplace();
+                Debug.Log("t");
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (attacknumber < lastlist[listnumber].Count)
@@ -729,18 +840,39 @@ public class attackcore : MonoBehaviour
                         }
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
                         {
-                            player.GetComponent<Animator>().SetTrigger("running");
-                            player.GetComponent<Animator>().SetBool(lastlist[listnumber][attacknumber].Normalskill.animationtrigger, true);
+                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                         }
                     }
 
                     else if (lastlist[listnumber][attacknumber].Amalgamed != null)
                     {
-                        currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
-                        currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
-                        currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
-                        currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
+                        {
+                            currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                            currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        }
+                        
+                        else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
+                        {
+                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        }
 
+                        else if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
+                        {
+                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Amalgamed.animationtrigger);
+                            currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        }
+
+                        else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
+                        {
+                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            amalgamedanimationtrigger = lastlist[listnumber][attacknumber].Amalgamed.animationtrigger;
+                        }
                     }
                 }
 
@@ -765,13 +897,23 @@ public class attackcore : MonoBehaviour
                     skillQueueUI.InitializeSkillList(lastlist);
                 }
 
-
+                WeaponimageReplace();
+                DefenseTextReplace();
                 TextReplace();
                 
 
             }
             
 
+        }
+    }
+
+    public void AmalgamedAnimation()
+    {
+        if (amalgamedanimationtrigger != null)
+        {
+            player.GetComponent<Animator>().SetTrigger(amalgamedanimationtrigger);
+            amalgamedanimationtrigger = null;
         }
     }
 

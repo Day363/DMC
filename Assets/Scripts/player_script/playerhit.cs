@@ -9,7 +9,7 @@ public class playerhit : MonoBehaviour
 
     public void Hit(int damage)
     {
-        GetComponent<playerstatus>().Damage(damage);
+        GetComponent<playerstatus>().BalanceDamage(damage);
         StartCoroutine(Hitcamera());
     }
 
@@ -19,17 +19,15 @@ public class playerhit : MonoBehaviour
         GetComponent<Animator>().SetBool("knockback", true);
         GetComponent<PlayerMove>().canmove = false;
         StartCoroutine(knockbackcool());
-        GetComponent<playerstatus>().Damage(damage);
+        GetComponent<playerstatus>().BalanceDamage(damage);
         int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
         if (dir < 0)
         {
-            GetComponent<PlayerMove>().dir = 1;
-            GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<PlayerMove>().LookRight();
         }
         else
         {
-            GetComponent<PlayerMove>().dir = -1;
-            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<PlayerMove>().LookLeft();
         }
         GetComponent<Rigidbody2D>().AddForce(new Vector2(dir, 0), ForceMode2D.Impulse);
     }

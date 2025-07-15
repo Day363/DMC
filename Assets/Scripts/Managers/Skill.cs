@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Skill : ScriptableObject
 {
+    public Weapon currentweapon;
+
     public bool normalskill;
     public bool enforceskill;
 

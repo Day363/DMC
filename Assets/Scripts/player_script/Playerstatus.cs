@@ -7,39 +7,44 @@ using TMPro;
 public class playerstatus : MonoBehaviour
 {
     [SerializeField]
-    public Slider hpslider;
+    public Slider balancebar;
     public TMP_Text hptext;
+    public Slider balancebarint;
 
-    public float max_health;
-    public float health;
+    public float side;
+    public float height;
+
+    public float maxbalance;
+    public float currentbalance;
     public float speed;
     public int attackpower;
 
-    public void CheckHp()
+    private void Start()
     {
-        if (hpslider != null)
-        {
-            hpslider.value = health / max_health;
-            hptext.text = health.ToString();
-        }
+        balancebarint.maxValue = maxbalance;
+        currentbalance = 0;
     }
 
-    public void Damage(int damage) 
+    private void Update()
     {
-        if (max_health == 0 || health <= 0) 
-            return;
-        health -= damage;
-        CheckHp();
-        if (health <= 0)
-        {
-            //* Ã¼·ÂÀÌ 0 ÀÌÇÏ¶ó Á×À½
-        }
+        Vector3 balancebarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side, transform.position.y + height, 0));
+        balancebar.transform.position = balancebarpos;
     }
 
-    public void Awake()
+    public void BalanceCheck()
     {
-        health = max_health;
+        balancebarint.value = currentbalance;
+    }
 
+    public void BalanceDamage(float balance)
+    {
+        currentbalance += balance;
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            // ±ÕÇüºØ±«
+        }
     }
 
 }

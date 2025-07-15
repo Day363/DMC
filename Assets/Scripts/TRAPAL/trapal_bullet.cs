@@ -21,9 +21,9 @@ public class trapal_bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("playerattack") && hp >= 0)
+        if (collision.gameObject.CompareTag("playerattack"))
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, collision.transform.parent.parent.parent.GetComponent<attackcore>().angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, player.GetComponent<playerskillmove>().attackcore.GetComponent<attackcore>().angle));
             reflected = true;
         }
         if (collision.gameObject.CompareTag("enemyobject1"))
