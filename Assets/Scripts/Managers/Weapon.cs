@@ -6,6 +6,14 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class Weapon : ScriptableObject
 {
+    
+    [TextArea]
+    public string passive_description;
+    [TextArea]
+    public string normalskill_description;
+    [TextArea]
+    public string arreyskill_description;
+
     public bool range;
 
     public int magazine;
@@ -19,6 +27,7 @@ public class Weapon : ScriptableObject
 
     public DefenseSkill defenseskill;
     public List<Skill> skilllist;
+    public List<bool> skillactivelist;
     public List<cynthskill> cynthskilllist;
     public List<standbyskill> standbyskilllist;
 }

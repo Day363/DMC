@@ -26,6 +26,11 @@ public class attackcore : MonoBehaviour
 {
     public bool testbool;
 
+    public GameObject skillarreyUi;
+    public TMP_Text passivetext;
+    public TMP_Text normalskilltext;
+    public TMP_Text arreyskilltext;
+    public GameObject skillsetlist;
     public GameObject skilllistUi;
     public GameObject weaponimageUi;
     public GameObject weaponlistUi;
@@ -90,8 +95,13 @@ public class attackcore : MonoBehaviour
         foreach (Weapon weapon in weaponlist)
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, weaponlistUi.transform);
+            currentweaponimage.GetComponent<weaponskillUi>().passivetext = passivetext;
+            currentweaponimage.GetComponent<weaponskillUi>().normalskilltext = normalskilltext;
+            currentweaponimage.GetComponent<weaponskillUi>().arreyskilltext = arreyskilltext;
+            currentweaponimage.GetComponent<weaponskillUi>().attackcore = gameObject;
             currentweaponimage.GetComponent<weaponskillUi>().weapon = weapon;
             currentweaponimage.GetComponent<weaponskillUi>().skilllistUi = skilllistUi;
+            currentweaponimage.GetComponent<weaponskillUi>().skillsetlist = skillsetlist;
             currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
             currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
             if (weapon.penetrate == true)
@@ -579,6 +589,24 @@ public class attackcore : MonoBehaviour
         }
     }
 
+    public void WaitskillarrayUi()
+    {
+        for (int i = skillarreyUi.transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = skillarreyUi.transform.GetChild(i);
+            Destroy(child.gameObject);
+        }
+
+        foreach (List<SkillReady> skillReadies in lastlist)
+        {
+            foreach (SkillReady skillReady in skillReadies)
+            {
+                GameObject waittext = Instantiate(waitskillprefap, skillarreyUi.transform);
+                waittext.GetComponent<TMP_Text>().text = SkillWaitText(skillReady);
+            }
+        }
+    }
+
     public string SkillWaitText(SkillReady skillReady)
     {
         string waittext;
@@ -689,24 +717,39 @@ public class attackcore : MonoBehaviour
         cycletext.GetComponent<TMP_Text>().text = $"{cycle}¼øÈ¯";
     }
 
+    public void SkillarreyUi()
+    {
+        Organize();
+        StandBySkillFind();
+        Array2();
+        WaitskillarrayUi();
+    }
+
+    public void ArreyComplete()
+    {
+        canattack = true;
+
+        
+
+        Organize();
+        StandBySkillFind();
+        Array2();
+
+        WeaponimageReplace();
+        DefenseTextReplace();
+        TextReplace();
+        CycleReplace();
+        Waitskillarray();
+        skillQueueUI.InitializeSkillList(lastlist);
+    }
+
     public void Update()
     {
         if (testbool)
         {
             testbool = false;
-
+            canattack = false;
             WeaponListUI();
-
-            Organize();
-            StandBySkillFind();
-            Array2();
-
-            WeaponimageReplace();
-            DefenseTextReplace();
-            TextReplace();
-            CycleReplace();
-            Waitskillarray();
-            skillQueueUI.InitializeSkillList(lastlist);
         }
 
         

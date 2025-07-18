@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2343289115054370116}
   - component: {fileID: 5211635094259395150}
   - component: {fileID: 8399179797036831390}
+  - component: {fileID: -5239260504048845409}
   m_Layer: 5
   m_Name: skillUi
   m_TagString: Untagged
@@ -254,4 +255,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5211635094259395150}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5239260504048845409}
+        m_TargetAssemblyTypeName: skillselectUi, Assembly-CSharp
+        m_MethodName: SkillAddToList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-5239260504048845409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935672127476075311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e0ac85cda51bb4ab40bf36b7d38698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackcore: {fileID: 0}
+  skill: {fileID: 0}
+  skilllist: {fileID: 0}
+  skillbutton: {fileID: 2553545667406617995, guid: be442237ab16751438c8dee13d079500, type: 3}
