@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class disabledattack : MonoBehaviour
+public class enemydattack : MonoBehaviour
 {
     public GameObject player;
-    public GameObject disabled;
+    public GameObject enemy;
     public int damage;
     public bool lightattack = false;
     public bool heavyattack = false;
@@ -19,21 +19,21 @@ public class disabledattack : MonoBehaviour
         if (collision.gameObject.tag == "playerattack")
         {
             gameObject.SetActive(false);
-            disabled.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
+            enemy.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
 
             ratiosum = damage + collision.gameObject.GetComponent<playerattackdamage>().damage;
             selfback = (collision.gameObject.GetComponent<playerattackdamage>().damage / ratiosum) * parryback;
             playerback = (damage / ratiosum) * parryback;
 
-            if (player.transform.position.x > disabled.transform.position.x)
+            if (player.transform.position.x > enemy.transform.position.x)
             {
                 player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * playerback, ForceMode2D.Impulse);
-                disabled.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
             }
             else
             {
                 player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -playerback, ForceMode2D.Impulse);
-                disabled.GetComponent<Rigidbody2D>().AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
             }
         }
 

@@ -5,8 +5,10 @@ using DG.Tweening;
 
 public class trapal_script : MonoBehaviour
 {
+    public GameObject cammanager;
     public GameObject gamemanager;
     public GameObject player;
+    public GameObject lazer2;
     public GameObject lazer;
     public GameObject pointattack;
     public GameObject barrier;
@@ -15,6 +17,7 @@ public class trapal_script : MonoBehaviour
     public GameObject eyeflash;
     public GameObject eyeslash;
     public GameObject lazer1;
+    public bool lazer2time;
     public float lazer1cool = 0;
     public float lazer1cooltime;
     public float lazercool = 0;
@@ -35,6 +38,10 @@ public class trapal_script : MonoBehaviour
     public float eyerandomx;
     public float eyerandomy;
     public bool canattack = true;
+    public float spawnTime;        
+    public float startInterval;     
+    public float endInterval;
+    private float currentInterval;
 
     public Vector3 targetPosition = new Vector3(0f, 3.46f, 0f);  
     public float duration = 2f;
@@ -47,6 +54,12 @@ public class trapal_script : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (lazer2time)
+        {
+            lazer2time = false;
+            Lazer2spwan();
+        }
+
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
         {
             GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -65,16 +78,18 @@ public class trapal_script : MonoBehaviour
 
         lazer1cool++;
         lazercool++;
-        pointattackcool++;
+        //pointattackcool++;
         barriercool++;
-        guncool++;
-        eyecool++;
+        //guncool++;
+        //eyecool++;
         if (canattack)
         {
             if (lazer1cool >= lazer1cooltime)
             {
                 lazer1cool = 0;
                 GameObject curlazer1 = Instantiate(lazer1, transform.position, Quaternion.identity);
+                curlazer1.transform.GetChild(0).GetComponent<enemydattack>().player = player;
+                curlazer1.transform.GetChild(0).GetComponent<enemydattack>().enemy = gameObject;
                 curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
                 Vector2 direction = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -86,6 +101,7 @@ public class trapal_script : MonoBehaviour
             {
                 lazercool = 0;
                 lazer.GetComponent<trapal_lazer>().LazerStart();
+
             }
 
             if (pointattackcool >= pointattackcooltime)
@@ -185,6 +201,38 @@ public class trapal_script : MonoBehaviour
             currenteye1.GetComponent<trapal_eyeslash>().Startslash(3);
             currenteye2.GetComponent<trapal_eyeslash>().Startslash(3);
             currenteye3.GetComponent<trapal_eyeslash>().Startslash(3);
+        }
+    }
+
+    public void Lazer2spwan()
+    {
+        currentInterval = startInterval;
+
+        DOTween.To(() => currentInterval, x => currentInterval = x, endInterval, spawnTime)
+               .SetEase(Ease.Linear);
+
+        StartCoroutine(SpawnLoop());
+
+        
+    }
+
+    IEnumerator SpawnLoop()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < spawnTime)
+        {
+            Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
+            Vector2 spawnDirection = -directionToPlayer;
+            Vector2 spawnPosition = (Vector2)transform.position + spawnDirection * 15;
+            GameObject curlazer2 = Instantiate(lazer2, spawnPosition, Quaternion.identity);
+            curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
+            curlazer2.GetComponent<lazer2lookat>().player = player;
+            curlazer2.GetComponent<lazer2lookat>().look = true;
+            curlazer2.GetComponent<lazer2lookat>().cammanager = cammanager;
+
+            yield return new WaitForSeconds(currentInterval);
+            elapsed += currentInterval;
         }
     }
 

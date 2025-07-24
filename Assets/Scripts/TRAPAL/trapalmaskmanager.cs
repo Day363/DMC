@@ -39,7 +39,8 @@ public class trapalmaskmanager : MonoBehaviour
 
     IEnumerator Maskdisappear(GameObject mask)
     {
-        yield return new WaitForSeconds(1.5f);
+        float randint = Random.Range(0.1f, 0.3f);
+        yield return new WaitForSeconds(randint);
         Destroy(mask);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float maxSpeed;
+    
     public float jumpPower;
     public bool isJump = false;
     public bool canmove = true;
@@ -86,14 +86,14 @@ public class PlayerMove : MonoBehaviour
             
             rigid.AddForce(Vector2.right * GetComponent<playerinput>().h, ForceMode2D.Impulse);
 
-            if (rigid.velocity.x > maxSpeed)
+            if (rigid.velocity.x > GetComponent<playerstatus>().speed)
             {
-                rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
+                rigid.velocity = new Vector2(GetComponent<playerstatus>().speed, rigid.velocity.y);
             }
 
-            else if (rigid.velocity.x < maxSpeed * (-1))
+            else if (rigid.velocity.x < GetComponent<playerstatus>().speed * (-1))
             {
-                rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
+                rigid.velocity = new Vector2(GetComponent<playerstatus>().speed * (-1), rigid.velocity.y);
             }
         }
     }

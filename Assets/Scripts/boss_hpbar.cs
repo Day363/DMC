@@ -6,6 +6,8 @@ using TMPro;
 
 public class boss_hpbar : MonoBehaviour
 {
+    public GameObject cammanager;
+
     public GameObject attackcore;
 
     public GameObject damagepos;
@@ -76,6 +78,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void Damage(int damage)
     {
+        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage;
@@ -88,6 +92,9 @@ public class boss_hpbar : MonoBehaviour
 
     public void SlashDamage(int damage)
     {
+
+        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * slashtolerance;
@@ -103,6 +110,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * penetratetolerance;
@@ -118,6 +127,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void BlowDamage(int damage)
     {
+        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+
         if (maxhealth == 0 || currenthealth <= 0)
             return;
         currenthealth -= damage * blowtolerance;

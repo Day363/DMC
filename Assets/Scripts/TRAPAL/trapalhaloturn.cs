@@ -10,6 +10,7 @@ public class trapalhaloturn : MonoBehaviour
     private void FixedUpdate()
     {
         currentangle = currentangle + turnspeed;
-        transform.rotation = Quaternion.Euler(0, 0, currentangle);
+        //transform.rotation = Quaternion.Euler(0, 0, currentangle);
+        transform.localEulerAngles = new Vector3(0, 0, currentangle);
     }
 }

@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Weapon : ScriptableObject
 {
     
-    [TextArea]
+    [TextArea(20, 1)]
     public string passive_description;
-    [TextArea]
+    [TextArea(20, 1)]
     public string normalskill_description;
-    [TextArea]
+    [TextArea(20, 1)]
     public string arreyskill_description;
 
     public bool range;

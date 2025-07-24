@@ -19,6 +19,7 @@ public class playerstatus : MonoBehaviour
     public float speed;
     public int attackpower;
 
+   
     private void Start()
     {
         balancebarint.maxValue = maxbalance;

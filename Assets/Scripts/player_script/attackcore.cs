@@ -25,7 +25,8 @@ public class SkillReady
 public class attackcore : MonoBehaviour
 {
     public bool testbool;
-
+    public GameObject skillselectui;
+    public GameObject viewpoint;
     public GameObject skillarreyUi;
     public TMP_Text passivetext;
     public TMP_Text normalskilltext;
@@ -95,15 +96,29 @@ public class attackcore : MonoBehaviour
         foreach (Weapon weapon in weaponlist)
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, weaponlistUi.transform);
-            currentweaponimage.GetComponent<weaponskillUi>().passivetext = passivetext;
-            currentweaponimage.GetComponent<weaponskillUi>().normalskilltext = normalskilltext;
-            currentweaponimage.GetComponent<weaponskillUi>().arreyskilltext = arreyskilltext;
-            currentweaponimage.GetComponent<weaponskillUi>().attackcore = gameObject;
-            currentweaponimage.GetComponent<weaponskillUi>().weapon = weapon;
-            currentweaponimage.GetComponent<weaponskillUi>().skilllistUi = skilllistUi;
-            currentweaponimage.GetComponent<weaponskillUi>().skillsetlist = skillsetlist;
+            //currentweaponimage.GetComponent<weaponskillUi>().viewpoint = viewpoint;
+            //currentweaponimage.GetComponent<weaponskillUi>().passivetext = passivetext;
+            //currentweaponimage.GetComponent<weaponskillUi>().normalskilltext = normalskilltext;
+            //currentweaponimage.GetComponent<weaponskillUi>().arreyskilltext = arreyskilltext;
+            //currentweaponimage.GetComponent<weaponskillUi>().attackcore = gameObject;
+            //currentweaponimage.GetComponent<weaponskillUi>().weapon = weapon;
+            //currentweaponimage.GetComponent<weaponskillUi>().skilllistUi = skilllistUi;
+            //currentweaponimage.GetComponent<weaponskillUi>().skillsetlist = skillsetlist;
+            //currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
+            //currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
+
+            weaponskillUi weaponskillUi_Script = currentweaponimage.GetComponent<weaponskillUi>();
+            weaponskillUi_Script.viewpoint = viewpoint;
+            weaponskillUi_Script.passivetext = passivetext;
+            weaponskillUi_Script.normalskilltext = normalskilltext;
+            weaponskillUi_Script.arreyskilltext = arreyskilltext;
+            weaponskillUi_Script.attackcore = gameObject;
+            weaponskillUi_Script.weapon = weapon;
+            weaponskillUi_Script.skilllistUi = skilllistUi;
+            weaponskillUi_Script.skillsetlist = skillsetlist;
             currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
             currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
+
             if (weapon.penetrate == true)
             {
                 currentweaponimage.transform.GetChild(0).GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 1);
@@ -180,6 +195,8 @@ public class attackcore : MonoBehaviour
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
         canattack = true;
         player.GetComponent<PlayerMove>().canmove = true;
+        skillselectui.SetActive(true);
+        canattack = false;
     }
 
     IEnumerator UseStandby()
@@ -192,6 +209,8 @@ public class attackcore : MonoBehaviour
 
     IEnumerator NoStandByskills()
     {
+        skillselectui.SetActive(true);
+        canattack = false;
         yield return new WaitForSeconds(4f);
         gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
     }
@@ -720,7 +739,7 @@ public class attackcore : MonoBehaviour
     public void SkillarreyUi()
     {
         Organize();
-        StandBySkillFind();
+        //StandBySkillFind();
         Array2();
         WaitskillarrayUi();
     }

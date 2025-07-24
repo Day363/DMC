@@ -2427,7 +2427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &13111076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2518,8 +2518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c5843f8b4795b488e04865ea8b7c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cammanager: {fileID: 373801462}
   gamemanager: {fileID: 1694457153}
   player: {fileID: 1233421491}
+  lazer2: {fileID: 3542183049290986615, guid: 4f6b304e9df60e84b8aee9a642ab49fc, type: 3}
   lazer: {fileID: 2009355511}
   pointattack: {fileID: 8156381176172354809, guid: 4397c16a3f1a9934a8d2712987bd97de, type: 3}
   barrier: {fileID: 1424221441}
@@ -2528,6 +2530,7 @@ MonoBehaviour:
   eyeflash: {fileID: 5550110819985193940, guid: 323fa2f350ebeac4fbcb6c5e9c53beb5, type: 3}
   eyeslash: {fileID: 4601948195255004860, guid: 9273aabdd62a9c14ebbf20f2a53ace41, type: 3}
   lazer1: {fileID: 3144816247686561561, guid: 8b2b7698ab789004da4793a426227bb5, type: 3}
+  lazer2time: 0
   lazer1cool: 0
   lazer1cooltime: 300
   lazercool: 0
@@ -2536,7 +2539,7 @@ MonoBehaviour:
   pointattackcooltime: 1500
   barriercool: 5000
   barriercooltime: 5000
-  guncool: 1000
+  guncool: 0
   guncooltime: 1000
   gunrandomx1: -40
   gunrandomx2: 40
@@ -2548,6 +2551,9 @@ MonoBehaviour:
   eyerandomx: 30
   eyerandomy: 5
   canattack: 1
+  spawnTime: 12.5
+  startInterval: 1.5
+  endInterval: 0.2
   targetPosition: {x: 0, y: 3.46, z: 0}
   duration: 2
   backtrigger: 0
@@ -2563,6 +2569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cammanager: {fileID: 373801462}
   attackcore: {fileID: 840654302}
   damagepos: {fileID: 1040285637}
   balancebar: {fileID: 915924457}
@@ -3314,7 +3321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -20340,7 +20347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &112168876
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21048,6 +21055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cammanager: {fileID: 0}
   attackcore: {fileID: 0}
   damagepos: {fileID: 0}
   balancebar: {fileID: 0}
@@ -24536,7 +24544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -30582,7 +30590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -32604,7 +32612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -36125,68 +36133,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &228814743
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 228814744}
-  - component: {fileID: 228814746}
-  m_Layer: 5
-  m_Name: Content
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &228814744
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228814743}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1565360887}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000015258789}
-  m_SizeDelta: {x: 0, y: 328.71}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &228814746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228814743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 1.73
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &229244847
 GameObject:
   m_ObjectHideFlags: 0
@@ -40357,7 +40303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -41123,7 +41069,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1233421494}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 11
+    OrthographicSize: 14
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -49905,7 +49851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -58025,7 +57971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -59284,7 +59230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -60275,7 +60221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask: {fileID: 3271025254673739234, guid: 6de2f7861f891ff4d946c38dbd9cbb7b, type: 3}
   randomint: 0
-  intrange: 5
+  intrange: 2
   minpos: -30
   maxpos: 30
   posx: 0
@@ -61970,7 +61916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -78690,7 +78636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -78878,7 +78824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.29803923}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -81572,7 +81518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -84242,7 +84188,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 14
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -90861,7 +90807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -97038,7 +96984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -101687,7 +101633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -107068,7 +107014,7 @@ RectTransform:
   m_Father: {fileID: 2055155469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -107466,7 +107412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &609046968
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -107632,6 +107578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cammanager: {fileID: 0}
   attackcore: {fileID: 840654302}
   damagepos: {fileID: 609046967}
   balancebar: {fileID: 1425506570}
@@ -112633,7 +112580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -115045,7 +114992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -115070,7 +115017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &655926170
 Transform:
   m_ObjectHideFlags: 0
@@ -121035,7 +120982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -121089,7 +121036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -121490,7 +121437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -127297,7 +127244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -127597,7 +127544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00008455014, y: 0}
+  m_AnchoredPosition: {x: 0.0003693277, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &750758428
@@ -128055,7 +128002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -129023,7 +128970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 35
   lightattack: 0
   heavyattack: 0
@@ -132320,7 +132267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -133746,7 +133693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -143304,12 +143251,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testbool: 1
+  skillselectui: {fileID: 169002058}
+  viewpoint: {fileID: 1565360886}
   skillarreyUi: {fileID: 750758426}
   passivetext: {fileID: 559349351}
   normalskilltext: {fileID: 2086927563}
   arreyskilltext: {fileID: 1110491965}
   skillsetlist: {fileID: 1076951763}
-  skilllistUi: {fileID: 228814743}
+  skilllistUi: {fileID: 0}
   weaponimageUi: {fileID: 4952906433717326173, guid: e1bc2ebe6fcff1c4fa8d3241cbcfbc7d, type: 3}
   weaponlistUi: {fileID: 1303483101}
   letterbox: {fileID: 671870209}
@@ -143327,8 +143276,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 206ae441426574f46ab29830c7187fc1, type: 2}
   - {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
   - {fileID: 11400000, guid: d5a2153cd4b149c49a9b2a9111b37365, type: 2}
-  attacklist_original:
-  - {fileID: 11400000, guid: bb1a61a32370b1b4d9987ce0014faf44, type: 2}
+  attacklist_original: []
   skillstring: []
   attacklist_notset: []
   canattack: 1
@@ -149661,7 +149609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -162415,7 +162363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -168773,7 +168721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -182618,7 +182566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -194838,7 +194786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1044400322
 Transform:
   m_ObjectHideFlags: 0
@@ -198167,7 +198115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -211240,7 +211188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -226339,7 +226287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad36e250cabaa94692ce11ae02e1d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
   jumpPower: 16
   isJump: 0
   canmove: 1
@@ -226384,7 +226331,7 @@ MonoBehaviour:
   height: -2.3
   maxbalance: 300
   currentbalance: 0
-  speed: 0
+  speed: 11
   attackpower: 10
 --- !u!114 &1233421500
 MonoBehaviour:
@@ -234747,7 +234694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -238381,7 +238328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -248676,7 +248623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -248997,7 +248944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 35
   lightattack: 0
   heavyattack: 0
@@ -250404,7 +250351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -256284,7 +256231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -257617,7 +257564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -261163,7 +261110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -268048,7 +267995,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1435005862
 MonoBehaviour:
@@ -269634,7 +269581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -272144,7 +272091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -273638,7 +273585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -277619,7 +277566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -303036,7 +302983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -304925,8 +304872,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 228814744}
+  m_Children: []
   m_Father: {fileID: 2069586011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -307844,7 +307790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -312431,7 +312377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -331859,7 +331805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -337185,7 +337131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -344043,7 +343989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -348640,7 +348586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -349908,7 +349854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -352423,7 +352369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -353995,8 +353941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 0.00035858}
-  m_SizeDelta: {x: 766.47, y: 31.399}
+  m_AnchoredPosition: {x: 0.00037766, y: 0.00035858}
+  m_SizeDelta: {x: 693.81, y: 31.399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928161002
 MonoBehaviour:
@@ -362082,7 +362028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -362674,6 +362620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cammanager: {fileID: 0}
   attackcore: {fileID: 0}
   damagepos: {fileID: 22722007}
   balancebar: {fileID: 2088447298}
@@ -364315,7 +364262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 30
   lightattack: 0
   heavyattack: 0
@@ -377518,7 +377465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Content: {fileID: 228814744}
+  m_Content: {fileID: 0}
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
@@ -386317,9 +386264,9 @@ MonoBehaviour:
   mask: {fileID: 654312045918044619, guid: 93fa8435cc763674787d03a65b0b1ac8, type: 3}
   currentmask: {fileID: 0}
   randomint: 0
-  intrange: 5
+  intrange: 7
   minsize: 0.3
-  maxsize: 4
+  maxsize: 5
   sizex: 0
   sizey: 0
   minpos: -9
@@ -387441,7 +387388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  disabled: {fileID: 1995604081}
+  enemy: {fileID: 0}
   damage: 45
   lightattack: 0
   heavyattack: 0
@@ -401355,7 +401302,7 @@ RectTransform:
   m_Father: {fileID: 1124692717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

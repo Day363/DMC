@@ -5,6 +5,10 @@ using TMPro;
 
 public class weaponskillUi : MonoBehaviour
 {
+    public GameObject viewpoint;
+    public GameObject content;
+    public GameObject curcontentnow;
+
     public TMP_Text passivetext;
     public TMP_Text normalskilltext;
     public TMP_Text arreyskilltext;
@@ -15,25 +19,47 @@ public class weaponskillUi : MonoBehaviour
     public Weapon weapon;
     public GameObject skillsetlist;
 
-    public void InstitateSkillUi()
+    public void Start()
+    {
+        InstitateSkillUi();
+    }
+
+    public void ButtonPress()
+    {
+        DescriptionUi();
+        SkillcontentActive();
+    }
+
+
+    public void DescriptionUi()
     {
         passivetext.text = weapon.passive_description;
         normalskilltext.text = weapon.normalskill_description;
         arreyskilltext.text = weapon.arreyskill_description;
+    }
 
-        for (int i = skilllistUi.transform.childCount - 1; i >= 0; i--)
+    public void SkillcontentActive()
+    {
+        foreach (Transform child in viewpoint.transform)
         {
-            Transform child = skilllistUi.transform.GetChild(i);
-            Destroy(child.gameObject); 
+            child.gameObject.SetActive(false);
         }
+        curcontentnow.SetActive(true);
+    }
+
+    public void InstitateSkillUi()
+    {
+        GameObject curcontent = Instantiate(content, viewpoint.transform);
+        curcontentnow = curcontent;
 
         foreach (Skill skill in weapon.skilllist)
         {
-            GameObject currentskillUi = Instantiate(skillUi, skilllistUi.transform);
+            GameObject currentskillUi = Instantiate(skillUi, curcontent.transform);
             currentskillUi.transform.GetChild(0).GetComponent<TMP_Text>().text = skill.skillmarkname;
             currentskillUi.GetComponent<skillselectUi>().attackcore = attackcore;
             currentskillUi.GetComponent<skillselectUi>().skill = skill;
             currentskillUi.GetComponent<skillselectUi>().skilllist = skillsetlist;
         }
+        curcontentnow.SetActive(false);
     }
 }

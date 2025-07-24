@@ -49,6 +49,11 @@ public class CameraManager : MonoBehaviour
         GetComponent<Animator>().SetTrigger("skillcam");
     }
 
+    public void CamVibration0_5()
+    {
+        StartCoroutine(CamVib0_5());
+    }
+
     public void CamVibration1()
     {
         StartCoroutine(CamVib1());
@@ -77,5 +82,13 @@ public class CameraManager : MonoBehaviour
         CamStable();
     }
 
-    
+    IEnumerator CamVib0_5()
+    {
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 6;
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.12f);
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        CamStable();
+    }
 }
