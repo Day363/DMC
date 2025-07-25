@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class lazer2lookat : MonoBehaviour
 {
+    public bool isshoot = true;
+
     public GameObject player;
     public GameObject cammanager;
 
@@ -31,8 +33,12 @@ public class lazer2lookat : MonoBehaviour
 
     IEnumerator StartCharge()
     {
-        yield return new WaitForSeconds(2f);
-        Charge();
+        if (isshoot)
+        {
+            yield return new WaitForSeconds(2f);
+            Charge();
+        }
+        
     }
 
     public void Charge()
@@ -68,6 +74,15 @@ public class lazer2lookat : MonoBehaviour
         }
         cammanager.GetComponent<CameraManager>().CamVibration1();
         StartCoroutine(SelfDes());
+    }
+
+    public void ShootNotDes()
+    {
+        foreach (GameObject halos in halolist)
+        {
+            halos.GetComponent<trapal_lazer2_turn>().LittleShoot();
+        }
+        cammanager.GetComponent<CameraManager>().CamVibration1();
     }
 
     IEnumerator SelfDes()

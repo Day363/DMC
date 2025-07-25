@@ -6,6 +6,7 @@ using DG.Tweening;
 public class trapal_lazer2_turn : MonoBehaviour
 {
     public bool charge;
+    public bool canset = true;
 
     public GameObject player;
 
@@ -24,7 +25,7 @@ public class trapal_lazer2_turn : MonoBehaviour
         turnspeed = Random.Range(speedrange.x, speedrange.y);
         targetz = Random.Range(zrange.x, zrange.y);
 
-        DOTween.To(() => curz, x => curz = x, targetz, 3f).SetEase(Ease.OutQuart);
+        DOTween.To(() => curz, x => curz = x, targetz, 3f).SetEase(Ease.OutQuart).SetId("go");
     }
 
     private void FixedUpdate()
@@ -36,7 +37,14 @@ public class trapal_lazer2_turn : MonoBehaviour
         {
             turnspeed = turnspeed + 0.2f;
         }
-        
+
+    }
+
+    public void LittleShoot()
+    {
+        DOTween.Kill("go");
+        targetz = Random.Range(-4f, -10f);
+        DOTween.To(() => curz, x => curz = x, targetz, 1f).SetEase(Ease.OutQuart);
     }
 
     public void Shoot()
