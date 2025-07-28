@@ -15,6 +15,9 @@ public class trapal_sword : MonoBehaviour
 
     public List<GameObject> lazer2list = new List<GameObject> { };
 
+    public float dashpower;
+    public int dir;
+
     public int count = 0;
     public float initialInterval = 5f;    
     public float minInterval = 1.5f;      
@@ -27,6 +30,8 @@ public class trapal_sword : MonoBehaviour
 
     IEnumerator CallFunctionFasterOverTime()
     {
+        yield return new WaitForSeconds(3.5f);
+
         float interval = initialInterval;
 
         while (count < 11)
@@ -96,15 +101,15 @@ public class trapal_sword : MonoBehaviour
 
             yield return new WaitForSeconds(0.7f);
 
-            transform.rotation = Quaternion.Euler(0, 0, 0);
             GetComponent<Animator>().SetTrigger("big");
-            transform.DORotate(new Vector3(0, 0, 90), 1.5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuart);
+            transform.DORotate(new Vector3(0, 0, 90), 1.5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuart).SetId("mnu");
 
             yield return new WaitForSeconds(1.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
-
-            yield return new WaitForSeconds(1.5f);
+            GetComponent<afterimagespawner>().enabled = false;
+            
             GetComponent<Animator>().SetTrigger("attack");
+            GetComponent<afterimagespawner>().enabled = true;
 
         }
     }
@@ -150,6 +155,27 @@ public class trapal_sword : MonoBehaviour
                 lazer2.GetComponent<lazer2lookat>().Charge();
             }
         }
+    }
+
+    public void Dash()
+    {
+        if (transform.position.x - player.transform.position.x > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+            dir = -1;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+            dir = 1;
+        }
+
+        GetComponent<Rigidbody2D>().AddForce(Vector2.right * dashpower * dir, ForceMode2D.Impulse);
+    }
+    public void CamVib()
+    {
+        cammanager.GetComponent<CameraManager>().CamVibration1();
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
     }
 
 }

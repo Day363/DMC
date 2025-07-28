@@ -17,7 +17,9 @@ public class trapal_script : MonoBehaviour
     public GameObject eyeflash;
     public GameObject eyeslash;
     public GameObject lazer1;
+    public GameObject sword;
     public bool lazer2time;
+    public bool swordtime;
     public float lazer1cool = 0;
     public float lazer1cooltime;
     public float lazercool = 0;
@@ -58,6 +60,12 @@ public class trapal_script : MonoBehaviour
         {
             lazer2time = false;
             Lazer2spwan();
+        }
+
+        if (swordtime)
+        {
+            swordtime = false;
+            SwordSpawn();
         }
 
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
@@ -202,6 +210,14 @@ public class trapal_script : MonoBehaviour
             currenteye2.GetComponent<trapal_eyeslash>().Startslash(3);
             currenteye3.GetComponent<trapal_eyeslash>().Startslash(3);
         }
+    }
+
+    public void SwordSpawn()
+    {
+        GameObject cursword = Instantiate(sword, new Vector3(transform.position.x, transform.position.y + 30, 0), Quaternion.Euler(90, 0, 0));
+        cursword.GetComponent<trapal_sword>().player = player;
+        cursword.GetComponent<trapal_sword>().cammanager = cammanager;
+        cursword.transform.DOLocalMoveY(8f, 3f).SetEase(Ease.Linear);
     }
 
     public void Lazer2spwan()

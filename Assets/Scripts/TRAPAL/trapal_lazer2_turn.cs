@@ -49,6 +49,7 @@ public class trapal_lazer2_turn : MonoBehaviour
 
     public void Shoot()
     {
+        DOTween.Kill("go");
         targetz = Random.Range(-10f, -30f);
         DOTween.To(() => curz, x => curz = x, targetz, 1f).SetEase(Ease.OutQuart);
     }

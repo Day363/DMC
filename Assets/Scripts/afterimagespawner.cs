@@ -18,6 +18,11 @@ public class afterimagespawner : MonoBehaviour
             SpawnAfterImage();
             timer = 0f;
         }
+
+        if (GetComponent<SpriteMask>().enabled)
+        {
+            GetComponent<SpriteMask>().sprite = GetComponent<SpriteRenderer>().sprite;
+        }
     }
 
     void SpawnAfterImage()

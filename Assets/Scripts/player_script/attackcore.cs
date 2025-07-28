@@ -683,6 +683,7 @@ public class attackcore : MonoBehaviour
 
     public void WeaponimageReplace()
     {
+        if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage != null)
         weaponimage.GetComponent<Image>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage;
 
 
@@ -830,6 +831,11 @@ public class attackcore : MonoBehaviour
                 {
                     if (lastlist[listnumber][attacknumber].Amalgamed == null)
                     {
+                        if (lastlist[listnumber][attacknumber].Normalskill.functionskill)
+                        {
+                            player.GetComponent<skillfunction>().ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.funtionname);
+                        }
+
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill != true)
                         {
                             if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy == false)

@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lazer2lookat : MonoBehaviour
+public class player_trapal_lazer2 : MonoBehaviour
 {
-    public bool isshoot = true;
-
-    public GameObject player;
+    public GameObject target;
     public GameObject cammanager;
 
     public List<GameObject> halolist;
@@ -26,28 +24,30 @@ public class lazer2lookat : MonoBehaviour
     {
         if (look)
         {
-            if (player != null)
+            if (target != null)
             {
-                transform.LookAt(player.transform);
+                transform.LookAt(target.transform);
             }
-            
+
         }
-        
+
     }
 
     IEnumerator StartCharge()
     {
-        if (isshoot)
+        if (look)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.4f);
             Charge();
         }
         
+        
+
     }
 
     public void Charge()
     {
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         anglea = angle;
 
@@ -65,7 +65,7 @@ public class lazer2lookat : MonoBehaviour
 
     IEnumerator Shootco()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         Shoot();
     }
 
