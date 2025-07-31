@@ -89,6 +89,11 @@ public class player_trapal_lazer2 : MonoBehaviour
         cammanager.GetComponent<CameraManager>().CamVibration1();
     }
 
+    public void SelfDesM()
+    {
+        StartCoroutine(SelfDes());
+    }
+
     IEnumerator SelfDes()
     {
         yield return new WaitForSeconds(1.1f);

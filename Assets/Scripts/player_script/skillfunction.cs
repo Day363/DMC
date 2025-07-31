@@ -12,6 +12,7 @@ public class skillfunction : MonoBehaviour
     public Dictionary<string, Action> commandMap;
     public Stack Inference;
     public GameObject lazer2;
+    public GameObject trapal_weapon1;
 
     void Start()
     {
@@ -94,6 +95,49 @@ public class skillfunction : MonoBehaviour
             curstartlazer2.GetComponent<player_trapal_lazer2>().Shoot();
         }
 
+    }
+
+    public void Trapal_Weapon1_Lazer2()
+    {
+        StartCoroutine(Trapal_Weapon1_Lazer2_co());
+    }
+
+    IEnumerator Trapal_Weapon1_Lazer2_co()
+    {
+        if (GetComponent<PlayerMove>().dir == 1)
+        {
+            GameObject curlazer2 = Instantiate(lazer2, new Vector3(transform.position.x - 9f, transform.position.y, -6.5f), Quaternion.Euler(0, 108, 0));
+            curlazer2.GetComponent<player_trapal_lazer2>().look = false;
+            curlazer2.GetComponent<player_trapal_lazer2>().cammanager = cammanager;
+
+            yield return new WaitForSeconds(0.4f);
+
+            curlazer2.GetComponent<player_trapal_lazer2>().ShootNotDes();
+            curlazer2.GetComponent<player_trapal_lazer2>().SelfDesM();
+        }
+        else
+        {
+            GameObject curlazer2 = Instantiate(lazer2, new Vector3(transform.position.x + 9f, transform.position.y, -6.5f), Quaternion.Euler(0, -108, 0));
+            curlazer2.GetComponent<player_trapal_lazer2>().look = false;
+            curlazer2.GetComponent<player_trapal_lazer2>().cammanager = cammanager;
+
+            yield return new WaitForSeconds(0.4f);
+
+            curlazer2.GetComponent<player_trapal_lazer2>().ShootNotDes();
+            curlazer2.GetComponent<player_trapal_lazer2>().SelfDesM();
+        }
+    }
+
+    public void Trapal_Weapon1_Shoot()
+    {
+        if (GetComponent<PlayerMove>().dir == 1)
+        {
+            GameObject curweapon = Instantiate(trapal_weapon1, new Vector3(transform.position.x - 4f, transform.position.y - 0.2f, 0), Quaternion.Euler(0, 0, 0));
+        }
+        else
+        {
+            GameObject curweapon = Instantiate(trapal_weapon1, new Vector3(transform.position.x + 4f, transform.position.y - 0.2f, 0), Quaternion.Euler(0, 0, 180));
+        }
     }
 
     public void Trapal_Add_Inference()

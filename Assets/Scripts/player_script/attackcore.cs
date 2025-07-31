@@ -6,6 +6,34 @@ using DG.Tweening;
 using UnityEngine.UI;
 
 
+public class Magazine
+{
+    public Weapon Weapon;
+    public int Remainmagazine;
+    public int Remaincycle;
+
+    public Magazine(Weapon weapon)
+    {
+        Weapon = weapon;
+        Remainmagazine = Mathf.Clamp(weapon.magazine, 0, weapon.magazine);
+        Remaincycle = Mathf.Clamp(weapon.magazinecycle, 0, weapon.magazinecycle);
+    }
+
+    public void IfShoot()
+    {
+        Remainmagazine = Mathf.Clamp(Remainmagazine - 1, 0, Weapon.magazine);
+    }
+
+    public void Reload()
+    {
+        if (Remaincycle > 0)
+        {
+            Remaincycle--;
+            Remainmagazine = Weapon.magazine;
+        }
+    }
+}
+
 public class SkillReady
 {
     public string Skillname { get; set; }
@@ -49,6 +77,8 @@ public class attackcore : MonoBehaviour
     public GameObject waitskillprefap;
     public GameObject skillwaittext;
     public GameObject cycletext;
+    public GameObject circumtext;
+    public GameObject magazinetext;
     public GameObject player;
     public List<Weapon> weaponlist;
     public List<Skill> attacklist_original;
@@ -60,6 +90,7 @@ public class attackcore : MonoBehaviour
     public int arrayindex = 0;
     public int listnumber = 0;
     public int cycle = 1;
+    public int circum = 0;
     public int attacknumber = 0;
     public int skillnameint = 0;
     public float angle;
@@ -85,10 +116,43 @@ public class attackcore : MonoBehaviour
 
     public string amalgamedanimationtrigger;
 
+    public List<Magazine> weaponsmagazine = new List<Magazine>();
+
     private void Start()
     {
         attacklist = new();
+        BattleStart(); //전투시작(나중에 고쳐야됨)
+    }
+
+    public void BattleStart()
+    {
+        MakeRangeWeaponMagzineList();
+    }
+
+    public void MakeRangeWeaponMagzineList()
+    {
+        weaponsmagazine.Clear();
+
+        foreach (Weapon weapon in weaponlist)
+        {
+            if (weapon.range)
+            {
+                weaponsmagazine.Add(new Magazine(weapon));
+            }
+        }
+    }
+
+
+    public void StartCircum()
+    {
+        circum++;
+        cycle = 0;
+        CircumReplace();
         
+        foreach (Magazine magazine in weaponsmagazine)
+        {
+            magazine.Reload();
+        }
     }
 
     public void WeaponListUI()
@@ -694,6 +758,20 @@ public class attackcore : MonoBehaviour
         defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
     }
 
+    public void MagazineTextReplace()
+    {
+        if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.range)
+        {
+            Magazine curmagazine = weaponsmagazine.Find(x => x.Weapon == lastlist[listnumber][attacknumber].Normalskill.currentweapon);
+            magazinetext.GetComponent<TMP_Text>().text = $"[{curmagazine.Remaincycle}/{curmagazine.Remainmagazine}]";
+        }
+        else
+        {
+            magazinetext.GetComponent<TMP_Text>().text = "[∞]";
+        }
+        
+    }
+    
     public void TextReplace()
     {
         if (lastlist[listnumber][attacknumber].Enforceskills == null && lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -735,6 +813,11 @@ public class attackcore : MonoBehaviour
     public void CycleReplace()
     {
         cycletext.GetComponent<TMP_Text>().text = $"{cycle}순환";
+    }
+
+    public void CircumReplace()
+    {
+        circumtext.GetComponent<TMP_Text>().text = $"{circum}주기";
     }
 
     public void SkillarreyUi()
@@ -797,7 +880,6 @@ public class attackcore : MonoBehaviour
 
                 if (attacknumber == lastlist[listnumber].Count)
                 {
-                    Debug.Log("e");
                     listnumber++;
                     attacknumber = 0;
                     cycle++;
@@ -815,7 +897,7 @@ public class attackcore : MonoBehaviour
                 WeaponimageReplace();
                 DefenseTextReplace();
                 TextReplace();
-                Debug.Log("t");
+                MagazineTextReplace();
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -842,6 +924,13 @@ public class attackcore : MonoBehaviour
                             {
                                 currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
                                 currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+
+                                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                                {
+                                    pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                    pg.attackcore = gameObject;
+                                }
+       
                             }
                             else if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy)
                             {
@@ -906,7 +995,7 @@ public class attackcore : MonoBehaviour
                             }
 
                         }
-                        else if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
+                        if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
                         {
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                         }
@@ -918,6 +1007,16 @@ public class attackcore : MonoBehaviour
                         {
                             currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                            {
+                                pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                pg.attackcore = gameObject;
+                            }
+                            if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
+                            {
+                                pg2.weapon = lastlist[listnumber][attacknumber].Amalgamed.currentweapon;
+                                pg2.attackcore = gameObject;
+                            }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         }
@@ -926,6 +1025,11 @@ public class attackcore : MonoBehaviour
                         {
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
+                            {
+                                pg2.weapon = lastlist[listnumber][attacknumber].Amalgamed.currentweapon;
+                                pg2.attackcore = gameObject;
+                            }
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         }
 
@@ -933,6 +1037,11 @@ public class attackcore : MonoBehaviour
                         {
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Amalgamed.animationtrigger);
                             currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                            if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                            {
+                                pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                pg.attackcore = gameObject;
+                            }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         }
 
@@ -968,7 +1077,9 @@ public class attackcore : MonoBehaviour
                 WeaponimageReplace();
                 DefenseTextReplace();
                 TextReplace();
-                
+                MagazineTextReplace();
+
+
 
             }
             

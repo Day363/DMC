@@ -11,6 +11,6 @@ public class startattack : MonoBehaviour
     {
         selectUi.SetActive(false);
         attackcore.GetComponent<attackcore>().ArreyComplete();
-
+        attackcore.GetComponent<attackcore>().StartCircum();
     }
 }
