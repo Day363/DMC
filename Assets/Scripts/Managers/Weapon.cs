@@ -25,6 +25,7 @@ public class Weapon : ScriptableObject
     public bool blow;
     public bool penetrate;
 
+    public List<string> passivelist;
     public DefenseSkill defenseskill;
     public List<Skill> skilllist;
     public List<bool> skillactivelist;

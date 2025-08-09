@@ -9,7 +9,7 @@ public class standbyskill : ScriptableObject
 
     public List<string> skillarreyto;
 
-    //대기페시브
+    public string passive;
 
     public string animationtrigger;
 

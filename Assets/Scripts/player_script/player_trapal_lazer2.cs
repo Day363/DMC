@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class player_trapal_lazer2 : MonoBehaviour
 {
+    public GameObject player;
+    public float damagenum;
+
     public GameObject target;
     public GameObject cammanager;
 
     public List<GameObject> halolist;
 
     public bool look = true;
+    public bool startcharge = true;
     public float anglea;
 
     public GameObject warning;
     public GameObject shoot;
+
+    public float angle;
+    public float autoangle;
 
     public void Start()
     {
@@ -24,10 +31,13 @@ public class player_trapal_lazer2 : MonoBehaviour
     {
         if (look)
         {
+            
             if (target != null)
             {
                 transform.LookAt(target.transform);
             }
+           
+            
 
         }
 
@@ -37,8 +47,12 @@ public class player_trapal_lazer2 : MonoBehaviour
     {
         if (look)
         {
-            yield return new WaitForSeconds(0.4f);
-            Charge();
+            if (startcharge)
+            {
+                yield return new WaitForSeconds(0.4f);
+                Charge();
+            }
+            
         }
         
         
@@ -47,9 +61,17 @@ public class player_trapal_lazer2 : MonoBehaviour
 
     public void Charge()
     {
-        Vector3 direction = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        anglea = angle;
+        if (target != null)
+        {
+            Vector3 direction = target.transform.position - transform.position;
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            anglea = angle;
+        }
+        else
+        {
+            anglea = autoangle;
+        }
+        
 
         look = false;
 
@@ -71,7 +93,14 @@ public class player_trapal_lazer2 : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, anglea));
+        if (target == null)
+        {
+            anglea = autoangle;
+        }
+        
+        GameObject curlazer = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, anglea));
+        curlazer.GetComponent<playerattackdamage>().player = player;
+        curlazer.GetComponent<playerattackdamage>().damagenum = damagenum;
         foreach (GameObject halos in halolist)
         {
             halos.GetComponent<trapal_lazer2_turn>().Shoot();

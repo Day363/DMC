@@ -127,6 +127,12 @@ public class playerskillmove : MonoBehaviour
         DOTween.To(() => camerasize, x => camerasize = x, 5.8f, 0.8f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
+    public void CameraZoomOut10_2()
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 10f, 2f).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
     public void CamVib1()
     {
         cameramanager.GetComponent<CameraManager>().CamVibration1();
@@ -150,10 +156,12 @@ public class playerskillmove : MonoBehaviour
     {
         if (transform.position.x < Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
         {
+            transform.localScale = new Vector3(1, 1, 1);
             GetComponent<PlayerMove>().dir = 1;
         }
         if (transform.position.x > Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
         {
+            transform.localScale = new Vector3(-1, 1, 1);
             GetComponent<PlayerMove>().dir = -1;
         }
     }

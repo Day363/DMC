@@ -129,6 +129,12 @@ public class attackcore : MonoBehaviour
         MakeRangeWeaponMagzineList();
     }
 
+    public void BossDamaged()
+    {
+        player.GetComponent<skillfunction>().Trapal_Penetrate_When_attacked();
+        player.GetComponent<Passivefunction>().HitEnemy();
+    }
+
     public void MakeRangeWeaponMagzineList()
     {
         weaponsmagazine.Clear();
@@ -143,11 +149,12 @@ public class attackcore : MonoBehaviour
     }
 
 
-    public void StartCircum()
+    public void StartCircum()//ÁÖ±â½ÃÀÛ
     {
         circum++;
         cycle = 0;
         CircumReplace();
+        player.GetComponent<Passivefunction>().WhenCircumStart();
         
         foreach (Magazine magazine in weaponsmagazine)
         {
@@ -155,22 +162,16 @@ public class attackcore : MonoBehaviour
         }
     }
 
+    public void StartCycle()
+    {
+        player.GetComponent<Passivefunction>().WhenCycleStart();
+    }
+
     public void WeaponListUI()
     {
         foreach (Weapon weapon in weaponlist)
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, weaponlistUi.transform);
-            //currentweaponimage.GetComponent<weaponskillUi>().viewpoint = viewpoint;
-            //currentweaponimage.GetComponent<weaponskillUi>().passivetext = passivetext;
-            //currentweaponimage.GetComponent<weaponskillUi>().normalskilltext = normalskilltext;
-            //currentweaponimage.GetComponent<weaponskillUi>().arreyskilltext = arreyskilltext;
-            //currentweaponimage.GetComponent<weaponskillUi>().attackcore = gameObject;
-            //currentweaponimage.GetComponent<weaponskillUi>().weapon = weapon;
-            //currentweaponimage.GetComponent<weaponskillUi>().skilllistUi = skilllistUi;
-            //currentweaponimage.GetComponent<weaponskillUi>().skillsetlist = skillsetlist;
-            //currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
-            //currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
-
             weaponskillUi weaponskillUi_Script = currentweaponimage.GetComponent<weaponskillUi>();
             weaponskillUi_Script.viewpoint = viewpoint;
             weaponskillUi_Script.passivetext = passivetext;
@@ -356,6 +357,23 @@ public class attackcore : MonoBehaviour
                 currenttext.GetComponent<TMP_Text>().text = $"[{standbyskill1.skillname}]";
             }
         }
+    }
+
+    public void StandBySkillPassiveActive()
+    {
+        List<string> passivestrings = new List<string> { };
+        foreach (standbyskill standbyskill in standbyskills)
+        {
+            passivestrings.Add(standbyskill.passive);
+        }
+        foreach (Weapon weapon in weaponlist)
+        {
+            foreach (string passivestring in weapon.passivelist)
+            {
+                passivestrings.Add(passivestring);
+            }  
+        }
+        player.GetComponent<Passivefunction>().SetBoolsFromList(passivestrings);
     }
 
     public void Organize()
@@ -774,38 +792,39 @@ public class attackcore : MonoBehaviour
     
     public void TextReplace()
     {
+        TMP_Text skillwaittext_tMP_Text = skillwaittext.GetComponent<TMP_Text>();
         if (lastlist[listnumber][attacknumber].Enforceskills == null && lastlist[listnumber][attacknumber].Amalgamed == null)
         {
-            skillwaittext.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]";
+            skillwaittext_tMP_Text.text = $"[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]";
         }
         else if (lastlist[listnumber][attacknumber].Amalgamed == null && lastlist[listnumber][attacknumber].Enforceskills != null)
         {
-            skillwaittext.GetComponent<TMP_Text>().text = "";
+            skillwaittext_tMP_Text.text = "";
             foreach (Skill enforceskill in lastlist[listnumber][attacknumber].Enforceskills)
             {
-                skillwaittext.GetComponent<TMP_Text>().text += $"[{enforceskill.skillmarkname}";
+                skillwaittext_tMP_Text.text += $"[{enforceskill.skillmarkname}";
             }
-            skillwaittext.GetComponent<TMP_Text>().text += $"[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]";
+            skillwaittext_tMP_Text.text += $"[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]";
             foreach (Skill enforceskill in lastlist[listnumber][attacknumber].Enforceskills)
             {
-                skillwaittext.GetComponent<TMP_Text>().text += "]";
+                skillwaittext_tMP_Text.text += "]";
             }
         }
         else if (lastlist[listnumber][attacknumber].Amalgamed != null && lastlist[listnumber][attacknumber].Enforceskills == null)
         {
-            skillwaittext.GetComponent<TMP_Text>().text = $"[[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]-[Æ¯¼ö-À¶ÇÕ]-[{lastlist[listnumber][attacknumber].Amalgamed.skillmarkname}]]";
+            skillwaittext_tMP_Text.text = $"[[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]-[Æ¯¼ö-À¶ÇÕ]-[{lastlist[listnumber][attacknumber].Amalgamed.skillmarkname}]]";
         }
         else if (lastlist[listnumber][attacknumber].Amalgamed != null && lastlist[listnumber][attacknumber].Enforceskills != null)
         {
-            skillwaittext.GetComponent<TMP_Text>().text = "";
+            skillwaittext_tMP_Text.text = "";
             foreach (Skill enforceskill in lastlist[listnumber][attacknumber].Enforceskills)
             {
-                skillwaittext.GetComponent<TMP_Text>().text += $"[{enforceskill.skillmarkname}";
+                skillwaittext_tMP_Text.text += $"[{enforceskill.skillmarkname}";
             }
-            skillwaittext.GetComponent<TMP_Text>().text += $"[[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]-[Æ¯¼ö-À¶ÇÕ]-[{lastlist[listnumber][attacknumber].Amalgamed.skillmarkname}]]";
+            skillwaittext_tMP_Text.text += $"[[{lastlist[listnumber][attacknumber].Normalskill.skillmarkname}]-[Æ¯¼ö-À¶ÇÕ]-[{lastlist[listnumber][attacknumber].Amalgamed.skillmarkname}]]";
             foreach (Skill enforceskill in lastlist[listnumber][attacknumber].Enforceskills)
             {
-                skillwaittext.GetComponent<TMP_Text>().text += "]";
+                skillwaittext_tMP_Text.text += "]";
             }
         }
     }
@@ -836,6 +855,7 @@ public class attackcore : MonoBehaviour
 
         Organize();
         StandBySkillFind();
+        StandBySkillPassiveActive();
         Array2();
 
         WeaponimageReplace();
@@ -875,7 +895,15 @@ public class attackcore : MonoBehaviour
                     skillQueueUI.UseNextSkill();
                 }
 
-                player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
+                {
+                    player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+                }
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
+                {
+                    player.GetComponent<skillfunction>().ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
+                }
+                
                 AttcknumberPlus();
 
                 if (attacknumber == lastlist[listnumber].Count)
@@ -885,12 +913,14 @@ public class attackcore : MonoBehaviour
                     cycle++;
                     //iscycle = true;
                     CycleReplace();
+                    StartCycle();
                 }
 
                 if (listnumber == lastlist.Count)
                 {
                     
                     listnumber = 0;
+                    attacknumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
                 }
 
@@ -922,14 +952,18 @@ public class attackcore : MonoBehaviour
                         {
                             if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy == false)
                             {
-                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
-                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
-
-                                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                                if (lastlist[listnumber][attacknumber].Normalskill.prefabskill)
                                 {
-                                    pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
-                                    pg.attackcore = gameObject;
+                                    currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                                    currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+
+                                    if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                                    {
+                                        pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                        pg.attackcore = gameObject;
+                                    }
                                 }
+                                
        
                             }
                             else if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy)
@@ -937,6 +971,7 @@ public class attackcore : MonoBehaviour
                                 float randomint = Random.Range(0, 361);
                                 currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
                             }
+                            
 
                             if (lastlist[listnumber][attacknumber].Enforceskills != null)
                             {
@@ -1065,12 +1100,14 @@ public class attackcore : MonoBehaviour
                     cycle++;
                     //iscycle = true;
                     CycleReplace();
+                    StartCycle();
                 }
 
                 if (listnumber == lastlist.Count)
                 {
                     Debug.Log("t");
                     listnumber = 0;
+                    attacknumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
                 }
 

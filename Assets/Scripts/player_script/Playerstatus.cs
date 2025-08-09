@@ -26,6 +26,9 @@ public class playerstatus : MonoBehaviour
 
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
+    public static event Action<Stack, int> OnStackApplied;
+    public static event Action<Stack, int> OnStackRemoved;
+
     public class StackInstance
     {
         public Stack stackData;
@@ -67,7 +70,12 @@ public class playerstatus : MonoBehaviour
         }
 
         Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
+
+        OnStackApplied?.Invoke(newStack, amount);
+
         canvus.GetComponent<stackUimanager>().RefreshUI();
+
+        GetComponent<Passivefunction>().WhenAddStack();
     }
 
     public void RemoveStack(Stack targetStack, int amount)
@@ -78,6 +86,8 @@ public class playerstatus : MonoBehaviour
         {
             existing.RemoveStack(amount);
             Debug.Log($"Removed stack: {targetStack.effectName} (-{amount})");
+
+            OnStackRemoved?.Invoke(targetStack, amount);
 
             // ½ºÅÃÀÌ 0ÀÌ¸é ¸ñ·Ï¿¡¼­ Á¦°Å
             if (existing.currentStack <= 0)
@@ -91,6 +101,8 @@ public class playerstatus : MonoBehaviour
             Debug.LogWarning($"Tried to remove stack that doesn't exist: {targetStack.effectName}");
         }
         canvus.GetComponent<stackUimanager>().RefreshUI();
+
+        GetComponent<Passivefunction>().WhenRemoveStack();
     }
 
     public void PrintStacks()
@@ -124,6 +136,8 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
+        
+
         currentbalance += balance;
         BalanceCheck();
         if (currentbalance >= maxbalance)
@@ -131,6 +145,8 @@ public class playerstatus : MonoBehaviour
             currentbalance = 0;
             // ±ÕÇüºØ±«
         }
+
+        GetComponent<Passivefunction>().PlayerHit();
     }
 
 }

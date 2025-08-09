@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class playerattackdamage : MonoBehaviour
 {
+    public bool canattack = true;
+
     public GameObject player;
     public float damagenum;
     public int damage;
@@ -16,29 +18,33 @@ public class playerattackdamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "client")
         {
-            if (fixdam)
+            if (canattack)
             {
-                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                collision.GetComponent<boss_hpbar>().Damage(damage);
-            }
+                if (fixdam)
+                {
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    collision.GetComponent<boss_hpbar>().Damage(damage);
+                }
 
-            if (slash)
-            {
-                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                collision.GetComponent<boss_hpbar>().SlashDamage(damage);
-            }
+                if (slash)
+                {
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    collision.GetComponent<boss_hpbar>().SlashDamage(damage);
+                }
 
-            if (penetrate)
-            {
-                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                collision.GetComponent<boss_hpbar>().PenetrateDamage(damage);
-            }
+                if (penetrate)
+                {
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    collision.GetComponent<boss_hpbar>().PenetrateDamage(damage);
+                }
 
-            if (blow)
-            {
-                damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                collision.GetComponent<boss_hpbar>().BlowDamage(damage);
+                if (blow)
+                {
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    collision.GetComponent<boss_hpbar>().BlowDamage(damage);
+                }
             }
+            
         }
         
     }

@@ -12,7 +12,9 @@ public class DefenseSkill : ScriptableObject
 
     public bool prefabskill;
     public bool animationskill;
+    public bool functionskill;
 
     public List<GameObject> skillprefab;
     public string animationtrigger;
+    public List<string> function = new List<string> { };
 }

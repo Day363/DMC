@@ -79,6 +79,7 @@ public class boss_hpbar : MonoBehaviour
     public void Damage(int damage)
     {
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        attackcore.GetComponent<attackcore>().BossDamaged();
 
         if (maxhealth == 0 || currenthealth <= 0)
             return;
@@ -94,6 +95,7 @@ public class boss_hpbar : MonoBehaviour
     {
 
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        attackcore.GetComponent<attackcore>().BossDamaged();
 
         if (maxhealth == 0 || currenthealth <= 0)
             return;
@@ -111,6 +113,7 @@ public class boss_hpbar : MonoBehaviour
     public void PenetrateDamage(int damage)
     {
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        attackcore.GetComponent<attackcore>().BossDamaged();
 
         if (maxhealth == 0 || currenthealth <= 0)
             return;
@@ -128,6 +131,7 @@ public class boss_hpbar : MonoBehaviour
     public void BlowDamage(int damage)
     {
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        attackcore.GetComponent<attackcore>().BossDamaged();
 
         if (maxhealth == 0 || currenthealth <= 0)
             return;
