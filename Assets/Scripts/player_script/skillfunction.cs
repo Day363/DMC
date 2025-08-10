@@ -41,6 +41,11 @@ public class skillfunction : MonoBehaviour
         };
     }
 
+    public void Indexer_Call()
+    {
+        GetComponent<Passivefunction>().Indexer_Call();
+    }
+
     public void Trapal_Slash1()
     {
         StartCoroutine(Trapal_Slash1_co());
@@ -76,26 +81,51 @@ public class skillfunction : MonoBehaviour
         playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
         playerstatus.StackInstance instance2 = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "확신");
 
-
-        if (instance == null)
+        if (instance2 == null)
         {
-
-        }
-        else if (instance.currentStack >= 6)
-        {
-            int runs = instance.currentStack / 6;
-            runs = Mathf.Clamp(runs, 0, trapal_point.GetComponent<player_trapal_weapon_arrey>().count);
-            for (int i = 0; i < runs; i++)
+            if (instance == null)
             {
-                if (trapal_point.transform.childCount < trapal_point.GetComponent<player_trapal_weapon_arrey>().count)
+
+            }
+            else if (instance.currentStack >= 6)
+            {
+                int runs = instance.currentStack / 6;
+                runs = Mathf.Clamp(runs, 0, trapal_point.GetComponent<player_trapal_weapon_arrey>().count);
+                for (int i = 0; i < runs; i++)
                 {
-                    GameObject curpen = Instantiate(trapal_weapon, trapal_point.transform);
-                    curpen.GetComponent<playerattackdamage>().canattack = false;
-                    trapal_point.GetComponent<player_trapal_weapon_arrey>().ArrangeExistingChildren();
+                    if (trapal_point.transform.childCount < trapal_point.GetComponent<player_trapal_weapon_arrey>().count)
+                    {
+                        GameObject curpen = Instantiate(trapal_weapon, trapal_point.transform);
+                        curpen.GetComponent<playerattackdamage>().canattack = false;
+                        trapal_point.GetComponent<player_trapal_weapon_arrey>().ArrangeExistingChildren();
+                    }
+
                 }
-                
             }
         }
+        else if (instance2 != null)
+        {
+            if (instance == null)
+            {
+
+            }
+            else if (instance.currentStack >= 3)
+            {
+                int runs = instance.currentStack / 3;
+                runs = Mathf.Clamp(runs, 0, trapal_point.GetComponent<player_trapal_weapon_arrey>().count);
+                for (int i = 0; i < runs; i++)
+                {
+                    if (trapal_point.transform.childCount < trapal_point.GetComponent<player_trapal_weapon_arrey>().count)
+                    {
+                        GameObject curpen = Instantiate(trapal_weapon, trapal_point.transform);
+                        curpen.GetComponent<playerattackdamage>().canattack = false;
+                        trapal_point.GetComponent<player_trapal_weapon_arrey>().ArrangeExistingChildren();
+                    }
+
+                }
+            }
+        }
+        
         
         if (instance2 != null)
         {

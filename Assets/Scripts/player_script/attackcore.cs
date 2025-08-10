@@ -218,6 +218,11 @@ public class attackcore : MonoBehaviour
         letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
     }
 
+    public void LetterBoxUp()
+    {
+        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+    }
+
     public void UseStandbySkill()
     {
         if (standbyskills.Count > 0)
@@ -274,6 +279,8 @@ public class attackcore : MonoBehaviour
 
     IEnumerator NoStandByskills()
     {
+        Debug.Log("sdsdsd");
+        LetterBoxUp();
         skillselectui.SetActive(true);
         canattack = false;
         yield return new WaitForSeconds(4f);
@@ -961,6 +968,7 @@ public class attackcore : MonoBehaviour
                                     {
                                         pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
                                         pg.attackcore = gameObject;
+                                        pg.player = player;
                                     }
                                 }
                                 
@@ -1046,11 +1054,13 @@ public class attackcore : MonoBehaviour
                             {
                                 pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
                                 pg.attackcore = gameObject;
+                                pg.player = player;
                             }
                             if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
                             {
                                 pg2.weapon = lastlist[listnumber][attacknumber].Amalgamed.currentweapon;
                                 pg2.attackcore = gameObject;
+                                pg2.player = player;
                             }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
@@ -1064,6 +1074,7 @@ public class attackcore : MonoBehaviour
                             {
                                 pg2.weapon = lastlist[listnumber][attacknumber].Amalgamed.currentweapon;
                                 pg2.attackcore = gameObject;
+                                pg2.player = player;
                             }
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         }
@@ -1076,6 +1087,7 @@ public class attackcore : MonoBehaviour
                             {
                                 pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
                                 pg.attackcore = gameObject;
+                                pg.player = player;
                             }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                         }

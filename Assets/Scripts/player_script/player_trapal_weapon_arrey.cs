@@ -12,12 +12,15 @@ public class player_trapal_weapon_arrey : MonoBehaviour
     public GameObject target;
     public float movespeed;
 
+    public float x;
+    public float y;
+
     public void FixedUpdate()
     {
         angle = angle + 1f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        transform.position = Vector3.Lerp(transform.position, target.transform.position, movespeed);
+        transform.position = new Vector3(target.transform.position.x + x, target.transform.position.y + y, 0);
 
     }
 

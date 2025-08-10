@@ -6,20 +6,29 @@ using System.Reflection;
 
 public class Passivefunction : MonoBehaviour
 {
+    public GameObject attackcore;
+    public GameObject gamemanager;
     public List<string> activepassivelist = new List<string> { };
     public Dictionary<string, Action> boolFunctions;
     public playerstatus playerStackHandler;
 
+    public Stack attention_rate;
     public Stack Inference;
     public Stack certain;
     public Stack deny;
 
+    public List<GameObject> indexer_rains = new List<GameObject> { };
+    public bool Indexer_istransformed = false;
+    public float Indexer_minus;
+    public GameObject indexer_gun;
     public bool ishaloactive;
     public GameObject trapal_halo;
     public List<GameObject> trapal_certain_texts = new List<GameObject> { };
     public List<GameObject> trapal_deny_texts = new List<GameObject> { };
-    
-    
+
+    private bool indexer_passive1 = false;
+    private bool indexer_passive2 = false;
+    private bool indexer_passive3 = false;
     private bool trapal_passive1 = false;
     private bool trapal_passive2 = false;
     private bool trapal_passive3 = false;
@@ -50,8 +59,33 @@ public class Passivefunction : MonoBehaviour
         }
     }
 
+    public void FixedUpdate()
+    {
+        if (indexer_passive3)
+        {
+            boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
+            if (enemyStackInstance != null)
+            {
+                float distance = Mathf.Abs(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - transform.position.x);
+                distance = Mathf.Clamp(distance, 0, 30);
+                float t = Mathf.InverseLerp(30, 0, distance);
+                int value = Mathf.RoundToInt(Mathf.Lerp(1, 99, t));
+                enemyStackInstance.currentStack = value;
+                gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+            }
+            
+        }
+    }
+
     public void WhenCircumStart()
     {
+        Indexer_minus = 0;
+
+        if (indexer_passive3)
+        {
+            gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().ApplyStack(attention_rate, 1);
+        }
+
         if (trapal_passive3)
         {
             playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
@@ -65,17 +99,34 @@ public class Passivefunction : MonoBehaviour
 
     public void WhenCycleStart()
     {
+        if (indexer_passive1)
+        {
+            boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
+            if (enemyStackInstance.currentStack >= 50)
+            {
+                int index = UnityEngine.Random.Range(0, 4);
+                Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
+                Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
+                GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
+                currain.GetComponent<playerattackdamage>().player = gameObject;
+            }
+        }
+
         if (trapal_passive2)
         {
             playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
-            if (instance.currentStack > 12)
+            if (instance != null)
             {
-                GetComponent<playerstatus>().RemoveStack(Inference, 1);
+                if (instance.currentStack > 12)
+                {
+                    GetComponent<playerstatus>().RemoveStack(Inference, 1);
+                }
+                if (instance.currentStack < 12)
+                {
+                    GetComponent<playerstatus>().ApplyStack(Inference, 1);
+                }
             }
-            if (instance.currentStack < 12)
-            {
-                GetComponent<playerstatus>().ApplyStack(Inference, 1);
-            }
+            
         }
     }
 
@@ -216,6 +267,48 @@ public class Passivefunction : MonoBehaviour
                 }
             }
             
+        }
+    }
+
+    public void Indexer_Call()
+    {
+        if (indexer_passive1)
+        {
+            int index = UnityEngine.Random.Range(0, 4);
+            Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
+            Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
+            GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
+            currain.GetComponent<playerattackdamage>().player = gameObject;
+        }
+    }
+
+    public void Indexer_Transform()
+    {
+        Indexer_istransformed = true;
+    }
+
+    public void Indexer_gun_call(GameObject gun)
+    {
+        
+        if (indexer_passive2)
+        {
+            
+            
+            if (!Indexer_istransformed && attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == gun.GetComponent<player_gunprefap>().weapon).Remainmagazine > 0)
+            {
+                Debug.Log("sdv");
+                Indexer_minus += 0.4f;
+                gun.GetComponent<player_gunprefap>().damagenmum -= Indexer_minus;
+            }
+            else if (!Indexer_istransformed && attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == gun.GetComponent<player_gunprefap>().weapon).Remainmagazine <= 0)
+            {
+                Indexer_minus += 0.8f;
+                gun.GetComponent<player_gunprefap>().damagenmum -= Indexer_minus;
+            }
+            else if (Indexer_istransformed)
+            {
+                Indexer_istransformed = false;
+            }
         }
     }
 }
