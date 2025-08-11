@@ -165,6 +165,12 @@ public class attackcore : MonoBehaviour
     public void StartCycle()
     {
         player.GetComponent<Passivefunction>().WhenCycleStart();
+        
+    }
+
+    public void EndCycle()
+    {
+        player.GetComponent<playerstatus>().RemoveStackWhenCycleEnd();
     }
 
     public void WeaponListUI()
@@ -915,6 +921,7 @@ public class attackcore : MonoBehaviour
 
                 if (attacknumber == lastlist[listnumber].Count)
                 {
+                    EndCycle();
                     listnumber++;
                     attacknumber = 0;
                     cycle++;
@@ -978,6 +985,13 @@ public class attackcore : MonoBehaviour
                             {
                                 float randomint = Random.Range(0, 361);
                                 currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                                {
+                                    pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                    pg.attackcore = gameObject;
+                                    pg.player = player;
+                                }
                             }
                             
 
@@ -1106,7 +1120,7 @@ public class attackcore : MonoBehaviour
 
                 if (attacknumber == lastlist[listnumber].Count)
                 {
-                    Debug.Log("e");
+                    EndCycle();
                     listnumber++;
                     attacknumber = 0;
                     cycle++;

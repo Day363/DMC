@@ -37,6 +37,8 @@ public class boss_hpbar : MonoBehaviour
     public float height2;
     public float side;
 
+    public bool iscollapse;
+
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
@@ -160,6 +162,7 @@ public class boss_hpbar : MonoBehaviour
 
             GetComponent<Animator>().SetTrigger("collapse");
             GetComponent<Animator>().SetBool("idle", false);
+            iscollapse = true;
             // ±ÕÇüºØ±«
         }
     }
@@ -168,6 +171,7 @@ public class boss_hpbar : MonoBehaviour
     {
         yield return new WaitForSeconds(collapsefloat);
         GetComponent<Animator>().SetBool("collapse", false);
+        iscollapse = false;
     }
 
     public void Damage(int damage)

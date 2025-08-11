@@ -12,10 +12,12 @@ public class Passivefunction : MonoBehaviour
     public Dictionary<string, Action> boolFunctions;
     public playerstatus playerStackHandler;
 
+    public Stack penetrationup;
     public Stack attention_rate;
     public Stack Inference;
     public Stack certain;
     public Stack deny;
+    public Stack regret;
 
     public List<GameObject> indexer_rains = new List<GameObject> { };
     public bool Indexer_istransformed = false;
@@ -26,6 +28,10 @@ public class Passivefunction : MonoBehaviour
     public List<GameObject> trapal_certain_texts = new List<GameObject> { };
     public List<GameObject> trapal_deny_texts = new List<GameObject> { };
 
+    private bool disabled_passive1 = false;
+    private bool alttrigger_passive1 = false;
+    private bool alttrigger_passive2 = false;
+    private bool alttrigger_passive3 = false;
     private bool indexer_passive1 = false;
     private bool indexer_passive2 = false;
     private bool indexer_passive3 = false;
@@ -63,23 +69,50 @@ public class Passivefunction : MonoBehaviour
     {
         if (indexer_passive3)
         {
-            boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
-            if (enemyStackInstance != null)
+            if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().iscollapse)
             {
-                float distance = Mathf.Abs(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - transform.position.x);
-                distance = Mathf.Clamp(distance, 0, 30);
-                float t = Mathf.InverseLerp(30, 0, distance);
-                int value = Mathf.RoundToInt(Mathf.Lerp(1, 99, t));
-                enemyStackInstance.currentStack = value;
-                gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+                boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
+                if (enemyStackInstance != null)
+                {
+                    float distance = Mathf.Abs(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - transform.position.x);
+                    distance = Mathf.Clamp(distance, 0, 30);
+                    float t = Mathf.InverseLerp(30, 0, distance);
+                    int value = Mathf.RoundToInt(Mathf.Lerp(1, 99, t));
+                    enemyStackInstance.currentStack = value;
+                    gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+                }
+
             }
-            
+
         }
     }
 
     public void WhenCircumStart()
     {
         Indexer_minus = 0;
+        GetComponent<playerstatus>().disabledbleeddamagepercent = 1f;
+
+        if (disabled_passive1)
+        {
+
+            GetComponent<playerstatus>().disabledbleeddamagepercent = 0.5f;
+        }
+
+        if (alttrigger_passive3)
+        {
+            playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "후회");
+            if (instance == null)
+            {
+                GetComponent<playerstatus>().ApplyStack(regret, 11);
+            }
+            else
+            {
+                instance.currentStack = 11;
+                GetComponent<playerstatus>().canvus.GetComponent<stackUimanager>().RefreshUI();
+            }
+
+            GetComponent<playerstatus>().ApplyStack(penetrationup, 11);
+        }
 
         if (indexer_passive3)
         {
@@ -149,6 +182,15 @@ public class Passivefunction : MonoBehaviour
 
     public void PlayerHit()
     {
+        if (alttrigger_passive2)
+        {
+            GetComponent<playerstatus>().alttriggerdecreaseselfdamagepercent = 0.7f;
+        }
+        else
+        {
+            GetComponent<playerstatus>().alttriggerdecreaseselfdamagepercent = 1f;
+        }
+
         if (trapal_passive3)
         {
             trapal_player_hit++;

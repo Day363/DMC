@@ -24,6 +24,10 @@ public class playerstatus : MonoBehaviour
     public float speed;
     public int attackpower;
 
+    public float bleeddamage;
+    public float disabledbleeddamagepercent = 1;
+    public float alttriggerdecreaseselfdamagepercent = 1;
+
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
@@ -90,7 +94,7 @@ public class playerstatus : MonoBehaviour
             OnStackRemoved?.Invoke(targetStack, amount);
 
             // ½ºÅÃÀÌ 0ÀÌ¸é ¸ñ·Ï¿¡¼­ Á¦°Å
-            if (existing.currentStack <= 0)
+            if (existing.currentStack <= 0 && existing.stackData.disappear_whenzero)
             {
                 activeStacks.Remove(existing);
                 Debug.Log($"{targetStack.effectName} stack fully removed.");
@@ -103,6 +107,43 @@ public class playerstatus : MonoBehaviour
         canvus.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenRemoveStack();
+    }
+
+    public void RemoveStackWhenCycleEnd()
+    {
+        foreach (StackInstance stackInstance in activeStacks)
+        {
+            if (stackInstance.stackData.whendecrease == TriggerType.OnCircumEnd)
+            {
+                stackInstance.currentStack -= 1;
+                if (stackInstance.currentStack <= 0 && stackInstance.stackData.disappear_whenzero)
+                {
+                    activeStacks.Remove(stackInstance);
+                }
+                canvus.GetComponent<stackUimanager>().RefreshUI();
+            }
+        }
+    }
+
+    public void TriggerWhenCycleEnd()
+    {
+        StackInstance instance = activeStacks.Find(s => s.stackData.effectName == "ÃâÇ÷");
+        if (instance == null)
+        {
+            bleeddamage = 0;
+        }
+
+        foreach (StackInstance stackInstance in activeStacks)
+        {
+            if (stackInstance.stackData.trigger == TriggerType.OnCircumEnd)
+            {
+                if (stackInstance.stackData.effectName == "ÃâÇ÷")
+                {
+                    bleeddamage += 5;
+                    BalanceDamage(bleeddamage * disabledbleeddamagepercent);
+                }
+            }
+        }
     }
 
     public void PrintStacks()
@@ -136,7 +177,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
-        
+        GetComponent<Passivefunction>().PlayerHit();
 
         currentbalance += balance;
         BalanceCheck();
@@ -146,7 +187,22 @@ public class playerstatus : MonoBehaviour
             // ±ÕÇüºØ±«
         }
 
+        
+    }
+
+    public void SelfBalanceDamage(float balance)
+    {
         GetComponent<Passivefunction>().PlayerHit();
+
+        currentbalance += (balance * alttriggerdecreaseselfdamagepercent);
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            // ±ÕÇüºØ±«
+        }
+
+        
     }
 
 }
