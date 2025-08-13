@@ -32,6 +32,8 @@ public class playerhit : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(dir, 0), ForceMode2D.Impulse);
     }
 
+    
+
     public void FlyAway(float power, float up)
     {
         GetComponent<Rigidbody2D>().AddForce(new Vector2(power, up), ForceMode2D.Impulse);

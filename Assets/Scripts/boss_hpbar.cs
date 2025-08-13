@@ -7,6 +7,7 @@ using System;
 
 public class boss_hpbar : MonoBehaviour
 {
+    public GameObject gammanager;
     public GameObject cammanager;
 
     public GameObject attackcore;
@@ -200,6 +201,15 @@ public class boss_hpbar : MonoBehaviour
         currenthealth -= damage * slashtolerance;
         BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
+        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+        {
+            damt.GetComponent<damagetext>().wherexpos = 1;
+        }
+        else
+        {
+            damt.GetComponent<damagetext>().wherexpos = -1;
+        }
+        damt.GetComponent<damagetext>().slash = true;
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;
         if (currenthealth <= 0)
@@ -218,6 +228,15 @@ public class boss_hpbar : MonoBehaviour
         currenthealth -= damage * penetratetolerance;
         BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
+        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+        {
+            damt.GetComponent<damagetext>().wherexpos = 1;
+        }
+        else
+        {
+            damt.GetComponent<damagetext>().wherexpos = -1;
+        }
+        damt.GetComponent<damagetext>().penetarte = true;
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;
         if (currenthealth <= 0)
@@ -236,6 +255,15 @@ public class boss_hpbar : MonoBehaviour
         currenthealth -= damage * blowtolerance;
         BalanceDamage(damage * 0.1f);
         GameObject damt = Instantiate(damagetext);
+        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+        {
+            damt.GetComponent<damagetext>().wherexpos = 1;
+        }
+        else
+        {
+            damt.GetComponent<damagetext>().wherexpos = -1;
+        }
+        damt.GetComponent<damagetext>().blow = true;
         damt.transform.position = damagepos.transform.position;
         damt.GetComponent<damagetext>().damage = damage;
         if (currenthealth <= 0)

@@ -151,6 +151,9 @@ public class attackcore : MonoBehaviour
 
     public void StartCircum()//주기시작
     {
+        attacknumber = 0;
+        listnumber = 0;
+
         circum++;
         cycle = 0;
         CircumReplace();

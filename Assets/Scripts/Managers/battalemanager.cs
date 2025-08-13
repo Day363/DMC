@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class battalemanager : MonoBehaviour
 {
+    public GameObject player;
     public GameObject currentenemy;
 }

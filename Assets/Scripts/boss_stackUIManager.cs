@@ -36,6 +36,29 @@ public class boss_stackUIManager : MonoBehaviour
 
             if (countText != null)
                 countText.text = stackInstance.currentStack.ToString();
+
+            if (stackInstance.stackData.animation != null)
+            {
+                ReplaceClip(go, stackInstance.stackData.animation);
+            }
+            else
+            {
+                go.GetComponentInChildren<Animator>().enabled = false;
+            }
         }
+    }
+
+    void ReplaceClip(GameObject target, AnimationClip clip)
+    {
+        Animator animator = target.GetComponentInChildren<Animator>();
+        var overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        overrideController.GetOverrides(overrides);
+
+        // 첫 번째 클립만 교체 (간단 버전)
+        overrides[0] = new KeyValuePair<AnimationClip, AnimationClip>(overrides[0].Key, clip);
+
+        overrideController.ApplyOverrides(overrides);
+        animator.runtimeAnimatorController = overrideController;
     }
 }

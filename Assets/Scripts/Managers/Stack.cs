@@ -14,6 +14,7 @@ public class Stack : ScriptableObject
     public TriggerType trigger;//언제 발동할지
     public TriggerType whendecrease;
     public Sprite icon;//아이콘
+    public AnimationClip animation;
     public bool stackable;//스텍 가능 여부
     public bool disappear_whenzero = true;
     public int maxStacks;//최대 스텍

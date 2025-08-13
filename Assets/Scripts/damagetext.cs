@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class damagetext : MonoBehaviour
 {
@@ -9,15 +11,52 @@ public class damagetext : MonoBehaviour
     public float speeddown;
     public float movespeed;
     public float alphaspeed;
-    
+    public int wherexpos;
+
+    public bool slash;
+    public bool penetarte;
+    public bool blow;
+
+    public Sprite slashsprite;
+    public Sprite penetratesprite;
+    public Sprite blowsprite;
+
+    SpriteRenderer img;
     TextMeshPro text;
     Color alpha;
 
     private void Start()
     {
-        text = GetComponent<TextMeshPro>();
+        movespeed += Random.Range(-1f, 2f);
+
+        text = GetComponentInChildren<TextMeshPro>();
+        img = GetComponentInChildren<SpriteRenderer>();
         alpha = text.color;
         text.text = damage.ToString();
+
+        float posx = transform.position.x;
+        if (wherexpos == -1)
+        {
+            posx += Random.Range(0.5f, 2f);
+        }
+        else if (wherexpos == 1)
+        {
+            posx += Random.Range(-0.5f, -2f);
+        }
+        transform.DOMoveX(posx, 2f).SetEase(Ease.OutQuart);
+
+        if (slash)
+        {
+            img.sprite = slashsprite;
+        }
+        else if (penetarte)
+        {
+            img.sprite = penetratesprite;
+        }
+        else if (blow)
+        {
+            img.sprite = blowsprite;
+        }
     }
 
     void Update()
@@ -32,6 +71,7 @@ public class damagetext : MonoBehaviour
         {
             alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaspeed);
             text.color = alpha;
+            img.color = alpha;
         }
         
         if (alpha.a <= 0.01)

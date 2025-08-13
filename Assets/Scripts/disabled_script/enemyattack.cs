@@ -14,6 +14,10 @@ public class enemydattack : MonoBehaviour
     public float playerback;
     public float ratiosum;
 
+    public bool slash;
+    public bool penetrate;
+    public bool blow;
+
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "playerattack")

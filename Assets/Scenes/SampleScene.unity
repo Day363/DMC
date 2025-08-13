@@ -2432,7 +2432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &13111076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2576,6 +2576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gammanager: {fileID: 0}
   cammanager: {fileID: 373801462}
   attackcore: {fileID: 840654302}
   damagepos: {fileID: 1040285637}
@@ -3339,6 +3340,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &17843330
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -20457,7 +20461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &112168876
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21169,6 +21173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gammanager: {fileID: 0}
   cammanager: {fileID: 0}
   attackcore: {fileID: 0}
   damagepos: {fileID: 0}
@@ -24669,6 +24674,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &147008498
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -30849,6 +30857,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &190007722
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -32871,6 +32882,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &203712807
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -34000,6 +34014,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2088447299}
+  - {fileID: 1325054157}
   m_Father: {fileID: 755688138}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -38413,8 +38428,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1594808437
+  m_SortingLayer: -3
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 9dcbe0a65b1093e48bbd2c4d7a93d472, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -40567,6 +40582,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &268145643
 GameObject:
   m_ObjectHideFlags: 0
@@ -50138,6 +50156,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &299870878
 GameObject:
   m_ObjectHideFlags: 0
@@ -58258,6 +58279,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &324827201
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -59517,6 +59541,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &337750679
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -59766,8 +59793,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1594808437
+  m_SortingLayer: -3
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: ab27d6a20dec836418c6fa4766a7b151, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -62203,6 +62230,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &360377841
 GameObject:
   m_ObjectHideFlags: 0
@@ -67457,7 +67487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.0022010803, y: 0.0000052452087}
+  m_AnchoredPosition: {x: -0.0021972656, y: 0.0000052452087}
   m_SizeDelta: {x: -15.1939, y: -5.2615}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &400406284
@@ -79143,6 +79173,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &479244539
 GameObject:
   m_ObjectHideFlags: 0
@@ -80654,8 +80687,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1594808437
+  m_SortingLayer: -3
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: b9084293349cdf94d9550e33be38eb6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -82025,6 +82058,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &497491400
 GameObject:
   m_ObjectHideFlags: 0
@@ -91122,8 +91158,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1594808437
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ede031e3684c2654f8404e244298830e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91319,6 +91355,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &531381101
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -94549,7 +94588,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547983340
 MonoBehaviour:
@@ -94572,7 +94611,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 10, y: 10}
-  m_Spacing: {x: 5, y: 5}
+  m_Spacing: {x: 25, y: 25}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &548855326
@@ -97643,6 +97682,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &569732323
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -102309,6 +102351,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &604828212
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -107682,7 +107727,7 @@ RectTransform:
   m_Father: {fileID: 2055155469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -108080,7 +108125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &609046968
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -108246,6 +108291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gammanager: {fileID: 1694457153}
   cammanager: {fileID: 373801462}
   attackcore: {fileID: 840654302}
   damagepos: {fileID: 609046967}
@@ -108253,7 +108299,7 @@ MonoBehaviour:
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
-  damagetext: {fileID: 168564666336440604, guid: e62b3c25ab13aea4a87b5edaba9303da, type: 3}
+  damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 10000
   currenthealth: 0
@@ -113259,6 +113305,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &642181193
 GameObject:
   m_ObjectHideFlags: 0
@@ -115671,6 +115720,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &655926169
 GameObject:
   m_ObjectHideFlags: 0
@@ -115688,7 +115740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &655926170
 Transform:
   m_ObjectHideFlags: 0
@@ -121721,6 +121773,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &693739993
 GameObject:
   m_ObjectHideFlags: 0
@@ -121775,6 +121830,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &693739996
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -122176,6 +122234,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &696939431
 GameObject:
   m_ObjectHideFlags: 0
@@ -128065,6 +128126,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &749704297
 GameObject:
   m_ObjectHideFlags: 0
@@ -128412,6 +128476,7 @@ GameObject:
   - component: {fileID: 755688141}
   - component: {fileID: 755688140}
   - component: {fileID: 755688139}
+  - component: {fileID: 755688142}
   m_Layer: 6
   m_Name: disabledcanvas
   m_TagString: Untagged
@@ -128503,6 +128568,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &755688142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755688137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss_hpbar: {fileID: 1995604094}
+  stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
+  stackContainer: {fileID: 1325054157}
 --- !u!1 &755882486
 GameObject:
   m_ObjectHideFlags: 0
@@ -128823,6 +128903,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &759444680
 GameObject:
   m_ObjectHideFlags: 0
@@ -129791,6 +129874,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &763915607 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4141868277977048051, guid: 9ad99030b1f51404787686f5b67d72dd, type: 3}
@@ -133098,6 +133184,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &793824397
 GameObject:
   m_ObjectHideFlags: 0
@@ -134524,6 +134613,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &802030946
 GameObject:
   m_ObjectHideFlags: 0
@@ -150445,6 +150537,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &878458412
 GameObject:
   m_ObjectHideFlags: 0
@@ -163338,6 +163433,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &952875237
 GameObject:
   m_ObjectHideFlags: 0
@@ -169696,6 +169794,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &963726143
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183599,6 +183700,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1031211014
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -195812,7 +195916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1044400322
 Transform:
   m_ObjectHideFlags: 0
@@ -199155,6 +199259,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1067846042
 GameObject:
   m_ObjectHideFlags: 0
@@ -212229,6 +212336,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1154746710
 GameObject:
   m_ObjectHideFlags: 0
@@ -227364,6 +227474,9 @@ MonoBehaviour:
   hptext: {fileID: 0}
   balancebarint: {fileID: 1869385928}
   canvus: {fileID: 573448653}
+  slash_tolerance: 1
+  penetration_tolerance: 1
+  blow_tolerance: 1
   side: 0
   height: -2.3
   side2: 0
@@ -235833,6 +235946,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1256656455
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -239467,6 +239583,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1281852800
 GameObject:
   m_ObjectHideFlags: 0
@@ -249846,6 +249965,69 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
+--- !u!1 &1325054156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325054157}
+  - component: {fileID: 1325054158}
+  m_Layer: 6
+  m_Name: stackbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1325054157
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325054156}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 209048159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -59.99994}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1325054158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325054156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 10, y: 10}
+  m_Spacing: {x: 25, y: 25}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1325361821
 GameObject:
   m_ObjectHideFlags: 0
@@ -250167,6 +250349,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1328889406
 GameObject:
   m_ObjectHideFlags: 0
@@ -251575,6 +251760,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1340237600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2495171208226628121, guid: 9ad99030b1f51404787686f5b67d72dd, type: 3}
@@ -257460,6 +257648,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1380866704
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -258793,6 +258984,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1394196047
 GameObject:
   m_ObjectHideFlags: 0
@@ -262355,6 +262549,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1422503939
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -270827,6 +271024,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1456114391
 GameObject:
   m_ObjectHideFlags: 0
@@ -273337,6 +273537,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1461540310
 GameObject:
   m_ObjectHideFlags: 0
@@ -274831,6 +275034,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1472946265
 GameObject:
   m_ObjectHideFlags: 0
@@ -278812,6 +279018,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1501385870
 GameObject:
   m_ObjectHideFlags: 0
@@ -304234,6 +304443,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1552882266
 GameObject:
   m_ObjectHideFlags: 0
@@ -309042,6 +309254,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1590659036
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -313634,6 +313849,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1627106003
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -322156,6 +322374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9ed7aa3d1cc73439b1e6a62e4cf227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
   currentenemy: {fileID: 0}
 --- !u!1 &1695546607
 GameObject:
@@ -333891,6 +334110,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1772154917
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -339217,6 +339439,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1810999477
 GameObject:
   m_ObjectHideFlags: 0
@@ -346075,6 +346300,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &1861044764
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -346802,7 +347030,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 20}
+  m_SizeDelta: {x: 140, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869385928
 MonoBehaviour:
@@ -350682,6 +350910,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1901666074
 GameObject:
   m_ObjectHideFlags: 0
@@ -351950,6 +352181,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1907703292
 GameObject:
   m_ObjectHideFlags: 0
@@ -354465,6 +354699,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1918944010
 GameObject:
   m_ObjectHideFlags: 0
@@ -364130,6 +364367,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &1995448642
 GameObject:
   m_ObjectHideFlags: 0
@@ -364342,8 +364582,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1536030945
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_Sprite: {fileID: 7501545312650975596, guid: bcfc5753c02abc94fbfe57b4fa699945, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -364714,11 +364954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cammanager: {fileID: 0}
-  attackcore: {fileID: 0}
+  gammanager: {fileID: 0}
+  cammanager: {fileID: 373801462}
+  attackcore: {fileID: 840654302}
   damagepos: {fileID: 22722007}
   balancebar: {fileID: 2088447298}
-  stackbar: {fileID: 0}
+  stackbar: {fileID: 1325054156}
   canvas: {fileID: 755688137}
   balancebarint: {fileID: 2088447300}
   damagetext: {fileID: 168564666336440604, guid: e62b3c25ab13aea4a87b5edaba9303da, type: 3}
@@ -364731,7 +364972,7 @@ MonoBehaviour:
   penetratetolerance: 0.7
   blowtolerance: 0.7
   height: -5.53
-  height2: 0
+  height2: 3.06
   side: 0
   iscollapse: 0
 --- !u!114 &1995604095
@@ -366369,6 +366610,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &2013675888
 GameObject:
   m_ObjectHideFlags: 0
@@ -389565,6 +389809,9 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!60 &2109197018
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -403471,7 +403718,7 @@ RectTransform:
   m_Father: {fileID: 1124692717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

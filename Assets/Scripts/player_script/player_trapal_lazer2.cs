@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player_trapal_lazer2 : MonoBehaviour
 {
+
     public GameObject player;
     public float damagenum;
 

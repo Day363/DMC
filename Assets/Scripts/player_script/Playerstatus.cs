@@ -14,6 +14,10 @@ public class playerstatus : MonoBehaviour
     public Slider balancebarint;
     public GameObject canvus;
 
+    public float slash_tolerance = 1;
+    public float penetration_tolerance = 1;
+    public float blow_tolerance = 1;
+
     public float side;
     public float height;
     public float side2;

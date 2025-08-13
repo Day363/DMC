@@ -380,6 +380,7 @@ public class skillfunction : MonoBehaviour
             curstartlazer2.transform.localScale = new Vector3(0.5f, 0.5f, -0.5f);
         }
         player_trapal_lazer2 curstartlazer2_player_Trapal_Lazer2 = curstartlazer2.GetComponent<player_trapal_lazer2>();
+        curstartlazer2_player_Trapal_Lazer2.damagenum = 8.8f;
         curstartlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
         curstartlazer2_player_Trapal_Lazer2.look = false;
         curstartlazer2_player_Trapal_Lazer2.cammanager = cammanager;
@@ -411,6 +412,7 @@ public class skillfunction : MonoBehaviour
                 Vector3 pos = new Vector3(spawnPosition.x, spawnPosition.y, -1.5f);
                 GameObject curlazer2 = Instantiate(lazer2, pos, Quaternion.identity);
                 player_trapal_lazer2 curlazer2_player_Trapal_Lazer2 = curlazer2.GetComponent<player_trapal_lazer2>();
+                curlazer2_player_Trapal_Lazer2.damagenum = 3.5f;
                 curlazer2_player_Trapal_Lazer2.look = true;
                 curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
                 curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
