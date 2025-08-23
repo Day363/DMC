@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 
 public class Magazine
@@ -63,6 +64,15 @@ public class attackcore : MonoBehaviour
     public GameObject skilllistUi;
     public GameObject weaponimageUi;
     public GameObject weaponlistUi;
+    public GameObject world_light;
+    public GameObject dashmanager;
+    public GameObject focusslider1;
+    public GameObject focusslider2;
+    public GameObject cursor1;
+    public GameObject cursor2;
+    public TMP_Text cursorskill;
+    public TMP_Text cursordefense;
+
 
     public GameObject letterbox;
 
@@ -87,6 +97,10 @@ public class attackcore : MonoBehaviour
     public List<SkillReady> attacklist = new List<SkillReady> { };
     public bool canattack = true;
     public bool isdelay = true;
+    public bool dash = false;
+    public bool focusing = false;
+    public float currentfocus;
+    public Coroutine dashcoroutine;
     public int arrayindex = 0;
     public int listnumber = 0;
     public int cycle = 1;
@@ -790,6 +804,7 @@ public class attackcore : MonoBehaviour
     public void DefenseTextReplace()
     {
         defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
+        cursordefense.text = defenseskilltest.GetComponent<TMP_Text>().text;
     }
 
     public void MagazineTextReplace()
@@ -843,6 +858,22 @@ public class attackcore : MonoBehaviour
                 skillwaittext_tMP_Text.text += "]";
             }
         }
+        cursorskill.text = skillwaittext_tMP_Text.text;
+    }
+
+    public void Focuslength()
+    {
+        player.GetComponent<playerstatus>().focus = attacklist_original.Count;
+        player.GetComponent<playerstatus>().focusbar.maxValue = player.GetComponent<playerstatus>().focus;
+        player.GetComponent<playerstatus>().focusbar.value = player.GetComponent<playerstatus>().focus;
+        currentfocus = player.GetComponent<playerstatus>().focus;
+
+    }
+
+    public void FocusReload()
+    {
+        player.GetComponent<playerstatus>().focusbar.value = player.GetComponent<playerstatus>().focus;
+        currentfocus = player.GetComponent<playerstatus>().focus;
     }
 
     public void CycleReplace()
@@ -867,8 +898,8 @@ public class attackcore : MonoBehaviour
     {
         canattack = true;
 
-        
 
+        Focuslength();
         Organize();
         StandBySkillFind();
         StandBySkillPassiveActive();
@@ -904,6 +935,11 @@ public class attackcore : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+
+                if (lastlist[listnumber][attacknumber].Normalskill.chat != null)
+                {
+                    player.GetComponent<playerskillmove>().chat = lastlist[listnumber][attacknumber].Normalskill.chat;
+                }
 
                 if (attacknumber < lastlist[listnumber].Count)
                 {
@@ -947,8 +983,13 @@ public class attackcore : MonoBehaviour
                 MagazineTextReplace();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !dashmanager.activeSelf)
             {
+                if (lastlist[listnumber][attacknumber].Normalskill.chat != null)
+                {
+                    player.GetComponent<playerskillmove>().chat = lastlist[listnumber][attacknumber].Normalskill.chat;
+                }
+
                 if (attacknumber < lastlist[listnumber].Count)
                 {
                     // UI 갱신
@@ -1148,9 +1189,179 @@ public class attackcore : MonoBehaviour
 
 
             }
+            if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting)
+            {
+                cursor1.SetActive(true);
+                cursor2.SetActive(true);
+
+                Color targetColor = new Color(255, 255, 255, 0);
+                focusslider1.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+                focusslider2.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+
+                focusing = false;
+                dashmanager.SetActive(false);
+                player.GetComponent<PlayerMove>().canmove = true;
+                player.GetComponent<Animator>().enabled = true;
+                Time.timeScale = 1f;
+                DOTween.Kill("light");
+                world_light.GetComponent<Light2D>().intensity = 1.5f;
+
+                Vector2 directionToEnemy = (gamemanager.GetComponent<battalemanager>().currentenemy.transform.position - player.transform.position).normalized;
+                player.transform.position = gamemanager.GetComponent<battalemanager>().currentenemy.transform.position;
+                Debug.Log(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower);
+                player.GetComponent<PlayerMove>().canmove = false;
+                dash = true;
+                StopCoroutine(dashcoroutine);
+                DOTween.Kill("flash");
+                player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
+                player.GetComponent<Rigidbody2D>().AddForce(directionToEnemy * lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower, ForceMode2D.Impulse);
+
+
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationskill)
+                {
+                    player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationtrigger);
+                }
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.prefabskill)
+                {
+                    foreach (GameObject skill in lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.skillprefab)
+                    {
+                        Debug.Log("sds");
+                        currentskill = Instantiate(skill, transform.position, transform.rotation);
+                        currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                    }
+                    
+                }
+
+                AttcknumberPlus();
+
+                if (attacknumber == lastlist[listnumber].Count)
+                {
+                    EndCycle();
+                    listnumber++;
+                    attacknumber = 0;
+                    cycle++;
+                    //iscycle = true;
+                    CycleReplace();
+                    StartCycle();
+                }
+
+                if (listnumber == lastlist.Count)
+                {
+                    Debug.Log("t");
+                    listnumber = 0;
+                    attacknumber = 0;
+                    skillQueueUI.InitializeSkillList(lastlist);
+                }
+
+                WeaponimageReplace();
+                DefenseTextReplace();
+                TextReplace();
+                MagazineTextReplace();
+            }
             
 
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus > 0)
+        {
+            if (canattack && player.GetComponent<PlayerMove>().canmove)
+            {
+                if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x > 0)
+                {
+                    player.transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x < 0)
+                {
+                    player.transform.localScale = new Vector3(1, 1, 1);
+                }
+                cursor1.SetActive(false);
+                cursor2.SetActive(false);
+
+                DOTween.Kill("focusbar");
+                focusslider1.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                focusslider2.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+
+                focusing = true;
+                dashmanager.SetActive(true);
+                player.GetComponent<PlayerMove>().canmove = false;
+                player.GetComponent<Animator>().enabled = false;
+                player.GetComponent<SpriteRenderer>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashready;
+                Time.timeScale = 0f;
+                DOTween.Kill("light");
+                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, 0.75f, 1f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
+
+                dashcoroutine = StartCoroutine(DashFlash());
+            }  
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus < 0)
+        {
+            //집중이 부족함 메세지
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (canattack && !player.GetComponent<PlayerMove>().canmove)
+            {
+                cursor1.SetActive(true);
+                cursor2.SetActive(true);
+
+                Color targetColor = new Color(255, 255, 255, 0);
+                focusslider1.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+                focusslider2.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+
+                focusing = false;
+                dashmanager.SetActive(false);
+                player.GetComponent<PlayerMove>().canmove = true;
+                player.GetComponent<Animator>().enabled = true;
+                Time.timeScale = 1f;
+                DOTween.Kill("light");
+                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, 1.5f, 0.4f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
+
+                StopCoroutine(dashcoroutine);
+                DOTween.Kill("flash");
+                player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
+            }
+        }
+
+        if (dash)
+        {
+            if (player.GetComponent<Rigidbody2D>().velocity.x > 1f)
+            {
+                if (player.GetComponent<Rigidbody2D>().velocity.x < 2f)
+                {
+                    player.GetComponent<PlayerMove>().canmove = true;
+                    dash = false;
+                }
+            }
+            else
+            {
+                if (player.GetComponent<Rigidbody2D>().velocity.x > -2f)
+                {
+                    player.GetComponent<PlayerMove>().canmove = true;
+                    dash = false;
+                }
+            }
+            
+        }
+
+        if (focusing)
+        {
+            currentfocus -= 2f * Time.unscaledDeltaTime;
+            currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
+            player.GetComponent<playerstatus>().focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
+        }
+    }
+
+    IEnumerator DashFlash()
+    {
+        while (true)
+        {
+            DOTween.Kill("flash");
+            player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 1f);
+            DOTween.To(() => player.GetComponent<SpriteRenderer>().material.GetFloat("_flashamount"), value => player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", value), 0f, 1.5f).SetEase(Ease.OutQuart).SetUpdate(true).SetId("flash");
+            yield return new WaitForSecondsRealtime(1.5f);
+        }
+        
     }
 
     public void AmalgamedAnimation()

@@ -7,6 +7,7 @@ using Cinemachine;
 public class playerskillmove : MonoBehaviour
 {
     public GameObject attackcore;
+    public string chat;
 
     public GameObject cameramanager;
     public GameObject Gamemanager;
@@ -65,6 +66,11 @@ public class playerskillmove : MonoBehaviour
     {
         float damage = GetComponent<playerstatus>().attackpower * damageint;
         Gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
+    }
+
+    public void Chat()
+    {
+        GetComponent<playerstatus>().StartTyping(chat);
     }
 
     public void CamaraSet()

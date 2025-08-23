@@ -27,6 +27,7 @@ public class Weapon : ScriptableObject
 
     public List<string> passivelist;
     public DefenseSkill defenseskill;
+    public dashskill dashskill;
     public List<Skill> skilllist;
     public List<bool> skillactivelist;
     public List<cynthskill> cynthskilllist;

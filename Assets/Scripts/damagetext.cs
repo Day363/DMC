@@ -34,6 +34,11 @@ public class damagetext : MonoBehaviour
         alpha = text.color;
         text.text = damage.ToString();
 
+        if (damage > 100)
+        {
+            transform.localScale = new Vector3(damage / 100, damage / 100, 1);
+        }
+
         float posx = transform.position.x;
         if (wherexpos == -1)
         {

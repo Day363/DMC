@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class playerstatus : MonoBehaviour
 {
     [SerializeField]
     public Transform stackbar;
     public Slider balancebar;
+    public Slider focusbar;
     public TMP_Text hptext;
     public Slider balancebarint;
     public GameObject canvus;
+    public GameObject chat;
+
+    public Coroutine typingCoroutine;
 
     public float slash_tolerance = 1;
     public float penetration_tolerance = 1;
@@ -22,7 +27,12 @@ public class playerstatus : MonoBehaviour
     public float height;
     public float side2;
     public float height2;
+    public float side3;
+    public float height3;
+    public float side4;
+    public float height4;
 
+    public float focus;
     public float maxbalance;
     public float currentbalance;
     public float speed;
@@ -172,6 +182,43 @@ public class playerstatus : MonoBehaviour
 
         Vector3 stackbarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side2, transform.position.y + height2, 0));
         stackbar.transform.position = stackbarpos;
+
+        Vector3 chatpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side3, transform.position.y + height3, 0));
+        chat.transform.position = chatpos;
+
+        Vector3 focusbarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side4, transform.position.y + height4, 0));
+        focusbar.transform.position = focusbarpos;
+    }
+
+    public void StartTyping(string message)
+    {
+        chat.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+        chat.GetComponent<Image>().DOFade(255f, 0.4f);
+        chat.GetComponentInChildren<TMP_Text>().color = new Color(255f, 255f, 255f, 0f);
+        chat.GetComponentInChildren<TMP_Text>().DOFade(255f, 0.4f);
+
+        // 이미 실행 중인 코루틴이 있으면 개별적으로 정지
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine = StartCoroutine(TypingCoroutine(message));
+    }
+
+    private IEnumerator TypingCoroutine(string message)
+    {
+        chat.GetComponentInChildren<TMP_Text>().text = "";
+
+        foreach (char c in message)
+        {
+            chat.GetComponentInChildren<TMP_Text>().text += c;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        typingCoroutine = null; // 끝나면 null로 초기화
+        chat.GetComponent<Image>().DOFade(0f, 0.4f);
+        chat.GetComponentInChildren<TMP_Text>().DOFade(0f, 0.4f);
     }
 
     public void BalanceCheck()
