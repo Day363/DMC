@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class boss_hpbar : MonoBehaviour
 {
@@ -175,8 +176,17 @@ public class boss_hpbar : MonoBehaviour
         iscollapse = false;
     }
 
+    public void Redemisson()
+    {
+        DOTween.Kill("enemyflash");
+        GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0.5f);
+        DOTween.To(() => GetComponent<SpriteRenderer>().material.GetFloat("_flashamount"), value => GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", value), 0f, 0.35f).SetEase(Ease.OutQuart).SetUpdate(true).SetId("enemyflash");
+    }
+
     public void Damage(int damage)
     {
+        Redemisson();
+
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
         attackcore.GetComponent<attackcore>().BossDamaged();
 
@@ -192,6 +202,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void SlashDamage(int damage)
     {
+        Redemisson();
 
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
         attackcore.GetComponent<attackcore>().BossDamaged();
@@ -220,6 +231,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        Redemisson();
+
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
         attackcore.GetComponent<attackcore>().BossDamaged();
 
@@ -247,6 +260,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void BlowDamage(int damage)
     {
+        Redemisson();
+
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
         attackcore.GetComponent<attackcore>().BossDamaged();
 

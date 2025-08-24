@@ -6,10 +6,60 @@ using Cinemachine;
 public class playerhit : MonoBehaviour
 {
     public GameObject cammanager;
+    public GameObject gamemanager;
+
+    public GameObject evasiontext;
+
+    public bool defense;
+    public bool counter;
+    public bool evasion;
+    public bool immobility;
+    public bool offset;
+
+    public float defenseCoef;
+    public float counterCoef;
+    public float evasionCoef;
+    public float offsetCoef;
+    public string counteranimationtrigger;
 
     public void Hit(int damage)
     {
-        GetComponent<playerstatus>().BalanceDamage(damage);
+        playerstatus playerstatus_com = GetComponent<playerstatus>();
+        int culdam = 0;
+        if (defense)
+        {
+            culdam = Mathf.Max(1, damage - (int)(playerstatus_com.attackpower * defenseCoef));
+        }
+        if (counter)
+        {
+            culdam = damage;
+            GetComponent<Animator>().SetTrigger(counteranimationtrigger);
+        }
+        if (evasion)
+        {
+            if (damage < playerstatus_com.attackpower * evasionCoef)
+            {
+                Instantiate(evasiontext, transform.position, Quaternion.identity);
+                return;
+            }
+            if (damage > playerstatus_com.attackpower * evasionCoef)
+            {
+                culdam = (int)(damage * 1.5f);
+            }
+        }
+        if (offset)
+        {
+            if (damage < playerstatus_com.attackpower * offsetCoef)
+            {
+                gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BalanceDamage((int)(playerstatus_com.attackpower * offsetCoef) - damage);
+                return;
+            }
+            if (damage > playerstatus_com.attackpower * offsetCoef)
+            {
+                culdam = damage - (int)(damage - (playerstatus_com.attackpower * offsetCoef));
+            }
+        }
+        GetComponent<playerstatus>().BalanceDamage(culdam);
         StartCoroutine(Hitcamera());
     }
 

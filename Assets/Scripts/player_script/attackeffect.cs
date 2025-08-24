@@ -21,7 +21,7 @@ public class attackeffect : MonoBehaviour
             Instantiate(effect2, midpoint, Quaternion.Euler(0, 0, angle2));
         }
 
-        if (collision.gameObject.tag == "enemyhitbox")
+        if (collision.gameObject.tag == "client")
         {
             int attackeffectnum = Random.Range(0, attackeffect_.Length);
             Vector3 eposition = collision.transform.position;

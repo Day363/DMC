@@ -935,16 +935,15 @@ public class attackcore : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-
-                if (lastlist[listnumber][attacknumber].Normalskill.chat != null)
-                {
-                    player.GetComponent<playerskillmove>().chat = lastlist[listnumber][attacknumber].Normalskill.chat;
-                }
-
                 if (attacknumber < lastlist[listnumber].Count)
                 {
                     // UI 갱신
                     skillQueueUI.UseNextSkill();
+                }
+
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger != null)
+                {
+                    GetComponent<playerhit>().counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
                 }
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
@@ -985,11 +984,6 @@ public class attackcore : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !dashmanager.activeSelf)
             {
-                if (lastlist[listnumber][attacknumber].Normalskill.chat != null)
-                {
-                    player.GetComponent<playerskillmove>().chat = lastlist[listnumber][attacknumber].Normalskill.chat;
-                }
-
                 if (attacknumber < lastlist[listnumber].Count)
                 {
                     // UI 갱신
