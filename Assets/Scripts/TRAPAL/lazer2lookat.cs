@@ -71,7 +71,8 @@ public class lazer2lookat : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, anglea));
+        GameObject currentshoot = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, anglea));
+        currentshoot.GetComponent<enemydattack>().player = player;
         foreach (GameObject halos in halolist)
         {
             halos.GetComponent<trapal_lazer2_turn>().Shoot();

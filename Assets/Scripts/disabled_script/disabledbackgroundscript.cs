@@ -17,7 +17,7 @@ public class disabledbackgroundscript : MonoBehaviour
         previousCameraPosition = cameraTransform.position;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector3 delta = cameraTransform.position - previousCameraPosition;
         transform.position += new Vector3(delta.x * parallaxFactor, delta.y * parallaxFactor * 0.3f, 0f);

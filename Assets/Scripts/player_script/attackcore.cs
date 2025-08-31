@@ -54,6 +54,7 @@ public class SkillReady
 public class attackcore : MonoBehaviour
 {
     public bool testbool;
+    public GameObject cammanager;
     public GameObject skillselectui;
     public GameObject viewpoint;
     public GameObject skillarreyUi;
@@ -132,14 +133,17 @@ public class attackcore : MonoBehaviour
 
     public List<Magazine> weaponsmagazine = new List<Magazine>();
 
+    public float worldlightintensity;
+
     private void Start()
     {
         attacklist = new();
-        BattleStart(); //전투시작(나중에 고쳐야됨)
     }
 
     public void BattleStart()
     {
+        skillselectui.SetActive(true);
+        Time.timeScale = 0f;
         MakeRangeWeaponMagzineList();
     }
 
@@ -182,7 +186,7 @@ public class attackcore : MonoBehaviour
     public void StartCycle()
     {
         player.GetComponent<Passivefunction>().WhenCycleStart();
-        
+        Focuslength();
     }
 
     public void EndCycle()
@@ -278,17 +282,27 @@ public class attackcore : MonoBehaviour
         }
         else
         {
-            StartCoroutine(NoStandByskills());
+            
         }
     }
 
     public void EndStandbySkill()
     {
+        gamemanager.GetComponent<battalemanager>().currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
         gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
-        canattack = true;
         player.GetComponent<PlayerMove>().canmove = true;
         skillselectui.SetActive(true);
+        Time.timeScale = 0f;
+        canattack = false;
+    }
+
+    public void NostandByskill()
+    {
+        gamemanager.GetComponent<battalemanager>().currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
+        player.GetComponent<PlayerMove>().canmove = true;
+        skillselectui.SetActive(true);
+        Time.timeScale = 0f;
         canattack = false;
     }
 
@@ -298,16 +312,6 @@ public class attackcore : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         player.GetComponent<Animator>().SetTrigger(curstandbyskill.animationtrigger);
         standbyskills.RemoveAt(0);
-    }
-
-    IEnumerator NoStandByskills()
-    {
-        Debug.Log("sdsdsd");
-        LetterBoxUp();
-        skillselectui.SetActive(true);
-        canattack = false;
-        yield return new WaitForSeconds(4f);
-        gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
     }
 
     public void Copy()
@@ -941,9 +945,9 @@ public class attackcore : MonoBehaviour
                     skillQueueUI.UseNextSkill();
                 }
 
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger != null)
+                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.counter)
                 {
-                    GetComponent<playerhit>().counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
+                    player.GetComponent<playerhit>().counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
                 }
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
@@ -1198,7 +1202,7 @@ public class attackcore : MonoBehaviour
                 player.GetComponent<Animator>().enabled = true;
                 Time.timeScale = 1f;
                 DOTween.Kill("light");
-                world_light.GetComponent<Light2D>().intensity = 1.5f;
+                world_light.GetComponent<Light2D>().intensity = worldlightintensity;
 
                 Vector2 directionToEnemy = (gamemanager.GetComponent<battalemanager>().currentenemy.transform.position - player.transform.position).normalized;
                 player.transform.position = gamemanager.GetComponent<battalemanager>().currentenemy.transform.position;
@@ -1260,6 +1264,8 @@ public class attackcore : MonoBehaviour
         {
             if (canattack && player.GetComponent<PlayerMove>().canmove)
             {
+                cammanager.GetComponent<CameraManager>().CamStable();
+
                 if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x > 0)
                 {
                     player.transform.localScale = new Vector3(-1, 1, 1);
@@ -1280,9 +1286,19 @@ public class attackcore : MonoBehaviour
                 player.GetComponent<PlayerMove>().canmove = false;
                 player.GetComponent<Animator>().enabled = false;
                 player.GetComponent<SpriteRenderer>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashready;
+                if (player.GetComponent<playerstatus>().currentparrystop != null)
+                {
+                    StopCoroutine(player.GetComponent<playerstatus>().currentparrystop);
+                }
+                if (player.GetComponent<playerhit>().currenthitstop != null)
+                {
+                    StopCoroutine(player.GetComponent<playerhit>().currenthitstop);
+                }
+                
                 Time.timeScale = 0f;
                 DOTween.Kill("light");
-                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, 0.75f, 1f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
+                worldlightintensity = world_light.GetComponent<Light2D>().intensity;
+                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity - 0.5f, 1f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
 
                 dashcoroutine = StartCoroutine(DashFlash());
             }  
@@ -1309,7 +1325,7 @@ public class attackcore : MonoBehaviour
                 player.GetComponent<Animator>().enabled = true;
                 Time.timeScale = 1f;
                 DOTween.Kill("light");
-                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, 1.5f, 0.4f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
+                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity, 0.4f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
 
                 StopCoroutine(dashcoroutine);
                 DOTween.Kill("flash");

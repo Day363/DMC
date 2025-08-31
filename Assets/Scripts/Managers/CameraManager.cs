@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
     public GameObject enemy;
 
     public GameObject playercam;
+    public GameObject bigcam;
     public GameObject enemycam;
     public GameObject smallpointcam;
     public GameObject skillcam;
@@ -26,6 +27,12 @@ public class CameraManager : MonoBehaviour
     {
         maincam = playercam;
         GetComponent<Animator>().SetTrigger("playercam");
+    }
+
+    public void LookBigCam()
+    {
+        maincam = bigcam;
+        GetComponent<Animator>().SetTrigger("bigcam");
     }
 
     public void LookEnemy()

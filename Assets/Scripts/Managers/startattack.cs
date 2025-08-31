@@ -9,6 +9,7 @@ public class startattack : MonoBehaviour
 
     public void StartFight()
     {
+        Time.timeScale = 1f;
         selectUi.SetActive(false);
         attackcore.GetComponent<attackcore>().ArreyComplete();
         attackcore.GetComponent<attackcore>().StartCircum();

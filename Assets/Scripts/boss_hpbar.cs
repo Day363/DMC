@@ -8,6 +8,8 @@ using DG.Tweening;
 
 public class boss_hpbar : MonoBehaviour
 {
+    public static event Action OnHitCalled;
+
     public GameObject gammanager;
     public GameObject cammanager;
 
@@ -156,14 +158,22 @@ public class boss_hpbar : MonoBehaviour
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
+            GetComponent<Animator>().SetBool("idle", false);
+            GetComponent<Animator>().SetTrigger("collapse");
+
             currentbalance = 0;
             if (attackcore.GetComponent<attackcore>().standbyskills.Count > 0)
             {
+                Debug.Log("대기스킬이 1개 이상이므로 대기스킬 사용");
                 attackcore.GetComponent<attackcore>().UseStandbySkill();
             }
+            else
+            {
+                StartCoroutine(Collapsetimeout());
+            }
 
-            GetComponent<Animator>().SetTrigger("collapse");
-            GetComponent<Animator>().SetBool("idle", false);
+            
+            
             iscollapse = true;
             // 균형붕괴
         }
@@ -172,8 +182,9 @@ public class boss_hpbar : MonoBehaviour
     IEnumerator Collapsetimeout()
     {
         yield return new WaitForSeconds(collapsefloat);
-        GetComponent<Animator>().SetBool("collapse", false);
+        GetComponent<Animator>().SetBool("idle", true);
         iscollapse = false;
+        attackcore.GetComponent<attackcore>().NostandByskill();
     }
 
     public void Redemisson()
@@ -185,6 +196,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void Damage(int damage)
     {
+        OnHitCalled?.Invoke();
+
         Redemisson();
 
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
@@ -202,6 +215,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void SlashDamage(int damage)
     {
+        OnHitCalled?.Invoke();
+
         Redemisson();
 
         cammanager.GetComponent<CameraManager>().CamVibration0_5();
@@ -231,6 +246,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        OnHitCalled?.Invoke();
+
         Redemisson();
 
         cammanager.GetComponent<CameraManager>().CamVibration0_5();

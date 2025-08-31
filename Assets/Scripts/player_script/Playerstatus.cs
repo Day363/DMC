@@ -42,6 +42,8 @@ public class playerstatus : MonoBehaviour
     public float disabledbleeddamagepercent = 1;
     public float alttriggerdecreaseselfdamagepercent = 1;
 
+    public Coroutine currentparrystop;
+
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
@@ -254,6 +256,18 @@ public class playerstatus : MonoBehaviour
         }
 
         
+    }
+
+    public void Parrystop()
+    {
+        currentparrystop = StartCoroutine(ParryStop());
+    }
+
+    IEnumerator ParryStop()
+    {
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(0.15f);
+        Time.timeScale = 1f;
     }
 
 }

@@ -29,7 +29,7 @@ public class Passivefunction : MonoBehaviour
     public List<GameObject> trapal_deny_texts = new List<GameObject> { };
 
     private bool disabled_passive1 = false;
-    private bool alttrigger_passive1 = false;
+    //private bool alttrigger_passive1 = false;
     private bool alttrigger_passive2 = false;
     private bool alttrigger_passive3 = false;
     private bool indexer_passive1 = false;
