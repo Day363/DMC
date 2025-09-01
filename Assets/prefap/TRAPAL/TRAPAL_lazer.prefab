@@ -92,13 +92,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemy: {fileID: 0}
-  damage: 0
+  damage: 35
   lightattack: 0
   heavyattack: 0
   parryback: 35
   selfback: 0
   playerback: 0
   ratiosum: 0
+  steadydamage: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
 --- !u!1 &3144816247686561561
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,8 +177,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1218937351
-  m_SortingLayer: 2
+  m_SortingLayerID: -448759843
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 1580824167, guid: f80fb12edd1e7e44f8730ae14cb1bfc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -233,5 +237,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  rotationSpeed: 2
+  rotationSpeed: 0.07
   rotate: 1

@@ -71,6 +71,10 @@ public class playerhit : MonoBehaviour
                     culdam = damage - (int)(damage - (playerstatus_com.attackpower * offsetCoef));
                 }
             }
+            else
+            {
+                culdam = damage;
+            }
             GetComponent<playerstatus>().BalanceDamage(culdam);
             Hitcamera();
         }

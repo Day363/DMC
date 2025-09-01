@@ -17,6 +17,7 @@ public class trapal_barrierActive : MonoBehaviour
         for (int i = 0; i < barriers.Length; i++)
         {
             barriers[i].SetActive(true);
+            barriers[i].GetComponent<PolygonCollider2D>().enabled = true;
             barriers[i].GetComponent<trapal_barrierlightup>().StartCo();
             yield return new WaitForSeconds(waittime);
         }

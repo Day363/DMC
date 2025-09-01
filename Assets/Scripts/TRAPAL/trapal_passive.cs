@@ -14,11 +14,10 @@ public class trapal_passive : MonoBehaviour
     public Stack deny;
     public Stack certain;
     public GameObject denyeye;
+    public GameObject mask;
+    public GameObject glitch;
 
     public bool canApplystack = true;
-
-    public GameObject[] backgrounds;
-    public GameObject[] etcs;
 
     private void OnEnable()
     {
@@ -44,12 +43,17 @@ public class trapal_passive : MonoBehaviour
 
             if (DenyInstance.currentStack >= 24)
             {
+                GetComponent<trapal_script>().canattack = false;
                 GetComponent<boss_hpbar>().RemoveStack(deny, 24);
                 GetComponent<Animator>().SetBool("idle", false);
                 GetComponent<Animator>().SetTrigger("deny24");
                 canApplystack = false;
-                
+
             }
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("deny", false);
         }
 
         if (CertainInstance != null)
@@ -66,26 +70,14 @@ public class trapal_passive : MonoBehaviour
             if (CertainInstance.currentStack >= 24)
             {
                 GetComponent<boss_hpbar>().RemoveStack(certain, 24);
-
-                foreach (GameObject background in backgrounds)
-                {
-                    background.SetActive(false);
-                }
-
-                GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
-
-                foreach (GameObject etc in etcs)
-                {
-                    etc.SetActive(false);
-                }
+                canApplystack = false;
+                StartCoroutine(Certain24());
             }
         }
-
-        
-
-        
-
-        
+        else
+        {
+            GetComponent<Animator>().SetBool("certain", false);
+        }
     }
 
     public void Deny()
@@ -110,7 +102,7 @@ public class trapal_passive : MonoBehaviour
             if (certaincount >= 3)
             {
                 certaincount = 0;
-                GetComponent<boss_hpbar>().ApplyStack(deny, 1);
+                GetComponent<boss_hpbar>().ApplyStack(certain, 1);
             }
         }
         
@@ -119,6 +111,7 @@ public class trapal_passive : MonoBehaviour
     public void SmallCamIn()
     {
         Cammanager.GetComponent<CameraManager>().Looksmallpoint(camtarget);
+        Cammanager.GetComponent<CameraManager>().CamStable();
     }
 
     public void SmallcamoutToPlayerCamDelay_()
@@ -130,6 +123,7 @@ public class trapal_passive : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Cammanager.GetComponent<CameraManager>().LookPlayer();
+        Cammanager.GetComponent<CameraManager>().CamStable();
         yield return new WaitForSeconds(2.5f);
         SpawnDeny();
     }
@@ -149,13 +143,55 @@ public class trapal_passive : MonoBehaviour
     {
         yield return new WaitForSeconds(0.6f);
         Cammanager.GetComponent<CameraManager>().LookBigCam();
+        Cammanager.GetComponent<CameraManager>().CamStable();
         GetComponent<trapal_script>().lazer2time = true;
         GetComponent<Animator>().SetBool("idle", true);
         yield return new WaitForSeconds(19f);
+        canApplystack = true;
         Cammanager.GetComponent<CameraManager>().LookPlayer();
         deny.transform.DOScale(new Vector3(0, 0, 1), 0.8f).SetEase(Ease.InQuart);
         Destroy(eye);
+        GetComponent<trapal_script>().canattack = true;
         yield return new WaitForSeconds(0.9f);
         Destroy(deny);
+    }
+
+    IEnumerator Glitch()
+    {
+        
+        yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(-14f, 14f), 0);
+        GameObject curglitch = Instantiate(glitch, pos, Quaternion.identity);
+        curglitch.transform.localScale = new Vector3(300f, Random.Range(0.12f, 0.6f), 1);
+        curglitch.GetComponent<SpriteRenderer>().material.SetVector("_moveto", new Vector2(UnityEngine.Random.Range(-0.05f, 0.05f), 0));
+        yield return new WaitForSeconds(Random.Range(0.1f, 1f));
+        Destroy(curglitch);
+        
+    }
+
+
+    IEnumerator Certain24()
+    {
+        GetComponent<trapal_script>().canattack = false;
+
+        for (int i = 0; i < 6; i++)
+        {
+            yield return new WaitForSeconds(1);
+
+            for (int x = 0; x < Random.Range(7, 15); x++)
+            {
+
+                StartCoroutine(Glitch());
+            }
+
+            
+        }
+        GameObject currentmask = Instantiate(mask, transform.position, Quaternion.identity);
+        currentmask.transform.localScale = new Vector3(200, 50, 1);
+
+        yield return new WaitForSeconds(15f);
+        GetComponent<trapal_script>().canattack = true;
+        canApplystack = true;
+        Destroy(currentmask);
     }
 }

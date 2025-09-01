@@ -8,17 +8,14 @@ public class trapal_barrier : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("enemybullet"))
+        if (collision.gameObject.CompareTag("enemyattack"))
         {
-            if (collision.gameObject.GetComponent<trapal_bullet>().reflected)
-            {
-                Destroy(collision.gameObject);
-                particle.GetComponent<ParticleSystem>().Play();
-                GetComponent<PolygonCollider2D>().enabled = false;
-                Color color = GetComponent<SpriteRenderer>().color;
-                color.a = 0f;
-                GetComponent<SpriteRenderer>().color = color;
-            }
+            particle.GetComponent<ParticleSystem>().Play();
+            GetComponent<PolygonCollider2D>().enabled = false;
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.a = 0f;
+            GetComponent<SpriteRenderer>().color = color;
+            
         }
     }
 

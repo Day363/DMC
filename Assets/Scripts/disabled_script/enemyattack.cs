@@ -14,6 +14,8 @@ public class enemydattack : MonoBehaviour
     public float playerback;
     public float ratiosum;
 
+    public bool steadydamage;
+
     public bool slash;
     public bool penetrate;
     public bool blow;
@@ -45,18 +47,35 @@ public class enemydattack : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            if (heavyattack)
+            if (!steadydamage)
             {
-                heavyattack = false;
-                player.GetComponent<playerhit>().StrongHit(damage, transform);
+                if (heavyattack)
+                {
+                    heavyattack = false;
+                    player.GetComponent<playerhit>().StrongHit(damage, transform);
 
+                }
+
+                if (lightattack)
+                {
+                    lightattack = false;
+                    player.GetComponent<playerhit>().Hit(damage);
+                }
             }
-
-            if (lightattack)
+            else
             {
-                lightattack = false;
-                player.GetComponent<playerhit>().Hit(damage);
+                if (heavyattack)
+                {
+                    player.GetComponent<playerhit>().StrongHit(damage, transform);
+
+                }
+
+                if (lightattack)
+                {
+                    player.GetComponent<playerhit>().Hit(damage);
+                }
             }
+            
         }
     }
 
