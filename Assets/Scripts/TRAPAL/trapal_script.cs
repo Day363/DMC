@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class trapal_script : MonoBehaviour
 {
+    public GameObject trapal_weapon1;
+    public GameObject trapal_point;
     public Vector3 lazer1point;
     public GameObject cammanager;
     public GameObject gamemanager;
@@ -19,8 +21,13 @@ public class trapal_script : MonoBehaviour
     public GameObject eyeslash;
     public GameObject lazer1;
     public GameObject sword;
+    public GameObject denycore;
+    public GameObject warning;
+    public GameObject bombshoot;
     public bool lazer2time;
     public bool swordtime;
+    public float weapon1cool = 0;
+    public float weapon1cooltime;
     public float lazer1cool = 0;
     public float lazer1cooltime;
     public float lazercool = 0;
@@ -31,6 +38,8 @@ public class trapal_script : MonoBehaviour
     public float barriercooltime;
     public float guncool = 0;
     public float guncooltime;
+    public float bombcool = 0;
+    public float bombcooltime;
     public float gunrandomx1;
     public float gunrandomx2;
     public int gunmaxint;
@@ -83,18 +92,30 @@ public class trapal_script : MonoBehaviour
             }
         }
 
+        weapon1cool++;
         lazer1cool++;
         lazercool++;
         barriercool++;
+        bombcool++;
 
         if (canattack)
         {
+            if (weapon1cool >= weapon1cooltime)
+            {
+                weapon1cool = 0;
+                if (trapal_point.transform.childCount < trapal_point.GetComponent<trapal_weapon_point>().count)
+                {
+                    Instantiate(trapal_weapon1, trapal_point.transform);
+                }
+                
+            }
+
             if (lazer1cool >= lazer1cooltime)
             {
                 lazer1cool = 0;
                 GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
-                curlazer1.transform.GetChild(0).GetComponent<enemydattack>().player = player;
-                curlazer1.transform.GetChild(0).GetComponent<enemydattack>().enemy = gameObject;
+                curlazer1.GetComponent<enemydattack>().player = player;
+                curlazer1.GetComponent<enemydattack>().enemy = gameObject;
                 curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
                 Vector2 direction = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -121,10 +142,57 @@ public class trapal_script : MonoBehaviour
                 barrier.GetComponent<trapal_barreirtext>().StartBarrier();
             }
 
+            if (bombcool >= bombcooltime)
+            {
+                bombcool = 0;
+                StartCoroutine(Bomb());
+            }
             
         }
 
         
+    }
+
+    IEnumerator Bomb()
+    {
+        int count = Random.Range(3, 6);
+        int i = 0;
+        while(i < count)
+        {
+            i++;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(Bombreal());
+
+        }
+    }
+
+    IEnumerator Bombreal()
+    {
+        Vector3 wheretopos = new Vector3(Random.Range(-17f, 17f), Random.Range(-5f, 7f), 0);
+        GameObject currentcore = Instantiate(denycore, wheretopos, Quaternion.identity);
+        currentcore.transform.localScale = new Vector3(0, 0, 1);
+        currentcore.transform.DOScale(new Vector3(1.5f, 1.5f, 1), 0.4f).SetEase(Ease.OutQuart);
+        float angledefault = Random.Range(0f, 91f);
+        Quaternion angle1 = Quaternion.Euler(0, 0, angledefault);
+        Quaternion angle2 = Quaternion.Euler(0, 0, angledefault + 90);
+        GameObject currentwarning1 = Instantiate(warning, wheretopos, angle1);
+        GameObject currentwarning2 = Instantiate(warning, wheretopos, angle2);
+        float addangle = Random.Range(300f, 390f);
+        currentwarning1.transform.DOLocalRotate(new Vector3(0, 0, angledefault + addangle), 2f, RotateMode.FastBeyond360).SetEase(Ease.OutExpo);
+        currentwarning2.transform.DOLocalRotate(new Vector3(0, 0, angledefault + addangle + 90), 2f, RotateMode.FastBeyond360).SetEase(Ease.OutExpo);
+        currentwarning1.GetComponent<lazer2_warning>().time = 2.5f;
+        currentwarning2.GetComponent<lazer2_warning>().time = 2.5f;
+        currentwarning1.GetComponent<lazer2_warning>().scaley = 3.3f;
+        currentwarning2.GetComponent<lazer2_warning>().scaley = 3.3f;
+        yield return new WaitForSeconds(0.4f);
+        currentcore.transform.DOScale(new Vector3(0, 0, 1), 1.6f).SetEase(Ease.InQuart);
+        yield return new WaitForSeconds(1.5f);
+        GameObject bombshoot1 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle));
+        GameObject bombshoot2 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle + 90));
+        bombshoot1.GetComponent<enemydattack>().player = player;
+        bombshoot1.GetComponent<enemydattack>().enemy = gameObject;
+        bombshoot2.GetComponent<enemydattack>().player = player;
+        bombshoot2.GetComponent<enemydattack>().enemy = gameObject;
     }
 
     public void Returntopos()

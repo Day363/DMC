@@ -51,6 +51,7 @@ public class enemydattack : MonoBehaviour
             {
                 if (heavyattack)
                 {
+                    Debug.Log("wdfcw");
                     heavyattack = false;
                     player.GetComponent<playerhit>().StrongHit(damage, transform);
 
@@ -58,6 +59,7 @@ public class enemydattack : MonoBehaviour
 
                 if (lightattack)
                 {
+                    Debug.Log("dfsaw");
                     lightattack = false;
                     player.GetComponent<playerhit>().Hit(damage);
                 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class lazer2lookat : MonoBehaviour
 {
     public bool isshoot = true;
+    public bool canshoot = true;
 
     public GameObject player;
     public GameObject cammanager;
@@ -16,6 +17,8 @@ public class lazer2lookat : MonoBehaviour
 
     public GameObject warning;
     public GameObject shoot;
+
+    public float chargetime = 2f;
 
     public void Start()
     {
@@ -39,7 +42,7 @@ public class lazer2lookat : MonoBehaviour
     {
         if (isshoot)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(chargetime);
             Charge();
         }
         
@@ -53,7 +56,11 @@ public class lazer2lookat : MonoBehaviour
 
         look = false;
 
-        Instantiate(warning, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+        if (canshoot)
+        {
+            Instantiate(warning, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+        }
+        
 
         foreach (GameObject halos in halolist)
         {
@@ -66,7 +73,11 @@ public class lazer2lookat : MonoBehaviour
     IEnumerator Shootco()
     {
         yield return new WaitForSeconds(0.7f);
-        Shoot();
+        if (canshoot)
+        {
+            Shoot();
+        }
+        
     }
 
     public void Shoot()
@@ -88,6 +99,11 @@ public class lazer2lookat : MonoBehaviour
             halos.GetComponent<trapal_lazer2_turn>().LittleShoot();
         }
         cammanager.GetComponent<CameraManager>().CamVibration1();
+    }
+
+    public void Dest()
+    {
+        StartCoroutine(SelfDes());
     }
 
     IEnumerator SelfDes()

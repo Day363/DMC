@@ -5,7 +5,11 @@ using DG.Tweening;
 
 public class trapal_passive : MonoBehaviour
 {
+    public GameObject cammanager;
+    public GameObject trapal_point;
     public GameObject player;
+    public GameObject lazer2;
+    public GameObject lazer2_small;
     public GameObject camtarget;
     public GameObject Cammanager;
     public GameObject denydistorsion;
@@ -17,12 +21,17 @@ public class trapal_passive : MonoBehaviour
     public GameObject mask;
     public GameObject glitch;
 
+    public boss_hpbar BossstackHander;
+
+    public bool whiledeny;
+    public bool whilecertain;
     public bool canApplystack = true;
 
     private void OnEnable()
     {
         boss_hpbar.OnHitCalled += Deny;
-        playerhit.OnHitCalled += Certain;
+        playerhit.OnHitCalled += Onhit;
+        trapal_lazer1.OnLazerHitCalled += Lazer1_Hit;
     }
 
     public void FixedUpdate()
@@ -35,10 +44,14 @@ public class trapal_passive : MonoBehaviour
             if (DenyInstance.currentStack >= 12)
             {
                 GetComponent<Animator>().SetBool("deny", true);
+                whiledeny = true;
+                trapal_point.GetComponent<trapal_weapon_point>().count = 12;
             }
             else if (DenyInstance.currentStack < 12)
             {
                 GetComponent<Animator>().SetBool("deny", false);
+                whiledeny = false;
+                trapal_point.GetComponent<trapal_weapon_point>().count = 3;
             }
 
             if (DenyInstance.currentStack >= 24)
@@ -54,6 +67,8 @@ public class trapal_passive : MonoBehaviour
         else
         {
             GetComponent<Animator>().SetBool("deny", false);
+            whiledeny = false;
+            trapal_point.GetComponent<trapal_weapon_point>().count = 3;
         }
 
         if (CertainInstance != null)
@@ -61,10 +76,12 @@ public class trapal_passive : MonoBehaviour
             if (CertainInstance.currentStack >= 12)
             {
                 GetComponent<Animator>().SetBool("certain", true);
+                whilecertain = true;
             }
             else
             {
                 GetComponent<Animator>().SetBool("certain", false);
+                whilecertain = false;
             }
 
             if (CertainInstance.currentStack >= 24)
@@ -77,7 +94,14 @@ public class trapal_passive : MonoBehaviour
         else
         {
             GetComponent<Animator>().SetBool("certain", false);
+            whilecertain = false;
         }
+    }
+
+    public void Onhit()
+    {
+        Certain();
+        WhenHitplayer();
     }
 
     public void Deny()
@@ -193,5 +217,80 @@ public class trapal_passive : MonoBehaviour
         GetComponent<trapal_script>().canattack = true;
         canApplystack = true;
         Destroy(currentmask);
+    }
+
+    public void Lazer1_Hit()
+    {
+        if (whiledeny)
+        {
+            StartCoroutine(Lazer1_Hit_co());
+        }
+       
+    }
+
+    IEnumerator Lazer1_Hit_co()
+    {
+        int i = 0;
+        while (i < Random.Range(7, 15))
+        {
+            i++;
+            yield return new WaitForSeconds(0.06f);
+            Vector3 spawnPosition = new Vector3(player.transform.position.x + Random.Range(-1, 1), 8, -6.5f);
+            GameObject curlazer2 = Instantiate(lazer2_small, spawnPosition, Quaternion.identity);
+            curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
+            curlazer2.GetComponent<lazer2lookat>().player = player;
+            curlazer2.GetComponent<lazer2lookat>().look = true;
+            curlazer2.GetComponent<lazer2lookat>().cammanager = Cammanager;
+        }
+        
+    }
+
+    public void WhenHitplayer()
+    {
+        Debug.Log("아앆!!!!!공습경!보!!!!!!");
+        StartCoroutine(Trapal_Penetrate_When_attacked_co());
+    }
+
+    IEnumerator Trapal_Penetrate_When_attacked_co()
+    {
+        int index = trapal_point.transform.childCount - 1;
+        Transform curpenetrate = trapal_point.transform.GetChild(index);
+        curpenetrate.SetParent(null);
+        Vector3 direction = (player.transform.position - curpenetrate.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        curpenetrate.DORotate(new Vector3(0, 0, targetAngle), 1f).SetEase(Ease.OutQuart);
+        yield return new WaitForSeconds(1.2f);
+        float opposangle = curpenetrate.eulerAngles.z + 90; //일단 각도에 180을 더함
+        float rad = opposangle * Mathf.Deg2Rad;//라디안으로 변환
+        Vector2 direction1 = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -7f;//거따가 5씩 곱해서 그뭐냐 그 원
+        Vector2 spawnPos = (Vector2)curpenetrate.position + direction1; //그걸이제 위치에 더해서 어따소환할지 정함 어잠만
+        GameObject curlazer2 = Instantiate(lazer2_small, spawnPos, Quaternion.identity);
+        curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
+        lazer2lookat curlazer2_player_Trapal_Lazer2 = curlazer2.GetComponent<lazer2lookat>();
+        curlazer2_player_Trapal_Lazer2.canshoot = false;
+        curlazer2_player_Trapal_Lazer2.player = curpenetrate.gameObject;
+        curlazer2_player_Trapal_Lazer2.look = true;
+        curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
+        curlazer2_player_Trapal_Lazer2.ShootNotDes();
+        enemydattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemydattack>();
+        curpenetrate_playerattackdamage.player = gameObject;
+        curpenetrate_playerattackdamage.enemy = gameObject;
+        curpenetrate_playerattackdamage.damage = 40;
+        curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.1f);
+        curlazer2.GetComponent<lazer2lookat>().look = false;
+        boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "부정");
+        if (instance.currentStack >= 12)
+        {
+            Debug.Log(instance.currentStack);
+            yield return new WaitForSeconds(0.4f);
+            curlazer2.GetComponent<lazer2lookat>().player = null;
+            curlazer2.GetComponent<lazer2lookat>().Shoot();
+
+        }
+        else
+        {
+            curlazer2.GetComponent<lazer2lookat>().Dest();
+        }
     }
 }

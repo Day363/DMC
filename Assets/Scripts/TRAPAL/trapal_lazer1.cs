@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class trapal_lazer1 : MonoBehaviour
 {
+    public static event Action OnLazerHitCalled;
+
     public Transform player;           // 따라볼 대상 (플레이어)
     public float rotationSpeed = 2f;   // 회전 속도
     public bool rotate = true;
@@ -37,5 +40,15 @@ public class trapal_lazer1 : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         GetComponent<Animator>().SetBool("shoot", true); ;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            Debug.Log("swdw");
+            OnLazerHitCalled?.Invoke();
+        }
+        
     }
 }
