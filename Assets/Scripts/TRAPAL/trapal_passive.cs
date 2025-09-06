@@ -5,7 +5,12 @@ using DG.Tweening;
 
 public class trapal_passive : MonoBehaviour
 {
+    public GameObject light1;
+    public GameObject light2;
+
     public GameObject cammanager;
+    public GameObject denyhandy;
+    public GameObject tearlazer;
     public GameObject trapal_point;
     public GameObject player;
     public GameObject lazer2;
@@ -20,6 +25,7 @@ public class trapal_passive : MonoBehaviour
     public GameObject denyeye;
     public GameObject mask;
     public GameObject glitch;
+    public GameObject certaindeny;
 
     public boss_hpbar BossstackHander;
 
@@ -208,22 +214,36 @@ public class trapal_passive : MonoBehaviour
                 StartCoroutine(Glitch());
             }
 
-            
+            if (i == 4)
+            {
+                GameObject currentdeny = Instantiate(denydistorsion, transform.position, Quaternion.identity);
+                currentdeny.transform.DOScale(new Vector3(125, 125, 1), 3.5f).SetEase(Ease.OutQuart);
+                certaindeny = currentdeny;
+            }
         }
+        Destroy(certaindeny);
+        light1.SetActive(false);
+        light2.SetActive(false);
         GameObject currentmask = Instantiate(mask, transform.position, Quaternion.identity);
         currentmask.transform.localScale = new Vector3(200, 50, 1);
 
         yield return new WaitForSeconds(15f);
+        light1.SetActive(true);
+        light2.SetActive(true);
         GetComponent<trapal_script>().canattack = true;
         canApplystack = true;
         Destroy(currentmask);
     }
 
-    public void Lazer1_Hit()
+    public void Lazer1_Hit(Vector2 direction)
     {
         if (whiledeny)
         {
             StartCoroutine(Lazer1_Hit_co());
+        }
+        else if (whilecertain)
+        {
+            StartCoroutine(Lazer1_Hit_co2(direction));
         }
        
     }
@@ -245,6 +265,14 @@ public class trapal_passive : MonoBehaviour
         
     }
 
+    IEnumerator Lazer1_Hit_co2(Vector2 direction)
+    {
+        yield return new WaitForSeconds(0.75f);
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        GameObject currentlazer = Instantiate(tearlazer, denyhandy.transform.position, Quaternion.Euler(0, 0, targetAngle + 90));
+
+    }
+
     public void WhenHitplayer()
     {
         Debug.Log("아앆!!!!!공습경!보!!!!!!");
@@ -253,44 +281,58 @@ public class trapal_passive : MonoBehaviour
 
     IEnumerator Trapal_Penetrate_When_attacked_co()
     {
-        int index = trapal_point.transform.childCount - 1;
-        Transform curpenetrate = trapal_point.transform.GetChild(index);
-        curpenetrate.SetParent(null);
-        Vector3 direction = (player.transform.position - curpenetrate.position).normalized;
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-        curpenetrate.DORotate(new Vector3(0, 0, targetAngle), 1f).SetEase(Ease.OutQuart);
-        yield return new WaitForSeconds(1.2f);
-        float opposangle = curpenetrate.eulerAngles.z + 90; //일단 각도에 180을 더함
-        float rad = opposangle * Mathf.Deg2Rad;//라디안으로 변환
-        Vector2 direction1 = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -7f;//거따가 5씩 곱해서 그뭐냐 그 원
-        Vector2 spawnPos = (Vector2)curpenetrate.position + direction1; //그걸이제 위치에 더해서 어따소환할지 정함 어잠만
-        GameObject curlazer2 = Instantiate(lazer2_small, spawnPos, Quaternion.identity);
-        curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
-        lazer2lookat curlazer2_player_Trapal_Lazer2 = curlazer2.GetComponent<lazer2lookat>();
-        curlazer2_player_Trapal_Lazer2.canshoot = false;
-        curlazer2_player_Trapal_Lazer2.player = curpenetrate.gameObject;
-        curlazer2_player_Trapal_Lazer2.look = true;
-        curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
-        curlazer2_player_Trapal_Lazer2.ShootNotDes();
-        enemydattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemydattack>();
-        curpenetrate_playerattackdamage.player = gameObject;
-        curpenetrate_playerattackdamage.enemy = gameObject;
-        curpenetrate_playerattackdamage.damage = 40;
-        curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.1f);
-        curlazer2.GetComponent<lazer2lookat>().look = false;
-        boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "부정");
-        if (instance.currentStack >= 12)
+        if (trapal_point.transform.childCount > 0)
         {
-            Debug.Log(instance.currentStack);
-            yield return new WaitForSeconds(0.4f);
-            curlazer2.GetComponent<lazer2lookat>().player = null;
-            curlazer2.GetComponent<lazer2lookat>().Shoot();
+            int index = trapal_point.transform.childCount - 1;
+            Transform curpenetrate = trapal_point.transform.GetChild(index);
+            curpenetrate.SetParent(null);
+            Vector3 direction = (player.transform.position - curpenetrate.position).normalized;
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            curpenetrate.DORotate(new Vector3(0, 0, targetAngle), 1f).SetEase(Ease.OutQuart);
+            yield return new WaitForSeconds(1.2f);
+            float opposangle = curpenetrate.eulerAngles.z + 90; //일단 각도에 180을 더함
+            float rad = opposangle * Mathf.Deg2Rad;//라디안으로 변환
+            Vector2 direction1 = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -7f;//거따가 5씩 곱해서 그뭐냐 그 원
+            Vector2 spawnPos = (Vector2)curpenetrate.position + direction1; //그걸이제 위치에 더해서 어따소환할지 정함 어잠만
+            GameObject curlazer2 = Instantiate(lazer2_small, spawnPos, Quaternion.identity);
+            curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
+            lazer2lookat curlazer2_player_Trapal_Lazer2 = curlazer2.GetComponent<lazer2lookat>();
+            curlazer2_player_Trapal_Lazer2.canshoot = false;
+            curlazer2_player_Trapal_Lazer2.player = curpenetrate.gameObject;
+            curlazer2_player_Trapal_Lazer2.look = true;
+            curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
+            curlazer2_player_Trapal_Lazer2.ShootNotDes();
+            enemydattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemydattack>();
+            curpenetrate_playerattackdamage.player = player;
+            curpenetrate_playerattackdamage.enemy = gameObject;
+            curpenetrate_playerattackdamage.damage = 40;
+            curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
+            curpenetrate.GetComponent<enemydattack>().canattack = true;
+            curpenetrate.GetComponent<enemydattack>().heavyattack = true;
+            yield return new WaitForSeconds(0.1f);
+            curlazer2.GetComponent<lazer2lookat>().look = false;
+            boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "부정");
+            if (instance != null)
+            {
+                if (instance.currentStack >= 12)
+                {
+                    Debug.Log(instance.currentStack);
+                    yield return new WaitForSeconds(0.4f);
+                    curlazer2.GetComponent<lazer2lookat>().player = null;
+                    curlazer2.GetComponent<lazer2lookat>().Shoot();
 
+                }
+                else
+                {
+                    curlazer2.GetComponent<lazer2lookat>().Dest();
+                }
+            }
+            else
+            {
+                curlazer2.GetComponent<lazer2lookat>().Dest();
+            }
         }
-        else
-        {
-            curlazer2.GetComponent<lazer2lookat>().Dest();
-        }
+        
+        
     }
 }

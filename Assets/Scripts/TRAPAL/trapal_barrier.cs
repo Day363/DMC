@@ -10,12 +10,16 @@ public class trapal_barrier : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemyattack"))
         {
-            particle.GetComponent<ParticleSystem>().Play();
-            GetComponent<PolygonCollider2D>().enabled = false;
-            Color color = GetComponent<SpriteRenderer>().color;
-            color.a = 0f;
-            GetComponent<SpriteRenderer>().color = color;
-            
+            if (collision.GetComponent<enemydattack>().canattack)
+            {
+                particle.GetComponent<ParticleSystem>().Play();
+                GetComponent<PolygonCollider2D>().enabled = false;
+                Color color = GetComponent<SpriteRenderer>().color;
+                color.a = 0f;
+                GetComponent<SpriteRenderer>().color = color;
+
+            }
+
         }
     }
 

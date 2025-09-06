@@ -937,7 +937,7 @@ public class attackcore : MonoBehaviour
 
         if (canattack)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
             {
                 if (attacknumber < lastlist[listnumber].Count)
                 {
@@ -952,6 +952,15 @@ public class attackcore : MonoBehaviour
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
                 {
+                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    if (mousePos.x > transform.position.x)
+                    {
+                        player.GetComponent<PlayerMove>().LookRightenforce();
+                    }
+                    else if (mousePos.x < transform.position.x)
+                    {
+                        player.GetComponent<PlayerMove>().LookLeftenforce();
+                    }
                     player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
@@ -1096,6 +1105,15 @@ public class attackcore : MonoBehaviour
                         }
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
                         {
+                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            if (mousePos.x > transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookRightenforce();
+                            }
+                            else if (mousePos.x < transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                            }
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                         }
                     }
@@ -1124,6 +1142,15 @@ public class attackcore : MonoBehaviour
                         
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
                         {
+                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            if (mousePos.x > transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookRightenforce();
+                            }
+                            else if (mousePos.x < transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                            }
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
                             if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
@@ -1150,6 +1177,15 @@ public class attackcore : MonoBehaviour
 
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
                         {
+                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            if (mousePos.x > transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookRightenforce();
+                            }
+                            else if (mousePos.x < transform.position.x)
+                            {
+                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                            }
                             player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             amalgamedanimationtrigger = lastlist[listnumber][attacknumber].Amalgamed.animationtrigger;
                         }

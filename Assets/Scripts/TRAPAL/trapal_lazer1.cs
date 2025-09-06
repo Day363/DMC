@@ -5,11 +5,12 @@ using System;
 
 public class trapal_lazer1 : MonoBehaviour
 {
-    public static event Action OnLazerHitCalled;
+    public static event Action<Vector2> OnLazerHitCalled;
 
     public Transform player;           // 따라볼 대상 (플레이어)
     public float rotationSpeed = 2f;   // 회전 속도
     public bool rotate = true;
+    public Vector2 direction;
 
     public void Start()
     {
@@ -20,7 +21,7 @@ public class trapal_lazer1 : MonoBehaviour
     {
         if (rotate)
         {
-            Vector2 direction = player.position - transform.position;
+            direction = player.position - transform.position;
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             float currentAngle = transform.eulerAngles.z;
@@ -47,7 +48,7 @@ public class trapal_lazer1 : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             Debug.Log("swdw");
-            OnLazerHitCalled?.Invoke();
+            OnLazerHitCalled?.Invoke(direction);
         }
         
     }

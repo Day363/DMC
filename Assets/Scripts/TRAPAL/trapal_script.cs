@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class trapal_script : MonoBehaviour
 {
+    public boss_hpbar BossstackHander;
+    public GameObject bomb_bullet;
     public GameObject trapal_weapon1;
     public GameObject trapal_point;
     public Vector3 lazer1point;
@@ -105,7 +107,9 @@ public class trapal_script : MonoBehaviour
                 weapon1cool = 0;
                 if (trapal_point.transform.childCount < trapal_point.GetComponent<trapal_weapon_point>().count)
                 {
-                    Instantiate(trapal_weapon1, trapal_point.transform);
+                    GameObject curweapon1 = Instantiate(trapal_weapon1, trapal_point.transform);
+                    curweapon1.GetComponent<enemydattack>().player = player;
+                    curweapon1.GetComponent<enemydattack>().canattack = false;
                 }
                 
             }
@@ -115,7 +119,6 @@ public class trapal_script : MonoBehaviour
                 lazer1cool = 0;
                 GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
                 curlazer1.GetComponent<enemydattack>().player = player;
-                curlazer1.GetComponent<enemydattack>().enemy = gameObject;
                 curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
                 Vector2 direction = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -168,7 +171,7 @@ public class trapal_script : MonoBehaviour
 
     IEnumerator Bombreal()
     {
-        Vector3 wheretopos = new Vector3(Random.Range(-17f, 17f), Random.Range(-5f, 7f), 0);
+        Vector3 wheretopos = new Vector3(Random.Range(-17f, 17f), Random.Range(1f, 7f), 0);
         GameObject currentcore = Instantiate(denycore, wheretopos, Quaternion.identity);
         currentcore.transform.localScale = new Vector3(0, 0, 1);
         currentcore.transform.DOScale(new Vector3(1.5f, 1.5f, 1), 0.4f).SetEase(Ease.OutQuart);
@@ -189,10 +192,23 @@ public class trapal_script : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         GameObject bombshoot1 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle));
         GameObject bombshoot2 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle + 90));
+        cammanager.GetComponent<CameraManager>().CamVibration1();
+        bombshoot1.GetComponent<enemydattack>().heavyattack = true;
+        bombshoot1.GetComponent<enemydattack>().lightattack = false;
         bombshoot1.GetComponent<enemydattack>().player = player;
-        bombshoot1.GetComponent<enemydattack>().enemy = gameObject;
+        bombshoot2.GetComponent<enemydattack>().heavyattack = true;
+        bombshoot2.GetComponent<enemydattack>().lightattack = false;
         bombshoot2.GetComponent<enemydattack>().player = player;
-        bombshoot2.GetComponent<enemydattack>().enemy = gameObject;
+        boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "ºÎÁ¤");
+        if (instance != null)
+        {
+            if (instance.currentStack >= 12)
+            {
+                GameObject currentbullet = Instantiate(bomb_bullet, currentcore.transform.position, Quaternion.identity);
+                currentbullet.GetComponent<trapal_bomb_bullet>().cameramanager = cammanager;
+            }
+        }
+        
     }
 
     public void Returntopos()

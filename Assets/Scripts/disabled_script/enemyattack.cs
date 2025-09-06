@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemydattack : MonoBehaviour
 {
+    public bool canattack = true;
     public GameObject player;
     public GameObject enemy;
     public int damage;
@@ -20,67 +21,96 @@ public class enemydattack : MonoBehaviour
     public bool penetrate;
     public bool blow;
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (canattack)
+        {
+            if (collision.gameObject.tag == "playerattack")
+            {
+                player.GetComponent<playerstatus>().Parrystop();
+
+                gameObject.SetActive(false);
+                if (enemy != null)
+                {
+                    enemy.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
+                }
+                
+
+                ratiosum = damage + collision.gameObject.GetComponent<playerattackdamage>().damage;
+                selfback = (collision.gameObject.GetComponent<playerattackdamage>().damage / ratiosum) * parryback;
+                playerback = (damage / ratiosum) * parryback;
+
+                if (player.transform.position.x > enemy.transform.position.x)
+                {
+                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * playerback, ForceMode2D.Impulse);
+                    if (enemy != null)
+                    {
+                        enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                    }
+                    
+                }
+                else
+                {
+                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -playerback, ForceMode2D.Impulse);
+                    if (enemy != null)
+                    {
+                        enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                    }
+                    
+                }
+            }
+
+            if (collision.gameObject.tag == "Player")
+            {
+                if (!steadydamage)
+                {
+                    if (heavyattack)
+                    {
+                        heavyattack = false;
+                        player.GetComponent<playerhit>().StrongHit(damage, transform);
+
+                    }
+
+                    if (lightattack)
+                    {
+                        lightattack = false;
+                        player.GetComponent<playerhit>().Hit(damage);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+        }
+        
+    }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "playerattack")
+        if (canattack)
         {
-            player.GetComponent<playerstatus>().Parrystop();
-
-            gameObject.SetActive(false);
-            enemy.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
-
-            ratiosum = damage + collision.gameObject.GetComponent<playerattackdamage>().damage;
-            selfback = (collision.gameObject.GetComponent<playerattackdamage>().damage / ratiosum) * parryback;
-            playerback = (damage / ratiosum) * parryback;
-
-            if (player.transform.position.x > enemy.transform.position.x)
+            if (collision.gameObject.tag == "Player")
             {
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * playerback, ForceMode2D.Impulse);
-                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
-            }
-            else
-            {
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -playerback, ForceMode2D.Impulse);
-                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                if (steadydamage)
+                {
+                    if (heavyattack)
+                    {
+                        player.GetComponent<playerhit>().StrongHit(damage, transform);
+
+                    }
+
+                    if (lightattack)
+                    {
+                        player.GetComponent<playerhit>().Hit(damage);
+                    }
+                }
             }
         }
-
-        if (collision.gameObject.tag == "Player")
-        {
-            if (!steadydamage)
-            {
-                if (heavyattack)
-                {
-                    Debug.Log("wdfcw");
-                    heavyattack = false;
-                    player.GetComponent<playerhit>().StrongHit(damage, transform);
-
-                }
-
-                if (lightattack)
-                {
-                    Debug.Log("dfsaw");
-                    lightattack = false;
-                    player.GetComponent<playerhit>().Hit(damage);
-                }
-            }
-            else
-            {
-                if (heavyattack)
-                {
-                    player.GetComponent<playerhit>().StrongHit(damage, transform);
-
-                }
-
-                if (lightattack)
-                {
-                    player.GetComponent<playerhit>().Hit(damage);
-                }
-            }
-            
-        }
+        
     }
 
-    
+
+
 
 }

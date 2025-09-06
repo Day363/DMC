@@ -23,6 +23,24 @@ public class PlayerMove : MonoBehaviour
         
     }
 
+    public void LookLeftenforce()
+    {
+        
+        transform.localScale = new Vector3(-1, 1, 1);
+        dir = -1;
+        
+
+    }
+
+    public void LookRightenforce()
+    {
+        
+        transform.localScale = new Vector3(1, 1, 1);
+        dir = 1;
+        
+
+    }
+
     public void LookLeft()
     {
         if (canmove)

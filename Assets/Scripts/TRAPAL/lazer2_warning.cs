@@ -9,6 +9,8 @@ public class lazer2_warning : MonoBehaviour
 
     public float time = 1.2f;
 
+    public bool y = true;
+
     public void Start()
     {
         DOTween.To(() => scaley, x => scaley = x, 0, time).SetEase(Ease.OutQuart);
@@ -17,7 +19,15 @@ public class lazer2_warning : MonoBehaviour
 
     public void FixedUpdate()
     {
-        transform.localScale = new Vector3(1, scaley, 1);
+        if (y)
+        {
+            transform.localScale = new Vector3(1, scaley, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(scaley, 1, 1);
+        }
+        
     }
 
     IEnumerator SelfDes()
