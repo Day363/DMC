@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 public class selectmirror : MonoBehaviour
 {
+    public GameObject player;
+
+    public Vector3 wheretospwan;
+
+    public GameObject cammanager;
     public GameObject attackcore;
+    public bool widercam;
+    public Collider2D widecollider;
 
     public GameObject fbutton;
     public bool selectactive;
 
     public GameObject background0;
+    public GameObject wall;
     public GameObject[] backgrounds;
     public GameObject client;
 
@@ -39,14 +48,23 @@ public class selectmirror : MonoBehaviour
 
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (Input.GetButtonDown("fbutton") && selectactive)
         {
+            player.transform.position = wheretospwan;
+
             worldlight.intensity = worldlightint;
 
-            attackcore.GetComponent<attackcore>().BattleStart();
+            if (widercam)
+            {
+                cammanager.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = widecollider;
+                cammanager.GetComponent<CinemachineConfiner2D>().InvalidateCache();
 
+            }
+
+           
+            wall.SetActive(false);
             background0.SetActive(false);
             foreach (GameObject background in backgrounds)
             {
@@ -58,8 +76,11 @@ public class selectmirror : MonoBehaviour
             {
                 mirror.gameObject.SetActive(false);
             }
-            attackcore.GetComponent<attackcore>().BattleStart();
+
         }
 
     }
+
+
+
 }

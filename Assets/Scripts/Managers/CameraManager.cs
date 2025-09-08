@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
+    public bool fuckcinemachine;
+
     public GameObject priorcamera;
 
     public GameObject maincam;
@@ -16,6 +18,7 @@ public class CameraManager : MonoBehaviour
     public GameObject enemycam;
     public GameObject smallpointcam;
     public GameObject skillcam;
+    public GameObject counselcam;
 
     
     public void Awake()
@@ -23,10 +26,26 @@ public class CameraManager : MonoBehaviour
         maincam = playercam;
     }
 
+    public void Update()
+    {
+        if (fuckcinemachine)
+        {
+            GetComponent<CinemachineConfiner2D>().InvalidateCache();
+        }
+        
+    }
+
     public void LookPlayer()
     {
         maincam = playercam;
         GetComponent<Animator>().SetTrigger("playercam");
+    }
+
+    public void LookCounsel(GameObject target)
+    {
+        maincam = counselcam;
+        counselcam.GetComponent<CinemachineVirtualCamera>().Follow = target.transform;
+        GetComponent<Animator>().SetTrigger("counselcam");
     }
 
     public void LookBigCam()
