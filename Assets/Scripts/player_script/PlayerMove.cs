@@ -78,6 +78,8 @@ public class PlayerMove : MonoBehaviour
 
     public void Stop()
     {
+        GetComponent<Animator>().SetBool("running", false);
+        GetComponent<Animator>().SetBool("idle", true);
         rigid.velocity = new Vector2(0, rigid.velocity.y);
     }
 

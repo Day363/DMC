@@ -6,6 +6,10 @@ using Cinemachine;
 
 public class filer_counsel : MonoBehaviour
 {
+    public bool firstmet;
+    public GameObject letterbox;
+    public GameObject gamemanager;
+    public GameObject chat;
     public GameObject cammanager;
     public GameObject player;
     public GameObject campos;
@@ -13,9 +17,21 @@ public class filer_counsel : MonoBehaviour
     public void Start()
     {
         StartCoroutine(Cammove());
+        gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
     }
 
-    
+    public void FixedUpdate()
+    {
+        if (!firstmet && transform.position.x - player.transform.position.x < 13)
+        {
+            firstmet = true;
+            letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            player.GetComponent<PlayerMove>().canmove = false;
+            player.GetComponent<PlayerMove>().Stop();
+            gamemanager.GetComponent<chatmanager>().CallDialogue(0);
+            
+        }
+    }
 
     IEnumerator Cammove()
     {

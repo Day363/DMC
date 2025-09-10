@@ -109536,7 +109536,7 @@ RectTransform:
   m_Father: {fileID: 2055155469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -109934,7 +109934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &609046968
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151629,7 +151629,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 85}
   m_LocalScale: {x: 0.044450935, y: 0.044450935, z: 0.044450935}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1386129465}
   m_Father: {fileID: 1683612389}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -151695,7 +151696,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -211321,6 +211322,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1124603115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3986315664660051058, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+  m_PrefabInstance: {fileID: 1386129464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124692716
 GameObject:
   m_ObjectHideFlags: 0
@@ -263032,6 +263038,144 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1386129464
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 863574095}
+    m_Modifications:
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -32.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051058, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_Name
+      value: chat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315664660051058, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121733, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121733, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 7.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986315665184121734, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.625
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+--- !u!224 &1386129465 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3986315664660051057, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+  m_PrefabInstance: {fileID: 1386129464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388950958
 GameObject:
   m_ObjectHideFlags: 0
@@ -327237,6 +327381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bb1ce4e8e382543bed6dd8b9ebba93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstmet: 0
+  letterbox: {fileID: 671870209}
+  gamemanager: {fileID: 1694457153}
+  chat: {fileID: 1124603115}
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   campos: {fileID: 90888324}
@@ -328418,6 +328566,7 @@ GameObject:
   - component: {fileID: 1694457155}
   - component: {fileID: 1694457154}
   - component: {fileID: 1694457156}
+  - component: {fileID: 1694457157}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -328466,8 +328615,196 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
-  attackcore: {fileID: 0}
+  attackcore: {fileID: 840654302}
   currentenemy: {fileID: 0}
+--- !u!114 &1694457157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694457153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6fa203cb1e1c046a107b3762e8a6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chating: 0
+  whilesaying: 0
+  skip: 0
+  player: {fileID: 1233421491}
+  letterbox: {fileID: 671870209}
+  dialogues:
+  - dialogueLines:
+    - target: 1
+      dialogue: "...\uC74C?"
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC8C4\uC1A1\uD55C\uB370, \uB204\uAD6C\uC2DC\uC8E0?"
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 0
+      dialogue: "\uC0C1\uB2F4\uC0AC\uB77C\uACE0 \uBD88\uB7EC."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC798\uC740 \uBAA8\uB974\uACA0\uC9C0\uB9CC... \uAF64 \uB192\uC740
+        \uC218\uC900\uC758 \uC758\uC2DD\uC744 \uC720\uC9C0\uD558\uACE0 \uACC4\uC2DC\uB294
+        \uAC83 \uAC19\uAD70\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uBB50, \uBC29\uD574\uB9CC \uC548 \uB41C\uB2E4\uBA74\uC57C \uBC1C\uC774
+        \uAC00\uB294 \uB370\uB85C \uB9C8\uC74C\uAECF \uB3CC\uC544\uB2E4\uB2C8\uC154\uB3C4
+        \uB429\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "...\uADF8\uAC74 \uADF8\uB807\uACE0, \uACE7 \uC0C8\uB85C\uC6B4 \uC8FC\uAE30\uAC00
+        \uC2DC\uC791\uB420 \uAC83 \uAC19\uB124\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC5B4\uB5BB\uC2B5\uB2C8\uAE4C? \uC0C8 \uC8FC\uAE30\uB97C \uB9DE\uC774\uD558\uBA70
+        \uC790\uC544\uAC00 \uC0AC\uB77D\uC0AC\uB77D \uC800\uBA70\uC838 \uAC00\uB294
+        \uAE30\uBD84\uC740. "
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 0
+      dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30...?"
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uB2F9\uC2E0\uC740 \uAE30\uC5B5\uB098\uC9C0 \uC54A\uACA0\uC9C0\uB9CC,
+        \uC544\uB9C8 \uC218\uB3C4 \uC5C6\uC774 \uB9CE\uC740 \uC8FC\uAE30\uB97C \uD2B8\uB77C\uD314\uC5D0\uC11C
+        \uBC18\uBCF5\uD588\uACA0\uC8E0."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uB2F9\uC2E0\uC740 \uAE30\uC5B5\uB098\uC9C0 \uC54A\uACA0\uC9C0\uB9CC,
+        \uC544\uB9C8 \uC218\uB3C4 \uC5C6\uC774 \uB9CE\uC740 \uC8FC\uAE30\uB97C \uD2B8\uB77C\uD314\uC5D0\uC11C
+        \uBC18\uBCF5\uD588\uACA0\uC8E0."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC800\uB3C4 \uB2F9\uC2E0\uC774 \uC5EC\uAE30 \uC628 \uAE30\uC5B5\uC740
+        \uC0C8\uAE30\uACE0 \uC788\uC9C0 \uC54A\uC9C0\uB9CC... \uC544\uB9C8 \uD56D\uC0C1
+        \uB611\uAC19\uC774 \uC5EC\uAE38 \uCC3E\uC544\uC624\uACE0, \uAC19\uC740 \uB300\uD654\uB97C
+        \uBC18\uBCF5\uD588\uC744 \uAC81\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC0C8\uAE34\uB2E4\uACE0?"
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uB124, \uC5D0\uCE6D\uC73C\uB85C \uAE30\uC5B5\uC744 \uC9C1\uC811
+        \uB1CC\uC5D0 \uC0C8\uAE30\uC8E0. \uD658\uC6D0\uC18D\uC5D0\uC11C \uC720\uC77C\uD558\uAC8C\uB098\uB9C8
+        \uB2E4\uC74C \uC8FC\uAE30\uB85C \uAC00\uC838\uAC08 \uC218 \uC788\uB294\uAC83\uB4E4\uC785\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC0C8\uAE38 \uC218 \uC788\uB294 \uCD1D\uB7C9\uC740 \uADF8\uB9AC
+        \uD06C\uC9C0 \uC54A\uC9C0\uB9CC... \uAE30\uC5B5\uC744 \uC758\uC874\uD560
+        \uC218 \uC788\uB2E4\uBA74.."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uD760. \uC774\uB807\uAC8C \uC0DD\uAC01\uD558\uB2C8 \uC800\uB294
+        \uC544\uBB34\uAC83\uB3C4 \uC544\uB2CC\uAC83\uAC19\uC2B5\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC9C0\uAE08 \uC774\uB807\uAC8C \uC804\uC9C0\uD55C\uAC83\uCC98\uB7FC
+        \uBCF4\uC5EC\uB3C4, \uACB0\uAD6D \uC81C \uB1CC\uC5D0 \uC0C8\uACA8\uC9C4 \uC5D0\uCE6D\uC774
+        \uC81C \uC815\uCCB4\uC131\uC744 \uD615\uC131\uD558\uACE0\uC788\uB2E4\uB294
+        \uC0AC\uC2E4\uC774..."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC774\uBBF8 \uD658\uC6D0\uC18D\uC5D0 \uC0BC\uCF1C\uC9C4 \uC9C4\uC9DC
+        \uC800\uB294 \uC0C8\uACA8\uC9C4 \uC5D0\uCE6D\uC5D0 \uB530\uB77C \uBC18\uBCF5\uC791\uC5C5\uB9CC\uC744
+        \uD558\uB294 \uAECD\uB370\uAE30\uCC98\uB7FC \uB290\uAEF4\uC9C0\uB294\uAD70\uC694...."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uADF8\uAC74 \uADF8\uB807\uACE0, \uC2DC\uAC04\uC774 \uC5BC\uB9C8
+        \uB0A8\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC800\uB294 \uC0C1\uB2F4\uC0AC...\uB2D8\uC774 \uB204\uAD70\uC9C0\uB294
+        \uC54C \uC218 \uC5C6\uACA0\uC9C0\uB9CC, \uBD80\uB514 \uB0A8\uC740 \uC2DC\uAC04\uC744
+        \uB354 \uC758\uBBF8\uC788\uAC8C, \uC624\uB86F\uC774 \uC790\uC2E0\uC758 \uAD73\uC740
+        \uC758\uC9C0\uB85C \uB098\uC544\uAC00\uC138\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC800\uB294 \uC774 \uC790\uB9AC\uC5D0\uC11C \uBAA8\uB450\uB97C
+        \uC704\uD55C \uD574\uACB0\uCC45\uC744 \uCC3E\uC744\uD14C\uB2C8... \uADF8\uB7EC\uB2C8,
+        \uB0B4\uC77C\uC758 \uD574\uB97C \uB9DE\uC774\uD558\uAE30 \uC704\uD55C \uC900\uBE44\uB97C
+        \uD574\uB450\uC138\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uC544\uB9C8 \uB2F9\uC2E0\uC758 \uB0B4\uC77C\uC740 \uD55C \uC8FC\uAE30\uAC00
+        \uBC18\uBCF5\uB418\uAE30\uB3C4 \uC804\uC5D0 \uCC3E\uC544\uC62C\uAC81\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 0
+    - target: 1
+      dialogue: "\uAE30\uC5B5\uC740... \uBABB\uD558\uACA0\uC9C0\uB9CC."
+      basicdelay: 0.1
+      dotdelay: 0.5
+      fuctionname: 
+      end: 1
+  currentdialogues:
+    dialogueLines: []
+  playerchatbox: {fileID: 1891505641}
+  enemychatbox: {fileID: 0}
+  chatnumber: 0
 --- !u!1 &1695546607
 GameObject:
   m_ObjectHideFlags: 0
