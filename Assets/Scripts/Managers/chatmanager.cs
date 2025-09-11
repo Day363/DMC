@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public enum Chattarget {Player, Enemy}
 
@@ -41,20 +42,31 @@ public class chatmanager : MonoBehaviour
     public GameObject enemychatbox;
     public int chatnumber;
 
+    public Coroutine currentchatco;
+
     public void Update()
     {
         if (chating)
         {
-            if (Input.GetMouseButtonDown(0) && whilesaying!)
+            if (Input.GetMouseButtonDown(0) && !whilesaying)
             {
                 if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
                 {
-                    StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
+                    if (currentchatco != null)
+                    {
+                        StopCoroutine(currentchatco);
+                    }
+                    
+                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
                     chatnumber++;
                 }
                 else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Player)
                 {
-                    StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
+                    if (currentchatco != null)
+                    {
+                        StopCoroutine(currentchatco);
+                    }
+                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
                     chatnumber++;
                 }
                 
@@ -75,12 +87,20 @@ public class chatmanager : MonoBehaviour
         enemychatbox.SetActive(true);
         if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
         {
-            StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
+            if (currentchatco != null)
+            {
+                StopCoroutine(currentchatco);
+            }
+            currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
             chatnumber++;
         }
         else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Player)
         {
-            StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
+            if (currentchatco != null)
+            {
+                StopCoroutine(currentchatco);
+            }
+            currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
             chatnumber++;
         }
     }
@@ -90,7 +110,11 @@ public class chatmanager : MonoBehaviour
         whilesaying = true;
 
         TMP_Text tmp = currentchatbox.transform.GetChild(0).GetComponent<TMP_Text>();
-        tmp.text = chat.dialogue;
+        texteffectmanager shaker = tmp.GetComponent<texteffectmanager>();
+        if (shaker != null)
+            shaker.SetText(chat.dialogue);
+        else
+            tmp.text = chat.dialogue;
         tmp.ForceMeshUpdate();
         int totalvisible = tmp.textInfo.characterCount;
         tmp.maxVisibleCharacters = 0;
@@ -103,7 +127,7 @@ public class chatmanager : MonoBehaviour
                 tmp.maxVisibleCharacters = totalvisible; 
                 skip = false;
                 whilesaying = false;
-                yield break;                         
+                break;                         
             }
 
             visible++;
@@ -123,6 +147,9 @@ public class chatmanager : MonoBehaviour
             letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
             player.GetComponent<PlayerMove>().canmove = true;
             chatnumber = 0;
+            chating = false;
+            playerchatbox.SetActive(false);
+            enemychatbox.SetActive(false);
         }
     }
 

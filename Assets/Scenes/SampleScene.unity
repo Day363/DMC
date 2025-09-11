@@ -509,6 +509,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1008365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3986315665184121735, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+  m_PrefabInstance: {fileID: 1386129464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1008369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7532f2ddeb5fbd4988692daa21dbb31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047002
 GameObject:
   m_ObjectHideFlags: 0
@@ -120370,7 +120387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &671870210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -128729,7 +128746,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3986315665184121735, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1400761299}
   m_SourcePrefab: {fileID: 100100000, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
 --- !u!1 &735762181
 GameObject:
@@ -263169,7 +263189,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3986315665184121735, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1008369}
   m_SourcePrefab: {fileID: 100100000, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
 --- !u!224 &1386129465 stripped
 RectTransform:
@@ -264794,6 +264817,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1400761295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3986315665184121735, guid: 2645ba57c44c049438edd40517d413e3, type: 3}
+  m_PrefabInstance: {fileID: 735624636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1400761299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400761295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7532f2ddeb5fbd4988692daa21dbb31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401721403
 GameObject:
   m_ObjectHideFlags: 0
@@ -328638,73 +328678,73 @@ MonoBehaviour:
   - dialogueLines:
     - target: 1
       dialogue: "...\uC74C?"
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
-      dialogue: "\uC8C4\uC1A1\uD55C\uB370, \uB204\uAD6C\uC2DC\uC8E0?"
-      basicdelay: 0.1
-      dotdelay: 0.5
+      dialogue: "\uC8C4\uC1A1\uD55C\uB370, <camerashake=2,0.5><shake=3,8>\uB204\uAD6C\uC2DC\uC8E0?</shake>"
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 0
       dialogue: "\uC0C1\uB2F4\uC0AC\uB77C\uACE0 \uBD88\uB7EC."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uC798\uC740 \uBAA8\uB974\uACA0\uC9C0\uB9CC... \uAF64 \uB192\uC740
         \uC218\uC900\uC758 \uC758\uC2DD\uC744 \uC720\uC9C0\uD558\uACE0 \uACC4\uC2DC\uB294
         \uAC83 \uAC19\uAD70\uC694."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uBB50, \uBC29\uD574\uB9CC \uC548 \uB41C\uB2E4\uBA74\uC57C \uBC1C\uC774
         \uAC00\uB294 \uB370\uB85C \uB9C8\uC74C\uAECF \uB3CC\uC544\uB2E4\uB2C8\uC154\uB3C4
         \uB429\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "...\uADF8\uAC74 \uADF8\uB807\uACE0, \uACE7 \uC0C8\uB85C\uC6B4 \uC8FC\uAE30\uAC00
         \uC2DC\uC791\uB420 \uAC83 \uAC19\uB124\uC694."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uC5B4\uB5BB\uC2B5\uB2C8\uAE4C? \uC0C8 \uC8FC\uAE30\uB97C \uB9DE\uC774\uD558\uBA70
         \uC790\uC544\uAC00 \uC0AC\uB77D\uC0AC\uB77D \uC800\uBA70\uC838 \uAC00\uB294
         \uAE30\uBD84\uC740. "
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 0
       dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30...?"
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uB2F9\uC2E0\uC740 \uAE30\uC5B5\uB098\uC9C0 \uC54A\uACA0\uC9C0\uB9CC,
         \uC544\uB9C8 \uC218\uB3C4 \uC5C6\uC774 \uB9CE\uC740 \uC8FC\uAE30\uB97C \uD2B8\uB77C\uD314\uC5D0\uC11C
         \uBC18\uBCF5\uD588\uACA0\uC8E0."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uB2F9\uC2E0\uC740 \uAE30\uC5B5\uB098\uC9C0 \uC54A\uACA0\uC9C0\uB9CC,
         \uC544\uB9C8 \uC218\uB3C4 \uC5C6\uC774 \uB9CE\uC740 \uC8FC\uAE30\uB97C \uD2B8\uB77C\uD314\uC5D0\uC11C
         \uBC18\uBCF5\uD588\uACA0\uC8E0."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
@@ -328712,37 +328752,37 @@ MonoBehaviour:
         \uC0C8\uAE30\uACE0 \uC788\uC9C0 \uC54A\uC9C0\uB9CC... \uC544\uB9C8 \uD56D\uC0C1
         \uB611\uAC19\uC774 \uC5EC\uAE38 \uCC3E\uC544\uC624\uACE0, \uAC19\uC740 \uB300\uD654\uB97C
         \uBC18\uBCF5\uD588\uC744 \uAC81\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
-    - target: 1
+    - target: 0
       dialogue: "\uC0C8\uAE34\uB2E4\uACE0?"
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uB124, \uC5D0\uCE6D\uC73C\uB85C \uAE30\uC5B5\uC744 \uC9C1\uC811
         \uB1CC\uC5D0 \uC0C8\uAE30\uC8E0. \uD658\uC6D0\uC18D\uC5D0\uC11C \uC720\uC77C\uD558\uAC8C\uB098\uB9C8
         \uB2E4\uC74C \uC8FC\uAE30\uB85C \uAC00\uC838\uAC08 \uC218 \uC788\uB294\uAC83\uB4E4\uC785\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uC0C8\uAE38 \uC218 \uC788\uB294 \uCD1D\uB7C9\uC740 \uADF8\uB9AC
         \uD06C\uC9C0 \uC54A\uC9C0\uB9CC... \uAE30\uC5B5\uC744 \uC758\uC874\uD560
         \uC218 \uC788\uB2E4\uBA74.."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uD760. \uC774\uB807\uAC8C \uC0DD\uAC01\uD558\uB2C8 \uC800\uB294
         \uC544\uBB34\uAC83\uB3C4 \uC544\uB2CC\uAC83\uAC19\uC2B5\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
@@ -328750,23 +328790,23 @@ MonoBehaviour:
         \uBCF4\uC5EC\uB3C4, \uACB0\uAD6D \uC81C \uB1CC\uC5D0 \uC0C8\uACA8\uC9C4 \uC5D0\uCE6D\uC774
         \uC81C \uC815\uCCB4\uC131\uC744 \uD615\uC131\uD558\uACE0\uC788\uB2E4\uB294
         \uC0AC\uC2E4\uC774..."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uC774\uBBF8 \uD658\uC6D0\uC18D\uC5D0 \uC0BC\uCF1C\uC9C4 \uC9C4\uC9DC
         \uC800\uB294 \uC0C8\uACA8\uC9C4 \uC5D0\uCE6D\uC5D0 \uB530\uB77C \uBC18\uBCF5\uC791\uC5C5\uB9CC\uC744
         \uD558\uB294 \uAECD\uB370\uAE30\uCC98\uB7FC \uB290\uAEF4\uC9C0\uB294\uAD70\uC694...."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uADF8\uAC74 \uADF8\uB807\uACE0, \uC2DC\uAC04\uC774 \uC5BC\uB9C8
         \uB0A8\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
@@ -328774,8 +328814,8 @@ MonoBehaviour:
         \uC54C \uC218 \uC5C6\uACA0\uC9C0\uB9CC, \uBD80\uB514 \uB0A8\uC740 \uC2DC\uAC04\uC744
         \uB354 \uC758\uBBF8\uC788\uAC8C, \uC624\uB86F\uC774 \uC790\uC2E0\uC758 \uAD73\uC740
         \uC758\uC9C0\uB85C \uB098\uC544\uAC00\uC138\uC694."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
@@ -328783,21 +328823,21 @@ MonoBehaviour:
         \uC704\uD55C \uD574\uACB0\uCC45\uC744 \uCC3E\uC744\uD14C\uB2C8... \uADF8\uB7EC\uB2C8,
         \uB0B4\uC77C\uC758 \uD574\uB97C \uB9DE\uC774\uD558\uAE30 \uC704\uD55C \uC900\uBE44\uB97C
         \uD574\uB450\uC138\uC694."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uC544\uB9C8 \uB2F9\uC2E0\uC758 \uB0B4\uC77C\uC740 \uD55C \uC8FC\uAE30\uAC00
         \uBC18\uBCF5\uB418\uAE30\uB3C4 \uC804\uC5D0 \uCC3E\uC544\uC62C\uAC81\uB2C8\uB2E4."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 0
     - target: 1
       dialogue: "\uAE30\uC5B5\uC740... \uBABB\uD558\uACA0\uC9C0\uB9CC."
-      basicdelay: 0.1
-      dotdelay: 0.5
+      basicdelay: 0.05
+      dotdelay: 0.25
       fuctionname: 
       end: 1
   currentdialogues:

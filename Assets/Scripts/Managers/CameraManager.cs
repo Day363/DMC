@@ -20,9 +20,11 @@ public class CameraManager : MonoBehaviour
     public GameObject skillcam;
     public GameObject counselcam;
 
-    
+    public static CameraManager Instance;
+
     public void Awake()
     {
+        Instance = this;
         maincam = playercam;
     }
 
@@ -73,6 +75,11 @@ public class CameraManager : MonoBehaviour
         maincam = skillcam;
         skillcam.GetComponent<CinemachineVirtualCamera>().Follow = target.transform;
         GetComponent<Animator>().SetTrigger("skillcam");
+    }
+
+    public void ShakeCamera(float strength, float duration)
+    {
+        //카메라 흔드는 코드
     }
 
     public void CamVibration0_5()

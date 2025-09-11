@@ -28,6 +28,7 @@ public class filer_counsel : MonoBehaviour
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
+            GetComponent<filer_textflow>().yelling = false;
             gamemanager.GetComponent<chatmanager>().CallDialogue(0);
             
         }
