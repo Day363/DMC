@@ -79,7 +79,17 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeCamera(float strength, float duration)
     {
-        //카메라 흔드는 코드
+        StartCoroutine(ShakeCameraC(strength, duration));
+    }
+
+    IEnumerator ShakeCameraC(float strength, float duration)
+    {
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = strength;
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        yield return new WaitForSeconds(duration);
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        CamStable();
     }
 
     public void CamVibration0_5()

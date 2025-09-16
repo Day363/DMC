@@ -63,8 +63,11 @@ public class selectmirror : MonoBehaviour
 
             }
 
-           
-            wall.SetActive(false);
+            if (wall  != null)
+            {
+                wall.SetActive(false);
+            }
+            
             background0.SetActive(false);
             foreach (GameObject background in backgrounds)
             {

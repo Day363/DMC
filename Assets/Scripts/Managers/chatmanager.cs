@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Text.RegularExpressions;
+using DG.Tweening;
+using System;
 
 public enum Chattarget {Player, Enemy}
 
@@ -20,6 +22,23 @@ public class Dialogue
     public string fuctionname;
 
     public bool end;
+
+    public bool gotoanswer;
+    public int answerindex;
+}
+
+[System.Serializable]
+public class Answer
+{
+    public string answer;
+    public int nextdialogueindex;
+    public string fuction;
+}
+
+[System.Serializable]
+public class Answers
+{
+    public List<Answer> answers;
 }
 
 [System.Serializable]
@@ -30,19 +49,32 @@ public class DialogueData
 
 public class chatmanager : MonoBehaviour
 {
+    public Dictionary<string, Action> fuctionMap;
+
     public bool chating;
     public bool whilesaying;
     public bool skip;
 
+    public GameObject cammanager;
     public GameObject player;
     public GameObject letterbox;
     public List<DialogueData> dialogues;
+    public List<Answers> answers;
     public DialogueData currentdialogues;
     public GameObject playerchatbox;
     public GameObject enemychatbox;
     public int chatnumber;
 
+    public GameObject beforechatbox;
     public Coroutine currentchatco;
+
+    void Start()
+    { 
+        fuctionMap = new Dictionary<string, Action>
+        {
+            { "test", Test }
+        };
+    }
 
     public void Update()
     {
@@ -107,10 +139,22 @@ public class chatmanager : MonoBehaviour
 
     IEnumerator Chat(Dialogue chat, GameObject currentchatbox)
     {
+        if (beforechatbox != null)
+        {
+            if (beforechatbox != currentchatbox)
+            {
+                beforechatbox.transform.DOScaleY(0, 0.7f);
+            }
+        }
+        
+        beforechatbox = currentchatbox;
+
+        currentchatbox.transform.localScale = new Vector3(2.4f, 0, 2.4f);
+
         whilesaying = true;
 
         TMP_Text tmp = currentchatbox.transform.GetChild(0).GetComponent<TMP_Text>();
-        texteffectmanager shaker = tmp.GetComponent<texteffectmanager>();
+        TextEffectManager shaker = tmp.GetComponent<TextEffectManager>();
         if (shaker != null)
             shaker.SetText(chat.dialogue);
         else
@@ -120,6 +164,9 @@ public class chatmanager : MonoBehaviour
         tmp.maxVisibleCharacters = 0;
         int visible = 0;
 
+        currentchatbox.transform.DOScaleY(2.4f, 0.7f);
+        yield return new WaitForSeconds(1f);
+
         while (visible < totalvisible)
         {
             if (skip)
@@ -127,11 +174,25 @@ public class chatmanager : MonoBehaviour
                 tmp.maxVisibleCharacters = totalvisible; 
                 skip = false;
                 whilesaying = false;
+                if (chat.end)
+                {
+                    yield return new WaitForSeconds(1f);
+                    cammanager.GetComponent<CameraManager>().LookPlayer();
+                    letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+                    player.GetComponent<PlayerMove>().canmove = true;
+                    chatnumber = 0;
+                    chating = false;
+                    playerchatbox.SetActive(false);
+                    enemychatbox.SetActive(false);
+                }
                 break;                         
             }
 
             visible++;
             tmp.maxVisibleCharacters = visible;
+
+            if (shaker != null)
+                shaker.CheckEvents(visible);
 
             char c = GetPrintedCharAtIndex(tmp, visible - 1);
             float wait = chat.basicdelay;
@@ -144,6 +205,8 @@ public class chatmanager : MonoBehaviour
 
         if (chat.end)
         {
+            yield return new WaitForSeconds(1f);
+            cammanager.GetComponent<CameraManager>().LookPlayer();
             letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
             player.GetComponent<PlayerMove>().canmove = true;
             chatnumber = 0;
@@ -163,5 +226,10 @@ public class chatmanager : MonoBehaviour
     bool IsPunctuation(char c)
     {
         return c == '.' || c == ',' || c == '!' || c == '?' || c == ';' || c == ':' || c == '¡¦';
+    }
+
+    public void Test()
+    {
+        Debug.Log("dialogue:test fuction");
     }
 }

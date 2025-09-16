@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 [RequireComponent(typeof(TMP_Text))]
-public class texteffectmanager : MonoBehaviour
+public class TextEffectManager : MonoBehaviour
 {
     TMP_Text tmp;
     string originalText;
@@ -63,7 +63,6 @@ public class texteffectmanager : MonoBehaviour
             offset += match.Length;
             return "";
         }, RegexOptions.Singleline);
-
         string shakePattern = @"<shake=(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)>(.*?)<\/shake>";
         MatchCollection matches = Regex.Matches(workingText, shakePattern, RegexOptions.Singleline);
 
@@ -87,20 +86,26 @@ public class texteffectmanager : MonoBehaviour
 
             removed += m.Length - inner.Length;
         }
+        workingText = Regex.Replace(workingText, shakePattern, "$3");
 
-        tmp.text = Regex.Replace(workingText, shakePattern, "$3");
+        tmp.text = workingText;
         tmp.ForceMeshUpdate();
     }
 
-    public void CheckCameraEvents(int visibleCount)
+    public void CheckEvents(int visibleCount)
     {
-        for (int i = cameraEvents.Count - 1; i >= 0; i--)
+        List<int> executedCamera = new List<int>();
+        for (int i = 0; i < cameraEvents.Count; i++)
         {
-            if (visibleCount == cameraEvents[i].triggerIndex)
+            if (visibleCount >= cameraEvents[i].triggerIndex)
             {
                 CameraManager.Instance?.ShakeCamera(cameraEvents[i].strength, cameraEvents[i].duration);
-                cameraEvents.RemoveAt(i);
+                executedCamera.Add(i);
             }
+        }
+        for (int i = executedCamera.Count - 1; i >= 0; i--)
+        {
+            cameraEvents.RemoveAt(executedCamera[i]);
         }
     }
 

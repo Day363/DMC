@@ -23,15 +23,6 @@ public class playerstatus : MonoBehaviour
     public float penetration_tolerance = 1;
     public float blow_tolerance = 1;
 
-    public float side;
-    public float height;
-    public float side2;
-    public float height2;
-    public float side3;
-    public float height3;
-    public float side4;
-    public float height4;
-
     public float focus;
     public float maxbalance;
     public float currentbalance;
@@ -175,21 +166,6 @@ public class playerstatus : MonoBehaviour
 
         balancebarint.maxValue = maxbalance;
         currentbalance = 0;
-    }
-
-    private void Update()
-    {
-        Vector3 balancebarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side, transform.position.y + height, 0));
-        balancebar.transform.position = balancebarpos;
-
-        Vector3 stackbarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side2, transform.position.y + height2, 0));
-        stackbar.transform.position = stackbarpos;
-
-        Vector3 chatpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side3, transform.position.y + height3, 0));
-        chat.transform.position = chatpos;
-
-        Vector3 focusbarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side4, transform.position.y + height4, 0));
-        focusbar.transform.position = focusbarpos;
     }
 
     public void StartTyping(string message)

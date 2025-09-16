@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class filer_counsel : MonoBehaviour
 {
+    public GameObject counselcam;
     public bool firstmet;
     public GameObject letterbox;
     public GameObject gamemanager;
@@ -25,6 +26,8 @@ public class filer_counsel : MonoBehaviour
         if (!firstmet && transform.position.x - player.transform.position.x < 13)
         {
             firstmet = true;
+            campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+            cammanager.GetComponent<CameraManager>().LookCounsel(campos);
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
