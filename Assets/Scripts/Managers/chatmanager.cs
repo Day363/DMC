@@ -190,6 +190,7 @@ public class chatmanager : MonoBehaviour
 
             visible++;
             tmp.maxVisibleCharacters = visible;
+            Debug.Log(tmp.maxVisibleCharacters);
 
             if (shaker != null)
                 shaker.CheckEvents(visible);
