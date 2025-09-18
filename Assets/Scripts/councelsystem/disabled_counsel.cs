@@ -27,7 +27,7 @@ public class disabled_counsel : MonoBehaviour
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
-            gamemanager.GetComponent<chatmanager>().CallDialogue(0);
+            gamemanager.GetComponent<chatmanager>().CallDialogue(1);
 
         }
     }
