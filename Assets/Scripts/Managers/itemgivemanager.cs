@@ -7,14 +7,34 @@ public class itemgivemanager : MonoBehaviour
     public GameObject currentobject;
     public Rapport[] corrects;
 
+    public GameObject itemselectui;
+
+    public GameObject disabled;
+
     public void Sucssess()
     {
-        //맞는아이템
+        if (currentobject == disabled)
+        {
+            Disabled_Sucssess();
+        }
     }
 
 
     public void Fail()
     {
-        //틀린아이템
+        if (currentobject == disabled)
+        {
+            Disabled_Fail();
+        }
+    }
+
+    public void Disabled_Sucssess()
+    {
+        disabled.GetComponent<disabled_counsel>().Startcutscene();
+    }
+
+    public void Disabled_Fail()
+    {
+        Debug.Log("실패");
     }
 }

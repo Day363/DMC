@@ -6,6 +6,7 @@ public class itemgivebutton : MonoBehaviour
 {
     public GameObject gamemanager;
     public Rapport currentrapport;
+    public itemgive itemgivecom;
 
     public void Onclick()
     {
@@ -13,11 +14,13 @@ public class itemgivebutton : MonoBehaviour
         {
             if (rapport == currentrapport)
             {
+                itemgivecom.Uiclose();
                 gamemanager.GetComponent<itemgivemanager>().Sucssess();
                 break;
             }
             else
             {
+                itemgivecom.Uiclose();
                 gamemanager.GetComponent<itemgivemanager>().Fail();
                 break;
             }

@@ -63,13 +63,19 @@ public class itemgive : MonoBehaviour
                     currentbutton.GetComponent<Image>().sprite = rapport.itemImage;
                     currentbutton.GetComponent<itemgivebutton>().gamemanager = gamemanager;
                     currentbutton.GetComponent<itemgivebutton>().currentrapport = rapport;
+                    currentbutton.GetComponent<itemgivebutton>().itemgivecom = gameObject.GetComponent<itemgive>();
                 }
             }
         }
         else if (uiopen && cangive && Input.GetButtonDown("fbutton"))
         {
-            uiopen = false;
-            giveui.SetActive(false);
+            Uiclose();
         }
+    }
+
+    public void Uiclose()
+    {
+        uiopen = false;
+        giveui.SetActive(false);
     }
 }

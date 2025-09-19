@@ -513,6 +513,7 @@ public class disabled_rushmanage : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        cammanager.GetComponent<CameraManager>().CamStable();
     }
 
     public void CamreaShackmethod()
