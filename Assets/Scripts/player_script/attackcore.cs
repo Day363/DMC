@@ -135,9 +135,31 @@ public class attackcore : MonoBehaviour
 
     public float worldlightintensity;
 
+    //Ä³½Ì
+    battalemanager gamemanagerbattalemanager;
+    playerstatus playerplayerstatus;
+    PlayerMove playerPlayerMove;
+    Rigidbody2D playerRigidbody2D;
+    Passivefunction playerPassivefunction;
+    Animator playerAnimator;
+    playerhit playerplayerhit;
+    skillfunction playerskillfunction;
+
+    letterboxin letterboxletterboxin;
+
     private void Start()
     {
         attacklist = new();
+        gamemanagerbattalemanager = gamemanager.GetComponent<battalemanager>();
+        playerplayerstatus = player.GetComponent<playerstatus>();
+        playerPlayerMove = player.GetComponent<PlayerMove>();
+        playerRigidbody2D = player.GetComponent<Rigidbody2D>();
+        playerPassivefunction = player.GetComponent<Passivefunction>();
+        playerAnimator = player.GetComponent<Animator>();
+        playerplayerhit = player.GetComponent<playerhit>();
+        playerskillfunction = player.GetComponent<skillfunction>();
+
+        letterboxletterboxin = letterbox.GetComponent<letterboxin>();
     }
 
     public void BattleStart()
@@ -175,7 +197,7 @@ public class attackcore : MonoBehaviour
         circum++;
         cycle = 0;
         CircumReplace();
-        player.GetComponent<Passivefunction>().WhenCircumStart();
+        playerPassivefunction.WhenCircumStart();
         
         foreach (Magazine magazine in weaponsmagazine)
         {
@@ -185,13 +207,13 @@ public class attackcore : MonoBehaviour
 
     public void StartCycle()
     {
-        player.GetComponent<Passivefunction>().WhenCycleStart();
+        playerPassivefunction.WhenCycleStart();
         Focuslength();
     }
 
     public void EndCycle()
     {
-        player.GetComponent<playerstatus>().RemoveStackWhenCycleEnd();
+        playerplayerstatus.RemoveStackWhenCycleEnd();
     }
 
     public void WeaponListUI()
@@ -242,12 +264,12 @@ public class attackcore : MonoBehaviour
 
     public void LetterBoxDown()
     {
-        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        letterboxletterboxin.PlayLetterboxIn();
     }
 
     public void LetterBoxUp()
     {
-        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+        letterboxletterboxin.PlayLetterboxOut();
     }
 
     public void UseStandbySkill()
@@ -257,26 +279,26 @@ public class attackcore : MonoBehaviour
             LetterBoxDown();
             curstandbyskill = standbyskills[0];
             canattack = false;
-            player.GetComponent<PlayerMove>().canmove = false;
+            playerPlayerMove.canmove = false;
 
-            if (player.transform.position.x < gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+            if (player.transform.position.x < gamemanagerbattalemanager.currentenemy.transform.position.x)
             {
                 player.transform.localScale = new Vector3(1, 1, 1);
-                player.GetComponent<PlayerMove>().dir = 1;
+                playerPlayerMove.dir = 1;
 
-                player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
+                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
 
-                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                playerRigidbody2D.velocity = Vector2.zero;
                 StartCoroutine(UseStandby());
             }
-            if (player.transform.position.x > gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+            if (player.transform.position.x > gamemanagerbattalemanager.currentenemy.transform.position.x)
             {
                 player.transform.localScale = new Vector3(-1, 1, 1);
-                player.GetComponent<PlayerMove>().dir = -1;
+                playerPlayerMove.dir = -1;
 
-                player.transform.position = new Vector3(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
+                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
 
-                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                playerRigidbody2D.velocity = Vector2.zero;
                 StartCoroutine(UseStandby());
             }
         }
@@ -288,10 +310,10 @@ public class attackcore : MonoBehaviour
 
     public void EndStandbySkill()
     {
-        gamemanager.GetComponent<battalemanager>().currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
-        gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<Animator>().SetBool("idle", true);
-        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
-        player.GetComponent<PlayerMove>().canmove = true;
+        gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
+        gamemanagerbattalemanager.currentenemy.GetComponent<Animator>().SetBool("idle", true);
+        letterboxletterboxin.PlayLetterboxOut();
+        playerPlayerMove.canmove = true;
         skillselectui.SetActive(true);
         Time.timeScale = 0f;
         canattack = false;
@@ -299,8 +321,8 @@ public class attackcore : MonoBehaviour
 
     public void NostandByskill()
     {
-        gamemanager.GetComponent<battalemanager>().currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
-        player.GetComponent<PlayerMove>().canmove = true;
+        gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
+        playerPlayerMove.canmove = true;
         skillselectui.SetActive(true);
         Time.timeScale = 0f;
         canattack = false;
@@ -308,9 +330,9 @@ public class attackcore : MonoBehaviour
 
     IEnumerator UseStandby()
     {
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerRigidbody2D.velocity = Vector2.zero;
         yield return new WaitForSeconds(0.1f);
-        player.GetComponent<Animator>().SetTrigger(curstandbyskill.animationtrigger);
+        playerAnimator.SetTrigger(curstandbyskill.animationtrigger);
         standbyskills.RemoveAt(0);
     }
 
@@ -407,7 +429,7 @@ public class attackcore : MonoBehaviour
                 passivestrings.Add(passivestring);
             }  
         }
-        player.GetComponent<Passivefunction>().SetBoolsFromList(passivestrings);
+        playerPassivefunction.SetBoolsFromList(passivestrings);
     }
 
     public void Organize()
@@ -867,17 +889,17 @@ public class attackcore : MonoBehaviour
 
     public void Focuslength()
     {
-        player.GetComponent<playerstatus>().focus = attacklist_original.Count;
-        player.GetComponent<playerstatus>().focusbar.maxValue = player.GetComponent<playerstatus>().focus;
-        player.GetComponent<playerstatus>().focusbar.value = player.GetComponent<playerstatus>().focus;
-        currentfocus = player.GetComponent<playerstatus>().focus;
+        playerplayerstatus.focus = attacklist_original.Count;
+        playerplayerstatus.focusbar.maxValue = playerplayerstatus.focus;
+        playerplayerstatus.focusbar.value = playerplayerstatus.focus;
+        currentfocus = playerplayerstatus.focus;
 
     }
 
     public void FocusReload()
     {
-        player.GetComponent<playerstatus>().focusbar.value = player.GetComponent<playerstatus>().focus;
-        currentfocus = player.GetComponent<playerstatus>().focus;
+        playerplayerstatus.focusbar.value = playerplayerstatus.focus;
+        currentfocus = playerplayerstatus.focus;
     }
 
     public void CycleReplace()
@@ -947,7 +969,7 @@ public class attackcore : MonoBehaviour
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.counter)
                 {
-                    player.GetComponent<playerhit>().counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
+                    playerplayerhit.counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
                 }
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
@@ -955,17 +977,17 @@ public class attackcore : MonoBehaviour
                     Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     if (mousePos.x > transform.position.x)
                     {
-                        player.GetComponent<PlayerMove>().LookRightenforce();
+                        playerPlayerMove.LookRightenforce();
                     }
                     else if (mousePos.x < transform.position.x)
                     {
-                        player.GetComponent<PlayerMove>().LookLeftenforce();
+                        playerPlayerMove.LookLeftenforce();
                     }
-                    player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+                    playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
                 {
-                    player.GetComponent<skillfunction>().ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
+                    playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
                 }
                 
                 AttcknumberPlus();
@@ -1010,7 +1032,7 @@ public class attackcore : MonoBehaviour
                     {
                         if (lastlist[listnumber][attacknumber].Normalskill.functionskill)
                         {
-                            player.GetComponent<skillfunction>().ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.funtionname);
+                            playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.funtionname);
                         }
 
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill != true)
@@ -1108,13 +1130,13 @@ public class attackcore : MonoBehaviour
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             if (mousePos.x > transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookRightenforce();
+                                playerPlayerMove.LookRightenforce();
                             }
                             else if (mousePos.x < transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                                playerPlayerMove.LookLeftenforce();
                             }
-                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                         }
                     }
 
@@ -1145,13 +1167,13 @@ public class attackcore : MonoBehaviour
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             if (mousePos.x > transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookRightenforce();
+                                playerPlayerMove.LookRightenforce();
                             }
                             else if (mousePos.x < transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                                playerPlayerMove.LookLeftenforce();
                             }
-                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
                             if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
                             {
@@ -1164,7 +1186,7 @@ public class attackcore : MonoBehaviour
 
                         else if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
                         {
-                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Amalgamed.animationtrigger);
+                            playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Amalgamed.animationtrigger);
                             currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
                             if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
                             {
@@ -1180,13 +1202,13 @@ public class attackcore : MonoBehaviour
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             if (mousePos.x > transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookRightenforce();
+                                playerPlayerMove.LookRightenforce();
                             }
                             else if (mousePos.x < transform.position.x)
                             {
-                                player.GetComponent<PlayerMove>().LookLeftenforce();
+                                playerPlayerMove.LookLeftenforce();
                             }
-                            player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             amalgamedanimationtrigger = lastlist[listnumber][attacknumber].Amalgamed.animationtrigger;
                         }
                     }
@@ -1234,8 +1256,8 @@ public class attackcore : MonoBehaviour
 
                 focusing = false;
                 dashmanager.SetActive(false);
-                player.GetComponent<PlayerMove>().canmove = true;
-                player.GetComponent<Animator>().enabled = true;
+                playerPlayerMove.canmove = true;
+                playerAnimator.enabled = true;
                 Time.timeScale = 1f;
                 DOTween.Kill("light");
                 world_light.GetComponent<Light2D>().intensity = worldlightintensity;
@@ -1243,17 +1265,17 @@ public class attackcore : MonoBehaviour
                 Vector2 directionToEnemy = (gamemanager.GetComponent<battalemanager>().currentenemy.transform.position - player.transform.position).normalized;
                 player.transform.position = gamemanager.GetComponent<battalemanager>().currentenemy.transform.position;
                 Debug.Log(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower);
-                player.GetComponent<PlayerMove>().canmove = false;
+                playerPlayerMove.canmove = false;
                 dash = true;
                 StopCoroutine(dashcoroutine);
                 DOTween.Kill("flash");
                 player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
-                player.GetComponent<Rigidbody2D>().AddForce(directionToEnemy * lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower, ForceMode2D.Impulse);
+                playerRigidbody2D.AddForce(directionToEnemy * lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower, ForceMode2D.Impulse);
 
 
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationskill)
                 {
-                    player.GetComponent<Animator>().SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationtrigger);
+                    playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationtrigger);
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.prefabskill)
                 {
@@ -1298,7 +1320,7 @@ public class attackcore : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus > 0)
         {
-            if (canattack && player.GetComponent<PlayerMove>().canmove)
+            if (canattack && playerPlayerMove.canmove)
             {
                 cammanager.GetComponent<CameraManager>().CamStable();
 
@@ -1319,19 +1341,20 @@ public class attackcore : MonoBehaviour
 
                 focusing = true;
                 dashmanager.SetActive(true);
-                player.GetComponent<PlayerMove>().canmove = false;
-                player.GetComponent<Animator>().enabled = false;
+                playerPlayerMove.canmove = false;
+                playerAnimator.enabled = false;
                 player.GetComponent<SpriteRenderer>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashready;
-                if (player.GetComponent<playerstatus>().currentparrystop != null)
+                if (playerplayerstatus.currentparrystop != null)
                 {
-                    StopCoroutine(player.GetComponent<playerstatus>().currentparrystop);
+                    StopCoroutine(playerplayerstatus.currentparrystop);
                 }
-                if (player.GetComponent<playerhit>().currenthitstop != null)
+                if (playerplayerhit.currenthitstop != null)
                 {
-                    StopCoroutine(player.GetComponent<playerhit>().currenthitstop);
+                    StopCoroutine(playerplayerhit.currenthitstop);
                 }
                 
                 Time.timeScale = 0f;
+                cammanager.GetComponent<CameraManager>().CamStable();
                 DOTween.Kill("light");
                 worldlightintensity = world_light.GetComponent<Light2D>().intensity;
                 DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity - 0.5f, 1f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
@@ -1346,7 +1369,7 @@ public class attackcore : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            if (canattack && !player.GetComponent<PlayerMove>().canmove)
+            if (canattack && !playerPlayerMove.canmove)
             {
                 cursor1.SetActive(true);
                 cursor2.SetActive(true);
@@ -1357,8 +1380,8 @@ public class attackcore : MonoBehaviour
 
                 focusing = false;
                 dashmanager.SetActive(false);
-                player.GetComponent<PlayerMove>().canmove = true;
-                player.GetComponent<Animator>().enabled = true;
+                playerPlayerMove.canmove = true;
+                playerAnimator.enabled = true;
                 Time.timeScale = 1f;
                 DOTween.Kill("light");
                 DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity, 0.4f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
@@ -1371,19 +1394,19 @@ public class attackcore : MonoBehaviour
 
         if (dash)
         {
-            if (player.GetComponent<Rigidbody2D>().velocity.x > 1f)
+            if (playerRigidbody2D.velocity.x > 1f)
             {
-                if (player.GetComponent<Rigidbody2D>().velocity.x < 2f)
+                if (playerRigidbody2D.velocity.x < 2f)
                 {
-                    player.GetComponent<PlayerMove>().canmove = true;
+                    playerPlayerMove.canmove = true;
                     dash = false;
                 }
             }
             else
             {
-                if (player.GetComponent<Rigidbody2D>().velocity.x > -2f)
+                if (playerRigidbody2D.velocity.x > -2f)
                 {
-                    player.GetComponent<PlayerMove>().canmove = true;
+                    playerPlayerMove.canmove = true;
                     dash = false;
                 }
             }
@@ -1394,7 +1417,7 @@ public class attackcore : MonoBehaviour
         {
             currentfocus -= 2f * Time.unscaledDeltaTime;
             currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
-            player.GetComponent<playerstatus>().focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
+            playerplayerstatus.focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
         }
     }
 
@@ -1414,7 +1437,7 @@ public class attackcore : MonoBehaviour
     {
         if (amalgamedanimationtrigger != null)
         {
-            player.GetComponent<Animator>().SetTrigger(amalgamedanimationtrigger);
+            playerAnimator.SetTrigger(amalgamedanimationtrigger);
             amalgamedanimationtrigger = null;
         }
     }

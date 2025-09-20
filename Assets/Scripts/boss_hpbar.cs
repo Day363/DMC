@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class boss_hpbar : MonoBehaviour
 {
     public static event Action OnHitCalled;
 
+    public GameObject worldlight;
+    public GameObject playerlight;
     public GameObject gammanager;
     public GameObject cammanager;
 
@@ -42,6 +45,7 @@ public class boss_hpbar : MonoBehaviour
     public float side;
 
     public bool iscollapse;
+    public bool canhit = true;
 
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
@@ -139,14 +143,6 @@ public class boss_hpbar : MonoBehaviour
         currentbalance = 0;
     }
 
-    private void Update()
-    {
-        Vector3 balancebarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side, transform.position.y + height, 0));
-        balancebar.transform.position = balancebarpos;
-        Vector2 stackbarpos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + side, transform.position.y + height2, 0));
-        stackbar.transform.position = stackbarpos;
-    }
-
     public void BalanceCheck()
     {
         balancebarint.value = currentbalance;
@@ -196,111 +192,163 @@ public class boss_hpbar : MonoBehaviour
 
     public void Damage(int damage)
     {
-        OnHitCalled?.Invoke();
-
-        Redemisson();
-
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
-        attackcore.GetComponent<attackcore>().BossDamaged();
-
-        if (maxhealth == 0 || currenthealth <= 0)
-            return;
-        currenthealth -= damage;
-        BalanceDamage(damage * 0.1f);
-        if (currenthealth <= 0)
+        if (canhit)
         {
-            //* 체력이 0 이하라 죽음
+            OnHitCalled?.Invoke();
+
+            Redemisson();
+
+            cammanager.GetComponent<CameraManager>().CamVibration0_5();
+            attackcore.GetComponent<attackcore>().BossDamaged();
+
+            if (maxhealth == 0 || currenthealth <= 0)
+                return;
+            currenthealth -= damage;
+            BalanceDamage(damage * 0.1f);
+            if (currenthealth <= 0)
+            {
+                Dead();
+            }
         }
+        
     }
 
     public void SlashDamage(int damage)
     {
-        OnHitCalled?.Invoke();
-
-        Redemisson();
-
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
-        attackcore.GetComponent<attackcore>().BossDamaged();
-
-        if (maxhealth == 0 || currenthealth <= 0)
-            return;
-        currenthealth -= damage * slashtolerance;
-        BalanceDamage(damage * 0.1f);
-        GameObject damt = Instantiate(damagetext);
-        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+        if (canhit)
         {
-            damt.GetComponent<damagetext>().wherexpos = 1;
+            OnHitCalled?.Invoke();
+
+            Redemisson();
+
+            cammanager.GetComponent<CameraManager>().CamVibration0_5();
+            attackcore.GetComponent<attackcore>().BossDamaged();
+
+            if (maxhealth == 0 || currenthealth <= 0)
+                return;
+            currenthealth -= damage * slashtolerance;
+            BalanceDamage(damage * 0.1f);
+            GameObject damt = Instantiate(damagetext);
+            damagetext damtdamagetext = damt.GetComponent<damagetext>();
+            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            {
+                damtdamagetext.wherexpos = 1;
+            }
+            else
+            {
+                damtdamagetext.wherexpos = -1;
+            }
+            damtdamagetext.slash = true;
+            damt.transform.position = damagepos.transform.position;
+            damtdamagetext.damage = damage;
+            if (currenthealth <= 0)
+            {
+                Dead();
+            }
         }
-        else
-        {
-            damt.GetComponent<damagetext>().wherexpos = -1;
-        }
-        damt.GetComponent<damagetext>().slash = true;
-        damt.transform.position = damagepos.transform.position;
-        damt.GetComponent<damagetext>().damage = damage;
-        if (currenthealth <= 0)
-        {
-            //* 체력이 0 이하라 죽음
-        }
+        
     }
 
     public void PenetrateDamage(int damage)
     {
-        OnHitCalled?.Invoke();
-
-        Redemisson();
-
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
-        attackcore.GetComponent<attackcore>().BossDamaged();
-
-        if (maxhealth == 0 || currenthealth <= 0)
-            return;
-        currenthealth -= damage * penetratetolerance;
-        BalanceDamage(damage * 0.1f);
-        GameObject damt = Instantiate(damagetext);
-        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+        if (canhit)
         {
-            damt.GetComponent<damagetext>().wherexpos = 1;
+            OnHitCalled?.Invoke();
+
+            Redemisson();
+
+            cammanager.GetComponent<CameraManager>().CamVibration0_5();
+            attackcore.GetComponent<attackcore>().BossDamaged();
+
+            if (maxhealth == 0 || currenthealth <= 0)
+                return;
+            currenthealth -= damage * penetratetolerance;
+            BalanceDamage(damage * 0.1f);
+            GameObject damt = Instantiate(damagetext);
+            damagetext damtdamagetext = damt.GetComponent<damagetext>();
+            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            {
+                damtdamagetext.wherexpos = 1;
+            }
+            else
+            {
+                damtdamagetext.wherexpos = -1;
+            }
+            damtdamagetext.penetarte = true;
+            damt.transform.position = damagepos.transform.position;
+            damtdamagetext.damage = damage;
+            if (currenthealth <= 0)
+            {
+                Dead();
+            }
         }
-        else
-        {
-            damt.GetComponent<damagetext>().wherexpos = -1;
-        }
-        damt.GetComponent<damagetext>().penetarte = true;
-        damt.transform.position = damagepos.transform.position;
-        damt.GetComponent<damagetext>().damage = damage;
-        if (currenthealth <= 0)
-        {
-            //* 체력이 0 이하라 죽음
-        }
+        
     }
 
     public void BlowDamage(int damage)
     {
-        Redemisson();
+        if (canhit)
+        {
+            Redemisson();
 
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
-        attackcore.GetComponent<attackcore>().BossDamaged();
+            cammanager.GetComponent<CameraManager>().CamVibration0_5();
+            attackcore.GetComponent<attackcore>().BossDamaged();
 
-        if (maxhealth == 0 || currenthealth <= 0)
-            return;
-        currenthealth -= damage * blowtolerance;
-        BalanceDamage(damage * 0.1f);
-        GameObject damt = Instantiate(damagetext);
-        if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
-        {
-            damt.GetComponent<damagetext>().wherexpos = 1;
+            if (maxhealth == 0 || currenthealth <= 0)
+                return;
+            currenthealth -= damage * blowtolerance;
+            BalanceDamage(damage * 0.1f);
+            GameObject damt = Instantiate(damagetext);
+            damagetext damtdamagetext = damt.GetComponent<damagetext>();
+            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            {
+                damtdamagetext.wherexpos = 1;
+            }
+            else
+            {
+                damtdamagetext.wherexpos = -1;
+            }
+            damtdamagetext.blow = true;
+            damt.transform.position = damagepos.transform.position;
+            damtdamagetext.damage = damage;
+            if (currenthealth <= 0)
+            {
+                Dead();
+            }
         }
-        else
+        
+    }
+
+    public void Dead()
+    {
+        StartCoroutine(Dead_co());
+    }
+
+    public bool killcut;
+
+    public void Update()
+    {
+        if (killcut)
         {
-            damt.GetComponent<damagetext>().wherexpos = -1;
+            Time.timeScale = 0.2f;
         }
-        damt.GetComponent<damagetext>().blow = true;
-        damt.transform.position = damagepos.transform.position;
-        damt.GetComponent<damagetext>().damage = damage;
-        if (currenthealth <= 0)
-        {
-            //* 체력이 0 이하라 죽음
-        }
+    }
+
+    IEnumerator Dead_co()
+    {
+        GetComponent<Animator>().SetTrigger("dying");
+        float worldlightintensity = worldlight.GetComponent<Light2D>().intensity;
+        Light2D worldlightLight2D = worldlight.GetComponent<Light2D>();
+        worldlightLight2D.color = new Color(1, 0, 0, 1);
+        worldlightLight2D.intensity = 15;
+        playerlight.GetComponent<Light2D>().color = new Color(0, 0, 0, 1);
+        killcut = true;
+        cammanager.GetComponent<CameraManager>().KIllcam();
+        yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1f;
+        killcut = false;
+        worldlightLight2D.color = new Color(1, 1, 1, 1);
+        worldlightLight2D.intensity = worldlightintensity;
+        playerlight.GetComponent<Light2D>().color = new Color(1, 1, 1, 1);
     }
 }

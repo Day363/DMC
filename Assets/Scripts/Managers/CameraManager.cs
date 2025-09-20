@@ -7,6 +7,10 @@ using DG.Tweening;
 public class CameraManager : MonoBehaviour
 {
     public bool fuckcinemachine;
+    public bool resetRotation;
+    public bool killcam;
+
+    public float killcamsize;
 
     public GameObject priorcamera;
 
@@ -33,6 +37,10 @@ public class CameraManager : MonoBehaviour
         if (fuckcinemachine)
         {
             GetComponent<CinemachineConfiner2D>().InvalidateCache();
+        }
+        if (killcam)
+        {
+            maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = killcamsize;
         }
         
     }
@@ -84,11 +92,13 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator ShakeCameraC(float strength, float duration)
     {
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = strength;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = strength;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(duration);
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
         CamStable();
     }
 
@@ -102,6 +112,22 @@ public class CameraManager : MonoBehaviour
         StartCoroutine(CamVib1());
     }
 
+    public void KIllcam()
+    {
+        StartCoroutine(Killcam_co());
+    }
+
+    IEnumerator Killcam_co()
+    {
+        float backpriorty = maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
+        maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5f;
+        killcamsize = 5f;
+        killcam = true;
+        DOTween.To(() => killcamsize, x => killcamsize = x, 10f, 3f).SetEase(Ease.OutQuart);
+        yield return new WaitForSecondsRealtime(3f);
+        killcam = false;
+    }
+
     public void CamStable()
     {
         StartCoroutine(FuckCinemachine());
@@ -109,29 +135,34 @@ public class CameraManager : MonoBehaviour
     
     IEnumerator FuckCinemachine()
     {
-        priorcamera.GetComponent<CinemachineBrain>().enabled = false;
+        CinemachineBrain priorcameraCinemachineBrain = priorcamera.GetComponent<CinemachineBrain>();
+        priorcameraCinemachineBrain.enabled = false;
         yield return new WaitForEndOfFrame();
         priorcamera.transform.rotation = Quaternion.Euler(0, 0, 0);
-        priorcamera.GetComponent<CinemachineBrain>().enabled = true;
+        priorcameraCinemachineBrain.enabled = true;
     }
 
     IEnumerator CamVib1()
     {
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 12;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 12;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.2f);
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
         CamStable();
     }
 
     IEnumerator CamVib0_5()
     {
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 6;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 6;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.12f);
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
         CamStable();
     }
 }

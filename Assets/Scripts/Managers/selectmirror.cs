@@ -52,7 +52,13 @@ public class selectmirror : MonoBehaviour
     {
         if (Input.GetButtonDown("fbutton") && selectactive)
         {
+            foreach (GameObject background in backgrounds)
+            {
+                background.SetActive(true);
+            }
+
             player.transform.position = wheretospwan;
+            cammanager.transform.position = player.transform.position;
 
             worldlight.intensity = worldlightint;
 
@@ -68,12 +74,9 @@ public class selectmirror : MonoBehaviour
                 wall.SetActive(false);
             }
             
-            background0.SetActive(false);
-            foreach (GameObject background in backgrounds)
-            {
-                background.SetActive(true);
 
-            }
+            background0.SetActive(false);
+            
             client.SetActive(true);
             foreach (Transform mirror in thisPack.transform)
             {
@@ -83,7 +86,4 @@ public class selectmirror : MonoBehaviour
         }
 
     }
-
-
-
 }

@@ -21,7 +21,7 @@ public class enemydattack : MonoBehaviour
     public bool penetrate;
     public bool blow;
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (canattack)
         {
@@ -62,10 +62,13 @@ public class enemydattack : MonoBehaviour
 
             if (collision.gameObject.tag == "Player")
             {
+                
                 if (!steadydamage)
                 {
+                    
                     if (heavyattack)
                     {
+                        Debug.Log("ada");
                         heavyattack = false;
                         player.GetComponent<playerhit>().StrongHit(damage, transform);
 
@@ -73,20 +76,30 @@ public class enemydattack : MonoBehaviour
 
                     if (lightattack)
                     {
+                        Debug.Log("ada");
                         lightattack = false;
                         player.GetComponent<playerhit>().Hit(damage);
                     }
                 }
-                else
+                else if(steadydamage)
                 {
-                    return;
+                    if (heavyattack)
+                    {
+                        player.GetComponent<playerhit>().StrongHit(damage, transform);
+
+                    }
+
+                    if (lightattack)
+                    {
+                        player.GetComponent<playerhit>().Hit(damage);
+                    }
                 }
 
             }
         }
         
     }
-    public void OnTriggerStay2D(Collider2D collision)
+    /*public void OnTriggerStay2D(Collider2D collision)
     {
         if (canattack)
         {
@@ -108,7 +121,7 @@ public class enemydattack : MonoBehaviour
             }
         }
         
-    }
+    }*/
 
 
 

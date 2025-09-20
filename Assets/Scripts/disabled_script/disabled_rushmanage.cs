@@ -36,6 +36,7 @@ public class disabled_rushmanage : MonoBehaviour
     public float attack4distance;
     public float attack4speed;
     public bool nowflying = false;
+    public bool canrotate;
 
     public bool phase2 = false;
     public float phase2rushpower;
@@ -45,6 +46,7 @@ public class disabled_rushmanage : MonoBehaviour
     public float phase2attacbigkrush;
     public int deathattackcooltime;
     public int deathattckcool;
+
 
     public void Start()
     {
@@ -72,7 +74,7 @@ public class disabled_rushmanage : MonoBehaviour
             }
         }
 
-        if (!whileattack)
+        if (!whileattack && canrotate)
         {
             if (direction < 0)
             {

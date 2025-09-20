@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class disabled_counsel : MonoBehaviour
 {
@@ -9,16 +10,30 @@ public class disabled_counsel : MonoBehaviour
     public GameObject cammanager;
     public bool firstmet;
     public GameObject player;
+    public GameObject attackcore;
     public GameObject letterbox;
     public GameObject chat;
     public GameObject campos;
     public GameObject chatpre;
     public GameObject canvus;
     public GameObject letd;
+    public GameObject cursor1;
+    public GameObject cursor2;
+    public GameObject balancebar;
+    public GameObject playerstatus;
+
+    //Ä³½Ì
+    PlayerMove playerPlayerMove;
+    CameraManager cammanagerCameraManager;
 
     public void Start()
     {
+        playerPlayerMove = player.GetComponent<PlayerMove>();
+        cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
+
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+        GetComponent<boss_hpbar>().canhit = false;
+        balancebar.GetComponent<Image>().color = new Color(1, 1, 1, 0);
     }
 
     public void FixedUpdate()
@@ -26,11 +41,12 @@ public class disabled_counsel : MonoBehaviour
         if (!firstmet && transform.position.x - player.transform.position.x < 10)
         {
             firstmet = true;
+            
             campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
-            cammanager.GetComponent<CameraManager>().LookCounsel(campos);
+            cammanagerCameraManager.LookCounsel(campos);
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
-            player.GetComponent<PlayerMove>().canmove = false;
-            player.GetComponent<PlayerMove>().Stop();
+            playerPlayerMove.canmove = false;
+            playerPlayerMove.Stop();
             gamemanager.GetComponent<chatmanager>().CallDialogue(1);
 
         }
@@ -38,6 +54,10 @@ public class disabled_counsel : MonoBehaviour
 
     public void Startcutscene()
     {
+        cursor1.SetActive(false);
+        cursor2.SetActive(false);
+        playerstatus.SetActive(false);
+        playerPlayerMove.canmove = false;
         player.transform.position = new Vector3(0, player.transform.position.y, 1);
         letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         GetComponent<Animator>().SetTrigger("start");
@@ -45,14 +65,16 @@ public class disabled_counsel : MonoBehaviour
 
     public void Lookplayer()
     {
-        StartCoroutine(Lookplayer_co());
-    }
-
-    IEnumerator Lookplayer_co()
-    {
-        yield return new WaitForSeconds(1f);
+        GetComponent<boss_hpbar>().canhit = true;
+        balancebar.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        GetComponent<disabled_rushmanage>().canrotate = true;
+        playerPlayerMove.canmove = true;
+        cursor1.SetActive(true);
+        cursor2.SetActive(true);
+        playerstatus.SetActive(true);
+        attackcore.GetComponent<attackcore>().BattleStart();
         GetComponent<cutscenemanager>().cameraset = false;
-        cammanager.GetComponent<CameraManager>().LookPlayer();
+        cammanagerCameraManager.LookPlayer();
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
     }
 
@@ -70,7 +92,7 @@ public class disabled_counsel : MonoBehaviour
         currentchat.transform.localScale = new Vector3(2.4f, 2.4f, 2.4f);
         TMP_Text tmp = currentchat.transform.GetChild(0).GetComponent<TMP_Text>();
         TextEffectManager shaker = tmp.GetComponent<TextEffectManager>();
-        shaker.SetText("<shake=1,13>Á¦¹ß Á×¿©</shake>");
+        shaker.SetText("<shake=0.5,13>Á¦¹ß Á×¿©</shake>");
         tmp.color = new Color(0.5f, 0, 0, 1f);
         tmp.ForceMeshUpdate();
         int totalvisible = tmp.textInfo.characterCount;
