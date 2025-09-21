@@ -92,7 +92,7 @@ public class disabled_counsel : MonoBehaviour
         currentchat.transform.localScale = new Vector3(2.4f, 2.4f, 2.4f);
         TMP_Text tmp = currentchat.transform.GetChild(0).GetComponent<TMP_Text>();
         TextEffectManager shaker = tmp.GetComponent<TextEffectManager>();
-        shaker.SetText("<shake=0.5,13>Á¦¹ß Á×¿©</shake>");
+        shaker.SetText("<shake=0.5,20>Á¦¹ß Á×¿©</shake>");
         tmp.color = new Color(0.5f, 0, 0, 1f);
         tmp.ForceMeshUpdate();
         int totalvisible = tmp.textInfo.characterCount;
@@ -112,5 +112,10 @@ public class disabled_counsel : MonoBehaviour
     public void letdd()
     {
         Destroy(letd);
+    }
+
+    public void ResetAll()
+    {
+        gamemanager.SetActive(false);
     }
 }
