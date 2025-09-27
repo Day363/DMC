@@ -5,13 +5,22 @@ using UnityEngine;
 public class itemobject : MonoBehaviour
 {
     public Rapport rapport;
+    public float pickupRadius;
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    void Update()
     {
-        if (collision.transform.tag == "Player")
+        Collider2D player = Physics2D.OverlapCircle(transform.position, pickupRadius);
+
+        if (player.transform.tag == "Player")
         {
-            collision.transform.GetComponent<player_inventory>().rapportinv.Add(rapport);
+            player.transform.GetComponent<player_inventory>().rapportinv.Add(rapport);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, pickupRadius);
     }
 }
