@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using DG.Tweening;
 using System;
 
-public enum Chattarget {Player, Enemy}
+public enum Chattarget {Player, Enemy, World}
 
 [System.Serializable]
 public class Dialogue
@@ -49,6 +49,8 @@ public class DialogueData
 
 public class chatmanager : MonoBehaviour
 {
+    public static event Action OnchatEnd;
+
     public Dictionary<string, Action> fuctionMap;
 
     public bool chating;
@@ -63,6 +65,7 @@ public class chatmanager : MonoBehaviour
     public DialogueData currentdialogues;
     public GameObject playerchatbox;
     public GameObject enemychatbox;
+    public GameObject worldchatbox;
     public int chatnumber;
 
     public GameObject beforechatbox;
@@ -101,6 +104,15 @@ public class chatmanager : MonoBehaviour
                     currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
                     chatnumber++;
                 }
+                else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.World)
+                {
+                    if (currentchatco != null)
+                    {
+                        StopCoroutine(currentchatco);
+                    }
+                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], worldchatbox));
+                    chatnumber++;
+                }
                 
             }
             else if (Input.GetMouseButtonDown(0) && whilesaying)
@@ -116,7 +128,11 @@ public class chatmanager : MonoBehaviour
         currentdialogues = dialogues[i];
         chating = true;
         playerchatbox.SetActive(true);
-        enemychatbox.SetActive(true);
+        if (enemychatbox != null)
+        {
+            enemychatbox.SetActive(true);
+        }
+        worldchatbox.SetActive(true);
         if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
         {
             if (currentchatco != null)
@@ -133,6 +149,15 @@ public class chatmanager : MonoBehaviour
                 StopCoroutine(currentchatco);
             }
             currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
+            chatnumber++;
+        }
+        else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.World)
+        {
+            if (currentchatco != null)
+            {
+                StopCoroutine(currentchatco);
+            }
+            currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], worldchatbox));
             chatnumber++;
         }
     }
@@ -183,7 +208,11 @@ public class chatmanager : MonoBehaviour
                     chatnumber = 0;
                     chating = false;
                     playerchatbox.SetActive(false);
-                    enemychatbox.SetActive(false);
+                    if (enemychatbox != null)
+                    {
+                        enemychatbox.SetActive(true);
+                    }
+                    worldchatbox.SetActive(false);
                 }
                 break;                         
             }
@@ -213,7 +242,13 @@ public class chatmanager : MonoBehaviour
             chatnumber = 0;
             chating = false;
             playerchatbox.SetActive(false);
-            enemychatbox.SetActive(false);
+            if (enemychatbox != null)
+            {
+                enemychatbox.SetActive(true);
+            }
+            worldchatbox.SetActive(false);
+
+            OnchatEnd?.Invoke();
         }
     }
 

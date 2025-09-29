@@ -24,8 +24,15 @@ public class TextEffectManager : MonoBehaviour
         public float duration;
     }
 
+    struct FunctionEvent
+    {
+        public int fuctiontriggerIndex;
+        public string fuctionname;
+    }
+
     List<ShakeRange> shakeRanges = new List<ShakeRange>();
     List<CameraShakeEvent> cameraEvents = new List<CameraShakeEvent>();
+    List<FunctionEvent> fuctionEvents = new List<FunctionEvent>();
 
     void Awake()
     {
@@ -42,6 +49,7 @@ public class TextEffectManager : MonoBehaviour
     {
         shakeRanges.Clear();
         cameraEvents.Clear();
+        fuctionEvents.Clear();
 
         string workingText = originalText;
 
@@ -63,9 +71,9 @@ public class TextEffectManager : MonoBehaviour
             offset += match.Length;
             return "";
         }, RegexOptions.Singleline);
+
         string shakePattern = @"<shake=(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)>(.*?)<\/shake>";
         MatchCollection matches = Regex.Matches(workingText, shakePattern, RegexOptions.Singleline);
-
         int removed = 0;
         foreach (Match m in matches)
         {
@@ -88,6 +96,26 @@ public class TextEffectManager : MonoBehaviour
         }
         workingText = Regex.Replace(workingText, shakePattern, "$3");
 
+        string fuctionPattern = @"<function=([^>]+)>";
+        int delete = 0;
+        workingText = Regex.Replace(workingText, fuctionPattern, match =>
+        {
+            string fuctionname_ = match.Groups[1].Value;
+
+            int trigger = match.Index - offset;
+            fuctionEvents.Add(new FunctionEvent
+            {
+                fuctiontriggerIndex = trigger,
+                fuctionname = fuctionname_
+            });
+
+            delete += match.Length;
+            return "";
+        }, RegexOptions.Singleline);
+
+
+
+
         tmp.text = workingText;
         tmp.ForceMeshUpdate();
     }
@@ -95,6 +123,7 @@ public class TextEffectManager : MonoBehaviour
     public void CheckEvents(int visibleCount)
     {
         List<int> executedCamera = new List<int>();
+        List<int> executedFuction = new List<int>();
         for (int i = 0; i < cameraEvents.Count; i++)
         {
             if (visibleCount >= cameraEvents[i].triggerIndex)
@@ -106,6 +135,18 @@ public class TextEffectManager : MonoBehaviour
         for (int i = executedCamera.Count - 1; i >= 0; i--)
         {
             cameraEvents.RemoveAt(executedCamera[i]);
+        }
+        for (int f = 0; f < fuctionEvents.Count; f++)
+        {
+            if (visibleCount >= fuctionEvents[f].fuctiontriggerIndex)
+            {
+                counselfunctionmanager.Instance?.FuctionStart(fuctionEvents[f].fuctionname);
+                executedFuction.Add(f);
+            }
+        }
+        for (int f = executedFuction.Count - 1; f >= 0; f--)
+        {
+            fuctionEvents.RemoveAt(executedFuction[f]);
         }
     }
 

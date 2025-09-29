@@ -154,7 +154,7 @@ public class waterscript : MonoBehaviour
             }
         }
 
-        mesh.Clear();
+        //mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uvs;  //  UV ÁÂÇ¥ Àû¿ë
