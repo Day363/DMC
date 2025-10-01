@@ -2439,6 +2439,7 @@ GameObject:
   - component: {fileID: 13111081}
   - component: {fileID: 13111082}
   - component: {fileID: 13111083}
+  - component: {fileID: 13111084}
   m_Layer: 6
   m_Name: TRAPAL_phase1
   m_TagString: client
@@ -2524,6 +2525,7 @@ Transform:
   - {fileID: 1809938103}
   - {fileID: 1483873305}
   - {fileID: 1232127271}
+  - {fileID: 1678837216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &13111078
@@ -2603,8 +2605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ecc5c4a1cc06c46b7182695f3b4dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldlight: {fileID: 0}
-  playerlight: {fileID: 0}
+  worldlight: {fileID: 1096786002}
+  playerlight: {fileID: 538344133}
   gammanager: {fileID: 1694457153}
   cammanager: {fileID: 373801462}
   attackcore: {fileID: 840654302}
@@ -2735,6 +2737,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   light1: {fileID: 461347450}
   light2: {fileID: 157538035}
+  attackcore: {fileID: 840654302}
+  gamemanager: {fileID: 1694457153}
   cammanager: {fileID: 373801462}
   denyhandy: {fileID: 498960624}
   tearlazer: {fileID: 7855524548594759534, guid: 19a51288a1d37354eba8b97cf885bd2d, type: 3}
@@ -2753,10 +2757,31 @@ MonoBehaviour:
   mask: {fileID: 654312045918044619, guid: 93fa8435cc763674787d03a65b0b1ac8, type: 3}
   glitch: {fileID: 781459568503545694, guid: 8eb1e3932cd77554592d54ecaf1f42a9, type: 3}
   certaindeny: {fileID: 0}
+  diffusion_fragment: {fileID: 5527299570913201990, guid: 9faa2d7a78a18f547b0905ae8c9f52da, type: 3}
+  convergence_fragment: {fileID: 8796608299156858136, guid: 31751cc003366664f8662555ea030d41, type: 3}
   BossstackHander: {fileID: 13111079}
   whiledeny: 0
   whilecertain: 0
   canApplystack: 1
+--- !u!114 &13111084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13111075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b366119e3305d6b4290d8d6ed2e69c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
+  cammanager: {fileID: 373801462}
+  gamemanager: {fileID: 1694457153}
+  campos: {fileID: 1678837215}
+  letterbox: {fileID: 671870209}
+  chat: {fileID: 146283266}
+  firstmet: 0
 --- !u!1 &13365581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,6 +3437,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &17843330
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -12362,6 +12388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 6
   damage: 0
@@ -20933,6 +20960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -25280,6 +25308,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &146283266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4327957546309461547, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+  m_PrefabInstance: {fileID: 882285405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &146283267 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+  m_PrefabInstance: {fileID: 882285405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &147008495
 GameObject:
   m_ObjectHideFlags: 0
@@ -25339,6 +25377,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &147008498
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -31831,6 +31870,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &190007722
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -33858,6 +33898,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &203712807
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -46749,6 +46790,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &268145643
 GameObject:
   m_ObjectHideFlags: 0
@@ -46905,19 +46947,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270786078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 85}
+  m_LocalScale: {x: 0.047058824, y: 0.047058824, z: 0.047058824}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 298833488}
+  - {fileID: 146283267}
   m_Father: {fileID: 13111077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 756, y: 425}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270786080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46957,7 +47000,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &270786082
 Canvas:
   m_ObjectHideFlags: 0
@@ -46967,8 +47010,8 @@ Canvas:
   m_GameObject: {fileID: 270786078}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 2
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -50263,6 +50306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -55856,7 +55900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -70.95}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &299709776
@@ -56107,6 +56151,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &299870878
 GameObject:
   m_ObjectHideFlags: 0
@@ -64081,6 +64126,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &324827201
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -65337,6 +65383,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &337750679
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -72969,6 +73016,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &360377841
 GameObject:
   m_ObjectHideFlags: 0
@@ -75466,6 +75514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -79343,6 +79392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -90433,6 +90483,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &479244539
 GameObject:
   m_ObjectHideFlags: 0
@@ -93077,6 +93128,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &497491400
 GameObject:
   m_ObjectHideFlags: 0
@@ -102410,6 +102462,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &531381101
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -108784,6 +108837,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &569732323
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -113956,6 +114010,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &604828212
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -125030,6 +125085,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &642181193
 GameObject:
   m_ObjectHideFlags: 0
@@ -127416,6 +127472,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &655926169
 GameObject:
   m_ObjectHideFlags: 0
@@ -133918,6 +133975,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &693739993
 GameObject:
   m_ObjectHideFlags: 0
@@ -133977,6 +134035,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &693739996
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -134383,6 +134442,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &696939431
 GameObject:
   m_ObjectHideFlags: 0
@@ -140638,6 +140698,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &749704297
 GameObject:
   m_ObjectHideFlags: 0
@@ -141569,6 +141630,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &759444680
 GameObject:
   m_ObjectHideFlags: 0
@@ -142542,6 +142604,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &764720748
 GameObject:
   m_ObjectHideFlags: 0
@@ -145952,6 +146015,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &793824397
 GameObject:
   m_ObjectHideFlags: 0
@@ -147383,6 +147447,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &802030946
 GameObject:
   m_ObjectHideFlags: 0
@@ -157014,6 +157079,7 @@ MonoBehaviour:
   circum: 0
   attacknumber: 0
   skillnameint: 0
+  attackyscale: 1
   angle: 0
   currentskill: {fileID: 0}
   currentskill2: {fileID: 0}
@@ -163643,6 +163709,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &878458412
 GameObject:
   m_ObjectHideFlags: 0
@@ -164546,6 +164613,147 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &882285405
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 270786079}
+    m_Modifications:
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219868898060392271, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327957546309461547, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_Name
+      value: chat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327957546309461547, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020843210420600074, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
 --- !u!1 &882506723
 GameObject:
   m_ObjectHideFlags: 0
@@ -176616,6 +176824,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &952875237
 GameObject:
   m_ObjectHideFlags: 0
@@ -183061,6 +183270,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &963726143
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -189246,6 +189456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -202133,6 +202344,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1031211014
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -209058,6 +209270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 3.1
   damage: 0
@@ -217647,6 +217860,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1067846042
 GameObject:
   m_ObjectHideFlags: 0
@@ -228434,6 +228648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 1.7
   damage: 0
@@ -235657,6 +235872,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1154746710
 GameObject:
   m_ObjectHideFlags: 0
@@ -259958,6 +260174,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1256656455
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -263945,6 +264162,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1281852800
 GameObject:
   m_ObjectHideFlags: 0
@@ -274566,6 +274784,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1325054156
 GameObject:
   m_ObjectHideFlags: 0
@@ -275082,6 +275301,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1328889406
 GameObject:
   m_ObjectHideFlags: 0
@@ -275342,6 +275562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -276411,6 +276632,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1340537240
 GameObject:
   m_ObjectHideFlags: 0
@@ -282302,6 +282524,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1380866704
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -283921,6 +284144,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1394196047
 GameObject:
   m_ObjectHideFlags: 0
@@ -287635,6 +287859,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1422503939
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -294813,6 +295038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.1
   damage: 0
@@ -296055,6 +296281,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1456114391
 GameObject:
   m_ObjectHideFlags: 0
@@ -298570,6 +298797,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1461540310
 GameObject:
   m_ObjectHideFlags: 0
@@ -300105,6 +300333,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1472946265
 GameObject:
   m_ObjectHideFlags: 0
@@ -304306,6 +304535,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1501385870
 GameObject:
   m_ObjectHideFlags: 0
@@ -330136,6 +330366,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1552882266
 GameObject:
   m_ObjectHideFlags: 0
@@ -332821,6 +333052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.9
   damage: 0
@@ -334879,6 +335111,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1590659036
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -344469,6 +344702,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1627106003
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -350452,6 +350686,37 @@ MonoBehaviour:
   damage: 0
   lightattack: 0
   heavyattack: 0
+--- !u!1 &1678837215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1678837216}
+  m_Layer: 6
+  m_Name: counselcampos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1678837216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678837215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 13111077}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1678954736
 GameObject:
   m_ObjectHideFlags: 0
@@ -351540,6 +351805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 1.4
   damage: 0
@@ -353070,7 +353336,6 @@ MonoBehaviour:
       dialogue: "...\uC74C?"
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353078,7 +353343,6 @@ MonoBehaviour:
       dialogue: "\uC8C4\uC1A1\uD55C\uB370, \uB204\uAD6C\uC2DC\uC8E0?"
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353086,7 +353350,6 @@ MonoBehaviour:
       dialogue: "\uC0C1\uB2F4\uC0AC\uB77C\uACE0 \uBD88\uB7EC."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353096,7 +353359,6 @@ MonoBehaviour:
         \uAC83 \uAC19\uAD70\uC694."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353106,7 +353368,6 @@ MonoBehaviour:
         \uB429\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353115,7 +353376,6 @@ MonoBehaviour:
         \uC2DC\uC791\uB420 \uAC83 \uAC19\uB124\uC694."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353125,7 +353385,6 @@ MonoBehaviour:
         \uAE30\uBD84\uC740. "
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353133,7 +353392,6 @@ MonoBehaviour:
       dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30...?"
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353143,7 +353401,6 @@ MonoBehaviour:
         \uBC18\uBCF5\uD588\uACA0\uC8E0."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353154,7 +353411,6 @@ MonoBehaviour:
         \uBC18\uBCF5\uD588\uC744 \uAC81\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353162,7 +353418,6 @@ MonoBehaviour:
       dialogue: "\uC0C8\uAE34\uB2E4\uACE0?"
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353172,7 +353427,6 @@ MonoBehaviour:
         \uB2E4\uC74C \uC8FC\uAE30\uB85C \uAC00\uC838\uAC08 \uC218 \uC788\uB294\uAC83\uB4E4\uC785\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353182,7 +353436,6 @@ MonoBehaviour:
         \uC218 \uC788\uB2E4\uBA74.."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353191,7 +353444,6 @@ MonoBehaviour:
         \uC544\uBB34\uAC83\uB3C4 \uC544\uB2CC\uAC83\uAC19\uC2B5\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353202,7 +353454,6 @@ MonoBehaviour:
         \uC0AC\uC2E4\uC774..."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353212,7 +353463,6 @@ MonoBehaviour:
         \uD558\uB294 \uAECD\uB370\uAE30\uCC98\uB7FC \uB290\uAEF4\uC9C0\uB294\uAD70\uC694...."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353221,7 +353471,6 @@ MonoBehaviour:
         \uB0A8\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353232,7 +353481,6 @@ MonoBehaviour:
         \uC758\uC9C0\uB85C \uB098\uC544\uAC00\uC138\uC694."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353243,7 +353491,6 @@ MonoBehaviour:
         \uD574\uB450\uC138\uC694."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353252,7 +353499,6 @@ MonoBehaviour:
         \uBC18\uBCF5\uB418\uAE30\uB3C4 \uC804\uC5D0 \uCC3E\uC544\uC62C\uAC81\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
@@ -353260,7 +353506,6 @@ MonoBehaviour:
       dialogue: "\uAE30\uC5B5\uC740... <shake=1,8>\uBABB\uD558\uACA0\uC9C0\uB9CC.</shake>"
       basicdelay: 0.05
       dotdelay: 0.25
-      fuctionname: 
       end: 1
       gotoanswer: 0
       answerindex: 0
@@ -353269,7 +353514,6 @@ MonoBehaviour:
       dialogue: ...
       basicdelay: 0.5
       dotdelay: 0.3
-      fuctionname: 
       end: 1
       gotoanswer: 0
       answerindex: 0
@@ -353278,16 +353522,66 @@ MonoBehaviour:
       dialogue: ...
       basicdelay: 0.5
       dotdelay: 0.3
-      fuctionname: 
       end: 0
       gotoanswer: 0
       answerindex: 0
     - target: 2
       dialogue: "\uB2F9\uC2E0\uC740 <function=asdad>\uC544\uBB34\uAC83\uB3C4 \uD558\uC9C0
-        <function=asd\u3141\u3142ad>\uBABB\uD588\uB2E4."
+        <function=asdad>\uBABB\uD588\uB2E4."
       basicdelay: 0.15
       dotdelay: 0.3
-      fuctionname: 
+      end: 1
+      gotoanswer: 0
+      answerindex: 0
+  - dialogueLines:
+    - target: 1
+      dialogue: "...\uC624\uC168\uAD70\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC8FC\uAE30\uAC00 \uC57D\uAC04 \uB290\uB824\uC9C4\uAC8C \uB290\uAEF4\uC9C0\uC2DC\uB098\uC694?"
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC774\uB860\uB300\uB85C\uB77C\uBA74 \uC8FC\uAE30\uB294 \uC644\uC804\uD788
+        \uC0AC\uB77C\uC838\uC57C\uD588\uB294\uB370...."
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uB531 <color=red>\uD55C\uAC00\uC9C0</color> \uBD80\uC871\uD55C\uAC8C
+        \uC788\uB354\uAD70\uC694."
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 0
+      dialogue: "<shake=0.5,10>\uADF8\uAC8C \uBB50\uC9C0...?</shake>"
+      basicdelay: 0.1
+      dotdelay: 0.3
+      end: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "...\uC8C4\uC1A1\uD558\uAC8C \uB410\uC2B5\uB2C8\uB2E4."
+      basicdelay: 0.1
+      dotdelay: 0.3
       end: 1
       gotoanswer: 0
       answerindex: 0
@@ -360942,6 +361236,7 @@ MonoBehaviour:
   slash: 0
   penetrate: 0
   blow: 1
+  friendly_hit: 0
 --- !u!61 &1749819480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -364218,6 +364513,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1772154917
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -369548,6 +369844,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1809938102
 GameObject:
   m_ObjectHideFlags: 0
@@ -376404,6 +376701,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &1861044764
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -381293,6 +381591,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1901666074
 GameObject:
   m_ObjectHideFlags: 0
@@ -382445,6 +382744,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1907703292
 GameObject:
   m_ObjectHideFlags: 0
@@ -384867,6 +385167,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1918944010
 GameObject:
   m_ObjectHideFlags: 0
@@ -386807,6 +387108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  prefab: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -395274,6 +395576,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &1995448642
 GameObject:
   m_ObjectHideFlags: 0
@@ -397507,6 +397810,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!1 &2013675888
 GameObject:
   m_ObjectHideFlags: 0
@@ -420899,6 +421203,7 @@ MonoBehaviour:
   slash: 1
   penetrate: 0
   blow: 0
+  friendly_hit: 0
 --- !u!60 &2109197018
 PolygonCollider2D:
   m_ObjectHideFlags: 0

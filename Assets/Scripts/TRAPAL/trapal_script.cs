@@ -68,6 +68,8 @@ public class trapal_script : MonoBehaviour
 
     private void FixedUpdate()
     {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
         if (lazer2time)
         {
             lazer2time = false;
@@ -108,8 +110,8 @@ public class trapal_script : MonoBehaviour
                 if (trapal_point.transform.childCount < trapal_point.GetComponent<trapal_weapon_point>().count)
                 {
                     GameObject curweapon1 = Instantiate(trapal_weapon1, trapal_point.transform);
-                    curweapon1.GetComponent<enemydattack>().player = player;
-                    curweapon1.GetComponent<enemydattack>().canattack = false;
+                    curweapon1.GetComponent<enemyattack>().player = player;
+                    curweapon1.GetComponent<enemyattack>().canattack = false;
                 }
                 
             }
@@ -118,7 +120,7 @@ public class trapal_script : MonoBehaviour
             {
                 lazer1cool = 0;
                 GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
-                curlazer1.GetComponent<enemydattack>().player = player;
+                curlazer1.GetComponent<enemyattack>().player = player;
                 curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
                 Vector2 direction = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -193,12 +195,12 @@ public class trapal_script : MonoBehaviour
         GameObject bombshoot1 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle));
         GameObject bombshoot2 = Instantiate(bombshoot, wheretopos, Quaternion.Euler(0, 0, angledefault + addangle + 90));
         cammanager.GetComponent<CameraManager>().CamVibration1();
-        bombshoot1.GetComponent<enemydattack>().heavyattack = true;
-        bombshoot1.GetComponent<enemydattack>().lightattack = false;
-        bombshoot1.GetComponent<enemydattack>().player = player;
-        bombshoot2.GetComponent<enemydattack>().heavyattack = true;
-        bombshoot2.GetComponent<enemydattack>().lightattack = false;
-        bombshoot2.GetComponent<enemydattack>().player = player;
+        bombshoot1.GetComponent<enemyattack>().heavyattack = true;
+        bombshoot1.GetComponent<enemyattack>().lightattack = false;
+        bombshoot1.GetComponent<enemyattack>().player = player;
+        bombshoot2.GetComponent<enemyattack>().heavyattack = true;
+        bombshoot2.GetComponent<enemyattack>().lightattack = false;
+        bombshoot2.GetComponent<enemyattack>().player = player;
         boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "∫Œ¡§");
         if (instance != null)
         {

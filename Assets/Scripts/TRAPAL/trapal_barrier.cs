@@ -10,7 +10,7 @@ public class trapal_barrier : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemyattack"))
         {
-            if (collision.GetComponent<enemydattack>().canattack)
+            if (collision.GetComponent<enemyattack>().canattack)
             {
                 particle.GetComponent<ParticleSystem>().Play();
                 GetComponent<PolygonCollider2D>().enabled = false;

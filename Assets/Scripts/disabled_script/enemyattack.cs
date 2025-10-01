@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemydattack : MonoBehaviour
+public class enemyattack : MonoBehaviour
 {
     public bool canattack = true;
     public GameObject player;
@@ -20,6 +20,8 @@ public class enemydattack : MonoBehaviour
     public bool slash;
     public bool penetrate;
     public bool blow;
+
+    public bool friendly_hit = false;
 
     public void OnTriggerStay2D(Collider2D collision)
     {
@@ -95,6 +97,29 @@ public class enemydattack : MonoBehaviour
                     }
                 }
 
+            }
+
+            if (friendly_hit)
+            {
+                if (collision.gameObject.tag == "normalenemy")
+                {
+                    if (collision.TryGetComponent<normal_enemy_hp>(out normal_enemy_hp neh))
+                    {
+                        neh.currenthitobjcet = enemy;
+                        if (slash)
+                        {
+                            neh.SlashDamage(damage);
+                        }
+                        else if (penetrate)
+                        {
+                            neh.PenetrateDamage(damage);
+                        }
+                        else if (blow)
+                        {
+                            neh.BlowDamage(damage);
+                        }
+                    }
+                }
             }
         }
         

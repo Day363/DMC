@@ -27,7 +27,8 @@ public class Skill : ScriptableObject
 
     public bool backlink;
     public bool amalagam;
-    
+
+    public float backdelay;
     
     public bool repeat;
     public bool speed;

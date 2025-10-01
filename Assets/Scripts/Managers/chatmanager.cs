@@ -19,8 +19,6 @@ public class Dialogue
     public float basicdelay = 0.1f;
     public float dotdelay = 0.5f;
 
-    public string fuctionname;
-
     public bool end;
 
     public bool gotoanswer;

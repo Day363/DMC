@@ -8,6 +8,8 @@ public class trapal_passive : MonoBehaviour
     public GameObject light1;
     public GameObject light2;
 
+    public GameObject attackcore;
+    public GameObject gamemanager;
     public GameObject cammanager;
     public GameObject denyhandy;
     public GameObject tearlazer;
@@ -26,6 +28,8 @@ public class trapal_passive : MonoBehaviour
     public GameObject mask;
     public GameObject glitch;
     public GameObject certaindeny;
+    public GameObject diffusion_fragment;
+    public GameObject convergence_fragment;
 
     public boss_hpbar BossstackHander;
 
@@ -38,6 +42,21 @@ public class trapal_passive : MonoBehaviour
         boss_hpbar.OnHitCalled += Deny;
         playerhit.OnHitCalled += Onhit;
         trapal_lazer1.OnLazerHitCalled += Lazer1_Hit;
+
+        GameObject fragment1 = Instantiate(diffusion_fragment);
+        fragment1.GetComponent<fragment_script>().trapal = gameObject;
+        normal_enemy_hp fragment1normal_enemy_hp = fragment1.GetComponent<normal_enemy_hp>();
+        fragment1normal_enemy_hp.gammanager = gamemanager;
+        fragment1normal_enemy_hp.cammanager = cammanager;
+        fragment1normal_enemy_hp.attackcore = attackcore;
+        fragment1.transform.position = new Vector3(-6f, -1.9f, 0);
+        GameObject fragment2 = Instantiate(convergence_fragment);
+        fragment2.GetComponent<fragment_script>().trapal = gameObject;
+        normal_enemy_hp fragment2normal_enemy_hp = fragment2.GetComponent<normal_enemy_hp>();
+        fragment2normal_enemy_hp.gammanager = gamemanager;
+        fragment2normal_enemy_hp.cammanager = cammanager;
+        fragment2normal_enemy_hp.attackcore = attackcore;
+        fragment2.transform.position = new Vector3(6f, -1.9f, 0);
     }
 
     public void FixedUpdate()
@@ -101,6 +120,90 @@ public class trapal_passive : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("certain", false);
             whilecertain = false;
+        }
+
+        
+    }
+
+    public void Fragment()
+    {
+        StartCoroutine(Fragment_co());
+    }
+
+    IEnumerator Fragment_co()
+    {
+        boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
+        boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
+
+        GameObject currentfragment;
+
+        yield return new WaitForSeconds(Random.Range(3f, 10f));
+        if (DenyInstance != null && CertainInstance != null)
+        {
+            if (DenyInstance.currentStack > CertainInstance.currentStack)
+            {
+                currentfragment = Instantiate(diffusion_fragment);
+                currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+                normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+                currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+                currentfragmentnormal_enemy_hp.cammanager = cammanager;
+                currentfragmentnormal_enemy_hp.attackcore = attackcore;
+                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            }
+            else if (DenyInstance.currentStack < CertainInstance.currentStack)
+            {
+                currentfragment = Instantiate(convergence_fragment);
+                currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+                normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+                currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+                currentfragmentnormal_enemy_hp.cammanager = cammanager;
+                currentfragmentnormal_enemy_hp.attackcore = attackcore;
+                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            }
+        }
+        else if (DenyInstance != null && CertainInstance == null)
+        {
+            currentfragment = Instantiate(diffusion_fragment);
+            currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+            normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+            currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+            currentfragmentnormal_enemy_hp.cammanager = cammanager;
+            currentfragmentnormal_enemy_hp.attackcore = attackcore;
+            currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+        }
+        else if (DenyInstance == null && CertainInstance != null)
+        {
+            currentfragment = Instantiate(convergence_fragment);
+            currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+            normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+            currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+            currentfragmentnormal_enemy_hp.cammanager = cammanager;
+            currentfragmentnormal_enemy_hp.attackcore = attackcore;
+            currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+        }
+        else if (DenyInstance == null && CertainInstance == null)
+        {
+            int i = Random.Range(0, 2);
+            if (i == 0)
+            {
+                currentfragment = Instantiate(diffusion_fragment);
+                currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+                normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+                currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+                currentfragmentnormal_enemy_hp.cammanager = cammanager;
+                currentfragmentnormal_enemy_hp.attackcore = attackcore;
+                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            }
+            else
+            {
+                currentfragment = Instantiate(convergence_fragment);
+                currentfragment.GetComponent<fragment_script>().trapal = gameObject;
+                normal_enemy_hp currentfragmentnormal_enemy_hp = currentfragment.GetComponent<normal_enemy_hp>();
+                currentfragmentnormal_enemy_hp.gammanager = gamemanager;
+                currentfragmentnormal_enemy_hp.cammanager = cammanager;
+                currentfragmentnormal_enemy_hp.attackcore = attackcore;
+                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            }
         }
     }
 
@@ -302,13 +405,13 @@ public class trapal_passive : MonoBehaviour
             curlazer2_player_Trapal_Lazer2.look = true;
             curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
             curlazer2_player_Trapal_Lazer2.ShootNotDes();
-            enemydattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemydattack>();
+            enemyattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemyattack>();
             curpenetrate_playerattackdamage.player = player;
             curpenetrate_playerattackdamage.enemy = gameObject;
             curpenetrate_playerattackdamage.damage = 40;
             curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
-            curpenetrate.GetComponent<enemydattack>().canattack = true;
-            curpenetrate.GetComponent<enemydattack>().heavyattack = true;
+            curpenetrate.GetComponent<enemyattack>().canattack = true;
+            curpenetrate.GetComponent<enemyattack>().heavyattack = true;
             yield return new WaitForSeconds(0.1f);
             curlazer2.GetComponent<lazer2lookat>().look = false;
             boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "부정");

@@ -108,6 +108,7 @@ public class attackcore : MonoBehaviour
     public int circum = 0;
     public int attacknumber = 0;
     public int skillnameint = 0;
+    public int attackyscale = 1;
     public float angle;
     public GameObject currentskill;
     public GameObject currentskill2;
@@ -956,6 +957,15 @@ public class attackcore : MonoBehaviour
         Vector3 direction = mousePosition - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (mousePosition.x > transform.position.x)
+        {
+            attackyscale = 1;
+        }
+        else if (mousePosition.x < transform.position.x)
+        {
+            attackyscale = -1;
+        }
+
 
         if (canattack)
         {
@@ -984,12 +994,14 @@ public class attackcore : MonoBehaviour
                         playerPlayerMove.LookLeftenforce();
                     }
                     playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+                    StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
                 {
                     playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
+                    StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                 }
-                
+
                 AttcknumberPlus();
 
                 if (attacknumber == lastlist[listnumber].Count)
@@ -1033,6 +1045,7 @@ public class attackcore : MonoBehaviour
                         if (lastlist[listnumber][attacknumber].Normalskill.functionskill)
                         {
                             playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.funtionname);
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                         }
 
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill != true)
@@ -1042,7 +1055,9 @@ public class attackcore : MonoBehaviour
                                 if (lastlist[listnumber][attacknumber].Normalskill.prefabskill)
                                 {
                                     currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                                    currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
                                     currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                                    currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
 
                                     if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
                                     {
@@ -1050,6 +1065,8 @@ public class attackcore : MonoBehaviour
                                         pg.attackcore = gameObject;
                                         pg.player = player;
                                     }
+
+                                    StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                                 }
                                 
        
@@ -1065,6 +1082,8 @@ public class attackcore : MonoBehaviour
                                     pg.attackcore = gameObject;
                                     pg.player = player;
                                 }
+
+                                StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                             }
                             
 
@@ -1127,16 +1146,40 @@ public class attackcore : MonoBehaviour
                         }
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill)
                         {
-                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                            if (mousePos.x > transform.position.x)
+                            if (!playerPlayerMove.isJump)
                             {
-                                playerPlayerMove.LookRightenforce();
+                                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                                if (mousePos.x > transform.position.x)
+                                {
+                                    playerPlayerMove.LookRightenforce();
+                                }
+                                else if (mousePos.x < transform.position.x)
+                                {
+                                    playerPlayerMove.LookLeftenforce();
+                                }
+                                playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             }
-                            else if (mousePos.x < transform.position.x)
+                            else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count != 0)
                             {
-                                playerPlayerMove.LookLeftenforce();
+                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                                currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
+                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
+
+                                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                                {
+                                    pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
+                                    pg.attackcore = gameObject;
+                                    pg.player = player;
+                                }
                             }
-                            playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
+                            else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count == 0)
+                            {
+                                return;
+                            }
+
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+
                         }
                     }
 
@@ -1145,7 +1188,9 @@ public class attackcore : MonoBehaviour
                         if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
                         {
                             currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                            currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            currentskill2.transform.localScale = new Vector3(1, attackyscale, 1);
                             if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
                             {
                                 pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
@@ -1159,7 +1204,11 @@ public class attackcore : MonoBehaviour
                                 pg2.player = player;
                             }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
+
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                         }
                         
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
@@ -1175,6 +1224,7 @@ public class attackcore : MonoBehaviour
                             }
                             playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             currentskill2 = Instantiate(lastlist[listnumber][attacknumber].Amalgamed.skillprefab[0], transform.position, transform.rotation);
+                            currentskill2.transform.localScale = new Vector3(1, attackyscale, 1);
                             if (currentskill2.TryGetComponent<player_gunprefap>(out player_gunprefap pg2))
                             {
                                 pg2.weapon = lastlist[listnumber][attacknumber].Amalgamed.currentweapon;
@@ -1182,12 +1232,16 @@ public class attackcore : MonoBehaviour
                                 pg2.player = player;
                             }
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
+
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                         }
 
                         else if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
                         {
                             playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Amalgamed.animationtrigger);
                             currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
+                            currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
                             if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
                             {
                                 pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
@@ -1195,6 +1249,9 @@ public class attackcore : MonoBehaviour
                                 pg.player = player;
                             }
                             currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().prefab = true;
+
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                         }
 
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
@@ -1210,6 +1267,8 @@ public class attackcore : MonoBehaviour
                             }
                             playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             amalgamedanimationtrigger = lastlist[listnumber][attacknumber].Amalgamed.animationtrigger;
+
+                            StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
                         }
                     }
                 }
@@ -1419,6 +1478,13 @@ public class attackcore : MonoBehaviour
             currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
             playerplayerstatus.focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
         }
+    }
+
+    IEnumerator AttackBackDelay(float time)
+    {
+        canattack = false;
+        yield return new WaitForSeconds(time);
+        canattack = true;
     }
 
     IEnumerator DashFlash()

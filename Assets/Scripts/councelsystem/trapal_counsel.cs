@@ -9,6 +9,7 @@ public class trapal_counsel : MonoBehaviour
     public GameObject gamemanager;
     public GameObject campos;
     public GameObject letterbox;
+    public GameObject chat;
 
     public bool firstmet;
 
@@ -32,7 +33,8 @@ public class trapal_counsel : MonoBehaviour
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             playerPlayerMove.canmove = false;
             playerPlayerMove.Stop();
-            gamemanager.GetComponent<chatmanager>().CallDialogue(2);
+            gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+            gamemanager.GetComponent<chatmanager>().CallDialogue(3);
 
         }
     }

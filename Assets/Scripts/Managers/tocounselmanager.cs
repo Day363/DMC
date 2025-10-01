@@ -73,6 +73,7 @@ public class tocounselmanager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(currentbox2);
         Destroy(currentbox1);
+        CancelInvoke("Spawn");
         yield return new WaitForSeconds(15f);
         Destroy(gameObject);
     }
