@@ -45,6 +45,18 @@ public class CameraManager : MonoBehaviour
         
     }
 
+    public void CinemachineInvalidateCache()
+    {
+        StartCoroutine(Fuckcinemachinetwice());
+    }
+
+    IEnumerator Fuckcinemachinetwice()
+    {
+        fuckcinemachine = true;
+        yield return new WaitForSeconds(3f);
+        fuckcinemachine = false;
+    }
+
     public void LookPlayer()
     {
         maincam = playercam;

@@ -6,6 +6,7 @@ using System;
 public class counselfunctionmanager : MonoBehaviour
 {
     public static counselfunctionmanager Instance;
+    public GameObject attackcore;
 
     Dictionary<string, Action> functionMap;
 
@@ -24,7 +25,8 @@ public class counselfunctionmanager : MonoBehaviour
         {
             { "Animation1", Animation1 },
             { "Animation2", Animation2 },
-            { "Animation3", Animation3 }
+            { "Animation3", Animation3 },
+            { "trapal_start", Trapal_start }
         };
     }
 
@@ -42,16 +44,27 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Animation1()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("anmation1");
+        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation1");
     }
 
     public void Animation2()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("anmation2");
+        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation2");
     }
 
     public void Animation3()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("anmation3");
+        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation3");
     }
+
+    public void Trapal_start()
+    {
+        Debug.Log("adsas");
+        if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
+        {
+            Debug.Log("aadadaddsas");
+            ta.SetTrigger("start");
+        }
+    }
+
 }

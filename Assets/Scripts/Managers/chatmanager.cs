@@ -197,6 +197,8 @@ public class chatmanager : MonoBehaviour
                 tmp.maxVisibleCharacters = totalvisible; 
                 skip = false;
                 whilesaying = false;
+                if (shaker != null)
+                    shaker.CheckEvents(totalvisible);
                 if (chat.end)
                 {
                     yield return new WaitForSeconds(1f);
@@ -242,7 +244,7 @@ public class chatmanager : MonoBehaviour
             playerchatbox.SetActive(false);
             if (enemychatbox != null)
             {
-                enemychatbox.SetActive(true);
+                enemychatbox.SetActive(false);
             }
             worldchatbox.SetActive(false);
 

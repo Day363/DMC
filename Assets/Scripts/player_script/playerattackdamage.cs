@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerattackdamage : MonoBehaviour
 {
     public bool canattack = true;
-    public bool prefab = false;
+    public bool canjump = false;
 
     public GameObject player;
     public float damagenum;
@@ -46,7 +46,7 @@ public class playerattackdamage : MonoBehaviour
                 }
             }
 
-            if (prefab && player.GetComponent<PlayerMove>().isJump)
+            if (canjump && player.GetComponent<PlayerMove>().isJump)
             {
                 player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 0);
                 player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
@@ -83,7 +83,7 @@ public class playerattackdamage : MonoBehaviour
                 }
             }
 
-            if (prefab && player.GetComponent<PlayerMove>().isJump)
+            if (canjump && player.GetComponent<PlayerMove>().isJump)
             {
                 player.GetComponent<Rigidbody2D>().velocity = new Vector2(player.GetComponent<Rigidbody2D>().velocity.x, 0);
                 player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);

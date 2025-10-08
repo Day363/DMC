@@ -6,11 +6,11 @@ public class dashline : MonoBehaviour
 {
     public Transform player;                  // 선 시작점
     public float assistRadius = 2.0f;         // 마우스 주변 감지 범위
-    public string enemyTag = "client";        // 적 태그
     public Camera mainCamera;
     public Sprite dot;
     public Sprite target;
     public bool nowtargetting = false;
+    public Transform targetenemy;
 
 
     private LineRenderer lineRenderer;
@@ -38,13 +38,14 @@ public class dashline : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.CompareTag(enemyTag))
+            if (hit.CompareTag("client") || hit.CompareTag("normalenemy"))
             {
                 float dist = Vector2.Distance(mouseWorldPos, hit.transform.position);
                 if (dist < closestDistance)
                 {
                     closestDistance = dist;
                     nearestEnemy = hit.transform;
+                    targetenemy = nearestEnemy;
                     GetComponent<SpriteRenderer>().sprite = target;
                 }
                 else

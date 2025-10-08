@@ -23,12 +23,21 @@ public class enemyattack : MonoBehaviour
 
     public bool friendly_hit = false;
 
+    public bool hit = false;
+
+    public void OnEnable()
+    {
+        hit = true;
+    }
+
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (canattack)
         {
             if (collision.gameObject.tag == "playerattack")
             {
+                attackcore.attackcoreInstance.AttackBackDelayDelete();
+
                 player.GetComponent<playerstatus>().Parrystop();
 
                 gameObject.SetActive(false);
@@ -101,25 +110,58 @@ public class enemyattack : MonoBehaviour
 
             if (friendly_hit)
             {
-                if (collision.gameObject.tag == "normalenemy")
+                if (steadydamage)
                 {
-                    if (collision.TryGetComponent<normal_enemy_hp>(out normal_enemy_hp neh))
+                    if (collision.gameObject.tag == "normalenemy")
                     {
-                        neh.currenthitobjcet = enemy;
-                        if (slash)
+                        if (collision.TryGetComponent<normal_enemy_hp>(out normal_enemy_hp neh))
                         {
-                            neh.SlashDamage(damage);
-                        }
-                        else if (penetrate)
-                        {
-                            neh.PenetrateDamage(damage);
-                        }
-                        else if (blow)
-                        {
-                            neh.BlowDamage(damage);
+                            neh.currenthitobjcet = enemy;
+                            if (slash)
+                            {
+                                neh.SlashDamage(damage);
+                            }
+                            else if (penetrate)
+                            {
+                                neh.PenetrateDamage(damage);
+                            }
+                            else if (blow)
+                            {
+                                neh.BlowDamage(damage);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    if (hit)
+                    {
+                        if (collision.gameObject.tag == "normalenemy")
+                        {
+                            if (collision.TryGetComponent<normal_enemy_hp>(out normal_enemy_hp neh))
+                            {
+                                neh.currenthitobjcet = enemy;
+                                if (slash)
+                                {
+                                    neh.SlashDamage(damage);
+                                    hit = false;
+                                }
+                                else if (penetrate)
+                                {
+                                    neh.PenetrateDamage(damage);
+                                    hit = false;
+                                }
+                                else if (blow)
+                                {
+                                    neh.BlowDamage(damage);
+                                    hit = false;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                
             }
         }
         

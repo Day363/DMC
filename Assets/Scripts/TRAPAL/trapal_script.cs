@@ -61,6 +61,8 @@ public class trapal_script : MonoBehaviour
     public float duration = 2f;
     public bool backtrigger = false;
 
+    public bool phase2;
+
     public void Start()
     {
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
@@ -68,94 +70,100 @@ public class trapal_script : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GetComponent<boss_hpbar>().currenthealth / 2 <= GetComponent<boss_hpbar>().maxhealth)
+        {
+            phase2 = true;
+        }
+
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
-        if (lazer2time)
+        if (!phase2)
         {
-            lazer2time = false;
-            Lazer2spwan();
-        }
-
-        if (swordtime)
-        {
-            swordtime = false;
-            SwordSpawn();
-        }
-
-        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
-        {
-            GetComponent<Rigidbody2D>().gravityScale = 1;
-            backtrigger = true;
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().gravityScale = 0;
-            if (backtrigger)
+            if (lazer2time)
             {
-                Returntopos();
+                lazer2time = false;
+                Lazer2spwan();
             }
-        }
 
-        weapon1cool++;
-        lazer1cool++;
-        lazercool++;
-        barriercool++;
-        bombcool++;
-
-        if (canattack)
-        {
-            if (weapon1cool >= weapon1cooltime)
+            if (swordtime)
             {
-                weapon1cool = 0;
-                if (trapal_point.transform.childCount < trapal_point.GetComponent<trapal_weapon_point>().count)
+                swordtime = false;
+                SwordSpawn();
+            }
+
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
+            {
+                GetComponent<Rigidbody2D>().gravityScale = 1;
+                backtrigger = true;
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().gravityScale = 0;
+                if (backtrigger)
                 {
-                    GameObject curweapon1 = Instantiate(trapal_weapon1, trapal_point.transform);
-                    curweapon1.GetComponent<enemyattack>().player = player;
-                    curweapon1.GetComponent<enemyattack>().canattack = false;
+                    Returntopos();
                 }
-                
             }
 
-            if (lazer1cool >= lazer1cooltime)
+            weapon1cool++;
+            lazer1cool++;
+            lazercool++;
+            barriercool++;
+            bombcool++;
+
+            if (canattack)
             {
-                lazer1cool = 0;
-                GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
-                curlazer1.GetComponent<enemyattack>().player = player;
-                curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
-                Vector2 direction = player.transform.position - transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                curlazer1.transform.rotation = Quaternion.Euler(0, 0, angle);
+                if (weapon1cool >= weapon1cooltime)
+                {
+                    weapon1cool = 0;
+                    if (trapal_point.transform.childCount < trapal_point.GetComponent<trapal_weapon_point>().count)
+                    {
+                        GameObject curweapon1 = Instantiate(trapal_weapon1, trapal_point.transform);
+                        curweapon1.GetComponent<enemyattack>().player = player;
+                        curweapon1.GetComponent<enemyattack>().canattack = false;
+                    }
+
+                }
+
+                if (lazer1cool >= lazer1cooltime)
+                {
+                    lazer1cool = 0;
+                    GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
+                    curlazer1.GetComponent<enemyattack>().player = player;
+                    curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
+                    Vector2 direction = player.transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    curlazer1.transform.rotation = Quaternion.Euler(0, 0, angle);
+                }
+
+
+                if (lazercool >= lazercooltime)
+                {
+                    lazercool = 0;
+                    lazer.GetComponent<trapal_lazer>().LazerStart();
+
+                }
+
+                if (pointattackcool >= pointattackcooltime)
+                {
+                    pointattackcool = 0;
+                    Instantiate(pointattack, new Vector3(Random.Range(-15, 16), 0, 0), Quaternion.identity);
+                }
+
+                if (barriercool >= barriercooltime)
+                {
+                    barriercool = 0;
+                    barrier.GetComponent<trapal_barreirtext>().StartBarrier();
+                }
+
+                if (bombcool >= bombcooltime)
+                {
+                    bombcool = 0;
+                    StartCoroutine(Bomb());
+                }
+
             }
-
-
-            if (lazercool >= lazercooltime)
-            {
-                lazercool = 0;
-                lazer.GetComponent<trapal_lazer>().LazerStart();
-
-            }
-
-            if (pointattackcool >= pointattackcooltime)
-            {
-                pointattackcool = 0;
-                Instantiate(pointattack, new Vector3(Random.Range(-15, 16), 0, 0), Quaternion.identity);
-            }
-
-            if (barriercool >= barriercooltime)
-            {
-                barriercool = 0;
-                barrier.GetComponent<trapal_barreirtext>().StartBarrier();
-            }
-
-            if (bombcool >= bombcooltime)
-            {
-                bombcool = 0;
-                StartCoroutine(Bomb());
-            }
-            
         }
-
-        
     }
 
     IEnumerator Bomb()

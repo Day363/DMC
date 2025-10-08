@@ -2776,11 +2776,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
+  attackcore: {fileID: 840654302}
   cammanager: {fileID: 373801462}
   gamemanager: {fileID: 1694457153}
   campos: {fileID: 1678837215}
   letterbox: {fileID: 671870209}
   chat: {fileID: 146283266}
+  deny: {fileID: 498960624}
   firstmet: 0
 --- !u!1 &13365581
 GameObject:
@@ -3438,6 +3440,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &17843330
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -12388,7 +12391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 6
   damage: 0
@@ -20960,7 +20963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -25378,6 +25381,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &147008498
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -31871,6 +31875,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &190007722
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -33899,6 +33904,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &203712807
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -46791,6 +46797,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &268145643
 GameObject:
   m_ObjectHideFlags: 0
@@ -50306,7 +50313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -56152,6 +56159,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &299870878
 GameObject:
   m_ObjectHideFlags: 0
@@ -64127,6 +64135,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &324827201
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -65384,6 +65393,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &337750679
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -73017,6 +73027,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &360377841
 GameObject:
   m_ObjectHideFlags: 0
@@ -75514,7 +75525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -79392,7 +79403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -90484,6 +90495,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &479244539
 GameObject:
   m_ObjectHideFlags: 0
@@ -93129,6 +93141,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &497491400
 GameObject:
   m_ObjectHideFlags: 0
@@ -102463,6 +102476,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &531381101
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -108838,6 +108852,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &569732323
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -114011,6 +114026,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &604828212
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -125086,6 +125102,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &642181193
 GameObject:
   m_ObjectHideFlags: 0
@@ -127473,6 +127490,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &655926169
 GameObject:
   m_ObjectHideFlags: 0
@@ -133976,6 +133994,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &693739993
 GameObject:
   m_ObjectHideFlags: 0
@@ -134036,6 +134055,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &693739996
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -134443,6 +134463,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &696939431
 GameObject:
   m_ObjectHideFlags: 0
@@ -140699,6 +140720,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &749704297
 GameObject:
   m_ObjectHideFlags: 0
@@ -141631,6 +141653,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &759444680
 GameObject:
   m_ObjectHideFlags: 0
@@ -142605,6 +142628,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &764720748
 GameObject:
   m_ObjectHideFlags: 0
@@ -146016,6 +146040,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &793824397
 GameObject:
   m_ObjectHideFlags: 0
@@ -147448,6 +147473,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &802030946
 GameObject:
   m_ObjectHideFlags: 0
@@ -157098,6 +157124,7 @@ MonoBehaviour:
   iscycle: 0
   amalgamedanimationtrigger: 
   worldlightintensity: 0
+  underattack: 0
 --- !u!1 &842060652
 GameObject:
   m_ObjectHideFlags: 0
@@ -159666,11 +159693,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1233421494}
   assistRadius: 2
-  enemyTag: client
   mainCamera: {fileID: 519420031}
   dot: {fileID: 21300000, guid: bbcc29cb920537c4194227863366b3a5, type: 3}
   target: {fileID: 21300000, guid: b7abca74140c10041a53b97cf67deddd, type: 3}
   nowtargetting: 0
+  targetenemy: {fileID: 0}
 --- !u!120 &856259969
 LineRenderer:
   serializedVersion: 2
@@ -163710,6 +163737,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &878458412
 GameObject:
   m_ObjectHideFlags: 0
@@ -176825,6 +176853,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &952875237
 GameObject:
   m_ObjectHideFlags: 0
@@ -183271,6 +183300,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &963726143
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -189456,7 +189486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -202345,6 +202375,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1031211014
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -209270,7 +209301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 3.1
   damage: 0
@@ -217861,6 +217892,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1067846042
 GameObject:
   m_ObjectHideFlags: 0
@@ -228648,7 +228680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 1.7
   damage: 0
@@ -235873,6 +235905,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1154746710
 GameObject:
   m_ObjectHideFlags: 0
@@ -260175,6 +260208,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1256656455
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -264163,6 +264197,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1281852800
 GameObject:
   m_ObjectHideFlags: 0
@@ -274785,6 +274820,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1325054156
 GameObject:
   m_ObjectHideFlags: 0
@@ -275302,6 +275338,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1328889406
 GameObject:
   m_ObjectHideFlags: 0
@@ -275562,7 +275599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
@@ -276633,6 +276670,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1340537240
 GameObject:
   m_ObjectHideFlags: 0
@@ -282525,6 +282563,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1380866704
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -284145,6 +284184,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1394196047
 GameObject:
   m_ObjectHideFlags: 0
@@ -287860,6 +287900,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1422503939
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -295038,7 +295079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.1
   damage: 0
@@ -296282,6 +296323,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1456114391
 GameObject:
   m_ObjectHideFlags: 0
@@ -298798,6 +298840,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1461540310
 GameObject:
   m_ObjectHideFlags: 0
@@ -300334,6 +300377,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1472946265
 GameObject:
   m_ObjectHideFlags: 0
@@ -304536,6 +304580,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1501385870
 GameObject:
   m_ObjectHideFlags: 0
@@ -330367,6 +330412,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1552882266
 GameObject:
   m_ObjectHideFlags: 0
@@ -333052,7 +333098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.9
   damage: 0
@@ -335112,6 +335158,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1590659036
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -344703,6 +344750,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1627106003
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -351805,7 +351853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 1.4
   damage: 0
@@ -353579,7 +353627,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "...\uC8C4\uC1A1\uD558\uAC8C \uB410\uC2B5\uB2C8\uB2E4."
+      dialogue: "...\uC8C4\uC1A1\uD558\uAC8C \uB410\uC2B5\uB2C8\uB2E4.<function=trapal_start>"
       basicdelay: 0.1
       dotdelay: 0.3
       end: 1
@@ -353628,6 +353676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6998f2b8875d142adb55963e8dd146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackcore: {fileID: 840654302}
 --- !u!1 &1695546607
 GameObject:
   m_ObjectHideFlags: 0
@@ -361237,6 +361286,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 1
   friendly_hit: 0
+  hit: 0
 --- !u!61 &1749819480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -364514,6 +364564,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1772154917
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -369845,6 +369896,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1809938102
 GameObject:
   m_ObjectHideFlags: 0
@@ -373254,13 +373306,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: deny
       objectReference: {fileID: 0}
+    - target: {fileID: 3245181360307935222, guid: 8e209f84bb8b54345bba84476ef6a9ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3660264078561196967, guid: 8e209f84bb8b54345bba84476ef6a9ad, type: 3}
       propertyPath: m_MaskInteraction
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5981419610788628475, guid: 8e209f84bb8b54345bba84476ef6a9ad, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.36
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 5981419610788628475, guid: 8e209f84bb8b54345bba84476ef6a9ad, type: 3}
       propertyPath: m_LocalScale.y
@@ -376702,6 +376758,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &1861044764
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -381592,6 +381649,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1901666074
 GameObject:
   m_ObjectHideFlags: 0
@@ -382745,6 +382803,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1907703292
 GameObject:
   m_ObjectHideFlags: 0
@@ -385168,6 +385227,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1918944010
 GameObject:
   m_ObjectHideFlags: 0
@@ -387108,7 +387168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
-  prefab: 0
+  canjump: 0
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
@@ -395577,6 +395637,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &1995448642
 GameObject:
   m_ObjectHideFlags: 0
@@ -397811,6 +397872,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!1 &2013675888
 GameObject:
   m_ObjectHideFlags: 0
@@ -421204,6 +421266,7 @@ MonoBehaviour:
   penetrate: 0
   blow: 0
   friendly_hit: 0
+  hit: 0
 --- !u!60 &2109197018
 PolygonCollider2D:
   m_ObjectHideFlags: 0
