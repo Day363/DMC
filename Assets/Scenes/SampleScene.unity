@@ -2593,6 +2593,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 3.46, z: 0}
   duration: 2
   backtrigger: 0
+  phase2: 0
 --- !u!114 &13111079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,6 +2630,7 @@ MonoBehaviour:
   side: 0
   iscollapse: 0
   canhit: 1
+  candie: 0
   killcut: 0
 --- !u!50 &13111080
 Rigidbody2D:
@@ -2763,6 +2765,8 @@ MonoBehaviour:
   whiledeny: 0
   whilecertain: 0
   canApplystack: 1
+  deny24count: 0
+  certain24count: 0
 --- !u!114 &13111084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,6 +2787,37 @@ MonoBehaviour:
   letterbox: {fileID: 671870209}
   chat: {fileID: 146283266}
   deny: {fileID: 498960624}
+  trapal_halo:
+  - {fileID: 1216074956}
+  - {fileID: 30087035}
+  - {fileID: 1378087876}
+  - {fileID: 162011700}
+  - {fileID: 1654007214}
+  - {fileID: 2096810271}
+  - {fileID: 1868596926}
+  - {fileID: 1639971247}
+  - {fileID: 1328123943}
+  - {fileID: 717704404}
+  - {fileID: 46240276}
+  - {fileID: 1102962853}
+  - {fileID: 634919545}
+  - {fileID: 1705615608}
+  - {fileID: 1297206739}
+  - {fileID: 695844632}
+  - {fileID: 549950168}
+  - {fileID: 1955289424}
+  - {fileID: 1038980526}
+  - {fileID: 1850391290}
+  - {fileID: 1677131204}
+  - {fileID: 533388455}
+  - {fileID: 1199742683}
+  - {fileID: 677690026}
+  - {fileID: 1708335736}
+  - {fileID: 1329789510}
+  - {fileID: 856391765}
+  - {fileID: 520773126}
+  - {fileID: 2129304108}
+  - {fileID: 473694507}
   firstmet: 0
 --- !u!1 &13365581
 GameObject:
@@ -21561,6 +21596,7 @@ MonoBehaviour:
   side: 0
   iscollapse: 0
   canhit: 1
+  candie: 1
   killcut: 0
 --- !u!1 &117862983
 GameObject:
@@ -63326,8 +63362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.0294, y: 225}
-  m_SizeDelta: {x: 813.7, y: 100}
+  m_AnchoredPosition: {x: 0.0024941, y: 280}
+  m_SizeDelta: {x: 813.7, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319515766
 MonoBehaviour:
@@ -119988,6 +120024,7 @@ MonoBehaviour:
   side: 0
   iscollapse: 0
   canhit: 1
+  candie: 1
   killcut: 0
 --- !u!95 &609046974
 Animator:
@@ -130248,10 +130285,10 @@ MonoBehaviour:
   topBar: {fileID: 319515765}
   bottomBar: {fileID: 1665113398}
   animationDuration: 0.5
-  topStartY: 225
-  bottomStartY: -225
-  targetY1: 144
-  targetY2: -144
+  topStartY: 280
+  bottomStartY: -280
+  targetY1: 140
+  targetY2: -140
   whilein: 0
 --- !u!1 &672044064
 GameObject:
@@ -349561,8 +349598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 2.0304, y: -225}
-  m_SizeDelta: {x: 813.695, y: 100}
+  m_AnchoredPosition: {x: 0.0050119, y: -280}
+  m_SizeDelta: {x: 813.695, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665113399
 MonoBehaviour:
@@ -353385,6 +353422,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353392,6 +353431,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 0
@@ -353399,6 +353440,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353408,6 +353451,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353417,6 +353462,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353425,6 +353472,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353434,6 +353483,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 0
@@ -353441,6 +353492,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353450,6 +353503,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353460,6 +353515,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 0
@@ -353467,6 +353524,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353476,6 +353535,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353485,6 +353546,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353493,6 +353556,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353503,6 +353568,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353512,6 +353579,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353520,6 +353589,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353530,6 +353601,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353540,6 +353613,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353548,6 +353623,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353555,6 +353632,8 @@ MonoBehaviour:
       basicdelay: 0.05
       dotdelay: 0.25
       end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
   - dialogueLines:
@@ -353563,6 +353642,8 @@ MonoBehaviour:
       basicdelay: 0.5
       dotdelay: 0.3
       end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
   - dialogueLines:
@@ -353571,6 +353652,8 @@ MonoBehaviour:
       basicdelay: 0.5
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 2
@@ -353579,6 +353662,8 @@ MonoBehaviour:
       basicdelay: 0.15
       dotdelay: 0.3
       end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
   - dialogueLines:
@@ -353587,6 +353672,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353594,6 +353681,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353601,6 +353690,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353609,6 +353700,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353617,6 +353710,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 0
@@ -353624,6 +353719,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
     - target: 1
@@ -353631,6 +353728,8 @@ MonoBehaviour:
       basicdelay: 0.1
       dotdelay: 0.3
       end: 1
+      end_lookplayer: 0
+      end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
   answers:
@@ -353677,6 +353776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackcore: {fileID: 840654302}
+  letterbox: {fileID: 671870209}
 --- !u!1 &1695546607
 GameObject:
   m_ObjectHideFlags: 0
@@ -396150,6 +396250,7 @@ MonoBehaviour:
   side: 0
   iscollapse: 0
   canhit: 1
+  candie: 1
   killcut: 0
 --- !u!114 &1995604095
 MonoBehaviour:

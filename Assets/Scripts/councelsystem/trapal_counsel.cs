@@ -13,14 +13,18 @@ public class trapal_counsel : MonoBehaviour
     public GameObject letterbox;
     public GameObject chat;
     public GameObject deny;
+    public GameObject[] trapal_halo;
 
     public bool firstmet;
 
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
 
+    
+
     public void Start()
     {
+        boss_hpbar.Die += GoTo2Phase;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
     }
@@ -58,8 +62,90 @@ public class trapal_counsel : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
+        yield return new WaitForSeconds(3);
         GetComponent<trapal_script>().canattack = true;
         yield return new WaitForSeconds(2);
         attackcore.GetComponent<attackcore>().BattleStart();
+    }
+
+    public void LookSelf()
+    {
+        cammanagerCameraManager.Looksmallpoint(gameObject);
+    }
+
+    public void Lookplaer()
+    {
+        StartCoroutine(Lookplaer_co());
+        
+    }
+
+    IEnumerator Lookplaer_co()
+    {
+        yield return new WaitForSeconds(3);
+        cammanagerCameraManager.LookPlayer();
+        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+    }
+
+    public void GoTo2Phase()
+    {
+        player.GetComponent<playerhit>().canhit = false;
+
+        GetComponent<trapal_script>().canattack = false;
+        GetComponent<trapal_script>().phase2 = true;
+        GetComponent<boss_hpbar>().candie = true;
+
+        if (GetComponent<trapal_passive>().deny24count > GetComponent<trapal_passive>().certain24count)
+        {
+            DenyPhase();
+        }
+        else if (GetComponent<trapal_passive>().deny24count < GetComponent<trapal_passive>().certain24count) 
+        {
+            CertainPhase();
+        }
+        else if (GetComponent<trapal_passive>().deny24count == GetComponent<trapal_passive>().certain24count)
+        {
+            boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
+            boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
+            if (DenyInstance.currentStack > CertainInstance.currentStack)
+            {
+                DenyPhase();
+            }
+            else if (DenyInstance.currentStack < CertainInstance.currentStack)
+            {
+                CertainPhase();
+            }
+            else if (DenyInstance.currentStack == CertainInstance.currentStack)
+            {
+                int i = Random.Range(0, 2);
+                if (i == 0)
+                {
+                    DenyPhase();
+                }
+                else if (i == 1)
+                {
+                    CertainPhase();
+                }
+            }
+        }
+    }
+
+    public void DenyPhase()
+    {
+        foreach (GameObject halo in trapal_halo)
+        {
+            StartCoroutine(Halo_Shutdown(halo));
+        }
+        transform.DOMoveY(1.74f, 5f).SetEase(Ease.OutQuad);
+    }
+
+    IEnumerator Halo_Shutdown(GameObject halo)
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 4.5f));
+        halo.SetActive(false);
+    }
+
+    public void CertainPhase()
+    {
+
     }
 }

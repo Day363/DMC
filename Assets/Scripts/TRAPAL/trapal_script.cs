@@ -70,10 +70,6 @@ public class trapal_script : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GetComponent<boss_hpbar>().currenthealth / 2 <= GetComponent<boss_hpbar>().maxhealth)
-        {
-            phase2 = true;
-        }
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 

@@ -20,6 +20,8 @@ public class Dialogue
     public float dotdelay = 0.5f;
 
     public bool end;
+    public bool end_lookplayer = true;
+    public bool end_letterboxin = true;
 
     public bool gotoanswer;
     public int answerindex;
@@ -202,8 +204,14 @@ public class chatmanager : MonoBehaviour
                 if (chat.end)
                 {
                     yield return new WaitForSeconds(1f);
-                    cammanager.GetComponent<CameraManager>().LookPlayer();
-                    letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+                    if (chat.end_lookplayer)
+                    {
+                        cammanager.GetComponent<CameraManager>().LookPlayer();
+                    }
+                    if (chat.end_letterboxin)
+                    {
+                        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+                    }
                     player.GetComponent<PlayerMove>().canmove = true;
                     chatnumber = 0;
                     chating = false;
@@ -236,8 +244,14 @@ public class chatmanager : MonoBehaviour
         if (chat.end)
         {
             yield return new WaitForSeconds(1f);
-            cammanager.GetComponent<CameraManager>().LookPlayer();
-            letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+            if (chat.end_lookplayer)
+            {
+                cammanager.GetComponent<CameraManager>().LookPlayer();
+            }
+            if (chat.end_letterboxin)
+            {
+                letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+            }         
             player.GetComponent<PlayerMove>().canmove = true;
             chatnumber = 0;
             chating = false;

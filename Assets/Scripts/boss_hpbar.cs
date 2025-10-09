@@ -10,6 +10,7 @@ using UnityEngine.Rendering.Universal;
 public class boss_hpbar : MonoBehaviour
 {
     public static event Action OnHitCalled;
+    public static event Action Die;
 
     public GameObject worldlight;
     public GameObject playerlight;
@@ -47,10 +48,13 @@ public class boss_hpbar : MonoBehaviour
     public bool iscollapse;
     public bool canhit = true;
 
+    public bool candie = true;
+
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
     public static event Action<Stack, int> OnStackRemoved;
+    
 
     public class StackInstance
     {
@@ -335,8 +339,12 @@ public class boss_hpbar : MonoBehaviour
     }
 
     IEnumerator Dead_co()
-    {
-        GetComponent<Animator>().SetTrigger("dying");
+    {  
+        if (candie)
+        {
+            GetComponent<Animator>().SetTrigger("dying");
+        }
+        Die.Invoke();
         float worldlightintensity = worldlight.GetComponent<Light2D>().intensity;
         Light2D worldlightLight2D = worldlight.GetComponent<Light2D>();
         worldlightLight2D.color = new Color(1, 0, 0, 1);

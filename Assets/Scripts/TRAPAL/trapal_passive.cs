@@ -37,6 +37,9 @@ public class trapal_passive : MonoBehaviour
     public bool whilecertain;
     public bool canApplystack = true;
 
+    public int deny24count;
+    public int certain24count;
+
     private void OnEnable()
     {
         boss_hpbar.OnHitCalled += Deny;
@@ -86,6 +89,7 @@ public class trapal_passive : MonoBehaviour
                 GetComponent<Animator>().SetBool("idle", false);
                 GetComponent<Animator>().SetTrigger("deny24");
                 canApplystack = false;
+                deny24count++;
 
             }
         }
@@ -114,6 +118,7 @@ public class trapal_passive : MonoBehaviour
                 GetComponent<boss_hpbar>().RemoveStack(certain, 24);
                 canApplystack = false;
                 StartCoroutine(Certain24());
+                certain24count++;
             }
         }
         else

@@ -7,6 +7,7 @@ public class counselfunctionmanager : MonoBehaviour
 {
     public static counselfunctionmanager Instance;
     public GameObject attackcore;
+    public GameObject letterbox;
 
     Dictionary<string, Action> functionMap;
 
@@ -59,10 +60,9 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Trapal_start()
     {
-        Debug.Log("adsas");
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
-            Debug.Log("aadadaddsas");
             ta.SetTrigger("start");
         }
     }
