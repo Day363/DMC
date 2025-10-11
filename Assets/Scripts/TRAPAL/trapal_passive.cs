@@ -40,6 +40,8 @@ public class trapal_passive : MonoBehaviour
     public int deny24count;
     public int certain24count;
 
+    public trapal_script ts;
+
     private void OnEnable()
     {
         boss_hpbar.OnHitCalled += Deny;
@@ -60,6 +62,8 @@ public class trapal_passive : MonoBehaviour
         fragment2normal_enemy_hp.cammanager = cammanager;
         fragment2normal_enemy_hp.attackcore = attackcore;
         fragment2.transform.position = new Vector3(6f, -1.9f, 0);
+
+        ts = GetComponent<trapal_script>();
     }
 
     public void FixedUpdate()
@@ -67,67 +71,68 @@ public class trapal_passive : MonoBehaviour
         boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
         boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
         
-        if (DenyInstance != null)
+        if (ts.phase2)
         {
-            if (DenyInstance.currentStack >= 12)
+            if (DenyInstance != null)
             {
-                GetComponent<Animator>().SetBool("deny", true);
-                whiledeny = true;
-                trapal_point.GetComponent<trapal_weapon_point>().count = 12;
+                if (DenyInstance.currentStack >= 12)
+                {
+                    GetComponent<Animator>().SetBool("deny", true);
+                    whiledeny = true;
+                    trapal_point.GetComponent<trapal_weapon_point>().count = 12;
+                }
+                else if (DenyInstance.currentStack < 12)
+                {
+                    GetComponent<Animator>().SetBool("deny", false);
+                    whiledeny = false;
+                    trapal_point.GetComponent<trapal_weapon_point>().count = 3;
+                }
+
+                if (DenyInstance.currentStack >= 24)
+                {
+                    GetComponent<trapal_script>().canattack = false;
+                    GetComponent<boss_hpbar>().RemoveStack(deny, 24);
+                    GetComponent<Animator>().SetBool("idle", false);
+                    GetComponent<Animator>().SetTrigger("deny24");
+                    canApplystack = false;
+                    deny24count++;
+
+                }
             }
-            else if (DenyInstance.currentStack < 12)
+            else
             {
                 GetComponent<Animator>().SetBool("deny", false);
                 whiledeny = false;
                 trapal_point.GetComponent<trapal_weapon_point>().count = 3;
             }
 
-            if (DenyInstance.currentStack >= 24)
+            if (CertainInstance != null)
             {
-                GetComponent<trapal_script>().canattack = false;
-                GetComponent<boss_hpbar>().RemoveStack(deny, 24);
-                GetComponent<Animator>().SetBool("idle", false);
-                GetComponent<Animator>().SetTrigger("deny24");
-                canApplystack = false;
-                deny24count++;
+                if (CertainInstance.currentStack >= 12)
+                {
+                    GetComponent<Animator>().SetBool("certain", true);
+                    whilecertain = true;
+                }
+                else
+                {
+                    GetComponent<Animator>().SetBool("certain", false);
+                    whilecertain = false;
+                }
 
-            }
-        }
-        else
-        {
-            GetComponent<Animator>().SetBool("deny", false);
-            whiledeny = false;
-            trapal_point.GetComponent<trapal_weapon_point>().count = 3;
-        }
-
-        if (CertainInstance != null)
-        {
-            if (CertainInstance.currentStack >= 12)
-            {
-                GetComponent<Animator>().SetBool("certain", true);
-                whilecertain = true;
+                if (CertainInstance.currentStack >= 24)
+                {
+                    GetComponent<boss_hpbar>().RemoveStack(certain, 24);
+                    canApplystack = false;
+                    StartCoroutine(Certain24());
+                    certain24count++;
+                }
             }
             else
             {
                 GetComponent<Animator>().SetBool("certain", false);
                 whilecertain = false;
             }
-
-            if (CertainInstance.currentStack >= 24)
-            {
-                GetComponent<boss_hpbar>().RemoveStack(certain, 24);
-                canApplystack = false;
-                StartCoroutine(Certain24());
-                certain24count++;
-            }
         }
-        else
-        {
-            GetComponent<Animator>().SetBool("certain", false);
-            whilecertain = false;
-        }
-
-        
     }
 
     public void Fragment()

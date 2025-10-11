@@ -2526,6 +2526,7 @@ Transform:
   - {fileID: 1483873305}
   - {fileID: 1232127271}
   - {fileID: 1678837216}
+  - {fileID: 15789686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &13111078
@@ -2593,7 +2594,27 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 3.46, z: 0}
   duration: 2
   backtrigger: 0
+  deny: {fileID: 0}
+  dir: 1
   phase2: 0
+  lazerpos: {fileID: 15789685}
+  phase2lazer: {fileID: 7696214330338488038, guid: 27a6a15054b0db142a06c923fd28788b, type: 3}
+  phase2currentlazer: {fileID: 0}
+  whileattack: 0
+  phase2lazercooltime: 1000
+  phase2lazercool: 0
+  phase2attack1cooltime: 1000
+  phase2attack1cool: 0
+  phase2attack2cooltime: 1000
+  phase2attack2cool: 0
+  lazer2s: []
+  attack1count: 0
+  trapal_slash: {fileID: 3650943234627083785, guid: 7ae5990f2b8d22a4dab045de5e2822bd, type: 3}
+  trapal_slash_warning: {fileID: 7804494006221275672, guid: 2500f2b3526e77749aafca29145dd75e, type: 3}
+  trapal_attack2_slash: {fileID: 9103727703359518429, guid: e164dd32f271a9648be2342d7ed1f54e, type: 3}
+  attack2angle: 
+  attack2pos: []
+  currenatcore: {fileID: 0}
 --- !u!114 &13111079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,7 +2679,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &13111081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2674,7 +2695,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2767,6 +2788,7 @@ MonoBehaviour:
   canApplystack: 1
   deny24count: 0
   certain24count: 0
+  ts: {fileID: 0}
 --- !u!114 &13111084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3082,6 +3104,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15485322}
   m_CullTransparentMesh: 1
+--- !u!1 &15789685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15789686}
+  m_Layer: 6
+  m_Name: lazerpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &15789686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15789685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 13111077}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &16071610
 GameObject:
   m_ObjectHideFlags: 0
@@ -46976,6 +47029,7 @@ GameObject:
   - component: {fileID: 270786081}
   - component: {fileID: 270786080}
   - component: {fileID: 270786083}
+  - component: {fileID: 270786084}
   m_Layer: 6
   m_Name: trapalcanvas
   m_TagString: Untagged
@@ -47064,7 +47118,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 159806315
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &270786083
@@ -47082,6 +47136,18 @@ MonoBehaviour:
   boss_hpbar: {fileID: 13111079}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 688798014}
+--- !u!114 &270786084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270786078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aacc03b4fc57464d9a1a6331569d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &271344829
 GameObject:
   m_ObjectHideFlags: 0
@@ -157132,6 +157198,7 @@ MonoBehaviour:
   skillstring: []
   attacklist_notset: []
   canattack: 1
+  whilecooltime: 0
   isdelay: 1
   dash: 0
   focusing: 0
@@ -353732,6 +353799,64 @@ MonoBehaviour:
       end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
+  - dialogueLines:
+    - target: 1
+      dialogue: "<color=red>\uC774\uB807\uAC8C \uB05D\uB0BC \uC218\uB294 \uC5C6\uC9C0.</color>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC5ED\uC2DC <color=red>\uC21C\uD658</color>\uC740 \uC6B0\uB9AC
+        \uBAA8\uB450\uC5D0\uAC8C \n\uD544\uC694\uD588\uB358\uAC83\uC774\uB77C\uACE0."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uADF8\uB807\uAC8C \uB9D0\uD558\uB358 \uAE30\uC5B5\uC774 \uC774\uB807\uAC8C\uB098
+        \uC120\uBA85\uD55C\uB370 \uB9D0\uC774\uC57C.."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uADF8\uB7FC, \uC81C\uB300\uB85C \uAC00\uBCFC\uAE4C\uC694, <color=red>\uC0C1\uB2F4\uC0AC\uB2D8</color>."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "<color=red>\uC774 \uC9C0\uAE0B\uC9C0\uAE0B\uD55C \uC21C\uD658\uB3C4
+        \uC774\uC81C\uB294 \uB04A\uC5B4\uB0B4\uC57C\uC8E0.</color>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "...\uC544\uB2D9\uB2C8\uAE4C?<function=trapal_start>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      end: 1
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
   answers:
   - answers:
     - answer: "[\uC790\uB9AC\uB97C \uB5A0\uB09C\uB2E4]"
@@ -397652,9 +397777,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingLayerID: 1594808437
+  m_SortingLayer: -4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f4013dae60145c04aad774460f174b2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

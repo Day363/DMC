@@ -54,6 +54,11 @@ public class trapal_counsel : MonoBehaviour
         deny.transform.DOScale(new Vector3(0.38f, 0.38f, 1), 0.7f).SetEase(Ease.InOutQuart);
     }
 
+    public void DenyKill()
+    {
+        deny.transform.DOScale(new Vector3(0f, 0f, 1), 0.7f).SetEase(Ease.InOutQuart);
+    }
+
     public void BattleStart()
     {
         StartCoroutine(BattleStart_co());
@@ -79,6 +84,20 @@ public class trapal_counsel : MonoBehaviour
         
     }
 
+    public void Lookplayer()
+    {
+        cammanagerCameraManager.LookPlayer();
+        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+    }
+
+    public void BattleStart2()
+    {
+        GetComponent<trapal_script>().canattack = true;
+        attackcore.GetComponent<attackcore>().canattack = true;
+        player.GetComponent<PlayerMove>().canmove = true;
+        attackcore.GetComponent<attackcore>().BattleStart();
+    }
+
     IEnumerator Lookplaer_co()
     {
         yield return new WaitForSeconds(3);
@@ -88,11 +107,15 @@ public class trapal_counsel : MonoBehaviour
 
     public void GoTo2Phase()
     {
-        player.GetComponent<playerhit>().canhit = false;
+        attackcore.GetComponent<attackcore>().canattack = false;
+        player.GetComponent<PlayerMove>().canmove = false;
 
+        player.GetComponent<playerhit>().canhit = false;
         GetComponent<trapal_script>().canattack = false;
         GetComponent<trapal_script>().phase2 = true;
         GetComponent<boss_hpbar>().candie = true;
+
+        GetComponent<boss_hpbar>().currenthealth = GetComponent<boss_hpbar>().maxhealth;
 
         if (GetComponent<trapal_passive>().deny24count > GetComponent<trapal_passive>().certain24count)
         {
@@ -131,16 +154,34 @@ public class trapal_counsel : MonoBehaviour
 
     public void DenyPhase()
     {
+        GetComponent<Animator>().SetTrigger("denyphase2entry");
+
         foreach (GameObject halo in trapal_halo)
         {
             StartCoroutine(Halo_Shutdown(halo));
         }
         transform.DOMoveY(1.74f, 5f).SetEase(Ease.OutQuad);
+        StartCoroutine(SayCooltime());
+    }
+
+    IEnumerator SayCooltime()
+    {
+        yield return new WaitForSeconds(5f);
+        campos.transform.position = transform.position;
+        cammanagerCameraManager.LookCounsel(campos);
+        cammanagerCameraManager.CinemachineInvalidateCache();
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        playerPlayerMove.canmove = false;
+        playerPlayerMove.Stop();
+        gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+        gamemanager.GetComponent<chatmanager>().CallDialogue(4);
     }
 
     IEnumerator Halo_Shutdown(GameObject halo)
     {
         yield return new WaitForSeconds(Random.Range(1f, 4.5f));
+        halo.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetEase(Ease.OutQuad);
+        yield return new WaitForSeconds(0.6f);
         halo.SetActive(false);
     }
 

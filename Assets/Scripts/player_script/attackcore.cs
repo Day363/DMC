@@ -99,6 +99,7 @@ public class attackcore : MonoBehaviour
     public List<Skill> attacklist_notset;
     public List<SkillReady> attacklist = new List<SkillReady> { };
     public bool canattack = true;
+    public bool whilecooltime = false;
     public bool isdelay = true;
     public bool dash = false;
     public bool focusing = false;
@@ -981,7 +982,7 @@ public class attackcore : MonoBehaviour
         }
 
 
-        if (canattack)
+        if (canattack && !whilecooltime)
         {
             if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
             {
@@ -1333,6 +1334,8 @@ public class attackcore : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting)
             {
+                playerplayerhit.canhit = true;
+
                 cursor1.SetActive(true);
                 cursor2.SetActive(true);
 
@@ -1406,6 +1409,8 @@ public class attackcore : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus > 0)
         {
+            playerplayerhit.canhit = false;
+
             if (canattack && playerPlayerMove.canmove)
             {
                 cammanager.GetComponent<CameraManager>().CamStable();
@@ -1457,6 +1462,8 @@ public class attackcore : MonoBehaviour
         {
             if (canattack && !playerPlayerMove.canmove)
             {
+                playerplayerhit.canhit = true;
+
                 cursor1.SetActive(true);
                 cursor2.SetActive(true);
 
@@ -1509,15 +1516,15 @@ public class attackcore : MonoBehaviour
 
     IEnumerator AttackBackDelay(float time)
     {
-        canattack = false;
+        whilecooltime = true;
         yield return new WaitForSeconds(time);
-        canattack = true;
+        whilecooltime = false;
     }
 
     public void AttackBackDelayDelete()
     {
         StopCoroutine(currentattackdelay);
-        canattack = true;
+        whilecooltime = false;
     }
 
     IEnumerator DashFlash()

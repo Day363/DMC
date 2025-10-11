@@ -6,6 +6,7 @@ public class lazer2lookat : MonoBehaviour
 {
     public bool isshoot = true;
     public bool canshoot = true;
+    public bool canwarning = true;
 
     public GameObject player;
     public GameObject cammanager;
@@ -50,16 +51,25 @@ public class lazer2lookat : MonoBehaviour
 
     public void Charge()
     {
+        
         Vector3 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         anglea = angle;
 
         look = false;
 
-        if (canshoot)
+        if (canwarning)
         {
-            Instantiate(warning, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+            if (canshoot)
+            {
+                Instantiate(warning, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+            }
         }
+        else
+        {
+            Instantiate(warning, gameObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
+        }
+        
         
 
         foreach (GameObject halos in halolist)
@@ -78,6 +88,18 @@ public class lazer2lookat : MonoBehaviour
             Shoot();
         }
         
+    }
+
+    public void Shoot2()
+    {
+        GameObject currentshoot = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, 0));
+        currentshoot.GetComponent<enemyattack>().player = player;
+        foreach (GameObject halos in halolist)
+        {
+            halos.GetComponent<trapal_lazer2_turn>().Shoot();
+        }
+        cammanager.GetComponent<CameraManager>().CamVibration1();
+        StartCoroutine(SelfDes());
     }
 
     public void Shoot()
