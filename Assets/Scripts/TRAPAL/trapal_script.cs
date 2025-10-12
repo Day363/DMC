@@ -83,6 +83,7 @@ public class trapal_script : MonoBehaviour
     public List<int> attack2angle = new List<int> { };
     public List<Vector3> attack2pos = new List<Vector3> { };
     public GameObject currenatcore;
+    public GameObject spaceslash;
 
     public void Start()
     {
@@ -452,7 +453,7 @@ public class trapal_script : MonoBehaviour
 
     public void Attack1_1()
     {
-        transform.position = new Vector3(player.transform.position.x + (-5f * dir), player.transform.position.y + 2, 0);
+        transform.position = new Vector3(player.transform.position.x + (-5f * dir), player.transform.position.y + 1.5f, 0);
     }
 
     public void Attack1_1_dash()
@@ -462,7 +463,7 @@ public class trapal_script : MonoBehaviour
 
     public void Attack1_2()
     {
-        transform.position = new Vector3(player.transform.position.x + (-7.5f * dir), player.transform.position.y + 2, 0);
+        transform.position = new Vector3(player.transform.position.x + (-7.5f * dir), player.transform.position.y + 1.5f, 0);
     }
 
     public void Attack1_2_dash()
@@ -530,4 +531,43 @@ public class trapal_script : MonoBehaviour
     {
         whileattack = false;
     }
+
+    public void SpaceSlash()
+    {
+        StartCoroutine(SpaceSlash_co());
+    }
+
+    IEnumerator SpaceSlash_co()
+    {
+        Vector2 dir = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Instantiate(trapal_slash_warning, transform.position, Quaternion.Euler(0, 0, angle));
+        yield return new WaitForSeconds(0.5f);
+        GameObject currentslash1 = Instantiate(spaceslash, transform.position, Quaternion.Euler(0, 0, angle));
+        yield return new WaitForSeconds(0.7f);
+        Vector3 playerpos = player.transform.position;
+        Vector3 pos = new Vector3(Random.Range(-30f, 30f), Random.Range(-25f, 25f), 0);
+        dir = player.transform.position - pos;
+        angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Instantiate(trapal_slash_warning, playerpos, Quaternion.Euler(0, 0, angle));
+        yield return new WaitForSeconds(0.5f);
+        GameObject currentslash2 = Instantiate(spaceslash, playerpos, Quaternion.Euler(0, 0, angle));
+        currentslash2.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+        yield return new WaitForSeconds(0.7f);
+        playerpos = player.transform.position;
+        pos = new Vector3(Random.Range(-30f, 30f), Random.Range(-25f, 25f), 0);
+        dir = player.transform.position - pos;
+        angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Instantiate(trapal_slash_warning, playerpos, Quaternion.Euler(0, 0, angle));
+        yield return new WaitForSeconds(0.5f);
+        GameObject currentslash3 = Instantiate(spaceslash, playerpos, Quaternion.Euler(0, 0, angle));
+        currentslash3.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;
+        yield return new WaitForSeconds(3f);
+        Destroy(currentslash1);
+        Destroy(currentslash2);
+        Destroy(currentslash3);
+
+    }
+
+    
 }
