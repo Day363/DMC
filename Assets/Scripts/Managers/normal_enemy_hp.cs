@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 
 public class normal_enemy_hp : MonoBehaviour
 {
+    public event Action OnDeath;
+
     public GameObject currenthitobjcet;
 
     public GameObject gammanager;
@@ -23,6 +26,8 @@ public class normal_enemy_hp : MonoBehaviour
 
     public bool canhit = true;
 
+    public bool candie = true;
+
     private void Start()
     {
         currenthealth = maxhealth;
@@ -30,9 +35,13 @@ public class normal_enemy_hp : MonoBehaviour
 
     public void Redemisson()
     {
-        DOTween.Kill("enemyflash");
-        GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0.5f);
-        DOTween.To(() => GetComponent<SpriteRenderer>().material.GetFloat("_flashamount"), value => GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", value), 0f, 0.35f).SetEase(Ease.OutQuart).SetUpdate(true).SetId("enemyflash");
+        if (TryGetComponent<SpriteRenderer>(out SpriteRenderer sr))
+        {
+            DOTween.Kill("enemyflash");
+            sr.material.SetFloat("_flashamount", 0.5f);
+            DOTween.To(() => sr.material.GetFloat("_flashamount"), value => sr.material.SetFloat("_flashamount", value), 0f, 0.35f).SetEase(Ease.OutQuart).SetUpdate(true).SetId("enemyflash");
+        }
+        
     }
 
     public void Damage(int damage)
@@ -156,6 +165,16 @@ public class normal_enemy_hp : MonoBehaviour
 
     public void Dead()
     {
-        GetComponent<Animator>().SetTrigger("dying");
+        if (candie)
+        {
+            OnDeath?.Invoke();
+            if (TryGetComponent<Animator>(out Animator ani))
+            {
+                ani.SetTrigger("dying");
+            }
+            
+            
+        }
+        
     }
 }

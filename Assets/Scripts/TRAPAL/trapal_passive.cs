@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class trapal_passive : MonoBehaviour
 {
+    public static Action OnCertainEnd;
+
     public GameObject light1;
     public GameObject light2;
 
@@ -30,6 +33,7 @@ public class trapal_passive : MonoBehaviour
     public GameObject certaindeny;
     public GameObject diffusion_fragment;
     public GameObject convergence_fragment;
+    public GameObject eye2;
 
     public boss_hpbar BossstackHander;
 
@@ -40,6 +44,8 @@ public class trapal_passive : MonoBehaviour
     public int deny24count;
     public int certain24count;
 
+    public int certaindestroy;
+
     public trapal_script ts;
 
     private void OnEnable()
@@ -47,6 +53,10 @@ public class trapal_passive : MonoBehaviour
         boss_hpbar.OnHitCalled += Deny;
         playerhit.OnHitCalled += Onhit;
         trapal_lazer1.OnLazerHitCalled += Lazer1_Hit;
+        trapal_certain_eye.OnDie += Certain24plus;
+
+        GetComponent<boss_hpbar>().ApplyStack(deny, 1);
+        GetComponent<boss_hpbar>().ApplyStack(certain, 1);
 
         GameObject fragment1 = Instantiate(diffusion_fragment);
         fragment1.GetComponent<fragment_script>().trapal = gameObject;
@@ -71,17 +81,17 @@ public class trapal_passive : MonoBehaviour
         boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
         boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
         
-        if (ts.phase2)
+        if (!ts.phase2)
         {
             if (DenyInstance != null)
             {
-                if (DenyInstance.currentStack >= 12)
+                if (DenyInstance.currentStack >= CertainInstance.currentStack && DenyInstance.currentStack >= 12)
                 {
                     GetComponent<Animator>().SetBool("deny", true);
                     whiledeny = true;
                     trapal_point.GetComponent<trapal_weapon_point>().count = 12;
                 }
-                else if (DenyInstance.currentStack < 12)
+                else 
                 {
                     GetComponent<Animator>().SetBool("deny", false);
                     whiledeny = false;
@@ -108,7 +118,7 @@ public class trapal_passive : MonoBehaviour
 
             if (CertainInstance != null)
             {
-                if (CertainInstance.currentStack >= 12)
+                if (CertainInstance.currentStack >= DenyInstance.currentStack && CertainInstance.currentStack >= 12)
                 {
                     GetComponent<Animator>().SetBool("certain", true);
                     whilecertain = true;
@@ -147,7 +157,7 @@ public class trapal_passive : MonoBehaviour
 
         GameObject currentfragment;
 
-        yield return new WaitForSeconds(Random.Range(3f, 10f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(3f, 10f));
         if (DenyInstance != null && CertainInstance != null)
         {
             if (DenyInstance.currentStack > CertainInstance.currentStack)
@@ -158,7 +168,7 @@ public class trapal_passive : MonoBehaviour
                 currentfragmentnormal_enemy_hp.gammanager = gamemanager;
                 currentfragmentnormal_enemy_hp.cammanager = cammanager;
                 currentfragmentnormal_enemy_hp.attackcore = attackcore;
-                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+                currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
             }
             else if (DenyInstance.currentStack < CertainInstance.currentStack)
             {
@@ -168,7 +178,7 @@ public class trapal_passive : MonoBehaviour
                 currentfragmentnormal_enemy_hp.gammanager = gamemanager;
                 currentfragmentnormal_enemy_hp.cammanager = cammanager;
                 currentfragmentnormal_enemy_hp.attackcore = attackcore;
-                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+                currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
             }
         }
         else if (DenyInstance != null && CertainInstance == null)
@@ -179,7 +189,7 @@ public class trapal_passive : MonoBehaviour
             currentfragmentnormal_enemy_hp.gammanager = gamemanager;
             currentfragmentnormal_enemy_hp.cammanager = cammanager;
             currentfragmentnormal_enemy_hp.attackcore = attackcore;
-            currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
         }
         else if (DenyInstance == null && CertainInstance != null)
         {
@@ -189,11 +199,11 @@ public class trapal_passive : MonoBehaviour
             currentfragmentnormal_enemy_hp.gammanager = gamemanager;
             currentfragmentnormal_enemy_hp.cammanager = cammanager;
             currentfragmentnormal_enemy_hp.attackcore = attackcore;
-            currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+            currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
         }
         else if (DenyInstance == null && CertainInstance == null)
         {
-            int i = Random.Range(0, 2);
+            int i = UnityEngine.Random.Range(0, 2);
             if (i == 0)
             {
                 currentfragment = Instantiate(diffusion_fragment);
@@ -202,7 +212,7 @@ public class trapal_passive : MonoBehaviour
                 currentfragmentnormal_enemy_hp.gammanager = gamemanager;
                 currentfragmentnormal_enemy_hp.cammanager = cammanager;
                 currentfragmentnormal_enemy_hp.attackcore = attackcore;
-                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+                currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
             }
             else
             {
@@ -212,7 +222,7 @@ public class trapal_passive : MonoBehaviour
                 currentfragmentnormal_enemy_hp.gammanager = gamemanager;
                 currentfragmentnormal_enemy_hp.cammanager = cammanager;
                 currentfragmentnormal_enemy_hp.attackcore = attackcore;
-                currentfragment.transform.position = new Vector3(Random.Range(-25f, 25f), -1.9f, 0);
+                currentfragment.transform.position = new Vector3(UnityEngine.Random.Range(-25f, 25f), -1.9f, 0);
             }
         }
     }
@@ -302,12 +312,12 @@ public class trapal_passive : MonoBehaviour
     IEnumerator Glitch()
     {
         
-        yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.5f));
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(-14f, 14f), 0);
         GameObject curglitch = Instantiate(glitch, pos, Quaternion.identity);
-        curglitch.transform.localScale = new Vector3(300f, Random.Range(0.12f, 0.6f), 1);
+        curglitch.transform.localScale = new Vector3(300f, UnityEngine.Random.Range(0.12f, 0.6f), 1);
         curglitch.GetComponent<SpriteRenderer>().material.SetVector("_moveto", new Vector2(UnityEngine.Random.Range(-0.05f, 0.05f), 0));
-        yield return new WaitForSeconds(Random.Range(0.1f, 1f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 1f));
         Destroy(curglitch);
         
     }
@@ -315,13 +325,17 @@ public class trapal_passive : MonoBehaviour
 
     IEnumerator Certain24()
     {
+        GetComponent<boss_hpbar>().canhit = false;
+
+        certaindestroy = 0;
+
         GetComponent<trapal_script>().canattack = false;
 
         for (int i = 0; i < 6; i++)
         {
             yield return new WaitForSeconds(1);
 
-            for (int x = 0; x < Random.Range(7, 15); x++)
+            for (int x = 0; x < UnityEngine.Random.Range(7, 15); x++)
             {
 
                 StartCoroutine(Glitch());
@@ -340,12 +354,49 @@ public class trapal_passive : MonoBehaviour
         GameObject currentmask = Instantiate(mask, transform.position, Quaternion.identity);
         currentmask.transform.localScale = new Vector3(200, 50, 1);
 
+        GameObject currenteye = Instantiate(eye2, transform.position, Quaternion.identity);
+        currenteye.transform.localScale = Vector3.zero;
+        float scale = UnityEngine.Random.Range(0.5f, 1.5f);
+        currenteye.transform.DOScale(new Vector3(scale, scale, 1), 0.5f);
+        currenteye.GetComponent<trapal_certain_eye>().tp = this;
+        currenteye.GetComponent<trapal_certain_eye>().player = player;
+        currenteye.GetComponent<trapal_certain_eye>().gamemanager = gamemanager;
+        currenteye.GetComponent<trapal_certain_eye>().cammanager = cammanager;
+        currenteye.GetComponent<trapal_certain_eye>().attackcore = attackcore;
+        currenteye.transform.GetChild(0).GetComponent<trapal_deny_eye>().centerObject = currenteye.transform.GetChild(1);
+        currenteye.transform.GetChild(0).GetComponent<trapal_deny_eye>().player = player.transform;
+        normal_enemy_hp currenteyenormal_enemy_hp = currenteye.GetComponent<normal_enemy_hp>();
+        currenteyenormal_enemy_hp.gammanager = gamemanager;
+        currenteyenormal_enemy_hp.cammanager = cammanager;
+        currenteyenormal_enemy_hp.attackcore = attackcore;
+
         yield return new WaitForSeconds(15f);
         light1.SetActive(true);
         light2.SetActive(true);
         GetComponent<trapal_script>().canattack = true;
         canApplystack = true;
         Destroy(currentmask);
+        GetComponent<boss_hpbar>().canhit = true;
+        WhenCertain24End();
+    }
+
+    public void Certain24plus()
+    {
+        certaindestroy++;
+    }
+
+    public void WhenCertain24End()
+    {
+        OnCertainEnd?.Invoke();
+
+        if (certaindestroy >= 12)
+        {
+            GetComponent<boss_hpbar>().BalanceCollapse();
+        }
+        else
+        {
+            player.GetComponent<playerstatus>().BalanceCollapse();
+        }
     }
 
     public void Lazer1_Hit(Vector2 direction)
@@ -364,11 +415,11 @@ public class trapal_passive : MonoBehaviour
     IEnumerator Lazer1_Hit_co()
     {
         int i = 0;
-        while (i < Random.Range(7, 15))
+        while (i < UnityEngine.Random.Range(7, 15))
         {
             i++;
             yield return new WaitForSeconds(0.06f);
-            Vector3 spawnPosition = new Vector3(player.transform.position.x + Random.Range(-1, 1), 8, -6.5f);
+            Vector3 spawnPosition = new Vector3(player.transform.position.x + UnityEngine.Random.Range(-1, 1), 8, -6.5f);
             GameObject curlazer2 = Instantiate(lazer2_small, spawnPosition, Quaternion.identity);
             curlazer2.transform.position = new Vector3(curlazer2.transform.position.x, curlazer2.transform.position.y, -6.5f);
             curlazer2.GetComponent<lazer2lookat>().player = player;

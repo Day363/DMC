@@ -117,7 +117,7 @@ public class boss_hpbar : MonoBehaviour
             OnStackRemoved?.Invoke(targetStack, amount);
 
             // 스택이 0이면 목록에서 제거
-            if (existing.currentStack <= 0)
+            if (existing.currentStack <= 0 && existing.stackData.disappear_whenzero)
             {
                 activeStacks.Remove(existing);
                 Debug.Log($"{targetStack.effectName} stack fully removed.");
@@ -158,25 +158,30 @@ public class boss_hpbar : MonoBehaviour
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
-            GetComponent<Animator>().SetBool("idle", false);
-            GetComponent<Animator>().SetTrigger("collapse");
-
-            currentbalance = 0;
-            if (attackcore.GetComponent<attackcore>().standbyskills.Count > 0)
-            {
-                Debug.Log("대기스킬이 1개 이상이므로 대기스킬 사용");
-                attackcore.GetComponent<attackcore>().UseStandbySkill();
-            }
-            else
-            {
-                StartCoroutine(Collapsetimeout());
-            }
-
-            
-            
-            iscollapse = true;
-            // 균형붕괴
+            BalanceCollapse();
         }
+    }
+
+    public void BalanceCollapse()
+    {
+        GetComponent<Animator>().SetBool("idle", false);
+        GetComponent<Animator>().SetTrigger("collapse");
+
+        currentbalance = 0;
+        if (attackcore.GetComponent<attackcore>().standbyskills.Count > 0)
+        {
+            Debug.Log("대기스킬이 1개 이상이므로 대기스킬 사용");
+            attackcore.GetComponent<attackcore>().UseStandbySkill();
+        }
+        else
+        {
+            StartCoroutine(Collapsetimeout());
+        }
+
+
+
+        iscollapse = true;
+        // 균형붕괴
     }
 
     IEnumerator Collapsetimeout()

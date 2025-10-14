@@ -213,10 +213,15 @@ public class playerstatus : MonoBehaviour
         if (currentbalance >= maxbalance)
         {
             currentbalance = 0;
-            // ±ÕÇüºØ±«
+            BalanceCollapse();
         }
 
         
+    }
+
+    public void BalanceCollapse()
+    {
+
     }
 
     public void SelfBalanceDamage(float balance)
