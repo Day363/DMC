@@ -40,6 +40,7 @@ public class trapal_passive : MonoBehaviour
     public bool whiledeny;
     public bool whilecertain;
     public bool canApplystack = true;
+    public bool whilecertain24 = false;
 
     public int deny24count;
     public int certain24count;
@@ -325,6 +326,8 @@ public class trapal_passive : MonoBehaviour
 
     IEnumerator Certain24()
     {
+        whilecertain24 = true;
+
         GetComponent<boss_hpbar>().canhit = false;
 
         certaindestroy = 0;
@@ -358,11 +361,13 @@ public class trapal_passive : MonoBehaviour
         currenteye.transform.localScale = Vector3.zero;
         float scale = UnityEngine.Random.Range(0.5f, 1.5f);
         currenteye.transform.DOScale(new Vector3(scale, scale, 1), 0.5f);
-        currenteye.GetComponent<trapal_certain_eye>().tp = this;
-        currenteye.GetComponent<trapal_certain_eye>().player = player;
-        currenteye.GetComponent<trapal_certain_eye>().gamemanager = gamemanager;
-        currenteye.GetComponent<trapal_certain_eye>().cammanager = cammanager;
-        currenteye.GetComponent<trapal_certain_eye>().attackcore = attackcore;
+        trapal_certain_eye currenteyetrapal_certain_eye = currenteye.GetComponent<trapal_certain_eye>();
+        currenteyetrapal_certain_eye.trapal = gameObject;
+        currenteyetrapal_certain_eye.tp = this;
+        currenteyetrapal_certain_eye.player = player;
+        currenteyetrapal_certain_eye.gamemanager = gamemanager;
+        currenteyetrapal_certain_eye.cammanager = cammanager;
+        currenteyetrapal_certain_eye.attackcore = attackcore;
         currenteye.transform.GetChild(0).GetComponent<trapal_deny_eye>().centerObject = currenteye.transform.GetChild(1);
         currenteye.transform.GetChild(0).GetComponent<trapal_deny_eye>().player = player.transform;
         normal_enemy_hp currenteyenormal_enemy_hp = currenteye.GetComponent<normal_enemy_hp>();
@@ -388,6 +393,7 @@ public class trapal_passive : MonoBehaviour
     public void WhenCertain24End()
     {
         OnCertainEnd?.Invoke();
+        whilecertain24 = false;
 
         if (certaindestroy >= 12)
         {

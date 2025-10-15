@@ -2639,7 +2639,7 @@ MonoBehaviour:
   canvas: {fileID: 270786078}
   balancebarint: {fileID: 915924458}
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
-  collapsefloat: 0
+  collapsefloat: 5
   maxhealth: 3000
   currenthealth: 0
   maxbalance: 500
@@ -2788,6 +2788,7 @@ MonoBehaviour:
   whiledeny: 0
   whilecertain: 0
   canApplystack: 1
+  whilecertain24: 0
   deny24count: 0
   certain24count: 0
   certaindestroy: 0
@@ -2809,6 +2810,7 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   gamemanager: {fileID: 1694457153}
   campos: {fileID: 1678837215}
+  campos2: {fileID: 1809938102}
   letterbox: {fileID: 671870209}
   chat: {fileID: 146283266}
   deny: {fileID: 498960624}
@@ -2843,7 +2845,24 @@ MonoBehaviour:
   - {fileID: 520773126}
   - {fileID: 2129304108}
   - {fileID: 473694507}
+  trapal_black_fade: {fileID: 1792952379599942845, guid: fa0c4097d6a30494980bc31e58725a96, type: 3}
+  chatpre: {fileID: 4327957546309461547, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
+  canvus: {fileID: 270786078}
   firstmet: 0
+  cameraset: 0
+  camerasize: 5
+  whispering:
+  - "<shake=0.5,8>\uB04A\uC5B4\uB0B4\uC57C...\uD558\uB294\uB370..</shake>"
+  - "<shake=0.3,25>\uC544\uBB34\uAC83\uB3C4 \uC911\uC694\uD558\uC9C0 \uC54A\uB2E4\uACE0!!!</shake>"
+  - "<shake=0.4,10>\uACB0\uAD6D \uC218\uB834\uD558\uACE0 \uB9D0\uAC83\uC774\uB2E4.</shake>"
+  - "<shake=0.4,6>\uB0B4\uC77C\uC774 \uCF54\uC55E\uC778\uB370..</shake>"
+  - "<shake=0.4,8>\uB098\uB294\uC0DD\uAC01\uD55C\uB2E4.</shake>"
+  - "<shake=0.4,8>\uD658\uC6D0\uC740 \uC774\uC81C \uC9C0\uAE0B\uC9C0\uAE0B\uD558\uB2E4.</shake>"
+  - "<shake=0.4,5>\uC790\uC544\uAC00 \uD55C \uC810\uC73C\uB85C \uB179\uC544\uB4E4\uC5B4\uAC00\uB294
+    \uB290\uB08C..</shake>"
+  - "<shake=0.4,5>\uBE48 \uAECD\uB370\uAE30\uB4E4\uC758 \uC0AC\uD68C\uAC00 \uC0AC\uB77D\uC0AC\uB77D
+    \uB0B4\uB294 \uC18C\uB9AC\uC640...</shake>"
+  - "<shake=0.4,20>\uB098\uC544\uAC00\uC57C\uB9CC\uD558\uB294\uB370</shake>"
 --- !u!1 &13365581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10166,6 +10185,7 @@ GameObject:
   - component: {fileID: 29092339}
   - component: {fileID: 29092341}
   - component: {fileID: 29092340}
+  - component: {fileID: 29092342}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -10243,6 +10263,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &29092342
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29092338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &29619238
 GameObject:
   m_ObjectHideFlags: 0
@@ -47268,7 +47305,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270786078}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 85}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.047058824, y: 0.047058824, z: 0.047058824}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47342,7 +47379,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 159806315
-  m_SortingOrder: 0
+  m_SortingOrder: 90
   m_TargetDisplay: 0
 --- !u!114 &270786083
 MonoBehaviour:

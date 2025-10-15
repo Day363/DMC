@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
+using Cinemachine;
+using UnityEngine.Rendering.Universal;
+using TMPro;
 
 public class trapal_counsel : MonoBehaviour
 {
@@ -10,12 +14,20 @@ public class trapal_counsel : MonoBehaviour
     public GameObject cammanager;
     public GameObject gamemanager;
     public GameObject campos;
+    public GameObject campos2;
     public GameObject letterbox;
     public GameObject chat;
     public GameObject deny;
     public GameObject[] trapal_halo;
+    public GameObject trapal_black_fade;
+    public GameObject chatpre;
+    public GameObject canvus;
 
     public bool firstmet;
+    public bool cameraset;
+    public float camerasize;
+
+    public string[] whispering;
 
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
@@ -27,6 +39,15 @@ public class trapal_counsel : MonoBehaviour
         boss_hpbar.Die += GoTo2Phase;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
+    }
+
+    public void LateUpdate()
+    {
+
+        if (cameraset)
+        {
+            cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = camerasize;
+        }
     }
 
     public void FixedUpdate()
@@ -76,6 +97,83 @@ public class trapal_counsel : MonoBehaviour
     public void LookSelf()
     {
         cammanagerCameraManager.Looksmallpoint(gameObject);
+    }
+
+    public void LookCampos()
+    {
+        cammanagerCameraManager.Looksmallpoint(campos2);
+    }
+
+    public void Zommin()
+    {
+        canvus.GetComponent<Canvas>().overrideSorting = true;
+        canvus.GetComponent<Canvas>().sortingLayerName = "background";
+        StartCoroutine(Zommin_co());
+        
+    }
+
+
+    IEnumerator Zommin_co()
+    {
+        cameraset = true;
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 2f, 20f).SetEase(Ease.OutCubic).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+        cammanager.GetComponent<CameraManager>().CamVibration20();
+        GameObject currentblack = Instantiate(trapal_black_fade, transform.position, Quaternion.identity);
+        currentblack.GetComponent<SpriteRenderer>().DOFade(1, 16f);
+        yield return new WaitForSeconds(20.1f);
+        camerasize = 4;
+        yield return new WaitForEndOfFrame();
+        cameraset = false;
+        canvus.GetComponent<Canvas>().sortingLayerName = "uiobject";
+    }
+
+    public void Whispering()
+    {
+        StartCoroutine(Whispering_co());
+    }
+
+    IEnumerator Whispering_co()
+    {
+        float delay = 1f;
+
+        for (int i = 0; i < 100; i++)
+        {
+            StartCoroutine(Whispering_co_co());
+            yield return new WaitForSeconds(delay);
+            delay = 1 * (1 - (i / 99));
+        }
+    }
+
+    IEnumerator Whispering_co_co()
+    {
+        GameObject currentchat = Instantiate(chatpre, canvus.transform);
+        currentchat.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+        currentchat.GetComponent<RectTransform>().localPosition = new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0);
+        currentchat.transform.rotation = Quaternion.Euler(0, 0, Random.Range(-30f, 30f));
+        currentchat.transform.localScale = new Vector3(2.4f, 2.4f, 2.4f);
+        TMP_Text tmp = currentchat.transform.GetChild(0).GetComponent<TMP_Text>();
+        TextEffectManager shaker = tmp.GetComponent<TextEffectManager>();
+        shaker.SetText(whispering[Random.Range(0, whispering.Length)]);
+        tmp.fontSize = Random.Range(2f, 4f);
+        tmp.color = new Color(0.5f, 0, 0, Random.Range(0.3f, 1f));
+        tmp.ForceMeshUpdate();
+        int totalvisible = tmp.textInfo.characterCount;
+        tmp.maxVisibleCharacters = 0;
+        int visible = 0;
+        while (visible < totalvisible)
+        {
+            visible++;
+            tmp.maxVisibleCharacters = visible;
+            if (shaker != null)
+                shaker.CheckEvents(visible);
+            float wait = 0.15f;
+            yield return new WaitForSeconds(wait);
+        }
+        yield return new WaitForSeconds(1.5f);
+        tmp.DOFade(0, 1f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(currentchat);
     }
 
     public void Lookplaer()
@@ -187,6 +285,13 @@ public class trapal_counsel : MonoBehaviour
 
     public void CertainPhase()
     {
+        StartCoroutine(CertainPhase_co());
+        
+    }
 
+    IEnumerator CertainPhase_co()
+    {
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetTrigger("2phase-2_start");
     }
 }
