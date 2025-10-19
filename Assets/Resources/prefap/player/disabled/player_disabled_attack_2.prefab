@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 7880688276144296467}
   - component: {fileID: 3110357613980766637}
   - component: {fileID: 4773439171850473980}
+  - component: {fileID: 2640062164794770134}
   m_Layer: 10
   m_Name: hitbox
   m_TagString: playerattack
@@ -218,6 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canattack: 1
+  canjump: 0
   player: {fileID: 0}
   damagenum: 1.5
   damage: 0
@@ -242,3 +245,19 @@ MonoBehaviour:
   attackeffect_:
   - {fileID: 7212541102233477223, guid: b9c0acf7ae22ba143aea294df126417f, type: 3}
   - {fileID: 9138673724804242370, guid: 4ee2e7af00984644cb114694d6e4a121, type: 3}
+--- !u!114 &2640062164794770134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681567306374134919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68477046b02feb4db62f87a43161c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stack: {fileID: 11400000, guid: f775d7130563a9d4d9c5378db8b9453d, type: 2}
+  stackamount: 2
+  percent: 1
+  applyinnextcycle: 0

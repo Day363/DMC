@@ -22,16 +22,31 @@ public class playerstatus : MonoBehaviour
     public float slash_tolerance = 1;
     public float penetration_tolerance = 1;
     public float blow_tolerance = 1;
+    public float slash_toleranceCore = 1;
+    public float penetration_toleranceCore = 1;
+    public float blow_toleranceCore = 1;
+
+    public float damagedecrease;
+    public float damagedecreaseCore = 1;
+
+    public float penetratedamageup;
+    public float penetratedamageupCore = 1;
 
     public float focus;
     public float maxbalance;
     public float currentbalance;
     public float speed;
-    public int attackpower;
+    public float attackpower;
+    public float attackpowerCore = 10;
 
-    public float bleeddamage;
-    public float disabledbleeddamagepercent = 1;
-    public float alttriggerdecreaseselfdamagepercent = 1;
+    public float bleeddamagedecrease;
+    public float bleeddamagedecreaseCore = 1;
+
+    public float healplus;
+    public float healplusCore = 1;
+
+    public float selfharmdamagepercent;
+    public float selfharmdamagepercentCore = 1;
 
     public Coroutine currentparrystop;
 
@@ -116,42 +131,22 @@ public class playerstatus : MonoBehaviour
         GetComponent<Passivefunction>().WhenRemoveStack();
     }
 
-    public void RemoveStackWhenCycleEnd()
-    {
-        foreach (StackInstance stackInstance in activeStacks)
-        {
-            if (stackInstance.stackData.whendecrease == TriggerType.OnCircumEnd)
-            {
-                stackInstance.currentStack -= 1;
-                if (stackInstance.currentStack <= 0 && stackInstance.stackData.disappear_whenzero)
-                {
-                    activeStacks.Remove(stackInstance);
-                }
-                canvus.GetComponent<stackUimanager>().RefreshUI();
-            }
-        }
-    }
+    //public void RemoveStackWhenCycleEnd()
+    //{
+    //    foreach (StackInstance stackInstance in activeStacks)
+    //    {
+    //        if (stackInstance.stackData.whendecrease == TriggerType.OnCircumEnd)
+    //        {
+    //            stackInstance.currentStack -= 1;
+    //            if (stackInstance.currentStack <= 0 && stackInstance.stackData.disappear_whenzero)
+    //            {
+    //                activeStacks.Remove(stackInstance);
+    //            }
+    //            canvus.GetComponent<stackUimanager>().RefreshUI();
+    //        }
+    //    }
+    //}
 
-    public void TriggerWhenCycleEnd()
-    {
-        StackInstance instance = activeStacks.Find(s => s.stackData.effectName == "출혈");
-        if (instance == null)
-        {
-            bleeddamage = 0;
-        }
-
-        foreach (StackInstance stackInstance in activeStacks)
-        {
-            if (stackInstance.stackData.trigger == TriggerType.OnCircumEnd)
-            {
-                if (stackInstance.stackData.effectName == "출혈")
-                {
-                    bleeddamage += 5;
-                    BalanceDamage(bleeddamage * disabledbleeddamagepercent);
-                }
-            }
-        }
-    }
 
     public void PrintStacks()
     {
@@ -159,6 +154,78 @@ public class playerstatus : MonoBehaviour
         {
             Debug.Log($"{s.stackData.effectName}: {s.currentStack}/{s.stackData.maxStacks}");
         }
+    }
+
+    public void CycleStart()
+    {
+        if (activeStacks.Count > 0)
+        {
+            foreach (StackInstance stack in activeStacks)
+            {  
+                if (stack.stackData.effectName == "관통 피해량 증가 I")
+                {
+                    penetratedamageup += 0.1f;
+                }
+                if (stack.stackData.effectName == "관통 피해량 증가 II")
+                {
+                    penetratedamageup += 0.2f;
+                }
+                if (stack.stackData.effectName == "후회")
+                {
+                    damagedecrease = damagedecrease * (1.01f * stack.currentStack);
+                    attackpower = attackpower * (1.01f * stack.currentStack);
+
+                }
+            }
+        }
+    }
+
+    public void CycleEnd()
+    {
+        if (activeStacks.Count > 0)
+        {
+            foreach (StackInstance stack in activeStacks)
+            {
+                if (stack.stackData.effectName == "출혈")
+                {
+                    BalanceDamage(stack.currentStack * bleeddamagedecrease);
+                    RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
+                    if (stack.currentStack == 1)
+                    {
+                        RemoveStack(stack.stackData, 1);
+                    }
+                }
+                if (stack.stackData.effectName == "관통 피해량 증가 I")
+                {
+                    RemoveStack(stack.stackData, 1);
+                }
+                if (stack.stackData.effectName == "관통 피해량 증가 II")
+                {
+                    RemoveStack(stack.stackData, 1);
+                }
+            }
+        }
+    }
+
+    public void PassiveFloatReset()
+    {
+        bleeddamagedecrease = bleeddamagedecreaseCore;
+
+        healplus = healplusCore;
+
+        slash_tolerance = slash_toleranceCore;
+
+        penetration_tolerance = penetration_toleranceCore;
+  
+        blow_tolerance = bleeddamagedecreaseCore;
+
+        damagedecrease = damagedecreaseCore;
+
+        penetratedamageup = penetratedamageupCore;
+
+        selfharmdamagepercent = selfharmdamagepercentCore;
+
+        attackpower = attackpowerCore;
     }
 
     private void Start()
@@ -208,7 +275,7 @@ public class playerstatus : MonoBehaviour
     {
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += balance;
+        currentbalance += balance * damagedecrease;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -217,6 +284,12 @@ public class playerstatus : MonoBehaviour
         }
 
         
+    }
+
+    public void BalanceHeal(float balance)
+    {
+        currentbalance -= balance * healplus;
+        BalanceCheck();
     }
 
     public void BalanceCollapse()
@@ -228,7 +301,7 @@ public class playerstatus : MonoBehaviour
     {
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += (balance * alttriggerdecreaseselfdamagepercent);
+        currentbalance += (balance * selfharmdamagepercent);
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {

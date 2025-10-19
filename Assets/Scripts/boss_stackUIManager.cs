@@ -46,6 +46,32 @@ public class boss_stackUIManager : MonoBehaviour
                 go.GetComponentInChildren<Animator>().enabled = false;
             }
         }
+
+        foreach (var stackInstance in boss_hpbar.nextcycleStacks)
+        {
+            GameObject go = Instantiate(stackUIPrefab, stackContainer);
+            currentStackUIObjects.Add(go);
+
+            Image iconImage = go.GetComponentInChildren<Image>();
+            TextMeshProUGUI countText = go.GetComponentInChildren<TextMeshProUGUI>();
+
+            if (iconImage != null)
+                iconImage.sprite = stackInstance.stackData.icon;
+
+            if (countText != null)
+                countText.text = stackInstance.currentStack.ToString();
+
+            if (stackInstance.stackData.animation != null)
+            {
+                ReplaceClip(go, stackInstance.stackData.animation);
+            }
+            else
+            {
+                go.GetComponentInChildren<Animator>().enabled = false;
+            }
+
+            iconImage.color = new Color(1, 1, 1, 0.4f);
+        }
     }
 
     void ReplaceClip(GameObject target, AnimationClip clip)

@@ -16,10 +16,12 @@ public class damagetext : MonoBehaviour
     public bool slash;
     public bool penetarte;
     public bool blow;
+    public bool fix;
 
     public Sprite slashsprite;
     public Sprite penetratesprite;
     public Sprite blowsprite;
+    public Sprite fixsprite;
 
     SpriteRenderer img;
     TextMeshPro text;
@@ -61,6 +63,10 @@ public class damagetext : MonoBehaviour
         else if (blow)
         {
             img.sprite = blowsprite;
+        }
+        else if (fix)
+        {
+            img.sprite = fixsprite;
         }
     }
 

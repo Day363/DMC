@@ -21,6 +21,8 @@ public class disabled_counsel : MonoBehaviour
     public GameObject cursor2;
     public GameObject balancebar;
     public GameObject playerstatus;
+    public GameObject counselmirror;
+    public GameObject background;
 
     //Ä³½Ì
     PlayerMove playerPlayerMove;
@@ -28,6 +30,7 @@ public class disabled_counsel : MonoBehaviour
 
     public void Start()
     {
+        boss_hpbar.Die += WhenDie;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
 
@@ -44,6 +47,7 @@ public class disabled_counsel : MonoBehaviour
             
             campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
             cammanagerCameraManager.LookCounsel(campos);
+            cammanagerCameraManager.CinemachineInvalidateCache();
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             playerPlayerMove.canmove = false;
             playerPlayerMove.Stop();
@@ -117,5 +121,26 @@ public class disabled_counsel : MonoBehaviour
     public void ResetAll()
     {
         gamemanager.SetActive(false);
+    }
+
+    public void WhenDie()
+    {
+
+    }
+
+    public void SpawnCounsel()
+    {
+
+        StartCoroutine(SpawnCounsel_co());
+    }
+
+    IEnumerator SpawnCounsel_co()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameObject currentcounselmirror = Instantiate(counselmirror, new Vector3(transform.position.x, 30f, 0), Quaternion.identity);
+        tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
+        currentcounselmirrortocounselmanager.player = player;
+        currentcounselmirrortocounselmanager.cammanager = cammanager;
+        currentcounselmirrortocounselmanager.background = background;
     }
 }

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 119094149306479222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.02, y: 0, z: 0}
+  m_LocalPosition: {x: 17.51, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canattack: 1
+  canjump: 0
   player: {fileID: 0}
   damagenum: 0
   damage: 0
@@ -204,11 +206,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9b83168fb4bf043bfa0093911e4b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  attackcore: {fileID: 0}
+  player: {fileID: 0}
   effect: {fileID: 1801223962321140275, guid: 816f0eb1486f62c49b598f143267daf9, type: 3}
   effectpos: {fileID: 119094149306479222}
   bullet: {fileID: 46323043755835269, guid: d0038891f8f456f4daeb68644829b5b5, type: 3}
   bulletpos: {fileID: 119094149306479222}
+  damagenmum: 0
   damage: 0
+  canshoot: 1
 --- !u!114 &5046157747010437560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +228,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e115fa90ac0cb4b81661a44dbb2b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disappearbytime: 0
+  time: 0

@@ -17,10 +17,13 @@ public class playerattackdamage : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        playerstatus playerplayerstatus = player.GetComponent<playerstatus>();
         if (collision.gameObject.tag == "client")
         {
             if (canattack)
             {
+                
+
                 if (fixdam)
                 {
                     damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
@@ -36,7 +39,7 @@ public class playerattackdamage : MonoBehaviour
                 if (penetrate)
                 {
                     damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                    collision.GetComponent<boss_hpbar>().PenetrateDamage(damage);
+                    collision.GetComponent<boss_hpbar>().PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
                 }
 
                 if (blow)
@@ -73,7 +76,7 @@ public class playerattackdamage : MonoBehaviour
                 if (penetrate)
                 {
                     damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
-                    neh.PenetrateDamage(damage);
+                    neh.PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
                 }
 
                 if (blow)

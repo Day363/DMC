@@ -66,7 +66,7 @@ public class attackcore : MonoBehaviour
     public GameObject skillsetlist;
     public GameObject skilllistUi;
     public GameObject weaponimageUi;
-    public GameObject weaponlistUi;
+    public GameObject activeweaponlistUi;
     public GameObject world_light;
     public GameObject dashmanager;
     public GameObject focusslider1;
@@ -93,7 +93,8 @@ public class attackcore : MonoBehaviour
     public GameObject circumtext;
     public GameObject magazinetext;
     public GameObject player;
-    public List<Weapon> weaponlist;
+    public List<Weapon> weaponinv;
+    public List<Weapon> activeweaponlist;
     public List<Skill> attacklist_original;
     public List<string> skillstring;
     public List<Skill> attacklist_notset;
@@ -188,7 +189,7 @@ public class attackcore : MonoBehaviour
     {
         weaponsmagazine.Clear();
 
-        foreach (Weapon weapon in weaponlist)
+        foreach (Weapon weapon in activeweaponlist)
         {
             if (weapon.range)
             {
@@ -200,6 +201,7 @@ public class attackcore : MonoBehaviour
 
     public void StartCircum()//주기시작
     {
+        playerplayerstatus.PassiveFloatReset();
         attacknumber = 0;
         listnumber = 0;
 
@@ -207,6 +209,7 @@ public class attackcore : MonoBehaviour
         cycle = 0;
         CircumReplace();
         playerPassivefunction.WhenCircumStart();
+
         
         foreach (Magazine magazine in weaponsmagazine)
         {
@@ -216,20 +219,22 @@ public class attackcore : MonoBehaviour
 
     public void StartCycle()
     {
+        playerplayerstatus.PassiveFloatReset();
         playerPassivefunction.WhenCycleStart();
+        playerplayerstatus.CycleStart();
         Focuslength();
     }
 
     public void EndCycle()
     {
-        playerplayerstatus.RemoveStackWhenCycleEnd();
+        playerplayerstatus.CycleEnd();
     }
 
     public void WeaponListUI()
     {
-        foreach (Weapon weapon in weaponlist)
+        foreach (Weapon weapon in activeweaponlist)
         {
-            GameObject currentweaponimage = Instantiate(weaponimageUi, weaponlistUi.transform);
+            GameObject currentweaponimage = Instantiate(weaponimageUi, activeweaponlistUi.transform);
             weaponskillUi weaponskillUi_Script = currentweaponimage.GetComponent<weaponskillUi>();
             weaponskillUi_Script.viewpoint = viewpoint;
             weaponskillUi_Script.passivetext = passivetext;
@@ -389,7 +394,7 @@ public class attackcore : MonoBehaviour
             skillstring_1.Add(skill.skillmarkname);
         }
 
-        foreach (Weapon weapon in weaponlist)
+        foreach (Weapon weapon in activeweaponlist)
         {
             foreach (standbyskill standbyskill in weapon.standbyskilllist)
             {
@@ -431,7 +436,7 @@ public class attackcore : MonoBehaviour
         {
             passivestrings.Add(standbyskill.passive);
         }
-        foreach (Weapon weapon in weaponlist)
+        foreach (Weapon weapon in activeweaponlist)
         {
             foreach (string passivestring in weapon.passivelist)
             {
@@ -451,7 +456,7 @@ public class attackcore : MonoBehaviour
             skillstring.Add(skill.skillmarkname);
         }
 
-        foreach (Weapon weapon in weaponlist)
+        foreach (Weapon weapon in activeweaponlist)
         {
             foreach (cynthskill cynthskill in weapon.cynthskilllist)
             {
@@ -1313,7 +1318,7 @@ public class attackcore : MonoBehaviour
                     cycle++;
                     //iscycle = true;
                     CycleReplace();
-                    StartCycle();
+                    StartCycle();               
                 }
 
                 if (listnumber == lastlist.Count)
@@ -1382,6 +1387,7 @@ public class attackcore : MonoBehaviour
                 if (attacknumber == lastlist[listnumber].Count)
                 {
                     EndCycle();
+                    playerplayerstatus.CycleEnd();
                     listnumber++;
                     attacknumber = 0;
                     cycle++;

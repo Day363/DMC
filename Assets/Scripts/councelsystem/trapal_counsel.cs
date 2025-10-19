@@ -22,12 +22,16 @@ public class trapal_counsel : MonoBehaviour
     public GameObject trapal_black_fade;
     public GameObject chatpre;
     public GameObject canvus;
+    public GameObject blackbox;
+    public GameObject floattextmanager;
+    public GameObject glitchboxmanager;
 
     public bool firstmet;
     public bool cameraset;
     public float camerasize;
 
     public string[] whispering;
+    public bool say;
 
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
@@ -121,7 +125,11 @@ public class trapal_counsel : MonoBehaviour
         cammanager.GetComponent<CameraManager>().CamVibration20();
         GameObject currentblack = Instantiate(trapal_black_fade, transform.position, Quaternion.identity);
         currentblack.GetComponent<SpriteRenderer>().DOFade(1, 16f);
+        floattextmanager.GetComponent<trapal_textmanager>().going = false;
+        glitchboxmanager.GetComponent<trapalmaskmanager>().going = false;
         yield return new WaitForSeconds(20.1f);
+        Instantiate(blackbox, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.1f);
         camerasize = 4;
         yield return new WaitForEndOfFrame();
         cameraset = false;
@@ -135,21 +143,30 @@ public class trapal_counsel : MonoBehaviour
 
     IEnumerator Whispering_co()
     {
-        float delay = 1f;
+        float delay = 1.5f;
+        DOTween.To(() => delay, x => delay = x, 0.001f, 18f).SetEase(Ease.OutCubic);
 
-        for (int i = 0; i < 100; i++)
+        say = true;
+        StartCoroutine(SayFalse());
+
+        while (say)
         {
             StartCoroutine(Whispering_co_co());
             yield return new WaitForSeconds(delay);
-            delay = 1 * (1 - (i / 99));
         }
+    }
+
+    IEnumerator SayFalse()
+    {
+        yield return new WaitForSeconds(20f);
+        say = false;
     }
 
     IEnumerator Whispering_co_co()
     {
         GameObject currentchat = Instantiate(chatpre, canvus.transform);
         currentchat.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-        currentchat.GetComponent<RectTransform>().localPosition = new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0);
+        currentchat.GetComponent<RectTransform>().localPosition = new Vector3(Random.Range(-50f, 50f), Random.Range(-50f, 50f), 0);
         currentchat.transform.rotation = Quaternion.Euler(0, 0, Random.Range(-30f, 30f));
         currentchat.transform.localScale = new Vector3(2.4f, 2.4f, 2.4f);
         TMP_Text tmp = currentchat.transform.GetChild(0).GetComponent<TMP_Text>();

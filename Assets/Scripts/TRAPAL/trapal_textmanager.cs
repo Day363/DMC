@@ -13,15 +13,21 @@ public class trapal_textmanager : MonoBehaviour
     public float posy;
     public Vector3 pos;
 
+    public bool going = true;
+
     private void FixedUpdate()
     {
-        posx = Random.Range(minpos, maxpos);
-        posy = Random.Range(minpos, maxpos);
-        pos = new Vector3(posx, posy, 0);
-        randomint = Random.Range(1, 101);
-        if (randomint <= intrange)
+        if (going)
         {
-            Instantiate(mask, pos, Quaternion.identity);
+            posx = Random.Range(minpos, maxpos);
+            posy = Random.Range(minpos, maxpos);
+            pos = new Vector3(posx, posy, 0);
+            randomint = Random.Range(1, 101);
+            if (randomint <= intrange)
+            {
+                Instantiate(mask, pos, Quaternion.identity);
+            }
         }
+        
     }
 }

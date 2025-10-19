@@ -13,11 +13,13 @@ public class Passivefunction : MonoBehaviour
     public playerstatus playerStackHandler;
 
     public Stack penetrationup;
+    public Stack penetrationup2;
     public Stack attention_rate;
     public Stack Inference;
     public Stack certain;
     public Stack deny;
     public Stack regret;
+    public Stack usedregret;
 
     public List<GameObject> indexer_rains = new List<GameObject> { };
     public bool Indexer_istransformed = false;
@@ -43,6 +45,7 @@ public class Passivefunction : MonoBehaviour
     {
         playerstatus.OnStackApplied += WhenStackAddCertain;
         playerstatus.OnStackRemoved += WhenStackRemoveCertain;
+        boss_hpbar.OnStackApplied += WhenBossApplyStack;
     }
 
     private void OnDisable()
@@ -90,12 +93,10 @@ public class Passivefunction : MonoBehaviour
     public void WhenCircumStart()
     {
         Indexer_minus = 0;
-        GetComponent<playerstatus>().disabledbleeddamagepercent = 1f;
 
         if (disabled_passive1)
         {
-
-            GetComponent<playerstatus>().disabledbleeddamagepercent = 0.5f;
+            GetComponent<playerstatus>().bleeddamagedecrease += 0.5f;
         }
 
         if (alttrigger_passive3)
@@ -111,7 +112,7 @@ public class Passivefunction : MonoBehaviour
                 GetComponent<playerstatus>().canvus.GetComponent<stackUimanager>().RefreshUI();
             }
 
-            GetComponent<playerstatus>().ApplyStack(penetrationup, 11);
+            GetComponent<playerstatus>().ApplyStack(penetrationup2, 11);
         }
 
         if (indexer_passive3)
@@ -132,6 +133,17 @@ public class Passivefunction : MonoBehaviour
 
     public void WhenCycleStart()
     {
+        if (disabled_passive1)
+        {
+            GetComponent<playerstatus>().healplus += 0.2f;
+            GetComponent<playerstatus>().slash_tolerance += 0.1f;
+        }
+
+        if (alttrigger_passive2)
+        {
+            GetComponent<playerstatus>().selfharmdamagepercent -= 0.3f;
+        }
+
         if (indexer_passive1)
         {
             boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
@@ -182,14 +194,7 @@ public class Passivefunction : MonoBehaviour
 
     public void PlayerHit()
     {
-        if (alttrigger_passive2)
-        {
-            GetComponent<playerstatus>().alttriggerdecreaseselfdamagepercent = 0.7f;
-        }
-        else
-        {
-            GetComponent<playerstatus>().alttriggerdecreaseselfdamagepercent = 1f;
-        }
+        
 
         if (trapal_passive3)
         {
@@ -309,6 +314,24 @@ public class Passivefunction : MonoBehaviour
                 }
             }
             
+        }
+        if (alttrigger_passive3)
+        {
+            if (stack.effectName == "후회")
+            {
+                GetComponent<playerstatus>().ApplyStack(usedregret, stackint);
+            }
+        }
+    }
+
+    public void WhenBossApplyStack(Stack stack, int stackint)
+    {
+        if (disabled_passive1)
+        {
+            if (stack.effectName == "출혈")
+            {
+                GetComponent<playerstatus>().ApplyStack(stack, stackint);
+            }
         }
     }
 

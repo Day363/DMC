@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class playerbullet : MonoBehaviour
 {
+    public GameObject attackcore;
+
     public int bulletspeed;
     public int damage = 0;
 
 
     public bool playercanreflect = false;
     public bool canselftarget = false;
+
+    public GameObject ifreflectShoot;
 
     public bool penetrate;
 
@@ -78,9 +82,15 @@ public class playerbullet : MonoBehaviour
         }
         if (playercanreflect)
         {
-            if (collision.gameObject.CompareTag("playerattack"))
+            if (collision.gameObject.CompareTag("playerattack") && ifreflectShoot == null)
             {
                 bulletspeed = -bulletspeed;
+            }
+            else if (collision.gameObject.CompareTag("playerattack") && ifreflectShoot != null)
+            {
+                Debug.Log(attackcore.transform.rotation.z);
+                GameObject currentobject = Instantiate(ifreflectShoot, collision.transform.position, Quaternion.Euler(0, 0, attackcore.transform.eulerAngles.z));
+                Destroy(gameObject);
             }
         }
     }

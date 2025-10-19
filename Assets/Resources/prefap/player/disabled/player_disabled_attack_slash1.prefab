@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2161952955568253298}
   - component: {fileID: 326391985738941092}
   - component: {fileID: 540356409859430702}
+  - component: {fileID: 921695722166972044}
   m_Layer: 10
   m_Name: hitbox
   m_TagString: playerattack
@@ -108,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  canjump: 0
   player: {fileID: 0}
   damagenum: 1.5
   damage: 0
@@ -132,6 +134,20 @@ MonoBehaviour:
   attackeffect_:
   - {fileID: 7212541102233477223, guid: b9c0acf7ae22ba143aea294df126417f, type: 3}
   - {fileID: 9138673724804242370, guid: 4ee2e7af00984644cb114694d6e4a121, type: 3}
+--- !u!114 &921695722166972044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989138958738428329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68477046b02feb4db62f87a43161c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stack: {fileID: 11400000, guid: f775d7130563a9d4d9c5378db8b9453d, type: 2}
+  stackamount: 1
 --- !u!1 &7548767611789015768
 GameObject:
   m_ObjectHideFlags: 0

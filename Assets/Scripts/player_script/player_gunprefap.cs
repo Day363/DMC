@@ -56,7 +56,9 @@ public class player_gunprefap : MonoBehaviour
             if (attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == weapon).Remainmagazine > 0)
             {
                 GameObject currentbullet = Instantiate(bullet, bulletpos.transform.position, transform.rotation);
-                currentbullet.GetComponent<playerbullet>().damage = damage;
+                playerbullet currentbulletplayerbullet = currentbullet.GetComponent<playerbullet>();
+                currentbulletplayerbullet.damage = damage;
+                currentbulletplayerbullet.attackcore = attackcore;
             }
 
             Magazine magazine = attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == weapon);

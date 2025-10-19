@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EffectType { Buff, Debuff, Stack }
-public enum TriggerType { OnCircumStart, OnCircumEnd, JustBuff, OnAttack, OnHit, JustStack, Seconddown, Secondup }
+public enum TriggerType { OnCircumStart, OnCircumEnd, JustBuff, JustDeBuff , OnAttack, OnHit, JustStack, Seconddown, Secondup }
 
 [CreateAssetMenu]
 

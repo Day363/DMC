@@ -19,21 +19,27 @@ public class trapalmaskmanager : MonoBehaviour
     public Vector3 pos;
     public Vector3 scale;
 
+    public bool going = true;
+
     private void FixedUpdate()
     {
-        sizex = Random.Range(minsize, maxsize);
-        sizey = Random.Range(minsize, maxsize);
-        scale = new Vector3(sizex, sizey, 1);
-        posx = Random.Range(minpos, maxpos);
-        posy = Random.Range(minpos, maxpos);
-        pos = new Vector3(posx, posy, 0);
-        randomint = Random.Range(1, 101);
-        if (randomint <= intrange)
+        if (going)
         {
-            currentmask = Instantiate(mask, pos, Quaternion.identity);
-            currentmask.transform.localScale = scale;
-            StartCoroutine(Maskdisappear(currentmask));
+            sizex = Random.Range(minsize, maxsize);
+            sizey = Random.Range(minsize, maxsize);
+            scale = new Vector3(sizex, sizey, 1);
+            posx = Random.Range(minpos, maxpos);
+            posy = Random.Range(minpos, maxpos);
+            pos = new Vector3(posx, posy, 0);
+            randomint = Random.Range(1, 101);
+            if (randomint <= intrange)
+            {
+                currentmask = Instantiate(mask, pos, Quaternion.identity);
+                currentmask.transform.localScale = scale;
+                StartCoroutine(Maskdisappear(currentmask));
+            }
         }
+        
         
     }
 

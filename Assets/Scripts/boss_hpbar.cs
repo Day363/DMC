@@ -40,6 +40,15 @@ public class boss_hpbar : MonoBehaviour
     public float slashtolerance;
     public float penetratetolerance;
     public float blowtolerance;
+    public float slashtoleranceCore;
+    public float penetratetoleranceCore;
+    public float blowtoleranceCore;
+
+    public float damageplus;
+    public float damageplusCore = 1;
+
+    public float bleeddamageincrease;
+    public float bleeddamageincreaseCore = 1;
 
     public float height;
     public float height2;
@@ -47,9 +56,11 @@ public class boss_hpbar : MonoBehaviour
 
     public bool iscollapse;
     public bool canhit = true;
+    public bool killcut;
 
     public bool candie = true;
 
+    public List<StackInstance> nextcycleStacks = new List<StackInstance>();
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
@@ -88,12 +99,14 @@ public class boss_hpbar : MonoBehaviour
         if (existing != null)
         {
             existing.AddStack(amount);
+
         }
         else
         {
             int initialStack = Mathf.Clamp(amount, 1, newStack.maxStacks);
             StackInstance instance = new StackInstance(newStack, initialStack);
             activeStacks.Add(instance);
+            WhenStackAdd(newStack);
         }
 
         Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
@@ -101,6 +114,7 @@ public class boss_hpbar : MonoBehaviour
         OnStackApplied?.Invoke(newStack, amount);
 
         canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+
 
         //GetComponent<Passivefunction>().WhenAddStack();
     }
@@ -132,6 +146,27 @@ public class boss_hpbar : MonoBehaviour
         //GetComponent<Passivefunction>().WhenRemoveStack();
     }
 
+    public void ApplyStackOnNextCycle(Stack newStack, int amount)
+    {
+        StackInstance existing = nextcycleStacks.Find(s => s.stackData == newStack);
+
+        if (existing != null)
+        {
+            existing.AddStack(amount);
+
+        }
+        else
+        {
+            int initialStack = Mathf.Clamp(amount, 1, newStack.maxStacks);
+            StackInstance instance = new StackInstance(newStack, initialStack);
+            nextcycleStacks.Add(instance);
+        }
+
+        Debug.Log($"Applied next stack: {newStack.effectName} (+{amount})");
+
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+    }
+
     public void PrintStacks()
     {
         foreach (var s in activeStacks)
@@ -140,11 +175,86 @@ public class boss_hpbar : MonoBehaviour
         }
     }
 
+    public void PassiveFloatReset()
+    {
+        slashtolerance = slashtoleranceCore;
+        penetratetolerance = penetratetoleranceCore;
+        blowtolerance = blowtoleranceCore;
+
+        damageplus = damageplusCore;
+
+        bleeddamageincrease = bleeddamageincreaseCore;
+
+    }
+
+
     private void Start()
     {
         currenthealth = maxhealth;
         balancebarint.maxValue = maxbalance;
         currentbalance = 0;
+    }
+
+    //완전 새 스텍일떄만 작동
+    public void WhenStackAdd(Stack stack)
+    {
+        if (activeStacks.Count > 0)
+        {
+            if (stack.effectName == "치명적 열상 I")
+            {
+                bleeddamageincrease += 0.1f;
+                if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                {
+                    damageplus += 0.1f;
+                }
+            }
+            if (stack.effectName == "치명적 열상 II")
+            {
+                bleeddamageincrease += 0.2f;
+                if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                {
+                    damageplus += 0.2f;
+                }
+            }
+        }
+    }
+
+    public void CycleStart()
+    {
+        foreach (StackInstance stack in nextcycleStacks)
+        {
+            ApplyStack(stack.stackData, stack.currentStack);
+        }
+        nextcycleStacks.Clear();
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+    }
+
+    public void CycleEnd()
+    {
+        if (activeStacks.Count > 0)
+        {
+            foreach (StackInstance stack in activeStacks)
+            {
+                if (stack.stackData.effectName == "출혈")
+                {
+                    Damage((int)(stack.currentStack * bleeddamageincrease));
+                    RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
+                    if (stack.currentStack == 1)
+                    {
+                        RemoveStack(stack.stackData, 1);
+                    }
+                }
+                if (stack.stackData.effectName == "치명적 열상 I")
+                {
+                    RemoveStack(stack.stackData, 1);
+                }
+                if (stack.stackData.effectName == "치명적 열상 II")
+                {
+                    RemoveStack(stack.stackData, 1);
+                }
+            }
+        }
+        
     }
 
     public void BalanceCheck()
@@ -212,8 +322,22 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            currenthealth -= damage;
+            float totaldamage = damage * damageplus;
+            currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
+            GameObject damt = Instantiate(damagetext);
+            damagetext damtdamagetext = damt.GetComponent<damagetext>();
+            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            {
+                damtdamagetext.wherexpos = 1;
+            }
+            else
+            {
+                damtdamagetext.wherexpos = -1;
+            }
+            damtdamagetext.fix = true;
+            damt.transform.position = damagepos.transform.position;
+            damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
                 Dead();
@@ -235,7 +359,8 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            currenthealth -= damage * slashtolerance;
+            float totaldamage = (damage * slashtolerance) * damageplus;
+            currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -249,7 +374,7 @@ public class boss_hpbar : MonoBehaviour
             }
             damtdamagetext.slash = true;
             damt.transform.position = damagepos.transform.position;
-            damtdamagetext.damage = damage;
+            damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
                 Dead();
@@ -271,7 +396,8 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            currenthealth -= damage * penetratetolerance;
+            float totaldamage = (damage * penetratetolerance) * damageplus;
+            currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -285,7 +411,7 @@ public class boss_hpbar : MonoBehaviour
             }
             damtdamagetext.penetarte = true;
             damt.transform.position = damagepos.transform.position;
-            damtdamagetext.damage = damage;
+            damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
                 Dead();
@@ -305,7 +431,8 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            currenthealth -= damage * blowtolerance;
+            float totaldamage = (damage * blowtolerance) * damageplus;
+            currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -319,7 +446,7 @@ public class boss_hpbar : MonoBehaviour
             }
             damtdamagetext.blow = true;
             damt.transform.position = damagepos.transform.position;
-            damtdamagetext.damage = damage;
+            damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
                 Dead();
@@ -333,7 +460,7 @@ public class boss_hpbar : MonoBehaviour
         StartCoroutine(Dead_co());
     }
 
-    public bool killcut;
+    
 
     public void Update()
     {
@@ -349,7 +476,7 @@ public class boss_hpbar : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("dying");
         }
-        Die.Invoke();
+        Die?.Invoke();
         float worldlightintensity = worldlight.GetComponent<Light2D>().intensity;
         Light2D worldlightLight2D = worldlight.GetComponent<Light2D>();
         worldlightLight2D.color = new Color(1, 0, 0, 1);
