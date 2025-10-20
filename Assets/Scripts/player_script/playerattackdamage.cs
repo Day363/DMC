@@ -10,10 +10,15 @@ public class playerattackdamage : MonoBehaviour
     public GameObject player;
     public float damagenum;
     public int damage;
+    public float damagepercentplus = 0;
+    public float damagepercent;
+    public float damagepercentCore = 1f;
     public bool fixdam;
     public bool slash;
     public bool penetrate;
     public bool blow;
+
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,30 +27,41 @@ public class playerattackdamage : MonoBehaviour
         {
             if (canattack)
             {
-                
-
                 if (fixdam)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    Debug.Log(damagepercent);
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().Damage(damage);
+                    damagepercentplus = 0;
                 }
 
                 if (slash)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().SlashDamage(damage);
+                    damagepercentplus = 0;
                 }
 
                 if (penetrate)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
+                    damagepercentplus = 0;
                 }
 
                 if (blow)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().BlowDamage(damage);
+                    damagepercentplus = 0;
                 }
             }
 
@@ -63,26 +79,39 @@ public class playerattackdamage : MonoBehaviour
                 neh.currenthitobjcet = player;
                 if (fixdam)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     neh.Damage(damage);
+                    damagepercentplus = 0;
                 }
 
                 if (slash)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     neh.SlashDamage(damage);
+                    damagepercentplus = 0;
                 }
 
                 if (penetrate)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     neh.PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
+                    damagepercentplus = 0;
                 }
 
                 if (blow)
                 {
-                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum);
+                    damagepercent = damagepercentCore;
+                    damagepercent = damagepercent + damagepercentplus;
+                    damage = Mathf.RoundToInt(player.GetComponent<playerstatus>().attackpower * damagenum * damagepercent);
                     neh.BlowDamage(damage);
+                    damagepercentplus = 0;
                 }
             }
 
@@ -92,6 +121,7 @@ public class playerattackdamage : MonoBehaviour
                 player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
             }
         }
-        
+
+
     }
 }

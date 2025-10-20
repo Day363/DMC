@@ -12587,6 +12587,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 6
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 0
   penetrate: 1
@@ -21173,8 +21176,11 @@ MonoBehaviour:
   canattack: 1
   canjump: 0
   player: {fileID: 1233421491}
-  damagenum: 2.5
+  damagenum: 4.5
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 0
   penetrate: 1
@@ -50799,6 +50805,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -76015,6 +76024,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -79938,6 +79950,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -190471,6 +190486,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -210289,6 +210307,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 3.1
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -229713,6 +229734,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 1.7
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -252681,11 +252705,16 @@ MonoBehaviour:
   slash_toleranceCore: 1
   penetration_toleranceCore: 1
   blow_toleranceCore: 1
+  damagedecrease: 0
+  damagedecreaseCore: 1
+  penetratedamageup: 0
+  penetratedamageupCore: 1
   focus: 0
   maxbalance: 300
   currentbalance: 0
   speed: 14
   attackpower: 10
+  attackpowerCore: 10
   bleeddamagedecrease: 0
   bleeddamagedecreaseCore: 1
   healplus: 0
@@ -252798,6 +252827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c2645f2309e3c4ba6c20bddc4230f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackcore: {fileID: 840654302}
   gamemanger: {fileID: 1694457153}
   playerStackHandler: {fileID: 1233421498}
   cammanager: {fileID: 373801462}
@@ -252813,6 +252843,8 @@ MonoBehaviour:
   trapal_glitch: {fileID: 781459568503545694, guid: 8eb1e3932cd77554592d54ecaf1f42a9, type: 3}
   trapal_box: {fileID: 2042937201670908184, guid: 09609a378d8fb1145be9e77d7c196ed8, type: 3}
   latereffect: {fileID: 0}
+  alttriger: {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
+  alttrigger_attack2: {fileID: 115809503}
 --- !u!114 &1233421508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252836,6 +252868,7 @@ MonoBehaviour:
   certain: {fileID: 11400000, guid: 4733870fae881e547a30f43daa8f569c, type: 2}
   deny: {fileID: 11400000, guid: 231cf8c23ebce3e4a8a350dc1f015d93, type: 2}
   regret: {fileID: 11400000, guid: c0c2defa5bc43bb46b82ab08ed534e39, type: 2}
+  usedregret: {fileID: 11400000, guid: 04982bf3163b5b54a80c708313a074b3, type: 2}
   indexer_rains:
   - {fileID: 3388751007453729275, guid: 6374489ee2697e1478509076c20345ae, type: 3}
   - {fileID: 9124013418427274501, guid: 8821ffc990fef08459abe6206d8156c2, type: 3}
@@ -276869,6 +276902,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 3.2
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -296352,6 +296388,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 2.1
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -334419,6 +334458,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 2.9
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -353222,6 +353264,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 1.4
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -388857,6 +388902,9 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   damagenum: 2.5
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 1
+  damagepercentCore: 1
   fixdam: 0
   slash: 1
   penetrate: 0
@@ -397833,9 +397881,9 @@ MonoBehaviour:
   slashtoleranceCore: 1
   penetratetoleranceCore: 0.7
   blowtoleranceCore: 0.7
-  damageplus: 0
+  damageplus: 1
   damageplusCore: 1
-  bleeddamageincrease: 0
+  bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
   height: -5.53
   height2: 3.06

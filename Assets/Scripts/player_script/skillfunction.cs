@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class skillfunction : MonoBehaviour
 {
+    public GameObject attackcore;
     public GameObject gamemanger;
     public playerstatus playerStackHandler;
     public GameObject cammanager;
@@ -23,6 +24,8 @@ public class skillfunction : MonoBehaviour
     public GameObject trapal_glitch;
     public GameObject trapal_box;
     public GameObject latereffect;
+    public Weapon alttriger;
+    public GameObject alttrigger_attack2;
 
     void Start()
     {
@@ -39,6 +42,17 @@ public class skillfunction : MonoBehaviour
             { "Trapal_shoot", Trapal_shoot },
             { "trapal_defense", Trapal_Defense }
         };
+    }
+
+    public void Alttrigger_attack2()
+    {
+        playerattackdamage playerplayerattackdamage = alttrigger_attack2.GetComponent<playerattackdamage>();
+        List<Magazine> magazines = attackcore.GetComponent<attackcore>().weaponsmagazine;
+        Magazine currentmagazine = magazines.Find(m => m.Weapon == alttriger);
+        if (currentmagazine.Remaincycle == 0)
+        {
+            playerplayerattackdamage.damagepercentplus += 1.11f;
+        }
     }
 
     public void Indexer_Call()

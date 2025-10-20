@@ -102,6 +102,7 @@ public class Passivefunction : MonoBehaviour
         if (alttrigger_passive3)
         {
             playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "»ƒ»∏");
+            playerstatus.StackInstance instance2 = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "¿‹»Á");
             if (instance == null)
             {
                 GetComponent<playerstatus>().ApplyStack(regret, 11);
@@ -110,6 +111,15 @@ public class Passivefunction : MonoBehaviour
             {
                 instance.currentStack = 11;
                 GetComponent<playerstatus>().canvus.GetComponent<stackUimanager>().RefreshUI();
+            }
+
+            if (instance2 == null)
+            {
+                
+            }
+            else if (instance2 != null)
+            {
+                GetComponent<playerstatus>().RemoveStack(instance2.stackData, instance2.currentStack);
             }
 
             GetComponent<playerstatus>().ApplyStack(penetrationup2, 11);
