@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using System;
 
 public class playerskillmove : MonoBehaviour
 {
+    public static event Action Whenattackend;
+
     public GameObject attackcore;
     public string chat;
 
@@ -152,6 +155,8 @@ public class playerskillmove : MonoBehaviour
 
     public void CanMove()
     {
+        Whenattackend?.Invoke();
+
         GetComponent<PlayerMove>().canmove = true;
         attackcore.GetComponent<attackcore>().AmalgamedAnimation();
         attackcore.GetComponent<attackcore>().canattack = true;

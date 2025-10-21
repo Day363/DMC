@@ -18,7 +18,10 @@ public class playerattackdamage : MonoBehaviour
     public bool penetrate;
     public bool blow;
 
-
+    public void Start()
+    {
+        playerskillmove.Whenattackend += DamagepercentplusZero;
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -123,5 +126,10 @@ public class playerattackdamage : MonoBehaviour
         }
 
 
+    }
+
+    public void DamagepercentplusZero()
+    {
+        damagepercentplus = 0;
     }
 }
