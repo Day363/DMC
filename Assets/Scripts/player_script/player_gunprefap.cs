@@ -76,20 +76,27 @@ public class player_gunprefap : MonoBehaviour
             }
             else if (hitscan)
             {
-                RaycastHit2D hit = Physics2D.Raycast(bulletpos.transform.position, bulletpos.transform.right, 500f, client);
-                Vector3 endPoint;
-                if (hit.collider != null)
+                if (attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == weapon).Remainmagazine > 0)
                 {
-                    endPoint = hit.point;
-                    transform.GetChild(0).GetComponent<playerattackdamage>().OnTriggerEnter2D(hit.collider);
-                }
-                else
-                {
-                    endPoint = bulletpos.transform.position + bulletpos.transform.right * 500f;
-                }
+                    RaycastHit2D hit = Physics2D.Raycast(bulletpos.transform.position, bulletpos.transform.right, 500f, client);
+                    Vector3 endPoint;
+                    if (hit.collider != null)
+                    {
+                        endPoint = hit.point;
+                        transform.GetChild(0).GetComponent<playerattackdamage>().OnTriggerEnter2D(hit.collider);
+                    }
+                    else
+                    {
+                        endPoint = bulletpos.transform.position + bulletpos.transform.right * 500f;
+                    }
 
-                // 선 이펙트 표시
-                StartCoroutine(ShowLine(bulletpos.transform.position, endPoint));
+                    // 선 이펙트 표시
+                    StartCoroutine(ShowLine(bulletpos.transform.position, endPoint));
+
+                    Magazine magazine = attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == weapon);
+                    magazine.IfShoot();
+                }
+                
             }
             
         }
@@ -103,7 +110,7 @@ public class player_gunprefap : MonoBehaviour
         ir.SetPosition(1, end);
         ir.enabled = true;
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.05f);
 
         ir.enabled = false;
     }

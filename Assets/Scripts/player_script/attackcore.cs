@@ -183,6 +183,7 @@ public class attackcore : MonoBehaviour
     {
         player.GetComponent<skillfunction>().Trapal_Penetrate_When_attacked();
         player.GetComponent<Passivefunction>().HitEnemy();
+        playerplayerstatus.AddEmotion(0.01f);
     }
 
     public void MakeRangeWeaponMagzineList()

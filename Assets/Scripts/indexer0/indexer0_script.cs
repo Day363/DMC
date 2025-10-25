@@ -44,6 +44,13 @@ public class indexer0_script : MonoBehaviour
     public Vector3 katanapos;
     public Vector3 katanateleportpos;
     public GameObject currentkatana;
+    public int attackint = 0;
+    public Animator animator;
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void FixedUpdate()
     {
@@ -63,32 +70,32 @@ public class indexer0_script : MonoBehaviour
             raincool++;
         }
 
-        if (teleportcool< teleportcooltime)
+        if (teleportcool > teleportcooltime)
         {
-            teleportcool++;
+            if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > teleportrange)
+            {
+                animator.SetBool("teleport", true);
+                teleportcool = 0;
+            }
         }
-        else
-        {
-            GetComponent<Animator>().SetBool("teleport", true);
-        }
+   
 
         if (raincool >= rainmincooltime)
         {
-            GetComponent<Animator>().SetBool("rain", true);
+            animator.SetTrigger("rain");
         }
 
-        Transform playerpos = player.GetComponent<Transform>();
-        Transform disabledpos = GetComponent<Transform>();
+        Transform playerpos = player.transform;
 
         if (!whileattack)
         {
-            if (playerpos.position.x < disabledpos.position.x)
+            if (playerpos.position.x < transform.position.x)
             {
                 direction = -1;
                 hitbox.GetComponent<indexer0_hitbox_script>().direction = -1;
             }
 
-            if (playerpos.position.x > disabledpos.position.x)
+            if (playerpos.position.x > transform.position.x)
             {
                 direction = 1;
                 hitbox.GetComponent<indexer0_hitbox_script>().direction = 1;
@@ -108,39 +115,26 @@ public class indexer0_script : MonoBehaviour
             }
         }
 
+        animator.SetFloat("walkrange", Mathf.Abs(transform.position.x - player.transform.position.x));
+
         if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > range)
         {
-            if (run)
-            {
-                walk = false;
-            }
-            if (!run)
-            {
-                gameObject.GetComponent<Animator>().SetBool("walk", true);
-                walk = true;
-            }
-            GetComponent<Animator>().SetBool("range", true);
-            GetComponent<Animator>().SetBool("melee", false);
+
+            animator.SetBool("range", true);
+            animator.SetBool("melee", false);
         }
         else
         {
-            gameObject.GetComponent<Animator>().SetBool("walk", false);
-            gameObject.GetComponent<Animator>().SetBool("run", false);
             GetComponent<Animator>().SetBool("range", false);
             GetComponent<Animator>().SetBool("melee", true);
-            walk = false;
-            run = false;
         }
 
-        if (Vector2.Distance(player.GetComponent<Transform>().position, gameObject.GetComponent<Transform>().position) > teleportrange)
-        {
-            GetComponent<Animator>().SetBool("teleport", true);
-        }
-
+        
         if (!whileattack && canmove)
         {
             if (walk)
             {
+                teleportcool++;
                 playerposition = new Vector2(player.transform.position.x, gameObject.transform.position.y);
                 gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, playerposition, movespeed);
             }
@@ -154,40 +148,48 @@ public class indexer0_script : MonoBehaviour
 
         if (weapons.Contains("katana"))
         {
-            GetComponent<Animator>().SetBool("katana", true);
+            animator.SetBool("katana", true);
         }
 
         if (weapons.Contains("rifle"))
         {
-            GetComponent<Animator>().SetBool("rifle", true);
+            animator.SetBool("rifle", true);
         }
 
         if (weapons.Contains("bigsword"))
         {
-            GetComponent<Animator>().SetBool("bigsword", true);
+            animator.SetBool("bigsword", true);
         }
 
         if (weapons.Contains("spear"))
         {
-            GetComponent<Animator>().SetBool("spear", true);
+            animator.SetBool("spear", true);
         }
 
         if (weapons.Contains("shootgun"))
         {
-            GetComponent<Animator>().SetBool("shootgun", true);
+            animator.SetBool("shootgun", true);
+        }
+    }
+
+    public void AddStack()
+    {
+        attackint++;
+        if (attackint == 3)
+        {
+            GetComponent<Animator>().SetBool("canreplace", true);
+            attackint = 0;
         }
     }
 
     public void LookClinet()
     {
-        cam.GetComponent<Animator>().SetBool("lookplayer", false);
-        cam.GetComponent<Animator>().SetBool("lookclient", true);
+        cam.GetComponent<CameraManager>().LookEnemy();
     }
 
     public void LookPlayer()
     {
-        cam.GetComponent<Animator>().SetBool("lookplayer", true);
-        cam.GetComponent<Animator>().SetBool("lookclient", false);
+        cam.GetComponent<CameraManager>().LookPlayer();
     }
 
     public void Startrain()
@@ -198,28 +200,25 @@ public class indexer0_script : MonoBehaviour
 
     public void Landstart()
     {
-        GetComponent<Animator>().SetBool("rainend", false);
-        rainmanager.GetComponent<indexer0_rainmanager>().land = true;
         weapons.Add("katana");
         weapons.Add("rifle");
         weapons.Add("bigsword");
         weapons.Add("spear");
         weapons.Add("shootgun");
         raincool = 0;
-        GetComponent<Animator>().SetBool("rain", false);
+        GetComponent<Animator>().ResetTrigger("rain");
         StartCoroutine(LandTime());
     }
 
     IEnumerator LandTime()
     {
         yield return new WaitForSeconds(0.15f);
-        rainmanager.GetComponent<indexer0_rainmanager>().land = false;
+        rainmanager.GetComponent<indexer0_rainmanager>().Land();
+        rainmanager.GetComponent<indexer0_rainmanager>().rain = false;
         yield return new WaitForSeconds(5f);
-        GetComponent<Animator>().SetBool("landend", true);
+        GetComponent<Animator>().SetTrigger("landend");
         yield return new WaitForSeconds(1f);
         whileattack = false;
-        GetComponent<Animator>().SetBool("landend", false);
-        
     }
 
     public void StartRun()
@@ -377,6 +376,7 @@ public class indexer0_script : MonoBehaviour
         weapons.Remove("bigsword");
         GetComponent<Animator>().SetBool("rifle", false);
         GetComponent<Animator>().SetBool("bigsword", false);
+        GetComponent<Animator>().SetBool("canreplace", false);
     }
 
     public void SpearShootgunAttackStart()
@@ -391,6 +391,7 @@ public class indexer0_script : MonoBehaviour
         weapons.Remove("shootgun");
         GetComponent<Animator>().SetBool("spear", false);
         GetComponent<Animator>().SetBool("shootgun", false);
+        GetComponent<Animator>().SetBool("canreplace", false);
     }
 
     public void PosTeleport()

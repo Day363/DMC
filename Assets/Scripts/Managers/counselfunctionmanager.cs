@@ -27,7 +27,8 @@ public class counselfunctionmanager : MonoBehaviour
             { "Animation1", Animation1 },
             { "Animation2", Animation2 },
             { "Animation3", Animation3 },
-            { "trapal_start", Trapal_start }
+            { "trapal_start", Trapal_start },
+            { "start",  BattleStart}
         };
     }
 
@@ -59,6 +60,15 @@ public class counselfunctionmanager : MonoBehaviour
     }
 
     public void Trapal_start()
+    {
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
+        {
+            ta.SetTrigger("start");
+        }
+    }
+
+    public void BattleStart()
     {
         letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))

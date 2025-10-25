@@ -12,6 +12,7 @@ public class indexer0_rainmanager : MonoBehaviour
     public GameObject rain4;
     public GameObject rain5;
     public GameObject rain6;
+    public GameObject[] rain_;
     public GameObject[] shaders;
     public GameObject[] weaponland;
     public bool rain = false;
@@ -24,128 +25,108 @@ public class indexer0_rainmanager : MonoBehaviour
     public int passiverainint = 1;
     public int passivecooltime;
     public int passivecool = 0;
-
-
+    public Coroutine raincorutine;
 
     public void FixedUpdate()
     {
-        indexerpos = indexer.transform.position;
-
         if (rain)
         {
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2  && whereshoot.x <indexerpos.x + 2)
+            if (raincorutine  == null)
             {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
+                raincorutine = StartCoroutine(Rain());
             }
-            Instantiate(rain1, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
-            {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
-            }
-            Instantiate(rain2, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
-            {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
-            }
-            Instantiate(rain3, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
-            {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
-            }
-            Instantiate(rain4, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
-            {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
-            }
-            Instantiate(rain2, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            if (whereshoot.x > indexerpos.x - 2 && whereshoot.x < indexerpos.x + 2)
-            {
-                whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 39.3f, 0);
-            }
-            Instantiate(rain3, whereshoot, Quaternion.identity);
+            
         }
-
-        if (land)
+        else
         {
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
-            Instantiate(weaponland[0], whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
-            Instantiate(weaponland[1], whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
-            Instantiate(weaponland[2], whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
-            Instantiate(weaponland[3], whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 0.26f, 0);
-            Instantiate(weaponland[4], whereshoot, Quaternion.identity);
+            if (raincorutine != null)
+            {
+                StopCoroutine(raincorutine);
+                raincorutine = null;
+            }
         }
+    }
 
-        passivecool++;
+    public void Land()
+    {
+        StartCoroutine(Land_co());
+    }
 
-        if (passivecool >= passivecooltime / (passiverainint + 10))
+    IEnumerator Land_co()
+    {
+        for (int i = 0; i < 25; i++)
         {
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            Instantiate(rain5, whereshoot, Quaternion.identity);
-            whereshoot = new Vector3(Random.Range(endpos1.x, endpos2.x + 1), 35.5f, 0);
-            Instantiate(rain6, whereshoot, Quaternion.identity);
-            passivecool = 0;
+            Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
+
+            Instantiate(weaponland[Random.Range(0, weaponland.Length)], pos, Quaternion.identity);
+            yield return new WaitForSeconds(0.001f);
+        }
+    }
+
+    IEnumerator Rain()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.001f);
+            Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
+            if (Vector3.Distance(indexer.transform.position, pos) < 3)
+            {
+                pos = new Vector3(pos.x, 2.13f, 1);
+            }
+            
+            Instantiate(rain_[Random.Range(0, rain_.Length)], pos, Quaternion.identity);
         }
     }
 
     IEnumerator Rain1Start()
     {
         shaders[0].SetActive(true);
-        impulsecam.GetComponent<raincam>().Start1Shake();
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(6, 1, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
         rain = false;
         yield return new WaitForSeconds(7f);
-        indexer.GetComponent<Animator>().SetBool("rainend", true);
+        indexer.GetComponent<Animator>().SetTrigger("rainend");
         passiverainint = 0;
     }
 
     IEnumerator Rain2Start()
     {
         shaders[1].SetActive(true);
-        impulsecam.GetComponent<raincam>().Start2Shake();
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(11, 2, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
         rain = false;
         yield return new WaitForSeconds(7f);
-        indexer.GetComponent<Animator>().SetBool("rainend", true);
+        indexer.GetComponent<Animator>().SetTrigger("rainend");
         passiverainint = 0;
     }
 
     IEnumerator Rain3Start()
     {
         shaders[2].SetActive(true);
-        impulsecam.GetComponent<raincam>().Start3Shake();
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(18, 3, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
         rain = false;
         yield return new WaitForSeconds(7f);
-        indexer.GetComponent<Animator>().SetBool("rainend", true);
+        indexer.GetComponent<Animator>().SetTrigger("rainend");
         passiverainint = 0;
     }
 
     IEnumerator Rain4Start()
     {
         shaders[3].SetActive(true);
-        impulsecam.GetComponent<raincam>().Start4Shake();
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(30, 4, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
         rain = false;
         yield return new WaitForSeconds(7f);
-        indexer.GetComponent<Animator>().SetBool("rainend", true);
+        indexer.GetComponent<Animator>().SetTrigger("rainend");
         passiverainint = 0;
     }
 

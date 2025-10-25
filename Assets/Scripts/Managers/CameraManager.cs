@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     public bool resetRotation;
     public bool killcam;
 
+    public GameObject Gamemanager;
+
     public float killcamsize;
 
     public GameObject priorcamera;
@@ -79,7 +81,7 @@ public class CameraManager : MonoBehaviour
     public void LookEnemy()
     {
         maincam = enemycam;
-        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = enemy.transform;
+        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = Gamemanager.GetComponent<battalemanager>().currentenemy.transform;
         GetComponent<Animator>().SetTrigger("playercam");
     }
 
@@ -150,6 +152,11 @@ public class CameraManager : MonoBehaviour
         StartCoroutine(FuckCinemachine());
     }
     
+    public void LimitlessShake(float AmplitudeGain, float FrequencyGain, float time)
+    {
+        StartCoroutine(CamVibE(AmplitudeGain, FrequencyGain, time));
+    }
+
     IEnumerator FuckCinemachine()
     {
         CinemachineBrain priorcameraCinemachineBrain = priorcamera.GetComponent<CinemachineBrain>();
@@ -157,6 +164,18 @@ public class CameraManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         priorcamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         priorcameraCinemachineBrain.enabled = true;
+    }
+
+    IEnumerator CamVibE(float AmplitudeGain, float FrequencyGain, float time)
+    {
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = AmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = FrequencyGain;
+        yield return new WaitForSeconds(time);
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        CamStable();
     }
 
     IEnumerator CamVib1()

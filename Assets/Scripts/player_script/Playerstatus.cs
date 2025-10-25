@@ -19,6 +19,17 @@ public class playerstatus : MonoBehaviour
 
     public Coroutine typingCoroutine;
 
+    public GameObject emotionbar;
+    public GameObject reasonbar;
+    public GameObject recognitionbar;
+
+    [Range(-3, 3)]
+    public float emotionrate;
+    [Range(-3, 3)]
+    public float reasonrate;
+    [Range(-3, 3)]
+    public float recognitionrate;
+
     public float slash_tolerance = 1;
     public float penetration_tolerance = 1;
     public float blow_tolerance = 1;
@@ -129,6 +140,47 @@ public class playerstatus : MonoBehaviour
         canvus.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenRemoveStack();
+    }
+
+    public void AddEmotion(float rate)
+    {
+        emotionrate = Mathf.Clamp(emotionrate + rate, -3, 3);
+        EmotionUIUpdate();
+    }
+
+    public void AddReason(float rate)
+    {
+        reasonrate = Mathf.Clamp(reasonrate + rate, -3, 3);
+        ResonUIUpdate();
+    }
+
+    public void AddRecognition(float rate)
+    {
+        recognitionrate = Mathf.Clamp(recognitionrate + rate, -3, 3);
+        RecognitionUUpdate();
+    }
+
+    public void EmotionUIUpdate()
+    {
+        DOTween.Kill("emotionrate");
+        float mappedTarget1 = Mathf.Lerp(-43.5f, 43.5f, (emotionrate + 3f) / 6f);
+        emotionbar.GetComponent<RectTransform>().DOAnchorPosY(mappedTarget1, 1f).SetEase(Ease.OutQuad).SetId("emotionrate");
+
+
+    }
+
+    public void ResonUIUpdate()
+    {
+        DOTween.Kill("reasonrate");
+        float mappedTarget2 = Mathf.Lerp(-43.5f, 43.5f, (reasonrate + 3f) / 6f);
+        reasonbar.GetComponent<RectTransform>().DOAnchorPosY(mappedTarget2, 1f).SetEase(Ease.OutQuad).SetId("reasonrate");
+    }
+
+    public void RecognitionUUpdate()
+    {
+        DOTween.Kill("recognitionrate");
+        float mappedTarget3 = Mathf.Lerp(-43.5f, 43.5f, (recognitionrate + 3f) / 6f);
+        recognitionbar.GetComponent<RectTransform>().DOAnchorPosY(mappedTarget3, 1f).SetEase(Ease.OutQuad).SetId("recognitionrate");
     }
 
     //public void RemoveStackWhenCycleEnd()

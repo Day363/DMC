@@ -134,6 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9b83168fb4bf043bfa0093911e4b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitscan: 0
+  client:
+    serializedVersion: 2
+    m_Bits: 0
+  normalenemy:
+    serializedVersion: 2
+    m_Bits: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
   weapon: {fileID: 11400000, guid: d5a2153cd4b149c49a9b2a9111b37365, type: 2}
   attackcore: {fileID: 0}
   player: {fileID: 0}
@@ -203,9 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c6262077e6ddc4b9b72c61967c9de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect1: {fileID: 4395509029384876015, guid: bc16b4f67c9b6864e9ec982e3c8bed72, type: 3}
-  effect2: {fileID: 6584602952146218520, guid: 502aa478f6c5fbb40a913e3a4e4c04bf, type: 3}
-  attackeffect_: []
+  attackeffectall:
+  - {fileID: 6971541318933649795, guid: 43a4c6f819eeeb94fbd7e1917ca32738, type: 3}
+  attackeffect_random:
+  - {fileID: 6971541318933649795, guid: 43a4c6f819eeeb94fbd7e1917ca32738, type: 3}
 --- !u!114 &8359782641203227140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +230,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canattack: 1
+  canjump: 0
   player: {fileID: 0}
   damagenum: 1.5
   damage: 0
+  damagepercentplus: 0
+  damagepercent: 0
+  damagepercentCore: 1
   fixdam: 0
   slash: 0
   penetrate: 1
