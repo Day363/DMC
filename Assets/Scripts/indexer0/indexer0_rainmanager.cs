@@ -26,6 +26,7 @@ public class indexer0_rainmanager : MonoBehaviour
     public int passivecooltime;
     public int passivecool = 0;
     public Coroutine raincorutine;
+    public Coroutine raincorutine2;
 
     public void FixedUpdate()
     {
@@ -34,6 +35,7 @@ public class indexer0_rainmanager : MonoBehaviour
             if (raincorutine  == null)
             {
                 raincorutine = StartCoroutine(Rain());
+                raincorutine2 = StartCoroutine(Rain());
             }
             
         }
@@ -42,7 +44,9 @@ public class indexer0_rainmanager : MonoBehaviour
             if (raincorutine != null)
             {
                 StopCoroutine(raincorutine);
+                StopCoroutine(raincorutine2);
                 raincorutine = null;
+                raincorutine2 = null;
             }
         }
     }
@@ -54,7 +58,7 @@ public class indexer0_rainmanager : MonoBehaviour
 
     IEnumerator Land_co()
     {
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 32; i++)
         {
             Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
 

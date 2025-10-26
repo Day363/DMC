@@ -33,8 +33,12 @@ public class trapal_counsel : MonoBehaviour
     public string[] whispering;
     public bool say;
 
+    public int cycleint_;
+    public int cycleint;
+
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
+    boss_hpbar bosshp;
 
     
 
@@ -69,6 +73,17 @@ public class trapal_counsel : MonoBehaviour
             gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
             gamemanager.GetComponent<chatmanager>().CallDialogue(3);
 
+        }
+    }
+
+    public void AttackEnd()
+    {
+        cycleint_++;
+        if (cycleint_ >= cycleint)
+        {
+            bosshp.CycleEnd();
+            bosshp.CycleStart();
+            cycleint_ = 0;
         }
     }
 

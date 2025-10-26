@@ -54,6 +54,26 @@ public class indexer0_script : MonoBehaviour
 
     public void FixedUpdate()
     {
+        //if (animator.GetBool("canreplace"))
+        //{
+        //    if (weapons.Contains("rifle") && !weapons.Contains("bigsword"))
+        //    {
+        //        animator.SetBool("canreplace", false);
+        //    }
+        //    else if (!weapons.Contains("rifle") && weapons.Contains("bigsword"))
+        //    {
+        //        animator.SetBool("canreplace", false);
+        //    }
+        //    else if (weapons.Contains("spear") && !weapons.Contains("shootgun"))
+        //    {
+        //        animator.SetBool("canreplace", false);
+        //    }
+        //    else if(!weapons.Contains("spear") && weapons.Contains("shootgun"))
+        //    {
+        //        animator.SetBool("canreplace", false);
+        //    }
+        //}
+
         playerfloorpos = new Vector3(player.transform.position.x, 2, 0);
         spearpos = new Vector3(transform.position.x, transform.position.y + 1, 0);
         if (direction == -1)
@@ -65,7 +85,7 @@ public class indexer0_script : MonoBehaviour
             katanapos = new Vector3(transform.position.x + 3, transform.position.y + 0.7f, 0);
         }
 
-        if (weapons.Count == 0)
+        if (weapons.Count <= 3)
         {
             raincool++;
         }

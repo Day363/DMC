@@ -48,6 +48,7 @@ public class trapal_passive : MonoBehaviour
     public int certaindestroy;
 
     public trapal_script ts;
+    public trapal_counsel tc;
 
     private void OnEnable()
     {
@@ -149,6 +150,7 @@ public class trapal_passive : MonoBehaviour
     public void Fragment()
     {
         StartCoroutine(Fragment_co());
+        tc.AttackEnd();
     }
 
     IEnumerator Fragment_co()
@@ -308,6 +310,7 @@ public class trapal_passive : MonoBehaviour
         GetComponent<trapal_script>().canattack = true;
         yield return new WaitForSeconds(0.9f);
         Destroy(deny);
+        tc.AttackEnd();
     }
 
     IEnumerator Glitch()
@@ -403,6 +406,7 @@ public class trapal_passive : MonoBehaviour
         {
             player.GetComponent<playerstatus>().BalanceCollapse();
         }
+        tc.AttackEnd();
     }
 
     public void Lazer1_Hit(Vector2 direction)

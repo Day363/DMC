@@ -74,7 +74,14 @@ public class counselfunctionmanager : MonoBehaviour
         if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
+            StartCoroutine(BattaleStartAttackCore());
         }
+    }
+
+    IEnumerator BattaleStartAttackCore()
+    {
+        yield return new WaitForSeconds(4f);
+        attackcore.GetComponent<attackcore>().BattleStart();
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class indexer0_weaponland : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class indexer0_weaponland : MonoBehaviour
     {
         if (collision.gameObject.name == "indexer0")
         {
-            if (!collision.gameObject.GetComponent<indexer0_script>().weapons.Contains(weaponname))
+            if (collision.gameObject.GetComponent<indexer0_script>().weapons.Count(x => x == weaponname) < 2)
             {
                 collision.gameObject.GetComponent<indexer0_script>().weapons.Add(weaponname);
                 collision.gameObject.GetComponent<indexer0_script>().RainmanagerCount();

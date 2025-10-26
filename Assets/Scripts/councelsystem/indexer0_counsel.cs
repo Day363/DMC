@@ -37,7 +37,7 @@ public class indexer0_counsel : MonoBehaviour
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
             gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
-            gamemanager.GetComponent<chatmanager>().CallDialogue(5);
+            gamemanager.GetComponent<chatmanager>().CallDialogue(6);
         }
     }
 }

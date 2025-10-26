@@ -47,11 +47,15 @@ public class disabled_rushmanage : MonoBehaviour
     public int deathattackcooltime;
     public int deathattckcool;
 
+    public disabled_counsel disc;
+    public Animator animator;
+    public Rigidbody2D rb;
 
     public void Start()
     {
         cammanager.GetComponent<CameraManager>().enemy = gameObject;
         battalemanager.GetComponent<battalemanager>().currentenemy = gameObject;
+
     }
 
     public void FixedUpdate()
@@ -101,12 +105,12 @@ public class disabled_rushmanage : MonoBehaviour
                 tomove = true;
                 if (attack5cool > attack5cooldown)
                 {
-                    GetComponent<Animator>().SetBool("attack5", true);
+                    animator.SetBool("attack5", true);
                 }
 
                 if (attack4cool > attack4cooldown)
                 {
-                    GetComponent<Animator>().SetBool("attack4", true);
+                    animator.SetBool("attack4", true);
                 }
             }
 
@@ -116,27 +120,27 @@ public class disabled_rushmanage : MonoBehaviour
 
                 if (skillselec == 1)
                 {
-                    GetComponent<Animator>().SetBool("attack1", true);
+                    animator.SetBool("attack1", true);
                 }
 
                 if (skillselec == 2)
                 {
-                    GetComponent<Animator>().SetBool("attack2", true);
+                    animator.SetBool("attack2", true);
                 }
 
                 if (skillselec == 3)
                 {
-                    GetComponent<Animator>().SetBool("attack6", true);
+                    animator.SetBool("attack6", true);
                 }
 
                 if (skillselec == 4)
                 {
-                    GetComponent<Animator>().SetBool("attack7", true);
+                    animator.SetBool("attack7", true);
                 }
 
                 if (skillselec == 5)
                 {
-                    GetComponent<Animator>().SetBool("attack8", true);
+                    animator.SetBool("attack8", true);
                 }
             }
 
@@ -147,12 +151,12 @@ public class disabled_rushmanage : MonoBehaviour
 
                 if (direction == -1)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * attack4speed, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * attack4speed, ForceMode2D.Impulse);
                 }
 
                 if (direction == 1)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * attack4speed, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * attack4speed, ForceMode2D.Impulse);
                 }
 
 
@@ -160,7 +164,7 @@ public class disabled_rushmanage : MonoBehaviour
                 {
                     if (Vector2.Distance(new Vector2(0, self.GetComponent<Transform>().position.y), new Vector2(0, floor.GetComponent<Transform>().position.y)) < 10.6)
                     {
-                        GetComponent<Animator>().SetBool("attack4end", true);
+                        animator.SetBool("attack4end", true);
                     }
                 }
 
@@ -170,18 +174,18 @@ public class disabled_rushmanage : MonoBehaviour
             {
                 if (rushselec < 2)
                 {
-                    GetComponent<Animator>().SetBool("rush1", true);
+                    animator.SetBool("rush1", true);
                 }
 
                 if (rushselec > 1)
                 {
-                    GetComponent<Animator>().SetBool("rush2", true);
+                    animator.SetBool("rush2", true);
                 }
             }
 
             if (attack3cool > attack3cooldown)
             {
-                GetComponent<Animator>().SetBool("attack3", true);
+                animator.SetBool("attack3", true);
             }
 
 
@@ -244,12 +248,12 @@ public class disabled_rushmanage : MonoBehaviour
             {
                 if (rushselec < 2)
                 {
-                    GetComponent<Animator>().SetBool("2phase_rush1", true);
+                    animator.SetBool("2phase_rush1", true);
                 }
 
                 if (rushselec > 1)
                 {
-                    GetComponent<Animator>().SetBool("2phase_rush2", true);
+                    animator.SetBool("2phase_rush2", true);
                 }
             }
 
@@ -258,27 +262,27 @@ public class disabled_rushmanage : MonoBehaviour
                 tomove = false;
                 if(deathattckcool >= deathattackcooltime)
                 {
-                    GetComponent<Animator>().SetBool("2phase_deathattack", true);
+                    animator.SetBool("2phase_deathattack", true);
                 }
 
                 if (phase2skillselec == 1)
                 {
-                    GetComponent<Animator>().SetBool("2phase_attack1", true);
+                    animator.SetBool("2phase_attack1", true);
                 }
 
                 if (phase2skillselec == 2)
                 {
-                    GetComponent<Animator>().SetBool("2phase_attack2", true);
+                    animator.SetBool("2phase_attack2", true);
                 }
 
                 if (phase2skillselec == 3)
                 {
-                    GetComponent<Animator>().SetBool("2phase_attack3", true);
+                    animator.SetBool("2phase_attack3", true);
                 }
 
                 if (phase2skillselec == 4)
                 {
-                    GetComponent<Animator>().SetBool("2phase_attack4", true);
+                    animator.SetBool("2phase_attack4", true);
                 }
 
             }
@@ -293,31 +297,33 @@ public class disabled_rushmanage : MonoBehaviour
 
         if (direction < 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * rushpower, ForceMode2D.Impulse);
-            GetComponent<Animator>().SetBool("rush1", false);
-            GetComponent<Animator>().SetBool("rush2", false);
+            rb.AddForce(Vector2.left * rushpower, ForceMode2D.Impulse);
+            animator.SetBool("rush1", false);
+            animator.SetBool("rush2", false);
             
         }
 
         if (direction > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * rushpower, ForceMode2D.Impulse);
-            GetComponent<Animator>().SetBool("rush1", false);
-            GetComponent<Animator>().SetBool("rush2", false);
+            rb.AddForce(Vector2.right * rushpower, ForceMode2D.Impulse);
+            animator.SetBool("rush1", false);
+            animator.SetBool("rush2", false);
             
         }
+
+        
     }
 
     public void Attackrush()
     {
         if (direction < 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * attackrushpower, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * attackrushpower, ForceMode2D.Impulse);
         }
 
         if (direction > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * attackrushpower, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * attackrushpower, ForceMode2D.Impulse);
         }
     }
 
@@ -334,54 +340,62 @@ public class disabled_rushmanage : MonoBehaviour
     public void Rushend()
     {
         whileattack = false;
+        disc.AttackEnd();
     }
 
     public void Attack1end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("attack1", false);
+        animator.SetBool("attack1", false);
         skillselec = Random.Range(1, 6);
+        disc.AttackEnd();
     }
 
     public void Attack2end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("attack2", false);
+        animator.SetBool("attack2", false);
         skillselec = Random.Range(1, 6);
+        disc.AttackEnd();
     }
 
     public void Attack6end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("attack6", false);
+        animator.SetBool("attack6", false);
         skillselec = Random.Range(1, 6);
+        disc.AttackEnd();
     }
 
     public void Attack7end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("attack7", false);
+        animator.SetBool("attack7", false);
         skillselec = Random.Range(1, 6);
+        disc.AttackEnd();
     }
 
     public void Attack8end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("attack8", false);
+        animator.SetBool("attack8", false);
         skillselec = Random.Range(1, 6);
+        disc.AttackEnd();
     }
 
     public void Attack3end()
     {
-        GetComponent<Animator>().SetBool("attack3", false);
+        animator.SetBool("attack3", false);
         whileattack = false;
         attack3cool = 0;
+        disc.AttackEnd();
     }
     public void Attack5end()
     {
-        GetComponent<Animator>().SetBool("attack5", false);
+        animator.SetBool("attack5", false);
         whileattack = false;
         attack5cool = 0;
+        disc.AttackEnd();
     }
 
     public void shot()
@@ -401,7 +415,7 @@ public class disabled_rushmanage : MonoBehaviour
 
     public void Jump()
     {
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
     }
 
     public void Nowflying()
@@ -415,13 +429,14 @@ public class disabled_rushmanage : MonoBehaviour
         nowflying = false;
         whileattack =  false;
         attack4cool = 0;
-        GetComponent<Animator>().SetBool("attack4end", false);
-        GetComponent<Animator>().SetBool("attack4", false);
+        animator.SetBool("attack4end", false);
+        animator.SetBool("attack4", false);
+        disc.AttackEnd();
     }
 
     public void Start2Phase()
     {
-        GetComponent<Animator>().SetBool("2phase", true);
+        animator.SetBool("2phase", true);
         phase2 = true;
     }
 
@@ -431,17 +446,17 @@ public class disabled_rushmanage : MonoBehaviour
 
         if (direction < 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2rushpower, ForceMode2D.Impulse);
-            GetComponent<Animator>().SetBool("2phase_rush1", false);
-            GetComponent<Animator>().SetBool("2phase_rush2", false);
+            rb.AddForce(Vector2.left * phase2rushpower, ForceMode2D.Impulse);
+            animator.SetBool("2phase_rush1", false);
+            animator.SetBool("2phase_rush2", false);
 
         }
 
         if (direction > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2rushpower, ForceMode2D.Impulse);
-            GetComponent<Animator>().SetBool("2phase_rush1", false);
-            GetComponent<Animator>().SetBool("2phase_rush2", false);
+            rb.AddForce(Vector2.right * phase2rushpower, ForceMode2D.Impulse);
+            animator.SetBool("2phase_rush1", false);
+            animator.SetBool("2phase_rush2", false);
 
         }
     }
@@ -449,36 +464,40 @@ public class disabled_rushmanage : MonoBehaviour
     public void Phase2Attack1end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("2phase_attack1", false);
+        animator.SetBool("2phase_attack1", false);
         phase2skillselec = Random.Range(1, 5);
+        disc.AttackEnd();
     }
 
     public void Phase2Attack2end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("2phase_attack2", false);
+        animator.SetBool("2phase_attack2", false);
         phase2skillselec = Random.Range(1, 5);
+        disc.AttackEnd();
     }
 
     public void Phase2Attack3end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("2phase_attack3", false);
+        animator.SetBool("2phase_attack3", false);
         phase2skillselec = Random.Range(1, 5);
+        disc.AttackEnd();
     }
 
     public void Phase2Attack4end()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("2phase_attack4", false);
+        animator.SetBool("2phase_attack4", false);
         phase2skillselec = Random.Range(1, 5);
+        disc.AttackEnd();
     }
 
     public void DeathAttackend()
     {
         whileattack = false;
-        GetComponent<Animator>().SetBool("2phase_deathattack", false);
-        GetComponent<Animator>().SetBool("2phase_deathattack_success", false);
+        animator.SetBool("2phase_deathattack", false);
+        animator.SetBool("2phase_deathattack_success", false);
         deathattckcool = 0;
     }
 
@@ -486,12 +505,12 @@ public class disabled_rushmanage : MonoBehaviour
     {
         if (direction < 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2attackrush, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * phase2attackrush, ForceMode2D.Impulse);
         }
 
         if (direction > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attackrush, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * phase2attackrush, ForceMode2D.Impulse);
         }
     }
 
@@ -499,22 +518,23 @@ public class disabled_rushmanage : MonoBehaviour
     {
         if (direction < 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * phase2attacbigkrush, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * phase2attacbigkrush, ForceMode2D.Impulse);
         }
 
         if (direction > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * phase2attacbigkrush, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * phase2attacbigkrush, ForceMode2D.Impulse);
         }
     }
 
     IEnumerator CameraShake()
     {
-        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 13;
-        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        CinemachineBasicMultiChannelPerlin cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin = cammanager.GetComponent<CameraManager>().GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 13;
+        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.1f);
-        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        cammanager.GetComponent<CameraManager>().maincam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
         cammanager.GetComponent<CameraManager>().CamStable();
     }
 

@@ -2647,12 +2647,12 @@ MonoBehaviour:
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
-  slashtoleranceCore: 0
-  penetratetoleranceCore: 0
-  blowtoleranceCore: 0
-  damageplus: 0
+  slashtoleranceCore: 1
+  penetratetoleranceCore: 1
+  blowtoleranceCore: 1
+  damageplus: 1
   damageplusCore: 1
-  bleeddamageincrease: 0
+  bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
   height: -4.23
   height2: -7
@@ -2800,6 +2800,7 @@ MonoBehaviour:
   certain24count: 0
   certaindestroy: 0
   ts: {fileID: 0}
+  tc: {fileID: 0}
 --- !u!114 &13111084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,6 +2875,8 @@ MonoBehaviour:
     \uB0B4\uB294 \uC18C\uB9AC\uC640...</shake>"
   - "<shake=0.4,20>\uB098\uC544\uAC00\uC57C\uB9CC\uD558\uB294\uB370</shake>"
   say: 0
+  cycleint_: 0
+  cycleint: 3
 --- !u!1 &13365581
 GameObject:
   m_ObjectHideFlags: 0
@@ -32953,8 +32956,8 @@ Transform:
   m_GameObject: {fileID: 191536539}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.95, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -5.292, z: 0}
+  m_LocalScale: {x: 1, y: 1.5699, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 655926170}
@@ -152400,7 +152403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &813932279
 Transform:
   m_ObjectHideFlags: 0
@@ -152410,7 +152413,7 @@ Transform:
   m_GameObject: {fileID: 813932278}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.96, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -186384,7 +186387,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: dd7740e5
@@ -219864,6 +219867,7 @@ GameObject:
   - component: {fileID: 1046264254}
   - component: {fileID: 1046264253}
   - component: {fileID: 1046264252}
+  - component: {fileID: 1046264255}
   m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
@@ -219955,6 +219959,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1046264255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046264250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss_hpbar: {fileID: 1486460266}
+  stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
+  stackContainer: {fileID: 136177265}
 --- !u!1 &1046317737
 GameObject:
   m_ObjectHideFlags: 0
@@ -308769,7 +308788,7 @@ GameObject:
   - component: {fileID: 1486460265}
   m_Layer: 6
   m_Name: indexer0
-  m_TagString: Untagged
+  m_TagString: client
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309101,9 +309120,9 @@ MonoBehaviour:
   slashtoleranceCore: 0.7
   penetratetoleranceCore: 0.1
   blowtoleranceCore: 1.2
-  damageplus: 0
+  damageplus: 1
   damageplusCore: 1
-  bleeddamageincrease: 0
+  bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
   height: 0
   height2: 0
@@ -360844,6 +360863,25 @@ MonoBehaviour:
       end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
+  - dialogueLines:
+    - target: 0
+      dialogue: "\uCC0D\uCC0D?"
+      basicdelay: 0.03
+      dotdelay: 0.1
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uCC0D\uCC0D?<function=start>"
+      basicdelay: 0.03
+      dotdelay: 0.1
+      end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
+      gotoanswer: 0
+      answerindex: 0
   answers:
   - answers:
     - answer: "[\uC790\uB9AC\uB97C \uB5A0\uB09C\uB2E4]"
@@ -404424,6 +404462,9 @@ MonoBehaviour:
   phase2attacbigkrush: 30
   deathattackcooltime: 750
   deathattckcool: 0
+  disc: {fileID: 1995604096}
+  animator: {fileID: 1995604086}
+  rb: {fileID: 1995604088}
 --- !u!114 &1995604093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404595,6 +404636,9 @@ MonoBehaviour:
   playerstatus: {fileID: 2010219122}
   counselmirror: {fileID: 7972837668425939847, guid: 7a93c5dc725548944ad1bd861814817a, type: 3}
   background: {fileID: 179731463}
+  bosshp: {fileID: 1995604094}
+  cycleint_: 0
+  cycleint: 5
 --- !u!114 &1995604097
 MonoBehaviour:
   m_ObjectHideFlags: 0

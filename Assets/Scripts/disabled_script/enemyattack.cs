@@ -40,7 +40,8 @@ public class enemyattack : MonoBehaviour
 
                 player.GetComponent<playerstatus>().Parrystop();
 
-                gameObject.SetActive(false);
+                
+
                 if (enemy != null)
                 {
                     enemy.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
@@ -69,6 +70,8 @@ public class enemyattack : MonoBehaviour
                     }
                     
                 }
+
+                battalemanager.EnemyAttackDisabled(gameObject);
             }
 
             if (collision.gameObject.tag == "Player")

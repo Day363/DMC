@@ -23,10 +23,24 @@ public class disabled_counsel : MonoBehaviour
     public GameObject playerstatus;
     public GameObject counselmirror;
     public GameObject background;
+    public boss_hpbar bosshp;
+    public int cycleint_;
+    public int cycleint;
 
     //Ä³½Ì
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
+
+    public void AttackEnd()
+    {
+        cycleint_++;
+        if (cycleint_ >= cycleint)
+        {
+            bosshp.CycleEnd();
+            bosshp.CycleStart();
+            cycleint_ = 0;
+        }
+    }
 
     public void Start()
     {
