@@ -49,6 +49,8 @@ public class DialogueData
 
 public class chatmanager : MonoBehaviour
 {
+    public bool conserned;
+
     public static event Action OnchatEnd;
 
     public Dictionary<string, Action> fuctionMap;
@@ -201,6 +203,10 @@ public class chatmanager : MonoBehaviour
                 whilesaying = false;
                 if (shaker != null)
                     shaker.CheckEvents(totalvisible);
+                if (chat.gotoanswer)
+                {
+
+                }
                 if (chat.end)
                 {
                     yield return new WaitForSeconds(1f);
@@ -241,6 +247,10 @@ public class chatmanager : MonoBehaviour
 
         whilesaying = false;
 
+        if (chat.gotoanswer)
+        {
+
+        }
         if (chat.end)
         {
             yield return new WaitForSeconds(1f);

@@ -5,6 +5,8 @@ using System;
 
 public class counselfunctionmanager : MonoBehaviour
 {
+    public static Action Onsuccess;
+
     public static counselfunctionmanager Instance;
     public GameObject attackcore;
     public GameObject letterbox;
@@ -28,7 +30,8 @@ public class counselfunctionmanager : MonoBehaviour
             { "Animation2", Animation2 },
             { "Animation3", Animation3 },
             { "trapal_start", Trapal_start },
-            { "start",  BattleStart}
+            { "start",  BattleStart},
+            { "success", CounselSuccess }
         };
     }
 
@@ -81,7 +84,12 @@ public class counselfunctionmanager : MonoBehaviour
     IEnumerator BattaleStartAttackCore()
     {
         yield return new WaitForSeconds(4f);
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore.GetComponent<attackcore>().SetCronometer();
+    }
+
+    public void CounselSuccess()
+    {
+        Onsuccess?.Invoke();
     }
 
 }

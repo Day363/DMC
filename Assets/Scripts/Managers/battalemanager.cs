@@ -19,7 +19,7 @@ public class battalemanager : MonoBehaviour
 
     public void Battlestart()
     {
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore.GetComponent<attackcore>().SetCronometer();
     }
 
     public static void EnemyAttackDisabled(GameObject currentattack)

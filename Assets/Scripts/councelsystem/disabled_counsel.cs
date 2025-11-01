@@ -90,7 +90,7 @@ public class disabled_counsel : MonoBehaviour
         cursor1.SetActive(true);
         cursor2.SetActive(true);
         playerstatus.SetActive(true);
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore.GetComponent<attackcore>().SetCronometer();
         GetComponent<cutscenemanager>().cameraset = false;
         cammanagerCameraManager.LookPlayer();
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();

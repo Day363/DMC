@@ -16,6 +16,7 @@ public class enemyattack : MonoBehaviour
     public float ratiosum;
 
     public bool steadydamage;
+    public bool Notifparrysetfalse;
 
     public bool slash;
     public bool penetrate;
@@ -71,7 +72,15 @@ public class enemyattack : MonoBehaviour
                     
                 }
 
-                battalemanager.EnemyAttackDisabled(gameObject);
+                if (!Notifparrysetfalse)
+                {
+                    battalemanager.EnemyAttackDisabled(gameObject);
+                }
+                else if (Notifparrysetfalse)
+                {
+                    GetComponent<Collider>().enabled = false;
+                }
+                
             }
 
             if (collision.gameObject.tag == "Player")

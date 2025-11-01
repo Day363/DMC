@@ -23,6 +23,7 @@ public class indexer0_counsel : MonoBehaviour
     public void Start()
     {
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
+
     }
 
     public void FixedUpdate()
@@ -37,7 +38,9 @@ public class indexer0_counsel : MonoBehaviour
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
             gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
-            gamemanager.GetComponent<chatmanager>().CallDialogue(6);
+            gamemanager.GetComponent<chatmanager>().CallDialogue(5);
         }
     }
+
+   
 }

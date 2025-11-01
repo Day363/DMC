@@ -75,7 +75,8 @@ public class attackcore : MonoBehaviour
     public GameObject cursor2;
     public TMP_Text cursorskill;
     public TMP_Text cursordefense;
-
+    public GameObject[] activewhenbattlestart;
+    public GameObject cronometer;
 
     public GameObject letterbox;
 
@@ -172,11 +173,30 @@ public class attackcore : MonoBehaviour
         letterboxletterboxin = letterbox.GetComponent<letterboxin>();
     }
 
+    public void SetCronometer()
+    {
+        cronometer.GetComponent<cronometer_script>().BattleStart();
+    }
+
     public void BattleStart()
     {
         skillselectui.SetActive(true);
         Time.timeScale = 0f;
         MakeRangeWeaponMagzineList();
+        foreach (GameObject ui in activewhenbattlestart)
+        {
+            ui.SetActive(true);
+        }
+    }
+
+    public void BattleEnd()
+    {
+        skillselectui.SetActive(false);
+        Time.timeScale = 1f;
+        foreach (GameObject ui in activewhenbattlestart)
+        {
+            ui.SetActive(false);
+        }
     }
 
     public void BossDamaged()

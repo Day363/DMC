@@ -109,8 +109,7 @@ public class trapal_counsel : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         GetComponent<trapal_script>().canattack = true;
-        yield return new WaitForSeconds(2);
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore.GetComponent<attackcore>().SetCronometer();
     }
 
     public void LookSelf()
@@ -225,7 +224,7 @@ public class trapal_counsel : MonoBehaviour
         GetComponent<trapal_script>().canattack = true;
         attackcore.GetComponent<attackcore>().canattack = true;
         player.GetComponent<PlayerMove>().canmove = true;
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore.GetComponent<attackcore>().SetCronometer();
     }
 
     IEnumerator Lookplaer_co()

@@ -119,6 +119,8 @@ public class selectmirror : MonoBehaviour
     {
         if (Input.GetButtonDown("fbutton") && selectactive)
         {
+            player.transform.position = new Vector3(2.5f, -0.4f, 0);
+
             foreach (GameObject background in backgrounds)
             {
                 background.SetActive(true);

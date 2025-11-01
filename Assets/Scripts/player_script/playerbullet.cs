@@ -89,7 +89,7 @@ public class playerbullet : MonoBehaviour
             else if (collision.gameObject.CompareTag("playerattack") && ifreflectShoot != null)
             {
                 Debug.Log(attackcore.transform.rotation.z);
-                GameObject currentobject = Instantiate(ifreflectShoot, collision.transform.position, Quaternion.Euler(0, 0, attackcore.transform.eulerAngles.z));
+                GameObject currentobject = Instantiate(ifreflectShoot, transform.position, Quaternion.Euler(0, 0, attackcore.transform.eulerAngles.z));
                 Destroy(gameObject);
             }
         }

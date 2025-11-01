@@ -527,20 +527,9 @@ public class disabled_rushmanage : MonoBehaviour
         }
     }
 
-    IEnumerator CameraShake()
-    {
-        CinemachineBasicMultiChannelPerlin cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin = cammanager.GetComponent<CameraManager>().GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 13;
-        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
-        yield return new WaitForSeconds(0.1f);
-        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        cammanagerCameraManagerCinemachineVirtualCameraCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
-        cammanager.GetComponent<CameraManager>().CamStable();
-    }
-
     public void CamreaShackmethod()
     {
-        StartCoroutine(CameraShake());
+        cammanager.GetComponent<CameraManager>().LimitlessShake(13, 1, 0.1f);
     }
 
 }
