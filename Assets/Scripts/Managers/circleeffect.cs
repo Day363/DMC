@@ -10,13 +10,14 @@ public class circleeffect : MonoBehaviour
 
     public void Start()
     {
-        transform.DOScale(targetscale, duration).SetEase(Ease.OutCubic);
-        GetComponent<SpriteRenderer>().DOFade(0, duration).SetEase(Ease.OutQuart);
+        transform.DOScale(targetscale, duration).SetEase(Ease.OutCubic).SetUpdate(true);
+        GetComponent<SpriteRenderer>().DOFade(0, duration).SetEase(Ease.OutQuart).SetUpdate(true);
+        StartCoroutine(Fuck());
     }
 
     IEnumerator Fuck()
     {
-        yield return new WaitForSeconds(duration + 0.1f);
+        yield return new WaitForSecondsRealtime(duration + 0.1f);
         Destroy(gameObject);
     }
 }

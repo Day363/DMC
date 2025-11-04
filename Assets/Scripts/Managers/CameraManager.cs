@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     public bool resetRotation;
     public bool killcam;
 
+    public GameObject braincam;
+
     public GameObject Gamemanager;
 
     public float killcamsize;
@@ -44,7 +46,6 @@ public class CameraManager : MonoBehaviour
         {
             maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = killcamsize;
         }
-        
     }
 
     public void CinemachineInvalidateCache()
@@ -114,6 +115,11 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
         CamStable();
+    }
+
+    public void CamVibTimeIgnore()
+    {
+        braincam.transform.DOShakePosition(0.12f, strength: 0.3f).SetUpdate(true);
     }
 
     public void CamVibration0_5()

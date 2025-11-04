@@ -6,6 +6,7 @@ using DG.Tweening;
 [ExecuteAlways] // 에디터 상태에서도 Update() 실행
 public class cronometer_script : MonoBehaviour
 {
+    public Camera mainCam;
     public float targetangle;
     public GameObject attackcore;
     public GameObject cammanager;
@@ -26,7 +27,14 @@ public class cronometer_script : MonoBehaviour
 
     public bool normaltime;
 
-    void FixedUpdate()
+    public playerstatus playerplayerstatus;
+
+    public void Start()
+    {
+        playerplayerstatus  = player.GetComponent<playerstatus>();
+    }
+
+    void Update()
     {
         if (normaltime)
         {
@@ -43,7 +51,6 @@ public class cronometer_script : MonoBehaviour
         secondHand.eulerAngles = new Vector3(0, 0, -(hourAngle * 720f));
     }
 
-    [ContextMenu("BattleStart")]
     public void BattleStart()
     {
         FadeIn();
@@ -52,8 +59,9 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
+        Time.timeScale = 0f;
         float currentAngle = hourHand.eulerAngles.z;
-
+        targetangle = (playerplayerstatus.lifecount / playerplayerstatus.maxlifecount) * 360;
         float endAngle = targetangle + (360f * 15f) + 90f ;
 
         DOTween.To(
@@ -61,11 +69,11 @@ public class cronometer_script : MonoBehaviour
             x => hourAngle = x,    
             endAngle,              
             2.5f                     
-        ).SetEase(Ease.InCubic).SetId("turn");
+        ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSecondsRealtime(2.5f);
         Instantiate(effect, transform.position, Quaternion.identity);
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
 
         DOTween.Kill("turn");
 
@@ -74,13 +82,15 @@ public class cronometer_script : MonoBehaviour
             x => hourAngle = x,
             targetangle + (360f * 15f),
             1f                     
-        ).SetEase(Ease.OutQuart).SetId("turn");
+        ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
 
-        yield return new WaitForSeconds(0.78f);
+        yield return new WaitForSecondsRealtime(1f);
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
+
+        yield return new WaitForSecondsRealtime(0.1f);
 
         attackcore.GetComponent<attackcore>().BattleStart();
         FadeOut();
@@ -88,21 +98,83 @@ public class cronometer_script : MonoBehaviour
 
     public void FadeIn()
     {
-        transform.position = player.transform.position;
-        middle.GetComponent<SpriteRenderer>().DOFade(1, 0.5f); 
-        hourHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f);
-        minuteHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f);
-        secondHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f);
+        Vector3 camPos = mainCam.transform.position;
+        transform.position = new Vector3(camPos.x, camPos.y, transform.position.z);
+        middle.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true); 
+        hourHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
+        minuteHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
+        secondHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
     }
 
     public void FadeOut()
     {
-        middle.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
-        hourHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
-        minuteHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
-        secondHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
+        middle.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+        hourHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+        minuteHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+        secondHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+
     }
 
+    public void WhenLifeCoutDown()
+    {
+        FadeIn();
+        StartCoroutine(WhenLifeCoutDown_co());
+    }
+
+    IEnumerator WhenLifeCoutDown_co()
+    {
+        Time.timeScale = 0f;
+        targetangle = 360 - (((float)playerplayerstatus.lifecount / (float)playerplayerstatus.maxlifecount) * 360);
+
+        DOTween.To(
+            () => hourAngle,
+            x => hourAngle = x,
+            targetangle + 360 + 30,
+            1.5f
+        ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(1.5f);
+        Instantiate(effect, transform.position, Quaternion.identity);
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
+
+        DOTween.Kill("turn");
+
+        DOTween.To(
+            () => hourAngle,
+            x => hourAngle = x,
+            targetangle + 360,
+            1f
+        ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        Instantiate(effect, transform.position, Quaternion.identity);
+        Instantiate(effect2, transform.position, Quaternion.identity);
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
+
+        FadeOut();
+        Time.timeScale = 1f;
+    }
+
+    [ContextMenu("Force Stop Battle (Editor)")]
+    void ForceStopBattle()
+    {
+        try
+        {
+            DOTween.Kill("turn", complete: false);
+            DOTween.KillAll(complete: false);
+            StopAllCoroutines();
+            hourAngle = 0f;
+            #if UNITY_EDITOR
+            #endif
+            Debug.Log("강제 정지 완료: DOTween 및 코루틴 종료.");
+            Time.timeScale = 1;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("ForceStopBattle 중 예외: " + ex);
+        }
+    }
 
 }
 

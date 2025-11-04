@@ -19,6 +19,8 @@ public class playerstatus : MonoBehaviour
 
     public Coroutine typingCoroutine;
 
+    public GameObject cronometer;
+
     public GameObject emotionbar;
     public GameObject reasonbar;
     public GameObject recognitionbar;
@@ -46,6 +48,8 @@ public class playerstatus : MonoBehaviour
     public float focus;
     public float maxbalance;
     public float currentbalance;
+    public int maxlifecount;
+    public int lifecount;
     public float speed;
     public float attackpower;
     public float attackpowerCore = 10;
@@ -282,7 +286,7 @@ public class playerstatus : MonoBehaviour
 
     private void Start()
     {
-
+        lifecount = maxlifecount;
         balancebarint.maxValue = maxbalance;
         currentbalance = 0;
     }
@@ -346,7 +350,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceCollapse()
     {
-
+        lifeCountDown();
     }
 
     public void SelfBalanceDamage(float balance)
@@ -358,10 +362,16 @@ public class playerstatus : MonoBehaviour
         if (currentbalance >= maxbalance)
         {
             currentbalance = 0;
-            // ±ÕÇüºØ±«
+            BalanceCollapse();
         }
 
         
+    }
+
+    public void lifeCountDown()
+    {
+        lifecount = lifecount - 1;
+        cronometer.GetComponent<cronometer_script>().WhenLifeCoutDown();
     }
 
     public void Parrystop()

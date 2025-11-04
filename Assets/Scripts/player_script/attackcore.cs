@@ -187,6 +187,7 @@ public class attackcore : MonoBehaviour
         {
             ui.SetActive(true);
         }
+        worldlightintensity = world_light.GetComponent<Light2D>().intensity;
     }
 
     public void BattleEnd()
@@ -1474,7 +1475,6 @@ public class attackcore : MonoBehaviour
                 Time.timeScale = 0f;
                 cammanager.GetComponent<CameraManager>().CamStable();
                 DOTween.Kill("light");
-                worldlightintensity = world_light.GetComponent<Light2D>().intensity;
                 DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity - 0.5f, 1f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
 
                 dashcoroutine = StartCoroutine(DashFlash());
