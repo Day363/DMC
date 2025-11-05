@@ -107,7 +107,7 @@ public class trapal_counsel : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         GetComponent<trapal_script>().canattack = true;
         attackcore.GetComponent<attackcore>().SetCronometer();
     }

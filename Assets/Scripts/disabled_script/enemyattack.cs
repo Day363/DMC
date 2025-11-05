@@ -18,6 +18,7 @@ public class enemyattack : MonoBehaviour
     public bool steadydamage;
     public bool Notifparrysetfalse;
 
+    public bool fixdam;
     public bool slash;
     public bool penetrate;
     public bool blow;
@@ -89,32 +90,95 @@ public class enemyattack : MonoBehaviour
                 if (!steadydamage)
                 {
                     
-                    if (heavyattack)
+                    if (heavyattack && hit)
                     {
-                        Debug.Log("ada");
-                        heavyattack = false;
-                        player.GetComponent<playerhit>().StrongHit(damage, transform);
-
+                        if (fixdam)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().StrongHit(damage, transform);
+                        }
+                        if (slash)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                        }
+                        if (penetrate)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                        }
+                        if (blow)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                        }
                     }
 
-                    if (lightattack)
+                    if (lightattack && hit)
                     {
-                        Debug.Log("ada");
-                        lightattack = false;
-                        player.GetComponent<playerhit>().Hit(damage);
+                        if (fixdam)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().Hit(damage);
+                        }
+                        if (slash)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().SlashHit(damage);
+                        }
+                        if (penetrate)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().PenetrateHit(damage);
+                        }
+                        if (blow)
+                        {
+                            hit = false;
+                            player.GetComponent<playerhit>().BlowHit(damage);
+                        }
                     }
                 }
                 else if(steadydamage)
                 {
-                    if (heavyattack)
+                    if (heavyattack && hit)
                     {
-                        player.GetComponent<playerhit>().StrongHit(damage, transform);
+                        if (fixdam)
+                        {
+                            player.GetComponent<playerhit>().StrongHit(damage, transform);
+                        }
+                        if (slash)
+                        {
+                            player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                        }
+                        if (penetrate)
+                        {
+                            player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                        }
+                        if (blow)
+                        {
+                            player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                        }
 
                     }
 
-                    if (lightattack)
+                    if (lightattack && hit)
                     {
-                        player.GetComponent<playerhit>().Hit(damage);
+                        if (fixdam)
+                        {
+                            player.GetComponent<playerhit>().Hit(damage);
+                        }
+                        if (slash)
+                        {
+                            player.GetComponent<playerhit>().SlashHit(damage);
+                        }
+                        if (penetrate)
+                        {
+                            player.GetComponent<playerhit>().PenetrateHit(damage);
+                        }
+                        if (blow)
+                        {
+                            player.GetComponent<playerhit>().BlowHit(damage);
+                        }
                     }
                 }
 

@@ -338,8 +338,45 @@ public class playerstatus : MonoBehaviour
             currentbalance = 0;
             BalanceCollapse();
         }
+    }
 
-        
+    public void SlashDamage(float balance)
+    {
+        GetComponent<Passivefunction>().PlayerHit();
+
+        currentbalance += balance * slash_tolerance;
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
+
+    public void PenetrateDamage(float balance)
+    {
+        GetComponent<Passivefunction>().PlayerHit();
+
+        currentbalance += balance * penetration_tolerance;
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
+
+    public void BlowDamage(float balance)
+    {
+        GetComponent<Passivefunction>().PlayerHit();
+
+        currentbalance += balance * blow_tolerance;
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
     }
 
     public void BalanceHeal(float balance)

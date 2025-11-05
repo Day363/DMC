@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e115fa90ac0cb4b81661a44dbb2b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disappearbytime: 0
+  time: 0
 --- !u!114 &-8032191557371142122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,13 +202,16 @@ MonoBehaviour:
   enemy: {fileID: 0}
   damage: 35
   lightattack: 0
-  heavyattack: 0
+  heavyattack: 1
   parryback: 35
   selfback: 0
   playerback: 0
   ratiosum: 0
   steadydamage: 0
+  Notifparrysetfalse: 0
+  fixdam: 0
   slash: 0
   penetrate: 1
   blow: 0
   friendly_hit: 1
+  hit: 0

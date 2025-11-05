@@ -78,8 +78,159 @@ public class playerhit : MonoBehaviour
             GetComponent<playerstatus>().BalanceDamage(culdam);
             Hitcamera();
         }
-        
-        
+    }
+
+    public void SlashHit(int damage)
+    {
+        playerstatus playerstatus_com = GetComponent<playerstatus>();
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            int culdam = 0;
+            if (defense)
+            {
+                culdam = Mathf.Max(1, damage - (int)(playerstatus_com.attackpower * defenseCoef));
+            }
+            if (counter)
+            {
+                culdam = damage;
+                StartCoroutine(CounterHitpass());
+                GetComponent<Animator>().SetTrigger(counteranimationtrigger);
+            }
+            if (evasion)
+            {
+                if (damage < playerstatus_com.attackpower * evasionCoef)
+                {
+                    Instantiate(evasiontext, transform.position, Quaternion.identity);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * evasionCoef)
+                {
+                    culdam = (int)(damage * 1.5f);
+                }
+            }
+            if (offset)
+            {
+                if (damage < playerstatus_com.attackpower * offsetCoef)
+                {
+                    gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BalanceDamage((int)(playerstatus_com.attackpower * offsetCoef) - damage);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * offsetCoef)
+                {
+                    culdam = damage - (int)(damage - (playerstatus_com.attackpower * offsetCoef));
+                }
+            }
+            else
+            {
+                culdam = damage;
+            }
+            GetComponent<playerstatus>().SlashDamage(culdam);
+            Hitcamera();
+        }
+    }
+
+    public void PenetrateHit(int damage)
+    {
+        playerstatus playerstatus_com = GetComponent<playerstatus>();
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            int culdam = 0;
+            if (defense)
+            {
+                culdam = Mathf.Max(1, damage - (int)(playerstatus_com.attackpower * defenseCoef));
+            }
+            if (counter)
+            {
+                culdam = damage;
+                StartCoroutine(CounterHitpass());
+                GetComponent<Animator>().SetTrigger(counteranimationtrigger);
+            }
+            if (evasion)
+            {
+                if (damage < playerstatus_com.attackpower * evasionCoef)
+                {
+                    Instantiate(evasiontext, transform.position, Quaternion.identity);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * evasionCoef)
+                {
+                    culdam = (int)(damage * 1.5f);
+                }
+            }
+            if (offset)
+            {
+                if (damage < playerstatus_com.attackpower * offsetCoef)
+                {
+                    gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BalanceDamage((int)(playerstatus_com.attackpower * offsetCoef) - damage);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * offsetCoef)
+                {
+                    culdam = damage - (int)(damage - (playerstatus_com.attackpower * offsetCoef));
+                }
+            }
+            else
+            {
+                culdam = damage;
+            }
+            GetComponent<playerstatus>().PenetrateDamage(culdam);
+            Hitcamera();
+        }
+    }
+
+    public void BlowHit(int damage)
+    {
+        playerstatus playerstatus_com = GetComponent<playerstatus>();
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            int culdam = 0;
+            if (defense)
+            {
+                culdam = Mathf.Max(1, damage - (int)(playerstatus_com.attackpower * defenseCoef));
+            }
+            if (counter)
+            {
+                culdam = damage;
+                StartCoroutine(CounterHitpass());
+                GetComponent<Animator>().SetTrigger(counteranimationtrigger);
+            }
+            if (evasion)
+            {
+                if (damage < playerstatus_com.attackpower * evasionCoef)
+                {
+                    Instantiate(evasiontext, transform.position, Quaternion.identity);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * evasionCoef)
+                {
+                    culdam = (int)(damage * 1.5f);
+                }
+            }
+            if (offset)
+            {
+                if (damage < playerstatus_com.attackpower * offsetCoef)
+                {
+                    gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BalanceDamage((int)(playerstatus_com.attackpower * offsetCoef) - damage);
+                    return;
+                }
+                if (damage > playerstatus_com.attackpower * offsetCoef)
+                {
+                    culdam = damage - (int)(damage - (playerstatus_com.attackpower * offsetCoef));
+                }
+            }
+            else
+            {
+                culdam = damage;
+            }
+            GetComponent<playerstatus>().BlowDamage(culdam);
+            Hitcamera();
+        }
     }
 
     IEnumerator CounterHitpass()
@@ -116,7 +267,86 @@ public class playerhit : MonoBehaviour
         
     }
 
-    
+    public void SlashStrongHit(int damage, Transform attacktransform)
+    {
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            currenthitstop = StartCoroutine(HitStop());
+
+            Hitcamera();
+            GetComponent<Animator>().SetBool("knockback", true);
+            GetComponent<PlayerMove>().canmove = false;
+            StartCoroutine(knockbackcool());
+            GetComponent<playerstatus>().SlashDamage(damage);
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            if (dir < 0)
+            {
+                GetComponent<PlayerMove>().LookRight();
+            }
+            else
+            {
+                GetComponent<PlayerMove>().LookLeft();
+            }
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(dir, 0), ForceMode2D.Impulse);
+        }
+
+    }
+
+    public void PenetrateStrongHit(int damage, Transform attacktransform)
+    {
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            currenthitstop = StartCoroutine(HitStop());
+
+            Hitcamera();
+            GetComponent<Animator>().SetBool("knockback", true);
+            GetComponent<PlayerMove>().canmove = false;
+            StartCoroutine(knockbackcool());
+            GetComponent<playerstatus>().PenetrateDamage(damage);
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            if (dir < 0)
+            {
+                GetComponent<PlayerMove>().LookRight();
+            }
+            else
+            {
+                GetComponent<PlayerMove>().LookLeft();
+            }
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(dir, 0), ForceMode2D.Impulse);
+        }
+
+    }
+
+    public void BlowStrongHit(int damage, Transform attacktransform)
+    {
+        if (canhit)
+        {
+            OnHitCalled?.Invoke();
+
+            currenthitstop = StartCoroutine(HitStop());
+
+            Hitcamera();
+            GetComponent<Animator>().SetBool("knockback", true);
+            GetComponent<PlayerMove>().canmove = false;
+            StartCoroutine(knockbackcool());
+            GetComponent<playerstatus>().BlowDamage(damage);
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            if (dir < 0)
+            {
+                GetComponent<PlayerMove>().LookRight();
+            }
+            else
+            {
+                GetComponent<PlayerMove>().LookLeft();
+            }
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(dir, 0), ForceMode2D.Impulse);
+        }
+
+    }
 
     public void FlyAway(float power, float up)
     {

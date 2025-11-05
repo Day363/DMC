@@ -83,7 +83,7 @@ public class counselfunctionmanager : MonoBehaviour
 
     IEnumerator BattaleStartAttackCore()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1.5f);
         attackcore.GetComponent<attackcore>().SetCronometer();
     }
 

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1431493284063230821}
   - component: {fileID: 4969265800840858530}
-  - component: {fileID: 1964318482989088862}
   - component: {fileID: 5461272115196023821}
   - component: {fileID: 5658753022840396314}
+  - component: {fileID: 6621980552524682240}
   m_Layer: 0
   m_Name: indexer0_bullet
   m_TagString: Untagged
@@ -88,19 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1964318482989088862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814224328938717487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cf289751b6bdc1428a08892047d30e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletspeed: 40
 --- !u!96 &5461272115196023821
 TrailRenderer:
   serializedVersion: 3
@@ -250,6 +237,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6621980552524682240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814224328938717487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357adde11be6ce745960e6f9e317a496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  bulletspeed: 40
+  canreflect: 1
+  reflected: 0
+  fixdam: 0
+  slash: 0
+  penetrate: 1
+  blow: 0
 --- !u!1 &3747045186939252782
 GameObject:
   m_ObjectHideFlags: 0

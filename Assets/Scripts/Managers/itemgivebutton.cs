@@ -15,13 +15,13 @@ public class itemgivebutton : MonoBehaviour
             if (rapport == currentrapport)
             {
                 itemgivecom.Uiclose();
-                gamemanager.GetComponent<itemgivemanager>().Sucssess();
+                gamemanager.GetComponent<itemgivemanager>().Sucssess(rapport);
                 break;
             }
             else
             {
                 itemgivecom.Uiclose();
-                gamemanager.GetComponent<itemgivemanager>().Fail();
+                gamemanager.GetComponent<itemgivemanager>().Fail(rapport);
                 break;
             }
         }
