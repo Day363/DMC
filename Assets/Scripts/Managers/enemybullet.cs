@@ -33,6 +33,7 @@ public class enemybullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         if (collision.gameObject.tag == "playerattack")
         {
             damage = damage - collision.GetComponent<playerattackdamage>().damage;

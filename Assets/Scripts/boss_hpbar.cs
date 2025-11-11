@@ -11,6 +11,7 @@ public class boss_hpbar : MonoBehaviour
 {
     public static event Action OnHitCalled;
     public static event Action Die;
+    public static event Action OnCycleEnd;
 
     public GameObject worldlight;
     public GameObject playerlight;
@@ -231,6 +232,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void CycleEnd()
     {
+        OnCycleEnd?.Invoke();
+
         if (activeStacks.Count > 0)
         {
             foreach (StackInstance stack in activeStacks)

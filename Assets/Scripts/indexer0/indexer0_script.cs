@@ -13,6 +13,7 @@ public class indexer0_script : MonoBehaviour
     public GameObject[] rainshader;
     public GameObject player;
     public GameObject hitbox;
+    public GameObject raindex;
     public List<string> weapons = new List<string>();
     public int rainmincooltime;
     public int raincool;
@@ -50,6 +51,8 @@ public class indexer0_script : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
+
+        boss_hpbar.OnCycleEnd += RainShoot;
     }
 
     public void FixedUpdate()
@@ -190,6 +193,12 @@ public class indexer0_script : MonoBehaviour
         {
             animator.SetBool("shootgun", true);
         }
+    }
+
+    public void RainShoot()
+    {
+        Debug.Log("asdad");
+        raindex.GetComponent<indexer_line_core>().Shoot();
     }
 
     public void AddStack()

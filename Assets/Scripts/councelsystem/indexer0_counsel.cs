@@ -17,8 +17,25 @@ public class indexer0_counsel : MonoBehaviour
     public GameObject letterbox;
     public GameObject chat;
     public GameObject canvus;
+    public GameObject line;
 
     public bool firstmet;
+
+    public boss_hpbar bosshp;
+    public int cycleint_;
+    public int cycleint;
+
+
+    public void AttackEnd()
+    {
+        cycleint_++;
+        if (cycleint_ >= cycleint)
+        {
+            bosshp.CycleEnd();
+            bosshp.CycleStart();
+            cycleint_ = 0;
+        }
+    }
 
     public void Start()
     {
@@ -39,6 +56,7 @@ public class indexer0_counsel : MonoBehaviour
             player.GetComponent<PlayerMove>().Stop();
             gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
             gamemanager.GetComponent<chatmanager>().CallDialogue(5);
+            line.GetComponent<indexer_line_core>().LookStart();
         }
     }
 
