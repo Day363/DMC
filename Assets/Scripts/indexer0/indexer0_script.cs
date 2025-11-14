@@ -88,7 +88,7 @@ public class indexer0_script : MonoBehaviour
             katanapos = new Vector3(transform.position.x + 3, transform.position.y + 0.7f, 0);
         }
 
-        if (weapons.Count <= 3)
+        if (weapons.Count <= 4)
         {
             raincool++;
         }
@@ -195,16 +195,20 @@ public class indexer0_script : MonoBehaviour
         }
     }
 
+    public void FuckAnimationEvent()
+    {
+        GetComponent<indexer0_counsel>().AttackEnd();
+    }
+
     public void RainShoot()
     {
-        Debug.Log("asdad");
         raindex.GetComponent<indexer_line_core>().Shoot();
     }
 
     public void AddStack()
     {
         attackint++;
-        if (attackint == 3)
+        if (weapons.Count > 4)
         {
             GetComponent<Animator>().SetBool("canreplace", true);
             attackint = 0;

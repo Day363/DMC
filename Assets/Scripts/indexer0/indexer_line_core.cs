@@ -5,8 +5,10 @@ using UnityEngine;
 public class indexer_line_core : MonoBehaviour
 {
     public GameObject player;
+    public GameObject indexer;
     public GameObject warning;
     public GameObject shoot;
+    public float lookspeed;
 
     public bool look;
 
@@ -14,7 +16,10 @@ public class indexer_line_core : MonoBehaviour
     {
         if (look)
         {
-            transform.LookAt(player.transform);
+            ///transform.LookAt(player.transform);
+            Vector3 dir = player.transform.position - transform.position;
+            Quaternion targetRot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, lookspeed);
         }
         
     }
@@ -46,7 +51,9 @@ public class indexer_line_core : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+        GameObject currentshoot = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, angle));
+        currentshoot.GetComponent<enemyattack>().player = player;
+        currentshoot.GetComponent<enemyattack>().enemy = indexer;
 
         look = true;
     }

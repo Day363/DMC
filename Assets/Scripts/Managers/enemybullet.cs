@@ -15,6 +15,10 @@ public class enemybullet : MonoBehaviour
     public bool penetrate;
     public bool blow;
 
+    public bool hit;
+    public bool heavyattack;
+    public bool lightattack;
+
     public void Start()
     {
         StartCoroutine(DestroySelf());
@@ -33,24 +37,6 @@ public class enemybullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
-        if (collision.gameObject.tag == "playerattack")
-        {
-            damage = damage - collision.GetComponent<playerattackdamage>().damage;
-            if (damage < 0)
-            {
-                if (canreflect)
-                {
-                    damage = -damage;
-                    reflected = true;
-                    transform.rotation = Quaternion.Euler(0, 0, collision.GetComponent<playerattackdamage>().player.GetComponent<playerskillmove>().attackcore.transform.rotation.z);
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
         if (collision.gameObject.tag == "client")
         {
             if (reflected)
@@ -71,23 +57,55 @@ public class enemybullet : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("playerhit");
             if (!reflected)
             {
-                if (fixdam)
+                if (heavyattack && hit)
                 {
-                    collision.GetComponent<playerstatus>().BalanceDamage(damage);
+                    if (fixdam)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().StrongHit((int)damage, transform);
+                    }
+                    if (slash)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().SlashStrongHit((int)damage, transform);
+                    }
+                    if (penetrate)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().PenetrateStrongHit((int)damage, transform);
+                    }
+                    if (blow)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().BlowStrongHit((int)damage, transform);
+                    }
                 }
-                if (slash)
+
+                if (lightattack && hit)
                 {
-                    collision.GetComponent<playerstatus>().SlashDamage(damage);
-                }
-                if (penetrate)
-                {
-                    collision.GetComponent<playerstatus>().PenetrateDamage(damage);
-                }
-                if (blow)
-                {
-                    collision.GetComponent<playerstatus>().BlowDamage(damage);
+                    if (fixdam)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().Hit((int)damage);
+                    }
+                    if (slash)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().SlashHit((int)damage);
+                    }
+                    if (penetrate)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().PenetrateHit((int)damage);
+                    }
+                    if (blow)
+                    {
+                        hit = false;
+                        collision.GetComponent<playerhit>().BlowHit((int)damage);
+                    }
                 }
             }
         }

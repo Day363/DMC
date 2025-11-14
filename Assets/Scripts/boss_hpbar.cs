@@ -10,6 +10,7 @@ using UnityEngine.Rendering.Universal;
 public class boss_hpbar : MonoBehaviour
 {
     public static event Action OnHitCalled;
+    public static event Action OnPenetrationHitCalled;
     public static event Action Die;
     public static event Action OnCycleEnd;
 

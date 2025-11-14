@@ -13573,6 +13573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &48658667
 MonoBehaviour:
@@ -22975,6 +22977,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!61 &115809507
 BoxCollider2D:
@@ -56457,6 +56461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!1 &294652632
 GameObject:
@@ -83508,6 +83514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &377180101
 MonoBehaviour:
@@ -87870,6 +87878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!60 &409004879
 PolygonCollider2D:
@@ -165195,8 +165205,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1233421491}
+  indexer: {fileID: 1486460257}
   warning: {fileID: 5868474963157984185, guid: 84683d508c4401341bf0100e83ee3c10, type: 3}
   shoot: {fileID: 5620256721846551248, guid: c08e65dd5521d34439f4f1fd5d8820cd, type: 3}
+  lookspeed: 0.1
   look: 0
 --- !u!4 &818311685
 Transform:
@@ -207191,7 +207203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &993772873
 Animator:
   serializedVersion: 5
@@ -209265,6 +209277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!1 &1011915914
 GameObject:
@@ -229586,6 +229600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &1040196159
 MonoBehaviour:
@@ -241181,6 +241197,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1080575884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080575885}
+  m_Layer: 7
+  m_Name: trapal_attack1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1080575885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080575884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2123657890}
+  m_Father: {fileID: 1354706160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1081540827
 GameObject:
   m_ObjectHideFlags: 0
@@ -250656,6 +250704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!1 &1113920411
 GameObject:
@@ -256908,7 +256958,7 @@ RectTransform:
   m_Father: {fileID: 554566165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -275288,6 +275338,7 @@ MonoBehaviour:
   dir: 0
   dash1power: 10
   dash2power: 20
+  dash3power: 100
 --- !u!114 &1233421504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275371,6 +275422,7 @@ MonoBehaviour:
   latereffect: {fileID: 0}
   alttriger: {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
   alttrigger_attack2: {fileID: 115809503}
+  trapal_attack1_recycle: 0
 --- !u!114 &1233421508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301724,6 +301776,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!1 &1332663854
 GameObject:
@@ -305729,6 +305783,7 @@ Transform:
   - {fileID: 1398290430}
   - {fileID: 559321543}
   - {fileID: 175959663}
+  - {fileID: 1080575885}
   m_Father: {fileID: 1233421494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357395916
@@ -322776,6 +322831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &1440719240
 MonoBehaviour:
@@ -368630,6 +368687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &1576792998
 MonoBehaviour:
@@ -389094,6 +389153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!114 &1682948763
 MonoBehaviour:
@@ -429578,6 +429639,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackeffectall: []
+  anglefix: 0
+  fixangle: 0
   attackeffect_random: []
 --- !u!60 &1930296520
 PolygonCollider2D:
@@ -478417,6 +478480,146 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2123657889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2123657890}
+  - component: {fileID: 2123657893}
+  - component: {fileID: 2123657892}
+  - component: {fileID: 2123657891}
+  - component: {fileID: 2123657894}
+  m_Layer: 10
+  m_Name: trapal_attack1_1
+  m_TagString: playerattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2123657890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123657889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1080575885}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123657891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123657889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canattack: 1
+  canjump: 0
+  player: {fileID: 1233421491}
+  damagenum: 3.2
+  damage: 0
+  damagepercentplus: 0
+  damagepercent: 0
+  damagepercentCore: 1
+  fixdam: 0
+  slash: 1
+  penetrate: 0
+  blow: 0
+--- !u!114 &2123657892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123657889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c6262077e6ddc4b9b72c61967c9de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackeffectall:
+  - {fileID: 577473096393356791, guid: d64b8ecbfab588949b81cf6845481f34, type: 3}
+  anglefix: 1
+  fixangle: 0
+  attackeffect_random:
+  - {fileID: 577473096393356791, guid: d64b8ecbfab588949b81cf6845481f34, type: 3}
+--- !u!60 &2123657893
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123657889}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.9640503, y: -0.122222185}
+      - {x: -2.8611212, y: -0.32519126}
+      - {x: -1.6537647, y: -0.527398}
+      - {x: 0.9536301, y: -0.687484}
+      - {x: 2.5126715, y: -0.5794142}
+  m_UseDelaunayMesh: 0
+--- !u!114 &2123657894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123657889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21cf43c4b29a7754da5465f9ad39a651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1233421491}
 --- !u!1 &2124193893
 GameObject:
   m_ObjectHideFlags: 0

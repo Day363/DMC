@@ -14,7 +14,6 @@ public class indexer0_katana_script : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Floor")
         {
             StartCoroutine(Stop());
@@ -24,7 +23,6 @@ public class indexer0_katana_script : MonoBehaviour
 
     IEnumerator Stop()
     {
-        Debug.Log("정지대기");
         yield return new WaitForSeconds(stopspeed);
         speed = 0;
     }

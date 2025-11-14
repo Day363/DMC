@@ -26,22 +26,15 @@ public class indexer0_counsel : MonoBehaviour
     public int cycleint;
 
 
-    public void AttackEnd()
-    {
-        cycleint_++;
-        if (cycleint_ >= cycleint)
-        {
-            bosshp.CycleEnd();
-            bosshp.CycleStart();
-            cycleint_ = 0;
-        }
-    }
+    
 
     public void Start()
     {
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
 
     }
+
+    
 
     public void FixedUpdate()
     {
@@ -60,5 +53,14 @@ public class indexer0_counsel : MonoBehaviour
         }
     }
 
-   
+    public void AttackEnd()
+    {
+        cycleint_++;
+        if (cycleint_ >= cycleint)
+        {
+            bosshp.CycleEnd();
+            bosshp.CycleStart();
+            cycleint_ = 0;
+        }
+    }
 }

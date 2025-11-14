@@ -27,6 +27,8 @@ public class skillfunction : MonoBehaviour
     public Weapon alttriger;
     public GameObject alttrigger_attack2;
 
+    public bool trapal_attack1_recycle;
+
     void Start()
     {
         
@@ -307,6 +309,16 @@ public class skillfunction : MonoBehaviour
             curstartlazer2_player_Trapal_Lazer2.Shoot();
         }
 
+    }
+
+    public void Trapal_Weapon1_New_Recycle()
+    {
+        if (trapal_attack1_recycle)
+        {
+            //추론 조건 넣기
+            trapal_attack1_recycle = false;
+            GetComponent<Animator>().SetTrigger("trapal_attack1");
+        }
     }
 
     public void Trapal_Weapon1_Lazer2()

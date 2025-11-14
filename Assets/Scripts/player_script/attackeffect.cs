@@ -5,6 +5,8 @@ using UnityEngine;
 public class attackeffect : MonoBehaviour
 {
     public GameObject[] attackeffectall;
+    public bool anglefix;
+    public float fixangle;
 
     public GameObject[] attackeffect_random;
 
@@ -15,6 +17,12 @@ public class attackeffect : MonoBehaviour
             foreach (GameObject effect in attackeffect_random)
             {
                 float angle = Random.Range(0, 361);
+
+                if (anglefix)
+                {
+                    angle = fixangle;
+                }
+
                 Vector2 midpoint = (transform.position + collision.gameObject.transform.position) / 2f;
                 Instantiate(effect, midpoint, Quaternion.Euler(0, 0, angle));
             }
@@ -29,6 +37,33 @@ public class attackeffect : MonoBehaviour
             Vector3 direction = eposition - transform.position;
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            if (anglefix)
+            {
+                angle = fixangle;
+            }
+
+            Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
+            foreach (GameObject effect in attackeffectall)
+            {
+                Instantiate(effect, collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
+            }
+        }
+
+        if (collision.gameObject.tag == "enemybullet")
+        {
+            int attackeffectnum = Random.Range(0, attackeffect_random.Length);
+            Vector3 eposition = collision.transform.position;
+            eposition.z = 0;
+
+            Vector3 direction = eposition - transform.position;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            if (anglefix)
+            {
+                angle = fixangle;
+            }
 
             Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
             foreach (GameObject effect in attackeffectall)
