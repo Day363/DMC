@@ -14,4 +14,7 @@ public class standbyskill : ScriptableObject
     public string animationtrigger;
 
     public float length;
+
+    [TextArea(5, 100)]
+    public string skilldescription;
 }

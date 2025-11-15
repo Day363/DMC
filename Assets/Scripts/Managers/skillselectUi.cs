@@ -12,6 +12,7 @@ public class skillselectUi : MonoBehaviour
     public Skill skill;
     public GameObject skilllist;
     public GameObject skillbutton;
+    public GameObject descriptionUi;
 
     public void SkillAddToList()
     {
@@ -26,6 +27,11 @@ public class skillselectUi : MonoBehaviour
         isselect = true;
 
         GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 0.2f);
+
+        if (descriptionUi != null)
+        {
+            descriptionUi.GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 0.1f);
+        }
 
         attackcore.GetComponent<attackcore>().attacklist_original.Add(skill);
         GameObject curskillbutton = Instantiate(skillbutton, skilllist.transform);
@@ -60,6 +66,11 @@ public class skillselectUi : MonoBehaviour
     {
         isselect = false;
 
-        GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 1.4655f);
+        GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 0.7f);
+
+        if (descriptionUi != null)
+        {
+            descriptionUi.GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 0.4f);
+        }
     }
 }

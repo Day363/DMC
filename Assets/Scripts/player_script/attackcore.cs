@@ -56,13 +56,17 @@ public class attackcore : MonoBehaviour
     public static attackcore attackcoreInstance;
 
     public bool testbool;
+    public GameObject skilllistscrollview;
+    public GameObject passivescrollview;
+    public GameObject normalskillscrollview;
+    public GameObject arreyskilllscrollview;
     public GameObject cammanager;
     public GameObject skillselectui;
     public GameObject viewpoint;
+    public GameObject passivelistViewPort;
+    public GameObject normalskilltlistViewPort;
+    public GameObject arreyskilllistViewPort;
     public GameObject skillarreyUi;
-    public TMP_Text passivetext;
-    public TMP_Text normalskilltext;
-    public TMP_Text arreyskilltext;
     public GameObject skillsetlist;
     public GameObject skilllistUi;
     public GameObject weaponimageUi;
@@ -258,13 +262,16 @@ public class attackcore : MonoBehaviour
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, activeweaponlistUi.transform);
             weaponskillUi weaponskillUi_Script = currentweaponimage.GetComponent<weaponskillUi>();
+            weaponskillUi_Script.scrollview = skilllistscrollview;
+            weaponskillUi_Script.passivescrollview = passivescrollview;
+            weaponskillUi_Script.normalskillscrollview = normalskillscrollview;
+            weaponskillUi_Script.arreyskilllscrollview = arreyskilllscrollview;
             weaponskillUi_Script.viewpoint = viewpoint;
-            weaponskillUi_Script.passivetext = passivetext;
-            weaponskillUi_Script.normalskilltext = normalskilltext;
-            weaponskillUi_Script.arreyskilltext = arreyskilltext;
             weaponskillUi_Script.attackcore = gameObject;
             weaponskillUi_Script.weapon = weapon;
-            weaponskillUi_Script.skilllistUi = skilllistUi;
+            weaponskillUi_Script.passivelistViewPort = passivelistViewPort;
+            weaponskillUi_Script.normalskilltlistViewPort = normalskilltlistViewPort;
+            weaponskillUi_Script.arreyskilllistViewPort = arreyskilllistViewPort;
             weaponskillUi_Script.skillsetlist = skillsetlist;
             currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
             currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
@@ -1079,7 +1086,12 @@ public class attackcore : MonoBehaviour
                     skillQueueUI.UseNextSkill();
                 }
 
-                   
+                Debug.Log("---------------------------------------------");
+                Debug.Log(lastlist.Count);
+                Debug.Log(lastlist[listnumber].Count);
+                Debug.Log(listnumber);
+                Debug.Log(attacknumber);
+                Debug.Log("---------------------------------------------");
                 if (lastlist[listnumber][attacknumber].Normalskill)
                 {
                     if (lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -1224,7 +1236,7 @@ public class attackcore : MonoBehaviour
                             }
                             else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count == 0)
                             {
-                                return;
+                                
                             }
 
                             currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));

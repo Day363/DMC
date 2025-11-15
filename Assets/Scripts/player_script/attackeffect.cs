@@ -7,6 +7,7 @@ public class attackeffect : MonoBehaviour
     public GameObject[] attackeffectall;
     public bool anglefix;
     public float fixangle;
+    public bool randomangle;
 
     public GameObject[] attackeffect_random;
 
@@ -46,6 +47,10 @@ public class attackeffect : MonoBehaviour
             Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
             foreach (GameObject effect in attackeffectall)
             {
+                if (randomangle)
+                {
+                    angle = Random.Range(0, 361);
+                }
                 Instantiate(effect, collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
             }
         }

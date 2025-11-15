@@ -28,6 +28,7 @@ public class skillfunction : MonoBehaviour
     public GameObject alttrigger_attack2;
 
     public bool trapal_attack1_recycle;
+    public int trapal_attack1_recycle_int;
 
     void Start()
     {
@@ -313,11 +314,25 @@ public class skillfunction : MonoBehaviour
 
     public void Trapal_Weapon1_New_Recycle()
     {
-        if (trapal_attack1_recycle)
+        playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
+        if (trapal_attack1_recycle && instance.currentStack >= 3)
         {
-            //추론 조건 넣기
-            trapal_attack1_recycle = false;
-            GetComponent<Animator>().SetTrigger("trapal_attack1");
+            trapal_attack1_recycle_int++;
+            if (trapal_attack1_recycle_int < 4)
+            {
+                trapal_attack1_recycle = false;
+                GetComponent<Animator>().SetTrigger("trapal_attack1");
+            }
+            if (trapal_attack1_recycle_int >= 4)
+            {
+                trapal_attack1_recycle = false;
+                GetComponent<Animator>().SetTrigger("trapal_attack1_five");
+                trapal_attack1_recycle_int = 0;
+            }
+        }
+        else
+        {
+            trapal_attack1_recycle_int = 0;
         }
     }
 

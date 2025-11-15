@@ -43,4 +43,7 @@ public class Skill : ScriptableObject
     public bool vibration;
     public bool crack;
     public bool explosion;
+
+    [TextArea(5, 100)]
+    public string skilldescription;
 }
