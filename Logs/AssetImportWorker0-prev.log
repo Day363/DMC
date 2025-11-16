@@ -15,7 +15,7 @@ D:/My project (1)
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50780
+60635
 Successfully changed project path to: D:/My project (1)
 D:/My project (1)
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,17 +49,17 @@ D:/My project (1)
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [13360]  Target information:
+Player connection [15780]  Target information:
 
-Player connection [13360]  * "[IP] 192.168.0.4 [Port] 0 [Flags] 2 [Guid] 2041433129 [EditorId] 2041433129 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-HUJHIT7) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15780]  * "[IP] 192.168.0.4 [Port] 0 [Flags] 2 [Guid] 1543730800 [EditorId] 1543730800 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-HUJHIT7) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [13360]  * "[IP] 25.5.237.238 [Port] 0 [Flags] 2 [Guid] 2041433129 [EditorId] 2041433129 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-HUJHIT7) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15780]  * "[IP] 25.5.237.238 [Port] 0 [Flags] 2 [Guid] 1543730800 [EditorId] 1543730800 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-HUJHIT7) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [13360] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [13360] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15780] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [15780] Host joined alternative multi-casting on [225.0.0.222:34997]...
 Input System module state changed to: Initialized.
 [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
-Refreshing native plugins compatible for Editor in 106.41 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 430.47 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.61f1 (6c53ebaf375d)
 [Subsystems] Discovering subsystems at path D:/2022.3.61f1/Editor/Data/Resources/UnitySubsystems
@@ -75,44 +75,44 @@ Initialize mono
 Mono path[0] = 'D:/2022.3.61f1/Editor/Data/Managed'
 Mono path[1] = 'D:/2022.3.61f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/2022.3.61f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56584
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56972
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/2022.3.61f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.006397 seconds.
-- Loaded All Assemblies, in  0.852 seconds
+Registered in 0.020746 seconds.
+- Loaded All Assemblies, in  1.076 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.632 seconds
-Domain Reload Profiling: 1482ms
-	BeginReloadAssembly (265ms)
+- Finished resetting the current domain, in  0.424 seconds
+Domain Reload Profiling: 1500ms
+	BeginReloadAssembly (465ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (2ms)
-	RebuildCommonClasses (95ms)
-	RebuildNativeTypeToScriptingClass (23ms)
-	initialDomainReloadingComplete (105ms)
-	LoadAllAssembliesAndSetupDomain (361ms)
-		LoadAssemblies (262ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (79ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (133ms)
+	LoadAllAssembliesAndSetupDomain (384ms)
+		LoadAssemblies (465ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (358ms)
-			TypeCache.Refresh (354ms)
-				TypeCache.ScanAssembly (304ms)
+		AnalyzeDomain (380ms)
+			TypeCache.Refresh (377ms)
+				TypeCache.ScanAssembly (338ms)
 			ScanForSourceGeneratedMonoScriptInfo (1ms)
 			ResolveRequiredComponents (2ms)
-	FinalizeReload (633ms)
+	FinalizeReload (424ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (531ms)
+		SetupLoadedEditorAssemblies (345ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (16ms)
-			SetLoadedEditorAssemblies (16ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (10ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (5ms)
-			ProcessInitializeOnLoadAttributes (367ms)
-			ProcessInitializeOnLoadMethodAttributes (127ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (249ms)
+			ProcessInitializeOnLoadMethodAttributes (73ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -121,343 +121,532 @@ Domain Reload Profiling: 1482ms
 Worker process is ready to serve import requests
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  3.146 seconds
+- Loaded All Assemblies, in  2.976 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.061 seconds
-Domain Reload Profiling: 5198ms
-	BeginReloadAssembly (526ms)
+- Finished resetting the current domain, in  1.142 seconds
+Domain Reload Profiling: 4117ms
+	BeginReloadAssembly (267ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (38ms)
+		DisableScriptedObjects (12ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (50ms)
-	RebuildCommonClasses (142ms)
-	RebuildNativeTypeToScriptingClass (40ms)
-	initialDomainReloadingComplete (250ms)
-	LoadAllAssembliesAndSetupDomain (2176ms)
-		LoadAssemblies (1418ms)
+		CreateAndSetChildDomain (26ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (43ms)
+	LoadAllAssembliesAndSetupDomain (2614ms)
+		LoadAssemblies (2337ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (998ms)
-			TypeCache.Refresh (889ms)
-				TypeCache.ScanAssembly (796ms)
-			ScanForSourceGeneratedMonoScriptInfo (75ms)
-			ResolveRequiredComponents (31ms)
-	FinalizeReload (2063ms)
+		AnalyzeDomain (395ms)
+			TypeCache.Refresh (317ms)
+				TypeCache.ScanAssembly (294ms)
+			ScanForSourceGeneratedMonoScriptInfo (53ms)
+			ResolveRequiredComponents (24ms)
+	FinalizeReload (1142ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1407ms)
+		SetupLoadedEditorAssemblies (866ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (10ms)
-			SetLoadedEditorAssemblies (12ms)
+			InitializePlatformSupportModulesInManaged (5ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (181ms)
-			ProcessInitializeOnLoadAttributes (1011ms)
-			ProcessInitializeOnLoadMethodAttributes (190ms)
-			AfterProcessingInitializeOnLoad (3ms)
+			BeforeProcessingInitializeOnLoad (104ms)
+			ProcessInitializeOnLoadAttributes (603ms)
+			ProcessInitializeOnLoadMethodAttributes (142ms)
+			AfterProcessingInitializeOnLoad (5ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (21ms)
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Error creating external process 'D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe' : 이 작업을 완료하기 위한 페이징 파일이 너무 작습니다.
-Error cleaning up external process: 핸들이 잘못되었습니다.
-Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Shader compiler: failed to launch and initialize compiler executable, even after 10 retries
-Shader compiler initialization error: Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
-Fatal Error! Shader compiler initialization error: Failed to launch UnityShaderCompiler.exe shader compiler! D:/2022.3.61f1/Editor/Data/Tools/UnityShaderCompiler.exe
+		AwakeInstancesAfterBackupRestoration (13ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.15 seconds
+Refreshing native plugins compatible for Editor in 17.20 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6161 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 60 unused Assets / (2.1 MB). Loaded Objects now: 6627.
+Memory consumption went from 248.7 MB to 246.6 MB.
+Total: 11.773300 ms (FindLiveObjects: 0.652100 ms CreateObjectMapping: 0.687600 ms MarkObjects: 9.590500 ms  DeleteObjects: 0.841700 ms)
 
-Crash!!!
-SymInit: Symbol-SearchPath: 'D:/2022.3.61f1/Editor/Data/Mono;.;D:\My project (1);D:\My project (1)\Library\BurstCache\JIT;D:\2022.3.61f1\Editor;C:\WINDOWS;C:\WINDOWS\system32;', symOptions: 534, UserName: 'user'
-OS-Version: 10.0.0
-D:\2022.3.61f1\Editor\Unity.exe:Unity.exe (00007FF622720000), size: 82595840 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.61.21483
-C:\WINDOWS\SYSTEM32\ntdll.dll:ntdll.dll (00007FFB11830000), size: 2064384 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFB10830000), size: 794624 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5915
-C:\WINDOWS\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFB0F280000), size: 3104768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6280
-C:\WINDOWS\System32\CRYPT32.dll:CRYPT32.dll (00007FFB0F120000), size: 1429504 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\ucrtbase.dll:ucrtbase.dll (00007FFB0F580000), size: 1048576 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\USER32.dll:USER32.dll (00007FFB0F850000), size: 1708032 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\win32u.dll:win32u.dll (00007FFB0F070000), size: 139264 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\GDI32.dll:GDI32.dll (00007FFB11750000), size: 176128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-D:\2022.3.61f1\Editor\libfbxsdk.dll:libfbxsdk.dll (00007FFAC48B0000), size: 8019968 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2020.3.7.0
-D:\2022.3.61f1\Editor\s3tcompress.dll:s3tcompress.dll (00007FFAF6E90000), size: 180224 (result: 0), SymType: '-deferred-', PDB: ''
-D:\2022.3.61f1\Editor\etccompress.dll:etccompress.dll (00007FFAC43D0000), size: 5070848 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\System32\gdi32full.dll:gdi32full.dll (00007FFB0F730000), size: 1150976 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFB11150000), size: 724992 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6328
-C:\WINDOWS\System32\msvcp_win.dll:msvcp_win.dll (00007FFB0EFA0000), size: 643072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\msvcrt.dll:msvcrt.dll (00007FFB10620000), size: 647168 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 7.0.19041.3636
-D:\2022.3.61f1\Editor\compress_bc7e.dll:compress_bc7e.dll (00007FFAD23A0000), size: 1433600 (result: 0), SymType: '-deferred-', PDB: ''
-D:\2022.3.61f1\Editor\ispc_texcomp.dll:ispc_texcomp.dll (00007FFAD8320000), size: 1826816 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\System32\sechost.dll:sechost.dll (00007FFB106C0000), size: 651264 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6328
-D:\2022.3.61f1\Editor\FreeImage.dll:FreeImage.dll (0000000180000000), size: 5783552 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 3.18.0.0
-D:\2022.3.61f1\Editor\WinPixEventRuntime.dll:WinPixEventRuntime.dll (00007FFAF8900000), size: 45056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.0.1812.6001
-C:\WINDOWS\System32\SHELL32.dll:SHELL32.dll (00007FFB0FCB0000), size: 7798784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\RPCRT4.dll:RPCRT4.dll (00007FFB10500000), size: 1179648 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6280
-C:\WINDOWS\System32\WS2_32.dll:WS2_32.dll (00007FFB109C0000), size: 438272 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\bcrypt.dll:bcrypt.dll (00007FFB0F040000), size: 159744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5369
-D:\2022.3.61f1\Editor\umbraoptimizer64.dll:umbraoptimizer64.dll (00007FFACBFB0000), size: 1187840 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFB11780000), size: 372736 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6392
-C:\WINDOWS\System32\ole32.dll:ole32.dll (00007FFB0FB80000), size: 1224704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5915
-C:\WINDOWS\System32\combase.dll:combase.dll (00007FFB113F0000), size: 3489792 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\IMM32.dll:IMM32.dll (00007FFB10A30000), size: 192512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFB10B30000), size: 4653056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\MSVCP140.dll:MSVCP140.dll (00007FFAD2240000), size: 577536 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.42.34433.0
-C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll:VCRUNTIME140_1.dll (00007FFAF6E80000), size: 49152 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.42.34433.0
-C:\WINDOWS\System32\cfgmgr32.dll:cfgmgr32.dll (00007FFB0EEC0000), size: 319488 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3996
-C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll:VCRUNTIME140.dll (00007FFB071B0000), size: 122880 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.42.34433.0
-C:\WINDOWS\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFB10A60000), size: 839680 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\WINTRUST.dll:WINTRUST.dll (00007FFB0F0A0000), size: 471040 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FFAEB8B0000), size: 1212416 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (00007FFB0E250000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\GLU32.dll:GLU32.dll (00007FFAEBF20000), size: 180224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\WINHTTP.dll:WINHTTP.dll (00007FFB085D0000), size: 1089536 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\WINMM.dll:WINMM.dll (00007FFB03BE0000), size: 159744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\HID.DLL:HID.DLL (00007FFB0D700000), size: 53248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFB0CC40000), size: 188416 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-D:\2022.3.61f1\Editor\SketchUpAPI.dll:SketchUpAPI.dll (00007FFAC3B30000), size: 8990720 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 23.0.0.0
-D:\2022.3.61f1\Editor\NativeProxyHelper.dll:NativeProxyHelper.dll (00007FFACBDF0000), size: 1789952 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\SYSTEM32\VERSION.dll:VERSION.dll (00007FFB09870000), size: 40960 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-D:\2022.3.61f1\Editor\SketchUpCommonPreferences.dll:SketchUpCommonPreferences.dll (00007FFAD2320000), size: 499712 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 23.0.0.0
-C:\WINDOWS\SYSTEM32\WSOCK32.dll:WSOCK32.dll (00007FFB09AB0000), size: 36864 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.1
-C:\WINDOWS\SYSTEM32\Secur32.dll:Secur32.dll (00007FFB07470000), size: 49152 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFB0ED70000), size: 204800 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6328
-D:\2022.3.61f1\Editor\OpenRL.dll:OpenRL.dll (000001EFF3360000), size: 12779520 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.5.0.2907
-D:\2022.3.61f1\Editor\embree.dll:embree.dll (00007FFABFDD0000), size: 16711680 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2.14.0.0
-C:\WINDOWS\SYSTEM32\MSVCP100.dll:MSVCP100.dll (0000000069E80000), size: 622592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.40219.325
-C:\WINDOWS\SYSTEM32\MSVCR100.dll:MSVCR100.dll (0000000069F20000), size: 860160 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.40219.325
-D:\2022.3.61f1\Editor\tbb.dll:tbb.dll (00007FFACB6C0000), size: 413696 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2017.0.2016.1004
-C:\WINDOWS\SYSTEM32\MSWSOCK.DLL:MSWSOCK.DLL (00007FFB0E570000), size: 434176 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5915
-C:\WINDOWS\SYSTEM32\MSVCR120.dll:MSVCR120.dll (00007FFAC8D90000), size: 978944 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 12.0.40649.5
-C:\WINDOWS\SYSTEM32\MSVCP120.dll:MSVCP120.dll (00007FFAC8E80000), size: 679936 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 12.0.40649.5
-D:\2022.3.61f1\Editor\OpenRL_pthread.dll:OpenRL_pthread.dll (000001EFF3FB0000), size: 61440 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2.9.0.0
-C:\WINDOWS\SYSTEM32\MSASN1.dll:MSASN1.dll (00007FFB0E9A0000), size: 73728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\bcryptprimitives.dll:bcryptprimitives.dll (00007FFB0EF10000), size: 532480 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5007
-C:\WINDOWS\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFB0CD50000), size: 73728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3758
-C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFB0C860000), size: 647168 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFB0CF50000), size: 8015872 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\SYSTEM32\Wldp.dll:Wldp.dll (00007FFB0E810000), size: 176128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\System32\SHCORE.dll:SHCORE.dll (00007FFB10900000), size: 708608 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFB0EDF0000), size: 147456 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6033
-C:\WINDOWS\system32\IconCodecService.dll:IconCodecService.dll (00007FFAEFA00000), size: 36864 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.1
-C:\WINDOWS\SYSTEM32\WindowsCodecs.dll:WindowsCodecs.dll (00007FFB0C660000), size: 1794048 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\clbcatq.dll:clbcatq.dll (00007FFB112C0000), size: 692224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2001.12.10941.16384
-C:\WINDOWS\System32\netprofm.dll:netprofm.dll (00007FFB0B280000), size: 258048 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.4355
-C:\WINDOWS\System32\npmproxy.dll:npmproxy.dll (00007FFB084A0000), size: 65536 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.4239
-C:\WINDOWS\System32\NSI.dll:NSI.dll (00007FFB109B0000), size: 32768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (00007FFB09210000), size: 94208 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (00007FFB08FF0000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\DNSAPI.dll:DNSAPI.dll (00007FFB0E290000), size: 827392 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5369
-C:\WINDOWS\system32\napinsp.dll:napinsp.dll (00007FFAD3AA0000), size: 94208 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\system32\pnrpnsp.dll:pnrpnsp.dll (00007FFAD3A80000), size: 110592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\system32\wshbth.dll:wshbth.dll (00007FFB09850000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5848
-C:\WINDOWS\system32\NLAapi.dll:NLAapi.dll (00007FFB095D0000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\winrnr.dll:winrnr.dll (00007FFAD3A60000), size: 73728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\fwpuclnt.dll:fwpuclnt.dll (00007FFB08160000), size: 524288 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6328
-C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (00007FFB07D70000), size: 40960 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6328
-D:\2022.3.61f1\Editor\NVUnityPlugin.DLL:NVUnityPlugin.DLL (00007FFABE350000), size: 1609728 (result: 0), SymType: '-deferred-', PDB: ''
-D:\2022.3.61f1\Editor\Data\Tools\astcenc-sse42.dll:astcenc-sse42.dll (00007FFABE2C0000), size: 544768 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\System32\MMDevApi.dll:MMDevApi.dll (00007FFB08CC0000), size: 544768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5915
-C:\WINDOWS\System32\DEVOBJ.dll:DEVOBJ.dll (00007FFB0EB70000), size: 208896 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\d3d11.dll:d3d11.dll (00007FFB09E80000), size: 2506752 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\dxgi.dll:dxgi.dll (00007FFB0D740000), size: 1007616 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_518f2921ba495409\igd10iumd64.dll:igd10iumd64.dll (00007FFB00570000), size: 19378176 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 26.20.100.7642
-C:\WINDOWS\SYSTEM32\ncrypt.dll:ncrypt.dll (00007FFB0E880000), size: 159744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5007
-C:\WINDOWS\SYSTEM32\apphelp.dll:apphelp.dll (00007FFB0C4A0000), size: 606208 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.6157
-C:\WINDOWS\SYSTEM32\NTASN1.dll:NTASN1.dll (00007FFB0E840000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_518f2921ba495409\igdgmm64.dll:igdgmm64.dll (00007FFB053C0000), size: 1703936 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 26.20.100.7642
-C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_518f2921ba495409\igc64.dll:igc64.dll (00007FFAFE170000), size: 37732352 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 26.20.100.7642
-C:\WINDOWS\SYSTEM32\dxcore.dll:dxcore.dll (00007FFB07AD0000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFAFC500000), size: 69632 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.4474
-C:\WINDOWS\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFB05190000), size: 589824 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFAFC530000), size: 81920 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.4474
-C:\WINDOWS\system32\wbem\fastprox.dll:fastprox.dll (00007FFAFBBD0000), size: 1097728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\amsi.dll:amsi.dll (00007FFAFB840000), size: 126976 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.4355
-C:\WINDOWS\SYSTEM32\opencl.dll:opencl.dll (00007FFABEA90000), size: 131072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2.2.5.0
-D:\2022.3.61f1\Editor\radeonrays.dll:radeonrays.dll (00007FFABE230000), size: 557056 (result: 0), SymType: '-deferred-', PDB: ''
-D:\2022.3.61f1\Editor\Data\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FFA99F30000), size: 10825728 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFB08A30000), size: 2101248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.5848
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 3ead1caaecf1c488f20bcfeb224b6af5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 87056.850680 seconds.
+  path: Assets/item/weapon/무명의 체현.asset
+  artifactKey: Guid(206ae441426574f46ab29830c7187fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/item/weapon/무명의 체현.asset using Guid(206ae441426574f46ab29830c7187fc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '46494200036216b215097ca6cf58669d') in 0.610413 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 165.528603 seconds.
+  path: Assets/Resources/prefap/player/indexer/player_indexer_normalattack_slash2.prefab
+  artifactKey: Guid(01cff5e493ecb764d912e5cb1c4801e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/indexer/player_indexer_normalattack_slash2.prefab using Guid(01cff5e493ecb764d912e5cb1c4801e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '7fc4cac24c61cc4e0035654922a9d9ac') in 1.126022 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 83
+========================================================================
+Received Import Request.
+  Time since last request: 978.677082 seconds.
+  path: Assets/Resources/prefap/player/notuse/brightslash1.prefab
+  artifactKey: Guid(2bdc9a0b8d273214fa0a69ba4eeb19ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/notuse/brightslash1.prefab using Guid(2bdc9a0b8d273214fa0a69ba4eeb19ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'bab6ffc73af21778affefd6fa857b409') in 0.396945 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 59
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Resources/prefap/player/notuse/brightslash3.prefab
+  artifactKey: Guid(3e0e48d46402a0b4680553e0be9e5b66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/notuse/brightslash3.prefab using Guid(3e0e48d46402a0b4680553e0be9e5b66) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '529660e206d5cdf8eb5f2c7885847eca') in 0.109673 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 58
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Resources/prefap/player/notuse/test.asset
+  artifactKey: Guid(834f5066d84f96a408f5d230ff2a721f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/notuse/test.asset using Guid(834f5066d84f96a408f5d230ff2a721f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'fc6145f6d88335213165d4f7715beca2') in 1.195001 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 90
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Resources/prefap/player/notuse/brightslash2.prefab
+  artifactKey: Guid(d84dce924386acf4a88ebf5affa00cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/notuse/brightslash2.prefab using Guid(d84dce924386acf4a88ebf5affa00cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '1f684b36c76d201996f314b885354f15') in 0.170703 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 58
+========================================================================
+Received Import Request.
+  Time since last request: 238.095873 seconds.
+  path: Assets/Resources/prefap/player/normal/slash1.asset
+  artifactKey: Guid(9377154d9d6c01845b0c8d622d109a99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/slash1.asset using Guid(9377154d9d6c01845b0c8d622d109a99) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '111bd65ceffa70d9253b0e7f958a2b12') in 0.768881 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-위력.asset
+  artifactKey: Guid(7922df409209cc7458e34d296506e01d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-위력.asset using Guid(7922df409209cc7458e34d296506e01d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '5048e3df025d7d97e9f7e6a05dda8f7f') in 0.156799 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/prefap/player/normal/test-돌진.asset
+  artifactKey: Guid(56a9945dd2f7d6a4b9cf6e2d49417c82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/test-돌진.asset using Guid(56a9945dd2f7d6a4b9cf6e2d49417c82) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '6710327024a7ec346ae909644410325f') in 0.137224 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-공간.asset
+  artifactKey: Guid(554e96e0afb79da4192a252c7363f9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-공간.asset using Guid(554e96e0afb79da4192a252c7363f9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '06496f66400ca14d78cbc468a29823c5') in 0.159895 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-반전.asset
+  artifactKey: Guid(108c4121e006b61459042024bfc9dbbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-반전.asset using Guid(108c4121e006b61459042024bfc9dbbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '0716c894f0d9efcaf307203953ab5056') in 0.131412 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-범위.asset
+  artifactKey: Guid(b90073eb848782041b60f5d0a2bcda05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-범위.asset using Guid(b90073eb848782041b60f5d0a2bcda05) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '6eb4abd41f0875535504feffc2009875') in 0.155247 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-균열.asset
+  artifactKey: Guid(4305efbcad943fe45b03fba9b3de1543) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-균열.asset using Guid(4305efbcad943fe45b03fba9b3de1543) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '7f72f1aee3b88b54f52a3f1a6d0abf2b') in 0.172039 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/prefap/player/normal/slash2.asset
+  artifactKey: Guid(e0991f68d31e5cc46901d8444d6e94c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/slash2.asset using Guid(e0991f68d31e5cc46901d8444d6e94c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '47ead8aa9c2ccde967a7929109f5b3f7') in 0.132834 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-속도.asset
+  artifactKey: Guid(45198204c1cc23548b7b7f14c4a93025) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-속도.asset using Guid(45198204c1cc23548b7b7f14c4a93025) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'e39d41373116c1b0be3f97bb34f67d0f') in 0.151712 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000113 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-연속.asset
+  artifactKey: Guid(73af647f4e1f0f84aabb6ab7b77ddb63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-연속.asset using Guid(73af647f4e1f0f84aabb6ab7b77ddb63) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '86d19b76c4bbbee1e0b1876371595a52') in 0.232874 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-정신.asset
+  artifactKey: Guid(bf62564d0e6ef4443bb4266ef2bbfd7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-정신.asset using Guid(bf62564d0e6ef4443bb4266ef2bbfd7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'c81145c32f9240299eb0525bf63924fe') in 0.506178 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000144 seconds.
+  path: Assets/Resources/prefap/player/normal/special_amalgam.asset
+  artifactKey: Guid(f01fe72d7128bda44b8916ca825efd7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/special_amalgam.asset using Guid(f01fe72d7128bda44b8916ca825efd7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'e053c7ab873d41016d73f1ba94ec6150') in 0.150945 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/prefap/player/normal/강화-발열.asset
+  artifactKey: Guid(20483408116f39d499ece6c109985ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/normal/강화-발열.asset using Guid(20483408116f39d499ece6c109985ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '2c105543b2ed3315f9977681b1c80d8e') in 0.150332 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 135
+========================================================================
+Received Import Request.
+  Time since last request: 129.720847 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_special_amalgam.asset
+  artifactKey: Guid(581173b7552d0e745ae253fc8b75e066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_special_amalgam.asset using Guid(581173b7552d0e745ae253fc8b75e066) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'a5061eb3c1f998a604b0c289da32673c') in 0.483204 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_특수-증폭.asset
+  artifactKey: Guid(42c5f6be12fc2f546a341a060b0cd85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_특수-증폭.asset using Guid(42c5f6be12fc2f546a341a060b0cd85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'b47a05073179e7e907861065c3879fe3') in 0.061140 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_강화-위력.asset
+  artifactKey: Guid(3277d2d337cedde45a6cf85c892d7f39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_강화-위력.asset using Guid(3277d2d337cedde45a6cf85c892d7f39) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'c160956ac8ac4657b70c865796463e1f') in 0.064394 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_강화-중량 1.asset
+  artifactKey: Guid(fe73777dddb4580489b0e89471c8f9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_강화-중량 1.asset using Guid(fe73777dddb4580489b0e89471c8f9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'bfeb1324cee83c4770cc1912b0ad91f6') in 0.056818 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_강화-범위.asset
+  artifactKey: Guid(6e999187a588339419714fa90c3a084a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_강화-범위.asset using Guid(6e999187a588339419714fa90c3a084a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'c0ec3fba701fca5d60b82da2a902e1aa') in 0.058839 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_강화-합.asset
+  artifactKey: Guid(36b9189ff89952d459dcfadea0b517b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_강화-합.asset using Guid(36b9189ff89952d459dcfadea0b517b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '2c18f123836be484688e35de286a15c0') in 0.065460 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Resources/prefap/player/disabled/disabled_강화-연속.asset
+  artifactKey: Guid(c4b70bf8d4813574fa5e5b2a00c0f0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/disabled/disabled_강화-연속.asset using Guid(c4b70bf8d4813574fa5e5b2a00c0f0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'c55ae5af16c1faa63192d635a0e32571') in 0.059437 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 115
+========================================================================
+Received Import Request.
+  Time since last request: 1208.258977 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal 강화-공간.asset
+  artifactKey: Guid(9071678bf161cf5428de4b306146924e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal 강화-공간.asset using Guid(9071678bf161cf5428de4b306146924e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'e6c2e3a9be3c38d9af80e43deb755005') in 0.601593 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.003344 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal 강화-연속.asset
+  artifactKey: Guid(071b2a17a0e969f41b15031407f774df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal 강화-연속.asset using Guid(071b2a17a0e969f41b15031407f774df) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '5182c1b32a50e475ccbb121570398497') in 0.131086 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.001258 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_attack2.asset
+  artifactKey: Guid(b9317511b6f6c2c4293fc74627412951) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_attack2.asset using Guid(b9317511b6f6c2c4293fc74627412951) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'b5fee03a207ec33dd61a2a2ea78c547c') in 0.175066 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.003405 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal 강화-위력.asset
+  artifactKey: Guid(ea1199eb36e91b74888d90b25d8c755e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal 강화-위력.asset using Guid(ea1199eb36e91b74888d90b25d8c755e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'c4c82c2595dc50410eb78aea1a22948d') in 0.022979 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_attack1.asset
+  artifactKey: Guid(dc2a83f485466cb4aaa218ae8f62d578) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_attack1.asset using Guid(dc2a83f485466cb4aaa218ae8f62d578) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '15820cbfac57cfb0a363230a87c8d7a4') in 0.018297 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal 특수-증폭.asset
+  artifactKey: Guid(197de4d09f3969a42ab17f1a844a2721) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal 특수-증폭.asset using Guid(197de4d09f3969a42ab17f1a844a2721) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '5f7dfcc583503132fcef32ef373a74e0') in 0.079647 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 1828.612809 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_blow.asset
+  artifactKey: Guid(842599e1d9a1143429a44f61f10522ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_blow.asset using Guid(842599e1d9a1143429a44f61f10522ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '5665fb7113438c6c3e85785d4648272e') in 0.380643 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_slash1.asset
+  artifactKey: Guid(9cf5538dfba5e98428ff189ae8477659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_slash1.asset using Guid(9cf5538dfba5e98428ff189ae8477659) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '763bdf2039002c7552fa345bf5b27832') in 0.435589 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.002712 seconds.
+  path: Assets/Resources/prefap/player/trapal/나아갈수만 있다면.asset
+  artifactKey: Guid(2e2efb263f330da488d62c8b206e4339) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/나아갈수만 있다면.asset using Guid(2e2efb263f330da488d62c8b206e4339) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'f2f352a2160954ab3729cfa6819743a6') in 0.002135 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000752 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_penetrate1.asset
+  artifactKey: Guid(0700eab8b141a9d48975a318e46ca14b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_penetrate1.asset using Guid(0700eab8b141a9d48975a318e46ca14b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'd45eb73b9ee3544217a2226a19dcfb9c') in 0.016338 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 227.766453 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_attack1.asset
+  artifactKey: Guid(dc2a83f485466cb4aaa218ae8f62d578) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_attack1.asset using Guid(dc2a83f485466cb4aaa218ae8f62d578) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '13dbe17efd4097532446e0f07929e807') in 0.009380 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Resources/prefap/player/trapal/trapal_attack2.asset
+  artifactKey: Guid(b9317511b6f6c2c4293fc74627412951) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/trapal_attack2.asset using Guid(b9317511b6f6c2c4293fc74627412951) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '1d6e34f240444b541e19996e75163d67') in 0.011695 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 153.692767 seconds.
+  path: Assets/item/weapon/IOR_BS07.A.asset
+  artifactKey: Guid(d5a2153cd4b149c49a9b2a9111b37365) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/item/weapon/IOR_BS07.A.asset using Guid(d5a2153cd4b149c49a9b2a9111b37365) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'f70dbc8d6b41d51a03b16acf19ebd253') in 0.634043 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 76
+========================================================================
+Received Import Request.
+  Time since last request: 1154.433669 seconds.
+  path: Assets/item/weapon/종단 회로.asset
+  artifactKey: Guid(29b1c51165303414181e0d8330fd5273) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/item/weapon/종단 회로.asset using Guid(29b1c51165303414181e0d8330fd5273) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '8954bb35f109187c023bd799dd6e744a') in 0.096846 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 475.288219 seconds.
+  path: Assets/Resources/prefap/player/trapal/오지않을 내일.asset
+  artifactKey: Guid(76b83358b79ffd54dae74b0d99c176d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/trapal/오지않을 내일.asset using Guid(76b83358b79ffd54dae74b0d99c176d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: 'a60e3aba39e9253ed0e6b2ac1b5fc5f6') in 0.012180 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 627.760224 seconds.
+  path: Assets/Resources/prefap/player/alttrigger/들여다보는 총구.asset
+  artifactKey: Guid(ccc34c0444e8e3c40a7b47c6f4e14d46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/alttrigger/들여다보는 총구.asset using Guid(ccc34c0444e8e3c40a7b47c6f4e14d46) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '4309aa741178cfa33c5f5d3800117aba') in 0.006012 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/Resources/prefap/player/alttrigger/제 1 종막.asset
+  artifactKey: Guid(6dbc9cb0fd559ea4fb301e56ec86ca8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/alttrigger/제 1 종막.asset using Guid(6dbc9cb0fd559ea4fb301e56ec86ca8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '4f274c986107401f8c5601b21a1d8d6b') in 0.505075 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 104
+========================================================================
+Received Import Request.
+  Time since last request: 0.000072 seconds.
+  path: Assets/Resources/prefap/player/alttrigger/들여다보이는 총구.asset
+  artifactKey: Guid(a9a5440b9ef6ab0489888f57249be3ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/alttrigger/들여다보이는 총구.asset using Guid(a9a5440b9ef6ab0489888f57249be3ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '1ccf2066690f9885bdcb701daec0009e') in 0.002123 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Resources/prefap/player/alttrigger/후회많은자에게로.asset
+  artifactKey: Guid(b22c8370df3f8b14e8987091e5f3d1fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/prefap/player/alttrigger/후회많은자에게로.asset using Guid(b22c8370df3f8b14e8987091e5f3d1fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 4 workers.
+ -> (artifact id: '742181886ae8831947054aa61b2759b4') in 0.040505 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 104
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in 16.134 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.231 seconds
+Domain Reload Profiling: 17370ms
+	BeginReloadAssembly (13813ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13281ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (214ms)
+	RebuildCommonClasses (104ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (48ms)
+	LoadAllAssembliesAndSetupDomain (2156ms)
+		LoadAssemblies (2348ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (47ms)
+			TypeCache.Refresh (14ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (30ms)
+	FinalizeReload (1232ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (818ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			SetLoadedEditorAssemblies (8ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (122ms)
+			ProcessInitializeOnLoadAttributes (559ms)
+			ProcessInitializeOnLoadMethodAttributes (118ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (31ms)
+Refreshing native plugins compatible for Editor in 15.89 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5959 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 35 unused Assets / (2.1 MB). Loaded Objects now: 6692.
+Memory consumption went from 215.0 MB to 212.9 MB.
+Total: 15.457100 ms (FindLiveObjects: 0.907900 ms CreateObjectMapping: 0.864500 ms MarkObjects: 8.813800 ms  DeleteObjects: 4.868600 ms)
 
-========== OUTPUTTING STACK TRACE ==================
-
-0x00007FFB0F2A5369 (KERNELBASE) RaiseException
-SymInit: Symbol-SearchPath: 'D:/2022.3.61f1/Editor/Data/Mono;.;D:\My project (1);D:\My project (1)\Library\BurstCache\JIT;D:\2022.3.61f1\Editor;C:\WINDOWS;C:\WINDOWS\system32;', symOptions: 534, UserName: 'user'
-OS-Version: 10.0.0
-D:\2022.3.61f1\Editor\Unity.exe:Unity.exe (00007FF622720000), size: 82595840 (result: -529697949), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.61.21483
-C:\WINDOWS\SYSTEM32\ntdll.dll:ntdll.dll (00007FFB11830000), size: 2064384 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\ntdll.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFB10830000), size: 794624 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\KERNEL32.DLL', fileVersion: 10.0.19041.5915
-C:\WINDOWS\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFB0F280000), size: 3104768 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\KERNELBASE.dll', fileVersion: 10.0.19041.6280
-C:\WINDOWS\System32\CRYPT32.dll:CRYPT32.dll (00007FFB0F120000), size: 1429504 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\CRYPT32.dll', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\ucrtbase.dll:ucrtbase.dll (00007FFB0F580000), size: 1048576 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ucrtbase.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\USER32.dll:USER32.dll (00007FFB0F850000), size: 1708032 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\USER32.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\win32u.dll:win32u.dll (00007FFB0F070000), size: 139264 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\win32u.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\GDI32.dll:GDI32.dll (00007FFB11750000), size: 176128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\GDI32.dll', fileVersion: 10.0.19041.6157
-D:\2022.3.61f1\Editor\libfbxsdk.dll:libfbxsdk.dll (00007FFAC48B0000), size: 8019968 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\libfbxsdk.dll', fileVersion: 2020.3.7.0
-D:\2022.3.61f1\Editor\s3tcompress.dll:s3tcompress.dll (00007FFAF6E90000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\s3tcompress.dll'
-D:\2022.3.61f1\Editor\etccompress.dll:etccompress.dll (00007FFAC43D0000), size: 5070848 (result: 0), SymType: '-exported-', PDB: 'D:\2022.3.61f1\Editor\etccompress.dll'
-C:\WINDOWS\System32\gdi32full.dll:gdi32full.dll (00007FFB0F730000), size: 1150976 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\gdi32full.dll', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFB11150000), size: 724992 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ADVAPI32.dll', fileVersion: 10.0.19041.6328
-C:\WINDOWS\System32\msvcp_win.dll:msvcp_win.dll (00007FFB0EFA0000), size: 643072 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\msvcp_win.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\msvcrt.dll:msvcrt.dll (00007FFB10620000), size: 647168 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\msvcrt.dll', fileVersion: 7.0.19041.3636
-D:\2022.3.61f1\Editor\compress_bc7e.dll:compress_bc7e.dll (00007FFAD23A0000), size: 1433600 (result: 0), SymType: '-exported-', PDB: 'D:\2022.3.61f1\Editor\compress_bc7e.dll'
-D:\2022.3.61f1\Editor\ispc_texcomp.dll:ispc_texcomp.dll (00007FFAD8320000), size: 1826816 (result: 0), SymType: '-exported-', PDB: 'D:\2022.3.61f1\Editor\ispc_texcomp.dll'
-C:\WINDOWS\System32\sechost.dll:sechost.dll (00007FFB106C0000), size: 651264 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\sechost.dll', fileVersion: 10.0.19041.6328
-D:\2022.3.61f1\Editor\FreeImage.dll:FreeImage.dll (0000000180000000), size: 5783552 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\FreeImage.dll', fileVersion: 3.18.0.0
-D:\2022.3.61f1\Editor\WinPixEventRuntime.dll:WinPixEventRuntime.dll (00007FFAF8900000), size: 45056 (result: 0), SymType: '-exported-', PDB: 'D:\2022.3.61f1\Editor\WinPixEventRuntime.dll', fileVersion: 1.0.1812.6001
-C:\WINDOWS\System32\SHELL32.dll:SHELL32.dll (00007FFB0FCB0000), size: 7798784 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHELL32.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\RPCRT4.dll:RPCRT4.dll (00007FFB10500000), size: 1179648 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\RPCRT4.dll', fileVersion: 10.0.19041.6280
-C:\WINDOWS\System32\WS2_32.dll:WS2_32.dll (00007FFB109C0000), size: 438272 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\WS2_32.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\bcrypt.dll:bcrypt.dll (00007FFB0F040000), size: 159744 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\bcrypt.dll', fileVersion: 10.0.19041.5369
-D:\2022.3.61f1\Editor\umbraoptimizer64.dll:umbraoptimizer64.dll (00007FFACBFB0000), size: 1187840 (result: 0), SymType: '-exported-', PDB: 'D:\2022.3.61f1\Editor\umbraoptimizer64.dll'
-C:\WINDOWS\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFB11780000), size: 372736 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHLWAPI.dll', fileVersion: 10.0.19041.6392
-C:\WINDOWS\System32\ole32.dll:ole32.dll (00007FFB0FB80000), size: 1224704 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ole32.dll', fileVersion: 10.0.19041.5915
-C:\WINDOWS\System32\combase.dll:combase.dll (00007FFB113F0000), size: 3489792 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\combase.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\System32\IMM32.dll:IMM32.dll (00007FFB10A30000), size: 192512 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\IMM32.dll', fileVersion: 10.0.19041.6157
-C:\WINDOWS\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFB10B30000), size: 4653056 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SETUPAPI.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\MSVCP140.dll:MSVCP140.dll (00007FFAD2240000), size: 577536 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP140.dll', fileVersion: 14.42.34433.0
-C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll:VCRUNTIME140_1.dll (00007FFAF6E80000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll', fileVersion: 14.42.34433.0
-C:\WINDOWS\System32\cfgmgr32.dll:cfgmgr32.dll (00007FFB0EEC0000), size: 319488 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\cfgmgr32.dll', fileVersion: 10.0.19041.3996
-C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll:VCRUNTIME140.dll (00007FFB071B0000), size: 122880 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll', fileVersion: 14.42.34433.0
-C:\WINDOWS\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFB10A60000), size: 839680 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\OLEAUT32.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\WINTRUST.dll:WINTRUST.dll (00007FFB0F0A0000), size: 471040 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\WINTRUST.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FFAEB8B0000), size: 1212416 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\OPENGL32.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (00007FFB0E250000), size: 241664 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\GLU32.dll:GLU32.dll (00007FFAEBF20000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\GLU32.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\WINHTTP.dll:WINHTTP.dll (00007FFB085D0000), size: 1089536 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\WINHTTP.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\WINMM.dll:WINMM.dll (00007FFB03BE0000), size: 159744 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\WINMM.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\HID.DLL:HID.DLL (00007FFB0D700000), size: 53248 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\HID.DLL', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFB0CC40000), size: 188416 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\dwmapi.dll', fileVersion: 10.0.19041.6157
-D:\2022.3.61f1\Editor\SketchUpAPI.dll:SketchUpAPI.dll (00007FFAC3B30000), size: 8990720 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\SketchUpAPI.dll', fileVersion: 23.0.0.0
-D:\2022.3.61f1\Editor\NativeProxyHelper.dll:NativeProxyHelper.dll (00007FFACBDF0000), size: 1789952 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\NativeProxyHelper.dll'
-C:\WINDOWS\SYSTEM32\VERSION.dll:VERSION.dll (00007FFB09870000), size: 40960 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VERSION.dll', fileVersion: 10.0.19041.3636
-D:\2022.3.61f1\Editor\SketchUpCommonPreferences.dll:SketchUpCommonPreferences.dll (00007FFAD2320000), size: 499712 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\SketchUpCommonPreferences.dll', fileVersion: 23.0.0.0
-C:\WINDOWS\SYSTEM32\WSOCK32.dll:WSOCK32.dll (00007FFB09AB0000), size: 36864 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\WSOCK32.dll', fileVersion: 10.0.19041.1
-C:\WINDOWS\SYSTEM32\Secur32.dll:Secur32.dll (00007FFB07470000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Secur32.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFB0ED70000), size: 204800 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\SSPICLI.DLL', fileVersion: 10.0.19041.6328
-D:\2022.3.61f1\Editor\OpenRL.dll:OpenRL.dll (000001EFF3360000), size: 12779520 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\OpenRL.dll', fileVersion: 1.5.0.2907
-D:\2022.3.61f1\Editor\embree.dll:embree.dll (00007FFABFDD0000), size: 16711680 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\embree.dll', fileVersion: 2.14.0.0
-C:\WINDOWS\SYSTEM32\MSVCP100.dll:MSVCP100.dll (0000000069E80000), size: 622592 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP100.dll', fileVersion: 10.0.40219.325
-C:\WINDOWS\SYSTEM32\MSVCR100.dll:MSVCR100.dll (0000000069F20000), size: 860160 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCR100.dll', fileVersion: 10.0.40219.325
-D:\2022.3.61f1\Editor\tbb.dll:tbb.dll (00007FFACB6C0000), size: 413696 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\tbb.dll', fileVersion: 2017.0.2016.1004
-C:\WINDOWS\SYSTEM32\MSWSOCK.DLL:MSWSOCK.DLL (00007FFB0E570000), size: 434176 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSWSOCK.DLL', fileVersion: 10.0.19041.5915
-C:\WINDOWS\SYSTEM32\MSVCR120.dll:MSVCR120.dll (00007FFAC8D90000), size: 978944 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCR120.dll', fileVersion: 12.0.40649.5
-C:\WINDOWS\SYSTEM32\MSVCP120.dll:MSVCP120.dll (00007FFAC8E80000), size: 679936 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP120.dll', fileVersion: 12.0.40649.5
-D:\2022.3.61f1\Editor\OpenRL_pthread.dll:OpenRL_pthread.dll (000001EFF3FB0000), size: 61440 (result: 0), SymType: '-nosymbols-', PDB: 'D:\2022.3.61f1\Editor\OpenRL_pthread.dll', fileVersion: 2.9.0.0
-C:\WINDOWS\SYSTEM32\MSASN1.dll:MSASN1.dll (00007FFB0E9A0000), size: 73728 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\MSASN1.dll', fileVersion: 10.0.19041.3636
-C:\WINDOWS\System32\bcryptprimitives.dll:bcryptprimitives.dll (00007FFB0EF10000), size: 532480 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\bcryptprimitives.dll', fileVersion: 10.0.19041.5007
-C:\WINDOWS\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFB0CD50000), size: 73728 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\kernel.appcore.dll', fileVersion: 10.0.19041.3758
-C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFB0C860000), size: 647168 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\system32\uxtheme.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFB0CF50000), size: 8015872 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\windows.storage.dll', fileVersion: 10.0.19041.6456
-C:\WINDOWS\SYSTEM32\Wldp.dll:Wldp.dll (00007FFB0E810000), size: 176128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Wldp.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\System32\SHCORE.dll:SHCORE.dll (00007FFB10900000), size: 708608 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHCORE.dll', fileVersion: 10.0.19041.5794
-C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFB0EDF0000), size: 147456 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\profapi.dll', fileVersion: 10.0.19041.6033
-C:\WINDOWS\system32\IconCodecService.dll:IconCodecService.dll (00007FFAEFA00000), size: 36864 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\system32\IconCodecService.dll', fileVersion: 10.0.19041.1
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Unknown error [-529697949]' (Address: 00007FF6243053B0)
-0x00007FF6243053B0 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Unknown error [-529697949]' (Address: 00007FF624305E2D)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624305E2D)
-0x00007FF624305E2D ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624FD1CBF)
-0x00007FF624FD1CBF (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624FD141A)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624FD141A)
-0x00007FF624FD141A ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6248D929A)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6248D929A)
-0x00007FF6248D929A ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6248DB354)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6248DB354)
-0x00007FF6248DB354 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6248DB4B7)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6248DB4B7)
-0x00007FF6248DB4B7 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6235CF925)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6235CF925)
-0x00007FF6235CF925 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624303718)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624303718)
-0x00007FF624303718 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6235EE2C7)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6235EE2C7)
-0x00007FF6235EE2C7 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6235EFAF7)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6235EFAF7)
-0x00007FF6235EFAF7 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF6235F62F6)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF6235F62F6)
-0x00007FF6235F62F6 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF62504BCA6)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF62504BCA6)
-0x00007FF62504BCA6 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624312545)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624312545)
-0x00007FF624312545 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF62504E119)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF62504E119)
-0x00007FF62504E119 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CB9A9B)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CB9A9B)
-0x00007FF624CB9A9B ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CF5A12)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CF5A12)
-0x00007FF624CF5A12 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CE19BE)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CE19BE)
-0x00007FF624CE19BE ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CE35EE)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CE35EE)
-0x00007FF624CE35EE ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CF3DBC)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CF3DBC)
-0x00007FF624CF3DBC ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624CC721F)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624CC721F)
-0x00007FF624CC721F ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624C92997)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624C92997)
-0x00007FF624C92997 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624C92A1B)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624C92A1B)
-0x00007FF624C92A1B ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF624485A5E)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF624485A5E)
-0x00007FF624485A5E ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF62491E245)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF62491E245)
-0x00007FF62491E245 ((<unknown>)) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: '지정된 모듈을 찾을 수 없습니다.' (Address: 00007FF625CF07BE)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FF625CF07BE)
-0x00007FF625CF07BE ((<unknown>)) (function-name not available)
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FFB10847374)
-0x00007FFB10847374 ((<unknown>)) BaseThreadInitThunk
-  ERROR: SymGetModuleInfo64, GetLastError: '메모리 리소스가 부족하여 이 명령을 처리할 수 없습니다.' (Address: 00007FFB1187CC91)
-0x00007FFB1187CC91 ((<unknown>)) RtlUserThreadStart
-
-========== END OF STACKTRACE ===========
-
-A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
- * C:/Users/user/AppData/Local/Temp/Unity/Editor/Crashes
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 3ead1caaecf1c488f20bcfeb224b6af5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

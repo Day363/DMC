@@ -240,21 +240,26 @@ public class playerstatus : MonoBehaviour
     {
         if (activeStacks.Count > 0)
         {
-            foreach (StackInstance stack in activeStacks)
+            for (int i = activeStacks.Count - 1; i >= 0; i--)
             {
+                StackInstance stack = activeStacks[i];
+
                 if (stack.stackData.effectName == "출혈")
                 {
                     BalanceDamage(stack.currentStack * bleeddamagedecrease);
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
+
                     if (stack.currentStack == 1)
                     {
                         RemoveStack(stack.stackData, 1);
                     }
                 }
+
                 if (stack.stackData.effectName == "관통 피해량 증가 I")
                 {
                     RemoveStack(stack.stackData, 1);
                 }
+
                 if (stack.stackData.effectName == "관통 피해량 증가 II")
                 {
                     RemoveStack(stack.stackData, 1);

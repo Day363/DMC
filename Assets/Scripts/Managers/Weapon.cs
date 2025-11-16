@@ -9,10 +9,6 @@ public class Weapon : ScriptableObject
     
     [TextArea(20, 1)]
     public string passive_description;
-    [TextArea(20, 1)]
-    public string normalskill_description;
-    [TextArea(20, 1)]
-    public string arreyskill_description;
 
     public bool range;
 
