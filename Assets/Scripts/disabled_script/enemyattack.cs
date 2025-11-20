@@ -37,6 +37,7 @@ public class enemyattack : MonoBehaviour
             {
                 attackcore.attackcoreInstance.AttackBackDelayDelete();
 
+                playerstatus.instance.ParrySuccess();
                 player.GetComponent<playerstatus>().Parrystop();
 
                 

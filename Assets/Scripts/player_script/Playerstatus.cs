@@ -8,6 +8,8 @@ using DG.Tweening;
 
 public class playerstatus : MonoBehaviour
 {
+    public static playerstatus instance;
+
     [SerializeField]
     public Transform stackbar;
     public Slider balancebar;
@@ -32,12 +34,21 @@ public class playerstatus : MonoBehaviour
     [Range(-3, 3)]
     public float recognitionrate;
 
+    public Stack bleed;
+
+    //실시간 체크(스텍의 효과가 순환 시작이나 끝 같은 특정한 트리거가 없으며 업데이트 할떄마다 이 수치를 조정해야함)
+    //효과용 변수
+
     public float slash_tolerance = 1;
     public float penetration_tolerance = 1;
     public float blow_tolerance = 1;
     public float slash_toleranceCore = 1;
     public float penetration_toleranceCore = 1;
     public float blow_toleranceCore = 1;
+
+    public float attackdamageplus;
+    public float balancedamageplus;
+    public float damagedecreaserealtime;
 
     public float damagedecrease;
     public float damagedecreaseCore = 1;
@@ -50,7 +61,10 @@ public class playerstatus : MonoBehaviour
     public float currentbalance;
     public int maxlifecount;
     public int lifecount;
+
     public float speed;
+    public float speedCore = 14;
+
     public float attackpower;
     public float attackpowerCore = 10;
 
@@ -62,13 +76,38 @@ public class playerstatus : MonoBehaviour
 
     public float selfharmdamagepercent;
     public float selfharmdamagepercentCore = 1;
+    //
+    //라포용 변수
+    public bool have_endofimpulse = false;
+    public bool have_endofimpulse_2 = false;
+    public bool have_compulsion = false;
 
+    public float r_balancemaxincrease;
+    public float r_balancemaxincreaseCore = 1;
+
+    public float r_bleeddamagedecrease;
+    public float r_bleeddamagedecreaseCore = 0;
+
+    public float r_healincrease;
+    public float r_healincreaseCore = 0;
+
+    public float r_compulsion_balancedamageincrease;
+    public float r_compulsion_balancedamageincreaseCore = 0;
+    //
     public Coroutine currentparrystop;
 
     public List<StackInstance> activeStacks = new List<StackInstance>();
 
     public static event Action<Stack, int> OnStackApplied;
     public static event Action<Stack, int> OnStackRemoved;
+
+    private void Awake()
+    {
+
+        instance = this;
+
+        playerhit.OnHitCalled += WhenHit;
+    }
 
     public class StackInstance
     {
@@ -117,6 +156,7 @@ public class playerstatus : MonoBehaviour
         canvus.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenAddStack();
+        WhenStackChange();
     }
 
     public void RemoveStack(Stack targetStack, int amount)
@@ -144,6 +184,54 @@ public class playerstatus : MonoBehaviour
         canvus.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenRemoveStack();
+        WhenStackChange();
+    }
+
+    public void RapportAdd()
+    {
+        have_endofimpulse = false;
+        have_endofimpulse_2 = false;
+        have_compulsion = false;
+        r_balancemaxincrease = r_balancemaxincreaseCore;
+        r_bleeddamagedecrease = r_bleeddamagedecreaseCore;
+        r_healincrease = r_healincreaseCore;
+        r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
+
+        List<Rapport> currentrapportinv = player_inventory.instance.rapportinv;
+        if (currentrapportinv.Count > 0)
+        {
+            foreach (Rapport rapport in currentrapportinv)
+            {
+                if (rapport.itemName == "미약한 박동")
+                {
+                    r_balancemaxincrease += 0.1f;
+                    have_endofimpulse = true;
+                }
+                if (rapport.itemName == "미약한 박동의 말로")
+                {
+                    r_bleeddamagedecrease += 0.2f;
+                    r_healincrease += 0.1f;
+                    have_endofimpulse_2 = true;
+                }
+                if (rapport.itemName == "강박")
+                {
+                    have_compulsion = true;
+                }
+            }
+        }
+    }
+
+    public void ParrySuccess()
+    {
+        if (have_compulsion)
+        {
+            r_compulsion_balancedamageincrease += 0.05f;
+        }
+    }
+
+    public void WhenHit()
+    {
+        r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
     }
 
     public void AddEmotion(float rate)
@@ -187,21 +275,55 @@ public class playerstatus : MonoBehaviour
         recognitionbar.GetComponent<RectTransform>().DOAnchorPosY(mappedTarget3, 1f).SetEase(Ease.OutQuad).SetId("recognitionrate");
     }
 
-    //public void RemoveStackWhenCycleEnd()
-    //{
-    //    foreach (StackInstance stackInstance in activeStacks)
-    //    {
-    //        if (stackInstance.stackData.whendecrease == TriggerType.OnCircumEnd)
-    //        {
-    //            stackInstance.currentStack -= 1;
-    //            if (stackInstance.currentStack <= 0 && stackInstance.stackData.disappear_whenzero)
-    //            {
-    //                activeStacks.Remove(stackInstance);
-    //            }
-    //            canvus.GetComponent<stackUimanager>().RefreshUI();
-    //        }
-    //    }
-    //}
+    public void WhenStackChange()
+    {
+        penetratedamageup = penetratedamageupCore;
+        damagedecrease = damagedecreaseCore;
+        attackpower = attackpowerCore;
+        speed = speedCore;
+        attackdamageplus = 0;
+        balancedamageplus = 0;
+        damagedecreaserealtime = 0;
+
+        if (activeStacks.Count > 0)
+        {
+            foreach (StackInstance stack in activeStacks)
+            {
+                if (stack.stackData.effectName == "관통 피해량 증가 I")
+                {
+                    penetratedamageup += 0.1f;
+                }
+                if (stack.stackData.effectName == "관통 피해량 증가 II")
+                {
+                    penetratedamageup += 0.2f;
+                }
+                if (stack.stackData.effectName == "후회")
+                {
+                    damagedecrease = +damagedecrease * (0.01f * stack.currentStack);
+                    attackpower = +attackpower * (0.01f * stack.currentStack);
+                    speed = -speed * (0.01f * stack.currentStack);
+                }
+                if (stack.stackData.effectName == "잔흔")
+                {
+                    damagedecrease = -damagedecrease * (0.01f * stack.currentStack);
+                    attackpower = -attackpower * (0.01f * stack.currentStack);
+                    speed = +speed * (0.01f * stack.currentStack);
+                }
+                if (stack.stackData.effectName == "추론")
+                {
+                    if (GetComponent<Passivefunction>().trapal_passive5)
+                    {
+                        attackdamageplus += attackdamageplus * (0.02f * stack.currentStack);
+                        balancedamageplus += balancedamageplus * (0.02f * stack.currentStack);
+                    }
+                    if (GetComponent<Passivefunction>().trapal_passive6)
+                    {
+                        damagedecreaserealtime += damagedecreaserealtime * (0.02f * (24 - stack.currentStack));
+                    }
+                }
+            }
+        }
+    }
 
 
     public void PrintStacks()
@@ -214,24 +336,21 @@ public class playerstatus : MonoBehaviour
 
     public void CycleStart()
     {
+        if (have_endofimpulse)
+        {
+            ApplyStack(bleed, 5);
+        }
+        if (have_endofimpulse_2)
+        {
+            ApplyStack(bleed, 3);
+        }
+
         if (activeStacks.Count > 0)
         {
             foreach (StackInstance stack in activeStacks)
             {  
-                if (stack.stackData.effectName == "관통 피해량 증가 I")
-                {
-                    penetratedamageup += 0.1f;
-                }
-                if (stack.stackData.effectName == "관통 피해량 증가 II")
-                {
-                    penetratedamageup += 0.2f;
-                }
-                if (stack.stackData.effectName == "후회")
-                {
-                    damagedecrease = damagedecrease * (1.01f * stack.currentStack);
-                    attackpower = attackpower * (1.01f * stack.currentStack);
-
-                }
+                
+                
             }
         }
     }
@@ -246,7 +365,7 @@ public class playerstatus : MonoBehaviour
 
                 if (stack.stackData.effectName == "출혈")
                 {
-                    BalanceDamage(stack.currentStack * bleeddamagedecrease);
+                    BalanceDamage(stack.currentStack * (bleeddamagedecrease - r_bleeddamagedecrease));
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
 
                     if (stack.currentStack == 1)
@@ -268,6 +387,32 @@ public class playerstatus : MonoBehaviour
         }
     }
 
+    public int WhenHitAbsorbtion(int damage)
+    {
+        if (activeStacks.Count > 0)
+        {
+            for (int i = activeStacks.Count - 1; i >= 0; i--)
+            {
+                StackInstance stack = activeStacks[i];
+                if (stack.stackData.name == "흡수")
+                {
+                    if (damage <= stack.currentStack)
+                    {
+                        RemoveStack(stack.stackData, damage);
+                        return damage;
+                    }
+                    else if (damage > stack.currentStack)
+                    {
+                        RemoveStack(stack.stackData, stack.currentStack);
+                        return stack.currentStack;
+                    }
+                }
+                break;
+            }
+        }
+        return 0;
+    }
+
     public void PassiveFloatReset()
     {
         bleeddamagedecrease = bleeddamagedecreaseCore;
@@ -286,13 +431,17 @@ public class playerstatus : MonoBehaviour
 
         selfharmdamagepercent = selfharmdamagepercentCore;
 
+        speed = speedCore;
+
         attackpower = attackpowerCore;
+
+        WhenStackChange();
     }
 
-    private void Start()
+    public void BattaleStart()
     {
         lifecount = maxlifecount;
-        balancebarint.maxValue = maxbalance;
+        balancebarint.maxValue = maxbalance * r_balancemaxincrease;
         currentbalance = 0;
     }
 
@@ -334,9 +483,12 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
+        
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += balance * damagedecrease;
+        float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -349,7 +501,9 @@ public class playerstatus : MonoBehaviour
     {
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += balance * slash_tolerance;
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * slash_tolerance;
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -362,7 +516,9 @@ public class playerstatus : MonoBehaviour
     {
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += balance * penetration_tolerance;
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * penetration_tolerance;
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -375,7 +531,9 @@ public class playerstatus : MonoBehaviour
     {
         GetComponent<Passivefunction>().PlayerHit();
 
-        currentbalance += balance * blow_tolerance;
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * blow_tolerance;
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -386,7 +544,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceHeal(float balance)
     {
-        currentbalance -= balance * healplus;
+        currentbalance -= balance * (healplus + r_healincrease);
         BalanceCheck();
     }
 
@@ -427,5 +585,7 @@ public class playerstatus : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.15f);
         Time.timeScale = 1f;
     }
+
+    
 
 }

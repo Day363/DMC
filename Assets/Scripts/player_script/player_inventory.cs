@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class player_inventory : MonoBehaviour
 {
+    public static player_inventory instance;
+
     public List<Weapon> weaponinv;
     public List<Rapport> rapportinv;
     
@@ -16,6 +18,11 @@ public class player_inventory : MonoBehaviour
 
     public bool canopeninv = true;
     public bool invactive;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     public void Update()
     {
@@ -48,5 +55,11 @@ public class player_inventory : MonoBehaviour
             invUi.SetActive(false);
         }
         
+    }
+
+    public void AddRapport(Rapport rapport)
+    {
+        rapportinv.Add(rapport);
+        GetComponent<playerstatus>().RapportAdd();
     }
 }

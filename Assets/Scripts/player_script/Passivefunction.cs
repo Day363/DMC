@@ -20,6 +20,7 @@ public class Passivefunction : MonoBehaviour
     public Stack deny;
     public Stack regret;
     public Stack usedregret;
+    public Stack absorbtion;
 
     public List<GameObject> indexer_rains = new List<GameObject> { };
     public bool Indexer_istransformed = false;
@@ -40,6 +41,9 @@ public class Passivefunction : MonoBehaviour
     private bool trapal_passive1 = false;
     private bool trapal_passive2 = false;
     private bool trapal_passive3 = false;
+    private bool trapal_passive4 = false;
+    public bool trapal_passive5 = false;
+    public bool trapal_passive6 = false;
 
     private void OnEnable()
     {
@@ -145,8 +149,19 @@ public class Passivefunction : MonoBehaviour
     {
         if (disabled_passive1)
         {
-            GetComponent<playerstatus>().healplus += 0.2f;
-            GetComponent<playerstatus>().slash_tolerance += 0.1f;
+            playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "출혈");
+            if (instance != null)
+            {
+                if (instance.currentStack >= 10)
+                {
+                    GetComponent<playerstatus>().healplus += 0.2f;
+                    GetComponent<playerstatus>().slash_tolerance += 0.1f;
+                    GetComponent<playerstatus>().penetration_tolerance += 0.1f;
+                    GetComponent<playerstatus>().blow_tolerance += 0.1f;
+                }
+            }
+            
+            
         }
 
         if (alttrigger_passive2)
@@ -182,6 +197,15 @@ public class Passivefunction : MonoBehaviour
                 }
             }
             
+        }
+
+        if (trapal_passive6)
+        {
+            playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
+            if (instance != null)
+            {
+                GetComponent<playerstatus>().ApplyStack(absorbtion, (int)(GetComponent<playerstatus>().maxbalance * (24f - instance.currentStack)));
+            }
         }
     }
 
@@ -251,6 +275,17 @@ public class Passivefunction : MonoBehaviour
             {
                 GetComponent<playerstatus>().ApplyStack(certain, 1);
             }
+        }
+
+        if (trapal_passive4)
+        {
+            playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "순환 연산자-결단");
+            playerstatus.StackInstance instance1 = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "순환 연산자-수렴");
+            if (instance != null && instance1 != null)
+            {
+                //대기 스킬에 이중결단 추가
+            }
+            
         }
     }
 

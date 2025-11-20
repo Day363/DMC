@@ -184,6 +184,7 @@ public class attackcore : MonoBehaviour
 
     public void BattleStart()
     {
+        playerstatus.instance.BattaleStart();
         skillselectui.SetActive(true);
         Time.timeScale = 0f;
         MakeRangeWeaponMagzineList();
@@ -357,8 +358,11 @@ public class attackcore : MonoBehaviour
         gamemanagerbattalemanager.currentenemy.GetComponent<Animator>().SetBool("idle", true);
         letterboxletterboxin.PlayLetterboxOut();
         playerPlayerMove.canmove = true;
-        skillselectui.SetActive(true);
-        Time.timeScale = 0f;
+        if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
+        {
+            skillselectui.SetActive(true);
+            Time.timeScale = 0f;
+        }
         canattack = false;
     }
 
@@ -366,8 +370,11 @@ public class attackcore : MonoBehaviour
     {
         gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerPlayerMove.canmove = true;
-        skillselectui.SetActive(true);
-        Time.timeScale = 0f;
+        if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
+        {
+            skillselectui.SetActive(true);
+            Time.timeScale = 0f;
+        }
         canattack = false;
     }
 

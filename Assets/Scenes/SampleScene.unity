@@ -2765,6 +2765,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 0
+  died: 0
 --- !u!50 &13111080
 Rigidbody2D:
   serializedVersion: 4
@@ -23566,6 +23567,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 1
+  died: 0
 --- !u!1 &117862983
 GameObject:
   m_ObjectHideFlags: 0
@@ -131560,6 +131562,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 1
+  died: 0
 --- !u!95 &609046974
 Animator:
   serializedVersion: 5
@@ -207228,7 +207231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &993772873
 Animator:
   serializedVersion: 5
@@ -207295,6 +207298,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 1
+  died: 0
 --- !u!114 &993772875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256959,7 +256963,7 @@ RectTransform:
   m_Father: {fileID: 554566165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -275280,6 +275284,9 @@ MonoBehaviour:
   slash_toleranceCore: 1
   penetration_toleranceCore: 1
   blow_toleranceCore: 1
+  attackdamageplus: 0
+  balancedamageplus: 0
+  damagedecreaserealtime: 0
   damagedecrease: 0
   damagedecreaseCore: 1
   penetratedamageup: 0
@@ -275290,6 +275297,7 @@ MonoBehaviour:
   maxlifecount: 3
   lifecount: 0
   speed: 14
+  speedCore: 14
   attackpower: 10
   attackpowerCore: 10
   bleeddamagedecrease: 0
@@ -275449,6 +275457,7 @@ MonoBehaviour:
   deny: {fileID: 11400000, guid: 231cf8c23ebce3e4a8a350dc1f015d93, type: 2}
   regret: {fileID: 11400000, guid: c0c2defa5bc43bb46b82ab08ed534e39, type: 2}
   usedregret: {fileID: 11400000, guid: 04982bf3163b5b54a80c708313a074b3, type: 2}
+  absorbtion: {fileID: 11400000, guid: 9d711ef0b16e47541aeedbf1b90c74e4, type: 2}
   indexer_rains:
   - {fileID: 3388751007453729275, guid: 6374489ee2697e1478509076c20345ae, type: 3}
   - {fileID: 9124013418427274501, guid: 8821ffc990fef08459abe6206d8156c2, type: 3}
@@ -275485,6 +275494,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  trapal_passive5: 0
+  trapal_passive6: 0
   trapal_hit: 0
   trapal_player_hit: 0
   trapal_haloint: 0
@@ -331584,6 +331595,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 1
+  died: 0
 --- !u!1 &1486490694
 GameObject:
   m_ObjectHideFlags: 0
@@ -440157,6 +440169,7 @@ MonoBehaviour:
   canhit: 1
   killcut: 0
   candie: 1
+  died: 0
 --- !u!114 &1995604095
 MonoBehaviour:
   m_ObjectHideFlags: 0

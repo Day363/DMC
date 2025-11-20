@@ -61,6 +61,7 @@ public class boss_hpbar : MonoBehaviour
     public bool killcut;
 
     public bool candie = true;
+    public bool died;
 
     public List<StackInstance> nextcycleStacks = new List<StackInstance>();
     public List<StackInstance> activeStacks = new List<StackInstance>();
@@ -108,7 +109,6 @@ public class boss_hpbar : MonoBehaviour
             int initialStack = Mathf.Clamp(amount, 1, newStack.maxStacks);
             StackInstance instance = new StackInstance(newStack, initialStack);
             activeStacks.Add(instance);
-            WhenStackAdd(newStack);
         }
 
         Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
@@ -119,6 +119,7 @@ public class boss_hpbar : MonoBehaviour
 
 
         //GetComponent<Passivefunction>().WhenAddStack();
+        WhenStackAdd();
     }
 
     public void RemoveStack(Stack targetStack, int amount)
@@ -146,6 +147,7 @@ public class boss_hpbar : MonoBehaviour
         canvas.GetComponent<boss_stackUIManager>().RefreshUI();
 
         //GetComponent<Passivefunction>().WhenRemoveStack();
+        WhenStackAdd();
     }
 
     public void ApplyStackOnNextCycle(Stack newStack, int amount)
@@ -198,24 +200,30 @@ public class boss_hpbar : MonoBehaviour
     }
 
     //완전 새 스텍일떄만 작동
-    public void WhenStackAdd(Stack stack)
+    public void WhenStackAdd()
     {
+        bleeddamageincrease = bleeddamageincreaseCore;
+        damageplus = damageplusCore;
+
         if (activeStacks.Count > 0)
         {
-            if (stack.effectName == "치명적 열상 I")
+            foreach (StackInstance stack in activeStacks)
             {
-                bleeddamageincrease += 0.1f;
-                if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                if (stack.stackData.effectName == "치명적 열상 I")
                 {
-                    damageplus += 0.1f;
+                    bleeddamageincrease += 0.1f;
+                    if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                    {
+                        damageplus += 0.1f;
+                    }
                 }
-            }
-            if (stack.effectName == "치명적 열상 II")
-            {
-                bleeddamageincrease += 0.2f;
-                if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                if (stack.stackData.effectName == "치명적 열상 II")
                 {
-                    damageplus += 0.2f;
+                    bleeddamageincrease += 0.2f;
+                    if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
+                    {
+                        damageplus += 0.2f;
+                    }
                 }
             }
         }
@@ -268,7 +276,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
-        currentbalance += balance;
+        currentbalance += (balance += (balance * (playerstatus.instance.balancedamageplus + playerstatus.instance.r_compulsion_balancedamageincrease)));
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -479,6 +487,7 @@ public class boss_hpbar : MonoBehaviour
         if (candie)
         {
             GetComponent<Animator>().SetTrigger("dying");
+            died = true;
         }
         Die?.Invoke();
         float worldlightintensity = worldlight.GetComponent<Light2D>().intensity;

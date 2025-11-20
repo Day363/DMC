@@ -13,7 +13,7 @@ public class itemobject : MonoBehaviour
 
         if (player.transform.tag == "Player")
         {
-            player.transform.GetComponent<player_inventory>().rapportinv.Add(rapport);
+            player.transform.GetComponent<player_inventory>().AddRapport(rapport);
             Destroy(gameObject);
         }
     }

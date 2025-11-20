@@ -11,6 +11,7 @@ public class slash_scale : MonoBehaviour
     {
         transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), 1, 1);
         transform.DOScaleY(0, time);
+        StartCoroutine(Ds());
     }
 
     IEnumerator Ds()

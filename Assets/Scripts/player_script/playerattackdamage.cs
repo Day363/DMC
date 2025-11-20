@@ -29,6 +29,7 @@ public class playerattackdamage : MonoBehaviour
         if (collision.gameObject.tag == "enemybullet")
         {
             damagepercent = damagepercentCore;
+            damagepercentplus += playerstatus.instance.attackdamageplus;
             damagepercent = damagepercent + damagepercentplus;
             damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
             enemybullet collisionenemybullet = collision.GetComponent<enemybullet>();
