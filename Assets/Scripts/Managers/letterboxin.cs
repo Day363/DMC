@@ -18,6 +18,11 @@ public class letterboxin : MonoBehaviour
 
     public bool whilein = false;
 
+    public void Awake()
+    {
+        battalemanager.Instance.letterbox = gameObject;
+    }
+
     public void PlayLetterboxIn()
     {
         if (!whilein)

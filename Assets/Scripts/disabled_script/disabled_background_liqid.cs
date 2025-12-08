@@ -36,7 +36,7 @@ public class disabled_background_liqid : MonoBehaviour
         yield return new WaitForSeconds(time + Random.Range(0f, 1.5f));
         time = Random.Range(0.5f, 2.5f);
         currentliqid.transform.DOScaleX(0, time).SetEase(Ease.OutQuart);
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time + 0.3f);
         Destroy(currentliqid);
     }
 }

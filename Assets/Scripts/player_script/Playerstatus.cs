@@ -27,6 +27,8 @@ public class playerstatus : MonoBehaviour
     public GameObject reasonbar;
     public GameObject recognitionbar;
 
+    public GameObject cutsceneuidisappear;
+
     [Range(-3, 3)]
     public float emotionrate;
     [Range(-3, 3)]
@@ -35,6 +37,8 @@ public class playerstatus : MonoBehaviour
     public float recognitionrate;
 
     public Stack bleed;
+    public Stack penetrationup1;
+    public Stack absorbtion;
 
     //실시간 체크(스텍의 효과가 순환 시작이나 끝 같은 특정한 트리거가 없으며 업데이트 할떄마다 이 수치를 조정해야함)
     //효과용 변수
@@ -54,7 +58,7 @@ public class playerstatus : MonoBehaviour
     public float damagedecreaseCore = 1;
 
     public float penetratedamageup;
-    public float penetratedamageupCore = 1;
+    public float penetratedamageupCore = 0;
 
     public float focus;
     public float maxbalance;
@@ -81,6 +85,10 @@ public class playerstatus : MonoBehaviour
     public bool have_endofimpulse = false;
     public bool have_endofimpulse_2 = false;
     public bool have_compulsion = false;
+    public bool have_penetration = false;
+    public bool r_penetration_cycle = true;
+    public bool have_forgotten = false;
+    public int forgotten_cycle = 0;
 
     public float r_balancemaxincrease;
     public float r_balancemaxincreaseCore = 1;
@@ -93,6 +101,15 @@ public class playerstatus : MonoBehaviour
 
     public float r_compulsion_balancedamageincrease;
     public float r_compulsion_balancedamageincreaseCore = 0;
+
+    public float r_penetrationdamageincrease;
+    public float r_penetrationdamageincreaseCore = 0;
+
+    public float r_bleedApplyadd;
+    public float r_bleedApplyaddCore = 0;
+
+    public float r_enemybleeddamageincrease;
+    public float r_enemybleeddamageincreaseCore = 0;
     //
     public Coroutine currentparrystop;
 
@@ -103,6 +120,8 @@ public class playerstatus : MonoBehaviour
 
     private void Awake()
     {
+        battalemanager.Instance.player = gameObject;
+        battalemanager.Instance.playerchatbox = chat;
 
         instance = this;
 
@@ -192,10 +211,16 @@ public class playerstatus : MonoBehaviour
         have_endofimpulse = false;
         have_endofimpulse_2 = false;
         have_compulsion = false;
+        have_penetration = false;
+        have_forgotten = false;
+        forgotten_cycle = 0;
         r_balancemaxincrease = r_balancemaxincreaseCore;
         r_bleeddamagedecrease = r_bleeddamagedecreaseCore;
         r_healincrease = r_healincreaseCore;
         r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
+        r_penetrationdamageincrease = r_penetrationdamageincreaseCore;
+        r_bleedApplyadd = r_bleedApplyaddCore;
+        r_enemybleeddamageincrease = r_enemybleeddamageincreaseCore;
 
         List<Rapport> currentrapportinv = player_inventory.instance.rapportinv;
         if (currentrapportinv.Count > 0)
@@ -217,6 +242,20 @@ public class playerstatus : MonoBehaviour
                 {
                     have_compulsion = true;
                 }
+                if (rapport.itemName == "관통상")
+                {
+                    r_penetrationdamageincrease += 0.1f;
+                    have_penetration = true;
+                }
+                if (rapport.itemName == "유기성 물감")
+                {
+                    r_bleedApplyadd += 1;
+                    r_enemybleeddamageincrease += 0.15f;
+                }
+                if (rapport.itemName == "잊혀진 것")
+                {
+                    have_forgotten = true;
+                }
             }
         }
     }
@@ -225,13 +264,27 @@ public class playerstatus : MonoBehaviour
     {
         if (have_compulsion)
         {
-            r_compulsion_balancedamageincrease += 0.05f;
+            Mathf.Clamp(r_compulsion_balancedamageincrease += 0.05f, 0f, 0.5f);
         }
     }
 
     public void WhenHit()
     {
         r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
+        if (have_forgotten && forgotten_cycle == 0)
+        {
+            forgotten_cycle = 5;
+            ApplyStack(absorbtion, (int)(maxbalance * 0.3f));
+        }
+    }
+
+    public void PenetrationHit()
+    {
+        if (have_penetration && r_penetration_cycle)
+        {
+            ApplyStack(penetrationup1, 1);
+            r_penetration_cycle = false;
+        }
     }
 
     public void AddEmotion(float rate)
@@ -336,6 +389,9 @@ public class playerstatus : MonoBehaviour
 
     public void CycleStart()
     {
+        r_penetration_cycle = true;
+        Mathf.Clamp(forgotten_cycle--, 0, 5);
+
         if (have_endofimpulse)
         {
             ApplyStack(bleed, 5);
@@ -407,7 +463,6 @@ public class playerstatus : MonoBehaviour
                         return stack.currentStack;
                     }
                 }
-                break;
             }
         }
         return 0;
@@ -440,6 +495,7 @@ public class playerstatus : MonoBehaviour
 
     public void BattaleStart()
     {
+        RapportAdd();
         lifecount = maxlifecount;
         balancebarint.maxValue = maxbalance * r_balancemaxincrease;
         currentbalance = 0;
@@ -515,6 +571,7 @@ public class playerstatus : MonoBehaviour
     public void PenetrateDamage(float balance)
     {
         GetComponent<Passivefunction>().PlayerHit();
+        PenetrationHit();
 
         float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * penetration_tolerance;
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
@@ -586,6 +643,15 @@ public class playerstatus : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    
+    public void CutSceneUiDisappear()
+    {
+        cutsceneuidisappear.SetActive(false);
+    }
+
+    public void CutSceneUiAppear()
+    {
+        cutsceneuidisappear.SetActive(true);
+    }
+
 
 }

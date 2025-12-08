@@ -32,6 +32,7 @@ public class CameraManager : MonoBehaviour
 
     public void Awake()
     {
+        battalemanager.Instance.cameramanager = gameObject;
         Instance = this;
         maincam = playercam;
     }
@@ -82,7 +83,7 @@ public class CameraManager : MonoBehaviour
     public void LookEnemy()
     {
         maincam = enemycam;
-        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = Gamemanager.GetComponent<battalemanager>().currentenemy.transform;
+        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = battalemanager.Instance.currentenemy.transform;
         GetComponent<Animator>().SetTrigger("playercam");
     }
 

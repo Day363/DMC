@@ -25,6 +25,12 @@ public class trapal_counsel : MonoBehaviour
     public GameObject blackbox;
     public GameObject floattextmanager;
     public GameObject glitchboxmanager;
+    public GameObject lazerpos;
+    public GameObject denytospawn;
+    public GameObject dielazer;
+    public GameObject counselmirror;
+    public GameObject background;
+    public GameObject counselcollider;
 
     public bool firstmet;
     public bool cameraset;
@@ -40,10 +46,12 @@ public class trapal_counsel : MonoBehaviour
     CameraManager cammanagerCameraManager;
     boss_hpbar bosshp;
 
+    public bool phase2;
     
 
     public void Start()
     {
+        gamemanager = battalemanager.Instance.gameObject;
         boss_hpbar.Die += GoTo2Phase;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
@@ -236,48 +244,63 @@ public class trapal_counsel : MonoBehaviour
 
     public void GoTo2Phase()
     {
-        attackcore.GetComponent<attackcore>().canattack = false;
-        player.GetComponent<PlayerMove>().canmove = false;
-
-        player.GetComponent<playerhit>().canhit = false;
-        GetComponent<trapal_script>().canattack = false;
-        GetComponent<trapal_script>().phase2 = true;
-        GetComponent<boss_hpbar>().candie = true;
-
-        GetComponent<boss_hpbar>().currenthealth = GetComponent<boss_hpbar>().maxhealth;
-
-        if (GetComponent<trapal_passive>().deny24count > GetComponent<trapal_passive>().certain24count)
+        if (!phase2)
         {
-            DenyPhase();
-        }
-        else if (GetComponent<trapal_passive>().deny24count < GetComponent<trapal_passive>().certain24count) 
-        {
-            CertainPhase();
-        }
-        else if (GetComponent<trapal_passive>().deny24count == GetComponent<trapal_passive>().certain24count)
-        {
-            boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
-            boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
-            if (DenyInstance.currentStack > CertainInstance.currentStack)
+            phase2 = true;
+
+            attackcore.GetComponent<attackcore>().canattack = false;
+            player.GetComponent<PlayerMove>().canmove = false;
+
+            player.GetComponent<playerhit>().canhit = false;
+            GetComponent<trapal_script>().canattack = false;
+            GetComponent<trapal_script>().phase2 = true;
+            GetComponent<boss_hpbar>().candie = true;
+
+            GetComponent<boss_hpbar>().currenthealth = GetComponent<boss_hpbar>().maxhealth;
+
+            if (GetComponent<trapal_passive>().deny24count > GetComponent<trapal_passive>().certain24count)
             {
                 DenyPhase();
             }
-            else if (DenyInstance.currentStack < CertainInstance.currentStack)
+            else if (GetComponent<trapal_passive>().deny24count < GetComponent<trapal_passive>().certain24count)
             {
                 CertainPhase();
             }
-            else if (DenyInstance.currentStack == CertainInstance.currentStack)
+            else if (GetComponent<trapal_passive>().deny24count == GetComponent<trapal_passive>().certain24count)
             {
-                int i = Random.Range(0, 2);
-                if (i == 0)
+                boss_hpbar.StackInstance DenyInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "부정");
+                boss_hpbar.StackInstance CertainInstance = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "확신");
+                if (DenyInstance.currentStack > CertainInstance.currentStack)
                 {
                     DenyPhase();
                 }
-                else if (i == 1)
+                else if (DenyInstance.currentStack < CertainInstance.currentStack)
                 {
                     CertainPhase();
                 }
+                else if (DenyInstance.currentStack == CertainInstance.currentStack)
+                {
+                    int i = Random.Range(0, 2);
+                    if (i == 0)
+                    {
+                        DenyPhase();
+                    }
+                    else if (i == 1)
+                    {
+                        CertainPhase();
+                    }
+                }
             }
+        }
+        else if (phase2)
+        {
+            attackcore.GetComponent<attackcore>().canattack = false;
+            player.GetComponent<PlayerMove>().canmove = false;
+            player.GetComponent<playerhit>().canhit = false;
+            GetComponent<trapal_script>().canattack = false;
+
+            GetComponent<Animator>().SetTrigger("trapal_phase2_die1");
+            gamemanager.GetComponent<chatmanager>().CallDialogue(7);
         }
     }
 
@@ -297,7 +320,7 @@ public class trapal_counsel : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         campos.transform.position = transform.position;
-        cammanagerCameraManager.LookCounsel(campos);
+        cammanagerCameraManager.LookEnemy();
         cammanagerCameraManager.CinemachineInvalidateCache();
         letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         playerPlayerMove.canmove = false;
@@ -324,5 +347,46 @@ public class trapal_counsel : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         GetComponent<Animator>().SetTrigger("2phase-2_start");
+    }
+
+    public void Die1()
+    {
+        StartCoroutine(Die1_co());
+    }
+
+    IEnumerator Die1_co()
+    {
+        GameObject currentlazer = Instantiate(dielazer, new Vector3(transform.position.x, transform.position.y + 10f, -6.5f), Quaternion.identity);
+        currentlazer.GetComponent<lazer2lookat>().look = true;
+        currentlazer.GetComponent<lazer2lookat>().canwarning = false;
+        currentlazer.GetComponent<lazer2lookat>().canshoot = false;
+        currentlazer.GetComponent<lazer2lookat>().player = gameObject;
+        currentlazer.GetComponent<lazer2lookat>().cammanager = cammanager;
+
+        GameObject currentdeny = Instantiate(denytospawn, lazerpos.transform, true);
+        currentdeny.transform.position = new Vector3(0, 0, 0);
+        currentdeny.transform.localScale = new Vector3(0, 0, 1);
+        currentdeny.transform.DOScale(1, 0.5f).SetEase(Ease.OutQuart);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Animator>().SetTrigger("trapal_phase2_die2");
+        yield return new WaitForSeconds(1f);
+        currentdeny.transform.DOScale(0, 1f).SetEase(Ease.OutQuart);
+        yield return new WaitForSeconds(1.1f);
+        Destroy(currentdeny);
+        yield return new WaitForSeconds(2f);
+
+        currentlazer.GetComponent<lazer2lookat>().Shoot();
+        GetComponent<SpriteRenderer>().DOFade(0, 0.1f);
+
+        yield return new WaitForSeconds(3f);
+        TOCounsel();
+    }
+
+    public void TOCounsel()
+    {
+        GameObject currentcounselmirror = Instantiate(counselmirror, new Vector3(-450f, 26.7f, 0), Quaternion.identity);
+        tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
+        currentcounselmirrortocounselmanager.player = player;
+        currentcounselmirrortocounselmanager.cammanager = cammanager;
     }
 }

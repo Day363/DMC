@@ -172,14 +172,18 @@ public class Passivefunction : MonoBehaviour
         if (indexer_passive1)
         {
             boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "ÁÖ½ÃÀ²");
-            if (enemyStackInstance.currentStack >= 50)
+            if (enemyStackInstance != null)
             {
-                int index = UnityEngine.Random.Range(0, 4);
-                Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
-                Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
-                GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
-                currain.GetComponent<playerattackdamage>().player = gameObject;
+                if (enemyStackInstance.currentStack >= 50)
+                {
+                    int index = UnityEngine.Random.Range(0, 4);
+                    Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
+                    Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
+                    GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
+                    currain.GetComponent<playerattackdamage>().player = gameObject;
+                }
             }
+            
         }
 
         if (trapal_passive2)

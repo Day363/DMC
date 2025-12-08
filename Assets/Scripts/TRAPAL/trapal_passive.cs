@@ -75,7 +75,13 @@ public class trapal_passive : MonoBehaviour
         fragment2normal_enemy_hp.attackcore = attackcore;
         fragment2.transform.position = new Vector3(6f, -1.9f, 0);
 
+        
+    }
+
+    public void Start()
+    {
         ts = GetComponent<trapal_script>();
+        tc = GetComponent<trapal_counsel>();
     }
 
     public void FixedUpdate()
@@ -400,13 +406,25 @@ public class trapal_passive : MonoBehaviour
 
         if (certaindestroy >= 12)
         {
-            GetComponent<boss_hpbar>().BalanceCollapse();
+            StartCoroutine(BosshpbarBalanceCollapse());
         }
         else
         {
-            player.GetComponent<playerstatus>().BalanceCollapse();
+            StartCoroutine(PlayerstatusBalanceCollapse());
         }
         tc.AttackEnd();
+    }
+
+    IEnumerator BosshpbarBalanceCollapse()
+    {
+        yield return new WaitForSeconds(0.17f);
+        GetComponent<boss_hpbar>().BalanceCollapse();
+    }
+
+    IEnumerator PlayerstatusBalanceCollapse()
+    {
+        yield return new WaitForSeconds(0.17f);
+        player.GetComponent<playerstatus>().BalanceCollapse();
     }
 
     public void Lazer1_Hit(Vector2 direction)
@@ -483,6 +501,7 @@ public class trapal_passive : MonoBehaviour
             curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
             curpenetrate.GetComponent<enemyattack>().canattack = true;
             curpenetrate.GetComponent<enemyattack>().heavyattack = true;
+            curpenetrate.GetComponent<enemyattack>().hit = true;
             yield return new WaitForSeconds(0.1f);
             curlazer2.GetComponent<lazer2lookat>().look = false;
             boss_hpbar.StackInstance instance = BossstackHander.activeStacks.Find(s => s.stackData.effectName == "∫Œ¡§");

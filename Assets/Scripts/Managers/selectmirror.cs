@@ -6,12 +6,13 @@ using UnityEngine.Rendering.Universal;
 using Cinemachine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class selectmirror : MonoBehaviour
 {
     public GameObject player;
-
-    public Vector3 wheretospwan;
+    public GameObject fadeout;
+    public string scenename;
 
     public string[] whispers;
     public GameObject chatpre;
@@ -23,21 +24,17 @@ public class selectmirror : MonoBehaviour
 
     public GameObject cammanager;
     public GameObject attackcore;
-    public bool widercam;
-    public Collider2D widecollider;
 
     public GameObject fbutton;
     public bool selectactive;
 
-    public GameObject background0;
-    public GameObject wall;
-    public GameObject[] backgrounds;
-    public GameObject client;
-
-    public GameObject thisPack;
-
-    public Light2D worldlight;
-    public float worldlightint;
+    public void Start()
+    {
+        player = battalemanager.Instance.player;
+        fadeout = battalemanager.Instance.fadeout;
+        cammanager = battalemanager.Instance.cameramanager;
+        attackcore = battalemanager.Instance.attackcore;
+    }
 
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -119,40 +116,14 @@ public class selectmirror : MonoBehaviour
     {
         if (Input.GetButtonDown("fbutton") && selectactive)
         {
-            player.transform.position = new Vector3(2.5f, -0.4f, 0);
-
-            foreach (GameObject background in backgrounds)
-            {
-                background.SetActive(true);
-            }
-
-            player.transform.position = wheretospwan;
-            cammanager.transform.position = player.transform.position;
-
-            worldlight.intensity = worldlightint;
-
-            if (widercam)
-            {
-                cammanager.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = widecollider;
-                cammanager.GetComponent<CinemachineConfiner2D>().InvalidateCache();
-
-            }
-
-            if (wall  != null)
-            {
-                wall.SetActive(false);
-            }
-            
-
-            background0.SetActive(false);
-            
-            client.SetActive(true);
-            foreach (Transform mirror in thisPack.transform)
-            {
-                mirror.gameObject.SetActive(false);
-            }
-
+            StartCoroutine(Fadeout());
+            fadeout.GetComponent<Image>().DOFade(1, 1.5f);
         }
+    }
 
+    IEnumerator Fadeout()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scenename);
     }
 }

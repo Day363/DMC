@@ -47,6 +47,16 @@ public class fragment_script : MonoBehaviour
 
     public void IfDie()
     {
+        if (diffusion)
+        {
+            trapal.GetComponent<boss_hpbar>().RemoveStack(battalemanager.Instance.stackdatas[13], 3);
+            trapal.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[12], 1);
+        }
+        else if (convergence)
+        {
+            trapal.GetComponent<boss_hpbar>().RemoveStack(battalemanager.Instance.stackdatas[12], 3);
+            trapal.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[13], 1);
+        }
         trapal.GetComponent<trapal_passive>().Fragment();
     }
 

@@ -9,19 +9,21 @@ public class itemgivemanager : MonoBehaviour
 
     public GameObject itemselectui;
 
-    public GameObject disabled;
-    public GameObject filer;
-
     public Rapport file;
     public Rapport bulb;
 
+    public void Start()
+    {
+        itemselectui = battalemanager.Instance.itemgiveui;
+    }
+
     public void Sucssess(Rapport rapport)
     {
-        if (currentobject == disabled)
+        if (currentobject.name == "disabled")
         {
             Disabled_Sucssess();
         }
-        if (currentobject == filer)
+        if (currentobject.name == "filer")
         {
             Filer_Sucssess(rapport);
         }
@@ -30,11 +32,11 @@ public class itemgivemanager : MonoBehaviour
 
     public void Fail(Rapport rapport)
     {
-        if (currentobject == disabled)
+        if (currentobject.name == "disabled")
         {
             Disabled_Fail();
         }
-        if (currentobject == filer)
+        if (currentobject.name == "filer")
         {
             Filer_Fail(rapport);
         }
@@ -42,7 +44,7 @@ public class itemgivemanager : MonoBehaviour
 
     public void Disabled_Sucssess()
     {
-        disabled.GetComponent<disabled_counsel>().Startcutscene();
+        currentobject.GetComponent<disabled_counsel>().Startcutscene();
     }
 
     public void Disabled_Fail()
@@ -65,6 +67,6 @@ public class itemgivemanager : MonoBehaviour
     public void Filer_Fail(Rapport rapport)
     {
         Debug.Log("½ÇÆÐ");
-        filer.GetComponent<filer_counsel>().ItemFail();
+        currentobject.GetComponent<filer_counsel>().ItemFail();
     }
 }

@@ -21,6 +21,7 @@ public class filer_counsel : MonoBehaviour
     public void Start()
     {
         StartCoroutine(Cammove());
+        gamemanager = battalemanager.Instance.gameObject;
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
     }
 

@@ -94,7 +94,7 @@ public class TextEffectManager : MonoBehaviour
 
             removed += m.Length - inner.Length;
         }
-        workingText = Regex.Replace(workingText, shakePattern, "$3");
+        workingText = Regex.Replace(workingText, shakePattern, "$3", RegexOptions.Singleline);
 
         string fuctionPattern = @"<function=([^>]+)>";
         int delete = 0;
@@ -140,7 +140,7 @@ public class TextEffectManager : MonoBehaviour
         {
             if (visibleCount >= fuctionEvents[f].fuctiontriggerIndex)
             {
-                counselfunctionmanager.Instance?.FuctionStart(fuctionEvents[f].fuctionname);
+                battalemanager.Instance.gameObject.GetComponent<counselfunctionmanager>().FuctionStart(fuctionEvents[f].fuctionname);
                 executedFuction.Add(f);
             }
         }

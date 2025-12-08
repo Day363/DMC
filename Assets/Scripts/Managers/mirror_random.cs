@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class mirror_random : MonoBehaviour
 {
-    public GameObject[] mirrors_original;
-
-    public List<GameObject> available_mirror;
+    public List<GameObject> available_mirror = new List<GameObject> { };
 
     public void Start()
     {
-        foreach (GameObject mirror in mirrors_original)
-        {
-            available_mirror.Add(mirror);
-        }
+        available_mirror = new List<GameObject>(battalemanager.Instance.available_mirror);
         SetRandom();
     }
 
@@ -23,31 +18,17 @@ public class mirror_random : MonoBehaviour
         Transform pos2 = transform.GetChild(1);
         Transform pos3 = transform.GetChild(2);
 
-        if (pos1.childCount > 0)
-        {
-            pos1.GetChild(0).gameObject.SetActive(false);
-        }
-        if (pos2.childCount > 0)
-        {
-            pos2.GetChild(0).gameObject.SetActive(false);
-        }
-        if (pos3.childCount > 0)
-        {
-            pos3.GetChild(0).gameObject.SetActive(false);
-        }
-
-
         int ran1 = Random.Range(0, available_mirror.Count);
-        available_mirror[ran1].SetActive(true);
-        available_mirror[ran1].transform.position = pos1.transform.position;
+        GameObject currentmirror1 = Instantiate(available_mirror[ran1], pos1);
+        currentmirror1.transform.localPosition = new Vector3(0, 0, 0);
         available_mirror.RemoveAt(ran1);
         int ran2 = Random.Range(0, available_mirror.Count);
-        available_mirror[ran2].SetActive(true);
-        available_mirror[ran2].transform.position = pos2.transform.position;
+        GameObject currentmirror2 = Instantiate(available_mirror[ran2], pos2);
+        currentmirror2.transform.localPosition = new Vector3(0, 0, 0);
         available_mirror.RemoveAt(ran2);
         int ran3 = Random.Range(0, available_mirror.Count);
-        available_mirror[ran3].SetActive(true);
-        available_mirror[ran3].transform.position = pos3.transform.position;
+        GameObject currentmirror3 = Instantiate(available_mirror[ran3], pos3);
+        currentmirror3.transform.localPosition = new Vector3(0, 0, 0);
         available_mirror.RemoveAt(ran3);
     }
 }

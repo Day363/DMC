@@ -98,11 +98,10 @@ public class attackcore : MonoBehaviour
     public GameObject circumtext;
     public GameObject magazinetext;
     public GameObject player;
-    public List<Weapon> weaponinv;
-    public List<Weapon> activeweaponlist;
     public List<Skill> attacklist_original;
     public List<string> skillstring;
     public List<Skill> attacklist_notset;
+    public List<Weapon> activeweaponlist;
     public List<SkillReady> attacklist = new List<SkillReady> { };
     public bool canattack = true;
     public bool whilecooltime = false;
@@ -160,8 +159,14 @@ public class attackcore : MonoBehaviour
 
     letterboxin letterboxletterboxin;
 
+    public void Awake()
+    {
+        battalemanager.Instance.attackcore = gameObject;
+    }
+
     private void Start()
     {
+        gamemanager = battalemanager.Instance.gameObject;
         attackcoreInstance = this;
 
         attacklist = new();
@@ -175,6 +180,7 @@ public class attackcore : MonoBehaviour
         playerskillfunction = player.GetComponent<skillfunction>();
 
         letterboxletterboxin = letterbox.GetComponent<letterboxin>();
+        activeweaponlist = player_inventory.instance.weaponinv;
     }
 
     public void SetCronometer()

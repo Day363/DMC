@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using System;
+using UnityEngine.SceneManagement;
 
 public class tocounselmanager : MonoBehaviour
 {
@@ -12,8 +14,6 @@ public class tocounselmanager : MonoBehaviour
     public GameObject fbutton;
     public GameObject player;
     public GameObject cammanager;
-    public GameObject counselcollider;
-    public GameObject background;
 
     public bool cango = false;
 
@@ -60,22 +60,7 @@ public class tocounselmanager : MonoBehaviour
         currentbox1.transform.localScale = new Vector3(1, 128, 1);
         currentbox1.transform.DOScaleX(100f, 10f).SetEase(Ease.OutExpo);
         yield return new WaitForSeconds(3f);
-        player.transform.position = new Vector3(-20, -2, 0);
-        GameObject currentbox2 = Instantiate(box2, player.transform.position, Quaternion.identity);
-        currentbox2.transform.localScale = new Vector3(100, 64, 1);
-        currentbox2.GetComponent<SpriteRenderer>().DOFade(0f, 2.5f).SetEase(Ease.OutQuart);
-
-        background.SetActive(false);
-
-        cammanager.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = counselcollider.GetComponent<PolygonCollider2D>();
-        yield return new WaitForSeconds(2f);
-        player.GetComponent<PlayerMove>().canmove = true;
-        yield return new WaitForSeconds(5f);
-        Destroy(currentbox2);
-        Destroy(currentbox1);
-        CancelInvoke("Spawn");
-        yield return new WaitForSeconds(15f);
-        Destroy(gameObject);
+        SceneManager.LoadScene("mirrorselect");
     }
 
     public void Spawn()

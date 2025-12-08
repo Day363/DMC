@@ -5,8 +5,9 @@ using TMPro;
 using System.Text.RegularExpressions;
 using DG.Tweening;
 using System;
+using UnityEngine.SceneManagement;
 
-public enum Chattarget {Player, Enemy, World}
+public enum Chattarget {Player, Enemy}
 
 [System.Serializable]
 public class Dialogue
@@ -18,6 +19,8 @@ public class Dialogue
 
     public float basicdelay = 0.1f;
     public float dotdelay = 0.5f;
+
+    public bool cantskip = false;
 
     public bool end;
     public bool end_lookplayer = true;
@@ -67,18 +70,37 @@ public class chatmanager : MonoBehaviour
     public DialogueData currentdialogues;
     public GameObject playerchatbox;
     public GameObject enemychatbox;
-    public GameObject worldchatbox;
     public int chatnumber;
 
     public GameObject beforechatbox;
     public Coroutine currentchatco;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     void Start()
-    { 
-        fuctionMap = new Dictionary<string, Action>
-        {
-            { "test", Test }
-        };
+    {
+        cammanager = battalemanager.Instance.cameramanager;
+        player = battalemanager.Instance.player;
+        letterbox = battalemanager.Instance.letterbox;
+        playerchatbox = battalemanager.Instance.playerchatbox;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshRefs();
+        chatnumber = 0;
+    }
+
+    private void RefreshRefs()
+    {
+        cammanager = battalemanager.Instance.cameramanager;
+        player = battalemanager.Instance.player;
+        letterbox = battalemanager.Instance.letterbox;
+        playerchatbox = battalemanager.Instance.playerchatbox;
     }
 
     public void Update()
@@ -106,16 +128,6 @@ public class chatmanager : MonoBehaviour
                     currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
                     chatnumber++;
                 }
-                else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.World)
-                {
-                    if (currentchatco != null)
-                    {
-                        StopCoroutine(currentchatco);
-                    }
-                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], worldchatbox));
-                    chatnumber++;
-                }
-                
             }
             else if (Input.GetMouseButtonDown(0) && whilesaying)
             {
@@ -134,7 +146,6 @@ public class chatmanager : MonoBehaviour
         {
             enemychatbox.SetActive(true);
         }
-        worldchatbox.SetActive(true);
         if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
         {
             if (currentchatco != null)
@@ -151,15 +162,6 @@ public class chatmanager : MonoBehaviour
                 StopCoroutine(currentchatco);
             }
             currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
-            chatnumber++;
-        }
-        else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.World)
-        {
-            if (currentchatco != null)
-            {
-                StopCoroutine(currentchatco);
-            }
-            currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], worldchatbox));
             chatnumber++;
         }
     }
@@ -196,7 +198,7 @@ public class chatmanager : MonoBehaviour
 
         while (visible < totalvisible)
         {
-            if (skip)
+            if (skip && !chat.cantskip)
             {
                 tmp.maxVisibleCharacters = totalvisible; 
                 skip = false;
@@ -226,14 +228,12 @@ public class chatmanager : MonoBehaviour
                     {
                         enemychatbox.SetActive(true);
                     }
-                    worldchatbox.SetActive(false);
                 }
                 break;                         
             }
 
             visible++;
             tmp.maxVisibleCharacters = visible;
-            Debug.Log(tmp.maxVisibleCharacters);
 
             if (shaker != null)
                 shaker.CheckEvents(visible);
@@ -270,7 +270,6 @@ public class chatmanager : MonoBehaviour
             {
                 enemychatbox.SetActive(false);
             }
-            worldchatbox.SetActive(false);
 
             OnchatEnd?.Invoke();
         }

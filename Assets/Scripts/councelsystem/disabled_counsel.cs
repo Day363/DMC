@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class disabled_counsel : MonoBehaviour
 {
@@ -24,8 +26,11 @@ public class disabled_counsel : MonoBehaviour
     public GameObject counselmirror;
     public GameObject background;
     public boss_hpbar bosshp;
+    public GameObject counselcollier;
     public int cycleint_;
     public int cycleint;
+    public GameObject cutsceneuidisappear;
+    public GameObject itemgive;
 
     //Ä³½Ì
     PlayerMove playerPlayerMove;
@@ -44,6 +49,8 @@ public class disabled_counsel : MonoBehaviour
 
     public void Start()
     {
+        gamemanager = battalemanager.Instance.gameObject;
+
         boss_hpbar.Die += WhenDie;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
@@ -72,11 +79,28 @@ public class disabled_counsel : MonoBehaviour
 
     public void Startcutscene()
     {
+        cutsceneuidisappear.SetActive(false);
+        itemgive.SetActive(false);
+        player.GetComponent<playerstatus>().CutSceneUiDisappear();
         cursor1.SetActive(false);
         cursor2.SetActive(false);
         playerstatus.SetActive(false);
         playerPlayerMove.canmove = false;
-        player.transform.position = new Vector3(0, player.transform.position.y, 1);
+        player.transform.position = new Vector3(-5.43f, player.transform.position.y, 1);
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        GetComponent<Animator>().SetTrigger("start");
+    }
+
+    public void Startcutscene2()
+    {
+        cutsceneuidisappear.SetActive(false);
+        player.GetComponent<playerstatus>().CutSceneUiDisappear();
+        cursor1.SetActive(false);
+        cursor2.SetActive(false);
+        playerstatus.SetActive(false);
+        playerPlayerMove.canmove = false;
+        player.transform.position = new Vector3(-5.43f, player.transform.position.y, 1);
+        player.GetComponent<SpriteRenderer>().DOFade(0, 0f);
         letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         GetComponent<Animator>().SetTrigger("start");
     }
@@ -91,6 +115,20 @@ public class disabled_counsel : MonoBehaviour
         cursor2.SetActive(true);
         playerstatus.SetActive(true);
         attackcore.GetComponent<attackcore>().SetCronometer();
+        GetComponent<cutscenemanager>().cameraset = false;
+        cammanagerCameraManager.LookPlayer();
+        letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+        cutsceneuidisappear.SetActive(true);
+        player.GetComponent<playerstatus>().CutSceneUiAppear();
+    }
+
+    public void LookPlayer2()
+    {
+        player.GetComponent<SpriteRenderer>().DOFade(1, 0f);
+        playerPlayerMove.canmove = true;
+        cursor1.SetActive(true);
+        cursor2.SetActive(true);
+        playerstatus.SetActive(true);
         GetComponent<cutscenemanager>().cameraset = false;
         cammanagerCameraManager.LookPlayer();
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
@@ -142,6 +180,12 @@ public class disabled_counsel : MonoBehaviour
 
     }
 
+    public void End()
+    {
+        gameObject.
+        gameObject.SetActive(false);
+    }
+
     public void SpawnCounsel()
     {
 
@@ -155,6 +199,5 @@ public class disabled_counsel : MonoBehaviour
         tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
         currentcounselmirrortocounselmanager.player = player;
         currentcounselmirrortocounselmanager.cammanager = cammanager;
-        currentcounselmirrortocounselmanager.background = background;
     }
 }

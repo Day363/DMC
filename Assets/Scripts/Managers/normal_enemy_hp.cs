@@ -78,7 +78,7 @@ public class normal_enemy_hp : MonoBehaviour
             currenthealth -= damage * slashtolerance;
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
-            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            if (battalemanager.Instance.player.transform.position.x - gameObject.transform.position.x > 0)
             {
                 damtdamagetext.wherexpos = 1;
             }
@@ -111,7 +111,7 @@ public class normal_enemy_hp : MonoBehaviour
             currenthealth -= damage * penetratetolerance;
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
-            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            if (battalemanager.Instance.player.transform.position.x - gameObject.transform.position.x > 0)
             {
                 damtdamagetext.wherexpos = 1;
             }

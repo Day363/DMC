@@ -115,13 +115,11 @@ public class indexer0_script : MonoBehaviour
             if (playerpos.position.x < transform.position.x)
             {
                 direction = -1;
-                hitbox.GetComponent<indexer0_hitbox_script>().direction = -1;
             }
 
             if (playerpos.position.x > transform.position.x)
             {
                 direction = 1;
-                hitbox.GetComponent<indexer0_hitbox_script>().direction = 1;
             }
         }
 
@@ -129,12 +127,12 @@ public class indexer0_script : MonoBehaviour
         {
             if (direction < 0)
             {
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.localScale = new Vector3(1, 1, 1);
             }
 
             if (direction > 0)
             {
-                GetComponent<SpriteRenderer>().flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
 

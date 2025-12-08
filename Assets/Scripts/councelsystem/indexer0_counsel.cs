@@ -25,11 +25,13 @@ public class indexer0_counsel : MonoBehaviour
     public int cycleint_;
     public int cycleint;
 
-
+    public GameObject portal;
     
 
     public void Start()
     {
+        gamemanager = battalemanager.Instance.gameObject;
+
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
 
     }
@@ -62,5 +64,36 @@ public class indexer0_counsel : MonoBehaviour
             bosshp.CycleStart();
             cycleint_ = 0;
         }
+    }
+
+    public void DieDialogue()
+    {
+        cammanager.GetComponent<CameraManager>().LookEnemy();
+        cammanager.GetComponent<CameraManager>().CinemachineInvalidateCache();
+        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        player.GetComponent<PlayerMove>().canmove = false;
+        player.GetComponent<PlayerMove>().Stop();
+        gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+        gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+        gamemanager.GetComponent<chatmanager>().CallDialogue(8);
+    }
+
+    public void DieDisapper()
+    {
+        StartCoroutine(DieDisapper_co());
+
+    }
+
+    IEnumerator DieDisapper_co()
+    {
+        GameObject curportal = Instantiate(portal, transform.position, Quaternion.identity);
+        curportal.transform.position = new Vector3(0, 0, 0);
+        curportal.transform.localScale = new Vector3(0, 0, 0);
+        curportal.transform.DOScale(4, 0.5f).SetEase(Ease.OutQuart);
+
+        yield return new WaitForSeconds(1.6f);
+        GetComponent<SpriteRenderer>().DOFade(0, 0.01f);
+
+        curportal.transform.DOScale(0, 0.2f).SetEase(Ease.OutQuart);
     }
 }

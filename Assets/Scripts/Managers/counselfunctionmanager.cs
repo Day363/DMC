@@ -15,9 +15,14 @@ public class counselfunctionmanager : MonoBehaviour
 
     battalemanager battalemanager;
 
+    public GameObject player;
+    public GameObject trapal;
+    public GameObject indexer0;
+
     public void Start()
     {
         battalemanager = GetComponent<battalemanager>();
+        player = GetComponent<battalemanager>().player;
     }
 
     public void Awake()
@@ -31,7 +36,10 @@ public class counselfunctionmanager : MonoBehaviour
             { "Animation3", Animation3 },
             { "trapal_start", Trapal_start },
             { "start",  BattleStart},
-            { "success", CounselSuccess }
+            { "success", CounselSuccess },
+            { "trapal_die1", Trapal_Die1 },
+            { "indexer_disappear", IndexerDisappear },
+            { "cutscene1", CutScene1 }
         };
     }
 
@@ -64,7 +72,7 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Trapal_start()
     {
-        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        battalemanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
@@ -73,8 +81,8 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void BattleStart()
     {
-        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
-        if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
+        battalemanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        if (battalemanager.Instance.currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
             StartCoroutine(BattaleStartAttackCore());
@@ -84,7 +92,7 @@ public class counselfunctionmanager : MonoBehaviour
     IEnumerator BattaleStartAttackCore()
     {
         yield return new WaitForSeconds(1.5f);
-        attackcore.GetComponent<attackcore>().SetCronometer();
+        battalemanager.Instance.attackcore.GetComponent<attackcore>().SetCronometer();
     }
 
     public void CounselSuccess()
@@ -92,4 +100,18 @@ public class counselfunctionmanager : MonoBehaviour
         Onsuccess?.Invoke();
     }
 
+    public void Trapal_Die1()
+    {
+        trapal.GetComponent<trapal_counsel>().Die1();
+    }
+
+    public void IndexerDisappear()
+    {
+        indexer0.GetComponent<indexer0_counsel>().DieDisapper();
+    }
+
+    public void CutScene1()
+    {
+        player.GetComponent<Animator>().SetTrigger("cutscene1");
+    }
 }

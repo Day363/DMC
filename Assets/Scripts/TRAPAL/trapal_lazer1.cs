@@ -47,7 +47,6 @@ public class trapal_lazer1 : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            Debug.Log("swdw");
             OnLazerHitCalled?.Invoke(direction);
         }
         

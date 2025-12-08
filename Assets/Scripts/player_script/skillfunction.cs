@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class skillfunction : MonoBehaviour
 {
+    public GameObject globallight;
+    public GameObject playerlight;
+    public GameObject fadeout;
+    public GameObject playerUi;
+
     public GameObject attackcore;
     public GameObject gamemanger;
     public playerstatus playerStackHandler;
@@ -26,6 +34,9 @@ public class skillfunction : MonoBehaviour
     public GameObject latereffect;
     public Weapon alttriger;
     public GameObject alttrigger_attack2;
+    public GameObject cutscene1shoot;
+    public GameObject glitch;
+    public GameObject cutsceneobject;
 
     public bool trapal_attack1_recycle;
     public int trapal_attack1_recycle_int;
@@ -45,6 +56,177 @@ public class skillfunction : MonoBehaviour
             { "Trapal_shoot", Trapal_shoot },
             { "trapal_defense", Trapal_Defense }
         };
+    }
+
+    public void Cutscene1_shoot()
+    {
+        StartCoroutine(Cutscene1_shoot_co());
+        playerUi.SetActive(false);
+    }
+
+    IEnumerator Cutscene1_shoot_co()
+    {
+        List<GameObject> gliths = new List<GameObject> { };
+
+        yield return new WaitForSecondsRealtime(1.5f);
+        cammanager.GetComponent<CameraManager>().ShakeCamera(30, 0.02f);
+        cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene1");
+
+        Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
+        playerlight.GetComponent<Light2D>().color = Color.black;
+        globallight.GetComponent<Light2D>().color = Color.red;
+        globallight.GetComponent<Light2D>().intensity = 1.5f;
+        Time.timeScale = 0.1f;
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 pos = new Vector3(transform.position.x + UnityEngine.Random.Range(-15f, 15f), transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
+            Vector3 scale = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-15f, 15f), 0);
+            Vector3 scale2 = new Vector3(UnityEngine.Random.Range(-15f, 15f), UnityEngine.Random.Range(-3f, 3f), 0);
+            Vector3 scale3 = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-3f, 3f), 0);
+            int x = UnityEngine.Random.Range(0, 3);
+            GameObject currentglitch;
+            if (x == 0)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 1)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale2;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 2)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale3;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+        }
+        yield return new WaitForSecondsRealtime(1.7f);
+        cammanager.GetComponent<CameraManager>().ShakeCamera(50, 0.03f);
+        cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene2");
+        Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
+        foreach (GameObject glitch in gliths)
+        {
+            Destroy(glitch);
+        }
+        for (int i = 0; i < 12; i++)
+        {
+            Vector3 pos = new Vector3(transform.position.x + UnityEngine.Random.Range(-15f, 15f), transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
+            Vector3 scale = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-15f, 15f), 0);
+            Vector3 scale2 = new Vector3(UnityEngine.Random.Range(-15f, 15f), UnityEngine.Random.Range(-3f, 3f), 0);
+            Vector3 scale3 = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-3f, 3f), 0);
+            int x = UnityEngine.Random.Range(0, 3);
+            GameObject currentglitch;
+            if (x == 0)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 1)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale2;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 2)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale3;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+        }
+        yield return new WaitForSecondsRealtime(1.7f);
+        cammanager.GetComponent<CameraManager>().ShakeCamera(100, 0.05f);
+        cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene3");
+        Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
+        foreach (GameObject glitch in gliths)
+        {
+            Destroy(glitch);
+        }
+        for (int i = 0; i < 15; i++)
+        {
+            Vector3 pos = new Vector3(transform.position.x + UnityEngine.Random.Range(-15f, 15f), transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
+            Vector3 scale = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-15f, 15f), 0);
+            Vector3 scale2 = new Vector3(UnityEngine.Random.Range(-15f, 15f), UnityEngine.Random.Range(-3f, 3f), 0);
+            Vector3 scale3 = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-3f, 3f), 0);
+            int x = UnityEngine.Random.Range(0, 3);
+            GameObject currentglitch;
+            if (x == 0)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 1)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale2;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 2)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale3;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+        }
+        yield return new WaitForSecondsRealtime(2.3f);
+        cammanager.GetComponent<CameraManager>().ShakeCamera(100, 0.06f);
+        cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene4");
+        Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
+        foreach (GameObject glitch in gliths)
+        {
+            Destroy(glitch);
+        }
+        for (int i = 0; i < 25; i++)
+        {
+            Vector3 pos = new Vector3(transform.position.x + UnityEngine.Random.Range(-15f, 15f), transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
+            Vector3 scale = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-15f, 15f), 0);
+            Vector3 scale2 = new Vector3(UnityEngine.Random.Range(-15f, 15f), UnityEngine.Random.Range(-3f, 3f), 0);
+            Vector3 scale3 = new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(-3f, 3f), 0);
+            int x = UnityEngine.Random.Range(0, 3);
+            GameObject currentglitch;
+            if (x == 0)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 1)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale2;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+            else if (x == 2)
+            {
+                currentglitch = Instantiate(glitch, pos, Quaternion.identity);
+                currentglitch.transform.localScale = scale3;
+                currentglitch.GetComponent<SpriteRenderer>().material.SetVector("moveto_", new Vector2(UnityEngine.Random.Range(-0.3f, 0.3f), UnityEngine.Random.Range(-0.3f, 0.3f)));
+                gliths.Add(currentglitch);
+            }
+        }
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.1f);
+        fadeout.GetComponent<Image>().DOFade(255, 0).SetUpdate(true);
+        yield return new WaitForSecondsRealtime(1f);
+        gamemanger.GetComponent<chatmanager>().chating = false;
+        SceneManager.LoadScene("mirrorselect");
     }
 
     public void Alttrigger_attack2()
@@ -315,25 +497,29 @@ public class skillfunction : MonoBehaviour
     public void Trapal_Weapon1_New_Recycle()
     {
         playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "Ãß·Ð");
-        if (trapal_attack1_recycle && instance.currentStack >= 3)
+        if (instance != null)
         {
-            trapal_attack1_recycle_int++;
-            if (trapal_attack1_recycle_int < 4)
+            if (trapal_attack1_recycle && instance.currentStack >= 3)
             {
-                trapal_attack1_recycle = false;
-                GetComponent<Animator>().SetTrigger("trapal_attack1");
+                trapal_attack1_recycle_int++;
+                if (trapal_attack1_recycle_int < 4)
+                {
+                    trapal_attack1_recycle = false;
+                    GetComponent<Animator>().SetTrigger("trapal_attack1");
+                }
+                if (trapal_attack1_recycle_int >= 4)
+                {
+                    trapal_attack1_recycle = false;
+                    GetComponent<Animator>().SetTrigger("trapal_attack1_five");
+                    trapal_attack1_recycle_int = 0;
+                }
             }
-            if (trapal_attack1_recycle_int >= 4)
+            else
             {
-                trapal_attack1_recycle = false;
-                GetComponent<Animator>().SetTrigger("trapal_attack1_five");
                 trapal_attack1_recycle_int = 0;
             }
         }
-        else
-        {
-            trapal_attack1_recycle_int = 0;
-        }
+        
     }
 
     public void Trapal_Weapon1_Lazer2()

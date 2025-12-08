@@ -15,13 +15,20 @@ public class player_attack_stack : MonoBehaviour
         {
             if (UnityEngine.Random.value < percent)
             {
+                int stackamount_ = stackamount;
+
+                if (stack.effectName == "ÃâÇ÷")
+                {
+                    stackamount_ += (int)playerstatus.instance.r_bleedApplyadd;
+                }
+
                 if (!applyinnextcycle)
                 {
-                    collision.GetComponent<boss_hpbar>().ApplyStack(stack, stackamount);
+                    collision.GetComponent<boss_hpbar>().ApplyStack(stack, stackamount_);
                 }
                 else if (applyinnextcycle)
                 {
-                    collision.GetComponent<boss_hpbar>().ApplyStackOnNextCycle(stack, stackamount);
+                    collision.GetComponent<boss_hpbar>().ApplyStackOnNextCycle(stack, stackamount_);
                 }
                 
             }

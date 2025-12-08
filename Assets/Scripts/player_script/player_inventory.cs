@@ -7,6 +7,8 @@ public class player_inventory : MonoBehaviour
 {
     public static player_inventory instance;
 
+    public GameObject gamemanager;
+
     public List<Weapon> weaponinv;
     public List<Rapport> rapportinv;
     
@@ -22,6 +24,19 @@ public class player_inventory : MonoBehaviour
     public void Awake()
     {
         instance = this;
+    }
+
+    public void Start()
+    {
+        gamemanager = battalemanager.Instance.gameObject;
+        weaponinv = gamemanager.GetComponent<battalemanager>().playerweaponinv;
+        rapportinv = gamemanager.GetComponent<battalemanager>().playerrapportinv;
+    }
+
+    public void OnDestroy()
+    {
+        battalemanager.Instance.playerweaponinv = weaponinv;
+        battalemanager.Instance.playerrapportinv = rapportinv;
     }
 
     public void Update()

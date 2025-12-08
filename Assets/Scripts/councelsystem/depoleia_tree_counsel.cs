@@ -11,7 +11,7 @@ public class depoleia_tree_counsel : MonoBehaviour
     public GameObject letterbox;
     public GameObject counselmirror;
     public GameObject counselcollider;
-
+    public GameObject chat;
     public GameObject background;
 
     public bool firstmet;
@@ -33,10 +33,10 @@ public class depoleia_tree_counsel : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (!firstmet && transform.position.x - player.transform.position.x < 10)
+        if (!firstmet && transform.position.x - player.transform.position.x < 5)
         {
             firstmet = true;
-
+            gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
             campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
             cammanagerCameraManager.LookCounsel(campos);
             letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
@@ -52,8 +52,6 @@ public class depoleia_tree_counsel : MonoBehaviour
         GameObject currentcounselmirror = Instantiate(counselmirror, new Vector3(-450f, 26.7f, 0), Quaternion.identity);
         tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
         currentcounselmirrortocounselmanager.player = player;
-        currentcounselmirrortocounselmanager.counselcollider = counselcollider;
         currentcounselmirrortocounselmanager.cammanager = cammanager;
-        currentcounselmirrortocounselmanager.background = background;
     }
 }

@@ -62,6 +62,9 @@ public class boss_hpbar : MonoBehaviour
 
     public bool candie = true;
     public bool died;
+    //라포용
+    
+    //
 
     public List<StackInstance> nextcycleStacks = new List<StackInstance>();
     public List<StackInstance> activeStacks = new List<StackInstance>();
@@ -191,6 +194,11 @@ public class boss_hpbar : MonoBehaviour
 
     }
 
+    public void Awake()
+    {
+        gammanager = battalemanager.Instance.gameObject;
+        battalemanager.Instance.currentenemy = gameObject;
+    }
 
     private void Start()
     {
@@ -245,21 +253,25 @@ public class boss_hpbar : MonoBehaviour
 
         if (activeStacks.Count > 0)
         {
-            foreach (StackInstance stack in activeStacks)
+            for (int i = activeStacks.Count - 1; i >= 0; i--)
             {
+                StackInstance stack = activeStacks[i];
+
                 if (stack.stackData.effectName == "출혈")
                 {
-                    Damage((int)(stack.currentStack * bleeddamageincrease));
+                    Damage((int)(stack.currentStack * (bleeddamageincrease + playerstatus.instance.r_enemybleeddamageincrease)));
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
                     if (stack.currentStack == 1)
                     {
                         RemoveStack(stack.stackData, 1);
                     }
                 }
+
                 if (stack.stackData.effectName == "치명적 열상 I")
                 {
                     RemoveStack(stack.stackData, 1);
                 }
+
                 if (stack.stackData.effectName == "치명적 열상 II")
                 {
                     RemoveStack(stack.stackData, 1);
@@ -408,7 +420,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = (damage * penetratetolerance) * damageplus;
+            float totaldamage = (damage * penetratetolerance) * (damageplus + playerstatus.instance.penetratedamageup + playerstatus.instance.r_penetrationdamageincrease);
             currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
             GameObject damt = Instantiate(damagetext);
@@ -473,7 +485,6 @@ public class boss_hpbar : MonoBehaviour
     }
 
     
-
     public void Update()
     {
         if (killcut)
