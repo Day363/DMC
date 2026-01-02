@@ -17,6 +17,7 @@ public class describtion_counsel : MonoBehaviour
 
     public void Start()
     {
+        gamemanager = battalemanager.Instance.gameObject;
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
         counselfunctionmanager.Onsuccess += Success;
     }

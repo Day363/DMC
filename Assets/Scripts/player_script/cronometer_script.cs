@@ -121,6 +121,12 @@ public class cronometer_script : MonoBehaviour
         StartCoroutine(WhenLifeCoutDown_co());
     }
 
+    public void WhenLifeCoutDownEnd()
+    {
+        FadeIn();
+        StartCoroutine(WhenLifeCoutDownEnd_co());
+    }
+
     IEnumerator WhenLifeCoutDown_co()
     {
         Time.timeScale = 0f;
@@ -147,6 +153,7 @@ public class cronometer_script : MonoBehaviour
         ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(1f);
+        
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);
@@ -154,6 +161,39 @@ public class cronometer_script : MonoBehaviour
 
         FadeOut();
         Time.timeScale = 1f;
+    }
+
+    IEnumerator WhenLifeCoutDownEnd_co()
+    {
+        Time.timeScale = 0f;
+        targetangle = 360 - (((float)playerplayerstatus.lifecount / (float)playerplayerstatus.maxlifecount) * 360);
+
+        DOTween.To(
+            () => hourAngle,
+            x => hourAngle = x,
+            targetangle + 360 + 30,
+            1.5f
+        ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(1.5f);
+        Instantiate(effect, transform.position, Quaternion.identity);
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
+
+        DOTween.Kill("turn");
+
+        DOTween.To(
+            () => hourAngle,
+            x => hourAngle = x,
+            targetangle + 360,
+            1f
+        ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(1f);
+        player.GetComponent<skillfunction>().GameOver();
+
+        Instantiate(effect, transform.position, Quaternion.identity);
+        Instantiate(effect2, transform.position, Quaternion.identity);
+        cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
     }
 
     [ContextMenu("Force Stop Battle (Editor)")]

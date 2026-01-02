@@ -1033,6 +1033,7 @@ public class attackcore : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
             {
+                Debug.Log("defense");
                 if (attacknumber < lastlist[listnumber].Count)
                 {
                     // UI °»½Å
@@ -1056,12 +1057,13 @@ public class attackcore : MonoBehaviour
                         playerPlayerMove.LookLeftenforce();
                     }
                     playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
-                    currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
+                    Debug.Log("defense1");
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
                 {
                     playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
-                    currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                 }
 
                 AttcknumberPlus();
@@ -1112,7 +1114,7 @@ public class attackcore : MonoBehaviour
                         if (lastlist[listnumber][attacknumber].Normalskill.functionskill)
                         {
                             playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.funtionname);
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                         }
 
                         if (lastlist[listnumber][attacknumber].Normalskill.animationskill != true)
@@ -1137,7 +1139,7 @@ public class attackcore : MonoBehaviour
                                         pg.player = player;
                                     }
 
-                                    currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                                    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                                 }
                                 
        
@@ -1154,7 +1156,7 @@ public class attackcore : MonoBehaviour
                                     pg.player = player;
                                 }
 
-                                currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                                currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                             }
                             
 
@@ -1252,7 +1254,7 @@ public class attackcore : MonoBehaviour
                                 
                             }
 
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
 
                         }
                     }
@@ -1282,7 +1284,7 @@ public class attackcore : MonoBehaviour
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
                             currentskill2.transform.GetChild(0).GetComponent<playerattackdamage>().canjump = true;
 
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                         }
                         
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && !lastlist[listnumber][attacknumber].Amalgamed.animationskill)
@@ -1311,7 +1313,7 @@ public class attackcore : MonoBehaviour
                                 currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().canjump = true;
                             }
 
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                         }
 
                         else if (!lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
@@ -1331,7 +1333,7 @@ public class attackcore : MonoBehaviour
                                 currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().canjump = true;
                             }
 
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                         }
 
                         else if (lastlist[listnumber][attacknumber].Normalskill.animationskill && lastlist[listnumber][attacknumber].Amalgamed.animationskill)
@@ -1348,7 +1350,7 @@ public class attackcore : MonoBehaviour
                             playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             amalgamedanimationtrigger = lastlist[listnumber][attacknumber].Amalgamed.animationtrigger;
 
-                            currentattackdelay = StartCoroutine(AttackBackDelay(lastlist[listnumber][attacknumber].Normalskill.backdelay));
+                            currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
                         }
                     }
                 }

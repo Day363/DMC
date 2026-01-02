@@ -44,7 +44,11 @@ public class attackeffect : MonoBehaviour
                 angle = fixangle;
             }
 
-            Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
+            if (attackeffect_random.Length > 0)
+            {
+                Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
+            }
+            
             foreach (GameObject effect in attackeffectall)
             {
                 if (randomangle)

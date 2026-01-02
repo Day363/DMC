@@ -166,8 +166,23 @@ public class chatmanager : MonoBehaviour
         }
     }
 
+    string MaskExceptSpace(string input)
+    {
+        char[] chars = input.ToCharArray();
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (!char.IsWhiteSpace(chars[i]))
+                chars[i] = 'бс';
+        }
+
+        return new string(chars);
+    }
+
     IEnumerator Chat(Dialogue chat, GameObject currentchatbox)
     {
+        
+
         if (beforechatbox != null)
         {
             if (beforechatbox != currentchatbox)

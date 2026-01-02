@@ -4132,7 +4132,7 @@ Transform:
   m_GameObject: {fileID: 187980153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00365448, y: 0, z: 0}
+  m_LocalPosition: {x: 0.002614975, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4196,7 +4196,7 @@ Transform:
   m_GameObject: {fileID: 191536539}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.984102, y: -6.502, z: 0}
+  m_LocalPosition: {x: -27.988625, y: -6.502, z: 0}
   m_LocalScale: {x: 1, y: 1.5699, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6507,7 +6507,7 @@ Transform:
   m_GameObject: {fileID: 275650087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.196098, y: -3.8346334, z: 2.9460802}
+  m_LocalPosition: {x: -26.190899, y: -3.8346434, z: 2.9460802}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9441,6 +9441,7 @@ MonoBehaviour:
   priorcamera: {fileID: 519420028}
   maincam: {fileID: 0}
   enemy: {fileID: 0}
+  titlecam: {fileID: 0}
   playercam: {fileID: 275650087}
   bigcam: {fileID: 1867396283}
   enemycam: {fileID: 611888038}
@@ -13420,7 +13421,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.87794, y: 1.9186, z: -15}
+  m_LocalPosition: {x: -28.883137, y: 1.91861, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17052,7 +17053,7 @@ Transform:
   m_GameObject: {fileID: 655926169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.982458, y: -1.21, z: 0}
+  m_LocalPosition: {x: -27.987448, y: -1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18848,7 +18849,7 @@ Transform:
   m_GameObject: {fileID: 712588149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00548172, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0039224625, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27188,6 +27189,7 @@ GameObject:
   - component: {fileID: 1046264253}
   - component: {fileID: 1046264252}
   - component: {fileID: 1046264255}
+  - component: {fileID: 1046264256}
   m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
@@ -27294,6 +27296,18 @@ MonoBehaviour:
   boss_hpbar: {fileID: 1486460266}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 136177265}
+--- !u!114 &1046264256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046264250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aacc03b4fc57464d9a1a6331569d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1058794144
 GameObject:
   m_ObjectHideFlags: 0
@@ -31280,6 +31294,7 @@ MonoBehaviour:
   isJump: 0
   canmove: 1
   dir: 1
+  rigid: {fileID: 0}
 --- !u!95 &1233421497
 Animator:
   serializedVersion: 5
@@ -31325,12 +31340,16 @@ MonoBehaviour:
   reasonbar: {fileID: 723676721}
   recognitionbar: {fileID: 1802578645}
   cutsceneuidisappear: {fileID: 0}
+  numberimage: {fileID: 0}
+  numbercount: {fileID: 0}
   emotionrate: 0
   reasonrate: 0
   recognitionrate: 0
   bleed: {fileID: 11400000, guid: f775d7130563a9d4d9c5378db8b9453d, type: 2}
   penetrationup1: {fileID: 11400000, guid: b7bab551a792f2244bb0ce508dd1be5e, type: 2}
   absorbtion: {fileID: 0}
+  backdelay: 0.4
+  backdelayCore: 0.4
   slash_tolerance: 1
   penetration_tolerance: 1
   blow_tolerance: 1
@@ -31606,11 +31625,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 809caf56c95d6374f895166bd7869985, type: 2}
   - {fileID: 11400000, guid: 458d8999a74629340b8565334b617806, type: 2}
   - {fileID: 11400000, guid: 8953fa6d65702394eb7af5b8425c43a0, type: 2}
+  iteminv_: []
   invUi: {fileID: 95974424}
   iteminv: {fileID: 1948556258}
+  iteminv2: {fileID: 0}
   itemimage: {fileID: 5100219656389014448, guid: d33d3e533bb67e242b8ac68e07920f7a, type: 3}
   canopeninv: 1
   invactive: 0
+  ditemimage: {fileID: 0}
+  ditemname: {fileID: 0}
+  ditemdescription: {fileID: 0}
+  ditemtag: {fileID: 0}
+  ditemstory: {fileID: 0}
 --- !u!1 &1235035942
 GameObject:
   m_ObjectHideFlags: 0
@@ -34880,7 +34906,7 @@ Transform:
   m_GameObject: {fileID: 1338736847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.983189, y: -4.34, z: 0}
+  m_LocalPosition: {x: -27.98797, y: -4.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38720,7 +38746,7 @@ Transform:
   m_GameObject: {fileID: 1527479136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00182724, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0013074875, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41561,7 +41587,7 @@ Transform:
   m_GameObject: {fileID: 1640196764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1136545, y: -5.97, z: 0}
+  m_LocalPosition: {x: -1.112615, y: -5.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42786,12 +42812,17 @@ MonoBehaviour:
   currentenemy: {fileID: 0}
   playerweaponinv: []
   playerrapportinv: []
+  playeriteminv: []
   available_mirror: []
   used_mirror: []
   fadeout: {fileID: 0}
   cameramanager: {fileID: 0}
   letterbox: {fileID: 0}
   playerchatbox: {fileID: 0}
+  itemgiveui: {fileID: 0}
+  stackdatas: []
+  number: 0
+  numberimage: {fileID: 0}
 --- !u!114 &1694457157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43489,8 +43520,6 @@ MonoBehaviour:
   currentobject: {fileID: 0}
   corrects: []
   itemselectui: {fileID: 437693398}
-  disabled: {fileID: 0}
-  filer: {fileID: 0}
   file: {fileID: 11400000, guid: 95ec901cc1196d74eaf85521692bdc1e, type: 2}
   bulb: {fileID: 11400000, guid: 6acd593ab917db948a18cff026bdd1b4, type: 2}
 --- !u!114 &1694457159
@@ -43508,8 +43537,6 @@ MonoBehaviour:
   attackcore: {fileID: 840654302}
   letterbox: {fileID: 671870209}
   player: {fileID: 0}
-  trapal: {fileID: 0}
-  indexer0: {fileID: 0}
 --- !u!1 &1695952406
 GameObject:
   m_ObjectHideFlags: 0
@@ -47875,7 +47902,7 @@ Transform:
   m_GameObject: {fileID: 1867396283}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.196098, y: -3.8346334, z: 2.9460802}
+  m_LocalPosition: {x: -26.190899, y: -3.8346434, z: 2.9460802}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51775,7 +51802,7 @@ Transform:
   m_GameObject: {fileID: 2032786400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00548172, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0039224625, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

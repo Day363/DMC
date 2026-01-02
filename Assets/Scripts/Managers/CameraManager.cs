@@ -21,6 +21,7 @@ public class CameraManager : MonoBehaviour
     public GameObject maincam;
     public GameObject enemy;
 
+    public GameObject titlecam;
     public GameObject playercam;
     public GameObject bigcam;
     public GameObject enemycam;
@@ -34,7 +35,7 @@ public class CameraManager : MonoBehaviour
     {
         battalemanager.Instance.cameramanager = gameObject;
         Instance = this;
-        maincam = playercam;
+        maincam = titlecam;
     }
 
     public void Update()
@@ -59,6 +60,12 @@ public class CameraManager : MonoBehaviour
         fuckcinemachine = true;
         yield return new WaitForSeconds(3f);
         fuckcinemachine = false;
+    }
+
+    public void LookTitle()
+    {
+        maincam = titlecam;
+        GetComponent<Animator>().SetTrigger("titlecam");
     }
 
     public void LookPlayer()

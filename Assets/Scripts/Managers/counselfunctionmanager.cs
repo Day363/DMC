@@ -16,8 +16,7 @@ public class counselfunctionmanager : MonoBehaviour
     battalemanager battalemanager;
 
     public GameObject player;
-    public GameObject trapal;
-    public GameObject indexer0;
+
 
     public void Start()
     {
@@ -102,12 +101,12 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Trapal_Die1()
     {
-        trapal.GetComponent<trapal_counsel>().Die1();
+        battalemanager.Instance.currentenemy.GetComponent<trapal_counsel>().Die1();
     }
 
     public void IndexerDisappear()
     {
-        indexer0.GetComponent<indexer0_counsel>().DieDisapper();
+        battalemanager.Instance.currentenemy.GetComponent<indexer0_counsel>().DieDisapper();
     }
 
     public void CutScene1()

@@ -43,7 +43,7 @@ public class skillfunction : MonoBehaviour
 
     void Start()
     {
-        
+        gamemanger = battalemanager.Instance.gameObject;
 
         // 명령어와 함수 매핑
         commandMap = new Dictionary<string, Action>
@@ -58,6 +58,15 @@ public class skillfunction : MonoBehaviour
         };
     }
 
+    public void GameOver()
+    {
+        cammanager.GetComponent<CameraManager>().ShakeCamera(5, 0.02f);
+        playerlight.GetComponent<Light2D>().color = Color.black;
+        globallight.GetComponent<Light2D>().color = Color.red;
+        globallight.GetComponent<Light2D>().intensity = 1.5f;
+    }
+
+
     public void Cutscene1_shoot()
     {
         StartCoroutine(Cutscene1_shoot_co());
@@ -71,6 +80,9 @@ public class skillfunction : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
         cammanager.GetComponent<CameraManager>().ShakeCamera(30, 0.02f);
         cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene1");
+
+        soundmanager.instance.SoundPlay("cutscene1_error");
+        soundmanager.instance.BGMStop();
 
         Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
         playerlight.GetComponent<Light2D>().color = Color.black;
@@ -184,6 +196,7 @@ public class skillfunction : MonoBehaviour
             }
         }
         yield return new WaitForSecondsRealtime(2.3f);
+        soundmanager.instance.SFXStop();
         cammanager.GetComponent<CameraManager>().ShakeCamera(100, 0.06f);
         cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene4");
         Instantiate(cutscene1shoot, playereffectpos.transform.position, Quaternion.Euler(0, 0, -19.38f));
@@ -296,6 +309,7 @@ public class skillfunction : MonoBehaviour
                     {
                         GameObject curpen = Instantiate(trapal_weapon, trapal_point.transform);
                         curpen.GetComponent<playerattackdamage>().canattack = false;
+                        curpen.GetComponent<playerattackdamage>().player = gameObject;
                         trapal_point.GetComponent<player_trapal_weapon_arrey>().ArrangeExistingChildren();
                     }
 

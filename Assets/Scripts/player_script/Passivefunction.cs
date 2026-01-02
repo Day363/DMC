@@ -52,6 +52,11 @@ public class Passivefunction : MonoBehaviour
         boss_hpbar.OnStackApplied += WhenBossApplyStack;
     }
 
+    public void Start()
+    {
+        gamemanager = battalemanager.Instance.gameObject;
+    }
+
     private void OnDisable()
     {
         playerstatus.OnStackApplied -= WhenStackAddCertain;

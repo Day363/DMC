@@ -138,6 +138,7 @@ public class trapal_script : MonoBehaviour
                     {
                         GameObject curweapon1 = Instantiate(trapal_weapon1, trapal_point.transform);
                         curweapon1.GetComponent<enemyattack>().player = player;
+                        curweapon1.GetComponent<enemyattack>().enemy = gameObject;
                         curweapon1.GetComponent<enemyattack>().canattack = false;
                     }
 
@@ -148,6 +149,7 @@ public class trapal_script : MonoBehaviour
                     lazer1cool = 0;
                     GameObject curlazer1 = Instantiate(lazer1, lazer1point, Quaternion.identity);
                     curlazer1.GetComponent<enemyattack>().player = player;
+                    curlazer1.GetComponent<enemyattack>().enemy = gameObject;
                     curlazer1.GetComponent<trapal_lazer1>().player = player.transform;
                     Vector2 direction = player.transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

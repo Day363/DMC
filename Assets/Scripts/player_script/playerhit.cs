@@ -253,7 +253,7 @@ public class playerhit : MonoBehaviour
             GetComponent<PlayerMove>().canmove = false;
             StartCoroutine(knockbackcool());
             GetComponent<playerstatus>().BalanceDamage(damage);
-            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 1 : -1;
             if (dir < 0)
             {
                 GetComponent<PlayerMove>().LookRight();
@@ -280,7 +280,7 @@ public class playerhit : MonoBehaviour
             GetComponent<PlayerMove>().canmove = false;
             StartCoroutine(knockbackcool());
             GetComponent<playerstatus>().SlashDamage(damage);
-            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 1 : -1;
             if (dir < 0)
             {
                 GetComponent<PlayerMove>().LookRight();
@@ -307,7 +307,7 @@ public class playerhit : MonoBehaviour
             GetComponent<PlayerMove>().canmove = false;
             StartCoroutine(knockbackcool());
             GetComponent<playerstatus>().PenetrateDamage(damage);
-            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 1 : -1;
             if (dir < 0)
             {
                 GetComponent<PlayerMove>().LookRight();
@@ -334,7 +334,7 @@ public class playerhit : MonoBehaviour
             GetComponent<PlayerMove>().canmove = false;
             StartCoroutine(knockbackcool());
             GetComponent<playerstatus>().BlowDamage(damage);
-            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 3 : -3;
+            int dir = GetComponent<Transform>().position.x - attacktransform.position.x > 0 ? 1 : -1;
             if (dir < 0)
             {
                 GetComponent<PlayerMove>().LookRight();

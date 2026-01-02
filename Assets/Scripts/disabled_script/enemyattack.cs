@@ -77,7 +77,7 @@ public class enemyattack : MonoBehaviour
                 }
                 else if (Notifparrysetfalse)
                 {
-                    GetComponent<Collider>().enabled = false;
+                    GetComponent<Collider2D>().enabled = false;
                 }
                 
             }

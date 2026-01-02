@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class itemobject : MonoBehaviour
 {
+    public bool israpport;
+    public bool isitem;
+
     public Rapport rapport;
+    public item item;
     public float pickupRadius;
 
     void Update()
@@ -13,8 +17,17 @@ public class itemobject : MonoBehaviour
 
         if (player.transform.tag == "Player")
         {
-            player.transform.GetComponent<player_inventory>().AddRapport(rapport);
-            Destroy(gameObject);
+            if (israpport)
+            {
+                player.transform.GetComponent<player_inventory>().AddRapport(rapport);
+                Destroy(gameObject);
+            }
+            else if (isitem)
+            {
+                player.transform.GetComponent<player_inventory>().ItemAdd(item);
+                Destroy(gameObject);
+            }
+            
         }
     }
 

@@ -29,6 +29,9 @@ public class playerstatus : MonoBehaviour
 
     public GameObject cutsceneuidisappear;
 
+    public GameObject numberimage;
+    public GameObject numbercount;
+
     [Range(-3, 3)]
     public float emotionrate;
     [Range(-3, 3)]
@@ -42,6 +45,9 @@ public class playerstatus : MonoBehaviour
 
     //실시간 체크(스텍의 효과가 순환 시작이나 끝 같은 특정한 트리거가 없으며 업데이트 할떄마다 이 수치를 조정해야함)
     //효과용 변수
+
+    public float backdelay = 0.4f;
+    public float backdelayCore = 0.4f;
 
     public float slash_tolerance = 1;
     public float penetration_tolerance = 1;
@@ -126,6 +132,11 @@ public class playerstatus : MonoBehaviour
         instance = this;
 
         playerhit.OnHitCalled += WhenHit;
+
+        numbercount.GetComponent<TMP_Text>().text = battalemanager.Instance.number.ToString();
+        numberimage.GetComponent<Image>().sprite = battalemanager.Instance.numberimage;
+
+
     }
 
     public class StackInstance
@@ -474,6 +485,8 @@ public class playerstatus : MonoBehaviour
 
         healplus = healplusCore;
 
+        backdelay = backdelayCore;
+
         slash_tolerance = slash_toleranceCore;
 
         penetration_tolerance = penetration_toleranceCore;
@@ -628,7 +641,15 @@ public class playerstatus : MonoBehaviour
     public void lifeCountDown()
     {
         lifecount = lifecount - 1;
-        cronometer.GetComponent<cronometer_script>().WhenLifeCoutDown();
+        if (lifecount > 0)
+        {
+            cronometer.GetComponent<cronometer_script>().WhenLifeCoutDown();
+        }
+        else if (lifecount == 0)
+        {
+            cronometer.GetComponent<cronometer_script>().WhenLifeCoutDownEnd();
+        }
+        
     }
 
     public void Parrystop()

@@ -32,8 +32,8 @@ public class playerskillmove : MonoBehaviour
     {
         if (fixenemy)
         {
-            Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position = enemyposition.transform.position;
-            Gamemanager.GetComponent<battalemanager>().currentenemy.transform.rotation = enemyposition.transform.rotation;
+            battalemanager.Instance.currentenemy.transform.position = enemyposition.transform.position;
+            battalemanager.Instance.currentenemy.transform.rotation = enemyposition.transform.rotation;
         }
 
     }
@@ -50,25 +50,25 @@ public class playerskillmove : MonoBehaviour
     public void FixedDamage()
     {
         float damage = GetComponent<playerstatus>().attackpower * damageint;
-        Gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().Damage((int)damage);
+        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().Damage((int)damage);
     }
 
     public void SlashDamage()
     {
         float damage = GetComponent<playerstatus>().attackpower * damageint;
-        Gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().SlashDamage((int)damage);
+        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().SlashDamage((int)damage);
     }
 
     public void PenetrateDamage()
     {
         float damage = GetComponent<playerstatus>().attackpower * damageint;
-        Gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().PenetrateDamage((int)damage);
+        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().PenetrateDamage((int)damage);
     }
 
     public void BlowDamage()
     {
         float damage = GetComponent<playerstatus>().attackpower * damageint;
-        Gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
+        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
     }
 
     public void Chat()
@@ -165,12 +165,12 @@ public class playerskillmove : MonoBehaviour
 
     public void FixSight()
     {
-        if (transform.position.x < Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+        if (transform.position.x < battalemanager.Instance.currentenemy.transform.position.x)
         {
             transform.localScale = new Vector3(1, 1, 1);
             GetComponent<PlayerMove>().dir = 1;
         }
-        if (transform.position.x > Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x)
+        if (transform.position.x > battalemanager.Instance.currentenemy.transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             GetComponent<PlayerMove>().dir = -1;
@@ -191,12 +191,12 @@ public class playerskillmove : MonoBehaviour
     {
         if (GetComponent<PlayerMove>().dir == 1)
         {
-            Vector3 tomove = new Vector3(Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x + distance, transform.position.y, 0);
             transform.DOMove(tomove, time);
         }
         if (GetComponent<PlayerMove>().dir == -1)
         {
-            Vector3 tomove = new Vector3(Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x - distance, transform.position.y, 0);
             transform.DOMove(tomove, time);
         }
     }
@@ -205,12 +205,12 @@ public class playerskillmove : MonoBehaviour
     {
         if (GetComponent<PlayerMove>().dir == 1)
         {
-            Vector3 tomove = new Vector3(Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x + distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x + distance, transform.position.y, 0);
             transform.DOMove(tomove, time).SetEase(Ease.OutCubic);
         }
         if (GetComponent<PlayerMove>().dir == -1)
         {
-            Vector3 tomove = new Vector3(Gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x - distance, transform.position.y, 0);
             transform.DOMove(tomove, time).SetEase(Ease.OutCubic);
         }
     }

@@ -11,6 +11,7 @@ public class battalemanager : MonoBehaviour
     public GameObject currentenemy;
     public List<Weapon> playerweaponinv = new List<Weapon> { };
     public List<Rapport> playerrapportinv = new List<Rapport> { };
+    public List<item> playeriteminv = new List<item> { };
     public List<GameObject> available_mirror = new List<GameObject> { };
     public List<GameObject> used_mirror = new List<GameObject> { };
     public GameObject fadeout;
@@ -19,6 +20,9 @@ public class battalemanager : MonoBehaviour
     public GameObject playerchatbox;
     public GameObject itemgiveui;
     public Stack[] stackdatas;
+
+    public int number;
+    public Sprite numberimage;
 
     private void Awake()
     {

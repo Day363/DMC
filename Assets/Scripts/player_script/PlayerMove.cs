@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     public bool canmove = true;
     public int dir = 1;
 
-    Rigidbody2D rigid;
+    public Rigidbody2D rigid;
 
     void Awake()
     {
