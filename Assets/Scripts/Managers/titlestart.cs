@@ -14,6 +14,12 @@ public class titlestart : MonoBehaviour
     public GameObject cammanager;
     public GameObject player;
 
+    public void Start()
+    {
+        cammanager = battalemanager.Instance.cameramanager;
+        player = battalemanager.Instance.player;
+    }
+
     public void Startgame()
     {
         List<GameObject> currentui = uis;

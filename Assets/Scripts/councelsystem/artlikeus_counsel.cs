@@ -24,7 +24,7 @@ public class artlikeus_counsel : MonoBehaviour
             firstmet = true;
             counselcam.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
             cammanager.GetComponent<CameraManager>().LookCounsel(counselcam);
-            letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             player.GetComponent<PlayerMove>().canmove = false;
             player.GetComponent<PlayerMove>().Stop();
             gamemanager.GetComponent<chatmanager>().CallDialogue(9);

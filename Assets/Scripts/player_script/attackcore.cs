@@ -162,10 +162,45 @@ public class attackcore : MonoBehaviour
     public void Awake()
     {
         battalemanager.Instance.attackcore = gameObject;
+        if (uimanager.Instance != null)
+        {
+            UIload();
+        }
+    }
+
+
+    public void UIload()
+    {
+        //ui
+        skilllistscrollview = uimanager.Instance.skilllist;
+        passivescrollview = uimanager.Instance.passiveview;
+        normalskillscrollview = uimanager.Instance.normalskillview;
+        arreyskilllscrollview = uimanager.Instance.arreyskillview;
+        passivelistViewPort = passivescrollview.transform.GetChild(0).gameObject;
+        normalskilltlistViewPort = normalskillscrollview.transform.GetChild(0).gameObject;
+        arreyskilllistViewPort = arreyskilllscrollview.transform.GetChild(0).gameObject;
+        skillselectui = uimanager.Instance.skillselectui;
+        viewpoint = uimanager.Instance.skilllistviewport;
+        skillarreyUi = uimanager.Instance.skilllength;
+        skillsetlist = uimanager.Instance.skilllistset;
+        activeweaponlistUi = uimanager.Instance.weaponlist;
+        letterbox = uimanager.Instance.letterbox;
+        letterboxletterboxin = letterbox.GetComponent<letterboxin>();
+        skillQueueUI = uimanager.Instance.skillQueUi;
+        defenseskilltest = uimanager.Instance.defense;
+        weaponimage = uimanager.Instance.weaponimage;
+        skillwaittext = uimanager.Instance.skillwaitprefap;
+        cycletext = uimanager.Instance.cycle;
+        circumtext = uimanager.Instance.circum;
+        magazinetext = uimanager.Instance.bullet;
+        //ui
     }
 
     private void Start()
     {
+        uimanager.OnUIReady += UIload;
+
+
         gamemanager = battalemanager.Instance.gameObject;
         attackcoreInstance = this;
 
@@ -179,7 +214,7 @@ public class attackcore : MonoBehaviour
         playerplayerhit = player.GetComponent<playerhit>();
         playerskillfunction = player.GetComponent<skillfunction>();
 
-        letterboxletterboxin = letterbox.GetComponent<letterboxin>();
+        
         activeweaponlist = player_inventory.instance.weaponinv;
     }
 

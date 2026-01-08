@@ -196,6 +196,19 @@ public class cronometer_script : MonoBehaviour
         cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
     }
 
+    public void RestartTurn()
+    {
+        DOTween.To(
+            () => hourAngle,
+            x => hourAngle = x,
+            0f,
+            10f
+        ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
+    }
+
+
+
+
     [ContextMenu("Force Stop Battle (Editor)")]
     void ForceStopBattle()
     {

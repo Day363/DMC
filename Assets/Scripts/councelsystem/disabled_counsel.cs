@@ -69,7 +69,7 @@ public class disabled_counsel : MonoBehaviour
             campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
             cammanagerCameraManager.LookCounsel(campos);
             cammanagerCameraManager.CinemachineInvalidateCache();
-            letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             playerPlayerMove.canmove = false;
             playerPlayerMove.Stop();
             gamemanager.GetComponent<chatmanager>().CallDialogue(1);

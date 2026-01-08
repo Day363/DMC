@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class battalemanager : MonoBehaviour
 {
@@ -24,8 +25,16 @@ public class battalemanager : MonoBehaviour
     public int number;
     public Sprite numberimage;
 
+    IEnumerator Uistart()
+    {
+        yield return SceneManager.LoadSceneAsync("uiscene", LoadSceneMode.Additive);
+    }
+
     private void Awake()
     {
+        Debug.Log("Aa");
+        StartCoroutine(Uistart());
+
         if (Instance == null)
         {
             Instance = this;

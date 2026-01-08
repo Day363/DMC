@@ -123,7 +123,17 @@ public class selectmirror : MonoBehaviour
 
     IEnumerator Fadeout()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(scenename);
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(scenename, LoadSceneMode.Additive);
+        yield return loadOperation;
+
+        Scene newScene = SceneManager.GetSceneByName(scenename);
+        SceneManager.SetActiveScene(newScene);
+
+        uimanager.Instance.ResetUi();
+
+        yield return SceneManager.UnloadSceneAsync(currentSceneName);
     }
 }

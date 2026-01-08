@@ -239,7 +239,17 @@ public class skillfunction : MonoBehaviour
         fadeout.GetComponent<Image>().DOFade(255, 0).SetUpdate(true);
         yield return new WaitForSecondsRealtime(1f);
         gamemanger.GetComponent<chatmanager>().chating = false;
-        SceneManager.LoadScene("mirrorselect");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);
+        yield return loadOperation;
+
+        Scene newScene = SceneManager.GetSceneByName("mirrorselect");
+        SceneManager.SetActiveScene(newScene);
+
+        uimanager.Instance.ResetUi();
+
+        yield return SceneManager.UnloadSceneAsync(currentSceneName);
     }
 
     public void Alttrigger_attack2()
