@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
+using DG.Tweening;
+using TMPro;
 
 public class uimanager : MonoBehaviour
 {
     public static uimanager Instance;
     public static event Action OnUIReady;
 
+    [Header("activewhenbattlestart")]
+    public GameObject[] activewhenbattlestart;
     [Header("playerstatus")]
     public GameObject skillwaitprefap;
     public GameObject defense;
@@ -39,7 +44,10 @@ public class uimanager : MonoBehaviour
     public GameObject itemstroy;
     public GameObject itemdescription;
     public GameObject itemtag;
+    public GameObject itemgiveui;
     public GameObject itemgiveselect;
+    [Header("gameover")]
+    public GameObject gameover;
 
 
     void Awake()
@@ -60,6 +68,22 @@ public class uimanager : MonoBehaviour
 
     public void ResetUi()
     {
+        foreach (Transform ui in skilllistset.transform)
+        {
+            ui.GetComponent<skillbuttondisappear>().ButtonDisappearWhenUiReset();
+        }
+        foreach (GameObject gameobject in activewhenbattlestart)
+        {
+            gameobject.SetActive(false);
+        }
+        foreach (Transform ui in skilllength.transform)
+        {
+            Destroy(ui);
+        }
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+        gameover.transform.GetChild(0).transform.GetComponent<gamerestart>().whilerestarting = false;
+        gameover.transform.GetChild(0).GetComponent<Image>().DOFade(0.447f, 0);
+        gameover.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().DOFade(1, 0);
+        gameover.SetActive(false);
     }
 }

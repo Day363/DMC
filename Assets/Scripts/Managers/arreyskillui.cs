@@ -18,7 +18,9 @@ public class arreyskillui : MonoBehaviour
 
     public void AutoArrey()
     {
-        
+        selectedskilluis.Clear();
+        selectedskilluistring.Clear();
+        normalskillUIs.Clear();
 
         if (cynthskill != null)
         {

@@ -23,4 +23,11 @@ public class skillbuttondisappear : MonoBehaviour
         attackcore.GetComponent<attackcore>().SkillarreyUi();
         Destroy(gameObject);
     }
+
+    public void ButtonDisappearWhenUiReset()
+    {
+        button.GetComponent<skillselectUi>().UnSelected();
+        skilllist.GetComponent<skillselectarrey>().original_skilllist.Remove(currentskill);
+        Destroy(gameObject);
+    }
 }

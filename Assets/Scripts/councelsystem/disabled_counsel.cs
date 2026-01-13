@@ -58,6 +58,7 @@ public class disabled_counsel : MonoBehaviour
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
         GetComponent<boss_hpbar>().canhit = false;
         balancebar.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        letterbox = uimanager.Instance.letterbox;
     }
 
     public void FixedUpdate()
@@ -69,7 +70,7 @@ public class disabled_counsel : MonoBehaviour
             campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
             cammanagerCameraManager.LookCounsel(campos);
             cammanagerCameraManager.CinemachineInvalidateCache();
-            uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
             playerPlayerMove.canmove = false;
             playerPlayerMove.Stop();
             gamemanager.GetComponent<chatmanager>().CallDialogue(1);

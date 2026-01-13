@@ -21,6 +21,7 @@ public class battalemanager : MonoBehaviour
     public GameObject playerchatbox;
     public GameObject itemgiveui;
     public Stack[] stackdatas;
+    public GameObject cronometer;
 
     public int number;
     public Sprite numberimage;

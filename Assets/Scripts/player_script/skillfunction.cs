@@ -63,7 +63,7 @@ public class skillfunction : MonoBehaviour
         cammanager.GetComponent<CameraManager>().ShakeCamera(5, 0.02f);
         playerlight.GetComponent<Light2D>().color = Color.black;
         globallight.GetComponent<Light2D>().color = Color.red;
-        globallight.GetComponent<Light2D>().intensity = 1.5f;
+        globallight.GetComponent<Light2D>().intensity = 16.5f;
     }
 
 

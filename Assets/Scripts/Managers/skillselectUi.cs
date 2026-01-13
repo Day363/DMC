@@ -22,8 +22,15 @@ public class skillselectUi : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        attackcore = battalemanager.Instance.attackcore;
+    }
+
     public void Selected()
     {
+        attackcore = battalemanager.Instance.attackcore;
+
         isselect = true;
 
         GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, GetComponent<Image>().color.g, GetComponent<Image>().color.b, 0.2f);

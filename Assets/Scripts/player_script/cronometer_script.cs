@@ -32,6 +32,8 @@ public class cronometer_script : MonoBehaviour
     public void Start()
     {
         playerplayerstatus  = player.GetComponent<playerstatus>();
+
+        battalemanager.Instance.cronometer = gameObject;
     }
 
     void Update()
@@ -98,20 +100,22 @@ public class cronometer_script : MonoBehaviour
 
     public void FadeIn()
     {
+        DOTween.Kill("fade");
         Vector3 camPos = mainCam.transform.position;
         transform.position = new Vector3(camPos.x, camPos.y, transform.position.z);
-        middle.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true); 
-        hourHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
-        minuteHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
-        secondHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
+        middle.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true).SetId("fade"); 
+        hourHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true).SetId("fade");
+        minuteHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true).SetId("fade");
+        secondHand.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true).SetId("fade");
     }
 
     public void FadeOut()
     {
-        middle.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
-        hourHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
-        minuteHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
-        secondHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+        DOTween.Kill("fade");
+        middle.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
+        hourHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
+        minuteHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
+        secondHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
 
     }
 
@@ -165,7 +169,7 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator WhenLifeCoutDownEnd_co()
     {
-        Time.timeScale = 0f;
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = true;
         targetangle = 360 - (((float)playerplayerstatus.lifecount / (float)playerplayerstatus.maxlifecount) * 360);
 
         DOTween.To(
@@ -190,6 +194,7 @@ public class cronometer_script : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
         player.GetComponent<skillfunction>().GameOver();
+        uimanager.Instance.gameover.SetActive(true);
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);
@@ -202,7 +207,7 @@ public class cronometer_script : MonoBehaviour
             () => hourAngle,
             x => hourAngle = x,
             0f,
-            10f
+            3f
         ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
     }
 

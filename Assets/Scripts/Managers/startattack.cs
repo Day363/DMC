@@ -11,8 +11,14 @@ public class startattack : MonoBehaviour
     public GameObject selectUi;
     public GameObject warning;
 
+    public void Start()
+    {
+        attackcore = battalemanager.Instance.attackcore;
+    }
+
     public void StartFight()
     {
+        attackcore = battalemanager.Instance.attackcore;
         if (attackcore.GetComponent<attackcore>().attacklist_original.Find(x => x.normalskill == true) && attackcore.GetComponent<attackcore>().attacklist_original[attackcore.GetComponent<attackcore>().attacklist_original.Count - 1].normalskill == true)
         {
             Time.timeScale = 1f;

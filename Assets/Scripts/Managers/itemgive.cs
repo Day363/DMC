@@ -22,6 +22,8 @@ public class itemgive : MonoBehaviour
     public void Start()
     {
         gamemanager = battalemanager.Instance.gameObject;
+        giveui = uimanager.Instance.itemgiveui;
+        giveuiselect = uimanager.Instance.itemgiveselect;
     }
 
     void OnTriggerStay2D(Collider2D collision)

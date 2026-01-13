@@ -175906,74 +175906,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &887667792
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 887667795}
-  - component: {fileID: 887667794}
-  - component: {fileID: 887667793}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &887667793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887667792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &887667794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887667792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &887667795
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887667792}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &887883530
 GameObject:
   m_ObjectHideFlags: 0
@@ -379280,6 +379212,7 @@ GameObject:
   - component: {fileID: 1694457158}
   - component: {fileID: 1694457159}
   - component: {fileID: 1694457160}
+  - component: {fileID: 1694457161}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -379369,6 +379302,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaeeeff4aa317f4381d4dc0c83c3b64, type: 2}
   - {fileID: 11400000, guid: 91b8e7d6a365fbc4ca4a06a395ba04df, type: 2}
   - {fileID: 11400000, guid: 04982bf3163b5b54a80c708313a074b3, type: 2}
+  cronometer: {fileID: 0}
   number: 0
   numberimage: {fileID: 0}
 --- !u!114 &1694457157
@@ -380128,6 +380062,19 @@ MonoBehaviour:
     key: depoleia_bgm1
     clip: {fileID: 8300000, guid: 536cff4eda9ad3f49be40294252ff74f, type: 3}
     volume: 1
+--- !u!114 &1694457161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694457153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10540eb2a8e290f40a42159e4c673e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ispause: 0
 --- !u!1 &1695546607
 GameObject:
   m_ObjectHideFlags: 0
@@ -427548,7 +427495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89887821dcc25c841a1c73c248def5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battalemanager: {fileID: 1694457153}
+  gamemanager: {fileID: 0}
   cammanager: {fileID: 373801462}
   rushpower: 25
   attackrushpower: 13
@@ -469286,7 +469233,6 @@ SceneRoots:
   - {fileID: 1142084079}
   - {fileID: 620244459}
   - {fileID: 663241404}
-  - {fileID: 887667795}
   - {fileID: 2125726733}
   - {fileID: 500383158}
   - {fileID: 1321379196}

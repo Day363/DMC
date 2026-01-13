@@ -193,6 +193,7 @@ public class attackcore : MonoBehaviour
         cycletext = uimanager.Instance.cycle;
         circumtext = uimanager.Instance.circum;
         magazinetext = uimanager.Instance.bullet;
+        activewhenbattlestart = uimanager.Instance.activewhenbattlestart;
         //ui
     }
 
@@ -825,17 +826,17 @@ public class attackcore : MonoBehaviour
         }
     }
 
-    public void Waitskillarray()
-    {
-        foreach (List<SkillReady> skillReadies in lastlist)
-        {
-            foreach (SkillReady skillReady in skillReadies)
-            {
-                GameObject waittext = Instantiate(waitskillprefap, waitskillslider.transform);
-                waittext.GetComponent<TMP_Text>().text = SkillWaitText(skillReady);
-            }
-        }
-    }
+    //public void Waitskillarray()
+    //{
+    //    foreach (List<SkillReady> skillReadies in lastlist)
+    //    {
+    //        foreach (SkillReady skillReady in skillReadies)
+    //        {
+    //            GameObject waittext = Instantiate(waitskillprefap, waitskillslider.transform);
+    //            waittext.GetComponent<TMP_Text>().text = SkillWaitText(skillReady);
+    //        }
+    //    }
+    //}
 
     public void WaitskillarrayUi()
     {
@@ -1026,7 +1027,7 @@ public class attackcore : MonoBehaviour
         DefenseTextReplace();
         TextReplace();
         CycleReplace();
-        Waitskillarray();
+        //Waitskillarray();
         skillQueueUI.InitializeSkillList(lastlist);
     }
 
