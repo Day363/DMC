@@ -40,7 +40,6 @@ public class gamerestart : MonoBehaviour
         SceneManager.SetActiveScene(newScene);
 
         battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = false;
-        Time.timeScale = 1f;
 
         yield return SceneManager.UnloadSceneAsync(currentSceneName);
 

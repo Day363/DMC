@@ -55,20 +55,20 @@ public class player_inventory : MonoBehaviour
         {
             invactive = true;
 
-            invUi.SetActive(true);
-            if (iteminv.transform.childCount > 0)
+            uimanager.Instance.invall.SetActive(true);
+            if (uimanager.Instance.iteminv1.transform.childCount > 0)
             {
-                for (int i = iteminv.transform.childCount - 1; i >= 0; i--)
+                for (int i = uimanager.Instance.iteminv1.transform.childCount - 1; i >= 0; i--)
                 {
-                    Destroy(iteminv.transform.GetChild(i).gameObject);
+                    Destroy(uimanager.Instance.iteminv1.transform.GetChild(i).gameObject);
                 }
             }
 
-            if (iteminv2.transform.childCount > 0)
+            if (uimanager.Instance.iteminv2.transform.childCount > 0)
             {
-                for (int i = iteminv.transform.childCount - 1; i >= 0; i--)
+                for (int i = uimanager.Instance.iteminv2.transform.childCount - 1; i >= 0; i--)
                 {
-                    Destroy(iteminv.transform.GetChild(i).gameObject);
+                    Destroy(uimanager.Instance.iteminv2.transform.GetChild(i).gameObject);
                 }
             }
 
@@ -76,7 +76,7 @@ public class player_inventory : MonoBehaviour
             {
                 foreach (Rapport rapport in rapportinv)
                 {
-                    GameObject currentitemimage = Instantiate(itemimage, iteminv.transform);
+                    GameObject currentitemimage = Instantiate(itemimage, uimanager.Instance.iteminv1.transform);
                     currentitemimage.GetComponent<Image>().sprite = rapport.itemImage;
                     itemdescription currentitemimageitemdescription = currentitemimage.GetComponent<itemdescription>();
                     currentitemimageitemdescription.rapportdata = rapport;
@@ -92,7 +92,7 @@ public class player_inventory : MonoBehaviour
             {
                 foreach (item item in iteminv_)
                 {
-                    GameObject currentitemimage = Instantiate(itemimage, iteminv2.transform);
+                    GameObject currentitemimage = Instantiate(itemimage, uimanager.Instance.iteminv2.transform);
                     currentitemimage.GetComponent<Image>().sprite = item.itemImage;
                     itemdescription currentitemimageitemdescription = currentitemimage.GetComponent<itemdescription>();
                     currentitemimageitemdescription.itemdata = item;
@@ -108,7 +108,7 @@ public class player_inventory : MonoBehaviour
         else if (invactive && canopeninv && Input.GetButtonDown("ebutton"))
         {
             invactive = false;
-            invUi.SetActive(false);
+            uimanager.Instance.invall.SetActive(false);
         }
         
     }
@@ -123,5 +123,10 @@ public class player_inventory : MonoBehaviour
     {
         iteminv_.Add(item);
 
+    }
+
+    public void AddWeapon(Weapon weapon)
+    {
+        weaponinv.Add(weapon);
     }
 }

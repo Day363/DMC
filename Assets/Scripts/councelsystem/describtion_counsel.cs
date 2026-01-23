@@ -12,6 +12,7 @@ public class describtion_counsel : MonoBehaviour
     public GameObject cammanager;
     public GameObject player;
     public GameObject campos;
+    public GameObject counselmirror;
 
     public GameObject rapport;
 
@@ -41,6 +42,15 @@ public class describtion_counsel : MonoBehaviour
     public void Success()
     {
         GameObject currentrapport = Instantiate(rapport, transform.position, Quaternion.identity);
-        currentrapport.GetComponent<Rigidbody2D>().AddForce(new Vector2(-9, 5), ForceMode2D.Force);
+        currentrapport.GetComponent<Rigidbody2D>().AddForce(new Vector2(-9, 9), ForceMode2D.Force);
+    }
+
+    IEnumerator SpawnMirror()
+    {
+        yield return new WaitForSeconds(2f);
+        GameObject mirror = Instantiate(counselmirror, transform.position, Quaternion.identity);
+        mirror.transform.position = new Vector3(mirror.transform.position.x, 29, 0);
+        mirror.GetComponent<tocounselmanager>().player = battalemanager.Instance.player;
+        mirror.GetComponent<tocounselmanager>().cammanager = battalemanager.Instance.cameramanager;
     }
 }

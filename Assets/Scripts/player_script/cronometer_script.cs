@@ -195,6 +195,8 @@ public class cronometer_script : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         player.GetComponent<skillfunction>().GameOver();
         uimanager.Instance.gameover.SetActive(true);
+        uimanager.Instance.CloseFightUi();
+        uimanager.Instance.PlayerSceneStatusClose();
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);

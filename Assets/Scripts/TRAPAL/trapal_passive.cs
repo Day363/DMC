@@ -114,7 +114,7 @@ public class trapal_passive : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("deny24");
                     canApplystack = false;
                     deny24count++;
-
+                    battalemanager.Instance.player.GetComponent<playerstatus>().ApplyStack(battalemanager.Instance.stackdatas[20], 1);
                 }
             }
             else
@@ -317,6 +317,7 @@ public class trapal_passive : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         Destroy(deny);
         tc.AttackEnd();
+        battalemanager.Instance.player.GetComponent<playerstatus>().RemoveStack(battalemanager.Instance.stackdatas[20], 1);
     }
 
     IEnumerator Glitch()

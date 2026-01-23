@@ -60,7 +60,20 @@ public class tocounselmanager : MonoBehaviour
         currentbox1.transform.localScale = new Vector3(1, 128, 1);
         currentbox1.transform.DOScaleX(100f, 10f).SetEase(Ease.OutExpo);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("mirrorselect");
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);
+        yield return loadOperation;
+
+        Scene newScene = SceneManager.GetSceneByName("mirrorselect");
+        SceneManager.SetActiveScene(newScene);
+
+        uimanager.Instance.ResetUi();
+
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = false;
+
+        yield return SceneManager.UnloadSceneAsync(currentSceneName);
     }
 
     public void Spawn()

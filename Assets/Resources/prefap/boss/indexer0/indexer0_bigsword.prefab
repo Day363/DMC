@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5510200104009266160}
   - component: {fileID: 4316939146045134026}
   - component: {fileID: 5399327848061570076}
+  - component: {fileID: 4183760130676547689}
   m_Layer: 0
   m_Name: indexer0_bigsword
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   landed: 0
   landangle: 0
   dividnum: 15
-  weaponname: bigsword
+  effectindex: 19
   rainmanager: {fileID: 0}
 --- !u!61 &5399327848061570076
 BoxCollider2D:
@@ -132,7 +133,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8743357922426933618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -170,3 +171,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7509594, y: 4.333402}
   m_EdgeRadius: 0
+--- !u!114 &4183760130676547689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743357922426933618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8b67088447baf4b80bb0fd2dcb6f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canattack: 1
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  damage: 55
+  lightattack: 0
+  heavyattack: 0
+  parryback: 35
+  selfback: 0
+  playerback: 0
+  ratiosum: 0
+  steadydamage: 0
+  Notifparrysetfalse: 0
+  fixdam: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
+  friendly_hit: 0
+  hit: 0

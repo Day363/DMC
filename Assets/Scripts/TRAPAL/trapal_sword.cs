@@ -106,10 +106,8 @@ public class trapal_sword : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            GetComponent<afterimagespawner>().enabled = false;
             
             GetComponent<Animator>().SetTrigger("attack");
-            GetComponent<afterimagespawner>().enabled = true;
 
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class item : ScriptableObject
 {
-    public enum itemtag { item, rapport}
+    public enum itemtag { item, rapport, weapon}
 
     public itemtag itemtag_;
     public string itemName;

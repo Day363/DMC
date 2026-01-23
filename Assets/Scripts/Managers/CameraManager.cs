@@ -29,6 +29,10 @@ public class CameraManager : MonoBehaviour
     public GameObject skillcam;
     public GameObject counselcam;
 
+    public float returnAmplitudeGain = 0;
+    public float returnFrequencyGain = 0;
+
+
     public static CameraManager Instance;
 
     public void Awake()
@@ -120,8 +124,8 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = strength;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(duration);
-        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
 
@@ -168,6 +172,7 @@ public class CameraManager : MonoBehaviour
     
     public void LimitlessShake(float AmplitudeGain, float FrequencyGain, float time)
     {
+        Debug.Log("adafe");
         StartCoroutine(CamVibE(AmplitudeGain, FrequencyGain, time));
     }
 
@@ -182,13 +187,18 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CamVibE(float AmplitudeGain, float FrequencyGain, float time)
     {
+        Debug.Log(maincam.name);
+        returnAmplitudeGain = AmplitudeGain;
+        returnFrequencyGain = FrequencyGain;
         CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();
         CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = AmplitudeGain;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = FrequencyGain;
         yield return new WaitForSeconds(time);
-        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        returnAmplitudeGain = 0;
+        returnFrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
 
@@ -199,8 +209,8 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 12;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.2f);
-        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
 
@@ -211,8 +221,8 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 6;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.12f);
-        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
 
@@ -223,8 +233,8 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 1;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0.5f;
         yield return new WaitForSeconds(20f);
-        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0;
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
 }

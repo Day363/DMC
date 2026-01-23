@@ -108,6 +108,7 @@ public class attackcore : MonoBehaviour
     public bool isdelay = true;
     public bool dash = false;
     public bool focusing = false;
+    public bool candash = true;
     public float currentfocus;
     public Coroutine dashcoroutine;
     public int arrayindex = 0;
@@ -161,6 +162,8 @@ public class attackcore : MonoBehaviour
 
     public void Awake()
     {
+        Random.Range(0, 0);
+
         battalemanager.Instance.attackcore = gameObject;
         if (uimanager.Instance != null)
         {
@@ -301,6 +304,10 @@ public class attackcore : MonoBehaviour
 
     public void WeaponListUI()
     {
+        foreach (GameObject weaponui in activeweaponlistUi.transform)
+        {
+            Destroy(weaponui);
+        }
         foreach (Weapon weapon in activeweaponlist)
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, activeweaponlistUi.transform);
@@ -1422,7 +1429,7 @@ public class attackcore : MonoBehaviour
 
 
             }
-            if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting)
+            if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting && candash)
             {
                 playerplayerhit.canhit = true;
 
@@ -1498,7 +1505,7 @@ public class attackcore : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus > 0 && candash)
         {
             playerplayerhit.canhit = false;
 
@@ -1546,6 +1553,10 @@ public class attackcore : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftShift) && currentfocus < 0)
         {
             //집중이 부족함 메세지
+        }
+        else if (!candash)
+        {
+            //대쉬불가능
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))

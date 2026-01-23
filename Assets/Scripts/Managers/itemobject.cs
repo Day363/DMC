@@ -6,9 +6,11 @@ public class itemobject : MonoBehaviour
 {
     public bool israpport;
     public bool isitem;
+    public bool isweapon;
 
     public Rapport rapport;
     public item item;
+    public Weapon weapon;
     public float pickupRadius;
 
     void Update()
@@ -27,7 +29,10 @@ public class itemobject : MonoBehaviour
                 player.transform.GetComponent<player_inventory>().ItemAdd(item);
                 Destroy(gameObject);
             }
-            
+            else if (isweapon)
+            {
+                player.transform.GetComponent<player_inventory>().AddWeapon(weapon);
+            }
         }
     }
 

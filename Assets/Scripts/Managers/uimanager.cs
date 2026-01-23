@@ -37,6 +37,7 @@ public class uimanager : MonoBehaviour
     [Header("letterbox")]
     public GameObject letterbox;
     [Header("inv")]
+    public GameObject invall;
     public GameObject iteminv1;
     public GameObject iteminv2;
     public GameObject itemimage;
@@ -48,7 +49,11 @@ public class uimanager : MonoBehaviour
     public GameObject itemgiveselect;
     [Header("gameover")]
     public GameObject gameover;
-
+    [Header("debug")]
+    public GameObject debugall;
+    public bool debugactive = false;
+    [Header("playerscenestatus")]
+    public GameObject playerscenestatus;
 
     void Awake()
     {
@@ -64,6 +69,33 @@ public class uimanager : MonoBehaviour
     void Start()
     {
         OnUIReady?.Invoke();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12) && debugactive)
+        {
+            debugactive = false;
+            uimanager.Instance.debugall.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.F12) && !debugactive)
+        {
+            debugactive = true;
+            uimanager.Instance.debugall.SetActive(true);
+        }
+    }
+
+    public void CloseFightUi()
+    {
+        foreach (GameObject gameobject in activewhenbattlestart)
+        {
+            gameobject.SetActive(false);
+        }
+    }
+
+    public void PlayerSceneStatusClose()
+    {
+        playerscenestatus.SetActive(false);
     }
 
     public void ResetUi()

@@ -50,6 +50,7 @@ public class disabled_counsel : MonoBehaviour
     public void Start()
     {
         gamemanager = battalemanager.Instance.gameObject;
+        battalemanager.Instance.currentenemy = gameObject;
 
         boss_hpbar.Die += WhenDie;
         playerPlayerMove = player.GetComponent<PlayerMove>();

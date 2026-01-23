@@ -14,7 +14,6 @@ public class indexer0_script : MonoBehaviour
     public GameObject player;
     public GameObject hitbox;
     public GameObject raindex;
-    public List<string> weapons = new List<string>();
     public int rainmincooltime;
     public int raincool;
     public bool rain = false;
@@ -47,12 +46,34 @@ public class indexer0_script : MonoBehaviour
     public GameObject currentkatana;
     public int attackint = 0;
     public Animator animator;
+    boss_hpbar hpBar;
+
+    string[] weaponNames =
+    {
+        "카타나",
+        "대검",
+        "창",
+        "샷건",
+        "라이플"
+    };
 
     public void Start()
     {
         animator = GetComponent<Animator>();
 
         boss_hpbar.OnCycleEnd += RainShoot;
+        WeaponEffect();
+        hpBar = GetComponent<boss_hpbar>();
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[15], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[16], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[17], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[18], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[19], 1);
+    }
+
+    public void WeaponEffect()
+    {
+
     }
 
     public void FixedUpdate()
@@ -88,7 +109,16 @@ public class indexer0_script : MonoBehaviour
             katanapos = new Vector3(transform.position.x + 3, transform.position.y + 0.7f, 0);
         }
 
-        if (weapons.Count <= 4)
+        int count = 0;
+        foreach (string weapon in weaponNames)
+        {
+            var stack = hpBar.activeStacks.Find(s => s.stackData.effectName == weapon);
+            if (stack != null)
+            {
+                count += stack.currentStack;
+            }
+        }
+        if (count <= 4)
         {
             raincool++;
         }
@@ -167,27 +197,29 @@ public class indexer0_script : MonoBehaviour
             }
         }
 
-        if (weapons.Contains("katana"))
+        
+
+        if (GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "카타나") != null)
         {
             animator.SetBool("katana", true);
         }
 
-        if (weapons.Contains("rifle"))
+        if (GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "라이플") != null)
         {
             animator.SetBool("rifle", true);
         }
 
-        if (weapons.Contains("bigsword"))
+        if (GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "대검") != null)
         {
             animator.SetBool("bigsword", true);
         }
 
-        if (weapons.Contains("spear"))
+        if (GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "창") != null)
         {
             animator.SetBool("spear", true);
         }
 
-        if (weapons.Contains("shootgun"))
+        if (GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "샷건") != null)
         {
             animator.SetBool("shootgun", true);
         }
@@ -206,7 +238,16 @@ public class indexer0_script : MonoBehaviour
     public void AddStack()
     {
         attackint++;
-        if (weapons.Count > 4)
+        int count = 0;
+        foreach (string weapon in weaponNames)
+        {
+            var stack = hpBar.activeStacks.Find(s => s.stackData.effectName == weapon);
+            if (stack != null)
+            {
+                count += stack.currentStack;
+            }
+        }
+        if (count > 4)
         {
             GetComponent<Animator>().SetBool("canreplace", true);
             attackint = 0;
@@ -231,11 +272,11 @@ public class indexer0_script : MonoBehaviour
 
     public void Landstart()
     {
-        weapons.Add("katana");
-        weapons.Add("rifle");
-        weapons.Add("bigsword");
-        weapons.Add("spear");
-        weapons.Add("shootgun");
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[15], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[16], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[17], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[18], 1);
+        GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[19], 1);
         raincool = 0;
         GetComponent<Animator>().ResetTrigger("rain");
         StartCoroutine(LandTime());
@@ -343,7 +384,7 @@ public class indexer0_script : MonoBehaviour
     public void KatanaAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("katana");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "카타나").stackData, 1);
         GetComponent<Animator>().SetBool("katana", false);
     }
 
@@ -355,7 +396,7 @@ public class indexer0_script : MonoBehaviour
     public void RifleAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("rifle");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "라이플").stackData, 1);
         GetComponent<Animator>().SetBool("rifle", false);
     }
 
@@ -367,7 +408,7 @@ public class indexer0_script : MonoBehaviour
     public void BigswordAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("bigsword");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "대검").stackData, 1);
         GetComponent<Animator>().SetBool("bigsword", false);
     }
 
@@ -379,7 +420,7 @@ public class indexer0_script : MonoBehaviour
     public void SpearAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("spear");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "창").stackData, 1);
         GetComponent<Animator>().SetBool("spear", false);
     }
 
@@ -391,7 +432,7 @@ public class indexer0_script : MonoBehaviour
     public void ShootgunAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("shootgun");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "샷건").stackData, 1);
         GetComponent<Animator>().SetBool("shootgun", false);
     }
 
@@ -403,8 +444,8 @@ public class indexer0_script : MonoBehaviour
     public void RiflebigswordAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("rifle");
-        weapons.Remove("bigsword");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "라이플").stackData, 1);
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "대검").stackData, 1);
         GetComponent<Animator>().SetBool("rifle", false);
         GetComponent<Animator>().SetBool("bigsword", false);
         GetComponent<Animator>().SetBool("canreplace", false);
@@ -418,8 +459,8 @@ public class indexer0_script : MonoBehaviour
     public void SpearShootgunAttackEnd()
     {
         whileattack = false;
-        weapons.Remove("spear");
-        weapons.Remove("shootgun");
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "창").stackData, 1);
+        GetComponent<boss_hpbar>().RemoveStack(GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "샷건").stackData, 1);
         GetComponent<Animator>().SetBool("spear", false);
         GetComponent<Animator>().SetBool("shootgun", false);
         GetComponent<Animator>().SetBool("canreplace", false);

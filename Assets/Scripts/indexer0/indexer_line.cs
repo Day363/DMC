@@ -9,8 +9,9 @@ public class indexer_line : MonoBehaviour
     public float currentangle;
     public float turnspeed;
 
-    public void LookStart()
+    public void Start()
     {
+        turnspeed = Random.Range(0.5f, 1.5f);
         if (Random.Range(0, 2) == 1)
         {
             dir = 1;
@@ -19,16 +20,21 @@ public class indexer_line : MonoBehaviour
         {
             dir = -1;
         }
-        turnspeed = Random.Range(0.5f, 1.5f);
+
+    }
+
+    public void LookStart()
+    {
+        
         float i = Random.Range(0.1f, 1f);
         transform.DOScale(new Vector3(i, i, 1), 1f).SetEase(Ease.OutQuart);
-        transform.DOLocalMoveZ(Random.Range(30f, 0f), 1.5f).SetEase(Ease.OutQuart);
+        transform.DOLocalMoveZ(Random.Range(30f, 0f), 4.5f).SetEase(Ease.OutQuart);
         StartCoroutine(StartCool());
     }
 
     IEnumerator StartCool()
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(4.6f);
         StartCoroutine(RandoScale());
         StartCoroutine(RandoTransform());
     }

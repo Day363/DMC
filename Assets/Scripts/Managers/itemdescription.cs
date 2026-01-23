@@ -16,6 +16,15 @@ public class itemdescription : MonoBehaviour
     public TMP_Text itemstory;
 
 
+    public void Start()
+    {
+        itemimage = uimanager.Instance.itemimage.GetComponent<Image>();
+        itemname = uimanager.Instance.itemname.GetComponent<TMP_Text>();
+        itemtag = uimanager.Instance.itemtag.GetComponent<TMP_Text>();
+        itemstory = uimanager.Instance.itemstroy.GetComponent<TMP_Text>();
+        itemdescription_ = uimanager.Instance.itemdescription.GetComponent<TMP_Text>();
+    }
+
     public void ItemDescription()
     {
         if (itemdata != null)

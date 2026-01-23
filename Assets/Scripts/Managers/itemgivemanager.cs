@@ -5,12 +5,10 @@ using UnityEngine;
 public class itemgivemanager : MonoBehaviour
 {
     public GameObject currentobject;
-    public Rapport[] corrects;
+    public List<Rapport> corrects;
 
     public GameObject itemselectui;
 
-    public Rapport file;
-    public Rapport bulb;
 
     public void Start()
     {
@@ -54,19 +52,24 @@ public class itemgivemanager : MonoBehaviour
 
     public void Filer_Sucssess(Rapport rapport)
     {
-        if (rapport == file)
+        Debug.Log(rapport.name);
+        if (rapport == battalemanager.Instance.rapportdatas[4])
         {
-
+            currentobject.GetComponent<filer_counsel>().ItemSuccessFile();
         }
-        else if (rapport == bulb)
+        else if (rapport == battalemanager.Instance.rapportdatas[0])
         {
-
+            currentobject.GetComponent<filer_counsel>().ItemSuccessBulb();
+        }
+        else if (rapport == battalemanager.Instance.rapportdatas[8])
+        {
+            currentobject.GetComponent<filer_counsel>().ItemSuccessEtching();
         }
     }
 
     public void Filer_Fail(Rapport rapport)
     {
-        Debug.Log("½ÇÆÐ");
+        Debug.Log(rapport.name);
         currentobject.GetComponent<filer_counsel>().ItemFail();
     }
 }

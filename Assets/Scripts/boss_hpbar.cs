@@ -30,6 +30,8 @@ public class boss_hpbar : MonoBehaviour
 
     RectTransform hpbarrect;
 
+    public string hitsound;
+
     public GameObject damagetext;
 
     public float collapsefloat;
@@ -281,6 +283,14 @@ public class boss_hpbar : MonoBehaviour
         
     }
 
+    public void HitSound()
+    {
+        if (hitsound != null)
+        {
+            battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay(hitsound);
+        }
+    }
+
     public void BalanceCheck()
     {
         balancebarint.value = currentbalance;
@@ -337,6 +347,7 @@ public class boss_hpbar : MonoBehaviour
     {
         if (canhit)
         {
+            HitSound();
             OnHitCalled?.Invoke();
 
             Redemisson();
@@ -374,6 +385,7 @@ public class boss_hpbar : MonoBehaviour
     {
         if (canhit)
         {
+            HitSound();
             OnHitCalled?.Invoke();
 
             Redemisson();
@@ -411,6 +423,7 @@ public class boss_hpbar : MonoBehaviour
     {
         if (canhit)
         {
+            HitSound();
             OnHitCalled?.Invoke();
 
             Redemisson();
@@ -448,6 +461,7 @@ public class boss_hpbar : MonoBehaviour
     {
         if (canhit)
         {
+            HitSound();
             Redemisson();
 
             cammanager.GetComponent<CameraManager>().CamVibration0_5();

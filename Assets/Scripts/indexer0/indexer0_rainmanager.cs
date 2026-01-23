@@ -27,6 +27,8 @@ public class indexer0_rainmanager : MonoBehaviour
     public int passivecool = 0;
     public Coroutine raincorutine;
     public Coroutine raincorutine2;
+    public Coroutine raincorutine3;
+    public Coroutine raincorutine4;
 
     public void FixedUpdate()
     {
@@ -36,6 +38,8 @@ public class indexer0_rainmanager : MonoBehaviour
             {
                 raincorutine = StartCoroutine(Rain());
                 raincorutine2 = StartCoroutine(Rain());
+                raincorutine3 = StartCoroutine(Rain());
+                raincorutine4 = StartCoroutine(Rain());
             }
             
         }
@@ -45,8 +49,12 @@ public class indexer0_rainmanager : MonoBehaviour
             {
                 StopCoroutine(raincorutine);
                 StopCoroutine(raincorutine2);
+                StopCoroutine(raincorutine3);
+                StopCoroutine(raincorutine4);
                 raincorutine = null;
                 raincorutine2 = null;
+                raincorutine3 = null;
+                raincorutine4 = null;
             }
         }
     }
@@ -62,8 +70,10 @@ public class indexer0_rainmanager : MonoBehaviour
         {
             Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
 
-            Instantiate(weaponland[Random.Range(0, weaponland.Length)], pos, Quaternion.identity);
-            yield return new WaitForSeconds(0.001f);
+            GameObject currain = Instantiate(weaponland[Random.Range(0, weaponland.Length)], pos, Quaternion.identity);
+            currain.GetComponent<enemyattack>().player = battalemanager.Instance.player;
+            currain.GetComponent<enemyattack>().enemy = battalemanager.Instance.currentenemy;
+            yield return null;
         }
     }
 
@@ -71,21 +81,23 @@ public class indexer0_rainmanager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.001f);
+            yield return null;
             Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
             if (Vector3.Distance(indexer.transform.position, pos) < 3)
             {
                 pos = new Vector3(pos.x, 2.13f, 1);
             }
             
-            Instantiate(rain_[Random.Range(0, rain_.Length)], pos, Quaternion.identity);
+            GameObject currain = Instantiate(rain_[Random.Range(0, rain_.Length)], pos, Quaternion.identity);
+            currain.GetComponent<enemyattack>().player = battalemanager.Instance.player;
+            currain.GetComponent<enemyattack>().enemy = battalemanager.Instance.currentenemy;
         }
     }
 
     IEnumerator Rain1Start()
     {
         shaders[0].SetActive(true);
-        impulsecam.GetComponent<CameraManager>().LimitlessShake(6, 1, 18);
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(3, 5, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
@@ -98,7 +110,7 @@ public class indexer0_rainmanager : MonoBehaviour
     IEnumerator Rain2Start()
     {
         shaders[1].SetActive(true);
-        impulsecam.GetComponent<CameraManager>().LimitlessShake(11, 2, 18);
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(7, 10, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
@@ -111,7 +123,7 @@ public class indexer0_rainmanager : MonoBehaviour
     IEnumerator Rain3Start()
     {
         shaders[2].SetActive(true);
-        impulsecam.GetComponent<CameraManager>().LimitlessShake(18, 3, 18);
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(13, 25, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);
@@ -124,7 +136,7 @@ public class indexer0_rainmanager : MonoBehaviour
     IEnumerator Rain4Start()
     {
         shaders[3].SetActive(true);
-        impulsecam.GetComponent<CameraManager>().LimitlessShake(30, 4, 18);
+        impulsecam.GetComponent<CameraManager>().LimitlessShake(30, 50, 18);
         yield return new WaitForSeconds(1f);
         rain = true;
         yield return new WaitForSeconds(11f);

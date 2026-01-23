@@ -35,6 +35,20 @@ public class enemyattack : MonoBehaviour
         {
             if (collision.gameObject.tag == "playerattack")
             {
+                int i = Random.Range(0, 3);
+                if (i == 0)
+                {
+                    battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("clash1");
+                }
+                else if (i == 1)
+                {
+                    battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("clash2");
+                }
+                else if (i == 2)
+                {
+                    battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("clash3");
+                }
+
                 attackcore.attackcoreInstance.AttackBackDelayDelete();
 
                 playerstatus.instance.ParrySuccess();

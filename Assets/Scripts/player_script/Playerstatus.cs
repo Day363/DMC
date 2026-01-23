@@ -10,6 +10,13 @@ public class playerstatus : MonoBehaviour
 {
     public static playerstatus instance;
 
+    public enum GroundType
+    {
+        snow, iron, rock, soil, grass
+    };
+
+    public GroundType groundtype;
+
     [SerializeField]
     public Transform stackbar;
     public Slider balancebar;
@@ -348,6 +355,7 @@ public class playerstatus : MonoBehaviour
         attackdamageplus = 0;
         balancedamageplus = 0;
         damagedecreaserealtime = 0;
+        battalemanager.Instance.attackcore.GetComponent<attackcore>().candash = true;
 
         if (activeStacks.Count > 0)
         {
@@ -384,6 +392,10 @@ public class playerstatus : MonoBehaviour
                     {
                         damagedecreaserealtime += damagedecreaserealtime * (0.02f * (24 - stack.currentStack));
                     }
+                }
+                if (stack.stackData.effectName == "Âø¶õ")
+                {
+                    battalemanager.Instance.attackcore.GetComponent<attackcore>().candash = false;
                 }
             }
         }

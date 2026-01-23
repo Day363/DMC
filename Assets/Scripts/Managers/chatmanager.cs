@@ -47,6 +47,9 @@ public class Answers
 [System.Serializable]
 public class DialogueData
 {
+    public string dialoguename;//°³¹ß¿ë
+    public string playervoice = "player_chat";
+    public string enemyvoice;
     public List<Dialogue> dialogueLines;
 }
 
@@ -74,6 +77,8 @@ public class chatmanager : MonoBehaviour
 
     public GameObject beforechatbox;
     public Coroutine currentchatco;
+
+    public string curvoice;
 
     private void Awake()
     {
@@ -148,6 +153,7 @@ public class chatmanager : MonoBehaviour
         }
         if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
         {
+            curvoice = currentdialogues.enemyvoice;
             if (currentchatco != null)
             {
                 StopCoroutine(currentchatco);
@@ -157,6 +163,7 @@ public class chatmanager : MonoBehaviour
         }
         else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Player)
         {
+            curvoice = currentdialogues.playervoice;
             if (currentchatco != null)
             {
                 StopCoroutine(currentchatco);
@@ -250,10 +257,13 @@ public class chatmanager : MonoBehaviour
             visible++;
             tmp.maxVisibleCharacters = visible;
 
+            char c = GetPrintedCharAtIndex(tmp, visible - 1);
+            SoundPlay(c, curvoice);
+
             if (shaker != null)
                 shaker.CheckEvents(visible);
 
-            char c = GetPrintedCharAtIndex(tmp, visible - 1);
+            c = GetPrintedCharAtIndex(tmp, visible - 1);
             float wait = chat.basicdelay;
             if (IsPunctuation(c)) wait += chat.dotdelay;
 
@@ -295,6 +305,15 @@ public class chatmanager : MonoBehaviour
         if (visibleIndex < 0 || visibleIndex >= t.textInfo.characterCount) return '\0';
         var ci = t.textInfo.characterInfo[visibleIndex];
         return ci.character;
+    }
+
+    public void SoundPlay(char i, string sound)
+    {
+        if (char.IsWhiteSpace(i)) return;
+        if (IsPunctuation(i)) return; 
+
+        if (sound != null)
+        GetComponent<soundmanager>().SoundPlay(sound);
     }
 
     bool IsPunctuation(char c)

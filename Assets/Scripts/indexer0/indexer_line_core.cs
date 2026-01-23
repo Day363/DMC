@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class indexer_line_core : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class indexer_line_core : MonoBehaviour
 
     public void LookStart()
     {
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("indexer_line");
+
+        transform.DOLocalMoveZ(30, 3f).SetEase(Ease.OutQuad);
+
         look = true;
 
         foreach (Transform child in transform)

@@ -33,6 +33,8 @@ public class counselfunctionmanager : MonoBehaviour
             { "Animation1", Animation1 },
             { "Animation2", Animation2 },
             { "Animation3", Animation3 },
+            { "Animation4", Animation4 },
+            { "Animation5", Animation5 },
             { "trapal_start", Trapal_start },
             { "start",  BattleStart},
             { "success", CounselSuccess },
@@ -67,6 +69,17 @@ public class counselfunctionmanager : MonoBehaviour
     public void Animation3()
     {
         battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation3");
+    }
+
+    public void Animation4()
+    {
+        Debug.Log("$rea");
+        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation4");
+    }
+
+    public void Animation5()
+    {
+        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation5");
     }
 
     public void Trapal_start()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1756388083821882542}
   - component: {fileID: 9179940370130021099}
   - component: {fileID: 5264103620973376699}
+  - component: {fileID: 7288245633259672568}
   m_Layer: 0
   m_Name: indexer0_katana
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   landed: 0
   landangle: 0
   dividnum: 15
-  weaponname: katana
+  effectindex: 15
   rainmanager: {fileID: 0}
 --- !u!61 &5264103620973376699
 BoxCollider2D:
@@ -132,7 +133,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4321493055822663032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -170,3 +171,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.30940247, y: 3.1380844}
   m_EdgeRadius: 0
+--- !u!114 &7288245633259672568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4321493055822663032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8b67088447baf4b80bb0fd2dcb6f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canattack: 1
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  damage: 45
+  lightattack: 0
+  heavyattack: 0
+  parryback: 35
+  selfback: 0
+  playerback: 0
+  ratiosum: 0
+  steadydamage: 0
+  Notifparrysetfalse: 0
+  fixdam: 0
+  slash: 0
+  penetrate: 0
+  blow: 0
+  friendly_hit: 0
+  hit: 0

@@ -66,6 +66,30 @@ public class skillfunction : MonoBehaviour
         globallight.GetComponent<Light2D>().intensity = 16.5f;
     }
 
+    public void Walksound()
+    {
+        if (GetComponent<playerstatus>().groundtype == playerstatus.GroundType.snow)
+        {
+            int s = UnityEngine.Random.Range(0, 4);
+            soundmanager soundmanager = battalemanager.Instance.gameObject.GetComponent<soundmanager>();
+            if (s == 0)
+            {
+                soundmanager.SoundPlay("walk_snow1");
+            }
+            else if (s == 1)
+            {
+                soundmanager.SoundPlay("walk_snow2");
+            }
+            else if (s == 2)
+            {
+                soundmanager.SoundPlay("walk_snow3");
+            }
+            else if (s == 3)
+            {
+                soundmanager.SoundPlay("walk_snow4");
+            }
+        }
+    }
 
     public void Cutscene1_shoot()
     {
@@ -75,9 +99,15 @@ public class skillfunction : MonoBehaviour
 
     IEnumerator Cutscene1_shoot_co()
     {
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("cutscene1_swoosh");
+        yield return new WaitForSecondsRealtime(1.5f);
+
         List<GameObject> gliths = new List<GameObject> { };
 
         yield return new WaitForSecondsRealtime(1.5f);
+
+        uimanager.Instance.PlayerSceneStatusClose();
+
         cammanager.GetComponent<CameraManager>().ShakeCamera(30, 0.02f);
         cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene1");
 

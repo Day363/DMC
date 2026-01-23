@@ -53,14 +53,18 @@ public class TextEffectManager : MonoBehaviour
 
         string workingText = originalText;
 
+        string plainText = Regex.Replace(workingText, "<.*?>", "");
+
+        int globalOffset = 0;
+
         string camPattern = @"<camerashake=(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)>";
-        int offset = 0;
         workingText = Regex.Replace(workingText, camPattern, match =>
         {
             float strength = float.Parse(match.Groups[1].Value);
             float duration = float.Parse(match.Groups[2].Value);
 
-            int trigger = match.Index - offset;
+            int trigger = GetPlainIndex(match.Index, workingText);
+
             cameraEvents.Add(new CameraShakeEvent
             {
                 triggerIndex = trigger,
@@ -68,21 +72,20 @@ public class TextEffectManager : MonoBehaviour
                 duration = duration
             });
 
-            offset += match.Length;
             return "";
-        }, RegexOptions.Singleline);
+        });
 
         string shakePattern = @"<shake=(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)>(.*?)<\/shake>";
         MatchCollection matches = Regex.Matches(workingText, shakePattern, RegexOptions.Singleline);
-        int removed = 0;
+
         foreach (Match m in matches)
         {
             float strength = float.Parse(m.Groups[1].Value);
             float speed = float.Parse(m.Groups[2].Value);
             string inner = m.Groups[3].Value;
 
-            int startIndex = m.Index - removed;
-            int length = inner.Length;
+            int startIndex = GetPlainIndex(m.Index, workingText);
+            int length = Regex.Replace(inner, "<.*?>", "").Length;
 
             shakeRanges.Add(new ShakeRange
             {
@@ -91,33 +94,34 @@ public class TextEffectManager : MonoBehaviour
                 strength = strength,
                 speed = speed
             });
-
-            removed += m.Length - inner.Length;
         }
+
         workingText = Regex.Replace(workingText, shakePattern, "$3", RegexOptions.Singleline);
 
         string fuctionPattern = @"<function=([^>]+)>";
-        int delete = 0;
         workingText = Regex.Replace(workingText, fuctionPattern, match =>
         {
             string fuctionname_ = match.Groups[1].Value;
+            int trigger = GetPlainIndex(match.Index, workingText);
 
-            int trigger = match.Index - offset;
             fuctionEvents.Add(new FunctionEvent
             {
                 fuctiontriggerIndex = trigger,
                 fuctionname = fuctionname_
             });
 
-            delete += match.Length;
             return "";
-        }, RegexOptions.Singleline);
-
-
-
+        });
 
         tmp.text = workingText;
         tmp.ForceMeshUpdate();
+    }
+
+    int GetPlainIndex(int sourceIndex, string source)
+    {
+        string before = source.Substring(0, sourceIndex);
+        string plain = Regex.Replace(before, "<.*?>", "");
+        return plain.Length;
     }
 
     public void CheckEvents(int visibleCount)
@@ -129,6 +133,7 @@ public class TextEffectManager : MonoBehaviour
             if (visibleCount >= cameraEvents[i].triggerIndex)
             {
                 CameraManager.Instance?.ShakeCamera(cameraEvents[i].strength, cameraEvents[i].duration);
+                battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("chat_shake");
                 executedCamera.Add(i);
             }
         }

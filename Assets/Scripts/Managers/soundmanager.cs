@@ -40,9 +40,8 @@ public class soundmanager : MonoBehaviour
         }
         else if (sounddata.soundvariation == soundvariation.SFX)
         {
-            sfxsoundplayer.volume = sounddata.volume;
             sfxsoundplayer.clip = sounddata.clip;
-            sfxsoundplayer.PlayOneShot(sounddata.clip);
+            sfxsoundplayer.PlayOneShot(sounddata.clip, sounddata.volume);
         }
     }
 

@@ -8,7 +8,9 @@ public class itemgive : MonoBehaviour
     public GameObject gamemanager;
     public GameObject me;
 
-    public Rapport[] correctrapport;
+    public List<Rapport> correctrapport;
+
+    public bool available = true;
 
     public GameObject player;
     public GameObject fbutton;
@@ -28,11 +30,18 @@ public class itemgive : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (available)
         {
-            fbutton.SetActive(true);
-            cangive = true;
+            if (collision.CompareTag("Player"))
+            {
+                if (fbutton != null)
+                {
+                    fbutton.SetActive(true);
+                }
+                cangive = true;
+            }
         }
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -46,38 +55,42 @@ public class itemgive : MonoBehaviour
 
     public void Update()
     {
-        if (!uiopen && cangive && Input.GetButtonDown("fbutton"))
+        if (available)
         {
-            gamemanager.GetComponent<itemgivemanager>().currentobject = me;
-            gamemanager.GetComponent<itemgivemanager>().corrects = correctrapport;
-
-            uiopen = true;
-            giveui.SetActive(true);
-
-            if (giveuiselect.transform.childCount > 0)
+            if (!uiopen && cangive && Input.GetButtonDown("fbutton"))
             {
-                for (int i = giveuiselect.transform.childCount - 1; i >= 0; i--)
+                gamemanager.GetComponent<itemgivemanager>().currentobject = me;
+                gamemanager.GetComponent<itemgivemanager>().corrects = correctrapport;
+
+                uiopen = true;
+                giveui.SetActive(true);
+
+                if (giveuiselect.transform.childCount > 0)
                 {
-                    Destroy(giveuiselect.transform.GetChild(i).gameObject);
+                    for (int i = giveuiselect.transform.childCount - 1; i >= 0; i--)
+                    {
+                        Destroy(giveuiselect.transform.GetChild(i).gameObject);
+                    }
+                }
+
+                if (player.GetComponent<player_inventory>().rapportinv.Count > 0)
+                {
+                    foreach (Rapport rapport in player.GetComponent<player_inventory>().rapportinv)
+                    {
+                        GameObject currentbutton = Instantiate(selectbutton, giveuiselect.transform);
+                        currentbutton.GetComponent<Image>().sprite = rapport.itemImage;
+                        currentbutton.GetComponent<itemgivebutton>().gamemanager = gamemanager;
+                        currentbutton.GetComponent<itemgivebutton>().currentrapport = rapport;
+                        currentbutton.GetComponent<itemgivebutton>().itemgivecom = gameObject.GetComponent<itemgive>();
+                    }
                 }
             }
-
-            if (player.GetComponent<player_inventory>().rapportinv.Count > 0)
+            else if (uiopen && cangive && Input.GetButtonDown("fbutton"))
             {
-                foreach (Rapport rapport in player.GetComponent<player_inventory>().rapportinv)
-                {
-                    GameObject currentbutton = Instantiate(selectbutton, giveuiselect.transform);
-                    currentbutton.GetComponent<Image>().sprite = rapport.itemImage;
-                    currentbutton.GetComponent<itemgivebutton>().gamemanager = gamemanager;
-                    currentbutton.GetComponent<itemgivebutton>().currentrapport = rapport;
-                    currentbutton.GetComponent<itemgivebutton>().itemgivecom = gameObject.GetComponent<itemgive>();
-                }
+                Uiclose();
             }
         }
-        else if (uiopen && cangive && Input.GetButtonDown("fbutton"))
-        {
-            Uiclose();
-        }
+        
     }
 
     public void Uiclose()

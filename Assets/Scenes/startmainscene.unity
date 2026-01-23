@@ -2742,6 +2742,7 @@ MonoBehaviour:
   stackbar: {fileID: 688798013}
   canvas: {fileID: 270786078}
   balancebarint: {fileID: 915924458}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 3000
@@ -34687,6 +34688,7 @@ MonoBehaviour:
   correctrapport:
   - {fileID: 11400000, guid: 95ec901cc1196d74eaf85521692bdc1e, type: 2}
   - {fileID: 11400000, guid: 6acd593ab917db948a18cff026bdd1b4, type: 2}
+  available: 1
   player: {fileID: 1233421491}
   fbutton: {fileID: 956104335}
   cangive: 0
@@ -79527,6 +79529,8 @@ MonoBehaviour:
   smallpointcam: {fileID: 475224696}
   skillcam: {fileID: 1925774574}
   counselcam: {fileID: 1865303742}
+  returnAmplitudeGain: 0
+  returnFrequencyGain: 0
 --- !u!114 &373801468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120133,6 +120137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601793707}
+  - component: {fileID: 601793708}
   m_Layer: 6
   m_Name: playerstate
   m_TagString: Untagged
@@ -120163,6 +120168,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00000032332, y: -90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &601793708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601793706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3cdfc66cae75b49a6e735ec83299a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &601858554
 GameObject:
   m_ObjectHideFlags: 0
@@ -126651,6 +126668,7 @@ MonoBehaviour:
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 10000
@@ -133567,6 +133585,7 @@ MonoBehaviour:
   me: {fileID: 1995604081}
   correctrapport:
   - {fileID: 11400000, guid: 1f6f38959a03bb642a3fa715e7db55f8, type: 2}
+  available: 1
   player: {fileID: 1233421491}
   fbutton: {fileID: 1278525942}
   cangive: 0
@@ -166451,6 +166470,7 @@ MonoBehaviour:
   isdelay: 1
   dash: 0
   focusing: 0
+  candash: 1
   currentfocus: 0
   arrayindex: 0
   listnumber: 0
@@ -199788,6 +199808,7 @@ GameObject:
   - component: {fileID: 993772875}
   - component: {fileID: 993772874}
   - component: {fileID: 993772873}
+  - component: {fileID: 993772880}
   m_Layer: 6
   m_Name: dummy (1)
   m_TagString: client
@@ -199838,6 +199859,7 @@ MonoBehaviour:
   stackbar: {fileID: 559132543}
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 10000
@@ -200015,6 +200037,24 @@ Transform:
   - {fileID: 1256725722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993772880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993772872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b6aa54c2ff34b459932b5aa0875223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generatewhenstart: 0
+  canspawn: 0
+  imageobject: {fileID: 4573516661582462094, guid: 2ed0c9ef0a1c5104eb3e5d6101fe3352, type: 3}
+  time: 0.2
+  fadetime: 1
+  sr: {fileID: 0}
 --- !u!1 &997210641
 GameObject:
   m_ObjectHideFlags: 0
@@ -255041,6 +255081,54 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2671091528749440589, guid: 3fc08aa91f0ed7f44acb998ffc4b6c3d, type: 3}
   m_PrefabInstance: {fileID: 578658532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1195773706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195773708}
+  - component: {fileID: 1195773707}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1195773707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195773706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25dd67b71b44b6549b25462eb55078ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slash: {fileID: 7548767611789015768, guid: 9c03d8b766e2f9a46862257d0946acfe, type: 3}
+  time: 0.01
+  maxscale: 2
+  minscale: 0.5
+--- !u!4 &1195773708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195773706}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -503.47, y: 19.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196022811
 GameObject:
   m_ObjectHideFlags: 0
@@ -266176,6 +266264,7 @@ GameObject:
   - component: {fileID: 1233421508}
   - component: {fileID: 1233421509}
   - component: {fileID: 1233421510}
+  - component: {fileID: 1233421511}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -266378,6 +266467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02724dd2f8c262b46905ce054f2c3faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundtype: 0
   stackbar: {fileID: 547983339}
   balancebar: {fileID: 1869385928}
   focusbar: {fileID: 339752947}
@@ -266695,6 +266785,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233421491}
   m_Enabled: 1
+--- !u!114 &1233421511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233421491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b6aa54c2ff34b459932b5aa0875223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generatewhenstart: 0
+  canspawn: 0
+  imageobject: {fileID: 4573516661582462094, guid: 2ed0c9ef0a1c5104eb3e5d6101fe3352, type: 3}
+  time: 0.15
+  fadetime: 1
+  sr: {fileID: 0}
 --- !u!1 &1235547323
 GameObject:
   m_ObjectHideFlags: 0
@@ -320849,12 +320957,6 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   hitbox: {fileID: 1872885568}
   raindex: {fileID: 818311683}
-  weapons:
-  - katana
-  - rifle
-  - bigsword
-  - spear
-  - shootgun
   rainmincooltime: 300
   raincool: 0
   rain: 0
@@ -321053,6 +321155,7 @@ MonoBehaviour:
   stackbar: {fileID: 136177264}
   canvas: {fileID: 1046264250}
   balancebarint: {fileID: 866648890}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 4
   maxhealth: 3000
@@ -378026,11 +378129,20 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   campos: {fileID: 90888324}
+  face: {fileID: 0}
+  face2: {fileID: 0}
+  fbutton: {fileID: 0}
+  tocounsel: {fileID: 0}
+  itemgive: {fileID: 0}
   itemfailstring:
   - "\uC774\uAC74...\uBB50\uC8E0?"
   - "\uC774\uAC8C \uBB54\uC9C0\uB294 \uBAA8\uB974\uACA0\uB2E4\uB9CC..."
   - "\uD765\uBBF8\uB86D\uAE34 \uD558\uC9C0\uB9CC..."
   - "\uD760..."
+  etchings: []
+  curetchings: []
+  lazer2_small: {fileID: 0}
+  curlazer_: {fileID: 0}
 --- !u!114 &1683612391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379213,6 +379325,7 @@ GameObject:
   - component: {fileID: 1694457159}
   - component: {fileID: 1694457160}
   - component: {fileID: 1694457161}
+  - component: {fileID: 1694457162}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -379302,6 +379415,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaeeeff4aa317f4381d4dc0c83c3b64, type: 2}
   - {fileID: 11400000, guid: 91b8e7d6a365fbc4ca4a06a395ba04df, type: 2}
   - {fileID: 11400000, guid: 04982bf3163b5b54a80c708313a074b3, type: 2}
+  - {fileID: 11400000, guid: a69cc1e852b983d4b8f360830fb3dd7a, type: 2}
+  - {fileID: 11400000, guid: 7bdda551336782d44bf24b55148e2c36, type: 2}
+  - {fileID: 11400000, guid: fc7e3ada6266c0d4aa87185f4a1c2abc, type: 2}
+  - {fileID: 11400000, guid: 4434fc3be84ab184bb208728fb2d2749, type: 2}
+  - {fileID: 11400000, guid: 2153022f4b5745948aebb7971910ad91, type: 2}
+  - {fileID: 11400000, guid: bfe552b474e7f9b4da464614d15430a6, type: 2}
+  rapportdatas:
+  - {fileID: 11400000, guid: 6acd593ab917db948a18cff026bdd1b4, type: 2}
+  - {fileID: 11400000, guid: 0f34c251c137d394ba6af5df8cbe6b4e, type: 2}
+  - {fileID: 11400000, guid: 1f6f38959a03bb642a3fa715e7db55f8, type: 2}
+  - {fileID: 11400000, guid: 73b38e2f621f94e4bb178e6aa8ec8734, type: 2}
+  - {fileID: 11400000, guid: 95ec901cc1196d74eaf85521692bdc1e, type: 2}
+  - {fileID: 11400000, guid: 809caf56c95d6374f895166bd7869985, type: 2}
+  - {fileID: 11400000, guid: 458d8999a74629340b8565334b617806, type: 2}
+  - {fileID: 11400000, guid: 8953fa6d65702394eb7af5b8425c43a0, type: 2}
+  - {fileID: 11400000, guid: 08cb1ab19841196429e5fe2e3406d576, type: 2}
   cronometer: {fileID: 0}
   number: 0
   numberimage: {fileID: 0}
@@ -379325,7 +379454,10 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   letterbox: {fileID: 0}
   dialogues:
-  - dialogueLines:
+  - dialoguename: filer_dialogue
+    playervoice: player_chat
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: "...\uC74C?"
       basicdelay: 0.05
@@ -379565,7 +379697,10 @@ MonoBehaviour:
       end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: ...
       basicdelay: 0.5
@@ -379576,7 +379711,10 @@ MonoBehaviour:
       end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: cutscene1_dialogue
+    playervoice: player_chat
+    enemyvoice: player_chat
+    dialogueLines:
     - target: 0
       dialogue: ...
       basicdelay: 0.5
@@ -379608,7 +379746,10 @@ MonoBehaviour:
       end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: lumen_before_fight_dialogue
+    playervoice: player_chat
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: "...\uC624\uC168\uAD70\uC694."
       basicdelay: 0.1
@@ -379681,7 +379822,10 @@ MonoBehaviour:
       end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: lumen_phase2_start
+    playervoice: player_chat
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: "<color=red>\uC774\uB807\uAC8C \uB05D\uB0BC \uC218\uB294 \uC5C6\uC9C0.</color>"
       basicdelay: 0.07
@@ -379756,7 +379900,10 @@ MonoBehaviour:
       end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: indexer_before_fight_dialogue
+    playervoice: player_chat
+    enemyvoice: 
+    dialogueLines:
     - target: 0
       dialogue: ...
       basicdelay: 0.08
@@ -379789,36 +379936,6 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uADF8\uB7F4 \uD655\uB960\uB3C4 \uC5C6\uC5C8\uACE0..."
-      basicdelay: 0.08
-      dotdelay: 0.15
-      cantskip: 0
-      end: 0
-      end_lookplayer: 0
-      end_letterboxin: 0
-      gotoanswer: 0
-      answerindex: 0
-    - target: 1
-      dialogue: "\uC124\uB9C8..."
-      basicdelay: 0.08
-      dotdelay: 0.15
-      cantskip: 0
-      end: 0
-      end_lookplayer: 0
-      end_letterboxin: 0
-      gotoanswer: 0
-      answerindex: 0
-    - target: 1
-      dialogue: "\uC544\uB2C8, \uADF8\uB7F4\uB9AC\uAC00 \uC5C6\uC9C0."
-      basicdelay: 0.08
-      dotdelay: 0.15
-      cantskip: 0
-      end: 0
-      end_lookplayer: 0
-      end_letterboxin: 0
-      gotoanswer: 0
-      answerindex: 0
-    - target: 1
       dialogue: "\uC5B4\uB5BB\uAC8C \uB4E4\uC5B4\uC654\uB294\uC9C0\uB294 \uBAA8\uB974\uACA0\uC9C0\uB9CC...<function=start>"
       basicdelay: 0.08
       dotdelay: 0.15
@@ -379828,9 +379945,12 @@ MonoBehaviour:
       end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: description_dialogue
+    playervoice: player_chat
+    enemyvoice: description_chat
+    dialogueLines:
     - target: 0
-      dialogue: "\uC73D...."
+      dialogue: "\uC73D<camerashake=10,0.1>...."
       basicdelay: 0.05
       dotdelay: 0.025
       cantskip: 0
@@ -379850,7 +379970,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uC874\uC7AC\uC640 \uBE44\uC874\uC7AC \uC0AC\uC774\uB97C \uADDC\uC815\uD558\uACE0..."
+      dialogue: "\uC0C1\uB2F4\uC0AC\uB85C\uAD70."
       basicdelay: 0.03
       dotdelay: 0.02
       cantskip: 0
@@ -379860,7 +379980,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uADF8\uAC83\uC744 \uBCF4\uAE30\uC88B\uAC8C \uD3EC\uC7A5\uD558\uC600\uC9C0."
+      dialogue: "\uC2DC\uC124\uC740 \uBB34\uC2A8\uAE30\uBD84\uC774\uC9C0?"
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379870,8 +379990,8 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uADF8\uB7EC\uD558\uC9C0 \uC544\uB2C8\uD55C\uAC00 \uC0C1\uB2F4\uC0AC?
-        \uC9D0\uC791\uCEE8\uB370, \uACB0\uAD6D \uBC14\uCE58\uACE0\uC57C \uB9D0\uC558\uAD70."
+      dialogue: "\uB2F9\uC2E0\uC744 \uB9CC\uB4E4\uC5B4\uB0B4\uAE30 \uC704\uD55C \uB9CE\uC740
+        \uD76C\uC0DD\uC774 \uC788\uC5C8\uC9C0."
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379912,7 +380032,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "<color=red>\uC544\uB2C8.</color>"
+      dialogue: "<camerashake=10,0.1><color=red>\uC544\uB2C8.</color>"
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379932,7 +380052,8 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "<shake=0.2,15>\uC0B4\uB824\uC8FC\uC138\uC694! \uC0B4\uB824\uC8FC\uC138\uC694.</shake>"
+      dialogue: "<shake=0.2,15>\uB2F9\uC2E0\uC774 <color=red>\uC774 \uC9C8\uBB38</color>\uC5D0
+        \uB300\uB2F5\uD560 <color=red>\uAD8C\uB9AC</color>\uB530\uC704\uB294 \uC5C6\uC5B4</shake>"
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379942,7 +380063,8 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uADF8\uB798?"
+      dialogue: "\uB2E4\uC74C\uC5D0 \uC62C\uB54C\uB294 <shake=0.2,15><color=red>\uD76C\uC0DD</color></shake>\uC744
+        \uB4E4\uACE0 \uC624\uAE30\uB97C"
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379952,7 +380074,18 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uADF8\uB798.<function=success>"
+      dialogue: "\uC544\uC8FC \uC870\uC6A9\uD558\uACE0, <shake=0.2,15><color=red><camerashake=10,0.1>\uAC15\uC81C\uC801\uC778
+        \uD76C\uC0DD</color></shake>\uB9D0\uC774\uC57C."
+      basicdelay: 0.03
+      dotdelay: 0.2
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 0
+      dialogue: ...<function=success>
       basicdelay: 0.03
       dotdelay: 0.2
       cantskip: 0
@@ -379961,7 +380094,10 @@ MonoBehaviour:
       end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: "\uBC18\uBCF5\uD558\uC9C0 \uC54A\uC73C\uB824\uBA74..."
       basicdelay: 0.07
@@ -379982,11 +380118,150 @@ MonoBehaviour:
       end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
-  - dialogueLines:
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
     - target: 1
       dialogue: "\uAC70\uC218\uC790 \uC81C\uC555 \uC2E4\uD328... \uD6C4\uD1F4\uD55C\uB2E4..<function=indexer_disappear>"
-      basicdelay: 0
-      dotdelay: 0
+      basicdelay: 0.08
+      dotdelay: 0.2
+      cantskip: 0
+      end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
+      gotoanswer: 0
+      answerindex: 0
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
+    - target: 1
+      dialogue: "\uADF8\uAC74... \uC7A0\uC2DC\uB9CC\uC694..<function=Animation1>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uD655\uC2E4\uD788... \uD655\uC2E4\uD788 \uC81C\uAC00 \uCC3E\uB358
+        \uD30C\uC77C\uC774\uAD70\uC694."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uAC10\uC0AC\uD569\uB2C8\uB2E4. \uC0AC\uB840\uB294... \uC544\uB2C8...
+        \uB2F9\uC2E0 \uB355\uBD84\uC785\uB2C8\uB2E4.\n\uBAA8\uB450\uB97C \uB300\uC2E0\uD574
+        \uAC10\uC0AC\uB4DC\uB9BD\uB2C8\uB2E4."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "<color=red>\uB0B4\uC77C\uC774 \uBA38\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.<function=Animation4></color>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
+      gotoanswer: 0
+      answerindex: 0
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
+    - target: 1
+      dialogue: "<shake=0.2,15>...\uC544\uC544</shake>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC65C \uC81C\uAC8C \uC774\uB7F0 \uC808\uB9DD\uC744 \uC548\uACA8
+        \uC8FC\uC2ED\uB2C8\uAE4C...?"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC81C\uAC00 \uBD88\uC548\uC815\uD55C\uAC83\uC744 \uC54C\uACE0\uB3C4..."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC774\uBC88 \uC21C\uD658\uC740 \uC5C6\uB358\uAC78\uB85C \uD558\uACA0\uC2B5\uB2C8\uB2E4..<function=Animation2>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 1
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+  - dialoguename: 
+    playervoice: 
+    enemyvoice: 
+    dialogueLines:
+    - target: 1
+      dialogue: "\uADF8\uAC74...\uC790\uC138\uD788 \uBD10\uB3C4 \uB420\uAE4C\uC694...?<function=Animation3>"
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: ...
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uC774\uAC74...\uB098\uBA38\uC9C0\uC758..."
+      basicdelay: 0.07
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      dialogue: "\uADF8\uB798, \uC774\uB807\uAC8C \uB9CC\uB4E4\uC5C8\uC5C8\uC9C0.<function=Animation5>"
+      basicdelay: 0.07
+      dotdelay: 0.3
       cantskip: 0
       end: 1
       end_lookplayer: 1
@@ -380002,11 +380277,15 @@ MonoBehaviour:
       nextdialogueindex: 0
       fuction: 
   currentdialogues:
+    dialoguename: 
+    playervoice: 
+    enemyvoice: 
     dialogueLines: []
   playerchatbox: {fileID: 1891505641}
   enemychatbox: {fileID: 0}
   chatnumber: 0
   beforechatbox: {fileID: 0}
+  curvoice: 
 --- !u!114 &1694457158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380022,8 +380301,6 @@ MonoBehaviour:
   currentobject: {fileID: 0}
   corrects: []
   itemselectui: {fileID: 0}
-  file: {fileID: 11400000, guid: 95ec901cc1196d74eaf85521692bdc1e, type: 2}
-  bulb: {fileID: 11400000, guid: 6acd593ab917db948a18cff026bdd1b4, type: 2}
 --- !u!114 &1694457159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380056,12 +380333,88 @@ MonoBehaviour:
   audioclips:
   - soundvariation: 1
     key: cutscene1_error
-    clip: {fileID: 8300000, guid: 4d033629aba440c4f872cd7afd743f73, type: 3}
-    volume: 0.04
+    clip: {fileID: 8300000, guid: eb75af6edf0f0ed49b848565acea5f90, type: 3}
+    volume: 0.642
   - soundvariation: 0
     key: depoleia_bgm1
-    clip: {fileID: 8300000, guid: 536cff4eda9ad3f49be40294252ff74f, type: 3}
+    clip: {fileID: 8300000, guid: b81fe2af8d25b2044a53efd9ff050031, type: 3}
+    volume: 0.486
+  - soundvariation: 1
+    key: clash1
+    clip: {fileID: 8300000, guid: 1866fb48620d96041bfb3624bc4960c6, type: 3}
+    volume: 0.2
+  - soundvariation: 1
+    key: clash2
+    clip: {fileID: 8300000, guid: 6d7b300cca9b0bc4b9750d16cafbcdf5, type: 3}
+    volume: 0.2
+  - soundvariation: 1
+    key: clash3
+    clip: {fileID: 8300000, guid: 2a833d98573a28c48bfeee9e1e7d5693, type: 3}
+    volume: 0.2
+  - soundvariation: 1
+    key: slash_hit
+    clip: {fileID: 8300000, guid: c3ae7c16911e71640875420fe196ca55, type: 3}
+    volume: 0.2
+  - soundvariation: 0
+    key: indexer_rain
+    clip: {fileID: 8300000, guid: 5a914043717320f46bd7b225c8268ad5, type: 3}
+    volume: 0.346
+  - soundvariation: 1
+    key: thunder1
+    clip: {fileID: 8300000, guid: 5515f58946f03964d912f81074c46d29, type: 3}
+    volume: 0.6
+  - soundvariation: 1
+    key: thunder2
+    clip: {fileID: 8300000, guid: e02953caa3f6948499e4a088d4c1bba4, type: 3}
+    volume: 0.6
+  - soundvariation: 1
+    key: thunder3
+    clip: {fileID: 8300000, guid: c2715104d75053f41bcaebaa1dde429c, type: 3}
+    volume: 0.6
+  - soundvariation: 0
+    key: indexer_heavy_rain
+    clip: {fileID: 8300000, guid: 0ed971a386ba3bf44b3cfc5b0eab0a83, type: 3}
+    volume: 0.5
+  - soundvariation: 1
+    key: cutscene1_swoosh
+    clip: {fileID: 8300000, guid: fff11f032a725c5409c17e50d75e3fe8, type: 3}
     volume: 1
+  - soundvariation: 1
+    key: indexer_line
+    clip: {fileID: 8300000, guid: f26fbe8fd1624d34c9535b047c6c183d, type: 3}
+    volume: 0.5
+  - soundvariation: 0
+    key: description_bgm
+    clip: {fileID: 8300000, guid: ae10a08a84c58fa41a8c205b7a2a0145, type: 3}
+    volume: 0.8
+  - soundvariation: 1
+    key: player_chat
+    clip: {fileID: 8300000, guid: 6f1befbc5cb7f1549bc306ba4e384b15, type: 3}
+    volume: 0.8
+  - soundvariation: 1
+    key: description_chat
+    clip: {fileID: 8300000, guid: d25f9c20cb317574084fb391ac912cf9, type: 3}
+    volume: 0.8
+  - soundvariation: 1
+    key: chat_shake
+    clip: {fileID: 8300000, guid: 1ae357f1ff242c048b7a80b088ceedb8, type: 3}
+    volume: 0.8
+  - soundvariation: 1
+    key: walk_snow1
+    clip: {fileID: 8300000, guid: f3c5b66a137d39748afb91d26d8a5308, type: 3}
+    volume: 0.3
+  - soundvariation: 1
+    key: walk_snow2
+    clip: {fileID: 8300000, guid: 3cae2cd54e7eb2748bd7d5e0428621fd, type: 3}
+    volume: 0.3
+  - soundvariation: 1
+    key: walk_snow3
+    clip: {fileID: 8300000, guid: f887499502c4e7b478a9be1c703e0962, type: 3}
+    volume: 0.3
+  - soundvariation: 1
+    key: walk_snow4
+    clip: {fileID: 8300000, guid: a6e3fdbf257fe744bad7fddcf0ce1c13, type: 3}
+    volume: 0.3
 --- !u!114 &1694457161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380075,6 +380428,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ispause: 0
+--- !u!114 &1694457162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694457153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b6cd8946b70264fb29b9387d18991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 0}
+  Instance: {fileID: 0}
 --- !u!1 &1695546607
 GameObject:
   m_ObjectHideFlags: 0
@@ -416431,63 +416798,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1922622030
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1777
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383491363823164749, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527580757051085846, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
-      propertyPath: m_Name
-      value: note
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 92286bdd04b9d3147a65fe0a4133aab3, type: 3}
 --- !u!1 &1923602735
 GameObject:
   m_ObjectHideFlags: 0
@@ -423317,6 +423627,7 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   campos: {fileID: 1335574596}
+  counselmirror: {fileID: 0}
   rapport: {fileID: 5691647741308360279, guid: 4e5089eb13e875d4a833f3d6bf00e6ab, type: 3}
 --- !u!1 &1973168071
 GameObject:
@@ -427643,6 +427954,7 @@ MonoBehaviour:
   stackbar: {fileID: 1325054156}
   canvas: {fileID: 755688137}
   balancebarint: {fileID: 2088447300}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 3000
@@ -469245,4 +469557,4 @@ SceneRoots:
   - {fileID: 347540795}
   - {fileID: 1465616544}
   - {fileID: 1705481450}
-  - {fileID: 1922622030}
+  - {fileID: 1195773708}

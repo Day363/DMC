@@ -15,14 +15,27 @@ public class filer_counsel : MonoBehaviour
     public GameObject cammanager;
     public GameObject player;
     public GameObject campos;
+    public GameObject face;
+    public GameObject face2;
+    public GameObject fbutton;
+    public GameObject tocounsel;
+    public GameObject itemgive;
 
     public string[] itemfailstring;
+    public GameObject[] etchings;
+    public List<GameObject> curetchings = new List<GameObject> { };
+    public GameObject lazer2_small;
+    public GameObject curlazer_;
 
     public void Start()
     {
         StartCoroutine(Cammove());
         gamemanager = battalemanager.Instance.gameObject;
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
+        letterbox = battalemanager.Instance.letterbox;
+        gamemanager = battalemanager.Instance.gameObject;
+        player = battalemanager.Instance.player;
+        battalemanager.Instance.currentenemy = gameObject;
     }
 
     public void FixedUpdate()
@@ -41,6 +54,55 @@ public class filer_counsel : MonoBehaviour
         }
     }
 
+    public void Tocousel()
+    {
+        StartCoroutine(Toconsel_co());
+    }
+
+    IEnumerator Toconsel_co()
+    {
+        yield return new WaitForSeconds(3f);
+        GameObject currentcounselmirror = Instantiate(tocounsel, new Vector3(transform.position.x, 30f, 0), Quaternion.identity);
+        tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
+        currentcounselmirrortocounselmanager.player = player;
+        currentcounselmirrortocounselmanager.cammanager = cammanager;
+    }
+
+    public void Fkill()
+    {
+        Destroy(fbutton);
+        GetComponent<itemgive>().enabled = false;
+        itemgive.GetComponent<itemgive>().available = false;
+    }
+
+    public void LetterBoxIn()
+    {
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+    }
+
+    public void LetterBoxOut()
+    {
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+    }
+
+    public void LookCam()
+    {
+        cammanager.GetComponent<CameraManager>().LookCounsel(campos);
+        player.GetComponent<PlayerMove>().canmove = false;
+        player.GetComponent<PlayerMove>().Stop();
+    }
+
+    public void LookPlayer()
+    {
+        cammanager.GetComponent<CameraManager>().LookPlayer();
+        player.GetComponent<PlayerMove>().canmove = true;
+    }
+
+    public void StopYelling()
+    {
+        GetComponent<filer_textflow>().yelling = false;
+    }
+
     IEnumerator Cammove()
     {
         cammanager.GetComponent<CameraManager>().fuckcinemachine = true;
@@ -54,6 +116,39 @@ public class filer_counsel : MonoBehaviour
         cammanager.GetComponent<CameraManager>().LookPlayer();
         player.GetComponent<PlayerMove>().canmove = true;
         cammanager.GetComponent<CameraManager>().fuckcinemachine = false;
+    }
+
+    public void ItemSuccessFile()
+    {
+        campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+        cammanager.GetComponent<CameraManager>().LookCounsel(campos);
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        player.GetComponent<PlayerMove>().canmove = false;
+        player.GetComponent<PlayerMove>().Stop();
+        GetComponent<filer_textflow>().yelling = false;
+        gamemanager.GetComponent<chatmanager>().CallDialogue(9);
+    }
+
+    public void ItemSuccessBulb()
+    {
+        campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+        cammanager.GetComponent<CameraManager>().LookCounsel(campos);
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        player.GetComponent<PlayerMove>().canmove = false;
+        player.GetComponent<PlayerMove>().Stop();
+        GetComponent<filer_textflow>().yelling = false;
+        gamemanager.GetComponent<chatmanager>().CallDialogue(10);
+    }
+
+    public void ItemSuccessEtching()
+    {
+        campos.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+        cammanager.GetComponent<CameraManager>().LookCounsel(campos);
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        player.GetComponent<PlayerMove>().canmove = false;
+        player.GetComponent<PlayerMove>().Stop();
+        GetComponent<filer_textflow>().yelling = false;
+        gamemanager.GetComponent<chatmanager>().CallDialogue(11);
     }
 
     public void ItemFail()
@@ -109,5 +204,53 @@ public class filer_counsel : MonoBehaviour
     bool IsPunctuation(char c)
     {
         return c == '.' || c == ',' || c == '!' || c == '?' || c == ';' || c == ':' || c == '¡¦';
+    }
+
+    public void SpawnEtching()
+    {
+        StartCoroutine(SpawnEtching_co());
+    }
+
+    IEnumerator SpawnEtching_co()
+    {
+        float x = 92f;
+        float y = 0.8f;
+
+        GameObject curlazer = Instantiate(lazer2_small, new Vector3(92.5f, 0.8f, 0), Quaternion.Euler(0, -70, 0));
+        curlazer.GetComponent<lazer2lookat>().look = false;
+        curlazer.GetComponent<lazer2lookat>().isshoot = false;
+        curlazer.GetComponent<lazer2lookat>().canwarning = false;
+        curlazer.GetComponent<lazer2lookat>().canshoot = false;
+        curlazer.GetComponent<lazer2lookat>().player = player;
+        curlazer.GetComponent<lazer2lookat>().cammanager = cammanager;
+        curlazer_ = curlazer;
+
+        for (int i = 0; i <= 30; i++)
+        {
+            GameObject curetching = Instantiate(etchings[Random.Range(0, 24)], new Vector3(x, y, 0), Quaternion.identity);
+            curetchings.Add(curetching);
+            x = x - 1;
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
+    public void Range()
+    {
+        curlazer_.GetComponent<lazer2lookat>().Charge();
+    }
+
+    public void Shoot()
+    {
+        curlazer_.GetComponent<lazer2lookat>().Shoot2();
+        foreach (GameObject etching in curetchings)
+        {
+            etching.GetComponent<etchingdestroy>().DestroySelf();
+        }
+    }
+
+    public void DestroyFace()
+    {
+        face.SetActive(false);
+        face2.SetActive(false);
     }
 }

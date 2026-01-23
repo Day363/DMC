@@ -8,22 +8,28 @@ public class indexer0_weaponland : MonoBehaviour
     public bool landed = false;
     public int landangle;
     public float dividnum = 4.5f;
-    public string weaponname;
+    public int effectindex;
     public GameObject rainmanager;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "indexer0")
         {
-            if (collision.gameObject.GetComponent<indexer0_script>().weapons.Count(x => x == weaponname) < 2)
+            boss_hpbar.StackInstance effectinstance = collision.gameObject.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == battalemanager.Instance.stackdatas[effectindex].effectName);
+            if (effectinstance.currentStack < 2)
             {
-                collision.gameObject.GetComponent<indexer0_script>().weapons.Add(weaponname);
+                collision.gameObject.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[effectindex], 1);
                 collision.gameObject.GetComponent<indexer0_script>().RainmanagerCount();
                 GetComponent<Animator>().SetBool("teleport", true);
             }
             
         }
             
+    }
+
+    public void CamVib()
+    {
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CamVibration0_5();
     }
 
     IEnumerator ShootDelay()

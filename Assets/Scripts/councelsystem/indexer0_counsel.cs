@@ -55,6 +55,20 @@ public class indexer0_counsel : MonoBehaviour
         }
     }
 
+    public void ToleranceDown()
+    {
+        GetComponent<boss_hpbar>().slashtolerance = 0.1f;
+        GetComponent<boss_hpbar>().blowtolerance = 0.1f;
+        GetComponent<boss_hpbar>().penetratetolerance = 0.1f;
+    }
+
+    public void ToleranceDownEnd()
+    {
+        GetComponent<boss_hpbar>().slashtolerance = GetComponent<boss_hpbar>().slashtoleranceCore;
+        GetComponent<boss_hpbar>().blowtolerance = GetComponent<boss_hpbar>().blowtoleranceCore;
+        GetComponent<boss_hpbar>().penetratetolerance = GetComponent<boss_hpbar>().penetratetoleranceCore;
+    }
+
     public void AttackEnd()
     {
         cycleint_++;
@@ -66,6 +80,7 @@ public class indexer0_counsel : MonoBehaviour
         }
     }
 
+    
     public void DieDialogue()
     {
         cammanager.GetComponent<CameraManager>().LookEnemy();

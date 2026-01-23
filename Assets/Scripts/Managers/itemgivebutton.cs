@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class itemgivebutton : MonoBehaviour
 {
@@ -10,21 +11,17 @@ public class itemgivebutton : MonoBehaviour
 
     public void Onclick()
     {
-        foreach (Rapport rapport in gamemanager.GetComponent<itemgivemanager>().corrects)
+        itemgivecom.Uiclose();
+
+        var manager = gamemanager.GetComponent<itemgivemanager>();
+
+        if (manager.corrects.Contains(currentrapport))
         {
-            if (rapport == currentrapport)
-            {
-                itemgivecom.Uiclose();
-                gamemanager.GetComponent<itemgivemanager>().Sucssess(rapport);
-                break;
-            }
-            else
-            {
-                itemgivecom.Uiclose();
-                gamemanager.GetComponent<itemgivemanager>().Fail(rapport);
-                break;
-            }
+            manager.Sucssess(currentrapport);
         }
-        
+        else
+        {
+            manager.Fail(currentrapport);
+        }
     }
 }

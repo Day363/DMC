@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class fade : MonoBehaviour
 {
-    public void Awake()
+    public void Start()
     {
         Time.timeScale = 1f;
         GetComponent<Image>().DOFade(0, 1.5f);

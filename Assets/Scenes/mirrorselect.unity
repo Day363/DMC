@@ -437,6 +437,7 @@ MonoBehaviour:
   stackbar: {fileID: 688798013}
   canvas: {fileID: 270786078}
   balancebarint: {fileID: 915924458}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 3000
@@ -2857,6 +2858,7 @@ MonoBehaviour:
   stackbar: {fileID: 0}
   canvas: {fileID: 0}
   balancebarint: {fileID: 0}
+  hitsound: 
   damagetext: {fileID: 0}
   collapsefloat: 0
   maxhealth: 0
@@ -3989,6 +3991,7 @@ MonoBehaviour:
   correctrapport:
   - {fileID: 11400000, guid: 95ec901cc1196d74eaf85521692bdc1e, type: 2}
   - {fileID: 11400000, guid: 6acd593ab917db948a18cff026bdd1b4, type: 2}
+  available: 1
   player: {fileID: 1233421491}
   fbutton: {fileID: 956104335}
   cangive: 0
@@ -11660,6 +11663,8 @@ MonoBehaviour:
   smallpointcam: {fileID: 475224696}
   skillcam: {fileID: 1925774574}
   counselcam: {fileID: 1865303742}
+  returnAmplitudeGain: 0
+  returnFrequencyGain: 0
 --- !u!114 &373801468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17104,6 +17109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601793707}
+  - component: {fileID: 601793708}
   m_Layer: 6
   m_Name: playerstate
   m_TagString: Untagged
@@ -17134,6 +17140,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00000032332, y: -90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &601793708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601793706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3cdfc66cae75b49a6e735ec83299a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &604828209
 GameObject:
   m_ObjectHideFlags: 0
@@ -17534,6 +17552,7 @@ MonoBehaviour:
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 10000
@@ -18892,6 +18911,7 @@ MonoBehaviour:
   me: {fileID: 1995604081}
   correctrapport:
   - {fileID: 11400000, guid: 1f6f38959a03bb642a3fa715e7db55f8, type: 2}
+  available: 1
   player: {fileID: 1233421491}
   fbutton: {fileID: 1278525942}
   cangive: 0
@@ -23621,6 +23641,7 @@ MonoBehaviour:
   isdelay: 1
   dash: 0
   focusing: 0
+  candash: 1
   currentfocus: 0
   arrayindex: 0
   listnumber: 0
@@ -27355,6 +27376,7 @@ MonoBehaviour:
   stackbar: {fileID: 559132543}
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 10000
@@ -37129,12 +37151,6 @@ MonoBehaviour:
   player: {fileID: 1233421491}
   hitbox: {fileID: 1872885568}
   raindex: {fileID: 0}
-  weapons:
-  - katana
-  - rifle
-  - bigsword
-  - spear
-  - shootgun
   rainmincooltime: 300
   raincool: 0
   rain: 0
@@ -37333,6 +37349,7 @@ MonoBehaviour:
   stackbar: {fileID: 136177264}
   canvas: {fileID: 1046264250}
   balancebarint: {fileID: 866648890}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 4
   maxhealth: 3000
@@ -40460,11 +40477,20 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   campos: {fileID: 90888324}
+  face: {fileID: 0}
+  face2: {fileID: 0}
+  fbutton: {fileID: 0}
+  tocounsel: {fileID: 0}
+  itemgive: {fileID: 0}
   itemfailstring:
   - "\uC774\uAC74...\uBB50\uC8E0?"
   - "\uC774\uAC8C \uBB54\uC9C0\uB294 \uBAA8\uB974\uACA0\uB2E4\uB9CC..."
   - "\uD765\uBBF8\uB86D\uAE34 \uD558\uC9C0\uB9CC..."
   - "\uD760..."
+  etchings: []
+  curetchings: []
+  lazer2_small: {fileID: 0}
+  curlazer_: {fileID: 0}
 --- !u!114 &1683612391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45427,6 +45453,7 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   campos: {fileID: 1335574596}
+  counselmirror: {fileID: 0}
   rapport: {fileID: 5691647741308360279, guid: 4e5089eb13e875d4a833f3d6bf00e6ab, type: 3}
 --- !u!1 &1994420322
 GameObject:
@@ -45932,6 +45959,7 @@ MonoBehaviour:
   stackbar: {fileID: 1325054156}
   canvas: {fileID: 755688137}
   balancebarint: {fileID: 2088447300}
+  hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
   maxhealth: 3000

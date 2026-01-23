@@ -51,10 +51,12 @@ public class trapal_counsel : MonoBehaviour
 
     public void Start()
     {
+        bosshp = GetComponent<boss_hpbar>();
         gamemanager = battalemanager.Instance.gameObject;
         boss_hpbar.Die += GoTo2Phase;
         playerPlayerMove = player.GetComponent<PlayerMove>();
         cammanagerCameraManager = cammanager.GetComponent<CameraManager>();
+        letterbox = uimanager.Instance.letterbox;
     }
 
     public void LateUpdate()
@@ -83,6 +85,12 @@ public class trapal_counsel : MonoBehaviour
 
         }
     }
+
+    public void PlayerFightUiClose()
+    {
+        uimanager.Instance.CloseFightUi();
+    }
+
 
     public void AttackEnd()
     {
