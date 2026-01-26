@@ -66,6 +66,11 @@ public class skillfunction : MonoBehaviour
         globallight.GetComponent<Light2D>().intensity = 16.5f;
     }
 
+    public void soundplay(string soundname)
+    {
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay(soundname);
+    }
+
     public void Walksound()
     {
         if (GetComponent<playerstatus>().groundtype == playerstatus.GroundType.snow)
@@ -87,6 +92,48 @@ public class skillfunction : MonoBehaviour
             else if (s == 3)
             {
                 soundmanager.SoundPlay("walk_snow4");
+            }
+        }
+        else if (GetComponent<playerstatus>().groundtype == playerstatus.GroundType.plate)
+        {
+            int s = UnityEngine.Random.Range(0, 4);
+            soundmanager soundmanager = battalemanager.Instance.gameObject.GetComponent<soundmanager>();
+            if (s == 0)
+            {
+                soundmanager.SoundPlay("walk_plate1");
+            }
+            else if (s == 1)
+            {
+                soundmanager.SoundPlay("walk_plate2");
+            }
+            else if (s == 2)
+            {
+                soundmanager.SoundPlay("walk_plate3");
+            }
+            else if (s == 3)
+            {
+                soundmanager.SoundPlay("walk_plate4");
+            }
+        }
+        else if (GetComponent<playerstatus>().groundtype == playerstatus.GroundType.metal)
+        {
+            int s = UnityEngine.Random.Range(0, 4);
+            soundmanager soundmanager = battalemanager.Instance.gameObject.GetComponent<soundmanager>();
+            if (s == 0)
+            {
+                soundmanager.SoundPlay("walk_metal1");
+            }
+            else if (s == 1)
+            {
+                soundmanager.SoundPlay("walk_metal2");
+            }
+            else if (s == 2)
+            {
+                soundmanager.SoundPlay("walk_metal3");
+            }
+            else if (s == 3)
+            {
+                soundmanager.SoundPlay("walk_metal4");
             }
         }
     }
@@ -270,6 +317,7 @@ public class skillfunction : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         gamemanger.GetComponent<chatmanager>().chating = false;
         string currentSceneName = SceneManager.GetActiveScene().name;
+        battalemanager.Instance.gameObject.GetComponent<chatmanager>().StopChatting();
 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);
         yield return loadOperation;

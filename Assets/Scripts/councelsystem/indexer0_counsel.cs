@@ -26,10 +26,13 @@ public class indexer0_counsel : MonoBehaviour
     public int cycleint;
 
     public GameObject portal;
+    public GameObject penetratedown;
     
 
     public void Start()
     {
+        boss_hpbar.OnPenetrationHitCalled += PenetrateDown;
+
         gamemanager = battalemanager.Instance.gameObject;
 
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
@@ -53,6 +56,12 @@ public class indexer0_counsel : MonoBehaviour
             gamemanager.GetComponent<chatmanager>().CallDialogue(5);
             line.GetComponent<indexer_line_core>().LookStart();
         }
+    }
+
+    public void PenetrateDown()
+    {
+        Vector3 pos = new Vector3(transform.position.x - 0.15f, transform.position.y + 0.82f, 0);
+        GameObject curpenetrate = Instantiate(penetratedown, pos, Quaternion.identity);
     }
 
     public void ToleranceDown()

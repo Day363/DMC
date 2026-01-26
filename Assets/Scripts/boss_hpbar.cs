@@ -425,6 +425,7 @@ public class boss_hpbar : MonoBehaviour
         {
             HitSound();
             OnHitCalled?.Invoke();
+            OnPenetrationHitCalled?.Invoke();
 
             Redemisson();
 

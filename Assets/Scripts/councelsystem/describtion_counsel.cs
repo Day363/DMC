@@ -43,11 +43,12 @@ public class describtion_counsel : MonoBehaviour
     {
         GameObject currentrapport = Instantiate(rapport, transform.position, Quaternion.identity);
         currentrapport.GetComponent<Rigidbody2D>().AddForce(new Vector2(-9, 9), ForceMode2D.Force);
+        StartCoroutine(SpawnMirror());
     }
 
     IEnumerator SpawnMirror()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         GameObject mirror = Instantiate(counselmirror, transform.position, Quaternion.identity);
         mirror.transform.position = new Vector3(mirror.transform.position.x, 29, 0);
         mirror.GetComponent<tocounselmanager>().player = battalemanager.Instance.player;

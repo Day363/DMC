@@ -197,6 +197,7 @@ public class cronometer_script : MonoBehaviour
         uimanager.Instance.gameover.SetActive(true);
         uimanager.Instance.CloseFightUi();
         uimanager.Instance.PlayerSceneStatusClose();
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().BGMStop();
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);

@@ -61,6 +61,8 @@ public class tocounselmanager : MonoBehaviour
         currentbox1.transform.DOScaleX(100f, 10f).SetEase(Ease.OutExpo);
         yield return new WaitForSeconds(3f);
 
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().BGMStop();
+
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);

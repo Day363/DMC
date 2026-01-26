@@ -1622,6 +1622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179731464}
   - component: {fileID: 179731465}
+  - component: {fileID: 179731466}
   m_Layer: 0
   m_Name: disabled_background
   m_TagString: Untagged
@@ -1702,6 +1703,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &179731466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179731463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e31fa4faa4fa943abb45a73a11cf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmname: disabled_background
 --- !u!1 &190007719
 GameObject:
   m_ObjectHideFlags: 0
@@ -9791,7 +9805,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.98, y: 5.6746316, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 832011910}
@@ -18974,6 +18988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02724dd2f8c262b46905ce054f2c3faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundtype: 0
   stackbar: {fileID: 547983339}
   balancebar: {fileID: 1869385928}
   focusbar: {fileID: 339752947}
@@ -20121,7 +20136,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.999515, y: 5.6882825, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -31206,7 +31221,7 @@ MonoBehaviour:
   hitsound: slash_hit
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 5
-  maxhealth: 3000
+  maxhealth: 6500
   currenthealth: 0
   maxbalance: 350
   currentbalance: 0

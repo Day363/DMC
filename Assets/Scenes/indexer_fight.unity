@@ -27881,7 +27881,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.98, y: 5.6746316, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 832011910}
@@ -37561,6 +37561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02724dd2f8c262b46905ce054f2c3faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundtype: 1
   stackbar: {fileID: 547983339}
   balancebar: {fileID: 1869385928}
   focusbar: {fileID: 339752947}
@@ -40153,7 +40154,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.999515, y: 5.6882825, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -43646,6 +43647,7 @@ MonoBehaviour:
   cycleint_: 0
   cycleint: 5
   portal: {fileID: 5169089409127016770, guid: 05a8b0df146437049bbf7e429d5e07ec, type: 3}
+  penetratedown: {fileID: 6679985170410987818, guid: ebe232555d1556540ae286ff61495524, type: 3}
 --- !u!114 &1486460266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43668,12 +43670,12 @@ MonoBehaviour:
   stackbar: {fileID: 136177264}
   canvas: {fileID: 1046264250}
   balancebarint: {fileID: 866648890}
-  hitsound: 
+  hitsound: slash_hit
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   collapsefloat: 4
-  maxhealth: 3000
+  maxhealth: 4500
   currenthealth: 0
-  maxbalance: 500
+  maxbalance: 400
   currentbalance: 0
   slashtolerance: 0.7
   penetratetolerance: 0.1

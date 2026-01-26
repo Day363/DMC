@@ -10,18 +10,31 @@ public class slashtestobject : MonoBehaviour
     public float maxscale;
     public float minscale;
 
+    public float whendisappear;
+
     public void Start()
     {
         StartCoroutine(Spawn());
+        StartCoroutine(Disappear());
     }
 
     IEnumerator Spawn()
     {
-        GameObject curslash = Instantiate(slash, transform);
+        GameObject curslash = Instantiate(slash, transform.position, Quaternion.identity);
         float scale = Random.Range(minscale, maxscale);
         curslash.transform.localScale = new Vector3(scale, scale, 1);
         curslash.transform.rotation = Quaternion.Euler(Random.Range(0f, 180f), Random.Range(0f, 180f), Random.Range(0f, 360f));
+        if (curslash.transform.GetChild(0).TryGetComponent<playerattackdamage>(out playerattackdamage pa))
+        {
+            pa.player = battalemanager.Instance.player;
+        }
         yield return new WaitForSeconds(time);
         StartCoroutine(Spawn());
+    }
+
+    IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(whendisappear);
+        Destroy(gameObject);
     }
 }

@@ -21,6 +21,8 @@ public class Skill : ScriptableObject
     public bool animationskill;
     public bool functionskill;
 
+    public bool playerchild;
+
     public List<GameObject> skillprefab;
     public string animationtrigger;
     public List<string> funtionname;

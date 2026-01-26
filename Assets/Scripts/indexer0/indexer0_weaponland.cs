@@ -66,4 +66,30 @@ public class indexer0_weaponland : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void SoundPlay()
+    {
+        soundmanager soundmanager = battalemanager.Instance.gameObject.GetComponent<soundmanager>();
+        int i = Random.Range(0, 5);
+        if (i == 0)
+        {
+            soundmanager.SoundPlay("indexer0_weaponland1");
+        }
+        else if (i == 1)
+        {
+            soundmanager.SoundPlay("indexer0_weaponland2");
+        }
+        else if (i == 2)
+        {
+            soundmanager.SoundPlay("indexer0_weaponland3");
+        }
+        else if (i == 3)
+        {
+            soundmanager.SoundPlay("indexer0_weaponland4");
+        }
+        else if (i == 4)
+        {
+            soundmanager.SoundPlay("indexer0_weaponland5");
+        }
+    }
 }

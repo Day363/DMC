@@ -37,6 +37,14 @@ public class enemybullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "playerattack")
+        {
+            if (canreflect)
+            {
+                bulletspeed = bulletspeed * -2;
+                reflected = true;
+            }
+        }
         if (collision.gameObject.tag == "client")
         {
             if (reflected)

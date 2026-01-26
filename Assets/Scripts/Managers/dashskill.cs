@@ -8,6 +8,7 @@ public class dashskill : ScriptableObject
     public Weapon currentweapon;
     public Sprite dashready;
     public float dashafterpower;
+    public float usefocus;
 
     public string skillmarkname;
     public string skillcode;

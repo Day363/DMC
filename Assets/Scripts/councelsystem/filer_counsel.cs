@@ -70,8 +70,6 @@ public class filer_counsel : MonoBehaviour
 
     public void Fkill()
     {
-        Destroy(fbutton);
-        GetComponent<itemgive>().enabled = false;
         itemgive.GetComponent<itemgive>().available = false;
     }
 

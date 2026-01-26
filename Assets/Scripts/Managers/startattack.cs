@@ -36,12 +36,12 @@ public class startattack : MonoBehaviour
     IEnumerator Fade()
     {
         warning.SetActive(true);
-        warning.GetComponent<Image>().DOFade(1, 0);
-        warning.transform.GetChild(0).GetComponent<TMP_Text>().DOFade(1, 0);
-        yield return new WaitForSeconds(2.1f);
-        warning.GetComponent<Image>().DOFade(0, 1);
-        warning.transform.GetChild(0).GetComponent<TMP_Text>().DOFade(0, 1);
-        yield return new WaitForSeconds(1.1f);
+        warning.GetComponent<Image>().DOFade(1, 0).SetUpdate(true);
+        warning.transform.GetChild(0).GetComponent<TMP_Text>().DOFade(1, 0).SetUpdate(true);
+        yield return new WaitForSecondsRealtime(2.1f);
+        warning.GetComponent<Image>().DOFade(0, 1).SetUpdate(true);
+        warning.transform.GetChild(0).GetComponent<TMP_Text>().DOFade(0, 1).SetUpdate(true);
+        yield return new WaitForSecondsRealtime(1.1f);
         warning.SetActive(false);
     }
 }

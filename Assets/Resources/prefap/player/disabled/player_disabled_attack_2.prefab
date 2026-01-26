@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2722980693957345675}
   - component: {fileID: 8030659777877710406}
   - component: {fileID: 7389556691813671083}
+  - component: {fileID: 37919339982919512}
   m_Layer: 10
   m_Name: player_disabled_attack_2
   m_TagString: playerattack
@@ -120,6 +121,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc10e12dfebeb864ab0e45668375a439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &37919339982919512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390210425538650882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760125094fb28a84ebb94062a3c8230c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundname: disabled_penetrate1
 --- !u!1 &2681567306374134919
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackeffectall:
   - {fileID: 5036060872192348948, guid: 9385f4dac163450409a2001eeeeef1ef, type: 3}
+  anglefix: 0
+  fixangle: 0
+  randomangle: 0
   attackeffect_random:
   - {fileID: 7212541102233477223, guid: b9c0acf7ae22ba143aea294df126417f, type: 3}
   - {fileID: 9138673724804242370, guid: 4ee2e7af00984644cb114694d6e4a121, type: 3}

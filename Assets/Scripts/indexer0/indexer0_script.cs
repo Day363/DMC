@@ -71,6 +71,11 @@ public class indexer0_script : MonoBehaviour
         GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[19], 1);
     }
 
+    public void SoundPlay(string soundname)
+    {
+        battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay(soundname);
+    }
+
     public void WeaponEffect()
     {
 
@@ -571,7 +576,8 @@ public class indexer0_script : MonoBehaviour
         Vector3 dir = playerfloorpos - spearpos;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         currentspear = Instantiate(spear, spearpos, Quaternion.AngleAxis(angle + 180, Vector3.back));
-        
+        currentspear.GetComponent<enemyattack>().enemy = gameObject;
+        currentspear.GetComponent<enemyattack>().player = battalemanager.Instance.player;
     }
 
     public void KatanaShoot()
@@ -579,5 +585,7 @@ public class indexer0_script : MonoBehaviour
         Vector3 dir = playerfloorpos - katanapos;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         currentkatana = Instantiate(katana, katanapos, Quaternion.AngleAxis(angle + 180, Vector3.back));
+        currentkatana.GetComponent<enemyattack>().enemy = gameObject;
+        currentkatana.GetComponent<enemyattack>().player = battalemanager.Instance.player;
     }
 }

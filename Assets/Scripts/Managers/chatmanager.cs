@@ -142,6 +142,11 @@ public class chatmanager : MonoBehaviour
 
     }
 
+    public void StopChatting()
+    {
+        StopCoroutine(currentchatco);
+    }
+
     public void CallDialogue(int i)
     {
         currentdialogues = dialogues[i];

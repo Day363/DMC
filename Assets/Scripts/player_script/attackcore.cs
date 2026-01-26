@@ -1205,58 +1205,62 @@ public class attackcore : MonoBehaviour
 
                             if (lastlist[listnumber][attacknumber].Enforceskills != null)
                             {
-                                if (lastlist[listnumber][attacknumber].Normalskill.repeat)
+                                foreach (Skill enforceskill in lastlist[listnumber][attacknumber].Enforceskills)
                                 {
+                                    if (enforceskill.repeat)
+                                    {
+                                        StartCoroutine(SkillReapeat(lastlist[listnumber][attacknumber]));
+                                    }
+                                    if (enforceskill.speed)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.speed)
-                                {
+                                    }
+                                    if (enforceskill.force)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.force)
-                                {
+                                    }
+                                    if (enforceskill.bout)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.bout)
-                                {
+                                    }
+                                    if (enforceskill.wide)
+                                    {
+                                        currentskill.transform.localScale = new Vector3(currentskill.transform.localScale.x * 1.5f, currentskill.transform.localScale.y * 1.5f, 1);
+                                    }
+                                    if (enforceskill.mental)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.wide)
-                                {
+                                    }
+                                    if (enforceskill.weight)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.mental)
-                                {
+                                    }
+                                    if (enforceskill.heat)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.weight)
-                                {
+                                    }
+                                    if (enforceskill.reversal)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.heat)
-                                {
+                                    }
+                                    if (enforceskill.space)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.reversal)
-                                {
+                                    }
+                                    if (enforceskill.vibration)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.space)
-                                {
+                                    }
+                                    if (enforceskill.crack)
+                                    {
 
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.vibration)
-                                {
+                                    }
+                                    if (enforceskill.explosion)
+                                    {
 
+                                    }
                                 }
-                                if (lastlist[listnumber][attacknumber].Normalskill.crack)
-                                {
-
-                                }
-                                if (lastlist[listnumber][attacknumber].Normalskill.explosion)
-                                {
-
-                                }
+                                
                             }
 
                         }
@@ -1275,7 +1279,7 @@ public class attackcore : MonoBehaviour
                                 }
                                 playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.animationtrigger);
                             }
-                            else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count != 0)
+                            else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count != 0 && !lastlist[listnumber][attacknumber].Normalskill.playerchild)
                             {
                                 currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], transform.position, transform.rotation);
                                 currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
@@ -1291,6 +1295,11 @@ public class attackcore : MonoBehaviour
                                     pg.attackcore = gameObject;
                                     pg.player = player;
                                 }
+                            }
+                            else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count != 0 && lastlist[listnumber][attacknumber].Normalskill.playerchild)
+                            {
+                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], player.transform);
+                                currentskill.transform.localPosition = new Vector3(0, 0, 0);
                             }
                             else if (playerPlayerMove.isJump && lastlist[listnumber][attacknumber].Normalskill.skillprefab.Count == 0)
                             {
@@ -1431,6 +1440,8 @@ public class attackcore : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting && candash)
             {
+                playerplayerstatus.focus = playerplayerstatus.focus - lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.usefocus;
+
                 playerplayerhit.canhit = true;
 
                 cursor1.SetActive(true);
@@ -1613,6 +1624,49 @@ public class attackcore : MonoBehaviour
             currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
             playerplayerstatus.focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
         }
+    }
+
+    IEnumerator SkillReapeat(SkillReady skillReady)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (skillReady.Normalskill.prefabspawntoenemy == false)
+        {
+            if (skillReady.Normalskill.prefabskill)
+            {
+                currentskill = Instantiate(skillReady.Normalskill.skillprefab[0], transform.position, transform.rotation);
+                currentskill.transform.localScale = new Vector3(1, attackyscale, 1);
+                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                if (underattack)
+                {
+                    currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().canjump = true;
+                }
+
+
+                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                {
+                    pg.weapon = skillReady.Normalskill.currentweapon;
+                    pg.attackcore = gameObject;
+                    pg.player = player;
+                }
+
+            }
+
+
+        }
+        else if (skillReady.Normalskill.prefabspawntoenemy)
+        {
+            float randomint = Random.Range(0, 361);
+            currentskill = Instantiate(skillReady.Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+            if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+            {
+                pg.weapon = skillReady.Normalskill.currentweapon;
+                pg.attackcore = gameObject;
+                pg.player = player;
+            }
+        }
+
     }
 
     IEnumerator AttackBackDelay(float time)

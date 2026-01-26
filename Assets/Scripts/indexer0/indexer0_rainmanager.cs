@@ -83,7 +83,7 @@ public class indexer0_rainmanager : MonoBehaviour
         {
             yield return null;
             Vector3 pos = new Vector3(Random.Range(-50f, 50f), -1.8f, 1);
-            if (Vector3.Distance(indexer.transform.position, pos) < 3)
+            if (Vector3.Distance(indexer.transform.position, pos) < 5)
             {
                 pos = new Vector3(pos.x, 2.13f, 1);
             }
