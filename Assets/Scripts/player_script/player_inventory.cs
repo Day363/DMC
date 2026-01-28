@@ -37,13 +37,17 @@ public class player_inventory : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("불러오기");
+        battalemanager.WhenDataSave += DataSave;
         gamemanager = battalemanager.Instance.gameObject;
         weaponinv = gamemanager.GetComponent<battalemanager>().playerweaponinv;
         rapportinv = gamemanager.GetComponent<battalemanager>().playerrapportinv;
+        iteminv_ = battalemanager.Instance.playeriteminv;
     }
 
-    public void OnDestroy()
+    public void DataSave()
     {
+        Debug.Log("dlsqpsxhfltpdlqm");
         battalemanager.Instance.playerweaponinv = weaponinv;
         battalemanager.Instance.playerrapportinv = rapportinv;
         battalemanager.Instance.playeriteminv = iteminv_;

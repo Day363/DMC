@@ -71,6 +71,7 @@ public class filer_counsel : MonoBehaviour
     public void Fkill()
     {
         itemgive.GetComponent<itemgive>().available = false;
+        itemgive.GetComponent<itemgive>().fbutton.SetActive(false);
     }
 
     public void LetterBoxIn()

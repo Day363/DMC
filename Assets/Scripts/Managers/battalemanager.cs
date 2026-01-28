@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class battalemanager : MonoBehaviour
 {
     public static battalemanager Instance { get; private set; }
+    public static event Action WhenDataSave;
+
 
     public GameObject player;
     public GameObject attackcore;
@@ -26,6 +29,11 @@ public class battalemanager : MonoBehaviour
 
     public int number;
     public Sprite numberimage;
+
+    public void DataSaveTo()
+    {
+        WhenDataSave?.Invoke();
+    }
 
     IEnumerator Uistart()
     {

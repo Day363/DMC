@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class skillfunction : MonoBehaviour
 {
+   
     public GameObject globallight;
     public GameObject playerlight;
     public GameObject fadeout;
@@ -318,6 +319,8 @@ public class skillfunction : MonoBehaviour
         gamemanger.GetComponent<chatmanager>().chating = false;
         string currentSceneName = SceneManager.GetActiveScene().name;
         battalemanager.Instance.gameObject.GetComponent<chatmanager>().StopChatting();
+
+        battalemanager.Instance.DataSaveTo();
 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);
         yield return loadOperation;

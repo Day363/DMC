@@ -65,6 +65,8 @@ public class tocounselmanager : MonoBehaviour
 
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+        battalemanager.Instance.DataSaveTo();
+
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("mirrorselect", LoadSceneMode.Additive);
         yield return loadOperation;
 

@@ -126,6 +126,9 @@ public class selectmirror : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         yield return new WaitForSeconds(2f);
+
+        battalemanager.Instance.DataSaveTo();
+
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(scenename, LoadSceneMode.Additive);
         yield return loadOperation;
 
