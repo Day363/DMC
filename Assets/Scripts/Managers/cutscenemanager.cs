@@ -119,6 +119,22 @@ public class cutscenemanager : MonoBehaviour
         DOTween.To(() => camerasize, x => camerasize = x, 10f, 0.2f).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
+    public void CameraZoomOut7OutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 7f, time).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+    public void CameraZoomIn6OutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 6f, time).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+    public void CameraZoomOut8OutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 8f, time).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
     public void CamVib1()
     {
         cameramanager.GetComponent<CameraManager>().CamVibration1();

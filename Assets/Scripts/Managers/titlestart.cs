@@ -29,17 +29,19 @@ public class titlestart : MonoBehaviour
             ui.GetComponent<RectTransform>().DOAnchorPosX(-600f, 0.7f).SetEase(Ease.OutQuart);
         }
 
-        cammanager.GetComponent<CameraManager>().LookPlayer();
+        //cammanager.GetComponent<CameraManager>().LookPlayer();
 
         currentobject.GetComponent<Image>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
         text.GetComponent<TMP_Text>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
         StartCoroutine(Disable_title());
+
+        uimanager.Instance.tutorialui.SetActive(true);
     }
 
     IEnumerator Disable_title()
     {
         yield return new WaitForSeconds(3.1f);
         titletotal.SetActive(false);
-        player.GetComponent<PlayerMove>().canmove = true;
+        //player.GetComponent<PlayerMove>().canmove = true;
     }
 }

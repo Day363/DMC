@@ -88,6 +88,18 @@ public class playerskillmove : MonoBehaviour
         cameraset = false;
     }
 
+    public void CameraReturnTime(float time)
+    {
+        StartCoroutine(CameraReturnTime_co(time)); 
+    }
+
+    IEnumerator CameraReturnTime_co(float time)
+    {
+        yield return new WaitForSeconds(time);
+        cameramanager.GetComponent<CameraManager>().LookPlayer();
+        cameraset = false;
+    }
+
     public void CameraShortZoomin()
     {
         DOTween.Kill("CameraZoom");
@@ -140,6 +152,18 @@ public class playerskillmove : MonoBehaviour
     {
         DOTween.Kill("CameraZoom");
         DOTween.To(() => camerasize, x => camerasize = x, 10f, 2f).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
+    public void CameraZoomInFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 4f, time).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+
+    }
+    public void CameraZoomOutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 10f, time).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
     public void CamVib1()
