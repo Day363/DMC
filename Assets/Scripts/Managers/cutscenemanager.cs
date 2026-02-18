@@ -10,6 +10,7 @@ public class cutscenemanager : MonoBehaviour
     public GameObject cameramanager;
     public GameObject campos;
     public GameObject blackmask;
+    public GameObject etc1;
 
     public bool cameraset;
     public float camerasize;
@@ -26,6 +27,12 @@ public class cutscenemanager : MonoBehaviour
     public void CamaraSet()
     {
         cameramanager.GetComponent<CameraManager>().LookCounsel(campos);
+        cameraset = true;
+    }
+
+    public void LookEtc()
+    {
+        cameramanager.GetComponent<CameraManager>().LookCounsel(etc1);
         cameraset = true;
     }
 
@@ -133,6 +140,18 @@ public class cutscenemanager : MonoBehaviour
     {
         DOTween.Kill("CameraZoom");
         DOTween.To(() => camerasize, x => camerasize = x, 8f, time).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
+    public void CameraZoomOut20utFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 20f, time).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
+    public void CameraZoomOut2_OutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 2f, time).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
     public void CamVib1()

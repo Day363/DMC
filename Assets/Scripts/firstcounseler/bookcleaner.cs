@@ -7,14 +7,9 @@ public class bookcleaner : MonoBehaviour
 {
     public int orderinlayer = 1;
 
-    public void Start()
-    {
-        StartMove();
-    }
-
     public void StartMove()
     {
-        transform.DOScale(new Vector3(200, 200, 1), 5f).SetEase(Ease.InQuad);
+        transform.DOScale(new Vector3(200, 200, 1), 4.5f);
     }
 
     public void OnTriggerStay2D(Collider2D collision)
