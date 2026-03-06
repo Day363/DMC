@@ -22,6 +22,9 @@ public class test1 : MonoBehaviour
     public GameObject bookcleaner;
     public Light2D globallight;
 
+    public float dash1power;
+    public float dash2power;
+
     public void LookPlayer()
     {
         if (player.transform.position.x < transform.position.x)
@@ -205,5 +208,32 @@ public class test1 : MonoBehaviour
         cureffect.transform.position = effectpos.transform.position;
         yield return new WaitForSeconds(5f);
         Destroy(cureffect);
+    }
+
+    public void Attack()
+    {
+        int i = Random.Range(0, 3);
+        if (i == 0)
+        {
+            GetComponent<Animator>().SetTrigger("attack1");
+        }
+        else if (i == 1)
+        {
+            GetComponent<Animator>().SetTrigger("attack2");
+        }
+        else if (i == 2)
+        {
+            GetComponent<Animator>().SetTrigger("attack3");
+        }
+    }
+
+    public void Dash1()
+    {
+        GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.localScale.x * dash1power, ForceMode2D.Impulse);
+    }
+
+    public void Dash2()
+    {
+        GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.localScale.x * dash2power, ForceMode2D.Impulse);
     }
 }
