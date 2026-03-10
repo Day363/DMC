@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 [ExecuteAlways] // 에디터 상태에서도 Update() 실행
 public class cronometer_script : MonoBehaviour
@@ -28,6 +29,12 @@ public class cronometer_script : MonoBehaviour
     public bool normaltime;
 
     public playerstatus playerplayerstatus;
+
+    public GameObject[] rings;
+    public GameObject[] lines;
+    public GameObject bossname;
+    public GameObject where;
+
 
     public void Start()
     {
@@ -61,6 +68,14 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
+        foreach (GameObject halo in rings)
+        {
+            halo.transform.localScale = new Vector3(0, 0, 1);
+            halo.GetComponent<trapalhaloturnupdate>().turnspeed = Random.Range(-2f, 2f);
+            float i = Random.Range(0.4f, 1.1f);
+            halo.transform.DOScale(new Vector3(i, i, 1), 2.5f).SetUpdate(true).SetId("turn").SetEase(Ease.OutQuad);
+        }
+
         Time.timeScale = 0f;
         float currentAngle = hourHand.eulerAngles.z;
         targetangle = (playerplayerstatus.lifecount / playerplayerstatus.maxlifecount) * 360;
@@ -79,14 +94,31 @@ public class cronometer_script : MonoBehaviour
 
         DOTween.Kill("turn");
 
+        foreach (GameObject halo in rings)
+        {
+            float i = Random.Range(0.8f, 2.1f);
+            halo.transform.DOScale(new Vector3(i, i, 1), 0.1f).SetUpdate(true).SetId("turn").SetEase(Ease.OutQuad);
+            halo.GetComponent<battletitleflash>().Flash();
+            halo.GetComponent<SpriteRenderer>().DOFade(0, 3f).SetUpdate(true);
+        }
+        foreach (GameObject line in lines)
+        {
+            line.SetActive(true);
+            line.GetComponent<SpriteRenderer>().DOFade(0, 3f).SetUpdate(true);
+        }
+        bossname.SetActive(true);
+        bossname.GetComponent<TMP_Text>().DOFade(0, 3f).SetUpdate(true).SetEase(Ease.InQuart);
+        where.SetActive(true);
+        where.GetComponent<TMP_Text>().DOFade(0, 3f).SetUpdate(true).SetEase(Ease.InQuart);
+
         DOTween.To(
             () => hourAngle,       
             x => hourAngle = x,
             targetangle + (360f * 15f),
-            1f                     
+            3f                     
         ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(3f);
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);

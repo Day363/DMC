@@ -58,28 +58,28 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Animation1()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation1");
+        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation1");
     }
 
     public void Animation2()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation2");
+        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation2");
     }
 
     public void Animation3()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation3");
+        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation3");
     }
 
     public void Animation4()
     {
         Debug.Log("$rea");
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation4");
+        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation4");
     }
 
     public void Animation5()
     {
-        battalemanager.currentenemy.GetComponent<Animator>().SetTrigger("animation5");
+        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation5");
     }
 
     public void Trapal_start()

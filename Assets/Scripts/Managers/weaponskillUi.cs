@@ -48,12 +48,12 @@ public class weaponskillUi : MonoBehaviour
 
     public void SkillcontentActive()
     {
+        scrollview.GetComponent<rullet>().target = curcontentnow.transform;
         foreach (Transform child in viewpoint.transform)
         {
             child.gameObject.SetActive(false);
         }
         curcontentnow.SetActive(true);
-        scrollview.GetComponent<ScrollRect>().content = curcontentnow.GetComponent<RectTransform>();
 
         foreach (Transform child in passivelistViewPort.transform)
         {
@@ -116,7 +116,10 @@ public class weaponskillUi : MonoBehaviour
             currentbox.GetComponent<normalskilluibutton>().skillbutton = currentskillUi;
 
             currentskillUi.GetComponent<skillselectUi>().descriptionUi = currentbox;
+
+            
         }
+        curcontent.GetComponent<circlelayout>().ArrangeNotEquel();
         curcontentnow.SetActive(false);
         passivelist.SetActive(false);
         normalskilltlist.SetActive(false);

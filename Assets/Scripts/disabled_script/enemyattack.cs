@@ -27,7 +27,10 @@ public class enemyattack : MonoBehaviour
 
     public bool hit = false;
 
- 
+    public void Start()
+    {
+        player = battalemanager.Instance.player;
+    }
 
     public void OnTriggerStay2D(Collider2D collision)
     {

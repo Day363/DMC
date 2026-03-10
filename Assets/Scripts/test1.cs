@@ -24,33 +24,66 @@ public class test1 : MonoBehaviour
 
     public float dash1power;
     public float dash2power;
+    public float movespeed;
+
+    public bool whileattack = false;
+    public bool canwalk = false;
+    public int direction = 1;
+
+    public void FixedUpdate()
+    {
+        if (canwalk && !whileattack && transform.parent.position.x - player.transform.position.x < 0)
+        {
+            direction = 1;
+            transform.parent.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (canwalk && !whileattack && transform.parent.position.x - player.transform.position.x > 0)
+        {
+            direction = -1;
+            transform.parent.localScale = new Vector3(1, 1, 1);
+        }
+
+        if (!whileattack && Vector2.Distance(transform.parent.position, player.transform.position) < 10)
+        {
+            transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            GetComponent<Animator>().SetBool("walk", false);
+            whileattack = true;
+            canwalk = false;
+            Attack();
+        }
+        else if (!whileattack && canwalk && Vector2.Distance(transform.parent.position, player.transform.position) > 10)
+        {
+            GetComponent<Animator>().SetBool("walk", true);
+            transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(movespeed * direction, 0);
+        }
+    }
 
     public void LookPlayer()
     {
-        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.parent.position.x)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.parent.localScale = new Vector3(1, 1, 1);
         }
         else if (player.transform.position.x > transform.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.parent.localScale = new Vector3(-1, 1, 1);
         }
     }
 
     public void Move()
     {
         DOTween.Kill("move");
-        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.parent.position.x)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.parent.localScale = new Vector3(1, 1, 1);
             float x = player.transform.position.x - Random.Range(5, 10);
-            transform.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
         }
-        else if (player.transform.position.x > transform.position.x)
+        else if (player.transform.position.x > transform.parent.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.parent.localScale = new Vector3(-1, 1, 1);
             float x = player.transform.position.x + Random.Range(5, 10);
-            transform.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
         }
 
     }
@@ -58,34 +91,34 @@ public class test1 : MonoBehaviour
     public void Move2()
     {
         DOTween.Kill("move");
-        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.parent.position.x)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.parent.localScale = new Vector3(1, 1, 1);
             float x = player.transform.position.x + 3f;
-            transform.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
         }
-        else if (player.transform.position.x > transform.position.x)
+        else if (player.transform.position.x > transform.parent.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.parent.localScale = new Vector3(-1, 1, 1);
             float x = player.transform.position.x - 3f;
-            transform.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.3f).SetEase(Ease.OutExpo).SetId("move");
         }
     }
 
     public void Move3()
     {
         DOTween.Kill("move");
-        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.parent.position.x)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.parent.localScale = new Vector3(1, 1, 1);
             float x = player.transform.position.x - 10f;
-            transform.DOMoveX(x, 0.15f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.15f).SetEase(Ease.OutExpo).SetId("move");
         }
-        else if (player.transform.position.x > transform.position.x)
+        else if (player.transform.position.x > transform.parent.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.parent.localScale = new Vector3(-1, 1, 1);
             float x = player.transform.position.x + 10f;
-            transform.DOMoveX(x, 0.15f).SetEase(Ease.OutExpo).SetId("move");
+            transform.parent.DOMoveX(x, 0.15f).SetEase(Ease.OutExpo).SetId("move");
         }
     }
 
@@ -168,7 +201,7 @@ public class test1 : MonoBehaviour
 
     public void PlayerNuckBack()
     {
-        if (transform.position.x > player.transform.position.x)
+        if (transform.parent.position.x > player.transform.position.x)
         {
             player.transform.DOMoveX(player.transform.position.x - 5f, 0.5f).SetEase(Ease.OutQuart);
         }
@@ -212,6 +245,7 @@ public class test1 : MonoBehaviour
 
     public void Attack()
     {
+        whileattack = true;
         int i = Random.Range(0, 3);
         if (i == 0)
         {
@@ -227,13 +261,32 @@ public class test1 : MonoBehaviour
         }
     }
 
+    public void AttackStart()
+    {
+        whileattack = true;
+        canwalk = false;
+    }
+
+    public void AttackEnd()
+    {
+        whileattack = false;
+        canwalk = true;
+    }
+
     public void Dash1()
     {
-        GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.localScale.x * dash1power, ForceMode2D.Impulse);
+        transform.parent.GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.parent.localScale.x * dash1power, ForceMode2D.Impulse);
     }
 
     public void Dash2()
     {
-        GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.localScale.x * dash2power, ForceMode2D.Impulse);
+        transform.parent.GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.parent.localScale.x * dash2power, ForceMode2D.Impulse);
+    }
+
+    public void BattleStart()
+    {
+        PlayerRealease();
+        battalemanager.Instance.Battlestart();
+        canwalk = true;
     }
 }
