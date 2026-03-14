@@ -18,7 +18,7 @@ public class skillselectUi : MonoBehaviour
     {
         if (isselect == false)
         {
-            Selected();
+            Selected(); 
         }
     }
 

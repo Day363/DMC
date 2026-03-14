@@ -306,8 +306,9 @@ public class attackcore : MonoBehaviour
     {
         foreach (Transform weaponui in activeweaponlistUi.transform)
         {
-            Destroy(weaponui);
+            Destroy(weaponui.gameObject); 
         }
+
         foreach (Weapon weapon in activeweaponlist)
         {
             GameObject currentweaponimage = Instantiate(weaponimageUi, activeweaponlistUi.transform);
@@ -323,37 +324,38 @@ public class attackcore : MonoBehaviour
             weaponskillUi_Script.normalskilltlistViewPort = normalskilltlistViewPort;
             weaponskillUi_Script.arreyskilllistViewPort = arreyskilllistViewPort;
             weaponskillUi_Script.skillsetlist = skillsetlist;
-            currentweaponimage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = weapon.weaponimage;
-            currentweaponimage.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
+            currentweaponimage.transform.GetChild(5).GetComponent<Image>().sprite = weapon.weaponimage;
+            currentweaponimage.transform.GetChild(1).GetComponent<TMP_Text>().text = weapon.weaponname;
 
             if (weapon.penetrate == true)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                currentweaponimage.transform.GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             }
             else if (weapon.penetrate == false)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+                currentweaponimage.transform.GetChild(2).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
             }
 
             if (weapon.slash == true)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                currentweaponimage.transform.GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             }
             else if (weapon.slash == false)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+                currentweaponimage.transform.GetChild(3).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
             }
 
             if (weapon.blow == true)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                currentweaponimage.transform.GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             }
             else if (weapon.blow == false)
             {
-                currentweaponimage.transform.GetChild(0).GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
-            }
-            activeweaponlistUi.GetComponent<circlelayout>().Arrange();
+                currentweaponimage.transform.GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+            } 
         }
+        Debug.Log(activeweaponlistUi.transform.childCount);
+        activeweaponlistUi.GetComponent<circlelayout>().ArrangeNotEquel_co();
     }
 
     public void LetterBoxDown()

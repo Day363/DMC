@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 
 public class rullet : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
-    public RectTransform center;   // 원형 UI 중심
-    public Transform target;       // 회전할 오브젝트
+    public RectTransform center;
+    public Transform target;
 
-    float prevAngle;
+    public float prevAngle;
+    public float totalAngle;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -19,16 +20,21 @@ public class rullet : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         float currentAngle = GetAngle(eventData.position);
 
-        float delta = currentAngle - prevAngle;
+        float delta = Mathf.DeltaAngle(prevAngle, currentAngle);
 
-        target.Rotate(0, 0, delta);
+        totalAngle += delta;
+
+        target.rotation = Quaternion.Euler(0, 0, totalAngle);
 
         prevAngle = currentAngle;
+
     }
 
     float GetAngle(Vector2 screenPos)
     {
-        Vector2 dir = screenPos - RectTransformUtility.WorldToScreenPoint(null, center.position);
+        Vector2 centerScreen = RectTransformUtility.WorldToScreenPoint(null, center.position);
+
+        Vector2 dir = screenPos - centerScreen;
 
         return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }

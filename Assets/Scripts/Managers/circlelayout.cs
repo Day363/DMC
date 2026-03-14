@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class circlelayout : MonoBehaviour
 {
@@ -10,6 +12,55 @@ public class circlelayout : MonoBehaviour
     public bool notequel;
     public float startAngle;
     public float angleStep;
+
+    public void Update()
+    {
+        float step = 0;
+
+        foreach (Transform child in transform)
+        {
+            Image img = child.GetComponent<Image>();
+
+            float angle = transform.parent.GetComponent<rullet>().totalAngle + step;
+
+            step += angleStep;
+
+            if (img.material == null || img.material.name.Contains("(Instance)") == false)
+            {
+                img.material = new Material(img.material);
+            }
+
+            if (angle > 0)
+            {
+                img.material.SetFloat("_Stencil", -1);
+            }
+            else if (angle < -180)
+            {
+                img.material.SetFloat("_Stencil", 1);
+            }
+            else
+            {
+                img.material.SetFloat("_Stencil", 0);
+            }
+             
+            if (angle < -360 || angle > 180)
+            {
+                child.gameObject.SetActive(false);
+            }
+            else
+            {
+                child.gameObject.SetActive(true);
+            }
+
+            foreach (Transform child2 in child)
+            {
+                if (child2.TryGetComponent<Image>(out Image ig) || child2.TryGetComponent<TMP_Text>(out TMP_Text tmp))
+                {
+                    child2.GetComponent<stencilequelwithparent>().SetMaterial();
+                }
+            }
+        }
+    }
 
     public void Arrange()
     {
@@ -37,6 +88,18 @@ public class circlelayout : MonoBehaviour
             }
         }
     }
+    
+    public void ArrangeNotEquel_co()
+    {
+        StartCoroutine(ArrangeNextFrame());
+    }
+
+
+    IEnumerator ArrangeNextFrame()
+    {
+        yield return null;
+        ArrangeNotEquel();
+    }
 
     public void ArrangeNotEquel()
     {
@@ -44,6 +107,7 @@ public class circlelayout : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
+            Debug.Log(i);
             Transform child = transform.GetChild(i);
 
             float angle = (startAngle + angleStep * i) * Mathf.Deg2Rad;

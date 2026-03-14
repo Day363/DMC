@@ -59,6 +59,7 @@ public class uimanager : MonoBehaviour
     public GameObject tutorialui;
     public GameObject glitch;
     public List<GameObject> glitchs = new List<GameObject> { };
+    public GameObject tutorialuireal;
 
     void Awake()
     {
@@ -193,5 +194,10 @@ public class uimanager : MonoBehaviour
         uimanager.Instance.ResetUi();
 
         yield return SceneManager.UnloadSceneAsync(currentSceneName);
+    }
+
+    public void TutorialGo()
+    {
+        tutorialuireal.SetActive(true);
     }
 }

@@ -35,6 +35,8 @@ public class cronometer_script : MonoBehaviour
     public GameObject bossname;
     public GameObject where;
 
+    public bool tutorial = false;
+
 
     public void Start()
     {
@@ -127,6 +129,7 @@ public class cronometer_script : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f);
 
         attackcore.GetComponent<attackcore>().BattleStart();
+        uimanager.Instance.TutorialGo();
         FadeOut();
     }
 

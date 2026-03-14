@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4048581447589856921}
   - component: {fileID: 5687244135853628873}
   - component: {fileID: 544164064710556787}
+  - component: {fileID: 7007344155665460121}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -134,6 +135,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7007344155665460121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058187383247415107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e48f2ae58405d4b95eef5a45cea43c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6935672127476075311
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: eed086fcba2af7e4080d688a1f70bcf7, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 0.68235296}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -280,7 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e0ac85cda51bb4ab40bf36b7d38698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isselect: 0
   attackcore: {fileID: 0}
   skill: {fileID: 0}
   skilllist: {fileID: 0}
   skillbutton: {fileID: 2553545667406617995, guid: be442237ab16751438c8dee13d079500, type: 3}
+  descriptionUi: {fileID: 0}

@@ -49,6 +49,8 @@ public class weaponskillUi : MonoBehaviour
     public void SkillcontentActive()
     {
         scrollview.GetComponent<rullet>().target = curcontentnow.transform;
+        scrollview.GetComponent<rullet>().totalAngle = 90 - (curcontentnow.transform.childCount * curcontentnow.GetComponent<circlelayout>().angleStep);
+        curcontentnow.transform.rotation = Quaternion.Euler(0, 0, 90 - (curcontentnow.transform.childCount * curcontentnow.GetComponent<circlelayout>().angleStep));
         foreach (Transform child in viewpoint.transform)
         {
             child.gameObject.SetActive(false);
