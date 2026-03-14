@@ -355,7 +355,7 @@ public class attackcore : MonoBehaviour
             } 
         }
         Debug.Log(activeweaponlistUi.transform.childCount);
-        activeweaponlistUi.GetComponent<circlelayout>().ArrangeNotEquel_co();
+        activeweaponlistUi.GetComponent<circlelayout>().ArrangeNotEquel();
     }
 
     public void LetterBoxDown()

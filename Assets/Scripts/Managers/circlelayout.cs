@@ -89,18 +89,6 @@ public class circlelayout : MonoBehaviour
         }
     }
     
-    public void ArrangeNotEquel_co()
-    {
-        StartCoroutine(ArrangeNextFrame());
-    }
-
-
-    IEnumerator ArrangeNextFrame()
-    {
-        yield return null;
-        ArrangeNotEquel();
-    }
-
     public void ArrangeNotEquel()
     {
         int count = transform.childCount;
