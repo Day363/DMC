@@ -13,6 +13,7 @@ public class boss_hpbar : MonoBehaviour
     public static event Action OnPenetrationHitCalled;
     public static event Action Die;
     public static event Action OnCycleEnd;
+    public static event Action OnCollusion;
 
     public GameObject worldlight;
     public GameObject playerlight;
@@ -308,6 +309,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void BalanceCollapse()
     {
+        OnCollusion?.Invoke();
         GetComponent<Animator>().SetBool("idle", false);
         GetComponent<Animator>().SetTrigger("collapse");
 
@@ -434,7 +436,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = (damage * penetratetolerance) * (damageplus + playerstatus.instance.penetratedamageup + playerstatus.instance.r_penetrationdamageincrease);
+            float totaldamage = (damage * penetratetolerance) * damageplus;
             currenthealth -= totaldamage;
             BalanceDamage(damage * 0.1f);
             GameObject damt = Instantiate(damagetext);

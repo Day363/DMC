@@ -1,7 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 
 public class test1 : MonoBehaviour
@@ -18,6 +21,8 @@ public class test1 : MonoBehaviour
     public GameObject effect3;
     public GameObject effect4;
     public GameObject effectpos;
+    public GameObject chatpre;
+    public GameObject canvus;
 
     public GameObject bookcleaner;
     public Light2D globallight;
@@ -288,5 +293,39 @@ public class test1 : MonoBehaviour
         PlayerRealease();
         battalemanager.Instance.Battlestart();
         canwalk = true;
+    }
+
+    public void Chat1()
+    {
+        StartCoroutine(Chat1_co());
+    }
+
+    public IEnumerator Chat1_co()
+    {
+        GameObject currentchat = Instantiate(chatpre, canvus.transform);
+        currentchat.GetComponent<RectTransform>().localPosition = new Vector3(0, 25, 0);
+        currentchat.transform.localScale = new Vector3(2.4f, 2.4f, 2.4f);
+        TMP_Text tmp = currentchat.transform.GetChild(0).GetComponent<TMP_Text>();
+        TextEffectManager shaker = tmp.GetComponent<TextEffectManager>();
+        shaker.SetText("이정도였나?");
+        tmp.fontSize = 4;
+        tmp.ForceMeshUpdate();
+        int totalvisible = tmp.textInfo.characterCount;
+        tmp.maxVisibleCharacters = 0;
+        int visible = 0;
+        while (visible < totalvisible)
+        {
+            visible++;
+            tmp.maxVisibleCharacters = visible;
+            if (shaker != null)
+                shaker.CheckEvents(visible);
+            float wait = 0.15f;
+            yield return new WaitForSeconds(wait);
+        }
+        yield return new WaitForSeconds(1.5f);
+        tmp.DOFade(0, 1f);
+        currentchat.GetComponent<Image>().DOFade(0, 1f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(currentchat);
     }
 }

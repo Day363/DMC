@@ -30,6 +30,7 @@ public class enemyattack : MonoBehaviour
     public void Start()
     {
         player = battalemanager.Instance.player;
+        enemy = battalemanager.Instance.currentenemy;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -74,7 +75,15 @@ public class enemyattack : MonoBehaviour
                     player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * playerback, ForceMode2D.Impulse);
                     if (enemy != null)
                     {
-                        enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                        if (enemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+                        {
+                            rb.AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                        }
+                        else if (enemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
+                        {
+                            rb2.AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                        }
+                            
                     }
                     
                 }
@@ -83,7 +92,14 @@ public class enemyattack : MonoBehaviour
                     player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -playerback, ForceMode2D.Impulse);
                     if (enemy != null)
                     {
-                        enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                        if (enemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+                        {
+                            rb.AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                        }
+                        else if (enemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
+                        {
+                            rb2.AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                        }
                     }
                     
                 }

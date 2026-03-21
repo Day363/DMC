@@ -304,9 +304,11 @@ public class attackcore : MonoBehaviour
 
     public void WeaponListUI()
     {
-        foreach (Transform weaponui in activeweaponlistUi.transform)
+        for (int i = activeweaponlistUi.transform.childCount - 1; i >= 0; i--)
         {
-            Destroy(weaponui.gameObject); 
+            Transform weaponui = activeweaponlistUi.transform.GetChild(i);
+            weaponui.SetParent(null);
+            Destroy(weaponui.gameObject);
         }
 
         foreach (Weapon weapon in activeweaponlist)
@@ -354,7 +356,6 @@ public class attackcore : MonoBehaviour
                 currentweaponimage.transform.GetChild(4).GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
             } 
         }
-        Debug.Log(activeweaponlistUi.transform.childCount);
         activeweaponlistUi.GetComponent<circlelayout>().ArrangeNotEquel();
     }
 

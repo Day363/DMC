@@ -32,8 +32,16 @@ public class playerskillmove : MonoBehaviour
     {
         if (fixenemy)
         {
-            battalemanager.Instance.currentenemy.transform.position = enemyposition.transform.position;
-            battalemanager.Instance.currentenemy.transform.rotation = enemyposition.transform.rotation;
+            if (battalemanager.Instance.currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            {
+                battalemanager.Instance.currentenemy.transform.position = enemyposition.transform.position;
+                battalemanager.Instance.currentenemy.transform.rotation = enemyposition.transform.rotation;
+            }
+            else
+            {
+                battalemanager.Instance.currentenemy.transform.parent.position = enemyposition.transform.position;
+                battalemanager.Instance.currentenemy.transform.parent.rotation = enemyposition.transform.rotation;
+            }
         }
 
     }
@@ -47,27 +55,27 @@ public class playerskillmove : MonoBehaviour
         }
     }
 
-    public void FixedDamage()
+    public void FixedDamage_(float damint)
     {
-        float damage = GetComponent<playerstatus>().attackpower * damageint;
+        float damage = GetComponent<playerstatus>().attackpower * damint;
         battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().Damage((int)damage);
     }
 
-    public void SlashDamage()
+    public void SlashDamage_(float damint)
     {
-        float damage = GetComponent<playerstatus>().attackpower * damageint;
+        float damage = GetComponent<playerstatus>().attackpower * damint;
         battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().SlashDamage((int)damage);
     }
 
-    public void PenetrateDamage()
+    public void PenetrateDamage_(float damint)
     {
-        float damage = GetComponent<playerstatus>().attackpower * damageint;
+        float damage = GetComponent<playerstatus>().attackpower * damint;
         battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().PenetrateDamage((int)damage);
     }
 
-    public void BlowDamage()
+    public void BlowDamage_(float damint)
     {
-        float damage = GetComponent<playerstatus>().attackpower * damageint;
+        float damage = GetComponent<playerstatus>().attackpower * damint;
         battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
     }
 
@@ -209,6 +217,32 @@ public class playerskillmove : MonoBehaviour
     public void UnfixEnemySpecificPoint()
     {
         fixenemy = false;
+    }
+
+    public void EnemyAddForce(float force)
+    {
+        if (battalemanager.Instance.currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+            if (GetComponent<PlayerMove>().dir == 1)
+            {
+                rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+            }
+            if (GetComponent<PlayerMove>().dir == -1)
+            {
+                rb.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+            }
+        }
+        else if (battalemanager.Instance.currentenemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
+        {
+            if (GetComponent<PlayerMove>().dir == 1)
+            {
+                rb2.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+            }
+            if (GetComponent<PlayerMove>().dir == -1)
+            {
+                rb2.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+            }
+        }
     }
 
     public void MovetoBackOfEnemy()

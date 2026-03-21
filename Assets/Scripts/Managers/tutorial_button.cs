@@ -7,6 +7,8 @@ public class tutorial_button : MonoBehaviour
     public GameObject[] uis;
     public int index;
 
+    public bool timescale1;
+
     public void Next()
     {
         if (index != uis.Length)
@@ -20,6 +22,10 @@ public class tutorial_button : MonoBehaviour
         }
         else
         {
+            if (timescale1)
+            {
+                Time.timeScale = 1;
+            }
             transform.parent.gameObject.SetActive(false);
         }
         

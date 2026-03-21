@@ -60,6 +60,8 @@ public class uimanager : MonoBehaviour
     public GameObject glitch;
     public List<GameObject> glitchs = new List<GameObject> { };
     public GameObject tutorialuireal;
+    public GameObject tutorialuireal2;
+    public GameObject tutorialuireal3;
 
     void Awake()
     {
@@ -199,5 +201,15 @@ public class uimanager : MonoBehaviour
     public void TutorialGo()
     {
         tutorialuireal.SetActive(true);
+    }
+
+    public void TutorialGo2()
+    {
+        tutorialuireal2.SetActive(true);
+    }
+
+    public void TutorialGo3()
+    {
+        tutorialuireal3.SetActive(true);
     }
 }

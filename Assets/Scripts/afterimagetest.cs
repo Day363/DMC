@@ -40,7 +40,7 @@ public class afterimagetest : MonoBehaviour
     {
         GameObject currentimage = Instantiate(imageobject, transform.position, transform.rotation);
 
-        currentimage.transform.localScale = transform.localScale;
+        currentimage.transform.localScale = transform.parent.localScale;
         currentimage.GetComponent<SpriteRenderer>().sprite = sr.sprite;
         currentimage.GetComponent<fade_sprite>().fadetime = fadetime;
 

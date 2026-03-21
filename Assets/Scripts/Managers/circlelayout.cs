@@ -92,10 +92,9 @@ public class circlelayout : MonoBehaviour
     public void ArrangeNotEquel()
     {
         int count = transform.childCount;
-
+        Debug.Log("awrw");
         for (int i = 0; i < count; i++)
         {
-            Debug.Log(i);
             Transform child = transform.GetChild(i);
 
             float angle = (startAngle + angleStep * i) * Mathf.Deg2Rad;

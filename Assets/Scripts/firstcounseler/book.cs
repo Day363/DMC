@@ -24,16 +24,16 @@ public class book : MonoBehaviour
         {
             if (transform.position.x > center.transform.position.x)
             {
-                transform.DOMoveX(transform.position.x + Random.Range(50, 100), 1.5f).SetId("MoveBook");
+                transform.DOLocalMoveX(transform.localPosition.x + Random.Range(70, 100), 1.5f).SetId("MoveBook");
             }
             else
             {
-                transform.DOMoveX(transform.position.x - Random.Range(50, 100), 1.5f).SetId("MoveBook");
+                transform.DOLocalMoveX(transform.localPosition.x - Random.Range(70, 100), 1.5f).SetId("MoveBook");
             }
         }
         else if (i == 1)
         {
-            transform.DOMoveY(transform.position.x + Random.Range(50, 100), 1.5f).SetId("MoveBook");
+            transform.DOLocalMoveY(transform.localPosition.y + Random.Range(70, 100), 1.5f).SetId("MoveBook");
         }
         yield return new WaitForSeconds(5f);
         moving = false;

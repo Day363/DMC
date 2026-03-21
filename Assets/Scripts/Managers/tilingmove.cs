@@ -18,7 +18,7 @@ public class tilingmove : MonoBehaviour
 
     void Update()
     {
-        float move = direction * speed * Time.deltaTime;
+        float move = direction * speed * Time.unscaledDeltaTime;
 
         for (int i = 0; i < tiles.Length; i++)
         {

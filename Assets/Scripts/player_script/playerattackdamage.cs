@@ -20,6 +20,7 @@ public class playerattackdamage : MonoBehaviour
 
     public void Start()
     {
+        player = battalemanager.Instance.player;
         playerskillmove.Whenattackend += DamagepercentplusZero;
     }
 

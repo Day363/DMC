@@ -17,6 +17,8 @@ public class counseler0_counsel : MonoBehaviour
 
     public void Start()
     {
+        boss_hpbar.OnCollusion += Tutorial3;
+
         battalemanager.Instance.currentenemy = gameObject;
         player = battalemanager.Instance.player;
         gamemanager = battalemanager.Instance.gameObject;
@@ -39,5 +41,11 @@ public class counseler0_counsel : MonoBehaviour
             gamemanager.GetComponent<chatmanager>().CallDialogue(13);
             GetComponent<Animator>().SetTrigger("meet");
         }
+    }
+
+    public void Tutorial3()
+    {
+        Time.timeScale = 0;
+        uimanager.Instance.TutorialGo3();
     }
 }

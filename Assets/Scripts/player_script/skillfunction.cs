@@ -38,6 +38,8 @@ public class skillfunction : MonoBehaviour
     public GameObject cutscene1shoot;
     public GameObject glitch;
     public GameObject cutsceneobject;
+    public GameObject warfrigmentslasheffect;
+    public GameObject warfrigmentpenetrateeffect;
 
     public bool trapal_attack1_recycle;
     public int trapal_attack1_recycle_int;
@@ -847,6 +849,39 @@ public class skillfunction : MonoBehaviour
         curbox.transform.localScale = new Vector3(UnityEngine.Random.Range(0.5f, 5f), UnityEngine.Random.Range(0.5f, 5f), 1);
         yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 2f));
         Destroy(curbox);
+    }
+
+    public void SpawnWarFrigMentSlash()
+    {
+        GameObject curslash = Instantiate(warfrigmentslasheffect, playereffectpos.transform);
+        curslash.transform.localPosition = new Vector3(0, 0, 0);
+        if (GetComponent<PlayerMove>().dir == 1)
+        {
+            curslash.transform.localScale = new Vector3(1, 1, 1);
+            curslash.transform.localRotation = Quaternion.Euler(UnityEngine.Random.Range(0, 180), 0, UnityEngine.Random.Range(30, -30));
+        }
+        if (GetComponent<PlayerMove>().dir == -1)
+        {
+            curslash.transform.localScale = new Vector3(-1, 1, 1);
+            curslash.transform.localRotation = Quaternion.Euler(UnityEngine.Random.Range(0, 180), 0, UnityEngine.Random.Range(30, -30));
+        }
+
+    }
+
+    public void SpawnWarFrigMentPenetrate()
+    {
+        GameObject curslash = Instantiate(warfrigmentpenetrateeffect, playereffectpos.transform);
+        curslash.transform.localPosition = new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.3f, 0.3f), 0);
+        if (GetComponent<PlayerMove>().dir == 1)
+        {
+            curslash.transform.localScale = new Vector3(1, 1, 1);
+ 
+        }
+        if (GetComponent<PlayerMove>().dir == -1)
+        {
+            curslash.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
     }
 
 

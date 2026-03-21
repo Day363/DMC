@@ -10273,6 +10273,7 @@ MonoBehaviour:
   lines: []
   bossname: {fileID: 0}
   where: {fileID: 0}
+  tutorial: 0
 --- !u!4 &29619240
 Transform:
   m_ObjectHideFlags: 0
@@ -20055,6 +20056,129 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &97939305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97939306}
+  - component: {fileID: 97939309}
+  - component: {fileID: 97939308}
+  - component: {fileID: 97939307}
+  m_Layer: 10
+  m_Name: hitbox1
+  m_TagString: playerattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97939306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97939305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 508927237}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97939307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97939305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c6262077e6ddc4b9b72c61967c9de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackeffectall: []
+  anglefix: 0
+  fixangle: 0
+  randomangle: 0
+  attackeffect_random: []
+--- !u!114 &97939308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97939305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54089fc9e4bada4ea5078c55b3c969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canattack: 1
+  canjump: 0
+  player: {fileID: 1233421491}
+  damagenum: 3
+  damage: 0
+  damagepercentplus: 0
+  damagepercent: 0
+  damagepercentCore: 1
+  fixdam: 0
+  slash: 0
+  penetrate: 1
+  blow: 0
+--- !u!60 &97939309
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97939305}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.1402283, y: -0.021131277}
+      - {x: -1.0810308, y: 0.7360363}
+      - {x: -1.0519576, y: -0.45626247}
+  m_UseDelaunayMesh: 0
 --- !u!1 &98082802
 GameObject:
   m_ObjectHideFlags: 0
@@ -101324,6 +101448,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &508927236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508927237}
+  m_Layer: 10
+  m_Name: war_frigment_skill1
+  m_TagString: playerattack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &508927237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508927236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 97939306}
+  m_Father: {fileID: 1354706160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &509341440
 GameObject:
   m_ObjectHideFlags: 0
@@ -166464,7 +166620,7 @@ MonoBehaviour:
   skillstring: []
   attacklist_notset: []
   activeweaponlist:
-  - {fileID: 11400000, guid: 1ae55655d9ee9f646a009801d976e23d, type: 2}
+  - {fileID: 11400000, guid: 1bc622aa009a5a7499eaf4f6fbf6bf68, type: 2}
   - {fileID: 11400000, guid: 206ae441426574f46ab29830c7187fc1, type: 2}
   - {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
   - {fileID: 11400000, guid: d5a2153cd4b149c49a9b2a9111b37365, type: 2}
@@ -266458,7 +266614,7 @@ MonoBehaviour:
   damagedecrease: 0
   damagedecreaseCore: 1
   penetratedamageup: 0
-  penetratedamageupCore: 1
+  penetratedamageupCore: 0
   focus: 0
   maxbalance: 300
   currentbalance: 0
@@ -266627,6 +266783,8 @@ MonoBehaviour:
   cutscene1shoot: {fileID: 5656130934363881753, guid: f0484163953b1994b92a5e1ddf718fbf, type: 3}
   glitch: {fileID: 781459568503545694, guid: 8eb1e3932cd77554592d54ecaf1f42a9, type: 3}
   cutsceneobject: {fileID: 1854147178}
+  warfrigmentslasheffect: {fileID: 7684701411538175375, guid: bbbe39ec6b8a63d4eb43e0f9aeed7f55, type: 3}
+  warfrigmentpenetrateeffect: {fileID: 3552736169618681211, guid: 8fc3d5b3cec8a8045ae2a1afaaeaa5de, type: 3}
   trapal_attack1_recycle: 0
   trapal_attack1_recycle_int: 0
 --- !u!114 &1233421508
@@ -266710,7 +266868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamemanager: {fileID: 0}
   weaponinv:
-  - {fileID: 11400000, guid: 1ae55655d9ee9f646a009801d976e23d, type: 2}
+  - {fileID: 11400000, guid: 1bc622aa009a5a7499eaf4f6fbf6bf68, type: 2}
   - {fileID: 11400000, guid: 206ae441426574f46ab29830c7187fc1, type: 2}
   - {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
   - {fileID: 11400000, guid: d5a2153cd4b149c49a9b2a9111b37365, type: 2}
@@ -295899,6 +296057,7 @@ Transform:
   - {fileID: 175959663}
   - {fileID: 1080575885}
   - {fileID: 526214699}
+  - {fileID: 508927237}
   m_Father: {fileID: 1233421494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357395916
@@ -379324,7 +379483,7 @@ MonoBehaviour:
   attackcore: {fileID: 840654302}
   currentenemy: {fileID: 0}
   playerweaponinv:
-  - {fileID: 11400000, guid: 1ae55655d9ee9f646a009801d976e23d, type: 2}
+  - {fileID: 11400000, guid: 1bc622aa009a5a7499eaf4f6fbf6bf68, type: 2}
   - {fileID: 11400000, guid: 206ae441426574f46ab29830c7187fc1, type: 2}
   - {fileID: 11400000, guid: 0cd0ec9dc6a0e2a4d8f0f2b73a328f54, type: 2}
   - {fileID: 11400000, guid: d5a2153cd4b149c49a9b2a9111b37365, type: 2}

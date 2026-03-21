@@ -140,8 +140,8 @@ public class playerstatus : MonoBehaviour
 
         playerhit.OnHitCalled += WhenHit;
 
-        numbercount.GetComponent<TMP_Text>().text = battalemanager.Instance.number.ToString();
-        numberimage.GetComponent<Image>().sprite = battalemanager.Instance.numberimage;
+        //numbercount.GetComponent<TMP_Text>().text = battalemanager.Instance.number.ToString();
+        //numberimage.GetComponent<Image>().sprite = battalemanager.Instance.numberimage;
 
 
     }

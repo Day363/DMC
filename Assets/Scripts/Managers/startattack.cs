@@ -25,11 +25,17 @@ public class startattack : MonoBehaviour
             selectUi.SetActive(false);
             attackcore.GetComponent<attackcore>().ArreyComplete();
             attackcore.GetComponent<attackcore>().StartCircum();
+            if (battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial)
+            {
+                Time.timeScale = 0f;
+                uimanager.Instance.TutorialGo2();
+            }
         }
         else
         {
             StartCoroutine(Fade());
         }
+
         
     }
 

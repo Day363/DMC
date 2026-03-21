@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
-using TMPro;
+using TMPro; 
+using System;
 
 public class indexer0_counsel : MonoBehaviour
 {
+
     public GameObject player;
     public GameObject attackcore;
     public GameObject cammanager;
@@ -32,6 +34,7 @@ public class indexer0_counsel : MonoBehaviour
     public void Start()
     {
         boss_hpbar.OnPenetrationHitCalled += PenetrateDown;
+
 
         gamemanager = battalemanager.Instance.gameObject;
 
@@ -120,4 +123,6 @@ public class indexer0_counsel : MonoBehaviour
 
         curportal.transform.DOScale(0, 0.2f).SetEase(Ease.OutQuart);
     }
+
+    
 }
