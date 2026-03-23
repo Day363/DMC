@@ -14,13 +14,14 @@ public class boss_hpbar : MonoBehaviour
     public static event Action Die;
     public static event Action OnCycleEnd;
     public static event Action OnCollusion;
+    public static event Action OnCollusionSolve;
 
     public GameObject worldlight;
     public GameObject playerlight;
     public GameObject gammanager;
     public GameObject cammanager;
 
-    public GameObject attackcore;
+    public GameObject attackcore_;
 
     public GameObject damagepos;
 
@@ -208,6 +209,7 @@ public class boss_hpbar : MonoBehaviour
         currenthealth = maxhealth;
         balancebarint.maxValue = maxbalance;
         currentbalance = 0;
+        attackcore_ = attackcore.attackcoreInstance.gameObject;
     }
 
     //완전 새 스텍일떄만 작동
@@ -314,10 +316,10 @@ public class boss_hpbar : MonoBehaviour
         GetComponent<Animator>().SetTrigger("collapse");
 
         currentbalance = 0;
-        if (attackcore.GetComponent<attackcore>().standbyskills.Count > 0)
+        if (attackcore_.GetComponent<attackcore>().standbyskills.Count > 0)
         {
             Debug.Log("대기스킬이 1개 이상이므로 대기스킬 사용");
-            attackcore.GetComponent<attackcore>().UseStandbySkill();
+            attackcore_.GetComponent<attackcore>().UseStandbySkill();
         }
         else
         {
@@ -333,9 +335,15 @@ public class boss_hpbar : MonoBehaviour
     IEnumerator Collapsetimeout()
     {
         yield return new WaitForSeconds(collapsefloat);
+        CollusionSolve();
         GetComponent<Animator>().SetBool("idle", true);
         iscollapse = false;
-        attackcore.GetComponent<attackcore>().NostandByskill();
+        attackcore_.GetComponent<attackcore>().NostandByskill();
+    }
+
+    public void CollusionSolve()
+    {
+        OnCollusionSolve?.Invoke();
     }
 
     public void Redemisson()
@@ -355,7 +363,7 @@ public class boss_hpbar : MonoBehaviour
             Redemisson();
 
             cammanager.GetComponent<CameraManager>().CamVibration0_5();
-            attackcore.GetComponent<attackcore>().BossDamaged();
+            attackcore_.GetComponent<attackcore>().BossDamaged();
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
@@ -393,7 +401,7 @@ public class boss_hpbar : MonoBehaviour
             Redemisson();
 
             cammanager.GetComponent<CameraManager>().CamVibration0_5();
-            attackcore.GetComponent<attackcore>().BossDamaged();
+            attackcore_.GetComponent<attackcore>().BossDamaged();
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
@@ -423,6 +431,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        Debug.Log(damage);
         if (canhit)
         {
             HitSound();
@@ -432,7 +441,7 @@ public class boss_hpbar : MonoBehaviour
             Redemisson();
 
             cammanager.GetComponent<CameraManager>().CamVibration0_5();
-            attackcore.GetComponent<attackcore>().BossDamaged();
+            attackcore_.GetComponent<attackcore>().BossDamaged();
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
@@ -468,7 +477,7 @@ public class boss_hpbar : MonoBehaviour
             Redemisson();
 
             cammanager.GetComponent<CameraManager>().CamVibration0_5();
-            attackcore.GetComponent<attackcore>().BossDamaged();
+            attackcore_.GetComponent<attackcore>().BossDamaged();
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;

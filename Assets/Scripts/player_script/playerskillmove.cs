@@ -28,6 +28,11 @@ public class playerskillmove : MonoBehaviour
 
     public List<GameObject> effects;
 
+    public void Start()
+    {
+        cameramanager = battalemanager.Instance.cameramanager;
+    }
+
     public void FixedUpdate()
     {
         if (fixenemy)

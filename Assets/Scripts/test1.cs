@@ -35,6 +35,12 @@ public class test1 : MonoBehaviour
     public bool canwalk = false;
     public int direction = 1;
 
+    public void Start()
+    {
+        player = battalemanager.Instance.player;
+        boss_hpbar.OnCollusionSolve += AttackEnd;
+    }
+
     public void FixedUpdate()
     {
         if (canwalk && !whileattack && transform.parent.position.x - player.transform.position.x < 0)
@@ -61,6 +67,11 @@ public class test1 : MonoBehaviour
             GetComponent<Animator>().SetBool("walk", true);
             transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(movespeed * direction, 0);
         }
+    }
+
+    public void SoundPlay(string name)
+    {
+        soundmanager.instance.SoundPlay(name);
     }
 
     public void LookPlayer()
@@ -129,16 +140,36 @@ public class test1 : MonoBehaviour
 
     public void EyeSpawn()
     {
+        SoundPlay("ding2");
         GameObject cureye = Instantiate(eye, eyeposition.transform);
         cureye.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void Slasheffect2()
     {
+        int i = Random.Range(0, 3);
+        if (i == 0)
+        {
+            SoundPlay("slash_test1");
+        }
+        else if (i == 1)
+        {
+            SoundPlay("slash_test2");
+        }
+        else if (i == 2)
+        {
+            SoundPlay("slash_test3");
+        }
+
         GameObject cureffect = Instantiate(slasheffect, player.transform.position, Quaternion.Euler(0, 0, Random.Range(135f, 45f)));
         cureffect.transform.position = player.transform.position;
         cureffect = Instantiate(slasheffect, player.transform.position, Quaternion.Euler(0, 0, Random.Range(135f, 45f)));
         cureffect.transform.position = player.transform.position;
+    }
+
+    public void SwordSwoosh()
+    {
+        SoundPlay("sword_swoosh");
     }
 
     public void TimeSlow()
@@ -181,12 +212,14 @@ public class test1 : MonoBehaviour
 
     public void CroizUp()
     {
+        SoundPlay("croiz_up");
         croiz.GetComponent<croiz>().Up();
     }
 
     public void CroizDown()
     {
         croiz.GetComponent<croiz>().Down();
+        SoundPlay("doom");
         StartCoroutine(Start_co());
         curjail = Instantiate(jail, player.transform);
         player.GetComponent<Animator>().SetBool("stiffness", true);

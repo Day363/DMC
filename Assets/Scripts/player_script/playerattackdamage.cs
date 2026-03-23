@@ -26,12 +26,13 @@ public class playerattackdamage : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        damagepercent = damagepercentCore;
+        damagepercentplus = playerstatus.instance.attackdamageplus + playerstatus.instance.damageincrease_c;//여기에 데미지 증가 변수 떄려박기
+        damagepercent = damagepercent + damagepercentplus;
+
         playerstatus playerplayerstatus = player.GetComponent<playerstatus>();
         if (collision.gameObject.tag == "enemybullet")
         {
-            damagepercent = damagepercentCore;
-            damagepercentplus += playerstatus.instance.attackdamageplus;
-            damagepercent = damagepercent + damagepercentplus;
             damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
             enemybullet collisionenemybullet = collision.GetComponent<enemybullet>();
             collisionenemybullet.damage -= damage;
@@ -55,8 +56,6 @@ public class playerattackdamage : MonoBehaviour
             {
                 if (fixdam)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().Damage(damage);
                     damagepercentplus = 0;
@@ -64,26 +63,20 @@ public class playerattackdamage : MonoBehaviour
 
                 if (slash)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().SlashDamage(damage);
                     damagepercentplus = 0;
                 }
 
                 if (penetrate)
-                {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
+                { 
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
-                    collision.GetComponent<boss_hpbar>().PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
+                    collision.GetComponent<boss_hpbar>().PenetrateDamage((int)(damage * (1 + playerplayerstatus.penetratedamageup)));
                     damagepercentplus = 0;
                 }
 
                 if (blow)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     collision.GetComponent<boss_hpbar>().BlowDamage(damage);
                     damagepercentplus = 0;
@@ -104,8 +97,6 @@ public class playerattackdamage : MonoBehaviour
                 neh.currenthitobjcet = player;
                 if (fixdam)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     neh.Damage(damage);
                     damagepercentplus = 0;
@@ -113,9 +104,6 @@ public class playerattackdamage : MonoBehaviour
 
                 if (slash)
                 {
-
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     neh.SlashDamage(damage);
                     damagepercentplus = 0;
@@ -123,8 +111,6 @@ public class playerattackdamage : MonoBehaviour
 
                 if (penetrate)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     neh.PenetrateDamage((int)(damage * playerplayerstatus.penetratedamageup));
                     damagepercentplus = 0;
@@ -132,8 +118,6 @@ public class playerattackdamage : MonoBehaviour
 
                 if (blow)
                 {
-                    damagepercent = damagepercentCore;
-                    damagepercent = damagepercent + damagepercentplus;
                     damage = Mathf.RoundToInt(playerplayerstatus.attackpower * damagenum * damagepercent);
                     neh.BlowDamage(damage);
                     damagepercentplus = 0;

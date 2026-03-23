@@ -31,19 +31,22 @@ public class Passivefunction : MonoBehaviour
     public List<GameObject> trapal_certain_texts = new List<GameObject> { };
     public List<GameObject> trapal_deny_texts = new List<GameObject> { };
 
-    private bool disabled_passive1 = false;
-    //private bool alttrigger_passive1 = false;
-    private bool alttrigger_passive2 = false;
-    private bool alttrigger_passive3 = false;
-    private bool indexer_passive1 = false;
-    private bool indexer_passive2 = false;
-    private bool indexer_passive3 = false;
-    private bool trapal_passive1 = false;
-    private bool trapal_passive2 = false;
-    private bool trapal_passive3 = false;
-    private bool trapal_passive4 = false;
+
+    public bool disabled_passive1 = false;
+    //public bool alttrigger_passive1 = false;
+    public bool alttrigger_passive2 = false;
+    public bool alttrigger_passive3 = false;
+    public bool indexer_passive1 = false;
+    public bool indexer_passive2 = false;
+    public bool indexer_passive3 = false;
+    public bool trapal_passive1 = false;
+    public bool trapal_passive2 = false;
+    public bool trapal_passive3 = false;
+    public bool trapal_passive4 = false;
     public bool trapal_passive5 = false;
     public bool trapal_passive6 = false;
+    public bool warfrigment_passive1 = false;
+    public bool warfrigment_passive2 = false;
 
     private void OnEnable()
     {
@@ -65,7 +68,8 @@ public class Passivefunction : MonoBehaviour
 
     public void SetBoolsFromList(List<string> activeList)
     {
-        FieldInfo[] fields = GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+        Debug.Log(activeList);
+        FieldInfo[] fields = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (FieldInfo field in fields)
         {
@@ -214,6 +218,14 @@ public class Passivefunction : MonoBehaviour
             if (instance != null)
             {
                 GetComponent<playerstatus>().ApplyStack(absorbtion, (int)(GetComponent<playerstatus>().maxbalance * (24f - instance.currentStack)));
+            }
+        }
+
+        if (warfrigment_passive1)
+        {
+            if (attackcore.GetComponent<attackcore>().cycle <= 5)
+            {
+                GetComponent<playerstatus>().damageincrease_c += 0.15f;
             }
         }
     }

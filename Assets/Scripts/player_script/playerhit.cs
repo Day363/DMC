@@ -374,7 +374,7 @@ public class playerhit : MonoBehaviour
 
     void Hitcamera()
     {
-        cammanager.GetComponent<CameraManager>().CamVibration0_5();
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CamVibration0_5();
     }
 
 }

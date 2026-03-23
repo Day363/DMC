@@ -9,7 +9,7 @@ public class cronometer_script : MonoBehaviour
 {
     public Camera mainCam;
     public float targetangle;
-    public GameObject attackcore;
+    public GameObject attackcore_;
     public GameObject cammanager;
     public GameObject player;
 
@@ -40,9 +40,12 @@ public class cronometer_script : MonoBehaviour
 
     public void Start()
     {
+        player = battalemanager.Instance.player;
         playerplayerstatus  = player.GetComponent<playerstatus>();
 
         battalemanager.Instance.cronometer = gameObject;
+        attackcore.attackcoreInstance.cronometer = gameObject;
+        attackcore_ = attackcore.attackcoreInstance.gameObject;
     }
 
     void Update()
@@ -90,6 +93,8 @@ public class cronometer_script : MonoBehaviour
             2.5f                     
         ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
 
+        soundmanager.instance.SoundPlay("battlestart");
+
         yield return new WaitForSecondsRealtime(2.5f);
         Instantiate(effect, transform.position, Quaternion.identity);
         cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
@@ -128,7 +133,7 @@ public class cronometer_script : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.1f);
 
-        attackcore.GetComponent<attackcore>().BattleStart();
+        attackcore_.GetComponent<attackcore>().BattleStart();
         uimanager.Instance.TutorialGo();
         FadeOut();
     }

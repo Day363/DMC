@@ -15,6 +15,11 @@ public class player_trapal_weapon_arrey : MonoBehaviour
     public float x;
     public float y;
 
+    public void Start()
+    {
+        target = battalemanager.Instance.player;
+    }
+
     public void FixedUpdate()
     {
         angle = angle + 1f;

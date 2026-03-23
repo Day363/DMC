@@ -206,6 +206,7 @@ public class attackcore : MonoBehaviour
 
 
         gamemanager = battalemanager.Instance.gameObject;
+        cammanager = battalemanager.Instance.cameramanager;
         attackcoreInstance = this;
 
         attacklist = new();
@@ -218,7 +219,7 @@ public class attackcore : MonoBehaviour
         playerplayerhit = player.GetComponent<playerhit>();
         playerskillfunction = player.GetComponent<skillfunction>();
 
-        
+        world_light = battalemanager.Instance.world_globallight;
         activeweaponlist = player_inventory.instance.weaponinv;
     }
 
@@ -292,8 +293,8 @@ public class attackcore : MonoBehaviour
     public void StartCycle()
     {
         playerplayerstatus.PassiveFloatReset();
-        playerPassivefunction.WhenCycleStart();
         playerplayerstatus.CycleStart();
+        playerPassivefunction.WhenCycleStart();
         Focuslength();
     }
 
@@ -407,6 +408,7 @@ public class attackcore : MonoBehaviour
 
     public void EndStandbySkill()
     {
+        gamemanagerbattalemanager.currentenemy.GetComponent<boss_hpbar>().CollusionSolve();
         gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
         gamemanagerbattalemanager.currentenemy.GetComponent<Animator>().SetBool("idle", true);
         letterboxletterboxin.PlayLetterboxOut();
@@ -510,11 +512,11 @@ public class attackcore : MonoBehaviour
                 }
             }
 
-            foreach (standbyskill standbyskill1 in standbyskills)
-            {
-                GameObject currenttext = Instantiate(waitskillprefap, standbyskillslider.transform);
-                currenttext.GetComponent<TMP_Text>().text = $"[{standbyskill1.skillname}]";
-            }
+            //foreach (standbyskill standbyskill1 in standbyskills)
+            //{
+            //    GameObject currenttext = Instantiate(waitskillprefap, standbyskillslider.transform);
+            //    currenttext.GetComponent<TMP_Text>().text = $"[{standbyskill1.skillname}]";
+            //}
         }
     }
 

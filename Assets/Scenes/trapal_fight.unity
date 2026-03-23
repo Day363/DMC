@@ -5937,7 +5937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 519420031}
   targetangle: 0
-  attackcore: {fileID: 840654302}
+  attackcore_: {fileID: 0}
   cammanager: {fileID: 373801462}
   player: {fileID: 1233421491}
   middle: {fileID: 127159112}
@@ -58290,6 +58290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096786003}
   - component: {fileID: 1096786004}
+  - component: {fileID: 1096786005}
   m_Layer: 0
   m_Name: world globallight
   m_TagString: Untagged
@@ -58362,6 +58363,18 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1096786005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096786002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2243a6afd11b7a648a98c4bba70ab5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1098857291
 GameObject:
   m_ObjectHideFlags: 0
@@ -65148,6 +65161,8 @@ MonoBehaviour:
   bleed: {fileID: 11400000, guid: f775d7130563a9d4d9c5378db8b9453d, type: 2}
   penetrationup1: {fileID: 11400000, guid: b7bab551a792f2244bb0ce508dd1be5e, type: 2}
   absorbtion: {fileID: 0}
+  damageincrease_c: 0
+  damageincreaseCore_c: 0
   backdelay: 0.4
   backdelayCore: 0.4
   slash_tolerance: 1
@@ -65331,6 +65346,8 @@ MonoBehaviour:
   cutscene1shoot: {fileID: 0}
   glitch: {fileID: 0}
   cutsceneobject: {fileID: 0}
+  warfrigmentslasheffect: {fileID: 0}
+  warfrigmentpenetrateeffect: {fileID: 0}
   trapal_attack1_recycle: 0
   trapal_attack1_recycle_int: 0
 --- !u!114 &1233421508
@@ -65394,8 +65411,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  disabled_passive1: 0
+  alttrigger_passive2: 0
+  alttrigger_passive3: 0
+  indexer_passive1: 0
+  indexer_passive2: 0
+  indexer_passive3: 0
+  trapal_passive1: 0
+  trapal_passive2: 0
+  trapal_passive3: 0
+  trapal_passive4: 0
   trapal_passive5: 0
   trapal_passive6: 0
+  warfrigment_passive1: 0
+  warfrigment_passive2: 0
   trapal_hit: 0
   trapal_player_hit: 0
   trapal_haloint: 0

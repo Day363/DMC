@@ -49,8 +49,14 @@ public class playerstatus : MonoBehaviour
     public Stack bleed;
     public Stack penetrationup1;
     public Stack absorbtion;
+    //주기 시작
 
+    public float damageincrease_c = 0;
+    public float damageincreaseCore_c = 0;
+
+    //
     //실시간 체크(스텍의 효과가 순환 시작이나 끝 같은 특정한 트리거가 없으며 업데이트 할떄마다 이 수치를 조정해야함)
+    //
     //효과용 변수
 
     public float backdelay = 0.4f;
@@ -414,6 +420,7 @@ public class playerstatus : MonoBehaviour
     {
         r_penetration_cycle = true;
         Mathf.Clamp(forgotten_cycle--, 0, 5);
+        damageincrease_c = damageincreaseCore_c;
 
         if (have_endofimpulse)
         {
@@ -564,7 +571,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
-        
+        Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
@@ -580,6 +587,7 @@ public class playerstatus : MonoBehaviour
 
     public void SlashDamage(float balance)
     {
+        Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * slash_tolerance;
@@ -595,6 +603,7 @@ public class playerstatus : MonoBehaviour
 
     public void PenetrateDamage(float balance)
     {
+        Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
         PenetrationHit();
 
@@ -611,6 +620,7 @@ public class playerstatus : MonoBehaviour
 
     public void BlowDamage(float balance)
     {
+        Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * blow_tolerance;
@@ -626,6 +636,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceHeal(float balance)
     {
+        Debug.Log("ADada");
         currentbalance -= balance * (healplus + r_healincrease);
         BalanceCheck();
     }
@@ -637,6 +648,7 @@ public class playerstatus : MonoBehaviour
 
     public void SelfBalanceDamage(float balance)
     {
+        Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         currentbalance += (balance * selfharmdamagepercent);

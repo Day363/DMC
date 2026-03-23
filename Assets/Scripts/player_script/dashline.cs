@@ -15,8 +15,14 @@ public class dashline : MonoBehaviour
 
     private LineRenderer lineRenderer;
 
+    public void Awake()
+    {
+        attackcore.attackcoreInstance.dashmanager = gameObject;
+    }
+
     void Start()
     {
+        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
     }

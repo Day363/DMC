@@ -16,6 +16,7 @@ public class book : MonoBehaviour
 
     IEnumerator Move_co()
     {
+        soundmanager.instance.SoundPlay("book");
         moving = true;
         GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.7f);
         yield return new WaitForSeconds(0.71f);
