@@ -10183,7 +10183,7 @@ MonoBehaviour:
   targetangle: 0
   attackcore_: {fileID: 0}
   cammanager: {fileID: 373801462}
-  player: {fileID: 0}
+  player: {fileID: 1233421491}
   middle: {fileID: 127159112}
   hourHand: {fileID: 434699929}
   minuteHand: {fileID: 293809439}
@@ -10196,6 +10196,7 @@ MonoBehaviour:
   playerplayerstatus: {fileID: 1233421498}
   rings: []
   lines: []
+  pin: {fileID: 0}
   bossname: {fileID: 0}
   where: {fileID: 0}
   tutorial: 0
@@ -108295,6 +108296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538344134}
   - component: {fileID: 538344135}
+  - component: {fileID: 538344136}
   m_Layer: 0
   m_Name: playerlight
   m_TagString: Untagged
@@ -108367,6 +108369,18 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &538344136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538344133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20349ace6c00f1e4c8b1c1c4c540bf8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &539234358
 GameObject:
   m_ObjectHideFlags: 0
@@ -231235,6 +231249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096786003}
   - component: {fileID: 1096786004}
+  - component: {fileID: 1096786005}
   m_Layer: 0
   m_Name: world globallight
   m_TagString: Untagged
@@ -231307,6 +231322,18 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1096786005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096786002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2243a6afd11b7a648a98c4bba70ab5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1098052494
 GameObject:
   m_ObjectHideFlags: 0
@@ -372570,6 +372597,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08cb1ab19841196429e5fe2e3406d576, type: 2}
   cronometer: {fileID: 0}
   world_globallight: {fileID: 0}
+  player_light: {fileID: 0}
   number: 0
   numberimage: {fileID: 0}
 --- !u!114 &1694457157
@@ -373773,6 +373801,10 @@ MonoBehaviour:
   - soundvariation: 1
     key: slash_test3
     clip: {fileID: 8300000, guid: d9bc9451ab10b1741b79a23247db4649, type: 3}
+    volume: 1
+  - soundvariation: 0
+    key: reeds
+    clip: {fileID: 8300000, guid: 32b266e809194c24eb33cb086ffd57fa, type: 3}
     volume: 1
 --- !u!114 &1694457161
 MonoBehaviour:

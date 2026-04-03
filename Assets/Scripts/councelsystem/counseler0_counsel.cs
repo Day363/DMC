@@ -45,7 +45,12 @@ public class counseler0_counsel : MonoBehaviour
 
     public void Tutorial3()
     {
-        Time.timeScale = 0;
-        uimanager.Instance.TutorialGo3();
+        if (battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial)
+        {
+            Time.timeScale = 0f;
+            uimanager.Instance.TutorialGo3();
+
+            battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial = false;
+        }
     }
 }

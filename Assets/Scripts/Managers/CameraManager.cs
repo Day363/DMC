@@ -29,6 +29,8 @@ public class CameraManager : MonoBehaviour
     public GameObject skillcam;
     public GameObject counselcam;
 
+    public Coroutine skillcamvib;
+
     public float returnAmplitudeGain = 0;
     public float returnFrequencyGain = 0;
 
@@ -233,6 +235,28 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 1;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 0.5f;
         yield return new WaitForSeconds(20f);
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
+        CamStable();
+    }
+
+    public void SkilCamvib()
+    {
+        if (skillcamvib != null)
+        {
+            StopCoroutine(skillcamvib);
+        }
+        
+        skillcamvib = StartCoroutine(Skillcam_CamVib0_5());
+    }
+
+    IEnumerator Skillcam_CamVib0_5()
+    {
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = skillcam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 12;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.1f);
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();

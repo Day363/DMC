@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
 using TMPro;
+using Unity.Mathematics;
+using UnityEngine;
 
 [ExecuteAlways] // 에디터 상태에서도 Update() 실행
 public class cronometer_script : MonoBehaviour
@@ -32,6 +33,7 @@ public class cronometer_script : MonoBehaviour
 
     public GameObject[] rings;
     public GameObject[] lines;
+    public GameObject pin;
     public GameObject bossname;
     public GameObject where;
 
@@ -73,11 +75,12 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
+        
         foreach (GameObject halo in rings)
         {
             halo.transform.localScale = new Vector3(0, 0, 1);
-            halo.GetComponent<trapalhaloturnupdate>().turnspeed = Random.Range(-2f, 2f);
-            float i = Random.Range(0.4f, 1.1f);
+            halo.GetComponent<trapalhaloturnupdate>().turnspeed = UnityEngine.Random.Range(-2f, 2f);
+            float i = UnityEngine.Random.Range(0.4f, 1.1f);
             halo.transform.DOScale(new Vector3(i, i, 1), 2.5f).SetUpdate(true).SetId("turn").SetEase(Ease.OutQuad);
         }
 
@@ -103,11 +106,12 @@ public class cronometer_script : MonoBehaviour
 
         foreach (GameObject halo in rings)
         {
-            float i = Random.Range(0.8f, 2.1f);
+            float i = UnityEngine.Random.Range(0.8f, 2.1f);
             halo.transform.DOScale(new Vector3(i, i, 1), 0.1f).SetUpdate(true).SetId("turn").SetEase(Ease.OutQuad);
             halo.GetComponent<battletitleflash>().Flash();
             halo.GetComponent<SpriteRenderer>().DOFade(0, 3f).SetUpdate(true);
         }
+        pin.GetComponent<SpriteRenderer>().DOFade(0, 3f).SetUpdate(true);
         foreach (GameObject line in lines)
         {
             line.SetActive(true);
@@ -134,13 +138,27 @@ public class cronometer_script : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f);
 
         attackcore_.GetComponent<attackcore>().BattleStart();
-        uimanager.Instance.TutorialGo();
+        if (tutorial)
+        {
+            uimanager.Instance.TutorialGo();
+        }
+        
         FadeOut();
     }
 
     public void FadeIn()
     {
         DOTween.Kill("fade");
+        pin.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true);
+        foreach (GameObject halo in rings)
+        {
+            halo.GetComponent<SpriteRenderer>().DOFade(0.5f, 0.5f).SetUpdate(true).SetId("fade");
+
+            halo.transform.localScale = new Vector3(0, 0, 1);
+            halo.GetComponent<trapalhaloturnupdate>().turnspeed = UnityEngine.Random.Range(-2f, 2f);
+            float i = UnityEngine.Random.Range(0.4f, 1.1f);
+            halo.transform.DOScale(new Vector3(i, i, 1), 2.5f).SetUpdate(true).SetId("turn").SetEase(Ease.OutQuad);
+        }
         Vector3 camPos = mainCam.transform.position;
         transform.position = new Vector3(camPos.x, camPos.y, transform.position.z);
         middle.GetComponent<SpriteRenderer>().DOFade(1, 0.5f).SetUpdate(true).SetId("fade"); 
@@ -152,6 +170,11 @@ public class cronometer_script : MonoBehaviour
     public void FadeOut()
     {
         DOTween.Kill("fade");
+        pin.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true);
+        foreach (GameObject halo in rings)
+        {
+            halo.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
+        }
         middle.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
         hourHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
         minuteHand.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).SetUpdate(true).SetId("fade");
@@ -173,7 +196,7 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator WhenLifeCoutDown_co()
     {
-        Time.timeScale = 0f;
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = true;
         targetangle = 360 - (((float)playerplayerstatus.lifecount / (float)playerplayerstatus.maxlifecount) * 360);
 
         DOTween.To(
@@ -205,6 +228,7 @@ public class cronometer_script : MonoBehaviour
 
         FadeOut();
         Time.timeScale = 1f;
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = false;
     }
 
     IEnumerator WhenLifeCoutDownEnd_co()

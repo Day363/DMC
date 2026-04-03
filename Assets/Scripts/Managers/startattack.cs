@@ -29,6 +29,7 @@ public class startattack : MonoBehaviour
             {
                 Time.timeScale = 0f;
                 uimanager.Instance.TutorialGo2();
+         
             }
         }
         else

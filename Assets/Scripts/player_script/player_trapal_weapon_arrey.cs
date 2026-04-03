@@ -25,7 +25,10 @@ public class player_trapal_weapon_arrey : MonoBehaviour
         angle = angle + 1f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        transform.position = new Vector3(target.transform.position.x + x, target.transform.position.y + y, 0);
+        if (target != null)
+        {
+            transform.position = new Vector3(target.transform.position.x + x, target.transform.position.y + y, 0);
+        }
 
     }
 

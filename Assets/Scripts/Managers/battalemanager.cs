@@ -27,6 +27,7 @@ public class battalemanager : MonoBehaviour
     public Rapport[] rapportdatas;
     public GameObject cronometer;
     public GameObject world_globallight;
+    public GameObject player_light;
 
     public int number;
     public Sprite numberimage;

@@ -667,11 +667,11 @@ public class playerstatus : MonoBehaviour
         lifecount = lifecount - 1;
         if (lifecount > 0)
         {
-            cronometer.GetComponent<cronometer_script>().WhenLifeCoutDown();
+            battalemanager.Instance.cronometer.GetComponent<cronometer_script>().WhenLifeCoutDown();
         }
         else if (lifecount == 0)
         {
-            cronometer.GetComponent<cronometer_script>().WhenLifeCoutDownEnd();
+            battalemanager.Instance.cronometer.GetComponent<cronometer_script>().WhenLifeCoutDownEnd();
         }
         
     }

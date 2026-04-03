@@ -369,7 +369,10 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = damage * damageplus;
             currenthealth -= totaldamage;
-            BalanceDamage(damage * 0.1f);
+            if (!iscollapse)
+            {
+                BalanceDamage(damage * 0.1f);
+            }
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
@@ -407,7 +410,10 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * slashtolerance) * damageplus;
             currenthealth -= totaldamage;
-            BalanceDamage(damage * 0.1f);
+            if (!iscollapse)
+            {
+                BalanceDamage(damage * 0.1f);
+            }
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
@@ -447,7 +453,10 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * penetratetolerance) * damageplus;
             currenthealth -= totaldamage;
-            BalanceDamage(damage * 0.1f);
+            if (!iscollapse)
+            {
+                BalanceDamage(damage * 0.1f);
+            }
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
@@ -483,7 +492,10 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * blowtolerance) * damageplus;
             currenthealth -= totaldamage;
-            BalanceDamage(damage * 0.1f);
+            if (!iscollapse)
+            {
+                BalanceDamage(damage * 0.1f);
+            }
             GameObject damt = Instantiate(damagetext);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)

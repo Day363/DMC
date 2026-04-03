@@ -63,10 +63,10 @@ public class skillfunction : MonoBehaviour
 
     public void GameOver()
     {
-        cammanager.GetComponent<CameraManager>().ShakeCamera(5, 0.02f);
-        playerlight.GetComponent<Light2D>().color = Color.black;
-        globallight.GetComponent<Light2D>().color = Color.red;
-        globallight.GetComponent<Light2D>().intensity = 16.5f;
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().ShakeCamera(5, 0.02f);
+        battalemanager.Instance.player_light.GetComponent<Light2D>().color = Color.black;
+        battalemanager.Instance.world_globallight.GetComponent<Light2D>().color = Color.red;
+        battalemanager.Instance.world_globallight.GetComponent<Light2D>().intensity = 16.5f;
     }
 
     public void soundplay(string soundname)
