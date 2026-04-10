@@ -104,7 +104,7 @@ public class PlayerMove : MonoBehaviour
         if (canmove)
         {
             
-            rigid.AddForce(Vector2.right * GetComponent<playerinput>().h, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.right * GetComponent<playerinput>().h * GetComponent<playerstatus>().speed, ForceMode2D.Impulse);
 
             if (rigid.velocity.x > GetComponent<playerstatus>().speed)
             {

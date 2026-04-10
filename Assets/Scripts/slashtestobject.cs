@@ -10,12 +10,17 @@ public class slashtestobject : MonoBehaviour
     public float maxscale;
     public float minscale;
 
+    public bool disappeartime = true;
     public float whendisappear;
 
     public void Start()
     {
         StartCoroutine(Spawn());
-        StartCoroutine(Disappear());
+        if (disappeartime)
+        {
+            StartCoroutine(Disappear());
+        }
+        
     }
 
     IEnumerator Spawn()

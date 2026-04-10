@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &741400168088402746
+--- !u!1 &6969342600005152538
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2142177286451784711}
-  - component: {fileID: 2994400970903227121}
+  - component: {fileID: 4153357867687618744}
+  - component: {fileID: 585864651919352813}
   m_Layer: 0
-  m_Name: slasheffectcore
+  m_Name: ray_slashcore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2142177286451784711
+--- !u!4 &4153357867687618744
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741400168088402746}
+  m_GameObject: {fileID: 6969342600005152538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -530.65424, y: -0.053028114, z: 10.925013}
+  m_LocalPosition: {x: -2.103003, y: -4.2141514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2994400970903227121
+--- !u!114 &585864651919352813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741400168088402746}
+  m_GameObject: {fileID: 6969342600005152538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b877c6c378f179f4587b096b870fdb8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 25dd67b71b44b6549b25462eb55078ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slash: {fileID: 7684701411538175375, guid: 5012c97ca4a310a4da1aa64c3ab04793, type: 3}
-  time: 0.03
-  maxscale: 1.5
-  minscale: 0.3
+  slash: {fileID: 213485761139487912, guid: ac1031139564a8d479a503b42cb53991, type: 3}
+  time: 0.01
+  maxscale: 0.15
+  minscale: 0.05
+  disappeartime: 0
+  whendisappear: 0.3

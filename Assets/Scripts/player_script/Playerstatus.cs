@@ -149,7 +149,7 @@ public class playerstatus : MonoBehaviour
         //numbercount.GetComponent<TMP_Text>().text = battalemanager.Instance.number.ToString();
         //numberimage.GetComponent<Image>().sprite = battalemanager.Instance.numberimage;
 
-
+        
     }
 
     public class StackInstance

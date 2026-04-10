@@ -34,9 +34,9 @@ public class cronometer0 : MonoBehaviour
             hourAngle += hourSpeed;
         }
 
-        hourHand.eulerAngles = new Vector3(0, 0, -hourAngle);
-        minuteHand.eulerAngles = new Vector3(0, 0, -(hourAngle * 3f));
-        secondHand.eulerAngles = new Vector3(0, 0, -(hourAngle * 9f));
+        hourHand.eulerAngles = new Vector3(hourHand.eulerAngles.x, hourHand.eulerAngles.y, -hourAngle);
+        minuteHand.eulerAngles = new Vector3(hourHand.eulerAngles.x, hourHand.eulerAngles.y, -(hourAngle * 3f));
+        secondHand.eulerAngles = new Vector3(hourHand.eulerAngles.x, hourHand.eulerAngles.y, -(hourAngle * 9f));
     }
 
     public void BattleStart()

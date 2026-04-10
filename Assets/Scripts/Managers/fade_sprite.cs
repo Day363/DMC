@@ -11,6 +11,7 @@ public class fade_sprite : MonoBehaviour
     public void Start()
     {
         GetComponent<SpriteRenderer>().DOFade(0, fadetime);
+        StartCoroutine(Destroy());
     }
 
     IEnumerator Destroy()
