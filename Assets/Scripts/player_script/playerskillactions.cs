@@ -9,6 +9,7 @@ public class playerskillactions : MonoBehaviour
     public float dash1power;
     public float dash2power;
     public float dash3power;
+    public float dash4power;
 
     public void Update()
     {
@@ -72,6 +73,18 @@ public class playerskillactions : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().AddForce(-dash3power * Vector2.right, ForceMode2D.Impulse);
+        }
+    }
+
+    public void Dash4()
+    {
+        if (dir == 1)
+        {
+            GetComponent<Rigidbody2D>().AddForce(dash4power * Vector2.right, ForceMode2D.Impulse);
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().AddForce(-dash4power * Vector2.right, ForceMode2D.Impulse);
         }
     }
 

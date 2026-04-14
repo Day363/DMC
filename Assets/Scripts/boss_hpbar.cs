@@ -343,6 +343,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void CollusionSolve()
     {
+        iscollapse = false; 
         OnCollusionSolve?.Invoke();
     }
 

@@ -101,11 +101,6 @@ public class uimanager : MonoBehaviour
         }
     }
 
-    public void PlayerSceneStatusClose()
-    {
-        playerscenestatus.SetActive(false);
-    }
-
     public void ResetUi()
     {
         foreach (Transform ui in skilllistset.transform)
@@ -133,7 +128,7 @@ public class uimanager : MonoBehaviour
         for (int i = 0; i < 15; i++)
         {
             Vector3 pos = new Vector3(battalemanager.Instance.cameramanager.transform.position.x + UnityEngine.Random.Range(-15f, 15f), battalemanager.Instance.cameramanager.transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
-            Vector3 scale = new Vector3(100, UnityEngine.Random.Range(-7f, 7f), 0);
+            Vector3 scale = new Vector3(100, UnityEngine.Random.Range(-3.5f, 3.5f), 0);
             GameObject currentglitch;
             currentglitch = Instantiate(glitch, pos, Quaternion.identity);
             currentglitch.transform.localScale = scale;

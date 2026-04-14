@@ -71,7 +71,7 @@ public class battalemanager : MonoBehaviour
     IEnumerator EnemyAttackDisabled_co(GameObject currentattack)
     {
         currentattack.SetActive(false);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         currentattack.SetActive(true);
     }
 }

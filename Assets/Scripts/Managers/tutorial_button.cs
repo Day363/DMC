@@ -24,6 +24,7 @@ public class tutorial_button : MonoBehaviour
         {
             if (timescale1)
             {
+                battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = false;
                 Time.timeScale = 1;
             }
             transform.parent.gameObject.SetActive(false);

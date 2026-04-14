@@ -250,6 +250,16 @@ public class CameraManager : MonoBehaviour
         skillcamvib = StartCoroutine(Skillcam_CamVib0_5());
     }
 
+    public void SkilCamvib30()
+    {
+        if (skillcamvib != null)
+        {
+            StopCoroutine(skillcamvib);
+        }
+
+        skillcamvib = StartCoroutine(Skillcam_CamVib30());
+    }
+
     IEnumerator Skillcam_CamVib0_5()
     {
         CinemachineVirtualCamera maincamCinemachineVirtualCamera = skillcam.GetComponent<CinemachineVirtualCamera>();
@@ -257,6 +267,18 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 12;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.1f);
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
+        CamStable();
+    }
+
+    IEnumerator Skillcam_CamVib30()
+    {
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = skillcam.GetComponent<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 30;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 5;
+        yield return new WaitForSeconds(1f);
         maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();

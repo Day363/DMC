@@ -33,6 +33,11 @@ public class enemyattack : MonoBehaviour
         enemy = battalemanager.Instance.currentenemy;
     }
 
+    public void HitOn()
+    {
+        hit = true;
+    }
+
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (canattack)
@@ -126,21 +131,25 @@ public class enemyattack : MonoBehaviour
                         if (fixdam)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().StrongHit(damage, transform);
                         }
                         if (slash)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
                         }
                         if (penetrate)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
                         }
                         if (blow)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
                         }
                     }
@@ -150,21 +159,25 @@ public class enemyattack : MonoBehaviour
                         if (fixdam)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().Hit(damage);
                         }
                         if (slash)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().SlashHit(damage);
                         }
                         if (penetrate)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().PenetrateHit(damage);
                         }
                         if (blow)
                         {
                             hit = false;
+                            battalemanager.EnemyAttackDisabled(gameObject);
                             player.GetComponent<playerhit>().BlowHit(damage);
                         }
                     }
@@ -252,16 +265,19 @@ public class enemyattack : MonoBehaviour
                                 {
                                     neh.SlashDamage(damage);
                                     hit = false;
+                                    battalemanager.EnemyAttackDisabled(gameObject);
                                 }
                                 else if (penetrate)
                                 {
                                     neh.PenetrateDamage(damage);
                                     hit = false;
+                                    battalemanager.EnemyAttackDisabled(gameObject);
                                 }
                                 else if (blow)
                                 {
                                     neh.BlowDamage(damage);
                                     hit = false;
+                                    battalemanager.EnemyAttackDisabled(gameObject);
                                 }
                             }
                         }

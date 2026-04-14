@@ -14,10 +14,14 @@ public class counseler0_counsel : MonoBehaviour
     public CameraManager cammanagerCameraManager;
 
     public PlayerMove playerPlayerMove;
+    public bool tutorial3 = true;
+    public GameObject cutscenemanager;
+    public GameObject battleui;
 
     public void Start()
     {
         boss_hpbar.OnCollusion += Tutorial3;
+        playerstatus.OnHit += Cutscene;
 
         battalemanager.Instance.currentenemy = gameObject;
         player = battalemanager.Instance.player;
@@ -45,12 +49,32 @@ public class counseler0_counsel : MonoBehaviour
 
     public void Tutorial3()
     {
-        if (battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial)
+        if (battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial && tutorial3)
         {
-            Time.timeScale = 0f;
+            tutorial3 = false;
+            battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = true;
             uimanager.Instance.TutorialGo3();
 
             battalemanager.Instance.cronometer.GetComponent<cronometer_script>().tutorial = false;
         }
+        else if (GetComponent<boss_hpbar>().maxhealth / 2 > GetComponent<boss_hpbar>().currenthealth)
+        {
+            uimanager.Instance.CloseFightUi();
+            cutscenemanager.SetActive(true);
+            player.SetActive(false);
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void Cutscene()
+    {
+        if (battalemanager.Instance.player.GetComponent<playerstatus>().lifecount == 1 && battalemanager.Instance.player.GetComponent<playerstatus>().currentbalance > battalemanager.Instance.player.GetComponent<playerstatus>().maxbalance / 2)
+        {
+            uimanager.Instance.CloseFightUi();
+            cutscenemanager.SetActive(true);
+            player.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        
     }
 }

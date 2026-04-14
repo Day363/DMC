@@ -10,6 +10,8 @@ public class playerstatus : MonoBehaviour
 {
     public static playerstatus instance;
 
+    public static Action OnHit;
+
     public enum GroundType
     {
         snow, plate, metal, soil, grass
@@ -571,6 +573,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
+        OnHit?.Invoke();
         Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
@@ -587,6 +590,7 @@ public class playerstatus : MonoBehaviour
 
     public void SlashDamage(float balance)
     {
+        OnHit?.Invoke();
         Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
@@ -603,6 +607,7 @@ public class playerstatus : MonoBehaviour
 
     public void PenetrateDamage(float balance)
     {
+        OnHit?.Invoke();
         Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
         PenetrationHit();
@@ -620,6 +625,7 @@ public class playerstatus : MonoBehaviour
 
     public void BlowDamage(float balance)
     {
+        OnHit?.Invoke();
         Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 

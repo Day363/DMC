@@ -83,7 +83,7 @@ public class disabled_counsel : MonoBehaviour
     {
         cutsceneuidisappear.SetActive(false);
         itemgive.SetActive(false);
-        player.GetComponent<playerstatus>().CutSceneUiDisappear();
+        //player.GetComponent<playerstatus>().CutSceneUiDisappear();
         cursor1.SetActive(false);
         cursor2.SetActive(false);
         playerstatus.SetActive(false);
@@ -96,7 +96,7 @@ public class disabled_counsel : MonoBehaviour
     public void Startcutscene2()
     {
         cutsceneuidisappear.SetActive(false);
-        player.GetComponent<playerstatus>().CutSceneUiDisappear();
+        //player.GetComponent<playerstatus>().CutSceneUiDisappear();
         cursor1.SetActive(false);
         cursor2.SetActive(false);
         playerstatus.SetActive(false);
@@ -121,7 +121,7 @@ public class disabled_counsel : MonoBehaviour
         cammanagerCameraManager.LookPlayer();
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
         cutsceneuidisappear.SetActive(true);
-        player.GetComponent<playerstatus>().CutSceneUiAppear();
+        //player.GetComponent<playerstatus>().CutSceneUiAppear();
     }
 
     public void LookPlayer2()

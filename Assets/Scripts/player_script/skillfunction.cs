@@ -156,7 +156,7 @@ public class skillfunction : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1.5f);
 
-        uimanager.Instance.PlayerSceneStatusClose();
+        uimanager.Instance.CloseFightUi();
 
         cammanager.GetComponent<CameraManager>().ShakeCamera(30, 0.02f);
         cutsceneobject.GetComponent<Animator>().SetTrigger("cutscene1");

@@ -423,6 +423,7 @@ public class attackcore : MonoBehaviour
 
     public void NostandByskill()
     {
+        gamemanagerbattalemanager.currentenemy.GetComponent<boss_hpbar>().CollusionSolve();
         gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerPlayerMove.canmove = true;
         if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)

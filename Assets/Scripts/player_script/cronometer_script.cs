@@ -190,6 +190,7 @@ public class cronometer_script : MonoBehaviour
 
     public void WhenLifeCoutDownEnd()
     {
+        
         FadeIn();
         StartCoroutine(WhenLifeCoutDownEnd_co());
     }
@@ -260,7 +261,7 @@ public class cronometer_script : MonoBehaviour
         player.GetComponent<skillfunction>().GameOver();
         uimanager.Instance.gameover.SetActive(true);
         uimanager.Instance.CloseFightUi();
-        uimanager.Instance.PlayerSceneStatusClose();
+        uimanager.Instance.CloseFightUi();
         battalemanager.Instance.gameObject.GetComponent<soundmanager>().BGMStop();
 
         Instantiate(effect, transform.position, Quaternion.identity);

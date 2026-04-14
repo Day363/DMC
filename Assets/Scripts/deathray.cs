@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class deathray : MonoBehaviour
 {
     public GameObject target;
+    public GameObject effect;
 
     public void Start()
     {
+        counselfunctionmanager.OnCutSceneObjectActive += Charge;
+
         StartCoroutine(TurnOn());
     }
 
@@ -58,5 +62,47 @@ public class deathray : MonoBehaviour
     public void Update()
     {
         transform.LookAt(new Vector3(target.transform.position.x, 0, 0));
+    }
+
+    public void Charge()
+    {
+        StartCoroutine(Charge_co());
+    }
+
+    IEnumerator Charge_co()
+    {
+        Instantiate(effect, transform.position, Quaternion.identity);
+
+        int count = 0;
+        foreach (Transform child in gameObject.transform)
+        {
+            count++;
+
+
+            var comp = child.GetComponent<trapalhaloturn>();
+            int i = 0;
+            if (child.GetComponent<trapalhaloturn>().turnspeed > 1)
+            {
+                i = 1;
+            }
+            else
+            {
+                i = -1;
+            }
+            DOTween.To(() => comp.turnspeed, x => comp.turnspeed = x, Random.Range(4f, 15f) * i, 5f).SetEase(Ease.InQuart);
+
+            float z = Mathf.Clamp(Gaussian(0f, 4.5f), -30f, 30f);
+            child.transform.DOLocalMoveZ(z, 10f).SetEase(Ease.OutQuad);
+            float t = Mathf.InverseLerp(0f, 30f, Mathf.Abs(z));
+            float maxScale = Mathf.Lerp(0.6f, 0.1f, t);
+            float scale = Random.Range(0.1f, maxScale);
+            child.transform.DOScale(scale, 6f).SetEase(Ease.OutQuad);
+
+            if (count >= 3)
+            {
+                count = 0;
+                yield return null;
+            }
+        }
     }
 }

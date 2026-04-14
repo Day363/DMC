@@ -31,7 +31,7 @@ public class attackeffect : MonoBehaviour
 
         if (collision.gameObject.tag == "client")
         {
-            int attackeffectnum = Random.Range(0, attackeffect_random.Length);
+            int attackeffectnum = Random.Range(0, attackeffectall.Length);
             Vector3 eposition = collision.transform.position;
             eposition.z = 0;
 
@@ -44,9 +44,9 @@ public class attackeffect : MonoBehaviour
                 angle = fixangle;
             }
 
-            if (attackeffect_random.Length > 0)
+            if (attackeffectall.Length > 0)
             {
-                Instantiate(attackeffect_random[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
+                Instantiate(attackeffectall[attackeffectnum], collision.gameObject.transform.position, Quaternion.Euler(0, 0, angle));
             }
             
             foreach (GameObject effect in attackeffectall)

@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class counselfunctionmanager : MonoBehaviour
 {
     public static Action Onsuccess;
+    public static Action OnCutSceneObjectActive;
+    public static Action OnCutSceneEnd;
+
 
     public static counselfunctionmanager Instance;
     public GameObject attackcore;
@@ -17,6 +24,8 @@ public class counselfunctionmanager : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject glitch;
+    public GameObject fadeout;
 
     public void Start()
     {
@@ -40,7 +49,9 @@ public class counselfunctionmanager : MonoBehaviour
             { "success", CounselSuccess },
             { "trapal_die1", Trapal_Die1 },
             { "indexer_disappear", IndexerDisappear },
-            { "cutscene1", CutScene1 }
+            { "cutscene1", CutScene1 },
+            { "cutScene2ray", CutScene2Ray },
+            { "CutScene2End", CutScene2End }
         };
     }
 
@@ -125,5 +136,15 @@ public class counselfunctionmanager : MonoBehaviour
     public void CutScene1()
     {
         player.GetComponent<Animator>().SetTrigger("cutscene1");
+    }
+
+    public void CutScene2Ray()
+    {
+        OnCutSceneObjectActive?.Invoke();
+    }
+
+    public void CutScene2End()
+    {
+        OnCutSceneEnd?.Invoke();
     }
 }

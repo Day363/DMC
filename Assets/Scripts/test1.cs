@@ -150,15 +150,15 @@ public class test1 : MonoBehaviour
         int i = Random.Range(0, 3);
         if (i == 0)
         {
-            SoundPlay("slash_test1");
+            //SoundPlay("slash_test1");
         }
         else if (i == 1)
         {
-            SoundPlay("slash_test2");
+            //SoundPlay("slash_test2");
         }
         else if (i == 2)
         {
-            SoundPlay("slash_test3");
+            //SoundPlay("slash_test3");
         }
 
         GameObject cureffect = Instantiate(slasheffect, player.transform.position, Quaternion.Euler(0, 0, Random.Range(135f, 45f)));
