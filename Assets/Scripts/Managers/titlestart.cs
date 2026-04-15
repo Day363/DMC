@@ -13,29 +13,39 @@ public class titlestart : MonoBehaviour
     public GameObject titletotal;
     public GameObject cammanager;
     public GameObject player;
+    public titleUI titleui;
 
     public void Start()
     {
         cammanager = battalemanager.Instance.cameramanager;
         player = battalemanager.Instance.player;
+        titleui = GetComponent<titleUI>();
     }
 
     public void Startgame()
     {
-        List<GameObject> currentui = uis;
-        currentui.Remove(currentobject);
-        foreach (GameObject ui in currentui)
+        if (!titleui.clicked)
         {
-            ui.GetComponent<RectTransform>().DOAnchorPosX(-600f, 0.7f).SetEase(Ease.OutQuart);
+            titleui.clicked  = true;
+
+            battalemanager.Instance.gameObject.GetComponent<soundmanager>().SoundPlay("click2");
+
+            List<GameObject> currentui = uis;
+            currentui.Remove(currentobject);
+            foreach (GameObject ui in currentui)
+            {
+                ui.GetComponent<RectTransform>().DOAnchorPosX(-600f, 0.7f).SetEase(Ease.OutQuart);
+            }
+
+            //cammanager.GetComponent<CameraManager>().LookPlayer();
+
+            currentobject.GetComponent<Image>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
+            text.GetComponent<TMP_Text>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
+            StartCoroutine(Disable_title());
+
+            uimanager.Instance.tutorialui.SetActive(true);
         }
-
-        //cammanager.GetComponent<CameraManager>().LookPlayer();
-
-        currentobject.GetComponent<Image>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
-        text.GetComponent<TMP_Text>().DOFade(0f, 3f).SetEase(Ease.OutQuart);
-        StartCoroutine(Disable_title());
-
-        uimanager.Instance.tutorialui.SetActive(true);
+        
     }
 
     IEnumerator Disable_title()

@@ -17,6 +17,7 @@ public class soundmanager : MonoBehaviour
         public soundvariation soundvariation;
         public string key;
         public AudioClip clip;
+        public bool randompitch;
 
         [Range(0f, 1f)]
         public float volume = 1;
@@ -42,6 +43,11 @@ public class soundmanager : MonoBehaviour
         {
             sfxsoundplayer.clip = sounddata.clip;
             sfxsoundplayer.PlayOneShot(sounddata.clip, sounddata.volume);
+            if (sounddata.randompitch)
+            {
+                sfxsoundplayer.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            }
+            
         }
     }
 

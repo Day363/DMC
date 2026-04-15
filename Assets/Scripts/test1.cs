@@ -74,6 +74,11 @@ public class test1 : MonoBehaviour
         soundmanager.instance.SoundPlay(name);
     }
 
+    public void StaticSound()
+    {
+        SoundPlay("static1");
+    }
+
     public void LookPlayer()
     {
         if (player.transform.position.x < transform.parent.position.x)
@@ -145,21 +150,18 @@ public class test1 : MonoBehaviour
         cureye.transform.localPosition = new Vector3(0, 0, 0);
     }
 
+    public void EyeSpawn2()
+    {
+        SoundPlay("lastring");
+        GameObject cureye = Instantiate(eye, eyeposition.transform);
+        cureye.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     public void Slasheffect2()
     {
-        int i = Random.Range(0, 3);
-        if (i == 0)
-        {
-            //SoundPlay("slash_test1");
-        }
-        else if (i == 1)
-        {
-            //SoundPlay("slash_test2");
-        }
-        else if (i == 2)
-        {
-            //SoundPlay("slash_test3");
-        }
+        
+        SoundPlay("slash_hit");
+        
 
         GameObject cureffect = Instantiate(slasheffect, player.transform.position, Quaternion.Euler(0, 0, Random.Range(135f, 45f)));
         cureffect.transform.position = player.transform.position;

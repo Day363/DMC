@@ -33,7 +33,8 @@ public class weaponskillUi : MonoBehaviour
     public GameObject normalskilltextprefap;
     public GameObject arreyskilltextprefap;
 
-    public void Start()
+
+    public void OnEnable()
     {
         InstitateSkillUi();
     }
@@ -102,6 +103,10 @@ public class weaponskillUi : MonoBehaviour
             currentbox.GetComponent<arreyskillui>().standbyskill = standbyskill;
         }
 
+        if (curcontentnow !=  null)
+        {
+            Destroy(curcontentnow);
+        }
         GameObject curcontent = Instantiate(content, viewpoint.transform);
         curcontentnow = curcontent;
 

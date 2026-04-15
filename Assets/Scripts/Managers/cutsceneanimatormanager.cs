@@ -48,7 +48,22 @@ public class cutsceneanimatormanager : MonoBehaviour
     public void Effect()
     {
         Instantiate(effect, effectpos.transform.position, Quaternion.identity);
+        int i = Random.Range(0, 3);
+        if (i == 0)
+        {
+            soundmanager.instance.SoundPlay("clash1");
+        }
+        else if (i == 1)
+        {
+            soundmanager.instance.SoundPlay("clash2");
+        }
+        else if (i == 2)
+        {
+            soundmanager.instance.SoundPlay("clash3");
+        }
     }
+
+    
 
     public void Effect2()
     {

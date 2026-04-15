@@ -127,6 +127,7 @@ public class uimanager : MonoBehaviour
         tutorialui.SetActive(false);
         for (int i = 0; i < 15; i++)
         {
+            soundmanager.instance.SoundPlay("static1");
             Vector3 pos = new Vector3(battalemanager.Instance.cameramanager.transform.position.x + UnityEngine.Random.Range(-15f, 15f), battalemanager.Instance.cameramanager.transform.position.y + UnityEngine.Random.Range(-9f, 9f), 0);
             Vector3 scale = new Vector3(100, UnityEngine.Random.Range(-3.5f, 3.5f), 0);
             GameObject currentglitch;

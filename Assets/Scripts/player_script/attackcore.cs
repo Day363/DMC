@@ -234,10 +234,10 @@ public class attackcore : MonoBehaviour
         skillselectui.SetActive(true);
         Time.timeScale = 0f;
         MakeRangeWeaponMagzineList();
-        foreach (GameObject ui in activewhenbattlestart)
-        {
-            ui.SetActive(true);
-        }
+        //foreach (GameObject ui in activewhenbattlestart)
+        //{
+        //    ui.SetActive(true);
+        //}
         worldlightintensity = world_light.GetComponent<Light2D>().intensity;
     }
 
@@ -311,6 +311,17 @@ public class attackcore : MonoBehaviour
             weaponui.SetParent(null);
             Destroy(weaponui.gameObject);
         }
+
+        if (uimanager.Instance.skilllist.transform.childCount > 0)
+        {
+            Transform parent = uimanager.Instance.skilllist.transform;
+
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                Destroy(parent.GetChild(i).gameObject);
+            }
+        }
+        
 
         foreach (Weapon weapon in activeweaponlist)
         {
@@ -416,6 +427,12 @@ public class attackcore : MonoBehaviour
         if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
+
+            foreach (GameObject ui in activewhenbattlestart)
+            {
+                ui.SetActive(false);
+            }
+
             Time.timeScale = 0f;
         }
         canattack = false;
@@ -429,6 +446,12 @@ public class attackcore : MonoBehaviour
         if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
+
+            foreach (GameObject ui in activewhenbattlestart)
+            {
+                ui.SetActive(false);
+            }
+
             Time.timeScale = 0f;
         }
         canattack = false;

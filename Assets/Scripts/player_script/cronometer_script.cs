@@ -97,8 +97,12 @@ public class cronometer_script : MonoBehaviour
         ).SetEase(Ease.InCubic).SetId("turn").SetUpdate(true);
 
         soundmanager.instance.SoundPlay("battlestart");
+        soundmanager.instance.SoundPlay("clocking");
 
         yield return new WaitForSecondsRealtime(2.5f);
+
+        soundmanager.instance.SoundPlay("clockbell");
+
         Instantiate(effect, transform.position, Quaternion.identity);
         cammanager.GetComponent<CameraManager>().CamVibTimeIgnore();
 
@@ -130,6 +134,8 @@ public class cronometer_script : MonoBehaviour
         ).SetEase(Ease.OutQuart).SetId("turn").SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(3f);
+
+        soundmanager.instance.SoundPlay("clockbell");
 
         Instantiate(effect, transform.position, Quaternion.identity);
         Instantiate(effect2, transform.position, Quaternion.identity);
