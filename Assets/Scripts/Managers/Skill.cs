@@ -46,4 +46,5 @@ public class Skill : ScriptableObject
 
     [TextArea(5, 100)]
     public string skilldescription;
+    public float forceenforcefloat;
 }

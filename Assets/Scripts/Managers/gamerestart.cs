@@ -41,8 +41,10 @@ public class gamerestart : MonoBehaviour
 
         battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = false;
 
+        uimanager.Instance.ResetUi();
+
         yield return SceneManager.UnloadSceneAsync(currentSceneName);
 
-        uimanager.Instance.ResetUi();
+        
     }
 }

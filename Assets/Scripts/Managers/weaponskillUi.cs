@@ -1,8 +1,11 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 
 public class weaponskillUi : MonoBehaviour
 {
@@ -33,19 +36,58 @@ public class weaponskillUi : MonoBehaviour
     public GameObject normalskilltextprefap;
     public GameObject arreyskilltextprefap;
 
+    public RectTransform rect;
+    public bool isHover;
+
 
     public void OnEnable()
     {
         InstitateSkillUi();
     }
 
+    void Awake()
+    {
+        rect = GetComponent<RectTransform>();
+    }
+
     public void ButtonPress()
     {
+        soundmanager.instance.SoundPlay("click2");
         SkillcontentActive();
     }
 
+    void Update()
+    {
+        bool nowHover = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
 
-   
+        if (nowHover && !isHover)
+        {
+            isHover = true;
+            ScaleUp();
+        }
+        else if (!nowHover && isHover)
+        {
+            isHover = false;
+            ScaleDown();
+        }
+    }
+
+    
+
+    public void ScaleUp()
+    {
+        rect.DOKill();
+        GetComponent<RectTransform>().DOScale(1.3f, 0.1f).SetId("UIScale").SetUpdate(true); 
+    }
+
+    public void ScaleDown()
+    {
+        rect.DOKill();
+        GetComponent<RectTransform>().DOScale(1f, 0.4f).SetId("UIScale").SetUpdate(true);
+    }
+
+
+
 
     public void SkillcontentActive()
     {
@@ -105,28 +147,36 @@ public class weaponskillUi : MonoBehaviour
 
         if (curcontentnow !=  null)
         {
-            Destroy(curcontentnow);
+            //Destroy(curcontentnow);
+            curcontentnow.SetActive(true);
         }
-        GameObject curcontent = Instantiate(content, viewpoint.transform);
-        curcontentnow = curcontent;
-
-        foreach (Skill skill in weapon.skilllist)
+        else
         {
-            GameObject currentskillUi = Instantiate(skillUi, curcontent.transform);
-            currentskillUi.transform.GetChild(0).GetComponent<TMP_Text>().text = skill.skillmarkname;
-            currentskillUi.GetComponent<skillselectUi>().attackcore = attackcore;
-            currentskillUi.GetComponent<skillselectUi>().skill = skill;
-            currentskillUi.GetComponent<skillselectUi>().skilllist = skillsetlist;
-
-            GameObject currentbox = Instantiate(normalskilltextprefap, normalskilltlist.transform);
-            currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = skill.skilldescription;
-            currentbox.GetComponent<normalskilluibutton>().skillbutton = currentskillUi;
-
-            currentskillUi.GetComponent<skillselectUi>().descriptionUi = currentbox;
-
-            
+            GameObject curcontent = Instantiate(content, viewpoint.transform);
+            curcontentnow = curcontent;
         }
-        curcontent.GetComponent<circlelayout>().ArrangeNotEquel();
+        
+        if (curcontentnow.transform.childCount < 1) 
+        {
+            foreach (Skill skill in weapon.skilllist)
+            {
+                GameObject currentskillUi = Instantiate(skillUi, curcontentnow.transform);
+                currentskillUi.transform.GetChild(0).GetComponent<TMP_Text>().text = skill.skillmarkname;
+                currentskillUi.GetComponent<skillselectUi>().attackcore = attackcore;
+                currentskillUi.GetComponent<skillselectUi>().skill = skill;
+                currentskillUi.GetComponent<skillselectUi>().skilllist = skillsetlist;
+
+                GameObject currentbox = Instantiate(normalskilltextprefap, normalskilltlist.transform);
+                currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = skill.skilldescription;
+                currentbox.GetComponent<normalskilluibutton>().skillbutton = currentskillUi;
+
+                currentskillUi.GetComponent<skillselectUi>().descriptionUi = currentbox;
+
+
+            }
+        }
+        
+        curcontentnow.GetComponent<circlelayout>().ArrangeNotEquel();
         curcontentnow.SetActive(false);
         passivelist.SetActive(false);
         normalskilltlist.SetActive(false);

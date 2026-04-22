@@ -14,7 +14,7 @@ public class playerstatus : MonoBehaviour
 
     public enum GroundType
     {
-        snow, plate, metal, soil, grass
+        snow, plate, metal, soil, grass, gore
     };
 
     public GroundType groundtype;

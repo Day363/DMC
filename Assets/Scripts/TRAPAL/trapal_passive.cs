@@ -499,7 +499,10 @@ public class trapal_passive : MonoBehaviour
             curpenetrate_playerattackdamage.player = player;
             curpenetrate_playerattackdamage.enemy = gameObject;
             curpenetrate_playerattackdamage.damage = 40;
+            curpenetrate_playerattackdamage.enabled = true;
+            curpenetrate.GetComponent<BoxCollider2D>().enabled = true;
             curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);
+            soundmanager.instance.SoundPlay("woosh1");
             curpenetrate.GetComponent<enemyattack>().canattack = true;
             curpenetrate.GetComponent<enemyattack>().heavyattack = true;
             curpenetrate.GetComponent<enemyattack>().hit = true;

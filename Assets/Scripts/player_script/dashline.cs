@@ -17,7 +17,7 @@ public class dashline : MonoBehaviour
 
     public void Awake()
     {
-        attackcore.attackcoreInstance.dashmanager = gameObject;
+        battalemanager.Instance.dashmanager = gameObject;
     }
 
     void Start()

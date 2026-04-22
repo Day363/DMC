@@ -18,6 +18,8 @@ public class arreyskillui : MonoBehaviour
 
     public void AutoArrey()
     {
+        soundmanager.instance.SoundPlay("click2");
+
         selectedskilluis.Clear();
         selectedskilluistring.Clear();
         normalskillUIs.Clear();

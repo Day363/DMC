@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class skillselectUi : MonoBehaviour
@@ -13,6 +15,42 @@ public class skillselectUi : MonoBehaviour
     public GameObject skilllist;
     public GameObject skillbutton;
     public GameObject descriptionUi;
+    public RectTransform rect;
+    public bool isHover;
+
+    void Update()
+    {
+        bool nowHover = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
+
+        if (nowHover && !isHover)
+        {
+            isHover = true; 
+            ScaleUp();
+        }
+        else if (!nowHover && isHover)
+        {
+            isHover = false;
+            ScaleDown();
+        }
+    }
+
+    void Awake()
+    {
+        rect = GetComponent<RectTransform>();
+    }
+
+
+    public void ScaleUp()
+    {
+        rect.DOKill();
+        GetComponent<RectTransform>().DOScale(1.3f, 0.1f).SetId("UIScale1").SetUpdate(true);
+    }
+
+    public void ScaleDown()
+    {
+        rect.DOKill();
+        GetComponent<RectTransform>().DOScale(1f, 0.4f).SetId("UIScale1").SetUpdate(true);
+    }
 
     public void SkillAddToList()
     {
@@ -29,6 +67,7 @@ public class skillselectUi : MonoBehaviour
 
     public void Selected()
     {
+        soundmanager.instance.SoundPlay("click2");
         attackcore = battalemanager.Instance.attackcore;
 
         isselect = true;

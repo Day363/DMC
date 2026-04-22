@@ -28,6 +28,7 @@ public class battalemanager : MonoBehaviour
     public GameObject cronometer;
     public GameObject world_globallight;
     public GameObject player_light;
+    public GameObject dashmanager;
 
     public int number;
     public Sprite numberimage;
@@ -74,4 +75,6 @@ public class battalemanager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         currentattack.SetActive(true);
     }
+
+    
 }

@@ -81,7 +81,8 @@ public class trapal_counsel : MonoBehaviour
             playerPlayerMove.canmove = false;
             playerPlayerMove.Stop();
             gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
-            gamemanager.GetComponent<chatmanager>().CallDialogue(3);
+            //gamemanager.GetComponent<chatmanager>().CallDialogue(3);
+            gamemanager.GetComponent<chatmanager>().CallDialogue(15);
 
         }
     }
@@ -123,7 +124,7 @@ public class trapal_counsel : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3f);
         GetComponent<trapal_script>().canattack = true;
         attackcore.GetComponent<attackcore>().SetCronometer();
     }
@@ -335,6 +336,7 @@ public class trapal_counsel : MonoBehaviour
         playerPlayerMove.Stop();
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
         gamemanager.GetComponent<chatmanager>().CallDialogue(4);
+        gamemanager.GetComponent<chatmanager>().CallDialogue(16);
     }
 
     IEnumerator Halo_Shutdown(GameObject halo)

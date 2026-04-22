@@ -115,7 +115,7 @@ public class enemyattack : MonoBehaviour
                 }
                 else if (Notifparrysetfalse)
                 {
-                    GetComponent<Collider2D>().enabled = false;
+                    Destroy(GetComponent<Collider2D>());
                 }
                 
             }
@@ -131,25 +131,60 @@ public class enemyattack : MonoBehaviour
                         if (fixdam)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                if (!Notifparrysetfalse)
+                                {
+                                    battalemanager.EnemyAttackDisabled(gameObject);
+                                }
+                                else if (Notifparrysetfalse)
+                                {
+                                    Destroy(GetComponent<Collider2D>());
+                                }
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                GetComponent<Collider2D>().enabled = false;
+                            }
                             player.GetComponent<playerhit>().StrongHit(damage, transform);
                         }
                         if (slash)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
                         }
                         if (penetrate)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
                         }
                         if (blow)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
                         }
                     }
@@ -159,25 +194,53 @@ public class enemyattack : MonoBehaviour
                         if (fixdam)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().Hit(damage);
                         }
                         if (slash)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().SlashHit(damage);
                         }
                         if (penetrate)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().PenetrateHit(damage);
                         }
                         if (blow)
                         {
                             hit = false;
-                            battalemanager.EnemyAttackDisabled(gameObject);
+                            if (!Notifparrysetfalse)
+                            {
+                                battalemanager.EnemyAttackDisabled(gameObject);
+                            }
+                            else if (Notifparrysetfalse)
+                            {
+                                Destroy(GetComponent<Collider2D>());
+                            }
                             player.GetComponent<playerhit>().BlowHit(damage);
                         }
                     }
@@ -265,19 +328,40 @@ public class enemyattack : MonoBehaviour
                                 {
                                     neh.SlashDamage(damage);
                                     hit = false;
-                                    battalemanager.EnemyAttackDisabled(gameObject);
+                                    if (!Notifparrysetfalse)
+                                    {
+                                        battalemanager.EnemyAttackDisabled(gameObject);
+                                    }
+                                    else if (Notifparrysetfalse)
+                                    {
+                                        Destroy(GetComponent<Collider2D>());
+                                    }
                                 }
                                 else if (penetrate)
                                 {
                                     neh.PenetrateDamage(damage);
                                     hit = false;
-                                    battalemanager.EnemyAttackDisabled(gameObject);
+                                    if (!Notifparrysetfalse)
+                                    {
+                                        battalemanager.EnemyAttackDisabled(gameObject);
+                                    }
+                                    else if (Notifparrysetfalse)
+                                    {
+                                        Destroy(GetComponent<Collider2D>());
+                                    }
                                 }
                                 else if (blow)
                                 {
                                     neh.BlowDamage(damage);
                                     hit = false;
-                                    battalemanager.EnemyAttackDisabled(gameObject);
+                                    if (!Notifparrysetfalse)
+                                    {
+                                        battalemanager.EnemyAttackDisabled(gameObject);
+                                    }
+                                    else if (Notifparrysetfalse)
+                                    {
+                                        Destroy(GetComponent<Collider2D>());
+                                    }
                                 }
                             }
                         }

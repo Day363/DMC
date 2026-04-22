@@ -62,6 +62,9 @@ public class uimanager : MonoBehaviour
     public GameObject tutorialuireal;
     public GameObject tutorialuireal2;
     public GameObject tutorialuireal3;
+    [Header("skilldesc")]
+    public GameObject normalskillbutton;
+    public GameObject arreyskillbutton;
 
     void Awake()
     {

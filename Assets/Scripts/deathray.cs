@@ -43,6 +43,7 @@ public class deathray : MonoBehaviour
 
             if (count >= 3)
             {
+                //soundmanager.instance.SoundPlay("ding2");
                 count = 0;
                 yield return null;
             }
@@ -101,7 +102,7 @@ public class deathray : MonoBehaviour
             if (count >= 3)
             {
                 count = 0;
-                soundmanager.instance.SoundPlay("ding2");
+                
                 yield return null;
             }
         }

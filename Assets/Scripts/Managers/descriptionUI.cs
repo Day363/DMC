@@ -11,7 +11,15 @@ public class descriptionUI : MonoBehaviour
     public void SetDesc()
     {
         myUi.SetActive(true);
-        otherUi1.SetActive(false);
-        otherUi2.SetActive(false);
+        if (otherUi1 != null)
+        {
+            otherUi1.SetActive(false);
+        }
+        if (otherUi2 != null)
+        {
+            otherUi2.SetActive(false);
+        }
+
+        
     }
 }

@@ -79,6 +79,11 @@ public class disabled_counsel : MonoBehaviour
         }
     }
 
+    public void Sound(string name)
+    {
+        soundmanager.instance.SoundPlay(name);
+    }
+
     public void Startcutscene()
     {
         cutsceneuidisappear.SetActive(false);

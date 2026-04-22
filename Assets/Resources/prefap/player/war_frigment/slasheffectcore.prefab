@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2142177286451784711}
   - component: {fileID: 2994400970903227121}
+  - component: {fileID: -7806091052665633749}
   m_Layer: 0
   m_Name: slasheffectcore
   m_TagString: Untagged
@@ -44,7 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b877c6c378f179f4587b096b870fdb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slash: {fileID: 7684701411538175375, guid: 5012c97ca4a310a4da1aa64c3ab04793, type: 3}
+  slash: {fileID: 7684701411538175375, guid: 0ca52cf487870dc439904464b18dc060, type: 3}
   time: 0.03
   maxscale: 1.5
   minscale: 0.3
+--- !u!114 &-7806091052665633749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741400168088402746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760125094fb28a84ebb94062a3c8230c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundname: air_swoosh1

@@ -139,6 +139,13 @@ public class skillfunction : MonoBehaviour
                 soundmanager.SoundPlay("walk_metal4");
             }
         }
+        else if (GetComponent<playerstatus>().groundtype == playerstatus.GroundType.gore)
+        {
+            soundmanager soundmanager = battalemanager.Instance.gameObject.GetComponent<soundmanager>();
+            
+            soundmanager.SoundPlay("gorewalk");
+            
+        }
     }
 
     public void Cutscene1_shoot()

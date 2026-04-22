@@ -11,6 +11,8 @@ public class lazer2lookat : MonoBehaviour
     public GameObject player;
     public GameObject cammanager;
 
+    public string soundname;
+
     public List<GameObject> halolist;
 
     public bool look = true;
@@ -92,6 +94,12 @@ public class lazer2lookat : MonoBehaviour
 
     public void Shoot2()
     {
+        if (soundname != null)
+        {
+            soundmanager.instance.SoundPlay(soundname);
+        }
+        
+
         GameObject currentshoot = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, 0));
         currentshoot.GetComponent<enemyattack>().player = player;
         foreach (GameObject halos in halolist)
@@ -104,6 +112,11 @@ public class lazer2lookat : MonoBehaviour
 
     public void Shoot()
     {
+        if (soundname != null)
+        {
+            soundmanager.instance.SoundPlay(soundname);
+        }
+
         GameObject currentshoot = Instantiate(shoot, gameObject.transform.position, Quaternion.Euler(0f, 0f, anglea));
         currentshoot.GetComponent<enemyattack>().player = player;
         foreach (GameObject halos in halolist)

@@ -7,6 +7,8 @@ public class tutorial_button : MonoBehaviour
     public GameObject[] uis;
     public int index;
 
+    public bool tutorial1 = false;
+
     public bool timescale1;
 
     public void Next()
@@ -19,6 +21,10 @@ public class tutorial_button : MonoBehaviour
             }
             uis[index].SetActive(true);
             index += 1;
+            if (index == 5 && tutorial1)
+            {
+                uimanager.Instance.arreyskillbutton.GetComponent<descriptionUI>().SetDesc();
+            }
         }
         else
         {

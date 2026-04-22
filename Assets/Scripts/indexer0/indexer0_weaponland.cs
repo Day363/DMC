@@ -13,11 +13,14 @@ public class indexer0_weaponland : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("ADafa");
         if (collision.gameObject.name == "indexer0")
         {
+            Debug.Log("adafa");
             boss_hpbar.StackInstance effectinstance = collision.gameObject.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == battalemanager.Instance.stackdatas[effectindex].effectName);
-            if (effectinstance.currentStack < 2)
+            if (effectinstance == null || effectinstance.currentStack < 2)
             {
+                Debug.Log("qt3eaf");
                 collision.gameObject.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[effectindex], 1);
                 collision.gameObject.GetComponent<indexer0_script>().RainmanagerCount();
                 GetComponent<Animator>().SetBool("teleport", true);
@@ -46,6 +49,8 @@ public class indexer0_weaponland : MonoBehaviour
     public void LandFinish()
     {
         landed = true;
+        GetComponent<enemyattack>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void Naturallanding()

@@ -75,7 +75,10 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator BattleStart_co()
     {
-        
+        player = battalemanager.Instance.player;
+        playerplayerstatus = player.GetComponent<playerstatus>();
+
+
         foreach (GameObject halo in rings)
         {
             halo.transform.localScale = new Vector3(0, 0, 1);
@@ -203,6 +206,9 @@ public class cronometer_script : MonoBehaviour
 
     IEnumerator WhenLifeCoutDown_co()
     {
+        player = battalemanager.Instance.player;
+        playerplayerstatus = player.GetComponent<playerstatus>();
+
         battalemanager.Instance.gameObject.GetComponent<PauseManager>().ispause = true;
         targetangle = 360 - (((float)playerplayerstatus.lifecount / (float)playerplayerstatus.maxlifecount) * 360);
 

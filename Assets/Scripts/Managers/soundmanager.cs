@@ -7,7 +7,11 @@ public class soundmanager : MonoBehaviour
 {
     public static soundmanager instance;
 
+    public GameObject SFXobject;
+    public List<GameObject> SFXlist = new List<GameObject>();
+
     public enum soundvariation { BGM, SFX }
+    public enum soundposition { player, enemy, pos1 }
     public AudioSource sfxsoundplayer;
     public AudioSource bgmsoundplayer;
 
@@ -15,6 +19,7 @@ public class soundmanager : MonoBehaviour
     public class StringAudioPair
     {
         public soundvariation soundvariation;
+        public soundposition soundposition;
         public string key;
         public AudioClip clip;
         public bool randompitch;
@@ -41,19 +46,48 @@ public class soundmanager : MonoBehaviour
         }
         else if (sounddata.soundvariation == soundvariation.SFX)
         {
-            sfxsoundplayer.clip = sounddata.clip;
-            sfxsoundplayer.PlayOneShot(sounddata.clip, sounddata.volume);
+            GameObject currentSFX = null;
+            if (sounddata.soundposition == soundposition.player)
+            {
+                currentSFX = Instantiate(SFXobject, battalemanager.Instance.player.transform.position, Quaternion.identity);
+            }
+            else if (sounddata.soundposition == soundposition.enemy)
+            {
+                currentSFX = Instantiate(SFXobject, battalemanager.Instance.currentenemy.transform.position, Quaternion.identity);
+            }
+            SFXlist.Add(currentSFX);
+
+            AudioSource currentsfxsoundplayer = currentSFX.GetComponent<AudioSource>();
+
+            currentsfxsoundplayer.clip = sounddata.clip;
+            currentsfxsoundplayer.PlayOneShot(sounddata.clip, sounddata.volume);
             if (sounddata.randompitch)
             {
-                sfxsoundplayer.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                currentsfxsoundplayer.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             }
-            
+            else
+            {
+                currentsfxsoundplayer.pitch = 1;
+            }
+
+            StartCoroutine(DestroySFX(currentSFX));
         }
     }
 
+    IEnumerator DestroySFX(GameObject cursound)
+    {
+        yield return new WaitForSeconds(15f);
+        Destroy(cursound);
+    }
+     
+
     public void SFXStop()
     {
-        sfxsoundplayer.Stop();
+        for (int i = SFXlist.Count - 1; i >= 0; i--)
+        {
+            Destroy(SFXlist[i]);
+        }
+        SFXlist.Clear();
     }
 
     public void BGMStop()

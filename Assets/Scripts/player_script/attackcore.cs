@@ -218,6 +218,7 @@ public class attackcore : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         playerplayerhit = player.GetComponent<playerhit>();
         playerskillfunction = player.GetComponent<skillfunction>();
+        //dashmanager = battalemanager.Instance.dashmanager;
 
         world_light = battalemanager.Instance.world_globallight;
         activeweaponlist = player_inventory.instance.weaponinv;
@@ -232,6 +233,7 @@ public class attackcore : MonoBehaviour
     {
         playerstatus.instance.BattaleStart();
         skillselectui.SetActive(true);
+        uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
         Time.timeScale = 0f;
         MakeRangeWeaponMagzineList();
         //foreach (GameObject ui in activewhenbattlestart)
@@ -1243,11 +1245,11 @@ public class attackcore : MonoBehaviour
                                     }
                                     if (enforceskill.speed)
                                     {
-
+                                        AttackBackDelayDelete();
                                     }
                                     if (enforceskill.force)
                                     {
-
+                                        currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().damagenum += enforceskill.forceenforcefloat;
                                     }
                                     if (enforceskill.bout)
                                     {
@@ -1711,6 +1713,8 @@ public class attackcore : MonoBehaviour
         StopCoroutine(currentattackdelay);
         whilecooltime = false;
     }
+
+
 
     IEnumerator DashFlash()
     {
