@@ -13125,6 +13125,8 @@ MonoBehaviour:
   balancebarint: {fileID: 1425506571}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
+  bleedtext: {fileID: 0}
+  balanceeffect: {fileID: 0}
   collapsefloat: 5
   maxhealth: 10000
   currenthealth: 0
@@ -15117,6 +15119,8 @@ MonoBehaviour:
   balancebarint: {fileID: 1880885220}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
+  bleedtext: {fileID: 0}
+  balanceeffect: {fileID: 0}
   collapsefloat: 5
   maxhealth: 10000
   currenthealth: 0
@@ -23658,6 +23662,7 @@ GameObject:
   - component: {fileID: 1694457160}
   - component: {fileID: 1694457161}
   - component: {fileID: 1694457162}
+  - component: {fileID: 1694457163}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -23714,9 +23719,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57e7ebcadd5838347868fa5b0c15fe6a, type: 2}
   - {fileID: 11400000, guid: 0cdd4aa3455b59f4c8f12cb0f1abea67, type: 2}
   available_mirror:
-  - {fileID: 4070620049292899522, guid: 10427d06df3a0bc4aa8cf51678e4ab84, type: 3}
   - {fileID: 487435523191921356, guid: beb47ab8d115a984b8139afcca6d8ecf, type: 3}
-  - {fileID: 7940369930441991110, guid: 26a07ec5f2255b14582d2658f43bc6f1, type: 3}
   - {fileID: 4956475703231857563, guid: c616d24f610e5244cb4c62ba9bdd0acc, type: 3}
   - {fileID: 5178241809236434882, guid: 8918555ef3da9394f8dc7f2229042ae5, type: 3}
   used_mirror:
@@ -23726,6 +23729,8 @@ MonoBehaviour:
   - {fileID: 8297625601213293739, guid: 2d4565ad7e37bfe4c9a501704fa9e231, type: 3}
   - {fileID: 2732459861749828292, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
   - {fileID: 7760851729304388008, guid: 956dd3c24a8999146a860f0a558c9904, type: 3}
+  - {fileID: 7940369930441991110, guid: 26a07ec5f2255b14582d2658f43bc6f1, type: 3}
+  - {fileID: 4070620049292899522, guid: 10427d06df3a0bc4aa8cf51678e4ab84, type: 3}
   fadeout: {fileID: 0}
   cameramanager: {fileID: 0}
   letterbox: {fileID: 0}
@@ -23814,7 +23819,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
-      dialogue: "\uC0C1\uB2F4\uC0AC\uB77C\uACE0 \uBD88\uB7EC."
+      dialogue: "...\uC0C1\uB2F4\uC0AC"
       basicdelay: 0.05
       dotdelay: 0.25
       cantskip: 0
@@ -23824,9 +23829,9 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uC798\uC740 \uBAA8\uB974\uACA0\uC9C0\uB9CC... \uAF64 \uB192\uC740
-        \uC218\uC900\uC758 \uC758\uC2DD\uC744 \n\uC720\uC9C0\uD558\uACE0 \uACC4\uC2DC\uB294
-        \uAC83 \uAC19\uAD70\uC694."
+      dialogue: "\uC0C1\uB2F4\uC0AC\uB77C...\uC798\uC740 \uBAA8\uB974\uACA0\uC9C0\uB9CC...
+        \uAF64 \uB192\uC740 \uC218\uC900\uC758 \uC758\uC2DD\uC744 \n\uC720\uC9C0\uD558\uACE0
+        \uACC4\uC2DC\uB294 \uAC83 \uAC19\uAD70\uC694."
       basicdelay: 0.05
       dotdelay: 0.25
       cantskip: 0
@@ -23836,7 +23841,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uBB50, \uBC29\uD574\uB9CC \uC548 \uB41C\uB2E4\uBA74\uC57C \uBC1C\uC774
+      dialogue: "\uBB50.. \uBC29\uD574\uB9CC \uC548 \uB41C\uB2E4\uBA74\uC57C \uBC1C\uC774
         \uAC00\uB294 \uB370\uB85C \uB9C8\uC74C\uAECF \uB3CC\uC544\uB2E4\uB2C8\uC154\uB3C4
         \uB429\uB2C8\uB2E4."
       basicdelay: 0.05
@@ -23871,7 +23876,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
-      dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30...?"
+      dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30?"
       basicdelay: 0.05
       dotdelay: 0.25
       cantskip: 0
@@ -23915,8 +23920,8 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uB124, \uC5D0\uCE6D\uC73C\uB85C \uAE30\uC5B5\uC744 \uC9C1\uC811
-        \uB1CC\uC5D0 \uC0C8\uAE30\uC8E0. \uD658\uC6D0\uC18D\uC5D0\uC11C \uC720\uC77C\uD558\uAC8C\uB098\uB9C8
+      dialogue: "\uC5D0\uCE6D\uC73C\uB85C \uAE30\uC5B5\uC744 \uC9C1\uC811 \uB1CC\uC5D0
+        \uC0C8\uAE30\uC8E0. \uD658\uC6D0\uC18D\uC5D0\uC11C \uC720\uC77C\uD558\uAC8C\uB098\uB9C8
         \n\uB2E4\uC74C \uC8FC\uAE30\uB85C \uAC00\uC838\uAC08 \uC218 \uC788\uB294\uAC83\uB4E4\uC785\uB2C8\uB2E4."
       basicdelay: 0.05
       dotdelay: 0.25
@@ -23950,7 +23955,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uC9C0\uAE08 \uC774\uB807\uAC8C \uC804\uC9C0\uD55C\uAC83\uCC98\uB7FC
+      dialogue: "\uC9C0\uAE08 \uC774\uB807\uAC8C \uBA40\uCA61\uD55C\uAC83\uCC98\uB7FC
         \uBCF4\uC5EC\uB3C4, \uACB0\uAD6D \uC81C \uB1CC\uC5D0 \uC0C8\uACA8\uC9C4 \n\uC5D0\uCE6D\uC774
         \uC81C \uC815\uCCB4\uC131\uC744 \uD615\uC131\uD558\uACE0\uC788\uB2E4\uB294
         \uC0AC\uC2E4\uC774..."
@@ -23988,8 +23993,7 @@ MonoBehaviour:
     - target: 1
       dialogue: "\uC800\uB294 \uC0C1\uB2F4\uC0AC...\uB2D8\uC774 \uB204\uAD70\uC9C0\uB294
         \uC54C \uC218 \uC5C6\uACA0\uC9C0\uB9CC, \uBD80\uB514 \uB0A8\uC740 \uC2DC\uAC04\uC744
-        \uB354 \uC758\uBBF8\uC788\uAC8C, \n\uC624\uB86F\uC774 \uC790\uC2E0\uC758
-        \uAD73\uC740 \uC758\uC9C0\uB85C \uB098\uC544\uAC00\uC138\uC694."
+        \uB354 \uC758\uBBF8\uC788\uAC8C \uC4F0\uC138\uC694"
       basicdelay: 0.05
       dotdelay: 0.25
       cantskip: 0
@@ -25357,6 +25361,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 0}
   Instance: {fileID: 0}
+--- !u!114 &1694457163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694457153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6e3df6807545244b9eb0cc94813d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705481448
 GameObject:
   m_ObjectHideFlags: 0
@@ -25959,7 +25975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1854147179
 Transform:
   m_ObjectHideFlags: 0
@@ -27972,6 +27988,50 @@ PrefabInstance:
     - target: {fileID: 8497979725163269799, guid: f7fc9356429ca90429ca62f923550096, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173922524682484, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 12.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173922524682484, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173922524682484, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173922524682487, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432192, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_text
+      value: " \uD14D\uC2A4\uD2B8  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 12.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751173923011432195, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 8917605295720771479, guid: f7fc9356429ca90429ca62f923550096, type: 3}
       propertyPath: m_AnchorMax.y

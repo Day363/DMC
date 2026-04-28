@@ -68,7 +68,7 @@ public class titlecode : MonoBehaviour
 
         string encoded = string.Join("", result);
 
-        Debug.Log(encoded);
+        //Debug.Log(encoded);
         SpawnObjects(encoded);
     }
 

@@ -49,6 +49,7 @@ public class indexer0_weaponland : MonoBehaviour
     public void LandFinish()
     {
         landed = true;
+        GetComponent<enemyattack>().canattack = false;
         GetComponent<enemyattack>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = true;
     }

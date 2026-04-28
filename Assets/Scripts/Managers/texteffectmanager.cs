@@ -55,7 +55,7 @@ public class TextEffectManager : MonoBehaviour
 
         string plainText = Regex.Replace(workingText, "<.*?>", "");
 
-        int globalOffset = 0;
+        //int globalOffset = 0;
 
         string camPattern = @"<camerashake=(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)>";
         workingText = Regex.Replace(workingText, camPattern, match =>

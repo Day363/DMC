@@ -61,6 +61,11 @@ public class skillfunction : MonoBehaviour
         };
     }
 
+    public void DashEnd()
+    {
+        GetComponent<playerhit>().canhit = true;
+    }
+
     public void GameOver()
     {
         battalemanager.Instance.cameramanager.GetComponent<CameraManager>().ShakeCamera(5, 0.02f);

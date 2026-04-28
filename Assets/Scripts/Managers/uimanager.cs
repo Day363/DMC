@@ -65,6 +65,8 @@ public class uimanager : MonoBehaviour
     [Header("skilldesc")]
     public GameObject normalskillbutton;
     public GameObject arreyskillbutton;
+    [Header("tooltip")]
+    public GameObject tooltip;
 
     void Awake()
     {
@@ -102,6 +104,8 @@ public class uimanager : MonoBehaviour
         {
             gameobject.SetActive(false);
         }
+        battalemanager.Instance.attackcore.GetComponent<attackcore>().cursor1.SetActive(false);
+        battalemanager.Instance.attackcore.GetComponent<attackcore>().cursor2.SetActive(false);
     }
 
     public void ResetUi()

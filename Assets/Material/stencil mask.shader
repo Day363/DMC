@@ -2,6 +2,7 @@ Shader "Unlit/stencil mask"
 {
     Properties
     {
+        _MainTex ("Texture", 2D) = "white" {}
         _Stencil ("Stencil ID", Float) = 1
     }
 

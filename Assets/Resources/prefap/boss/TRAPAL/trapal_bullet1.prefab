@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8b67088447baf4b80bb0fd2dcb6f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canattack: 1
   player: {fileID: 0}
   enemy: {fileID: 0}
   damage: 0
@@ -102,10 +103,15 @@ MonoBehaviour:
   selfback: 0
   playerback: 0
   ratiosum: 0
+  cantparry: 1
   steadydamage: 0
+  Notifparrysetfalse: 1
+  fixdam: 0
   slash: 0
   penetrate: 0
   blow: 0
+  friendly_hit: 0
+  hit: 0
 --- !u!50 &1438650494144762275
 Rigidbody2D:
   serializedVersion: 4

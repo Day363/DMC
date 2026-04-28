@@ -13,7 +13,7 @@ public class trapal_arms : MonoBehaviour
     public JointMotor2D motor;
 
 
-    public AudioSource audio;
+    public AudioSource audioSource;
     public float maxpitch;
     public float lowpitch;
     public float maxvolume;
@@ -38,8 +38,8 @@ public class trapal_arms : MonoBehaviour
 
     IEnumerator Turn()
     {
-        DOTween.To(() => audio.volume, x => audio.volume = x, maxvolume, 0.5f).SetEase(Ease.OutQuad);
-        audio.DOPitch(maxpitch, 1.5f);
+        DOTween.To(() => audioSource.volume, x => audioSource.volume = x, maxvolume, 0.5f).SetEase(Ease.OutQuad);
+        audioSource.DOPitch(maxpitch, 1.5f);
 
         direction = Random.Range(1, 3);
         if (direction == 1)
@@ -58,9 +58,9 @@ public class trapal_arms : MonoBehaviour
 
         yield return new WaitForSeconds(randomsecond);
 
-        audio.DOPitch(lowpitch, 1.5f);
-        DOTween.To(() => audio.volume, x => audio.volume = x, 0, 0.5f).SetEase(Ease.OutQuad);
-        
+        audioSource.DOPitch(lowpitch, 1.5f);
+        DOTween.To(() => audioSource.volume, x => audioSource.volume = x, 0f, 0.5f).SetEase(Ease.OutQuad);
+
         StartCoroutine(TurnStart());
     }
 }

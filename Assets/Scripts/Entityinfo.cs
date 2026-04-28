@@ -11,6 +11,6 @@ public class Entityinfo : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(entityname);
+        //Debug.Log(entityname);
     }
 }

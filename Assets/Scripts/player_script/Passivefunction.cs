@@ -68,7 +68,7 @@ public class Passivefunction : MonoBehaviour
 
     public void SetBoolsFromList(List<string> activeList)
     {
-        Debug.Log(activeList);
+        //Debug.Log(activeList);
         FieldInfo[] fields = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (FieldInfo field in fields)

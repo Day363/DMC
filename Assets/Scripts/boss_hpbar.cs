@@ -25,6 +25,9 @@ public class boss_hpbar : MonoBehaviour
 
     public GameObject damagepos;
 
+    
+   
+
     public GameObject balancebar;
     public GameObject stackbar;
     public GameObject canvas;
@@ -34,7 +37,11 @@ public class boss_hpbar : MonoBehaviour
 
     public string hitsound;
 
+    //ÇÁ¸®ÆÕ
     public GameObject damagetext;
+    public GameObject bleedtext;
+    public GameObject balanceeffect;
+    //
 
     public float collapsefloat;
 
@@ -118,7 +125,7 @@ public class boss_hpbar : MonoBehaviour
             activeStacks.Add(instance);
         }
 
-        Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
+        //Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
 
         OnStackApplied?.Invoke(newStack, amount);
 
@@ -136,7 +143,7 @@ public class boss_hpbar : MonoBehaviour
         if (existing != null)
         {
             existing.RemoveStack(amount);
-            Debug.Log($"Removed stack: {targetStack.effectName} (-{amount})");
+            //Debug.Log($"Removed stack: {targetStack.effectName} (-{amount})");
 
             OnStackRemoved?.Invoke(targetStack, amount);
 
@@ -264,7 +271,10 @@ public class boss_hpbar : MonoBehaviour
 
                 if (stack.stackData.effectName == "ÃâÇ÷")
                 {
-                    Damage((int)(stack.currentStack * (bleeddamageincrease + playerstatus.instance.r_enemybleeddamageincrease)));
+                    float bleeddam = stack.currentStack * (bleeddamageincrease + playerstatus.instance.r_enemybleeddamageincrease);
+                    Damage((int)bleeddam, false);
+                    GameObject curbleedtext = Instantiate(bleedtext,damagepos.transform.position, Quaternion.identity);
+                    curbleedtext.transform.GetChild(0).GetComponent<TMP_Text>().text = bleeddam.ToString("F0");
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
                     if (stack.currentStack == 1)
                     {
@@ -312,6 +322,17 @@ public class boss_hpbar : MonoBehaviour
     public void BalanceCollapse()
     {
         OnCollusion?.Invoke();
+
+        GameObject obj = Instantiate(balanceeffect, balancebar.transform);
+
+        RectTransform rt = obj.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+
+        rt.anchoredPosition = Vector2.zero;
+
+
         GetComponent<Animator>().SetBool("idle", false);
         GetComponent<Animator>().SetTrigger("collapse");
 
@@ -354,7 +375,7 @@ public class boss_hpbar : MonoBehaviour
         DOTween.To(() => GetComponent<SpriteRenderer>().material.GetFloat("_flashamount"), value => GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", value), 0f, 0.35f).SetEase(Ease.OutQuart).SetUpdate(true).SetId("enemyflash");
     }
 
-    public void Damage(int damage)
+    public void Damage(int damage, bool damNotion = true)
     {
         if (canhit)
         {
@@ -374,19 +395,25 @@ public class boss_hpbar : MonoBehaviour
             {
                 BalanceDamage(damage * 0.1f);
             }
-            GameObject damt = Instantiate(damagetext);
-            damagetext damtdamagetext = damt.GetComponent<damagetext>();
-            if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+            if (damNotion)
             {
-                damtdamagetext.wherexpos = 1;
+                {
+                    GameObject damt = Instantiate(damagetext);
+                    damagetext damtdamagetext = damt.GetComponent<damagetext>();
+                    if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
+                    {
+                        damtdamagetext.wherexpos = 1;
+                    }
+                    else
+                    {
+                        damtdamagetext.wherexpos = -1;
+                    }
+                    damtdamagetext.fix = true;
+                    damt.transform.position = damagepos.transform.position;
+                    damtdamagetext.damage = (int)totaldamage;
+                }
             }
-            else
-            {
-                damtdamagetext.wherexpos = -1;
-            }
-            damtdamagetext.fix = true;
-            damt.transform.position = damagepos.transform.position;
-            damtdamagetext.damage = (int)totaldamage;
+            
             if (currenthealth <= 0)
             {
                 Dead();
@@ -438,7 +465,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
-        Debug.Log(damage);
+        //Debug.Log(damage);
         if (canhit)
         {
             HitSound();

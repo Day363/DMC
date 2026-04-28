@@ -94,7 +94,7 @@ public class lazer2lookat : MonoBehaviour
 
     public void Shoot2()
     {
-        if (soundname != null)
+        if (soundname != "")
         {
             soundmanager.instance.SoundPlay(soundname);
         }
@@ -112,7 +112,7 @@ public class lazer2lookat : MonoBehaviour
 
     public void Shoot()
     {
-        if (soundname != null)
+        if (soundname != "")
         {
             soundmanager.instance.SoundPlay(soundname);
         }

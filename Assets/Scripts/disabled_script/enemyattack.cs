@@ -10,11 +10,8 @@ public class enemyattack : MonoBehaviour
     public int damage;
     public bool lightattack = false;
     public bool heavyattack = false;
-    public float parryback = 35;
-    public float selfback;
-    public float playerback;
-    public float ratiosum;
 
+    public bool cantparry = false;
     public bool steadydamage;
     public bool Notifparrysetfalse;
 
@@ -42,7 +39,7 @@ public class enemyattack : MonoBehaviour
     {
         if (canattack)
         {
-            if (collision.gameObject.tag == "playerattack")
+            if (collision.gameObject.tag == "playerattack" && !cantparry)
             {
                 int i = Random.Range(0, 3);
                 if (i == 0)
@@ -69,24 +66,19 @@ public class enemyattack : MonoBehaviour
                 {
                     enemy.GetComponent<boss_hpbar>().BalanceDamage(collision.gameObject.GetComponent<playerattackdamage>().damage);
                 }
-                
-
-                ratiosum = damage + collision.gameObject.GetComponent<playerattackdamage>().damage;
-                selfback = (collision.gameObject.GetComponent<playerattackdamage>().damage / ratiosum) * parryback;
-                playerback = (damage / ratiosum) * parryback;
 
                 if (player.transform.position.x > enemy.transform.position.x)
                 {
-                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * playerback, ForceMode2D.Impulse);
+                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 3f, ForceMode2D.Impulse);
                     if (enemy != null)
                     {
                         if (enemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
                         {
-                            rb.AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                            rb.AddForce(Vector2.right * -3f, ForceMode2D.Impulse);
                         }
                         else if (enemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
                         {
-                            rb2.AddForce(Vector2.right * -selfback, ForceMode2D.Impulse);
+                            rb2.AddForce(Vector2.right * -3f, ForceMode2D.Impulse);
                         }
                             
                     }
@@ -94,16 +86,16 @@ public class enemyattack : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -playerback, ForceMode2D.Impulse);
+                    player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -3f, ForceMode2D.Impulse);
                     if (enemy != null)
                     {
                         if (enemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
                         {
-                            rb.AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                            rb.AddForce(Vector2.right * 3f, ForceMode2D.Impulse);
                         }
                         else if (enemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
                         {
-                            rb2.AddForce(Vector2.right * selfback, ForceMode2D.Impulse);
+                            rb2.AddForce(Vector2.right * 3f, ForceMode2D.Impulse);
                         }
                     }
                     

@@ -560,10 +560,12 @@ MonoBehaviour:
   balancebarint: {fileID: 915924458}
   hitsound: slash_hit
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
+  bleedtext: {fileID: 535754460568182478, guid: fc86e1f50d0ae5d4595d3374fddfb23b, type: 3}
+  balanceeffect: {fileID: 4032733885910268684, guid: 95afb20b494203d45aeaf8a58164d96c, type: 3}
   collapsefloat: 5
   maxhealth: 4500
   currenthealth: 0
-  maxbalance: 200
+  maxbalance: 450
   currentbalance: 0
   slashtolerance: 1
   penetratetolerance: 1
@@ -25078,7 +25080,7 @@ MonoBehaviour:
   randomstopsecond: 0
   direction: 0
   hingeJointe: {fileID: 0}
-  audio: {fileID: 615615531}
+  audioSource: {fileID: 615615531}
   maxpitch: 1
   lowpitch: 0.8
   maxvolume: 0.1
@@ -25708,7 +25710,7 @@ MonoBehaviour:
   randomstopsecond: 0
   direction: 0
   hingeJointe: {fileID: 0}
-  audio: {fileID: 666330176}
+  audioSource: {fileID: 666330176}
   maxpitch: 0.8
   lowpitch: 0.65
   maxvolume: 0.04
@@ -31870,7 +31872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ed080f36f35e64c822d7e1a4208da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2018610597}
   assistRadius: 2
   mainCamera: {fileID: 519420031}
   dot: {fileID: 21300000, guid: bbcc29cb920537c4194227863366b3a5, type: 3}
@@ -33246,10 +33248,7 @@ MonoBehaviour:
   damage: 45
   lightattack: 0
   heavyattack: 1
-  parryback: 0
-  selfback: 0
-  playerback: 0
-  ratiosum: 0
+  cantparry: 0
   steadydamage: 0
   Notifparrysetfalse: 0
   fixdam: 0
@@ -97679,10 +97678,7 @@ MonoBehaviour:
   damage: 5
   lightattack: 1
   heavyattack: 0
-  parryback: 10
-  selfback: 0
-  playerback: 0
-  ratiosum: 0
+  cantparry: 1
   steadydamage: 1
   Notifparrysetfalse: 0
   fixdam: 0
@@ -97903,10 +97899,7 @@ MonoBehaviour:
   damage: 45
   lightattack: 0
   heavyattack: 1
-  parryback: 0
-  selfback: 0
-  playerback: 0
-  ratiosum: 0
+  cantparry: 0
   steadydamage: 0
   Notifparrysetfalse: 0
   fixdam: 0
@@ -99585,6 +99578,10 @@ PrefabInstance:
       propertyPath: cammanager
       value: 
       objectReference: {fileID: 373801462}
+    - target: {fileID: 8950290879707491086, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: evasiontext
+      value: 
+      objectReference: {fileID: 168564666336440604, guid: 534325433d42cdd42aae386c9a0475b3, type: 3}
     - target: {fileID: 9107977690485584215, guid: f7fc9356429ca90429ca62f923550096, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

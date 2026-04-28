@@ -174,7 +174,7 @@ public class CameraManager : MonoBehaviour
     
     public void LimitlessShake(float AmplitudeGain, float FrequencyGain, float time)
     {
-        Debug.Log("adafe");
+        //Debug.Log("adafe");
         StartCoroutine(CamVibE(AmplitudeGain, FrequencyGain, time));
     }
 
@@ -189,7 +189,7 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CamVibE(float AmplitudeGain, float FrequencyGain, float time)
     {
-        Debug.Log(maincam.name);
+        //Debug.Log(maincam.name);
         returnAmplitudeGain = AmplitudeGain;
         returnFrequencyGain = FrequencyGain;
         CinemachineVirtualCamera maincamCinemachineVirtualCamera = maincam.GetComponent<CinemachineVirtualCamera>();

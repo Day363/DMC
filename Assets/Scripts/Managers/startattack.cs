@@ -18,11 +18,6 @@ public class startattack : MonoBehaviour
 
     public void StartFight()
     {
-        foreach (GameObject ui in uimanager.Instance.activewhenbattlestart)
-        {
-            ui.SetActive(true);
-        }
-
         attackcore = battalemanager.Instance.attackcore;
         if (attackcore.GetComponent<attackcore>().attacklist_original.Find(x => x.normalskill == true) && attackcore.GetComponent<attackcore>().attacklist_original[attackcore.GetComponent<attackcore>().attacklist_original.Count - 1].normalskill == true)
         {
@@ -35,6 +30,11 @@ public class startattack : MonoBehaviour
                 Time.timeScale = 0f;
                 uimanager.Instance.TutorialGo2();
          
+            }
+
+            foreach (GameObject ui in uimanager.Instance.activewhenbattlestart)
+            {
+                ui.SetActive(true);
             }
         }
         else

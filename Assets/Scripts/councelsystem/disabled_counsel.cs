@@ -31,6 +31,7 @@ public class disabled_counsel : MonoBehaviour
     public int cycleint;
     public GameObject cutsceneuidisappear;
     public GameObject itemgive;
+    public GameObject cronometer;
 
     //Ä³½Ì
     PlayerMove playerPlayerMove;
@@ -206,5 +207,20 @@ public class disabled_counsel : MonoBehaviour
         tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
         currentcounselmirrortocounselmanager.player = player;
         currentcounselmirrortocounselmanager.cammanager = cammanager;
+    }
+
+    public void DEAD()
+    {
+        cronometer.GetComponent<cronometer_script>().WhenLifeCoutDownEnd();
+    }
+
+    public void CantHit()
+    {
+        GetComponent<boss_hpbar>().canhit = false;
+    }
+
+    public void CanHit()
+    {
+        GetComponent<boss_hpbar>().canhit = true;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System;
+using DG.Tweening;
 
 public class playerhit : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class playerhit : MonoBehaviour
     public bool canhit = true;
 
     public Coroutine currenthitstop;
+    public Coroutine currentEmisson;
 
     public void Hit(int damage)
     {
@@ -49,15 +51,8 @@ public class playerhit : MonoBehaviour
             }
             if (evasion)
             {
-                if (damage < playerstatus_com.attackpower * evasionCoef)
-                {
-                    Instantiate(evasiontext, transform.position, Quaternion.identity);
-                    return;
-                }
-                if (damage > playerstatus_com.attackpower * evasionCoef)
-                {
-                    culdam = (int)(damage * 1.5f);
-                }
+                Instantiate(evasiontext, transform.position, Quaternion.identity);
+                return;
             }
             if (offset)
             {
@@ -75,6 +70,10 @@ public class playerhit : MonoBehaviour
             {
                 culdam = damage;
             }
+
+            RedEmisson();
+            currenthitstop = StartCoroutine(HitStop());
+
             GetComponent<playerstatus>().BalanceDamage(culdam);
             Hitcamera();
         }
@@ -100,15 +99,8 @@ public class playerhit : MonoBehaviour
             }
             if (evasion)
             {
-                if (damage < playerstatus_com.attackpower * evasionCoef)
-                {
-                    Instantiate(evasiontext, transform.position, Quaternion.identity);
-                    return;
-                }
-                if (damage > playerstatus_com.attackpower * evasionCoef)
-                {
-                    culdam = (int)(damage * 1.5f);
-                }
+                Instantiate(evasiontext, transform.position, Quaternion.identity);
+                return;
             }
             if (offset)
             {
@@ -126,6 +118,8 @@ public class playerhit : MonoBehaviour
             {
                 culdam = damage;
             }
+            RedEmisson();
+            currenthitstop = StartCoroutine(HitStop());
             GetComponent<playerstatus>().SlashDamage(culdam);
             Hitcamera();
         }
@@ -151,15 +145,8 @@ public class playerhit : MonoBehaviour
             }
             if (evasion)
             {
-                if (damage < playerstatus_com.attackpower * evasionCoef)
-                {
-                    Instantiate(evasiontext, transform.position, Quaternion.identity);
-                    return;
-                }
-                if (damage > playerstatus_com.attackpower * evasionCoef)
-                {
-                    culdam = (int)(damage * 1.5f);
-                }
+                Instantiate(evasiontext, transform.position, Quaternion.identity);
+                return;
             }
             if (offset)
             {
@@ -177,6 +164,10 @@ public class playerhit : MonoBehaviour
             {
                 culdam = damage;
             }
+
+            RedEmisson();
+            currenthitstop = StartCoroutine(HitStop());
+
             GetComponent<playerstatus>().PenetrateDamage(culdam);
             Hitcamera();
         }
@@ -202,15 +193,8 @@ public class playerhit : MonoBehaviour
             }
             if (evasion)
             {
-                if (damage < playerstatus_com.attackpower * evasionCoef)
-                {
-                    Instantiate(evasiontext, transform.position, Quaternion.identity);
-                    return;
-                }
-                if (damage > playerstatus_com.attackpower * evasionCoef)
-                {
-                    culdam = (int)(damage * 1.5f);
-                }
+                Instantiate(evasiontext, transform.position, Quaternion.identity);
+                return;
             }
             if (offset)
             {
@@ -228,6 +212,10 @@ public class playerhit : MonoBehaviour
             {
                 culdam = damage;
             }
+
+            RedEmisson();
+            currenthitstop = StartCoroutine(HitStop());
+
             GetComponent<playerstatus>().BlowDamage(culdam);
             Hitcamera();
         }
@@ -246,6 +234,7 @@ public class playerhit : MonoBehaviour
         {
             OnHitCalled?.Invoke();
 
+            RedEmisson();
             currenthitstop = StartCoroutine(HitStop());
 
             Hitcamera();
@@ -360,6 +349,7 @@ public class playerhit : MonoBehaviour
 
     IEnumerator HitStop()
     {
+        //Debug.Log("hitstop");
         Time.timeScale = 0.2f;
         yield return new WaitForSecondsRealtime(0.15f);
         Time.timeScale = 1f;
@@ -375,6 +365,24 @@ public class playerhit : MonoBehaviour
     void Hitcamera()
     {
         battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CamVibration0_5();
+    }
+
+    public void RedEmisson()
+    {
+        if (currentEmisson != null)
+        {
+            StopCoroutine(currentEmisson);
+        }
+        currentEmisson = StartCoroutine(RedEmisson_co());
+    }
+
+    IEnumerator RedEmisson_co()
+    {
+        DOTween.Kill("playerEmisson");
+        GetComponent<SpriteRenderer>().material.DOFloat(0.5f, "_flashamount", 0.1f).SetId("playerEmisson");
+        yield return new WaitForSeconds(0.1f);
+        DOTween.Kill("playerEmisson");
+        GetComponent<SpriteRenderer>().material.DOFloat(0f, "_flashamount", 0.3f).SetId("playerEmisson");
     }
 
 }

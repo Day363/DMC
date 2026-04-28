@@ -14,6 +14,7 @@ public class disabled_deathattack : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<playerstatus>().maxbalance / 2 > collision.gameObject.GetComponent<playerstatus>().currentbalance)
             {
+                player = battalemanager.Instance.player;
                 disabled.GetComponent<disabledcam>().Deathattack();
                 disabled.GetComponent<Animator>().SetBool("2phase_deathattack_success", true);
                 Color color = player.GetComponent<SpriteRenderer>().color;

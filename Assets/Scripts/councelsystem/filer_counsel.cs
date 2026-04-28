@@ -29,13 +29,14 @@ public class filer_counsel : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(Cammove());
+        
         gamemanager = battalemanager.Instance.gameObject;
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
         letterbox = battalemanager.Instance.letterbox;
         gamemanager = battalemanager.Instance.gameObject;
         player = battalemanager.Instance.player;
         battalemanager.Instance.currentenemy = gameObject;
+        StartCoroutine(Cammove());
     }
 
     public void FixedUpdate()

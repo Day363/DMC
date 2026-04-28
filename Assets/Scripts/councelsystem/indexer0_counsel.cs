@@ -20,6 +20,7 @@ public class indexer0_counsel : MonoBehaviour
     public GameObject chat;
     public GameObject canvus;
     public GameObject line;
+    public GameObject mirror;
 
     public bool firstmet;
 
@@ -95,9 +96,9 @@ public class indexer0_counsel : MonoBehaviour
     
     public void DieDialogue()
     {
-        cammanager.GetComponent<CameraManager>().LookEnemy();
-        cammanager.GetComponent<CameraManager>().CinemachineInvalidateCache();
-        letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookEnemy();
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CinemachineInvalidateCache();
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
         player.GetComponent<PlayerMove>().canmove = false;
         player.GetComponent<PlayerMove>().Stop();
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
@@ -114,7 +115,7 @@ public class indexer0_counsel : MonoBehaviour
     IEnumerator DieDisapper_co()
     {
         GameObject curportal = Instantiate(portal, transform.position, Quaternion.identity);
-        curportal.transform.position = new Vector3(0, 0, 0);
+        curportal.transform.position = transform.position;
         curportal.transform.localScale = new Vector3(0, 0, 0);
         curportal.transform.DOScale(4, 0.5f).SetEase(Ease.OutQuart);
 
@@ -122,7 +123,23 @@ public class indexer0_counsel : MonoBehaviour
         GetComponent<SpriteRenderer>().DOFade(0, 0.01f);
 
         curportal.transform.DOScale(0, 0.2f).SetEase(Ease.OutQuart);
+        canvus.SetActive(false);
+        SpawnCounsel();
     }
 
-    
+    public void SpawnCounsel()
+    {
+
+        StartCoroutine(SpawnCounsel_co());
+    }
+
+    IEnumerator SpawnCounsel_co()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameObject currentcounselmirror = Instantiate(mirror, new Vector3(transform.position.x, 30f, 0), Quaternion.identity);
+        tocounselmanager currentcounselmirrortocounselmanager = currentcounselmirror.GetComponent<tocounselmanager>();
+        currentcounselmirrortocounselmanager.player = player;
+        currentcounselmirrortocounselmanager.cammanager = cammanager;
+    }
+
 }

@@ -124,26 +124,40 @@ public class weaponskillUi : MonoBehaviour
 
     public void InstitateSkillUi()
     {
-        passivelist = Instantiate(passivedescriptionContentpre, passivelistViewPort.transform);
-        normalskilltlist = Instantiate(descriptionContentpre, normalskilltlistViewPort.transform);
-        arreyskilllist = Instantiate(descriptionContentpre, arreyskilllistViewPort.transform);
+        if (passivelist == null)
+        {
+            passivelist = Instantiate(passivedescriptionContentpre, passivelistViewPort.transform);
+        }
+        if (normalskilltlist == null)
+        {
+            normalskilltlist = Instantiate(descriptionContentpre, normalskilltlistViewPort.transform);
+        }
+        if (arreyskilllist == null)
+        {
+            arreyskilllist = Instantiate(descriptionContentpre, arreyskilllistViewPort.transform);
+        }
+        
 
 
         passivelist.transform.GetChild(0).GetComponent<TMP_Text>().text = weapon.passive_description;
-        foreach (cynthskill cynthskill in weapon.cynthskilllist)
+        if (arreyskilllist.transform.childCount < 1)
         {
-            GameObject currentbox = Instantiate(arreyskilltextprefap, arreyskilllist.transform);
-            currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = cynthskill.skill.skilldescription;
-            currentbox.GetComponent<arreyskillui>().skillArreyViewport = viewpoint;
-            currentbox.GetComponent<arreyskillui>().cynthskill = cynthskill;
+            foreach (cynthskill cynthskill in weapon.cynthskilllist)
+            {
+                GameObject currentbox = Instantiate(arreyskilltextprefap, arreyskilllist.transform);
+                currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = cynthskill.skill.skilldescription;
+                currentbox.GetComponent<arreyskillui>().skillArreyViewport = viewpoint;
+                currentbox.GetComponent<arreyskillui>().cynthskill = cynthskill;
+            }
+            foreach (standbyskill standbyskill in weapon.standbyskilllist)
+            {
+                GameObject currentbox = Instantiate(arreyskilltextprefap, arreyskilllist.transform);
+                currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = standbyskill.skilldescription;
+                currentbox.GetComponent<arreyskillui>().skillArreyViewport = viewpoint;
+                currentbox.GetComponent<arreyskillui>().standbyskill = standbyskill;
+            }
         }
-        foreach (standbyskill standbyskill in weapon.standbyskilllist)
-        {
-            GameObject currentbox = Instantiate(arreyskilltextprefap, arreyskilllist.transform);
-            currentbox.transform.GetChild(0).GetComponent<TMP_Text>().text = standbyskill.skilldescription;
-            currentbox.GetComponent<arreyskillui>().skillArreyViewport = viewpoint;
-            currentbox.GetComponent<arreyskillui>().standbyskill = standbyskill;
-        }
+        
 
         if (curcontentnow !=  null)
         {

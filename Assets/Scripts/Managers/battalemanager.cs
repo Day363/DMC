@@ -45,7 +45,6 @@ public class battalemanager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Aa");
         StartCoroutine(Uistart());
 
         if (Instance == null)

@@ -231,6 +231,8 @@ public class attackcore : MonoBehaviour
 
     public void BattleStart()
     {
+        cursor1.SetActive(true);
+        cursor2.SetActive(true);
         playerstatus.instance.BattaleStart();
         skillselectui.SetActive(true);
         uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
@@ -250,6 +252,8 @@ public class attackcore : MonoBehaviour
         foreach (GameObject ui in activewhenbattlestart)
         {
             ui.SetActive(false);
+            cursor1.SetActive(false);
+            cursor2.SetActive(false);
         }
     }
 
@@ -429,10 +433,13 @@ public class attackcore : MonoBehaviour
         if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
+            uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
 
             foreach (GameObject ui in activewhenbattlestart)
             {
                 ui.SetActive(false);
+                cursor1.SetActive(false);
+                cursor2.SetActive(false);
             }
 
             Time.timeScale = 0f;
@@ -448,10 +455,13 @@ public class attackcore : MonoBehaviour
         if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
+            uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
 
             foreach (GameObject ui in activewhenbattlestart)
             {
                 ui.SetActive(false);
+                cursor1.SetActive(false);
+                cursor2.SetActive(false);
             }
 
             Time.timeScale = 0f;
@@ -810,7 +820,7 @@ public class attackcore : MonoBehaviour
                     {
                         if (attacklist_notset[normalskillindex + 1].amalagam)
                         {
-                            Debug.Log("y");
+                            //Debug.Log("y");
                             amalgamskill = attacklist_notset[normalskillindex + 2];
                         }
                         else
@@ -836,7 +846,7 @@ public class attackcore : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(amalgamskill.skillmarkname);
+                        //Debug.Log(amalgamskill.skillmarkname);
                         for (int i = normalskillindex + 2; i >= 0; i--)
                         {
                             
@@ -952,14 +962,16 @@ public class attackcore : MonoBehaviour
 
     public void WeaponimageReplace()
     {
-        if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage != null)
-        weaponimage.GetComponent<Image>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage;
+        if (lastlist.Count == 0 || lastlist[listnumber].Count == 0) return;
+        if (lastlist[listnumber][attacknumber].Normalskill?.currentweapon?.weaponimage != null)
+            weaponimage.GetComponent<Image>().sprite = lastlist[listnumber][attacknumber].Normalskill.currentweapon.weaponimage;
 
 
     }
 
     public void DefenseTextReplace()
     {
+        if (lastlist.Count == 0 || lastlist[listnumber].Count == 0) return;
         defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
         cursordefense.text = defenseskilltest.GetComponent<TMP_Text>().text;
     }
@@ -980,6 +992,7 @@ public class attackcore : MonoBehaviour
     
     public void TextReplace()
     {
+        if (lastlist.Count == 0 || lastlist[listnumber].Count == 0) return;
         TMP_Text skillwaittext_tMP_Text = skillwaittext.GetComponent<TMP_Text>();
         if (lastlist[listnumber][attacknumber].Enforceskills == null && lastlist[listnumber][attacknumber].Amalgamed == null)
         {
@@ -1053,6 +1066,10 @@ public class attackcore : MonoBehaviour
 
     public void ArreyComplete()
     {
+        attacknumber = 0;
+        listnumber = 0;
+        cycle = 1;
+
         canattack = true;
 
 
@@ -1108,7 +1125,7 @@ public class attackcore : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
             {
-                Debug.Log("defense");
+                //Debug.Log("defense");
                 if (attacknumber < lastlist[listnumber].Count)
                 {
                     // UI °»½Å
@@ -1133,7 +1150,7 @@ public class attackcore : MonoBehaviour
                     }
                     playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
                     currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
-                    Debug.Log("defense1");
+                    //Debug.Log("defense1");
                 }
                 if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
                 {
@@ -1176,12 +1193,12 @@ public class attackcore : MonoBehaviour
                     skillQueueUI.UseNextSkill();
                 }
 
-                Debug.Log("---------------------------------------------");
-                Debug.Log(lastlist.Count);
-                Debug.Log(lastlist[listnumber].Count);
-                Debug.Log(listnumber);
-                Debug.Log(attacknumber);
-                Debug.Log("---------------------------------------------");
+                //Debug.Log("---------------------------------------------");
+                //Debug.Log(lastlist.Count);
+                //Debug.Log(lastlist[listnumber].Count);
+                //Debug.Log(listnumber);
+                //Debug.Log(attacknumber);
+                //Debug.Log("---------------------------------------------");
                 if (lastlist[listnumber][attacknumber].Normalskill)
                 {
                     if (lastlist[listnumber][attacknumber].Amalgamed == null)
@@ -1454,9 +1471,9 @@ public class attackcore : MonoBehaviour
                     StartCycle();               
                 }
 
-                if (listnumber == lastlist.Count)
+                if (listnumber >= lastlist.Count)
                 {
-                    Debug.Log("t");
+                    //Debug.Log("t");
                     listnumber = 0;
                     attacknumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
@@ -1472,77 +1489,83 @@ public class attackcore : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting && candash)
             {
-                playerplayerstatus.focus = playerplayerstatus.focus - lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.usefocus;
-
-                playerplayerhit.canhit = true;
-
-                cursor1.SetActive(true);
-                cursor2.SetActive(true);
-
-                Color targetColor = new Color(255, 255, 255, 0);
-                focusslider1.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
-                focusslider2.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
-
-                focusing = false;
-                dashmanager.SetActive(false);
-                playerPlayerMove.canmove = true;
-                playerAnimator.enabled = true;
-                Time.timeScale = 1f;
-                DOTween.Kill("light");
-                world_light.GetComponent<Light2D>().intensity = worldlightintensity;
-
-                Vector2 directionToEnemy = (dashmanager.GetComponent<dashline>().targetenemy.position - player.transform.position).normalized;
-                player.transform.position = dashmanager.GetComponent<dashline>().targetenemy.position;
-                Debug.Log(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower);
-                playerPlayerMove.canmove = false;
-                dash = true;
-                StopCoroutine(dashcoroutine);
-                DOTween.Kill("flash");
-                player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
-                playerRigidbody2D.AddForce(directionToEnemy * lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower, ForceMode2D.Impulse);
-
-
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationskill)
+                if (currentfocus > lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.usefocus)
                 {
-                    playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationtrigger);
-                }
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.prefabskill)
-                {
-                    foreach (GameObject skill in lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.skillprefab)
+                    currentfocus -= lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.usefocus;
+                    currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
+                    playerplayerstatus.focusbar.value = currentfocus;
+
+                    playerplayerhit.canhit = true;
+
+                    cursor1.SetActive(true);
+                    cursor2.SetActive(true);
+
+                    Color targetColor = new Color(255, 255, 255, 0);
+                    focusslider1.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+                    focusslider2.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+
+                    focusing = false;
+                    dashmanager.SetActive(false);
+                    playerPlayerMove.canmove = true;
+                    playerAnimator.enabled = true;
+                    Time.timeScale = 1f;
+                    DOTween.Kill("light");
+                    world_light.GetComponent<Light2D>().intensity = worldlightintensity;
+
+                    Vector2 directionToEnemy = (dashmanager.GetComponent<dashline>().targetenemy.position - player.transform.position).normalized;
+                    player.transform.position = dashmanager.GetComponent<dashline>().targetenemy.position;
+                    //Debug.Log(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower);
+                    playerPlayerMove.canmove = false;
+                    dash = true;
+                    StopCoroutine(dashcoroutine);
+                    DOTween.Kill("flash");
+                    player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
+                    playerRigidbody2D.AddForce(directionToEnemy * lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.dashafterpower, ForceMode2D.Impulse);
+
+
+                    if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationskill)
                     {
-                        Debug.Log("sds");
-                        currentskill = Instantiate(skill, transform.position, transform.rotation);
-                        currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.animationtrigger);
                     }
-                    
+                    if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.prefabskill)
+                    {
+                        foreach (GameObject skill in lastlist[listnumber][attacknumber].Normalskill.currentweapon.dashskill.skillprefab)
+                        {
+                            //Debug.Log("sds");
+                            currentskill = Instantiate(skill, transform.position, transform.rotation);
+                            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                        }
+
+                    }
+
+                    AttcknumberPlus();
+
+                    if (attacknumber == lastlist[listnumber].Count)
+                    {
+                        EndCycle();
+                        playerplayerstatus.CycleEnd();
+                        listnumber++;
+                        attacknumber = 0;
+                        cycle++;
+                        //iscycle = true;
+                        CycleReplace();
+                        StartCycle();
+                    }
+
+                    if (listnumber == lastlist.Count)
+                    {
+                        Debug.Log("t");
+                        listnumber = 0;
+                        attacknumber = 0;
+                        skillQueueUI.InitializeSkillList(lastlist);
+                    }
+
+                    WeaponimageReplace();
+                    DefenseTextReplace();
+                    TextReplace();
+                    MagazineTextReplace();
                 }
-
-                AttcknumberPlus();
-
-                if (attacknumber == lastlist[listnumber].Count)
-                {
-                    EndCycle();
-                    playerplayerstatus.CycleEnd();
-                    listnumber++;
-                    attacknumber = 0;
-                    cycle++;
-                    //iscycle = true;
-                    CycleReplace();
-                    StartCycle();
-                }
-
-                if (listnumber == lastlist.Count)
-                {
-                    Debug.Log("t");
-                    listnumber = 0;
-                    attacknumber = 0;
-                    skillQueueUI.InitializeSkillList(lastlist);
-                }
-
-                WeaponimageReplace();
-                DefenseTextReplace();
-                TextReplace();
-                MagazineTextReplace();
+                
             }
             
 
@@ -1604,10 +1627,9 @@ public class attackcore : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            playerplayerhit.canhit = true;
             if (canattack && !playerPlayerMove.canmove)
             {
-                playerplayerhit.canhit = true;
-
                 cursor1.SetActive(true);
                 cursor2.SetActive(true);
 
@@ -1655,6 +1677,29 @@ public class attackcore : MonoBehaviour
             currentfocus -= 2f * Time.unscaledDeltaTime;
             currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
             playerplayerstatus.focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
+            if (currentfocus <= 0 && focusing)
+            {
+                focusing = false;
+
+                playerplayerhit.canhit = true;
+                cursor1.SetActive(true);
+                cursor2.SetActive(true);
+
+                Color targetColor = new Color(255, 255, 255, 0);
+                focusslider1.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+                focusslider2.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart).SetId("focusbar");
+
+                dashmanager.SetActive(false);
+                playerPlayerMove.canmove = true;
+                playerAnimator.enabled = true;
+                Time.timeScale = 1f;
+                DOTween.Kill("light");
+                DOTween.To(() => world_light.GetComponent<Light2D>().intensity, x => world_light.GetComponent<Light2D>().intensity = x, worldlightintensity, 0.4f).SetEase(Ease.OutQuart).SetId("light").SetUpdate(true);
+
+                StopCoroutine(dashcoroutine);
+                DOTween.Kill("flash");
+                player.GetComponent<SpriteRenderer>().material.SetFloat("_flashamount", 0f);
+            }
         }
     }
 

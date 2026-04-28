@@ -303,8 +303,6 @@ public class cronometer_script : MonoBehaviour
             DOTween.KillAll(complete: false);
             StopAllCoroutines();
             hourAngle = 0f;
-            #if UNITY_EDITOR
-            #endif
             Debug.Log("강제 정지 완료: DOTween 및 코루틴 종료.");
             Time.timeScale = 1;
         }

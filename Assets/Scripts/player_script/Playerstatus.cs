@@ -41,6 +41,10 @@ public class playerstatus : MonoBehaviour
     public GameObject numberimage;
     public GameObject numbercount;
 
+    //ÇÁ¸®ÆÕ
+    public GameObject bleedtext;
+    //
+
     [Range(-3, 3)]
     public float emotionrate;
     [Range(-3, 3)]
@@ -194,7 +198,7 @@ public class playerstatus : MonoBehaviour
             activeStacks.Add(instance);
         }
 
-        Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
+        //Debug.Log($"Applied stack: {newStack.effectName} (+{amount})");
 
         OnStackApplied?.Invoke(newStack, amount);
 
@@ -211,7 +215,7 @@ public class playerstatus : MonoBehaviour
         if (existing != null)
         {
             existing.RemoveStack(amount);
-            Debug.Log($"Removed stack: {targetStack.effectName} (-{amount})");
+            //Debug.Log($"Removed stack: {targetStack.effectName} (-{amount})");
 
             OnStackRemoved?.Invoke(targetStack, amount);
 
@@ -219,7 +223,7 @@ public class playerstatus : MonoBehaviour
             if (existing.currentStack <= 0 && existing.stackData.disappear_whenzero)
             {
                 activeStacks.Remove(existing);
-                Debug.Log($"{targetStack.effectName} stack fully removed.");
+                //Debug.Log($"{targetStack.effectName} stack fully removed.");
             }
         }
         else
@@ -453,8 +457,12 @@ public class playerstatus : MonoBehaviour
 
                 if (stack.stackData.effectName == "ÃâÇ÷")
                 {
-                    BalanceDamage(stack.currentStack * (bleeddamagedecrease - r_bleeddamagedecrease));
+                    float bleeddam = stack.currentStack * (bleeddamagedecrease - r_bleeddamagedecrease);
+                    BalanceDamage(bleeddam);
+                    GameObject curbleedtext = Instantiate(bleedtext, transform.position, Quaternion.identity);
+                    curbleedtext.transform.GetChild(0).GetComponent<TMP_Text>().text = bleeddam.ToString("F0");
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
+                    
 
                     if (stack.currentStack == 1)
                     {
@@ -574,7 +582,7 @@ public class playerstatus : MonoBehaviour
     public void BalanceDamage(float balance)
     {
         OnHit?.Invoke();
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
@@ -591,7 +599,7 @@ public class playerstatus : MonoBehaviour
     public void SlashDamage(float balance)
     {
         OnHit?.Invoke();
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * slash_tolerance;
@@ -608,7 +616,7 @@ public class playerstatus : MonoBehaviour
     public void PenetrateDamage(float balance)
     {
         OnHit?.Invoke();
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
         PenetrationHit();
 
@@ -626,7 +634,7 @@ public class playerstatus : MonoBehaviour
     public void BlowDamage(float balance)
     {
         OnHit?.Invoke();
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * blow_tolerance;
@@ -642,7 +650,7 @@ public class playerstatus : MonoBehaviour
 
     public void BalanceHeal(float balance)
     {
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         currentbalance -= balance * (healplus + r_healincrease);
         BalanceCheck();
     }
@@ -654,7 +662,7 @@ public class playerstatus : MonoBehaviour
 
     public void SelfBalanceDamage(float balance)
     {
-        Debug.Log("ADada");
+        //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         currentbalance += (balance * selfharmdamagepercent);
@@ -684,6 +692,10 @@ public class playerstatus : MonoBehaviour
 
     public void Parrystop()
     {
+        if (currentparrystop != null)
+        {
+            StopCoroutine(currentparrystop);
+        }
         currentparrystop = StartCoroutine(ParryStop());
     }
 

@@ -110,36 +110,38 @@ public class chatmanager : MonoBehaviour
 
     public void Update()
     {
-        if (chating)
+        if (!chating) return;
+
+        if (chatnumber >= currentdialogues.dialogueLines.Count)
         {
-            if (Input.GetMouseButtonDown(0) && !whilesaying)
-            {
-                if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
-                {
-                    if (currentchatco != null)
-                    {
-                        StopCoroutine(currentchatco);
-                    }
-                    
-                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
-                    chatnumber++;
-                }
-                else if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Player)
-                {
-                    if (currentchatco != null)
-                    {
-                        StopCoroutine(currentchatco);
-                    }
-                    currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], playerchatbox));
-                    chatnumber++;
-                }
-            }
-            else if (Input.GetMouseButtonDown(0) && whilesaying)
-            {
-                skip = true;
-            }
+            chating = false;
+            return;
         }
 
+        if (Input.GetMouseButtonDown(0) && !whilesaying)
+        {
+            if (currentchatco != null)
+            {
+                StopCoroutine(currentchatco);
+            }
+
+            var line = currentdialogues.dialogueLines[chatnumber];
+
+            if (line.target == Chattarget.Enemy)
+            {
+                currentchatco = StartCoroutine(Chat(line, enemychatbox));
+            }
+            else if (line.target == Chattarget.Player)
+            {
+                currentchatco = StartCoroutine(Chat(line, playerchatbox));
+            }
+
+            chatnumber++;
+        }
+        else if (Input.GetMouseButtonDown(0) && whilesaying)
+        {
+            skip = true;
+        }
     }
 
     public void StopChatting()
