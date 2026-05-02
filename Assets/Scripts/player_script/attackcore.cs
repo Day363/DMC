@@ -1037,7 +1037,7 @@ public class attackcore : MonoBehaviour
         playerplayerstatus.focusbar.maxValue = playerplayerstatus.focus;
         playerplayerstatus.focusbar.value = playerplayerstatus.focus;
         currentfocus = playerplayerstatus.focus;
-
+        uimanager.Instance.playerfocus.GetComponent<Slider>().maxValue = playerplayerstatus.focus;
     }
 
     public void FocusReload()
@@ -1677,6 +1677,7 @@ public class attackcore : MonoBehaviour
             currentfocus -= 2f * Time.unscaledDeltaTime;
             currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
             playerplayerstatus.focusbar.value = Mathf.Lerp(player.GetComponent<playerstatus>().focusbar.value, currentfocus, Time.unscaledDeltaTime * 5f);
+            uimanager.Instance.playerfocus.GetComponent<Slider>().value = playerplayerstatus.focusbar.value;
             if (currentfocus <= 0 && focusing)
             {
                 focusing = false;

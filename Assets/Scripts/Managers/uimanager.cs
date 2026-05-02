@@ -67,6 +67,18 @@ public class uimanager : MonoBehaviour
     public GameObject arreyskillbutton;
     [Header("tooltip")]
     public GameObject tooltip;
+    public GameObject tooltip2;
+    [Header("pausemanu")]
+    public GameObject pausemanu;
+    public GameObject uicronometer;
+
+    public GameObject playerbalance;
+    public GameObject playerfocus;
+    public GameObject playerstack;
+
+    public GameObject enemybalance;
+    public GameObject enemyfocus;
+    public GameObject enemystack;
 
     void Awake()
     {
@@ -177,6 +189,8 @@ public class uimanager : MonoBehaviour
         battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookPlayer();
         yield return SceneManager.UnloadSceneAsync(currentSceneName);
         battalemanager.Instance.player.GetComponent<Animator>().SetTrigger("cutscene2");
+
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().canpause = true;
     }
 
     IEnumerator SkipTutorial_co()
@@ -199,6 +213,8 @@ public class uimanager : MonoBehaviour
         uimanager.Instance.ResetUi();
 
         yield return SceneManager.UnloadSceneAsync(currentSceneName);
+
+        battalemanager.Instance.gameObject.GetComponent<PauseManager>().canpause = true;
     }
 
     public void TutorialGo()

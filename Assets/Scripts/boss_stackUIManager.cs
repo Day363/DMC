@@ -6,7 +6,6 @@ using TMPro;
 
 public class boss_stackUIManager : MonoBehaviour
 {
-    public boss_hpbar boss_hpbar; // 참조
     public GameObject stackUIPrefab; // StackUI 프리팹
     public Transform stackContainer; // UI 표시할 부모 오브젝트
 
@@ -23,7 +22,7 @@ public class boss_stackUIManager : MonoBehaviour
         currentStackUIObjects.Clear();
 
         // 플레이어 스택 정보 받아와서 UI 생성
-        foreach (var stackInstance in boss_hpbar.activeStacks)
+        foreach (var stackInstance in battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().activeStacks)
         {
             GameObject go = Instantiate(stackUIPrefab, stackContainer);
             currentStackUIObjects.Add(go);
@@ -45,9 +44,16 @@ public class boss_stackUIManager : MonoBehaviour
             {
                 go.GetComponentInChildren<Animator>().enabled = false;
             }
+
+            if (go.transform.GetChild(0).TryGetComponent<stacktooltip>(out stacktooltip stt))
+            {
+                stt.stackdata = stackInstance.stackData;
+                go.transform.GetChild(1).GetComponent<stencilequelwithparent>().SetMaterial();
+                go.transform.GetChild(0).GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+            }
         }
 
-        foreach (var stackInstance in boss_hpbar.nextcycleStacks)
+        foreach (var stackInstance in battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().nextcycleStacks)
         {
             GameObject go = Instantiate(stackUIPrefab, stackContainer);
             currentStackUIObjects.Add(go);
@@ -71,6 +77,13 @@ public class boss_stackUIManager : MonoBehaviour
             }
 
             iconImage.color = new Color(1, 1, 1, 0.4f);
+
+            if (go.transform.GetChild(0).TryGetComponent<stacktooltip>(out stacktooltip stt))
+            {
+                stt.stackdata = stackInstance.stackData;
+                go.transform.GetChild(1).GetComponent<stencilequelwithparent>().SetMaterial();
+                go.transform.GetChild(0).GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+            }
         }
     }
 

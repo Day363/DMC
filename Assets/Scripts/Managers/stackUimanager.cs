@@ -6,7 +6,6 @@ using TMPro;
 
 public class stackUimanager : MonoBehaviour
 {
-    public playerstatus playerstatus; // 참조
     public GameObject stackUIPrefab; // StackUI 프리팹
     public Transform stackContainer; // UI 표시할 부모 오브젝트
 
@@ -23,7 +22,7 @@ public class stackUimanager : MonoBehaviour
         currentStackUIObjects.Clear();
 
         // 플레이어 스택 정보 받아와서 UI 생성
-        foreach (var stackInstance in playerstatus.activeStacks)
+        foreach (var stackInstance in battalemanager.Instance.player.GetComponent<playerstatus>().activeStacks)
         {
             GameObject go = Instantiate(stackUIPrefab, stackContainer);
             currentStackUIObjects.Add(go);
@@ -45,6 +44,15 @@ public class stackUimanager : MonoBehaviour
             {
                 go.GetComponentInChildren<Animator>().enabled = false;
             }
+
+            if (go.transform.GetChild(0).TryGetComponent<stacktooltip>(out stacktooltip stt))
+            {
+                stt.stackdata = stackInstance.stackData;
+                go.transform.GetChild(1).GetComponent<stencilequelwithparent>().SetMaterial();
+                go.transform.GetChild(0).GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+            }
+
+
         }
     }
     

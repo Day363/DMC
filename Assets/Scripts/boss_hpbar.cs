@@ -130,6 +130,7 @@ public class boss_hpbar : MonoBehaviour
         OnStackApplied?.Invoke(newStack, amount);
 
         canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
 
 
         //GetComponent<Passivefunction>().WhenAddStack();
@@ -159,6 +160,7 @@ public class boss_hpbar : MonoBehaviour
             Debug.LogWarning($"Tried to remove stack that doesn't exist: {targetStack.effectName}");
         }
         canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
 
         //GetComponent<Passivefunction>().WhenRemoveStack();
         WhenStackAdd();
@@ -183,6 +185,7 @@ public class boss_hpbar : MonoBehaviour
         Debug.Log($"Applied next stack: {newStack.effectName} (+{amount})");
 
         canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
     }
 
     public void PrintStacks()
@@ -307,7 +310,10 @@ public class boss_hpbar : MonoBehaviour
     public void BalanceCheck()
     {
         balancebarint.value = currentbalance;
-    }
+
+        uimanager.Instance.enemybalance.GetComponent<Slider>().maxValue = maxbalance;
+        uimanager.Instance.enemybalance.GetComponent<Slider>().value = currentbalance;
+}
 
     public void BalanceDamage(float balance)
     {

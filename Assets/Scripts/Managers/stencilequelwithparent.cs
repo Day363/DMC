@@ -10,7 +10,17 @@ public class stencilequelwithparent : MonoBehaviour
 {
     public void SetMaterial()
     {
-        float stencil = transform.parent.GetComponent<Image>().material.GetFloat("_Stencil");
+        float stencil;
+
+        if (transform.parent.TryGetComponent<Image>(out Image img))
+        {
+            stencil = transform.parent.GetComponent<Image>().material.GetFloat("_Stencil");
+        }
+        else
+        {
+            stencil = transform.parent.GetChild(0).GetComponent<Image>().material.GetFloat("_Stencil");
+        }
+        
 
         if (TryGetComponent<Image>(out Image ig))
         {

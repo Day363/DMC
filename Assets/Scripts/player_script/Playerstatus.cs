@@ -203,6 +203,7 @@ public class playerstatus : MonoBehaviour
         OnStackApplied?.Invoke(newStack, amount);
 
         canvus.GetComponent<stackUimanager>().RefreshUI();
+        uimanager.Instance.playerstack.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenAddStack();
         WhenStackChange();
@@ -230,7 +231,9 @@ public class playerstatus : MonoBehaviour
         {
             Debug.LogWarning($"Tried to remove stack that doesn't exist: {targetStack.effectName}");
         }
+
         canvus.GetComponent<stackUimanager>().RefreshUI();
+        uimanager.Instance.playerstack.GetComponent<stackUimanager>().RefreshUI();
 
         GetComponent<Passivefunction>().WhenRemoveStack();
         WhenStackChange();
@@ -577,6 +580,9 @@ public class playerstatus : MonoBehaviour
     public void BalanceCheck()
     {
         balancebarint.value = currentbalance;
+
+        uimanager.Instance.playerbalance.GetComponent<Slider>().maxValue = maxbalance;
+        uimanager.Instance.playerbalance.GetComponent<Slider>().value = currentbalance;
     }
 
     public void BalanceDamage(float balance)
