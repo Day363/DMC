@@ -29,11 +29,13 @@ public class boss_hpbar : MonoBehaviour
    
 
     public GameObject balancebar;
+    public GameObject healthbar;
     public GameObject stackbar;
     public GameObject canvas;
     public Slider balancebarint;
+    public Slider healthbarint;
 
-    RectTransform hpbarrect;
+
 
     public string hitsound;
 
@@ -49,6 +51,7 @@ public class boss_hpbar : MonoBehaviour
     public float currenthealth;
     public float maxbalance;
     public float currentbalance;
+    public float maxbalanceminus;
 
     public float slashtolerance;
     public float penetratetolerance;
@@ -218,6 +221,7 @@ public class boss_hpbar : MonoBehaviour
     {
         currenthealth = maxhealth;
         balancebarint.maxValue = maxbalance;
+        healthbarint.maxValue = maxhealth * 2;
         currentbalance = 0;
         attackcore_ = attackcore.attackcoreInstance.gameObject;
     }
@@ -313,13 +317,23 @@ public class boss_hpbar : MonoBehaviour
 
         uimanager.Instance.enemybalance.GetComponent<Slider>().maxValue = maxbalance;
         uimanager.Instance.enemybalance.GetComponent<Slider>().value = currentbalance;
-}
+    }
+
+    public void HeathCheck()
+    {
+        healthbarint.value = maxhealth - currenthealth;
+
+        maxbalanceminus = currenthealth / (2 * maxhealth);
+
+        uimanager.Instance.enemyhealth.GetComponent<Slider>().maxValue = maxhealth * 2;
+        uimanager.Instance.enemyhealth.GetComponent<Slider>().value = maxhealth - currenthealth;
+    }
 
     public void BalanceDamage(float balance)
     {
         currentbalance += (balance += (balance * (playerstatus.instance.balancedamageplus + playerstatus.instance.r_compulsion_balancedamageincrease)));
         BalanceCheck();
-        if (currentbalance >= maxbalance)
+        if (currentbalance >= maxbalance - maxbalanceminus)
         {
             BalanceCollapse();
         }
@@ -397,6 +411,9 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = damage * damageplus;
             currenthealth -= totaldamage;
+
+            HeathCheck();
+
             if (!iscollapse)
             {
                 BalanceDamage(damage * 0.1f);
@@ -444,6 +461,9 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * slashtolerance) * damageplus;
             currenthealth -= totaldamage;
+
+            HeathCheck();
+
             if (!iscollapse)
             {
                 BalanceDamage(damage * 0.1f);
@@ -487,6 +507,9 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * penetratetolerance) * damageplus;
             currenthealth -= totaldamage;
+
+            HeathCheck();
+
             if (!iscollapse)
             {
                 BalanceDamage(damage * 0.1f);
@@ -526,6 +549,9 @@ public class boss_hpbar : MonoBehaviour
                 return;
             float totaldamage = (damage * blowtolerance) * damageplus;
             currenthealth -= totaldamage;
+
+            HeathCheck();
+
             if (!iscollapse)
             {
                 BalanceDamage(damage * 0.1f);

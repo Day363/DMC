@@ -1,10 +1,15 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.Android;
+using static UnityEditor.PlayerSettings;
 
 public class trapal_script : MonoBehaviour
 {
+    public Animator animator;
+
     public boss_hpbar BossstackHander;
     public GameObject bomb_bullet;
     public GameObject trapal_weapon1;
@@ -69,12 +74,14 @@ public class trapal_script : MonoBehaviour
     public GameObject phase2lazer;
     public GameObject phase2currentlazer;
     public bool whileattack;
-    public float phase2lazercooltime;
-    public float phase2lazercool;
+    //public float phase2lazercooltime;
+    //public float phase2lazercool;
+    //public float phase2attack1cooltime;
+    //public float phase2attack1cool;
+    //public float phase2attack2cooltime;
+    //public float phase2attack2cool;
     public float phase2attack1cooltime;
-    public float phase2attack1cool;
-    public float phase2attack2cooltime;
-    public float phase2attack2cool;
+    public float phase2attack1cool = 0;
     public List<GameObject> lazer2s = new List<GameObject> { };
     public int attack1count;
     public GameObject trapal_slash;
@@ -84,17 +91,36 @@ public class trapal_script : MonoBehaviour
     public List<Vector3> attack2pos = new List<Vector3> { };
     public GameObject currenatcore;
     public GameObject spaceslash;
-
+    public GameObject phase2currentlazer1;
+    public GameObject shaft;
+    public GameObject currentshaft;
+    public bool fix = true;
+    public GameObject dashslasheffect;
+    public GameObject flash;
+    public GameObject particle1;
+    public Material normalmat;
+    public Material glitchmat;
+    public GameObject concern;
+    public GameObject text1;
+    public GameObject curtext1;
+    public GameObject lazer2small;
+    public GameObject curlazer2small;
+         
     public void Start()
     {
+        animator = GetComponent<Animator>();
+
         gamemanager = battalemanager.Instance.gameObject;
         gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
     }
 
     private void FixedUpdate()
     {
-
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        if (fix)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
+        
 
         if (!phase2)
         {
@@ -110,18 +136,26 @@ public class trapal_script : MonoBehaviour
                 SwordSpawn();
             }
 
-            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("collapse"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("collapse"))
             {
-                GetComponent<Rigidbody2D>().gravityScale = 1;
-                backtrigger = true;
+                if (fix)
+                {
+                    GetComponent<Rigidbody2D>().gravityScale = 1;
+                    backtrigger = true;
+                }
+                
             }
             else
             {
-                GetComponent<Rigidbody2D>().gravityScale = 0;
-                if (backtrigger)
+                if (fix)
                 {
-                    Returntopos();
+                    GetComponent<Rigidbody2D>().gravityScale = 0;
+                    if (backtrigger)
+                    {
+                        Returntopos();
+                    }
                 }
+                
             }
 
             weapon1cool++;
@@ -186,39 +220,39 @@ public class trapal_script : MonoBehaviour
             }
         }
 
-        else if (phase2)
-        {
-            phase2lazercool++;
-            phase2attack1cool++;
-            phase2attack2cool++;
+        //else if (phase2)
+        //{
+        //    phase2lazercool++;
+        //    phase2attack1cool++;
+        //    phase2attack2cool++;
 
-            if (canattack && !whileattack && phase2lazercool >= phase2lazercooltime)
-            {
-                phase2lazercool = 0;
+        //    if (canattack && !whileattack && phase2lazercool >= phase2lazercooltime)
+        //    {
+        //        phase2lazercool = 0;
 
-                if (Mathf.Abs(player.transform.position.x - transform.position.x) >= 7f)
-                {
-                    canattack = false;
-                    GetComponent<Animator>().SetTrigger("lazer");
-                }
-            }
+        //        if (Mathf.Abs(player.transform.position.x - transform.position.x) >= 7f)
+        //        {
+        //            canattack = false;
+        //            GetComponent<Animator>().SetTrigger("lazer");
+        //        }
+        //    }
 
-            if (canattack && !whileattack && phase2attack1cool >= phase2attack1cooltime)
-            {
-                phase2attack1cool = 0;
-                whileattack = true;
+        //    if (canattack && !whileattack && phase2attack1cool >= phase2attack1cooltime)
+        //    {
+        //        phase2attack1cool = 0;
+        //        whileattack = true;
 
-                GetComponent<Animator>().SetTrigger("attack1_ready");
-            }
+        //        GetComponent<Animator>().SetTrigger("attack1_ready");
+        //    }
 
-            if (canattack && !whileattack && phase2attack2cool >= phase2attack2cooltime)
-            {
-                phase2attack2cool = 0;
-                whileattack = true;
+        //    if (canattack && !whileattack && phase2attack2cool >= phase2attack2cooltime)
+        //    {
+        //        phase2attack2cool = 0;
+        //        whileattack = true;
 
-                GetComponent<Animator>().SetTrigger("attack2");
-            }
-        }
+        //        GetComponent<Animator>().SetTrigger("attack2");
+        //    }
+        //}
     }
 
     IEnumerator Bomb()
@@ -408,20 +442,20 @@ public class trapal_script : MonoBehaviour
         DOTween.Kill("dash");
         if (attack1count >= 5)
         {
-            GetComponent<Animator>().ResetTrigger("attack1_1");
-            GetComponent<Animator>().ResetTrigger("attack1_2");
+            animator.ResetTrigger("attack1_1");
+            animator.ResetTrigger("attack1_2");
             attack1count = 0;
             transform.position = new Vector3(transform.position.x, player.transform.position.y + 4f, 0);
-            GetComponent<Animator>().SetTrigger("idle2");
+            animator.SetTrigger("idle2");
             whileattack = false;
             yield break;
         }
         int i = Random.Range(1, 3);
         if (i == 1)
         {
-            GetComponent<Animator>().ResetTrigger("attack1_1");
-            GetComponent<Animator>().ResetTrigger("attack1_2");
-            GetComponent<Animator>().SetTrigger("attack1_1");
+            animator.ResetTrigger("attack1_1");
+            animator.ResetTrigger("attack1_2");
+            animator.SetTrigger("attack1_1");
             int x = Random.Range(1, 3);
             if (x == 1)
             {
@@ -436,9 +470,9 @@ public class trapal_script : MonoBehaviour
         }
         else if (i == 2)
         {
-            GetComponent<Animator>().ResetTrigger("attack1_1");
-            GetComponent<Animator>().ResetTrigger("attack1_2");
-            GetComponent<Animator>().SetTrigger("attack1_2");
+            animator.ResetTrigger("attack1_1");
+            animator.ResetTrigger("attack1_2");
+            animator.SetTrigger("attack1_2");
             int x = Random.Range(1, 3);
             if (x == 1)
             {
@@ -572,5 +606,222 @@ public class trapal_script : MonoBehaviour
 
     }
 
-    
+    public void Gravity()
+    {
+        fix = false;
+        GetComponent<Rigidbody2D>().gravityScale = 5f;
+    }
+
+    public void LookPlayer()
+    {
+        if (transform.position.x > player.transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (transform.position.x < player.transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    public void Phase2AttackEnd()
+    {
+        int i = Random.Range(0, 1);
+        if (i == 1)
+        {
+            animator.SetTrigger("phase2_attack1");
+        }
+    }
+
+    public void Phase2attack1_Dash()
+    {
+        float power = 50 + Vector3.Distance(transform.position, player.transform.position) * 5;
+
+        GetComponent<Rigidbody2D>().AddForce(Vector2.left * transform.localScale.x * power, ForceMode2D.Impulse);
+
+        Vector3 effectpos = new Vector3(transform.position.x + (-transform.localScale.x * Vector3.Distance(transform.position, player.transform.position) / 2), transform.position.y - 1, 0);
+
+        StartCoroutine(Dashslasheffect());
+    }
+
+    IEnumerator Dashslasheffect()
+    {
+        particle1.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        
+        particle1.SetActive(false);
+    }
+
+    public void Phase2attack1_lazer0()
+    {
+        phase2currentlazer1 = Instantiate(lazer2, lazerpos.transform.position, Quaternion.Euler(0, -68, 0));
+        phase2currentlazer1.GetComponent<lazer2lookat>().cammanager = battalemanager.Instance.cameramanager;
+        phase2currentlazer1.GetComponent<lazer2lookat>().look = false;
+    }
+
+    public void Phase2attack1_lazer0_shoot()
+    {
+        phase2currentlazer1.GetComponent<lazer2lookat>().anglea = 0;
+        phase2currentlazer1.GetComponent<lazer2lookat>().Shoot();
+        if (transform.localScale.x == 1)
+        {
+            Vector3 pos = new Vector3(lazerpos.transform.position.x + 10, lazerpos.transform.position.y, 0);
+            currentshaft = Instantiate(shaft, pos, Quaternion.identity);
+            currentshaft.transform.DOMoveX(lazerpos.transform.position.x, 1.5f).SetEase(Ease.OutQuart).SetId("shaftmove");
+        }
+        else if (transform.localScale.x == -1)
+        {
+            Vector3 pos = new Vector3(lazerpos.transform.position.x - 10, lazerpos.transform.position.y, 0);
+            currentshaft = Instantiate(shaft, pos, Quaternion.identity);
+            currentshaft.transform.localScale = new Vector3(-1, 1, 1);
+            currentshaft.transform.DOMoveX(lazerpos.transform.position.x, 1.5f).SetEase(Ease.OutQuart).SetId("shaftmove");
+        }
+
+        StartCoroutine(Positioning());
+    }
+
+    public void Phase2attack1_lazer0_2()
+    {
+        phase2currentlazer1 = Instantiate(lazer2, lazerpos.transform.position, Quaternion.Euler(0, -68, 0));
+        phase2currentlazer1.GetComponent<lazer2lookat>().cammanager = battalemanager.Instance.cameramanager;
+        phase2currentlazer1.GetComponent<lazer2lookat>().look = false;
+    }
+
+    public void Phase2attack1_lazer0_shoot2()
+    {
+        phase2currentlazer1.GetComponent<lazer2lookat>().anglea = 0;
+        phase2currentlazer1.GetComponent<lazer2lookat>().Shoot();
+        if (transform.localScale.x == 1)
+        {
+            Vector3 pos = new Vector3(lazerpos.transform.position.x + 10, lazerpos.transform.position.y, 0);
+            currentshaft = Instantiate(shaft, pos, Quaternion.identity);
+            currentshaft.transform.DOMoveX(lazerpos.transform.position.x, 1.5f).SetEase(Ease.OutQuart).SetId("shaftmove");
+        }
+        else if (transform.localScale.x == -1)
+        {
+            Vector3 pos = new Vector3(lazerpos.transform.position.x - 10, lazerpos.transform.position.y, 0);
+            currentshaft = Instantiate(shaft, pos, Quaternion.identity);
+            currentshaft.transform.localScale = new Vector3(-1, 1, 1);
+            currentshaft.transform.DOMoveX(lazerpos.transform.position.x, 1.5f).SetEase(Ease.OutQuart).SetId("shaftmove");
+        }
+
+        StartCoroutine(Transforming());
+    }
+
+    IEnumerator Positioning()
+    {
+        yield return new WaitForSeconds(1.6f);
+        currentshaft.GetComponent<trapal_shaft>().RamdomPosition();
+    }
+
+    IEnumerator Transforming()
+    {
+        yield return new WaitForSeconds(1f);
+        currentshaft.GetComponent<trapal_shaft>().Transforming();
+    }
+
+    public void ShaftShoot()
+    {
+        currentshaft.GetComponent<trapal_shaft>().Shoot();
+    }
+
+    public void ShaftShootGo()
+    {
+        currentshaft.GetComponent<trapal_shaft>().ShootGO();
+    }
+
+    public void Phase2attack1_lazer1()
+    {
+        phase2currentlazer1 = Instantiate(lazer2, lazerpos.transform.position, lazer2.transform.rotation);
+        phase2currentlazer1.GetComponent<lazer2lookat>().cammanager = battalemanager.Instance.cameramanager;
+        phase2currentlazer1.GetComponent<lazer2lookat>().look = false;
+    }
+
+    public void Phase2attack1_lazer1_shoot()
+    {
+        phase2currentlazer1.GetComponent<lazer2lookat>().anglea = 90;
+        phase2currentlazer1.GetComponent<lazer2lookat>().Shoot();
+    }
+
+    public void Flash()
+    {
+        Instantiate(flash, lazerpos.transform.position, Quaternion.identity);
+    }
+
+    public void AfterImage()
+    {
+        GetComponent<afterimagetest>().StartGenerate();
+        GetComponent<SpriteRenderer>().material = glitchmat;
+    }
+
+    public void EndAfterImage()
+    {
+        GetComponent<afterimagetest>().EndGenerate();
+        GetComponent<SpriteRenderer>().material = normalmat;
+
+    }
+
+    public void Consern1()
+    {
+        var ps = concern.GetComponent<ParticleSystem>();
+        var emission = ps.emission;
+        emission.rateOverTime = 5f;
+    }
+
+    public void Consern2()
+    {
+        var ps = concern.GetComponent<ParticleSystem>();
+        var emission = ps.emission;
+        emission.rateOverTime = 10f;
+    }
+
+    public void Consern3()
+    {
+        var ps = concern.GetComponent<ParticleSystem>();
+        var emission = ps.emission;
+        emission.rateOverTime = 25f;
+    }
+
+    public void Consern4()
+    {
+        var ps = concern.GetComponent<ParticleSystem>();
+        var emission = ps.emission;
+        emission.rateOverTime = 50f;
+    }
+
+    public void Consern0()
+    {
+        var ps = concern.GetComponent<ParticleSystem>();
+        var emission = ps.emission;
+        emission.rateOverTime = 0f;
+    }
+
+    public void SpawnEtching()
+    {
+        GameObject curlazer = Instantiate(lazer2small, lazerpos.transform.position, Quaternion.Euler(0, -70, 0));
+        curlazer.GetComponent<lazer2lookat>().look = false;
+        curlazer.GetComponent<lazer2lookat>().isshoot = false;
+        curlazer.GetComponent<lazer2lookat>().canwarning = false;
+        curlazer.GetComponent<lazer2lookat>().canshoot = false;
+        curlazer.GetComponent<lazer2lookat>().player = player;
+        curlazer.GetComponent<lazer2lookat>().cammanager = cammanager;
+        curlazer2small = curlazer;
+
+        Vector3 newpos = lazerpos.transform.position;
+
+        curtext1 = Instantiate(text1, lazerpos.transform.position, Quaternion.identity);
+        curtext1.transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+    }
+
+    public void Range()
+    {
+        curlazer2small.GetComponent<lazer2lookat>().Charge();
+    }
+
+    public void Shoot()
+    {
+        curlazer2small.GetComponent<lazer2lookat>().Shoot2();
+        Destroy(curtext1);
+    }
+
 }

@@ -225,7 +225,7 @@ public class filer_counsel : MonoBehaviour
         curlazer.GetComponent<lazer2lookat>().cammanager = cammanager;
         curlazer_ = curlazer;
 
-        for (int i = 0; i <= 30; i++)
+        for (int i = 0; i <= 30; i++)//암호화하기
         {
             GameObject curetching = Instantiate(etchings[Random.Range(0, 24)], new Vector3(x, y, 0), Quaternion.identity);
             curetchings.Add(curetching);

@@ -77,6 +77,7 @@ public class uimanager : MonoBehaviour
     public GameObject playerstack;
 
     public GameObject enemybalance;
+    public GameObject enemyhealth;
     public GameObject enemyfocus;
     public GameObject enemystack;
 

@@ -99,6 +99,7 @@ public class counselfunctionmanager : MonoBehaviour
         if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
+            ta.SetTrigger("phase2_attack1");
         }
     }
 

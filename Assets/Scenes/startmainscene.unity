@@ -441,7 +441,7 @@ MonoBehaviour:
   targetangle: 0
   attackcore_: {fileID: 0}
   cammanager: {fileID: 373801462}
-  player: {fileID: 1233421491}
+  player: {fileID: 0}
   middle: {fileID: 127159112}
   hourHand: {fileID: 434699929}
   minuteHand: {fileID: 293809439}
@@ -12061,9 +12061,9 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420033}
   - component: {fileID: 519420035}
-  - component: {fileID: 519420034}
   - component: {fileID: 519420036}
   - component: {fileID: 519420037}
+  - component: {fileID: 519420039}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12172,23 +12172,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: fea19f50eef09974b95e223f7e7f501d, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12305,6 +12288,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b920cf59abddb924d9e9c17ba9998e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &519420039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 37040bea721998a459fc83a2203df072, type: 2}
 --- !u!1 &538344133
 GameObject:
   m_ObjectHideFlags: 0
@@ -13120,9 +13120,11 @@ MonoBehaviour:
   attackcore_: {fileID: 0}
   damagepos: {fileID: 609046967}
   balancebar: {fileID: 1425506570}
+  healthbar: {fileID: 0}
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
+  healthbarint: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
@@ -13132,6 +13134,7 @@ MonoBehaviour:
   currenthealth: 0
   maxbalance: 150
   currentbalance: 0
+  maxbalanceminus: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -15114,9 +15117,11 @@ MonoBehaviour:
   attackcore_: {fileID: 0}
   damagepos: {fileID: 993772872}
   balancebar: {fileID: 1880885219}
+  healthbar: {fileID: 0}
   stackbar: {fileID: 559132543}
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
+  healthbarint: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
@@ -15126,6 +15131,7 @@ MonoBehaviour:
   currenthealth: 0
   maxbalance: 150
   currentbalance: 0
+  maxbalanceminus: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -21413,11 +21419,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4675290653802209748, guid: 8ec4f01e3af0a7d4598db2610d95160a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -493.02
+      value: -495.5
       objectReference: {fileID: 0}
     - target: {fileID: 4675290653802209748, guid: 8ec4f01e3af0a7d4598db2610d95160a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.36
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4675290653802209748, guid: 8ec4f01e3af0a7d4598db2610d95160a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21711,7 +21717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_hpbar: {fileID: 993772874}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 559132544}
 --- !u!114 &1256725724
@@ -22767,7 +22772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_hpbar: {fileID: 609046973}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 2089652179}
 --- !u!1 &1425506570
@@ -24907,13 +24911,13 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
-      dialogue: "\uB04A\uC5B4\uB0B4\uC57C\uB9CC..<function=trapal_start>"
+      dialogue: "\uB04A\uC5B4\uB0B4\uC57C\uB9CC..\uD55C\uB2E4\uBA74..<function=trapal_start>"
       basicdelay: 0.1
       dotdelay: 0.3
       cantskip: 0
       end: 1
-      end_lookplayer: 0
-      end_letterboxin: 0
+      end_lookplayer: 1
+      end_letterboxin: 1
       gotoanswer: 0
       answerindex: 0
   answers:
@@ -27942,6 +27946,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7560417159147856671, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_Value
+      value: 0.41
+      objectReference: {fileID: 0}
     - target: {fileID: 7923032877175823432, guid: f7fc9356429ca90429ca62f923550096, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -28149,6 +28157,14 @@ PrefabInstance:
     - target: {fileID: 9107977690485584215, guid: f7fc9356429ca90429ca62f923550096, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112700483312371857, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112700483312371857, guid: f7fc9356429ca90429ca62f923550096, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

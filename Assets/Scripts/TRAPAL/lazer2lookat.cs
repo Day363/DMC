@@ -10,6 +10,7 @@ public class lazer2lookat : MonoBehaviour
 
     public GameObject player;
     public GameObject cammanager;
+    public Vector3 targetpos;
 
     public string soundname;
 

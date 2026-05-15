@@ -13,9 +13,12 @@ public class trapalgrid : MonoBehaviour
 
     private int lastChildCount = -1;
 
+    public int min = 5;
+    public int max = 15;
+
     private void Start()
     {
-        columns = Random.Range(5, 15);
+        columns = Random.Range(min, max);
     }
 
     void Update()

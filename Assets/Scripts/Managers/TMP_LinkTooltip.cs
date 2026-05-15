@@ -48,7 +48,7 @@ public class TMP_LinkTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         Stack stackdata = ToolTipManager.Instance.tooltipMap[id];
         tooltip.transform.GetChild(0).GetComponent<Image>().sprite = stackdata.icon;
-        tooltip.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = stackdata.effectName;
+        tooltip.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = stackdata.systemeffectName;
         tooltip.transform.GetChild(1).GetComponent<TMP_Text>().text = stackdata.description;
     }
 

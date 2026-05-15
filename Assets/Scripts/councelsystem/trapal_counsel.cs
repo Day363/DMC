@@ -31,6 +31,7 @@ public class trapal_counsel : MonoBehaviour
     public GameObject counselmirror;
     public GameObject background;
     public GameObject counselcollider;
+    public GameObject joint;
 
     public bool firstmet;
     public bool cameraset;
@@ -317,6 +318,8 @@ public class trapal_counsel : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("denyphase2entry");
 
+        joint.SetActive(false);
+
         foreach (GameObject halo in trapal_halo)
         {
             StartCoroutine(Halo_Shutdown(halo));
@@ -335,7 +338,7 @@ public class trapal_counsel : MonoBehaviour
         playerPlayerMove.canmove = false;
         playerPlayerMove.Stop();
         gamemanager.GetComponent<chatmanager>().enemychatbox = chat;
-        gamemanager.GetComponent<chatmanager>().CallDialogue(4);
+        //gamemanager.GetComponent<chatmanager>().CallDialogue(4);
         gamemanager.GetComponent<chatmanager>().CallDialogue(16);
     }
 

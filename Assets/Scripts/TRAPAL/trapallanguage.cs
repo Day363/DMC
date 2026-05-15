@@ -17,6 +17,8 @@ public class trapallanguage : MonoBehaviour
 
     public GameObject currenttext;
 
+    public bool autodisabled = true;
+
     public string[] CHO =
     {
         "r","R","s","e","E","f","a","q","Q","t",
@@ -107,12 +109,20 @@ public class trapallanguage : MonoBehaviour
     IEnumerator Delete(GameObject text)
     {
         yield return new WaitForSeconds(3.5f);
-        Destroy(text);
+        if (autodisabled)
+        {
+            Destroy(text);
+        }
+        
     }
 
     IEnumerator DeleteALL()
     {
         yield return new WaitForSeconds(10f);
-        Destroy(gameObject);
+        if (autodisabled)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }

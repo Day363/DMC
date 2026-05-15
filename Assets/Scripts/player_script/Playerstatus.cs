@@ -452,6 +452,7 @@ public class playerstatus : MonoBehaviour
 
     public void CycleEnd()
     {
+        Debug.Log("qwrf");
         if (activeStacks.Count > 0)
         {
             for (int i = activeStacks.Count - 1; i >= 0; i--)
@@ -460,6 +461,7 @@ public class playerstatus : MonoBehaviour
 
                 if (stack.stackData.effectName == "ÃâÇ÷")
                 {
+                    Debug.Log("adqf");
                     float bleeddam = stack.currentStack * (bleeddamagedecrease - r_bleeddamagedecrease);
                     BalanceDamage(bleeddam);
                     GameObject curbleedtext = Instantiate(bleedtext, transform.position, Quaternion.identity);

@@ -165,6 +165,7 @@ public class CameraManager : MonoBehaviour
         DOTween.To(() => killcamsize, x => killcamsize = x, 10f, 3f).SetEase(Ease.OutQuart);
         yield return new WaitForSecondsRealtime(3f);
         killcam = false;
+        maincam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 10f;
     }
 
     public void CamStable()

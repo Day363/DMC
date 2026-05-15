@@ -10,6 +10,7 @@ public enum TriggerType { OnCircumStart, OnCircumEnd, JustBuff, JustDeBuff , OnA
 public class Stack : ScriptableObject
 {
     public string effectName;//이름
+    public string systemeffectName;//시스템 내부 이름
     public EffectType type;//버픈지 디버픈지 그냥 스텍인지
     public TriggerType trigger;//언제 발동할지
     public TriggerType whendecrease;
