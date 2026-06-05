@@ -416,7 +416,6 @@ public class playerstatus : MonoBehaviour
         }
     }
 
-
     public void PrintStacks()
     {
         foreach (var s in activeStacks)

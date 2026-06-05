@@ -105,6 +105,12 @@ public class trapal_script : MonoBehaviour
     public GameObject curtext1;
     public GameObject lazer2small;
     public GameObject curlazer2small;
+    public GameObject effectpos;
+    public GameObject effectpos2;
+    public GameObject pierece;
+    public GameObject box;
+    public GameObject wind;
+    public GameObject slashcore;
          
     public void Start()
     {
@@ -824,4 +830,90 @@ public class trapal_script : MonoBehaviour
         Destroy(curtext1);
     }
 
+    public void MoveLittleForwardTo()
+    {
+        BoxTrue();
+        if (player.transform.position.x < transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.left, ForceMode2D.Impulse);
+        }
+        else if (player.transform.position.x > transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.right, ForceMode2D.Impulse);
+        }
+    }
+
+    public void MoveForwardTo()
+    {
+        BoxTrue();
+        if (player.transform.position.x < transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(50f * Vector2.left, ForceMode2D.Impulse);
+        }
+        else if (player.transform.position.x > transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(50f * Vector2.right, ForceMode2D.Impulse);
+        }
+    }
+
+    public void MoveOverTo()
+    {
+        BoxFlase();
+        if (player.transform.position.x < transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(120f * Vector2.left, ForceMode2D.Impulse);
+        }
+        else if (player.transform.position.x > transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(120f * Vector2.right, ForceMode2D.Impulse);
+        }
+    }
+
+    public void MovebackTo()
+    {
+        BoxTrue();
+        if (player.transform.position.x < transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.right, ForceMode2D.Impulse);
+        }
+        else if (player.transform.position.x > transform.position.x)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.left, ForceMode2D.Impulse);
+        }
+    }
+
+    public void Pierece()
+    {
+        GameObject curp = Instantiate(pierece, effectpos.transform);
+        curp.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void BoxTrue()
+    {
+        box.SetActive(true);
+    }
+
+    public void BoxFlase()
+    {
+        box.SetActive(false);
+    }
+
+    public void SpawnWind()
+    {
+        GameObject curwind = Instantiate(wind, effectpos.transform);
+        curwind.transform.localPosition = Vector3.zero;
+        GameObject curwind2 = Instantiate(wind, effectpos2.transform);
+        curwind2.transform.localScale = new Vector3(1.5f, 1.5f, 1);
+        curwind2.transform.localPosition = Vector3.zero;
+    }
+
+    public void ActiveSlashcore()
+    {
+        slashcore.SetActive(true);
+    }
+
+    public void FalseSlashcore()
+    {
+        slashcore.SetActive(false);
+    }
 }
