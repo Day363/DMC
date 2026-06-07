@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParallaxBackground : MonoBehaviour
 {
     public ParallaxCamera parallaxCamera;
-    List<ParallaxLayer> parallaxLayers = new List<ParallaxLayer>();
+    List<MonoBehaviour> parallaxLayers = new List<MonoBehaviour>();
 
     void Start()
     {
@@ -21,23 +21,22 @@ public class ParallaxBackground : MonoBehaviour
     void SetLayers()
     {
         parallaxLayers.Clear();
-
         for (int i = 0; i < transform.childCount; i++)
         {
-            ParallaxLayer layer = transform.GetChild(i).GetComponent<ParallaxLayer>();
-
-            if (layer != null)
-            {
-                parallaxLayers.Add(layer);
-            }
+            var child = transform.GetChild(i);
+            ParallaxLayer layer = child.GetComponent<ParallaxLayer>();
+            InfiniteParallaxLayer inf = child.GetComponent<InfiniteParallaxLayer>();
+            if (layer != null) parallaxLayers.Add(layer);
+            else if (inf != null) parallaxLayers.Add(inf);
         }
     }
 
     void Move(float delta)
     {
-        foreach (ParallaxLayer layer in parallaxLayers)
+        foreach (MonoBehaviour layer in parallaxLayers)
         {
-            layer.Move(delta);
+            if (layer is ParallaxLayer pl) pl.Move(delta);
+            else if (layer is InfiniteParallaxLayer il) il.Move(delta);
         }
     }
 }

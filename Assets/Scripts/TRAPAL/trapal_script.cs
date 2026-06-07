@@ -632,10 +632,14 @@ public class trapal_script : MonoBehaviour
 
     public void Phase2AttackEnd()
     {
-        int i = Random.Range(0, 1);
+        int i = Random.Range(0, 2);
         if (i == 1)
         {
             animator.SetTrigger("phase2_attack1");
+        }
+        else if (i == 2)
+        {
+            animator.SetTrigger("phase2_attack2");
         }
     }
 

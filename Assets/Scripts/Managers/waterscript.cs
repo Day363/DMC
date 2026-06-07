@@ -2,163 +2,365 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[ExecuteAlways]
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class waterscript : MonoBehaviour
 {
-    public int resolution = 20;          // 물 표면 분할
-    public float springConstant = 0.02f; // 탄성 계수
-    public float damping = 0.04f;        // 감쇠
-    public float spread = 0.05f;         // 파동 전파 정도
-    public float width = 10f;            // 물 가로 길이
-    public float height = 3f;            // 물 영역 높이 (Collider용 + Mesh 아래 영역)
-    public float baseHeight = 0f;        // 기본 수면 높이
-    public float splashForce = -5f;      // 충격 세기
-    public float triggeroffset = 0;      // 충돌 위치 보정
+    [Header("Shape")]
+    [Min(2)] public int pointCount = 64;
+    public float width = 20f;
+    public float depth = 5f;
 
-    private float[] heights;
-    private float[] velocities;
-    private float[] accelerations;
+    [Header("Wave")]
+    public float springStrength = 0.02f;
+    public float damping = 0.04f;
+    public float spread = 0.05f;
+    public int spreadIterations = 8;
 
-    private LineRenderer line;
-    private BoxCollider2D boxCollider;
-    private MeshFilter meshFilter;
-    private Mesh mesh;
+    [Header("Interaction")]
+    public string playerTag = "Player";
 
-    void Start()
+    [Tooltip("물 진입 시 파동")]
+    public float enterSplashMultiplier = 0.5f;
+
+    [Tooltip("물속 이동 시 파동")]
+    public float moveSplashMultiplier = 0.005f;
+
+    private readonly HashSet<Rigidbody2D> bodiesInWater = new();
+
+    float[] heights;
+    float[] velocities;
+    float[] leftDeltas;
+    float[] rightDeltas;
+
+    Mesh mesh;
+    Vector3[] vertices;
+    int[] triangles;
+    Vector2[] uvs;
+
+    int cachedPointCount;
+
+    void OnEnable()
     {
-        heights = new float[resolution];
-        velocities = new float[resolution];
-        accelerations = new float[resolution];
+        Initialize();
+    }
 
-        line = GetComponent<LineRenderer>();
-        line.positionCount = resolution;
+    void OnValidate()
+    {
+        Initialize();
+    }
 
-        boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.isTrigger = true;
+    void Initialize()
+    {
+        pointCount = Mathf.Max(2, pointCount);
 
-        meshFilter = GetComponent<MeshFilter>();
-        mesh = new Mesh();
-        meshFilter.mesh = mesh;
+        if (heights == null || heights.Length != pointCount)
+        {
+            heights = new float[pointCount];
+            velocities = new float[pointCount];
+            leftDeltas = new float[pointCount];
+            rightDeltas = new float[pointCount];
+        }
 
-        UpdateColliderSize();
+        if (mesh == null)
+        {
+            MeshFilter mf = GetComponent<MeshFilter>();
+
+            if (Application.isPlaying)
+            {
+                mesh = mf.mesh;
+            }
+            else
+            {
+                mesh = new Mesh();
+                mesh.name = "Water";
+                mf.sharedMesh = mesh;
+            }
+        }
+
+        CreateMesh();
     }
 
     void Update()
     {
-        // 탄성 + 감쇠
-        for (int i = 0; i < resolution; i++)
+        if (cachedPointCount != pointCount)
         {
-            float force = springConstant * (baseHeight - heights[i]) - velocities[i] * damping;
-            accelerations[i] = force;
-            velocities[i] += accelerations[i];
+            cachedPointCount = pointCount;
+            Initialize();
+        }
+
+        if (mesh == null || vertices == null)
+        {
+            Initialize();
+            return;
+        }
+
+        if (Application.isPlaying)
+        {
+            Simulate();
+        }
+
+        UpdateMesh();
+    }
+
+    void CreateMesh()
+    {
+        if (mesh == null)
+            return;
+
+        vertices = new Vector3[pointCount * 2];
+        uvs = new Vector2[pointCount * 2];
+        triangles = new int[(pointCount - 1) * 6];
+
+        float spacing = width / (pointCount - 1);
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float x = i * spacing - width * 0.5f;
+
+            vertices[i * 2] = new Vector3(x, 0f, 0f);
+            vertices[i * 2 + 1] = new Vector3(x, -depth, 0f);
+
+            float u = (float)i / (pointCount - 1);
+
+            uvs[i * 2] = new Vector2(u, 1);
+            uvs[i * 2 + 1] = new Vector2(u, 0);
+        }
+
+        int t = 0;
+
+        for (int i = 0; i < pointCount - 1; i++)
+        {
+            int tl = i * 2;
+            int bl = i * 2 + 1;
+            int tr = i * 2 + 2;
+            int br = i * 2 + 3;
+
+            triangles[t++] = tl;
+            triangles[t++] = tr;
+            triangles[t++] = bl;
+
+            triangles[t++] = tr;
+            triangles[t++] = br;
+            triangles[t++] = bl;
+        }
+
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+    }
+
+    void Simulate()
+    {
+        for (int i = 0; i < pointCount; i++)
+        {
+            float force = -heights[i] * springStrength;
+
+            velocities[i] += force;
+            velocities[i] *= (1f - damping);
+
             heights[i] += velocities[i];
         }
 
-        // 파동 전파
-        float[] leftDeltas = new float[resolution];
-        float[] rightDeltas = new float[resolution];
-
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < spreadIterations; j++)
         {
-            for (int i = 0; i < resolution; i++)
+            for (int i = 0; i < pointCount; i++)
             {
                 if (i > 0)
                 {
                     leftDeltas[i] = spread * (heights[i] - heights[i - 1]);
                     velocities[i - 1] += leftDeltas[i];
                 }
-                if (i < resolution - 1)
+
+                if (i < pointCount - 1)
                 {
                     rightDeltas[i] = spread * (heights[i] - heights[i + 1]);
                     velocities[i + 1] += rightDeltas[i];
                 }
             }
-        }
 
-        // 라인 & 메쉬 업데이트
-        UpdateLineAndMesh();
-
-        // Collider 갱신
-        UpdateColliderSize();
-    }
-
-    // 외부에서 충격 주기
-    public void Splash(int index, float velocity)
-    {
-        if (index >= 0 && index < resolution)
-        {
-            velocities[index] = velocity;
-        }
-    }
-
-    // 플레이어 충돌 감지
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            float relativeX = other.transform.position.x - (transform.position.x - width / 2f) + triggeroffset;
-            int index = Mathf.RoundToInt((relativeX / width) * (resolution - 1));
-            Splash(index, splashForce);
-        }
-    }
-
-    // BoxCollider 크기 자동 조정
-    private void UpdateColliderSize()
-    {
-        if (boxCollider != null)
-        {
-            boxCollider.size = new Vector2(width, height);
-            boxCollider.offset = new Vector2(0, baseHeight - height / 2f);
-        }
-    }
-
-    // 라인과 메쉬 업데이트
-    private void UpdateLineAndMesh()
-    {
-        float startX = transform.position.x - width / 2f;
-
-        // 버텍스: 윗부분(수면) + 아랫부분(고정)
-        Vector3[] vertices = new Vector3[resolution * 2];
-        Vector2[] uvs = new Vector2[resolution * 2];
-        int[] triangles = new int[(resolution - 1) * 6];
-
-        for (int i = 0; i < resolution; i++)
-        {
-            float x = startX + (i / (float)(resolution - 1)) * width;
-            float y = heights[i] + baseHeight + transform.position.y;
-
-            // LineRenderer (수면)
-            line.SetPosition(i, new Vector3(x, y, 0));
-
-            // 수면 윗쪽 버텍스
-            vertices[i] = new Vector3(x, y, 0);
-
-            // 수면 아래쪽 버텍스
-            vertices[i + resolution] = new Vector3(x, transform.position.y - height, 0);
-
-            // UV 좌표 (0~1 범위로 정규화)
-            float u = i / (float)(resolution - 1);
-            uvs[i] = new Vector2(u, 1f);            // 윗부분
-            uvs[i + resolution] = new Vector2(u, 0f); // 아랫부분
-
-            // 사각형을 두 개의 삼각형으로 나누기
-            if (i < resolution - 1)
+            for (int i = 0; i < pointCount; i++)
             {
-                int idx = i * 6;
-                triangles[idx] = i;
-                triangles[idx + 1] = i + 1;
-                triangles[idx + 2] = i + resolution;
+                if (i > 0)
+                    heights[i - 1] += leftDeltas[i];
 
-                triangles[idx + 3] = i + 1;
-                triangles[idx + 4] = i + resolution + 1;
-                triangles[idx + 5] = i + resolution;
+                if (i < pointCount - 1)
+                    heights[i + 1] += rightDeltas[i];
             }
         }
+    }
 
-        //mesh.Clear();
+    void UpdateMesh()
+    {
+        float spacing = width / (pointCount - 1);
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float x = i * spacing - width * 0.5f;
+
+            vertices[i * 2] = new Vector3(x, heights[i], 0f);
+            vertices[i * 2 + 1] = new Vector3(x, -depth, 0f);
+        }
+
         mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uvs;  //  UV 좌표 적용
-        mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+    }
+
+    public void Splash(Vector3 worldPosition, float force)
+    {
+        Vector3 local = transform.InverseTransformPoint(worldPosition);
+
+        float normalizedX = (local.x + width * 0.5f) / width;
+
+        int center = Mathf.RoundToInt(normalizedX * (pointCount - 1));
+
+        for (int i = -2; i <= 2; i++)
+        {
+            int index = center + i;
+
+            if (index < 0 || index >= pointCount)
+                continue;
+
+            float falloff = 1f - Mathf.Abs(i) * 0.25f;
+
+            velocities[index] += force * falloff;
+        }
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag(playerTag))
+            return;
+
+        Rigidbody2D rb = other.attachedRigidbody;
+
+        if (rb == null)
+            return;
+
+        bodiesInWater.Add(rb);
+
+        float impact = Mathf.Abs(rb.velocity.y) * enterSplashMultiplier;
+
+        if (impact > 0.1f)
+        {
+            Splash(other.bounds.center, -impact);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.CompareTag(playerTag))
+            return;
+
+        Rigidbody2D rb = other.attachedRigidbody;
+
+        if (rb == null)
+            return;
+
+        float moveSpeed = Mathf.Abs(rb.velocity.x);
+
+        if (moveSpeed < 0.5f)
+            return;
+
+        if (Time.frameCount % 5 == 0)
+        {
+            Splash(
+                other.bounds.center,
+                -moveSpeed * moveSplashMultiplier
+            );
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Rigidbody2D rb = other.attachedRigidbody;
+
+        if (rb != null)
+        {
+            bodiesInWater.Remove(rb);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+
+        Vector3 lt = transform.TransformPoint(new Vector3(-width * 0.5f, 0, 0));
+        Vector3 rt = transform.TransformPoint(new Vector3(width * 0.5f, 0, 0));
+
+        Vector3 lb = transform.TransformPoint(new Vector3(-width * 0.5f, -depth, 0));
+        Vector3 rb = transform.TransformPoint(new Vector3(width * 0.5f, -depth, 0));
+
+        Gizmos.DrawLine(lt, rt);
+        Gizmos.DrawLine(lt, lb);
+        Gizmos.DrawLine(rt, rb);
+        Gizmos.DrawLine(lb, rb);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+
+        float spacing = width / (pointCount - 1);
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float x = i * spacing - width * 0.5f;
+
+            Vector3 pos = transform.TransformPoint(new Vector3(x, 0, 0));
+
+            Gizmos.DrawSphere(pos, 0.05f);
+        }
+    }
+
+    public float GetHeight(int index)
+    {
+        index = Mathf.Clamp(index, 0, pointCount - 1);
+        return heights[index];
+    }
+
+    public float SampleHeight(float normalizedX)
+    {
+        normalizedX = Mathf.Clamp01(normalizedX);
+
+        float fIndex = normalizedX * (pointCount - 1);
+
+        int a = Mathf.FloorToInt(fIndex);
+        int b = Mathf.Min(a + 1, pointCount - 1);
+
+        float t = fIndex - a;
+
+        return Mathf.Lerp(
+            heights[a],
+            heights[b],
+            t
+        );
+    }
+
+    public void AddVelocityAtNormalized(float normalizedX, float force)
+    {
+        normalizedX = Mathf.Clamp01(normalizedX);
+
+        int center = Mathf.RoundToInt(normalizedX * (pointCount - 1));
+
+        for (int i = -2; i <= 2; i++)
+        {
+            int index = center + i;
+
+            if (index < 0 || index >= pointCount)
+                continue;
+
+            float falloff = 1f - Mathf.Abs(i) * 0.25f;
+
+            velocities[index] += force * falloff;
+        }
     }
 }
