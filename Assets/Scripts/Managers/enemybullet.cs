@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class enemybullet : MonoBehaviour
 {
+    public GameObject enemy;
+
     public float damage;
     public int bulletspeed;
     public bool canreflect;
@@ -73,22 +75,26 @@ public class enemybullet : MonoBehaviour
                     if (fixdam)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().StrongHit((int)damage, transform);
+                        //collision.GetComponent<playerhit>().StrongHit((int)damage, transform);
+                        collision.GetComponent<playerhit>().Hit((int)damage, enemy);
                     }
                     if (slash)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().SlashStrongHit((int)damage, transform);
+                        //collision.GetComponent<playerhit>().SlashStrongHit((int)damage, transform);
+                        collision.GetComponent<playerhit>().SlashHit((int)damage, enemy);
                     }
                     if (penetrate)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().PenetrateStrongHit((int)damage, transform);
+                        //collision.GetComponent<playerhit>().PenetrateStrongHit((int)damage, transform);
+                        collision.GetComponent<playerhit>().PenetrateHit((int)damage, enemy);
                     }
                     if (blow)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().BlowStrongHit((int)damage, transform);
+                        //collision.GetComponent<playerhit>().BlowStrongHit((int)damage, transform);
+                        collision.GetComponent<playerhit>().BlowHit((int)damage, enemy);
                     }
                 }
 
@@ -97,22 +103,22 @@ public class enemybullet : MonoBehaviour
                     if (fixdam)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().Hit((int)damage);
+                        collision.GetComponent<playerhit>().Hit((int)damage, enemy);
                     }
                     if (slash)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().SlashHit((int)damage);
+                        collision.GetComponent<playerhit>().SlashHit((int)damage, enemy);
                     }
                     if (penetrate)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().PenetrateHit((int)damage);
+                        collision.GetComponent<playerhit>().PenetrateHit((int)damage, enemy);
                     }
                     if (blow)
                     {
                         hit = false;
-                        collision.GetComponent<playerhit>().BlowHit((int)damage);
+                        collision.GetComponent<playerhit>().BlowHit((int)damage, enemy);
                     }
                 }
             }

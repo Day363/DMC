@@ -71,6 +71,8 @@ public class attackcore : MonoBehaviour
     public GameObject skilllistUi;
     public GameObject weaponimageUi;
     public GameObject activeweaponlistUi;
+    public GameObject defenseskilllistUi;
+    public GameObject defenseskillprephep;
     public GameObject world_light;
     public GameObject dashmanager;
     public GameObject focusslider1;
@@ -132,6 +134,7 @@ public class attackcore : MonoBehaviour
     public List<string> skillstring2 = new List<string> { };
     public List<List<SkillReady>> lastlist = new List<List<SkillReady>> { };
     public List<Skill> skillsets = new List<Skill> { };
+    public List<DefenseSkill> defenseSkills = new List<DefenseSkill> { };
 
     public List<standbyskill> standbyskills = new List<standbyskill> { };
     public List<string> skillstring_1 = new List<string> { };
@@ -190,7 +193,6 @@ public class attackcore : MonoBehaviour
         letterbox = uimanager.Instance.letterbox;
         letterboxletterboxin = letterbox.GetComponent<letterboxin>();
         skillQueueUI = uimanager.Instance.skillQueUi;
-        defenseskilltest = uimanager.Instance.defense;
         weaponimage = uimanager.Instance.weaponimage;
         skillwaittext = uimanager.Instance.skillwaitprefap;
         cycletext = uimanager.Instance.cycle;
@@ -302,6 +304,7 @@ public class attackcore : MonoBehaviour
         playerplayerstatus.CycleStart();
         playerPassivefunction.WhenCycleStart();
         Focuslength();
+
     }
 
     public void EndCycle()
@@ -389,29 +392,29 @@ public class attackcore : MonoBehaviour
 
     public void UseStandbySkill()
     {
-        if (standbyskills.Count > 0)
+        if (standbyskills.Count > 0 && gamemanagerbattalemanager.currentenemys.Count == 1)
         {
             LetterBoxDown();
             curstandbyskill = standbyskills[0];
             canattack = false;
             playerPlayerMove.canmove = false;
 
-            if (player.transform.position.x < gamemanagerbattalemanager.currentenemy.transform.position.x)
+            if (player.transform.position.x < gamemanagerbattalemanager.currentenemys[0].transform.position.x)
             {
                 player.transform.localScale = new Vector3(1, 1, 1);
                 playerPlayerMove.dir = 1;
 
-                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemy.transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
+                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemys[0].transform.position.x - curstandbyskill.length, player.transform.position.y, 0);
 
                 playerRigidbody2D.velocity = Vector2.zero;
                 StartCoroutine(UseStandby());
             }
-            if (player.transform.position.x > gamemanagerbattalemanager.currentenemy.transform.position.x)
+            if (player.transform.position.x > gamemanagerbattalemanager.currentenemys[0].transform.position.x)
             {
                 player.transform.localScale = new Vector3(-1, 1, 1);
                 playerPlayerMove.dir = -1;
 
-                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemy.transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
+                player.transform.position = new Vector3(gamemanagerbattalemanager.currentenemys[0].transform.position.x + curstandbyskill.length, player.transform.position.y, 0);
 
                 playerRigidbody2D.velocity = Vector2.zero;
                 StartCoroutine(UseStandby());
@@ -425,12 +428,12 @@ public class attackcore : MonoBehaviour
 
     public void EndStandbySkill()
     {
-        gamemanagerbattalemanager.currentenemy.GetComponent<boss_hpbar>().CollusionSolve();
-        gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
-        gamemanagerbattalemanager.currentenemy.GetComponent<Animator>().SetBool("idle", true);
+        gamemanagerbattalemanager.currentenemys[0].GetComponent<boss_hpbar>().CollusionSolve();
+        gamemanagerbattalemanager.currentenemys[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+        gamemanagerbattalemanager.currentenemys[0].GetComponent<Animator>().SetBool("idle", true);
         letterboxletterboxin.PlayLetterboxOut();
         playerPlayerMove.canmove = true;
-        if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
+        if (!gamemanager.GetComponent<battalemanager>().currentenemys[0].GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
             uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
@@ -449,10 +452,10 @@ public class attackcore : MonoBehaviour
 
     public void NostandByskill()
     {
-        gamemanagerbattalemanager.currentenemy.GetComponent<boss_hpbar>().CollusionSolve();
-        gamemanagerbattalemanager.currentenemy.transform.rotation = Quaternion.Euler(0, 0, 0);
+        gamemanagerbattalemanager.currentenemys[0].GetComponent<boss_hpbar>().CollusionSolve();
+        gamemanagerbattalemanager.currentenemys[0].transform.rotation = Quaternion.Euler(0, 0, 0);
         playerPlayerMove.canmove = true;
-        if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().died)
+        if (!gamemanager.GetComponent<battalemanager>().currentenemys[0].GetComponent<boss_hpbar>().died)
         {
             skillselectui.SetActive(true);
             uimanager.Instance.weaponlist.transform.GetChild(0).GetComponent<weaponskillUi>().ButtonPress();
@@ -969,12 +972,12 @@ public class attackcore : MonoBehaviour
 
     }
 
-    public void DefenseTextReplace()
-    {
-        if (lastlist.Count == 0 || lastlist[listnumber].Count == 0) return;
-        defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
-        cursordefense.text = defenseskilltest.GetComponent<TMP_Text>().text;
-    }
+    //public void DefenseTextReplace()
+    //{
+    //    if (lastlist.Count == 0 || lastlist[listnumber].Count == 0) return;
+    //    defenseskilltest.GetComponent<TMP_Text>().text = $"[{lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.skillmarkname}]";
+    //    cursordefense.text = defenseskilltest.GetComponent<TMP_Text>().text;
+    //}
 
     public void MagazineTextReplace()
     {
@@ -1040,6 +1043,151 @@ public class attackcore : MonoBehaviour
         uimanager.Instance.playerfocus.GetComponent<Slider>().maxValue = playerplayerstatus.focus;
     }
 
+    public void DefenseSkillArrey(List<SkillReady> currentskilllist)
+    {
+        defenseSkills.Clear();
+        
+        foreach (SkillReady currentskill in currentskilllist)
+        {
+            defenseSkills.Add(currentskill.Normalskill.currentweapon.defenseskill);
+            if (currentskill.Amalgamed != null)
+            {
+                defenseSkills.Add(currentskill.Amalgamed.currentweapon.defenseskill);
+            }
+        }
+
+        DefenseSkillUiSet();
+    }
+
+    public void DefenseSkillUiSet()
+    {
+        for (int i = defenseskilllistUi.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(defenseskilllistUi.transform.GetChild(i).gameObject);
+        }
+
+        foreach (DefenseSkill defenseSkill in defenseSkills)
+        {
+            GameObject currentdefenseui = Instantiate(defenseskillprephep, defenseskilllistUi.transform);
+            currentdefenseui.GetComponent<TMP_Text>().text = $"[{defenseSkill.skillmarkname}]";
+        }
+
+        DefenseSkilluiAlphaToZero(defenseskilllistUi);
+    }
+
+    private Tween defenseSkillFadeDelayTween;
+
+    public void DefenseSkilluiAlpha(GameObject parent)
+    {
+        DOTween.Kill("DefenseSkilluiAlphaToZero");
+
+        if (defenseSkillFadeDelayTween != null && defenseSkillFadeDelayTween.IsActive())
+            defenseSkillFadeDelayTween.Kill();
+
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            Color color = tt.color;
+
+            if (i >= 4)
+            {
+                color.a = 0f;
+            }
+            else
+            {
+                color.a = 1f - (i * 0.25f);
+            }
+
+            tt.color = color;
+        }
+
+        defenseSkillFadeDelayTween = DOVirtual.DelayedCall(1.5f, () =>
+        {
+            if (parent != null)
+                DefenseSkilluiAlphaToZeroTween(parent);
+        });
+    }
+
+    public void DefenseSkilluiAlphaToZeroTween(GameObject parent)
+    {
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            tt.DOFade(0, 1.5f).SetId("DefenseSkilluiAlphaToZero");
+        }
+    }
+
+    public void DefenseSkilluiAlphaToZero(GameObject parent)
+    {
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            tt.DOFade(0, 0f).SetId("DefenseSkilluiAlphaToZero");
+        }
+    }
+
+    private Tween currentTween;
+    private Transform currentRemovingUi;
+
+    public void DefenseSkillUiDecrease()
+    {
+        if (defenseSkills.Count > 0)
+            defenseSkills.RemoveAt(0);
+        if (defenseskilllistUi.transform.childCount == 0)
+            return;
+
+        if (currentTween != null)
+        {
+            currentTween.Kill();
+            currentTween = null;
+        }
+        if (currentRemovingUi != null)
+        {
+            currentRemovingUi.SetSiblingIndex(defenseskilllistUi.transform.childCount - 1);
+            Destroy(currentRemovingUi.gameObject);
+            currentRemovingUi = null;
+        }
+
+        if (defenseskilllistUi.transform.childCount == 0)
+            return;
+
+        Transform currentui = defenseskilllistUi.transform.GetChild(0);
+        TMP_Text text = currentui.GetComponent<TMP_Text>();
+        currentRemovingUi = currentui;
+
+        currentTween = DOTween.Sequence()
+        .SetUpdate(true)
+        .Join(text.DOFade(0, 0.45f))
+        .Join(currentui.DOScaleY(0, 0.5f))
+        .Join(currentui.DOLocalMoveX(currentui.localPosition.x - 30f, 0.45f))
+        .OnComplete(() =>
+        {
+        if (currentui != null)
+            Destroy(currentui.gameObject);
+            currentTween = null;
+            currentRemovingUi = null;
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(
+             defenseskilllistUi.GetComponent<RectTransform>());
+            DefenseSkilluiAlpha(defenseskilllistUi);
+         });
+
+        DefenseSkilluiAlpha(defenseskilllistUi);
+    }
+
+
     public void FocusReload()
     {
         playerplayerstatus.focusbar.value = playerplayerstatus.focus;
@@ -1068,7 +1216,7 @@ public class attackcore : MonoBehaviour
     {
         attacknumber = 0;
         listnumber = 0;
-        cycle = 1;
+        cycle = 0;
 
         canattack = true;
 
@@ -1080,11 +1228,12 @@ public class attackcore : MonoBehaviour
         Array2();
 
         WeaponimageReplace();
-        DefenseTextReplace();
+        //DefenseTextReplace();
         TextReplace();
         CycleReplace();
         //Waitskillarray();
         skillQueueUI.InitializeSkillList(lastlist);
+        DefenseSkillArrey(lastlist[listnumber]);
     }
 
     public void Update()
@@ -1123,67 +1272,67 @@ public class attackcore : MonoBehaviour
 
         if (canattack && !whilecooltime)
         {
-            if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
-            {
-                //Debug.Log("defense");
-                if (attacknumber < lastlist[listnumber].Count)
-                {
-                    // UI 갱신
-                    skillQueueUI.UseNextSkill();
-                }
+            //if (Input.GetMouseButtonDown(1) && !dashmanager.activeSelf)
+            //{
+            //    //Debug.Log("defense");
+            //    if (attacknumber < lastlist[listnumber].Count)
+            //    {
+            //        // UI 갱신
+            //        skillQueueUI.UseNextSkill();
+            //    }
 
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.counter)
-                {
-                    playerplayerhit.counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
-                }
+            //    //if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.counter)
+            //    //{
+            //    //    playerplayerhit.counteranimationtrigger = lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.countertrigger;
+            //    //}
 
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
-                {
-                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    if (mousePos.x > transform.position.x)
-                    {
-                        playerPlayerMove.LookRightenforce();
-                    }
-                    else if (mousePos.x < transform.position.x)
-                    {
-                        playerPlayerMove.LookLeftenforce();
-                    }
-                    playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
-                    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
-                    //Debug.Log("defense1");
-                }
-                if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
-                {
-                    playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
-                    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
-                }
+            //    //if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationskill)
+            //    //{
+            //    //    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //    //    if (mousePos.x > transform.position.x)
+            //    //    {
+            //    //        playerPlayerMove.LookRightenforce();
+            //    //    }
+            //    //    else if (mousePos.x < transform.position.x)
+            //    //    {
+            //    //        playerPlayerMove.LookLeftenforce();
+            //    //    }
+            //    //    playerAnimator.SetTrigger(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.animationtrigger);
+            //    //    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
+            //    //    //Debug.Log("defense1");
+            //    //}
+            //    //if (lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.functionskill)
+            //    //{
+            //    //    playerskillfunction.ExecuteCommand(lastlist[listnumber][attacknumber].Normalskill.currentweapon.defenseskill.function);
+            //    //    currentattackdelay = StartCoroutine(AttackBackDelay(playerstatus.instance.backdelay));
+            //    //}
 
-                AttcknumberPlus();
+            //    AttcknumberPlus();
 
-                if (attacknumber == lastlist[listnumber].Count)
-                {
-                    EndCycle();
-                    listnumber++;
-                    attacknumber = 0;
-                    cycle++;
-                    //iscycle = true;
-                    CycleReplace();
-                    StartCycle();
-                }
+            //    if (attacknumber == lastlist[listnumber].Count)
+            //    {
+            //        EndCycle();
+            //        listnumber++;
+            //        attacknumber = 0;
+            //        cycle++;
+            //        //iscycle = true;
+            //        CycleReplace();
+            //        StartCycle();
+            //    }
 
-                if (listnumber == lastlist.Count)
-                {
+            //    if (listnumber == lastlist.Count)
+            //    {
                     
-                    listnumber = 0;
-                    attacknumber = 0;
-                    skillQueueUI.InitializeSkillList(lastlist);
-                }
+            //        listnumber = 0;
+            //        attacknumber = 0;
+            //        skillQueueUI.InitializeSkillList(lastlist);
+            //    }
 
-                WeaponimageReplace();
-                DefenseTextReplace();
-                TextReplace();
-                MagazineTextReplace();
-            }
+            //    WeaponimageReplace();
+            //    DefenseTextReplace();
+            //    TextReplace();
+            //    MagazineTextReplace();
+            //}
 
             if (Input.GetMouseButtonDown(0) && !dashmanager.activeSelf)
             {
@@ -1239,8 +1388,12 @@ public class attackcore : MonoBehaviour
                             else if (lastlist[listnumber][attacknumber].Normalskill.prefabspawntoenemy)
                             {
                                 float randomint = Random.Range(0, 361);
-                                currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
-                                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                                foreach (GameObject currentenemy in gamemanager.GetComponent<battalemanager>().currentenemys)
+                                {
+                                    currentskill = Instantiate(lastlist[listnumber][attacknumber].Normalskill.skillprefab[0], currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+                                    currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+                                }
+                                
                                 if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
                                 {
                                     pg.weapon = lastlist[listnumber][attacknumber].Normalskill.currentweapon;
@@ -1468,7 +1621,8 @@ public class attackcore : MonoBehaviour
                     cycle++;
                     //iscycle = true;
                     CycleReplace();
-                    StartCycle();               
+                    StartCycle();
+                    DefenseSkillArrey(lastlist[listnumber]);
                 }
 
                 if (listnumber >= lastlist.Count)
@@ -1477,14 +1631,15 @@ public class attackcore : MonoBehaviour
                     listnumber = 0;
                     attacknumber = 0;
                     skillQueueUI.InitializeSkillList(lastlist);
+                    
                 }
 
                 WeaponimageReplace();
-                DefenseTextReplace();
+                //DefenseTextReplace();
                 TextReplace();
                 MagazineTextReplace();
 
-
+                
 
             }
             if (Input.GetMouseButtonDown(0) && dashmanager.activeSelf && dashmanager.GetComponent<dashline>().nowtargetting && candash)
@@ -1550,6 +1705,7 @@ public class attackcore : MonoBehaviour
                         //iscycle = true;
                         CycleReplace();
                         StartCycle();
+                        DefenseSkillArrey(lastlist[listnumber]);
                     }
 
                     if (listnumber == lastlist.Count)
@@ -1561,7 +1717,7 @@ public class attackcore : MonoBehaviour
                     }
 
                     WeaponimageReplace();
-                    DefenseTextReplace();
+                    //DefenseTextReplace();
                     TextReplace();
                     MagazineTextReplace();
                 }
@@ -1579,11 +1735,11 @@ public class attackcore : MonoBehaviour
             {
                 cammanager.GetComponent<CameraManager>().CamStable();
 
-                if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x > 0)
+                if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemys[0].transform.position.x > 0)
                 {
                     player.transform.localScale = new Vector3(-1, 1, 1);
                 }
-                else if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x < 0)
+                else if (player.transform.position.x - gamemanager.GetComponent<battalemanager>().currentenemys[0].transform.position.x < 0)
                 {
                     player.transform.localScale = new Vector3(1, 1, 1);
                 }
@@ -1735,8 +1891,12 @@ public class attackcore : MonoBehaviour
         else if (skillReady.Normalskill.prefabspawntoenemy)
         {
             float randomint = Random.Range(0, 361);
-            currentskill = Instantiate(skillReady.Normalskill.skillprefab[0], gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
-            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+            foreach (GameObject currentenemy in gamemanager.GetComponent<battalemanager>().currentenemys)
+            {
+                currentskill = Instantiate(skillReady.Normalskill.skillprefab[0], currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = player;
+            }
+            
             if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
             {
                 pg.weapon = skillReady.Normalskill.currentweapon;

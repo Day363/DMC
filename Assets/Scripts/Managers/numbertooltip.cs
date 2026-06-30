@@ -10,6 +10,7 @@ public class numbertooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool playerfocus;
     public bool enemybalance;
     public bool enemyfocus;
+    public GameObject currentenemy;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -37,12 +38,12 @@ public class numbertooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (enemybalance)
         {
-            uimanager.Instance.tooltip2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"{battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().currentbalance}/{battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().maxbalance}";
+            uimanager.Instance.tooltip2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"{currentenemy.GetComponent<boss_hpbar>().currentbalance}/{currentenemy.GetComponent<boss_hpbar>().maxbalance}";
         }
 
         if (enemyfocus)
         {
-            uimanager.Instance.tooltip2.transform.GetChild(0).GetComponent<TMP_Text>().text = "null/null";
+            uimanager.Instance.tooltip2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"{currentenemy.GetComponent<boss_hpbar>().currentfocus}/{currentenemy.GetComponent<boss_hpbar>().maxfocus}";
         }
     }
 }

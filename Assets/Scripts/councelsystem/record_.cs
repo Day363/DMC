@@ -12,7 +12,7 @@ public class record_ : MonoBehaviour
     public void Start()
     {
         gamemanager = battalemanager.Instance.gameObject;
-        battalemanager.Instance.currentenemy = gameObject;
+        battalemanager.Instance.currentenemys.Add(gameObject);
     }
 
     void OnTriggerStay2D(Collider2D collision)

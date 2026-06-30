@@ -117,7 +117,7 @@ public class trapal_script : MonoBehaviour
         animator = GetComponent<Animator>();
 
         gamemanager = battalemanager.Instance.gameObject;
-        gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
+        gamemanager.GetComponent<battalemanager>().currentenemys.Add(gameObject);
     }
 
     private void FixedUpdate()

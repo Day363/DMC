@@ -23,6 +23,7 @@ public class counselfunctionmanager : MonoBehaviour
     battalemanager battalemanager;
 
     public GameObject player;
+    public GameObject currentenemy;
 
     public GameObject glitch;
     public GameObject fadeout;
@@ -69,34 +70,34 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Animation1()
     {
-        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation1");
+        currentenemy.GetComponent<Animator>().SetTrigger("animation1");
     }
 
     public void Animation2()
     {
-        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation2");
+        currentenemy.GetComponent<Animator>().SetTrigger("animation2");
     }
 
     public void Animation3()
     {
-        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation3");
+        currentenemy.GetComponent<Animator>().SetTrigger("animation3");
     }
 
     public void Animation4()
     {
         Debug.Log("$rea");
-        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation4");
+        currentenemy.GetComponent<Animator>().SetTrigger("animation4");
     }
 
     public void Animation5()
     {
-        battalemanager.Instance.currentenemy.GetComponent<Animator>().SetTrigger("animation5");
+        currentenemy.GetComponent<Animator>().SetTrigger("animation5");
     }
 
     public void Trapal_start()
     {
         battalemanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
-        if (battalemanager.currentenemy.TryGetComponent<Animator>(out Animator ta))
+        if (currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
             ta.SetTrigger("phase2_attack1");
@@ -106,7 +107,7 @@ public class counselfunctionmanager : MonoBehaviour
     public void BattleStart()
     {
         battalemanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
-        if (battalemanager.Instance.currentenemy.TryGetComponent<Animator>(out Animator ta))
+        if (currentenemy.TryGetComponent<Animator>(out Animator ta))
         {
             ta.SetTrigger("start");
             StartCoroutine(BattaleStartAttackCore());
@@ -126,12 +127,12 @@ public class counselfunctionmanager : MonoBehaviour
 
     public void Trapal_Die1()
     {
-        battalemanager.Instance.currentenemy.GetComponent<trapal_counsel>().Die1();
+        currentenemy.GetComponent<trapal_counsel>().Die1();
     }
 
     public void IndexerDisappear()
     {
-        battalemanager.Instance.currentenemy.GetComponent<indexer0_counsel>().DieDisapper();
+        currentenemy.GetComponent<indexer0_counsel>().DieDisapper();
     }
 
     public void CutScene1()

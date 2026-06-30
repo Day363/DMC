@@ -12,8 +12,8 @@ public class battalemanager : MonoBehaviour
 
     public GameObject player;
     public GameObject attackcore;
-    public GameObject currentenemy;
-    //public List<GameObject> currentenemys = new List<GameObject>();
+    //public GameObject currentenemy;
+    public List<GameObject> currentenemys = new List<GameObject>();
     public List<Weapon> playerweaponinv = new List<Weapon> { };
     public List<Rapport> playerrapportinv = new List<Rapport> { };
     public List<item> playeriteminv = new List<item> { };

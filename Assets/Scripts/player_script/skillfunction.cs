@@ -370,27 +370,31 @@ public class skillfunction : MonoBehaviour
 
     IEnumerator Trapal_Slash1_co()
     {
-        GameObject curslash = Instantiate(trapal_slash1, gamemanger.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)));
-        curslash.GetComponent<playerattackdamage>().player = gameObject;
-        curslash.GetComponent<playerattackdamage>().damagenum = 1.1f;
-        playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
-        if (instance.currentStack >= 4)
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
         {
-            int runs = instance.currentStack / 4;
-            for (int i = 0; i < runs; i++)
+            GameObject curslash = Instantiate(trapal_slash1, currentenemy.transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)));
+            curslash.GetComponent<playerattackdamage>().player = gameObject;
+            curslash.GetComponent<playerattackdamage>().damagenum = 1.1f;
+            playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "추론");
+            if (instance.currentStack >= 4)
             {
-                yield return new WaitForSeconds(0.06f);
-                Vector3 randomposition = new Vector3(gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.x + UnityEngine.Random.Range(-3.5f, 3.5f), gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.y + UnityEngine.Random.Range(-3.5f, 3.5f), 0);
-                GameObject curslash1 = Instantiate(trapal_slash1, randomposition, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)));
-                curslash1.GetComponent<playerattackdamage>().player = gameObject;
-                curslash1.GetComponent<playerattackdamage>().damagenum = 1.1f;
+                int runs = instance.currentStack / 4;
+                for (int i = 0; i < runs; i++)
+                {
+                    yield return new WaitForSeconds(0.06f);
+                    Vector3 randomposition = new Vector3(currentenemy.transform.position.x + UnityEngine.Random.Range(-3.5f, 3.5f), currentenemy.transform.position.y + UnityEngine.Random.Range(-3.5f, 3.5f), 0);
+                    GameObject curslash1 = Instantiate(trapal_slash1, randomposition, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)));
+                    curslash1.GetComponent<playerattackdamage>().player = gameObject;
+                    curslash1.GetComponent<playerattackdamage>().damagenum = 1.1f;
+                }
+
             }
-            
+            else
+            {
+                curslash.transform.localScale = new Vector3(2f, 2f, 1);
+            }
         }
-        else
-        {
-            curslash.transform.localScale = new Vector3(2f, 2f, 1);
-        }
+        
     }
 
     public void Trapal_Penetrate()
@@ -471,7 +475,7 @@ public class skillfunction : MonoBehaviour
         int index = trapal_point.transform.childCount - 1;
         Transform curpenetrate = trapal_point.transform.GetChild(index);
         curpenetrate.SetParent(null);
-        Vector3 direction = (gamemanger.GetComponent<battalemanager>().currentenemy.transform.position - curpenetrate.position).normalized;
+        Vector3 direction = (gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position - curpenetrate.position).normalized;
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         curpenetrate.DORotate(new Vector3(0, 0, targetAngle), 1f).SetEase(Ease.OutQuart);
         yield return new WaitForSeconds(1.2f);
@@ -554,7 +558,7 @@ public class skillfunction : MonoBehaviour
         player_trapal_lazer2 curstartlazer2_player_Trapal_Lazer2 = curstartlazer2.GetComponent<player_trapal_lazer2>();
         curstartlazer2_player_Trapal_Lazer2.player = gameObject;
         curstartlazer2_player_Trapal_Lazer2.damagenum = 3.7f;
-        curstartlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
+        curstartlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemys[0];
         curstartlazer2_player_Trapal_Lazer2.look = false;
         curstartlazer2_player_Trapal_Lazer2.cammanager = cammanager;
         yield return new WaitForSeconds(0.5f);
@@ -576,7 +580,7 @@ public class skillfunction : MonoBehaviour
                         curlazer2_player_Trapal_Lazer2.player = gameObject;
                         curlazer2_player_Trapal_Lazer2.damagenum = 3.7f;
                         curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
-                        curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
+                        curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemys[0];
                         curlazer2_player_Trapal_Lazer2.look = true;
 
                     }
@@ -589,7 +593,7 @@ public class skillfunction : MonoBehaviour
                         curlazer2_player_Trapal_Lazer2.player = gameObject;
                         curlazer2_player_Trapal_Lazer2.damagenum = 3.7f;
                         curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
-                        curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
+                        curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemys[0];
                         curlazer2_player_Trapal_Lazer2.look = true;
                     }
 
@@ -727,7 +731,7 @@ public class skillfunction : MonoBehaviour
         }
         player_trapal_lazer2 curstartlazer2_player_Trapal_Lazer2 = curstartlazer2.GetComponent<player_trapal_lazer2>();
         curstartlazer2_player_Trapal_Lazer2.damagenum = 8.8f;
-        curstartlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
+        curstartlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemys[0];
         curstartlazer2_player_Trapal_Lazer2.look = false;
         curstartlazer2_player_Trapal_Lazer2.cammanager = cammanager;
         yield return new WaitForSeconds(0.7f);
@@ -752,16 +756,16 @@ public class skillfunction : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.03f);
                 float radian = currentangle * Mathf.Deg2Rad;
-                float spawnX = gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.x + Mathf.Cos(radian) * 4f;
-                float spawnY = gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.y + Mathf.Sin(radian) * 4f;
-                Vector2 spawnPosition = new Vector2(gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.x + spawnX, gamemanger.GetComponent<battalemanager>().currentenemy.transform.position.y + spawnY);
+                float spawnX = gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position.x + Mathf.Cos(radian) * 4f;
+                float spawnY = gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position.y + Mathf.Sin(radian) * 4f;
+                Vector2 spawnPosition = new Vector2(gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position.x + spawnX, gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position.y + spawnY);
                 Vector3 pos = new Vector3(spawnPosition.x, spawnPosition.y, -1.5f);
                 GameObject curlazer2 = Instantiate(lazer2, pos, Quaternion.identity);
                 player_trapal_lazer2 curlazer2_player_Trapal_Lazer2 = curlazer2.GetComponent<player_trapal_lazer2>();
                 curlazer2_player_Trapal_Lazer2.damagenum = 3.5f;
                 curlazer2_player_Trapal_Lazer2.look = true;
                 curlazer2_player_Trapal_Lazer2.cammanager = cammanager;
-                curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemy;
+                curlazer2_player_Trapal_Lazer2.target = gamemanger.GetComponent<battalemanager>().currentenemys[0];
                 
 
                 currentangle = currentangle - 15;
@@ -776,7 +780,7 @@ public class skillfunction : MonoBehaviour
 
     IEnumerator Trapal_Attack3_Rainattack_co()
     {
-        GameObject curlazer1 = Instantiate(trapal_lazer1, gamemanger.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, 90));
+        GameObject curlazer1 = Instantiate(trapal_lazer1, gamemanger.GetComponent<battalemanager>().currentenemys[0].transform.position, Quaternion.Euler(0, 0, 90));
         yield return new WaitForSeconds(0.1f);
         curlazer1.transform.DOScaleX(0, 1f).SetEase(Ease.OutQuart);
     }

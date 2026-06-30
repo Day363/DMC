@@ -3351,17 +3351,33 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   attackcore_: {fileID: 0}
   damagepos: {fileID: 609046967}
+  mincycle: 0
+  maxcycle: 0
+  decisionedcycle: 0
+  currentcycle: 0
+  currentphase: 0
+  currentattacknumber: 0
+  maxfocus: 0
+  currentfocus: 0
+  phase: []
+  currentenemySkills: []
   balancebar: {fileID: 1425506570}
+  healthbar: {fileID: 0}
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
+  healthbarint: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
+  bleedtext: {fileID: 0}
+  balanceeffect: {fileID: 0}
   collapsefloat: 5
+  attackpower: 0
   maxhealth: 10000
   currenthealth: 0
   maxbalance: 150
   currentbalance: 0
+  maxbalanceminus: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -3372,9 +3388,6 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 0
   bleeddamageincreaseCore: 1
-  height: -2.64
-  height2: -6.53
-  side: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -5353,17 +5366,33 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   attackcore_: {fileID: 0}
   damagepos: {fileID: 993772872}
+  mincycle: 0
+  maxcycle: 0
+  decisionedcycle: 0
+  currentcycle: 0
+  currentphase: 0
+  currentattacknumber: 0
+  maxfocus: 0
+  currentfocus: 0
+  phase: []
+  currentenemySkills: []
   balancebar: {fileID: 1880885219}
+  healthbar: {fileID: 0}
   stackbar: {fileID: 559132543}
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
+  healthbarint: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
+  bleedtext: {fileID: 0}
+  balanceeffect: {fileID: 0}
   collapsefloat: 5
+  attackpower: 0
   maxhealth: 10000
   currenthealth: 0
   maxbalance: 150
   currentbalance: 0
+  maxbalanceminus: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -5374,9 +5403,6 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
-  height: -2.64
-  height2: -6.53
-  side: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -6602,9 +6628,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_hpbar: {fileID: 993772874}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 559132544}
+  self: {fileID: 0}
 --- !u!114 &1256725724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7399,6 +7425,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1384812213
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2732459861749828292, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_Name
+      value: counseler_5_mirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 361018434}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: fadeout
+      value: 
+      objectReference: {fileID: 1676781304}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: scenename
+      value: trapal_outer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: attackcore
+      value: 
+      objectReference: {fileID: 361018433}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: cammanager
+      value: 
+      objectReference: {fileID: 373801462}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.464296
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0326166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
 --- !u!1 &1415738663
 GameObject:
   m_ObjectHideFlags: 0
@@ -7514,9 +7617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0285f8ceb104f74e9001ed743d68b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_hpbar: {fileID: 609046973}
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 2089652179}
+  self: {fileID: 0}
 --- !u!1 &1425506570
 GameObject:
   m_ObjectHideFlags: 0
@@ -8103,7 +8206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.0062866, y: 2.4037018}
+  m_AnchoredPosition: {x: 4.0063477, y: 2.4036865}
   m_SizeDelta: {x: 136.1427, y: 90.2449}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1676781306
@@ -8728,7 +8831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.001892, y: 8.539505}
+  m_AnchoredPosition: {x: -12.001953, y: 8.53949}
   m_SizeDelta: {x: 104.1272, y: 77.973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1849874861
@@ -9902,3 +10005,4 @@ SceneRoots:
   - {fileID: 609046970}
   - {fileID: 993772879}
   - {fileID: 1686278958}
+  - {fileID: 1384812213}

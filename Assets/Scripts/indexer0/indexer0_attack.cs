@@ -5,6 +5,7 @@ using UnityEngine;
 public class indexer0_attack : MonoBehaviour
 {
     public GameObject player;
+    public GameObject enemy;
     public int damage;
     public bool lightattack = false;
     public bool heavyattack = false;
@@ -22,14 +23,14 @@ public class indexer0_attack : MonoBehaviour
         if (heavyattack)
         {
             heavyattack = false;
-            player.GetComponent<playerhit>().StrongHit(damage, collision.transform);
-
+            //player.GetComponent<playerhit>().StrongHit(damage, collision.transform);
+            player.GetComponent<playerhit>().Hit(damage, enemy);
         }
 
         if (lightattack)
         {
             lightattack = false;
-            player.GetComponent<playerhit>().Hit(damage);
+            //player.GetComponent<playerhit>().Hit(damage);
         }
     }
 }

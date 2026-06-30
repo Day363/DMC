@@ -5973,6 +5973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackUIPrefab: {fileID: 6743634353056689547, guid: 86c61d50c26265d4b84b4f96d44e9b23, type: 3}
   stackContainer: {fileID: 1325054157}
+  self: {fileID: 1995604081}
 --- !u!1 &759426411
 GameObject:
   m_ObjectHideFlags: 0
@@ -23837,7 +23838,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1995604084}
   - component: {fileID: 1995604083}
-  - component: {fileID: 1995604082}
   - component: {fileID: 1995604086}
   - component: {fileID: 1995604088}
   - component: {fileID: 1995604087}
@@ -23855,22 +23855,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1995604082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995604081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347d34f54af36684ea79ff872847950a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityname: "\uD30C\uD3B8\uD654"
-  entitycode: DPE-sin8.CLR
-  selectline: "\"\uC0B0\uC0B0\uC870\uAC01\uB09C \uB098\uC5D0\uAC8C\uB294 \uB208\uAE38\uC870\uCC28
-    \uC5C6\uC5C8\uC9C0\""
 --- !u!212 &1995604083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24058,7 +24042,7 @@ MonoBehaviour:
   attackrushpower: 13
   jumppower: 30
   direction: 0
-  rushrange: 20
+  rushrange: 15
   tomove: 0
   attack4move: 0
   player: {fileID: 1687270681}
@@ -24068,12 +24052,6 @@ MonoBehaviour:
   whileattack: 0
   rushselec: 1
   skillselec: 1
-  attack3cool: 0
-  attack3cooldown: 1250
-  attack4cool: 0
-  attack4cooldown: 1400
-  attack5cool: 0
-  attack5cooldown: 490
   bulletspawnpoint: {fileID: 463541830}
   bullet: {fileID: 1289393346502936716, guid: c1096f8c98db9ac4d8bc5838e27ef783, type: 3}
   bomb: {fileID: 3860154457293843958, guid: 71b61b407c63c7e4085ea29b4366d86e, type: 3}
@@ -24196,6 +24174,52 @@ MonoBehaviour:
   cammanager: {fileID: 373801462}
   attackcore_: {fileID: 1687270679}
   damagepos: {fileID: 22722007}
+  mincycle: 4
+  maxcycle: 7
+  decisionedcycle: 0
+  currentcycle: 0
+  currentphase: 0
+  currentattacknumber: 0
+  phase:
+  - skills:
+    - skillname: "\uC5F0\uACA9"
+      enemyAttackType: 0
+      animationtrigger: attack1
+    - skillname: "\uB0B4\uB824\uCE58\uAE30"
+      enemyAttackType: 2
+      animationtrigger: attack2
+    - skillname: "\uC0B4\uC810 \uC0AC\uCD9C"
+      enemyAttackType: 0
+      animationtrigger: attack3
+    - skillname: "\uAD00\uD1B5"
+      enemyAttackType: 1
+      animationtrigger: attack5
+    - skillname: "\uADF8\uC5B4\uB0B4\uAE30"
+      enemyAttackType: 0
+      animationtrigger: attack6
+    - skillname: "\uCD9C\uD608\uC720\uB3C4"
+      enemyAttackType: 0
+      animationtrigger: attack7
+    - skillname: "\uB04C\uC5B4\uB0B4\uAE30"
+      enemyAttackType: 0
+      animationtrigger: attack8
+  - skills:
+    - skillname: "\uC9C1\uBA74"
+      enemyAttackType: 1
+      animationtrigger: 2phase_attack1
+    - skillname: "\uD604\uC2E4\uBD80\uC815"
+      enemyAttackType: 0
+      animationtrigger: 2phase_attack2
+    - skillname: "\uCC22\uC5B4\uB0B4\uAE30"
+      enemyAttackType: 0
+      animationtrigger: 2phase_attack3
+    - skillname: "\uAC08\uC544\uB0B4\uAE30"
+      enemyAttackType: 0
+      animationtrigger: 2phase_attack4
+    - skillname: "\uC774\uB984\uC5C6\uB294 \uBB18\uC9C0"
+      enemyAttackType: 0
+      animationtrigger: 2phase_deathattack
+  currentenemySkills: []
   balancebar: {fileID: 2088447298}
   healthbar: {fileID: 733882418}
   stackbar: {fileID: 1325054156}

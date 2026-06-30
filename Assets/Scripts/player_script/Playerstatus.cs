@@ -41,6 +41,9 @@ public class playerstatus : MonoBehaviour
     public GameObject numberimage;
     public GameObject numbercount;
 
+    public standbyskill currentstandbyskill;
+    public int skillcellindex = 0;
+
     //ÇÁ¸®ÆÕ
     public GameObject bleedtext;
     //
@@ -601,6 +604,17 @@ public class playerstatus : MonoBehaviour
             currentbalance = 0;
             BalanceCollapse();
         }
+    }
+
+    public void StartUseStandbySkill()
+    {
+        skillcellindex = 0;
+    }
+
+    public void StandbySkill()
+    {
+        var skillcell = currentstandbyskill.skillcells[skillcellindex];
+        //µô
     }
 
     public void SlashDamage(float balance)

@@ -10,15 +10,19 @@ public class alttrigger_gunscript : MonoBehaviour
     {
         if (GetComponent<player_gunprefap>().attackcore.GetComponent<attackcore>().weaponsmagazine.Find(x => x.Weapon == gameObject.GetComponent<player_gunprefap>().weapon).Remainmagazine <= 0)
         {
-            float randomint = Random.Range(0, 361);
-            GameObject currentskill = Instantiate(fractal, GetComponent<player_gunprefap>().attackcore.GetComponent<attackcore>().gamemanager.GetComponent<battalemanager>().currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
-            currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = GetComponent<player_gunprefap>().player;
-            if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
             {
-                pg.weapon = GetComponent<player_gunprefap>().weapon;
-                pg.attackcore = GetComponent<player_gunprefap>().attackcore;
-                pg.player = GetComponent<player_gunprefap>().player;
+                float randomint = Random.Range(0, 361);
+                GameObject currentskill = Instantiate(fractal, currentenemy.transform.position, Quaternion.Euler(0, 0, randomint));
+                currentskill.transform.GetChild(0).GetComponent<playerattackdamage>().player = GetComponent<player_gunprefap>().player;
+                if (currentskill.TryGetComponent<player_gunprefap>(out player_gunprefap pg))
+                {
+                    pg.weapon = GetComponent<player_gunprefap>().weapon;
+                    pg.attackcore = GetComponent<player_gunprefap>().attackcore;
+                    pg.player = GetComponent<player_gunprefap>().player;
+                }
             }
+            
         }
     }
 }

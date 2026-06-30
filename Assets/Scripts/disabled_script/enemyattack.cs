@@ -7,7 +7,7 @@ public class enemyattack : MonoBehaviour
     public bool canattack = true;
     public GameObject player;
     public GameObject enemy;
-    public int damage;
+    public float calculation;
     public bool lightattack = false;
     public bool heavyattack = false;
 
@@ -24,15 +24,73 @@ public class enemyattack : MonoBehaviour
 
     public bool hit = false;
 
+    [System.Serializable]
+    public class StackCell
+    {
+        public Stack stack;
+        public bool random;
+        public int minstack;
+        public int maxstack;
+        public int fixstack;
+    }
+
+    public List<StackCell> stackcells = new List<StackCell> { };
+
+    [System.Serializable]
+    public class Effectcell
+    {
+        public GameObject effect;
+        public bool randomrotation;
+    }
+
+    public List<Effectcell> effectcells = new List<Effectcell> { };
+
     public void Start()
     {
         player = battalemanager.Instance.player;
-        enemy = battalemanager.Instance.currentenemy;
     }
 
     public void HitOn()
     {
         hit = true;
+    }
+
+    public void Effect()
+    {
+        if (effectcells.Count > 0)
+        {
+            foreach (Effectcell cell in effectcells)
+            {
+                if (!cell.randomrotation)
+                {
+                    GameObject currenteffect = Instantiate(cell.effect, player.transform.position, Quaternion.identity);
+                }
+                else if (cell.randomrotation)
+                {
+                    GameObject currenteffect = Instantiate(cell.effect, player.transform.position, Quaternion.identity);
+                    currenteffect.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+                }
+            }
+        }
+    }
+
+    public void StackAdd()
+    {
+        if (stackcells.Count > 0)
+        {
+            foreach (StackCell cell in stackcells)
+            {
+                if (!cell.random)
+                {
+                    player.GetComponent<playerstatus>().ApplyStack(cell.stack, cell.fixstack);
+                }
+                else if (cell.random)
+                {
+                    player.GetComponent<playerstatus>().ApplyStack(cell.stack, Random.Range(cell.minstack, cell.maxstack + 1));
+                }
+            }
+        }
+        
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -138,7 +196,10 @@ public class enemyattack : MonoBehaviour
                             {
                                 GetComponent<Collider2D>().enabled = false;
                             }
-                            player.GetComponent<playerhit>().StrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().StrongHit(damage, transform);
+                            player.GetComponent<playerhit>().Hit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (slash)
                         {
@@ -151,7 +212,10 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().SlashHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (penetrate)
                         {
@@ -164,7 +228,10 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().PenetrateHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (blow)
                         {
@@ -177,7 +244,10 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().BlowHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                     }
 
@@ -194,7 +264,9 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().Hit(damage);
+                            player.GetComponent<playerhit>().Hit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (slash)
                         {
@@ -207,7 +279,9 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().SlashHit(damage);
+                            player.GetComponent<playerhit>().SlashHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (penetrate)
                         {
@@ -220,7 +294,9 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().PenetrateHit(damage);
+                            player.GetComponent<playerhit>().PenetrateHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (blow)
                         {
@@ -233,7 +309,9 @@ public class enemyattack : MonoBehaviour
                             {
                                 Destroy(GetComponent<Collider2D>());
                             }
-                            player.GetComponent<playerhit>().BlowHit(damage);
+                            player.GetComponent<playerhit>().BlowHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                     }
                 }
@@ -243,19 +321,31 @@ public class enemyattack : MonoBehaviour
                     {
                         if (fixdam)
                         {
-                            player.GetComponent<playerhit>().StrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().StrongHit(damage, transform);
+                            player.GetComponent<playerhit>().Hit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (slash)
                         {
-                            player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().SlashStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().SlashHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (penetrate)
                         {
-                            player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().PenetrateStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().PenetrateHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (blow)
                         {
-                            player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                            //player.GetComponent<playerhit>().BlowStrongHit(damage, transform);
+                            player.GetComponent<playerhit>().BlowHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
 
                     }
@@ -264,19 +354,27 @@ public class enemyattack : MonoBehaviour
                     {
                         if (fixdam)
                         {
-                            player.GetComponent<playerhit>().Hit(damage);
+                            player.GetComponent<playerhit>().Hit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (slash)
                         {
-                            player.GetComponent<playerhit>().SlashHit(damage);
+                            player.GetComponent<playerhit>().SlashHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (penetrate)
                         {
-                            player.GetComponent<playerhit>().PenetrateHit(damage);
+                            player.GetComponent<playerhit>().PenetrateHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                         if (blow)
                         {
-                            player.GetComponent<playerhit>().BlowHit(damage);
+                            player.GetComponent<playerhit>().BlowHit((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation), enemy);
+                            StackAdd();
+                            Effect();
                         }
                     }
                 }
@@ -294,16 +392,16 @@ public class enemyattack : MonoBehaviour
                             neh.currenthitobjcet = enemy;
                             if (slash)
                             {
-                                neh.SlashDamage(damage);
+                                neh.SlashDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
                             }
                             else if (penetrate)
                             {
-                                neh.PenetrateDamage(damage);
+                                neh.PenetrateDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
                             }
                             else if (blow)
                             {
-                                neh.BlowDamage(damage);
-                            }
+                                neh.BlowDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
+                            }   
                         }
                     }
                 }
@@ -318,7 +416,7 @@ public class enemyattack : MonoBehaviour
                                 neh.currenthitobjcet = enemy;
                                 if (slash)
                                 {
-                                    neh.SlashDamage(damage);
+                                    neh.SlashDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
                                     hit = false;
                                     if (!Notifparrysetfalse)
                                     {
@@ -331,7 +429,7 @@ public class enemyattack : MonoBehaviour
                                 }
                                 else if (penetrate)
                                 {
-                                    neh.PenetrateDamage(damage);
+                                    neh.PenetrateDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
                                     hit = false;
                                     if (!Notifparrysetfalse)
                                     {
@@ -344,7 +442,7 @@ public class enemyattack : MonoBehaviour
                                 }
                                 else if (blow)
                                 {
-                                    neh.BlowDamage(damage);
+                                    neh.BlowDamage((int)(enemy.GetComponent<boss_hpbar>().attackpower * calculation));
                                     hit = false;
                                     if (!Notifparrysetfalse)
                                     {

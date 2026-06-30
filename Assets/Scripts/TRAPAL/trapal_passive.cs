@@ -156,7 +156,7 @@ public class trapal_passive : MonoBehaviour
     public void Fragment()
     {
         StartCoroutine(Fragment_co());
-        tc.AttackEnd();
+        
     }
 
     IEnumerator Fragment_co()
@@ -316,7 +316,7 @@ public class trapal_passive : MonoBehaviour
         GetComponent<trapal_script>().canattack = true;
         yield return new WaitForSeconds(0.9f);
         Destroy(deny);
-        tc.AttackEnd();
+        
         battalemanager.Instance.player.GetComponent<playerstatus>().RemoveStack(battalemanager.Instance.stackdatas[20], 1);
     }
 
@@ -413,7 +413,7 @@ public class trapal_passive : MonoBehaviour
         {
             StartCoroutine(PlayerstatusBalanceCollapse());
         }
-        tc.AttackEnd();
+        
     }
 
     IEnumerator BosshpbarBalanceCollapse()
@@ -498,7 +498,7 @@ public class trapal_passive : MonoBehaviour
             enemyattack curpenetrate_playerattackdamage = curpenetrate.GetComponent<enemyattack>();
             curpenetrate_playerattackdamage.player = player;
             curpenetrate_playerattackdamage.enemy = gameObject;
-            curpenetrate_playerattackdamage.damage = 40;
+            curpenetrate_playerattackdamage.calculation = 4;
             curpenetrate_playerattackdamage.enabled = true;
             curpenetrate.GetComponent<BoxCollider2D>().enabled = true;
             curpenetrate.GetComponent<Rigidbody2D>().AddForce(90f * direction, ForceMode2D.Impulse);

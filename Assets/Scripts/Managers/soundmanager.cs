@@ -15,6 +15,8 @@ public class soundmanager : MonoBehaviour
     public AudioSource sfxsoundplayer;
     public AudioSource bgmsoundplayer;
 
+    public GameObject currentenemy;
+
     [Serializable]
     public class StringAudioPair
     {
@@ -53,7 +55,7 @@ public class soundmanager : MonoBehaviour
             }
             else if (sounddata.soundposition == soundposition.enemy)
             {
-                currentSFX = Instantiate(SFXobject, battalemanager.Instance.currentenemy.transform.position, Quaternion.identity);
+                currentSFX = Instantiate(SFXobject, currentenemy.transform.position, Quaternion.identity);
             }
             SFXlist.Add(currentSFX);
 

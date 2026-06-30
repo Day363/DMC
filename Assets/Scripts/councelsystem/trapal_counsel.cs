@@ -94,16 +94,7 @@ public class trapal_counsel : MonoBehaviour
     }
 
 
-    public void AttackEnd()
-    {
-        cycleint_++;
-        if (cycleint_ >= cycleint)
-        {
-            bosshp.CycleEnd();
-            bosshp.CycleStart();
-            cycleint_ = 0;
-        }
-    }
+    
 
     public void Setdeny()
     {

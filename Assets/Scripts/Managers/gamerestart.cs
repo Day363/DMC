@@ -25,6 +25,7 @@ public class gamerestart : MonoBehaviour
             StartCoroutine(Restart_co());
         }
         
+        battalemanager.Instance.currentenemys.Clear();
     }
 
     IEnumerator Restart_co()

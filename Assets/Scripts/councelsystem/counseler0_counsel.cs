@@ -23,7 +23,7 @@ public class counseler0_counsel : MonoBehaviour
         boss_hpbar.OnCollusion += Tutorial3;
         playerstatus.OnHit += Cutscene;
 
-        battalemanager.Instance.currentenemy = gameObject;
+        
         player = battalemanager.Instance.player;
         gamemanager = battalemanager.Instance.gameObject;
         playerPlayerMove = player.GetComponent<PlayerMove>();

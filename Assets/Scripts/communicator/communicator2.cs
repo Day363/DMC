@@ -36,7 +36,7 @@ public class communicator2 : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //StartWalk();
+        StartWalk();
     }
 
     public void FixedUpdate()
@@ -64,7 +64,7 @@ public class communicator2 : MonoBehaviour
 
         if (UnityEngine.Random.Range(0, 75) == 0)
         {
-            animator.SetTrigger("smoke");
+            animator.SetTrigger("cigarette");
         }
     }
 
@@ -270,5 +270,17 @@ public class communicator2 : MonoBehaviour
     public void MainSlashCoreOn()
     {
         mainslashcore.SetActive(true);
+    }
+
+    public void Phase2()
+    {
+        GetComponent<boss_hpbar>().PhaseUp();
+        GetComponent<Animator>().SetTrigger("attack5");
+    }
+
+    IEnumerator TestAttackReady()
+    {
+        yield return new WaitForSeconds(3f);
+        animator.SetTrigger("ready");
     }
 }

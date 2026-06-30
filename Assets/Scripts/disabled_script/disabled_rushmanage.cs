@@ -21,12 +21,12 @@ public class disabled_rushmanage : MonoBehaviour
     public bool whileattack = false;
     public int rushselec = 1;
     public int skillselec = 1;
-    public int attack3cool = 0;
-    public int attack3cooldown;
-    public int attack4cool = 0;
-    public int attack4cooldown;
-    public int attack5cool = 0;
-    public int attack5cooldown;
+    //public int attack3cool = 0;
+    //public int attack3cooldown;
+    //public int attack4cool = 0;
+    //public int attack4cooldown;
+    //public int attack5cool = 0;
+    //public int attack5cooldown;
     public Transform bulletspawnpoint;
     public GameObject bullet;
     public GameObject bomb;
@@ -55,7 +55,6 @@ public class disabled_rushmanage : MonoBehaviour
     {
         gamemanager = battalemanager.Instance.gameObject;
         cammanager.GetComponent<CameraManager>().enemy = gameObject;
-        gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
 
     }
 
@@ -98,197 +97,47 @@ public class disabled_rushmanage : MonoBehaviour
             {
                 Start2Phase();
             }
-
-            if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) > rushrange)
+            if (Vector2.Distance(player.transform.position, gameObject.transform.position) > rushrange && !whileattack)
             {
-                attack4cool = attack4cool + 1;
-                attack5cool = attack5cool + 1;
-                tomove = true;
-                if (attack5cool > attack5cooldown)
-                {
-                    animator.SetBool("attack5", true);
-                }
-
-                if (attack4cool > attack4cooldown)
-                {
-                    animator.SetBool("attack4", true);
-                }
+                whileattack = true;
+                Rush();
             }
-
-            if (Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) < rushrange)
+            if (Vector2.Distance(player.transform.position, gameObject.transform.position) < rushrange && !whileattack)
             {
-                tomove = false;
-
-                if (skillselec == 1)
-                {
-                    animator.SetBool("attack1", true);
-                }
-
-                if (skillselec == 2)
-                {
-                    animator.SetBool("attack2", true);
-                }
-
-                if (skillselec == 3)
-                {
-                    animator.SetBool("attack6", true);
-                }
-
-                if (skillselec == 4)
-                {
-                    animator.SetBool("attack7", true);
-                }
-
-                if (skillselec == 5)
-                {
-                    animator.SetBool("attack8", true);
-                }
+                whileattack = true;
+                Attack();
             }
-
-
-            if (attack4move)
-            {
-                attack4speed = Vector2.Distance(player.GetComponent<Transform>().position, self.GetComponent<Transform>().position) / attack4speedlow;
-
-                if (direction == -1)
-                {
-                    rb.AddForce(Vector2.left * attack4speed, ForceMode2D.Impulse);
-                }
-
-                if (direction == 1)
-                {
-                    rb.AddForce(Vector2.right * attack4speed, ForceMode2D.Impulse);
-                }
-
-
-                if (nowflying)
-                {
-                    if (Vector2.Distance(new Vector2(0, self.GetComponent<Transform>().position.y), new Vector2(0, floor.GetComponent<Transform>().position.y)) < 10.6)
-                    {
-                        animator.SetBool("attack4end", true);
-                    }
-                }
-
-            }
-
-            if (tomove)
-            {
-                if (rushselec < 2)
-                {
-                    animator.SetBool("rush1", true);
-                }
-
-                if (rushselec > 1)
-                {
-                    animator.SetBool("rush2", true);
-                }
-            }
-
-            if (attack3cool > attack3cooldown)
-            {
-                animator.SetBool("attack3", true);
-            }
-
-
-
-            if (bombtime)
-            {
-                bombgo = bombgo + 1;
-
-                if (bombgo == 100)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 130)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 190)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 230)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 240)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 250)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                }
-
-                if (bombgo == 300)
-                {
-                    Instantiate(bomb, new Vector3(player.transform.position.x, -1, 0), Quaternion.identity);
-                    bombtime = false;
-                    bombgo = 0;
-                }
-            }
-
-            attack3cool = attack3cool + 1;
         }
 
         if (phase2)
         {
-            deathattckcool = deathattckcool + 1;
-
             if(Vector2.Distance(player.transform.position, gameObject.transform.position) > phase2rushdistance)
             {
                 tomove = true;
             }
 
-            if (tomove)
-            {
-                if (rushselec < 2)
-                {
-                    animator.SetBool("2phase_rush1", true);
-                }
-
-                if (rushselec > 1)
-                {
-                    animator.SetBool("2phase_rush2", true);
-                }
-            }
-
-            if (Vector2.Distance(player.transform.position, gameObject.transform.position) < phase2rushdistance)
-            {
-                tomove = false;
-                if(deathattckcool >= deathattackcooltime)
-                {
-                    animator.SetBool("2phase_deathattack", true);
-                }
-
-                if (phase2skillselec == 1)
-                {
-                    animator.SetBool("2phase_attack1", true);
-                }
-
-                if (phase2skillselec == 2)
-                {
-                    animator.SetBool("2phase_attack2", true);
-                }
-
-                if (phase2skillselec == 3)
-                {
-                    animator.SetBool("2phase_attack3", true);
-                }
-
-                if (phase2skillselec == 4)
-                {
-                    animator.SetBool("2phase_attack4", true);
-                }
-
-            }
         }
-        
+    }
+
+    public void Attack()
+    {
+        GetComponent<boss_hpbar>().Attack();
+    }
+
+    public void Rush()
+    {
+        GetComponent<Animator>().ResetTrigger("rush1");
+        GetComponent<Animator>().ResetTrigger("rush2");
+
+        int rushint = Random.Range(0, 2);
+        if (rushint == 0)
+        {
+            GetComponent<Animator>().SetTrigger("rush1");
+        }
+        else if (rushint == 1)
+        {
+            GetComponent<Animator>().SetTrigger("rush2");
+        }
     }
 
     public void Rush1()
@@ -341,7 +190,7 @@ public class disabled_rushmanage : MonoBehaviour
     public void Rushend()
     {
         whileattack = false;
-        disc.AttackEnd();
+        
     }
 
     public void Attack1end()
@@ -349,7 +198,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("attack1", false);
         skillselec = Random.Range(1, 6);
-        disc.AttackEnd();
+        
     }
 
     public void Attack2end()
@@ -357,7 +206,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("attack2", false);
         skillselec = Random.Range(1, 6);
-        disc.AttackEnd();
+        
     }
 
     public void Attack6end()
@@ -365,7 +214,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("attack6", false);
         skillselec = Random.Range(1, 6);
-        disc.AttackEnd();
+        
     }
 
     public void Attack7end()
@@ -373,7 +222,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("attack7", false);
         skillselec = Random.Range(1, 6);
-        disc.AttackEnd();
+        
     }
 
     public void Attack8end()
@@ -381,22 +230,22 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("attack8", false);
         skillselec = Random.Range(1, 6);
-        disc.AttackEnd();
+        
     }
 
     public void Attack3end()
     {
         animator.SetBool("attack3", false);
         whileattack = false;
-        attack3cool = 0;
-        disc.AttackEnd();
+        //attack3cool = 0;
+        
     }
     public void Attack5end()
     {
         animator.SetBool("attack5", false);
         whileattack = false;
-        attack5cool = 0;
-        disc.AttackEnd();
+        //attack5cool = 0;
+        
     }
 
     public void shot()
@@ -429,16 +278,17 @@ public class disabled_rushmanage : MonoBehaviour
         attack4move = false;
         nowflying = false;
         whileattack =  false;
-        attack4cool = 0;
+        //attack4cool = 0;
         animator.SetBool("attack4end", false);
         animator.SetBool("attack4", false);
-        disc.AttackEnd();
+        
     }
 
     public void Start2Phase()
     {
         animator.SetBool("2phase", true);
         phase2 = true;
+        GetComponent<boss_hpbar>().PhaseUp();
     }
 
     public void Phase2Rush()
@@ -467,7 +317,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("2phase_attack1", false);
         phase2skillselec = Random.Range(1, 5);
-        disc.AttackEnd();
+        
     }
 
     public void Phase2Attack2end()
@@ -475,7 +325,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("2phase_attack2", false);
         phase2skillselec = Random.Range(1, 5);
-        disc.AttackEnd();
+        
     }
 
     public void Phase2Attack3end()
@@ -483,7 +333,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("2phase_attack3", false);
         phase2skillselec = Random.Range(1, 5);
-        disc.AttackEnd();
+        
     }
 
     public void Phase2Attack4end()
@@ -491,7 +341,7 @@ public class disabled_rushmanage : MonoBehaviour
         whileattack = false;
         animator.SetBool("2phase_attack4", false);
         phase2skillselec = Random.Range(1, 5);
-        disc.AttackEnd();
+        
     }
 
     public void DeathAttackend()

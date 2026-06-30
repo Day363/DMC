@@ -37,16 +37,20 @@ public class playerskillmove : MonoBehaviour
     {
         if (fixenemy)
         {
-            if (battalemanager.Instance.currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
             {
-                battalemanager.Instance.currentenemy.transform.position = enemyposition.transform.position;
-                battalemanager.Instance.currentenemy.transform.rotation = enemyposition.transform.rotation;
+                if (currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+                {
+                    currentenemy.transform.position = enemyposition.transform.position;
+                    currentenemy.transform.rotation = enemyposition.transform.rotation;
+                }
+                else
+                {
+                    currentenemy.transform.parent.position = enemyposition.transform.position;
+                    currentenemy.transform.parent.rotation = enemyposition.transform.rotation;
+                }
             }
-            else
-            {
-                battalemanager.Instance.currentenemy.transform.parent.position = enemyposition.transform.position;
-                battalemanager.Instance.currentenemy.transform.parent.rotation = enemyposition.transform.rotation;
-            }
+            
         }
 
     }
@@ -63,25 +67,41 @@ public class playerskillmove : MonoBehaviour
     public void FixedDamage_(float damint)
     {
         float damage = GetComponent<playerstatus>().attackpower * damint;
-        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().Damage((int)damage);
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+        {
+            currentenemy.GetComponent<boss_hpbar>().Damage((int)damage);
+        }
+        
     }
 
     public void SlashDamage_(float damint)
     {
         float damage = GetComponent<playerstatus>().attackpower * damint;
-        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().SlashDamage((int)damage);
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+        {
+            currentenemy.GetComponent<boss_hpbar>().SlashDamage((int)damage);
+        }
+            
     }
 
     public void PenetrateDamage_(float damint)
     {
         float damage = GetComponent<playerstatus>().attackpower * damint;
-        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().PenetrateDamage((int)damage);
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+        {
+            currentenemy.GetComponent<boss_hpbar>().PenetrateDamage((int)damage);
+        }
+            
     }
 
     public void BlowDamage_(float damint)
     {
         float damage = GetComponent<playerstatus>().attackpower * damint;
-        battalemanager.Instance.currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+        {
+            currentenemy.GetComponent<boss_hpbar>().BlowDamage((int)damage);
+        }
+            
     }
 
     public void Chat()
@@ -202,12 +222,12 @@ public class playerskillmove : MonoBehaviour
 
     public void FixSight()
     {
-        if (transform.position.x < battalemanager.Instance.currentenemy.transform.position.x)
+        if (transform.position.x < battalemanager.Instance.currentenemys[0].transform.position.x)
         {
             transform.localScale = new Vector3(1, 1, 1);
             GetComponent<PlayerMove>().dir = 1;
         }
-        if (transform.position.x > battalemanager.Instance.currentenemy.transform.position.x)
+        if (transform.position.x > battalemanager.Instance.currentenemys[0].transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             GetComponent<PlayerMove>().dir = -1;
@@ -226,40 +246,44 @@ public class playerskillmove : MonoBehaviour
 
     public void EnemyAddForce(float force)
     {
-        if (battalemanager.Instance.currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
         {
-            if (GetComponent<PlayerMove>().dir == 1)
+            if (currentenemy.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
-                rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+                if (GetComponent<PlayerMove>().dir == 1)
+                {
+                    rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+                }
+                if (GetComponent<PlayerMove>().dir == -1)
+                {
+                    rb.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+                }
             }
-            if (GetComponent<PlayerMove>().dir == -1)
+            else if (currentenemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
             {
-                rb.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+                if (GetComponent<PlayerMove>().dir == 1)
+                {
+                    rb2.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+                }
+                if (GetComponent<PlayerMove>().dir == -1)
+                {
+                    rb2.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+                }
             }
         }
-        else if (battalemanager.Instance.currentenemy.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2))
-        {
-            if (GetComponent<PlayerMove>().dir == 1)
-            {
-                rb2.AddForce(Vector2.right * force, ForceMode2D.Impulse);
-            }
-            if (GetComponent<PlayerMove>().dir == -1)
-            {
-                rb2.AddForce(Vector2.left * force, ForceMode2D.Impulse);
-            }
-        }
+            
     }
 
     public void MovetoBackOfEnemy()
     {
         if (GetComponent<PlayerMove>().dir == 1)
         {
-            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x + distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemys[0].transform.position.x + distance, transform.position.y, 0);
             transform.DOMove(tomove, time);
         }
         if (GetComponent<PlayerMove>().dir == -1)
         {
-            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x - distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemys[0].transform.position.x - distance, transform.position.y, 0);
             transform.DOMove(tomove, time);
         }
     }
@@ -268,12 +292,12 @@ public class playerskillmove : MonoBehaviour
     {
         if (GetComponent<PlayerMove>().dir == 1)
         {
-            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x + distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemys[0].transform.position.x + distance, transform.position.y, 0);
             transform.DOMove(tomove, time).SetEase(Ease.OutCubic);
         }
         if (GetComponent<PlayerMove>().dir == -1)
         {
-            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemy.transform.position.x - distance, transform.position.y, 0);
+            Vector3 tomove = new Vector3(battalemanager.Instance.currentenemys[0].transform.position.x - distance, transform.position.y, 0);
             transform.DOMove(tomove, time).SetEase(Ease.OutCubic);
         }
     }

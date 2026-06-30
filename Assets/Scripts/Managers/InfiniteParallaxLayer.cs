@@ -14,10 +14,13 @@ public class InfiniteParallaxLayer : MonoBehaviour
     {
         var sr = GetComponent<SpriteRenderer>();
         _spriteWidth = sr.bounds.size.x;
-        _cam = Camera.main;
+        
     }
 
-    
+    public void Start()
+    {
+        //_cam = battalemanager.Instance.cameramanager.GetComponent<CameraManager>().braincam.GetComponent<Camera>();
+    }
 
     public void Move(float delta)
     {

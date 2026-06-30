@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public bool fuckcinemachine;
     public bool resetRotation;
     public bool killcam;
+    public bool firstlookplayer;
 
     public GameObject braincam;
 
@@ -42,6 +43,10 @@ public class CameraManager : MonoBehaviour
         battalemanager.Instance.cameramanager = gameObject;
         Instance = this;
         maincam = titlecam;
+        if (firstlookplayer)
+        {
+            LookPlayer();
+        }
     }
 
     public void Update()
@@ -96,7 +101,14 @@ public class CameraManager : MonoBehaviour
     public void LookEnemy()
     {
         maincam = enemycam;
-        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = battalemanager.Instance.currentenemy.transform;
+        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = battalemanager.Instance.currentenemys[0].transform;
+        GetComponent<Animator>().SetTrigger("playercam");
+    }
+
+    public void LookEnemy2()
+    {
+        maincam = enemycam;
+        enemycam.GetComponent<CinemachineVirtualCamera>().Follow = battalemanager.Instance.currentenemys[1].transform;
         GetComponent<Animator>().SetTrigger("playercam");
     }
 

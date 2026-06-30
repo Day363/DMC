@@ -9,6 +9,11 @@ using UnityEngine.Rendering.Universal;
 
 public class boss_hpbar : MonoBehaviour
 {
+    public enum EnemyAttackType
+    {
+        slash, penetrate, blow, fix
+    };
+
     public static event Action OnHitCalled;
     public static event Action OnPenetrationHitCalled;
     public static event Action Die;
@@ -25,8 +30,35 @@ public class boss_hpbar : MonoBehaviour
 
     public GameObject damagepos;
 
-    
-   
+    public int mincycle;
+    public int maxcycle;
+    public int decisionedcycle;
+    public int currentcycle;
+
+    public int currentphase;
+    public int currentattacknumber;
+
+    public float maxfocus;
+    public float currentfocus;
+
+    [System.Serializable]
+    public class EnemySkills
+    {
+        public string skillname;
+        public List<EnemyAttackType> enemyAttackTypes;
+        public string animationtrigger;
+    }
+
+    [System.Serializable]
+    public class EnemySkillPhase
+    {
+        public List<EnemySkills> skills;
+    }
+
+    public List<EnemySkillPhase> phase;
+
+    public List<EnemySkills> currentenemySkills;
+
 
     public GameObject balancebar;
     public GameObject healthbar;
@@ -47,6 +79,8 @@ public class boss_hpbar : MonoBehaviour
 
     public float collapsefloat;
 
+    public int attackpower;
+
     public float maxhealth;
     public float currenthealth;
     public float maxbalance;
@@ -66,9 +100,9 @@ public class boss_hpbar : MonoBehaviour
     public float bleeddamageincrease;
     public float bleeddamageincreaseCore = 1;
 
-    public float height;
-    public float height2;
-    public float side;
+    //public float height;
+    //public float height2;
+    //public float side;
 
     public bool iscollapse;
     public bool canhit = true;
@@ -132,8 +166,11 @@ public class boss_hpbar : MonoBehaviour
 
         OnStackApplied?.Invoke(newStack, amount);
 
-        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
-        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI(this);
+
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
 
 
         //GetComponent<Passivefunction>().WhenAddStack();
@@ -162,8 +199,11 @@ public class boss_hpbar : MonoBehaviour
         {
             Debug.LogWarning($"Tried to remove stack that doesn't exist: {targetStack.effectName}");
         }
-        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
-        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI(this);
+
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
 
         //GetComponent<Passivefunction>().WhenRemoveStack();
         WhenStackAdd();
@@ -187,8 +227,11 @@ public class boss_hpbar : MonoBehaviour
 
         Debug.Log($"Applied next stack: {newStack.effectName} (+{amount})");
 
-        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
-        uimanager.Instance.enemystack.GetComponent<boss_stackUIManager>().RefreshUI();
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI(this);
+
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
     }
 
     public void PrintStacks()
@@ -214,7 +257,7 @@ public class boss_hpbar : MonoBehaviour
     public void Awake()
     {
         gammanager = battalemanager.Instance.gameObject;
-        battalemanager.Instance.currentenemy = gameObject;
+        
     }
 
     private void Start()
@@ -224,6 +267,7 @@ public class boss_hpbar : MonoBehaviour
         healthbarint.maxValue = maxhealth * 2;
         currentbalance = 0;
         attackcore_ = attackcore.attackcoreInstance.gameObject;
+        CycleDecision();
     }
 
     //완전 새 스텍일떄만 작동
@@ -263,11 +307,13 @@ public class boss_hpbar : MonoBehaviour
             ApplyStack(stack.stackData, stack.currentStack);
         }
         nextcycleStacks.Clear();
-        canvas.GetComponent<boss_stackUIManager>().RefreshUI();
+        canvas.GetComponent<boss_stackUIManager>().RefreshUI(this);
     }
 
     public void CycleEnd()
     {
+        Debug.Log("dkjjAE");
+
         OnCycleEnd?.Invoke();
 
         if (activeStacks.Count > 0)
@@ -315,8 +361,10 @@ public class boss_hpbar : MonoBehaviour
     {
         balancebarint.value = currentbalance;
 
-        uimanager.Instance.enemybalance.GetComponent<Slider>().maxValue = maxbalance;
-        uimanager.Instance.enemybalance.GetComponent<Slider>().value = currentbalance;
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().maxValue = maxbalance;
+        targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().value = currentbalance;
     }
 
     public void HeathCheck()
@@ -325,8 +373,10 @@ public class boss_hpbar : MonoBehaviour
 
         maxbalanceminus = currenthealth / (2 * maxhealth);
 
-        uimanager.Instance.enemyhealth.GetComponent<Slider>().maxValue = maxhealth * 2;
-        uimanager.Instance.enemyhealth.GetComponent<Slider>().value = maxhealth - currenthealth;
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().healthbar.GetComponent<Slider>().maxValue = maxhealth * 2;
+        targetObj.GetComponent<enemystateui>().healthbar.GetComponent<Slider>().value = maxhealth - currenthealth;
     }
 
     public void BalanceDamage(float balance)
@@ -380,12 +430,14 @@ public class boss_hpbar : MonoBehaviour
         GetComponent<Animator>().SetBool("idle", true);
         iscollapse = false;
         attackcore_.GetComponent<attackcore>().NostandByskill();
+
     }
 
     public void CollusionSolve()
     {
         iscollapse = false; 
         OnCollusionSolve?.Invoke();
+        CycleDecision();
     }
 
     public void Redemisson()
@@ -612,5 +664,74 @@ public class boss_hpbar : MonoBehaviour
         worldlightLight2D.color = new Color(1, 1, 1, 1);
         worldlightLight2D.intensity = worldlightintensity;
         playerlight.GetComponent<Light2D>().color = new Color(1, 1, 1, 1);
+
+        battalemanager.Instance.currentenemys.Remove(gameObject);
+    }
+
+    public void FocusUpdate()
+    {
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().value = currentfocus;
+    }
+
+    public void PhaseUp()
+    {
+        currentphase++;
+    }
+
+    public void CycleDecision()
+    {
+        currentattacknumber = 0;
+        decisionedcycle = UnityEngine.Random.Range(mincycle, maxcycle);
+        maxfocus = decisionedcycle;
+        currentfocus = maxfocus;
+
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().maxValue = currentfocus;
+
+        currentenemySkills.Clear();
+
+        List<EnemySkills> tempList = new List<EnemySkills>(phase[currentphase].skills);
+
+        int count = Mathf.Min(decisionedcycle, tempList.Count);
+
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, tempList.Count);
+
+            currentenemySkills.Add(tempList[randomIndex]);
+            tempList.RemoveAt(randomIndex);
+        }
+    }
+
+    public void Attack()
+    {
+        if (currentattacknumber == 0)
+        {
+            CycleStart();
+        }
+        GetComponent<Animator>().SetTrigger(currentenemySkills[currentattacknumber].animationtrigger);
+        currentattacknumber++;
+        if (currentenemySkills.Count <= currentattacknumber)
+        {
+            currentattacknumber = 0;
+            CycleEnd();
+        }
+    }
+
+    public void BattleStart()
+    {
+        battalemanager.Instance.currentenemys.Add(gameObject);
+        uimanager.Instance.EnemyStatesSet(gameObject);
+
+        GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
+
+        targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().maxValue = currentfocus;
+        targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().value = currentfocus;
+        targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().maxValue = maxbalance;
+        targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().value = currentbalance;
+        targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
     }
 }

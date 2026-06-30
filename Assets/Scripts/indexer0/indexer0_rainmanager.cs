@@ -72,7 +72,7 @@ public class indexer0_rainmanager : MonoBehaviour
 
             GameObject currain = Instantiate(weaponland[Random.Range(0, weaponland.Length)], pos, Quaternion.identity);
             currain.GetComponent<enemyattack>().player = battalemanager.Instance.player;
-            currain.GetComponent<enemyattack>().enemy = battalemanager.Instance.currentenemy;
+            currain.GetComponent<enemyattack>().enemy = indexer;
             yield return null;
         }
     }
@@ -90,7 +90,7 @@ public class indexer0_rainmanager : MonoBehaviour
             
             GameObject currain = Instantiate(rain_[Random.Range(0, rain_.Length)], pos, Quaternion.identity);
             currain.GetComponent<enemyattack>().player = battalemanager.Instance.player;
-            currain.GetComponent<enemyattack>().enemy = battalemanager.Instance.currentenemy;
+            currain.GetComponent<enemyattack>().enemy = indexer;
         }
     }
 

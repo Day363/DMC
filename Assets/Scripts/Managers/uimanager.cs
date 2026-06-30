@@ -16,7 +16,6 @@ public class uimanager : MonoBehaviour
     public GameObject[] activewhenbattlestart;
     [Header("playerstatus")]
     public GameObject skillwaitprefap;
-    public GameObject defense;
     public GameObject bullet;
     public GameObject cycle;
     public GameObject circum;
@@ -76,10 +75,10 @@ public class uimanager : MonoBehaviour
     public GameObject playerfocus;
     public GameObject playerstack;
 
-    public GameObject enemybalance;
-    public GameObject enemyhealth;
-    public GameObject enemyfocus;
-    public GameObject enemystack;
+    public GameObject enemystateuiprephep;
+    public GameObject enemystates;
+
+    public List<GameObject> enemystatessets = new List<GameObject> { };
 
     void Awake()
     {
@@ -231,5 +230,21 @@ public class uimanager : MonoBehaviour
     public void TutorialGo3()
     {
         tutorialuireal3.SetActive(true);
+    }
+
+    public void EnemyStatesSet(GameObject enemy)
+    {
+        if (enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == enemy))
+        {
+            Destroy(enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == enemy));
+        }
+        
+
+        GameObject currentui = Instantiate(enemystateuiprephep, enemystates.transform);
+        currentui.GetComponent<enemystateui>().enemy = enemy;
+        currentui.GetComponent<enemystateui>().balancetooltiptarget.GetComponent<numbertooltip>().currentenemy = enemy;
+        currentui.GetComponent<enemystateui>().focustooltiptarget.GetComponent<numbertooltip>().currentenemy = enemy;
+        enemystatessets.Add(currentui);
+       
     }
 }

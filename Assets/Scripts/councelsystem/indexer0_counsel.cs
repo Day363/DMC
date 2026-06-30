@@ -39,7 +39,7 @@ public class indexer0_counsel : MonoBehaviour
 
         gamemanager = battalemanager.Instance.gameObject;
 
-        gamemanager.GetComponent<battalemanager>().currentenemy = gameObject;
+        
 
     }
 
@@ -82,16 +82,7 @@ public class indexer0_counsel : MonoBehaviour
         GetComponent<boss_hpbar>().penetratetolerance = GetComponent<boss_hpbar>().penetratetoleranceCore;
     }
 
-    public void AttackEnd()
-    {
-        cycleint_++;
-        if (cycleint_ >= cycleint)
-        {
-            bosshp.CycleEnd();
-            bosshp.CycleStart();
-            cycleint_ = 0;
-        }
-    }
+    
 
     
     public void DieDialogue()

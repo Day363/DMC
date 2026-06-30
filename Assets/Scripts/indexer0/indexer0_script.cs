@@ -230,10 +230,7 @@ public class indexer0_script : MonoBehaviour
         }
     }
 
-    public void FuckAnimationEvent()
-    {
-        GetComponent<indexer0_counsel>().AttackEnd();
-    }
+    
 
     public void RainShoot()
     {

@@ -37,21 +37,10 @@ public class disabled_counsel : MonoBehaviour
     PlayerMove playerPlayerMove;
     CameraManager cammanagerCameraManager;
 
-    public void AttackEnd()
-    {
-        cycleint_++;
-        if (cycleint_ >= cycleint)
-        {
-            bosshp.CycleEnd();
-            bosshp.CycleStart();
-            cycleint_ = 0;
-        }
-    }
-
     public void Start()
     {
         gamemanager = battalemanager.Instance.gameObject;
-        battalemanager.Instance.currentenemy = gameObject;
+        
 
         boss_hpbar.Die += WhenDie;
         playerPlayerMove = player.GetComponent<PlayerMove>();
@@ -82,6 +71,7 @@ public class disabled_counsel : MonoBehaviour
 
     public void Sound(string name)
     {
+        soundmanager.instance.currentenemy = gameObject;
         soundmanager.instance.SoundPlay(name);
     }
 

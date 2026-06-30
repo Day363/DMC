@@ -85,20 +85,24 @@ public class Passivefunction : MonoBehaviour
     {
         if (indexer_passive3)
         {
-            if (!gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().iscollapse)
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
             {
-                boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
-                if (enemyStackInstance != null)
+                if (!currentenemy.GetComponent<boss_hpbar>().iscollapse)
                 {
-                    float distance = Mathf.Abs(gamemanager.GetComponent<battalemanager>().currentenemy.transform.position.x - transform.position.x);
-                    distance = Mathf.Clamp(distance, 0, 30);
-                    float t = Mathf.InverseLerp(30, 0, distance);
-                    int value = Mathf.RoundToInt(Mathf.Lerp(1, 99, t));
-                    enemyStackInstance.currentStack = value;
-                    gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().canvas.GetComponent<boss_stackUIManager>().RefreshUI();
-                }
+                    boss_hpbar.StackInstance enemyStackInstance = currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
+                    if (enemyStackInstance != null)
+                    {
+                        float distance = Mathf.Abs(currentenemy.transform.position.x - transform.position.x);
+                        distance = Mathf.Clamp(distance, 0, 30);
+                        float t = Mathf.InverseLerp(30, 0, distance);
+                        int value = Mathf.RoundToInt(Mathf.Lerp(1, 99, t));
+                        enemyStackInstance.currentStack = value;
+                        currentenemy.GetComponent<boss_hpbar>().canvas.GetComponent<boss_stackUIManager>().RefreshUI(currentenemy.GetComponent<boss_hpbar>());
+                    }
 
+                }
             }
+            
 
         }
     }
@@ -140,7 +144,11 @@ public class Passivefunction : MonoBehaviour
 
         if (indexer_passive3)
         {
-            gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().ApplyStack(attention_rate, 1);
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+            {
+                currentenemy.GetComponent<boss_hpbar>().ApplyStack(attention_rate, 1);
+            }
+            
         }
 
         if (trapal_passive3)
@@ -180,18 +188,22 @@ public class Passivefunction : MonoBehaviour
 
         if (indexer_passive1)
         {
-            boss_hpbar.StackInstance enemyStackInstance = gamemanager.GetComponent<battalemanager>().currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
-            if (enemyStackInstance != null)
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
             {
-                if (enemyStackInstance.currentStack >= 50)
+                boss_hpbar.StackInstance enemyStackInstance = currentenemy.GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "주시율");
+                if (enemyStackInstance != null)
                 {
-                    int index = UnityEngine.Random.Range(0, 4);
-                    Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
-                    Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
-                    GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
-                    currain.GetComponent<playerattackdamage>().player = gameObject;
+                    if (enemyStackInstance.currentStack >= 50)
+                    {
+                        int index = UnityEngine.Random.Range(0, 4);
+                        Transform bm_enemy = currentenemy.transform;
+                        Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
+                        GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
+                        currain.GetComponent<playerattackdamage>().player = gameObject;
+                    }
                 }
             }
+            
             
         }
 
@@ -405,11 +417,15 @@ public class Passivefunction : MonoBehaviour
     {
         if (indexer_passive1)
         {
-            int index = UnityEngine.Random.Range(0, 4);
-            Transform bm_enemy = gamemanager.GetComponent<battalemanager>().currentenemy.transform;
-            Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
-            GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
-            currain.GetComponent<playerattackdamage>().player = gameObject;
+            foreach (GameObject currentenemy in battalemanager.Instance.currentenemys)
+            {
+                int index = UnityEngine.Random.Range(0, 4);
+                Transform bm_enemy = currentenemy.transform;
+                Vector3 pos = new Vector3(bm_enemy.position.x, 35.47f, 0);
+                GameObject currain = Instantiate(indexer_rains[index], pos, Quaternion.identity);
+                currain.GetComponent<playerattackdamage>().player = gameObject;
+            }
+            
         }
     }
 

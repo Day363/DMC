@@ -35,7 +35,7 @@ public class filer_counsel : MonoBehaviour
         letterbox = battalemanager.Instance.letterbox;
         gamemanager = battalemanager.Instance.gameObject;
         player = battalemanager.Instance.player;
-        battalemanager.Instance.currentenemy = gameObject;
+        battalemanager.Instance.currentenemys.Add(gameObject);
         StartCoroutine(Cammove());
     }
 
