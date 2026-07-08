@@ -441,7 +441,7 @@ MonoBehaviour:
   targetangle: 0
   attackcore_: {fileID: 0}
   cammanager: {fileID: 373801462}
-  player: {fileID: 1233421491}
+  player: {fileID: 0}
   middle: {fileID: 127159112}
   hourHand: {fileID: 434699929}
   minuteHand: {fileID: 293809439}
@@ -11590,6 +11590,7 @@ MonoBehaviour:
   fuckcinemachine: 0
   resetRotation: 0
   killcam: 0
+  firstlookplayer: 0
   braincam: {fileID: 519420028}
   Gamemanager: {fileID: 1694457153}
   killcamsize: 0
@@ -11902,171 +11903,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!43 &445615660
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WindCone
-  serializedVersion: 11
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 288
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 98
-    localAABB:
-      m_Center: {x: 0, y: 0.875, z: 0}
-      m_Extent: {x: 9.06, y: 0.875, z: 9.06}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200020003000400030005000400040005000600050007000600060007000800070009000800080009000a0009000b000a000a000b000c000b000d000c000c000d000e000d000f000e000e000f0010000f0011001000100011001200110013001200120013001400130015001400140015001600150017001600160017001800170019001800180019001a0019001b001a001a001b001c001b001d001c001c001d001e001d001f001e001e001f0020001f0021002000200021002200210023002200220023002400230025002400240025002600250027002600260027002800270029002800280029002a0029002b002a002a002b002c002b002d002c002c002d002e002d002f002e002e002f0030002f0031003000300031003200310033003200320033003400330035003400340035003600350037003600360037003800370039003800380039003a0039003b003a003a003b003c003b003d003c003c003d003e003d003f003e003e003f0040003f0041004000400041004200410043004200420043004400430045004400440045004600450047004600460047004800470049004800480049004a0049004b004a004a004b004c004b004d004c004c004d004e004d004f004e004e004f0050004f0051005000500051005200510053005200520053005400530055005400540055005600550057005600560057005800570059005800580059005a0059005b005a005a005b005c005b005d005c005c005d005e005d005f005e005e005f0060005f0061006000
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 98
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 24
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 3136
-    _typelessdata: c3f510410000000000000000d3403b3f87212e3fb65e443d000000000000000028d8ed400000e03f00000000f8bc3e3f35ba2a3f97d22a3c000000000000803f49b80f41000000005f5e973fb5e13e3f77ed293fafe36f3dabaaaa3c00000000a95aef400000e03fb3177c3fbcf7413fd6f2253f90a19a3dabaaaa3c0000803f47050c4100000000da121640dd1b3f3f20bf243fae102d3eabaa2a3d000000003d41eb400000e03f3725fc3f4b583b3f0037253f5a36603eabaa2a3d0000803ff3ec0541000000002be55d401d2e333f5fab263f4a5b963e0000803d00000000e5a2de400000e03f1f703840ec062a3f7b6a2a3fac2fae3e0000803d0000803ffe13fb4000000000c3f59040d201233f124f2c3f4b9bc03eabaaaa3d00000000b0facd400000e03f28d86d40541a193fbac12f3f44b5d33eabaaaa3d0000803f4e02e64000000000fc7db04057f4113f3742313fd362e23e5555d53d00000000fea4ba400000e03fa5378f405cee0a3f82f0323fa973ee3e5555d53d0000803f2101cd40000000002101cd401f2b033f7e3f333fef90fe3e0000003e00000000d80fa6400000e03fd80fa640ed69023f499d313f0850023f0000003e0000803ffc7db040000000004e02e640a6a4ef3ecf2a303fe1ed0d3f5555153e0000000098c390400000e03f00a9bc400f7beb3e3a4a2d3f4d1e133f5555153e0000803fc2f5904000000000ff13fb40bd3bc83e12792c3f6184203fabaa2a3e000000008c676f400000e03f9454cf40d051bd3ef7132b3f3840253fabaa2a3e0000803f2ae55d4000000000f3ec054144809a3e12c52a3f8f5f2e3f0000403e0000000018a837400000e03f72b1dd40ae46903e138b293f56ba313f0000403e0000803fdb1216400000000047050c41e3dc5d3ebcdc283ff03d383f5555553e0000000005b1f93f0000e03f1ef7e8408d38393e5488283f6c0d3b3f5555553e0000803f595e973f0000000049b80f4100d0dc3d00e4283f07653e3fabaa6a3e000000005a277b3f0000e03f7e76ee40c6035f3d1a1d2b3f48e63d3fabaa6a3e0000803f4a9dd4b400000000c3f51041f8c78bbb429c2c3f300d3d3f0000803e00000000a96caeb40000e03f28d8ed401b8f5cbd03a02f3f26bf393f0000803e0000803f695e97bf0000000048b80f41d2e7c4bd5ff3303f995a373fabaa8a3e00000000a0f375bf0000e03ff585e9402308ffbd07f7313fa13d353fabaa8a3e0000803fda1216c00000000047050c41e8102ebeadd1313febf2323f5555953e00000000cc52f4bf0000e03ff5f4e340c4323abe619b2f3f4d5d343f5555953e0000803f2de55dc000000000f3ec054111837ebe0a1b2e3f4b90303f0000a03e0000000009e636c00000e03f2ec7dc400e1988bee38e2a3f4a5e323f0000a03e0000803fc4f590c000000000fe13fb406a18b2bef14a293ffc222a3fabaaaa3e00000000595a71c00000e03f8a04d1403293bebefad3263f3a30293fabaaaa3e0000803ffc7db0c0000000004e02e640ae9ce3bedf22263f570f1e3f5555b53e0000000063a893c00000e03f6c6ec040bf05f8be3857273fdbd7143f5555b53e0000803f2101cdc0000000002101cd40e8eb08bf9fe4283f9f24073f0000c03e00000000628ca9c00000e03f628ca940dddc10bf001d2d3f4284f13e0000c03e0000803f5202e6c000000000f87db04031e715bf5f5d2f3fdaebdd3eabaaca3e000000002a22bbc00000e03fad978f401f6b19bffaea313f3d69cb3eabaaca3e0000803ffe13fbc000000000c4f5904056c01dbf1962323f87efbb3e5555d53e00000000d2c8cbc00000e03f604f6b40fe5e21bf0579323fd1d8ae3e5555d53e0000803ff4ec05c10000000024e55d40581628bf0c54323fa413943e0000e03e00000000b4b8d9c00000e03fc65d3440546d2bbf8d9c323f4d55823e0000e03e0000803f47050cc100000000d6121640c03a30bfb9fe323f6695453eabaaea3e00000000fcdce2c00000e03fb126f33f2bea31bf9223333ff54e293eabaaea3e0000803f49b80fc100000000565e973fd6e534bf23f2323f3ee8e03d5555f53e00000000ba51e9c00000e03f7cbc753f163037bf6e11313f9404c83d5555f53e0000803fc3f510c1000000004a9d54b5d0e439bf12d52f3f20fcfc3c0000003f0000000028d8edc00000e03fa96c2eb5d6073dbf65922c3f6667973c0000003f0000803f48b80fc100000000635e97bf2f873dbf28452b3f214286bd5555053f00000000034deec00000e03fbbfb7abf1e813ebf4a4d293fcfd2c0bd5555053f0000803f46050cc100000000e41216c0afdb3abf1004293f094535beabaa0a3f0000000057a6e8c00000e03f825af9bf8d4a38bf3f1e293f9c0e5abeabaa0a3f0000803ff3ec05c1000000002ae55dc0bf3f32bf7476293fe3108ebe0000103f0000000012f4ddc00000e03f4adf37c09a1c30bf1f11293fc31a9abe0000103f0000803ffe13fbc000000000c2f590c056b729bf4375283fcbcdb6be5555153f000000008a04d1c00000e03f565a71c0d83e29bff733263fe78bc0be5555153f0000803f4c02e6c000000000ff7db0c028ba1fbf1202253f1f3ce2beabaa1a3f000000002019c1c00000e03f642b94c02fe01cbf160a233fc288efbeabaa1a3f0000803f1e01cdc0000000002301cdc091660fbf5a99223f922308bf0000203f000000008b9bacc00000e03f8f9bacc09d0506bf4095233fe94510bf0000203f0000803ffd7db0c0000000004d02e6c03ae6eebe3cc3243f3d4f1bbf5555253f00000000346793c00000e03f7719c0c0babbd8be984d273f8da120bf5555253f0000803fc1f590c000000000ff13fbc04dc5c1be6f6c283f79ae26bfabaa2a3f00000000ef6070c00000e03f902cd0c0daa8adbea63e2a3f3d552abfabaa2a3f0000803f1ee55dc000000000f4ec05c1ab3395bea0e72a3f4a642fbf0000303f00000000c92d37c00000e03fdc1dddc0b7f781be22112c3fdf0f32bf0000303f0000803fd81216c00000000047050cc117664cbe98892c3f3f1636bf5555353f00000000bbf6f6bf0000e03fa16be6c04e7727bed6582d3f0eab37bf5555353f0000803f495e97bf0000000049b80fc1e79ed9bd4da82d3fac1d3abfabaa3a3f000000000b8d78bf0000e03ff3fdebc03b9d94bd1e142e3f38c83abfabaa3a3f0000803f4d03e83300000000c3f510c1f94950bc3f332e3f03903bbf0000403f00000000ac56be330000e03f28d8edc0c0e0943c682d2e3fe48d3bbf0000403f0000803f6e5e973f0000000048b80fc166ffa43dee182e3fac8c3abf5555453f00000000598d783f0000e03f02feebc019c6de3d7c9e2d3f6e0e3abf5555453f0000803fea1216400000000046050cc12771313ec0582d3f071537bfabaa4a3f00000000cafaf63f0000e03f4b6fe6c073364c3e44752c3fd72c36bfabaa4a3f0000803f31e55d4000000000f2ec05c1f3b2873e3a072c3f090731bf0000503f00000000bf3537400000e03f6327ddc0b453943e1ad02a3fa4aa2fbf0000503f0000803fc1f5904000000000ff13fbc0afa5b53ebf432a3f9b3728bf5555553f00000000ef6070400000e03f902cd0c0e425c03eee61283f1d3127bf5555553f0000803ffe7db040000000004d02e6c03cdce03e8d6a273f93b11dbfabaa5a3f000000001b5f93400000e03fe80ec0c05dc9eb3ed70d253fd42f1cbfabaa5a3f0000803f2501cd40000000001c01cdc05119063f4a1a243f239c0fbf0000603f000000002150ac400000e03f1a50acc0093a0e3f3130243f1b7607bf0000603f0000803f4f02e64000000000fb7db0c088a81a3fdc1a253f8da4efbe5555653f00000000bb12c0400000e03f066293c09309213f906c283fb200d4be5555653f0000803f0114fb4000000000bef590c0c188263fbc622a3fe24ebbbeabaa6a3f00000000afd2ce400000e03f87d16ec0fb102a3faa942e3f15a79cbeabaa6a3f0000803ff3ec0541000000002ae55dc0f52b2c3f3aa1303f990989be0000703f000000000a60d9400000e03f571434c093752d3fd2fc333f02fe5cbe0000703f0000803f47050c4100000000d21216c0d0b62e3fc75a353ff03c38be5555753f00000000b0e8e0400000e03f740ef1bfeca82f3f32a1353fa07324be5555753f0000803f49b80f41000000003d5e97bf50a9323f98e1343fe1beefbdabaa7a3f00000000c496e8400000e03f69f774bf2eef353ffcd0313febb3e4bdabaa7a3f0000803fc3f51041000000004a9dd43527e2373fa8e4303fc637a6bd0000803f0000000028d8ed400000e03fa96cae3564013a3f7af82c3f4964ffbd0000803f0000803f
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0, y: 0.875, z: 0}
-    m_Extent: {x: 9.06, y: 0.875, z: 9.06}
-  m_MeshUsageFlags: 0
-  m_CookingOptions: 30
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &456751626
 GameObject:
   m_ObjectHideFlags: 0
@@ -13620,6 +13456,7 @@ MonoBehaviour:
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
   healthbarint: {fileID: 0}
+  chatbox: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
@@ -13641,6 +13478,12 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 0
   bleeddamageincreaseCore: 1
+  passive_balancedamagedecrease: 0
+  passive_balancedamagedecreaseCore: 0
+  passive_damageplus: 0
+  passive_damageplusCore: 0
+  passive_calculationPlus: 0
+  passive_calculationPlusCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -15746,6 +15589,7 @@ MonoBehaviour:
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
   healthbarint: {fileID: 0}
+  chatbox: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
@@ -15767,6 +15611,12 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
+  passive_balancedamagedecrease: 0
+  passive_balancedamagedecreaseCore: 0
+  passive_damageplus: 0
+  passive_damageplusCore: 0
+  passive_calculationPlus: 0
+  passive_calculationPlusCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -22361,6 +22211,171 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   available_mirror: []
+--- !u!43 &1246423022
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WindCone
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 288
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 98
+    localAABB:
+      m_Center: {x: 0, y: 0.875, z: 0}
+      m_Extent: {x: 9.06, y: 0.875, z: 9.06}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 000001000200010003000200020003000400030005000400040005000600050007000600060007000800070009000800080009000a0009000b000a000a000b000c000b000d000c000c000d000e000d000f000e000e000f0010000f0011001000100011001200110013001200120013001400130015001400140015001600150017001600160017001800170019001800180019001a0019001b001a001a001b001c001b001d001c001c001d001e001d001f001e001e001f0020001f0021002000200021002200210023002200220023002400230025002400240025002600250027002600260027002800270029002800280029002a0029002b002a002a002b002c002b002d002c002c002d002e002d002f002e002e002f0030002f0031003000300031003200310033003200320033003400330035003400340035003600350037003600360037003800370039003800380039003a0039003b003a003a003b003c003b003d003c003c003d003e003d003f003e003e003f0040003f0041004000400041004200410043004200420043004400430045004400440045004600450047004600460047004800470049004800480049004a0049004b004a004a004b004c004b004d004c004c004d004e004d004f004e004e004f0050004f0051005000500051005200510053005200520053005400530055005400540055005600550057005600560057005800570059005800580059005a0059005b005a005a005b005c005b005d005c005c005d005e005d005f005e005e005f0060005f0061006000
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 98
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 3136
+    _typelessdata: c3f510410000000000000000d3403b3f87212e3fb65e443d000000000000000028d8ed400000e03f00000000f8bc3e3f35ba2a3f97d22a3c000000000000803f49b80f41000000005f5e973fb5e13e3f77ed293fafe36f3dabaaaa3c00000000a95aef400000e03fb3177c3fbcf7413fd6f2253f90a19a3dabaaaa3c0000803f47050c4100000000da121640dd1b3f3f20bf243fae102d3eabaa2a3d000000003d41eb400000e03f3725fc3f4b583b3f0037253f5a36603eabaa2a3d0000803ff3ec0541000000002be55d401d2e333f5fab263f4a5b963e0000803d00000000e5a2de400000e03f1f703840ec062a3f7b6a2a3fac2fae3e0000803d0000803ffe13fb4000000000c3f59040d201233f124f2c3f4b9bc03eabaaaa3d00000000b0facd400000e03f28d86d40541a193fbac12f3f44b5d33eabaaaa3d0000803f4e02e64000000000fc7db04057f4113f3742313fd362e23e5555d53d00000000fea4ba400000e03fa5378f405cee0a3f82f0323fa973ee3e5555d53d0000803f2101cd40000000002101cd401f2b033f7e3f333fef90fe3e0000003e00000000d80fa6400000e03fd80fa640ed69023f499d313f0850023f0000003e0000803ffc7db040000000004e02e640a6a4ef3ecf2a303fe1ed0d3f5555153e0000000098c390400000e03f00a9bc400f7beb3e3a4a2d3f4d1e133f5555153e0000803fc2f5904000000000ff13fb40bd3bc83e12792c3f6184203fabaa2a3e000000008c676f400000e03f9454cf40d051bd3ef7132b3f3840253fabaa2a3e0000803f2ae55d4000000000f3ec054144809a3e12c52a3f8f5f2e3f0000403e0000000018a837400000e03f72b1dd40ae46903e138b293f56ba313f0000403e0000803fdb1216400000000047050c41e3dc5d3ebcdc283ff03d383f5555553e0000000005b1f93f0000e03f1ef7e8408d38393e5488283f6c0d3b3f5555553e0000803f595e973f0000000049b80f4100d0dc3d00e4283f07653e3fabaa6a3e000000005a277b3f0000e03f7e76ee40c6035f3d1a1d2b3f48e63d3fabaa6a3e0000803f4a9dd4b400000000c3f51041f8c78bbb429c2c3f300d3d3f0000803e00000000a96caeb40000e03f28d8ed401b8f5cbd03a02f3f26bf393f0000803e0000803f695e97bf0000000048b80f41d2e7c4bd5ff3303f995a373fabaa8a3e00000000a0f375bf0000e03ff585e9402308ffbd07f7313fa13d353fabaa8a3e0000803fda1216c00000000047050c41e8102ebeadd1313febf2323f5555953e00000000cc52f4bf0000e03ff5f4e340c4323abe619b2f3f4d5d343f5555953e0000803f2de55dc000000000f3ec054111837ebe0a1b2e3f4b90303f0000a03e0000000009e636c00000e03f2ec7dc400e1988bee38e2a3f4a5e323f0000a03e0000803fc4f590c000000000fe13fb406a18b2bef14a293ffc222a3fabaaaa3e00000000595a71c00000e03f8a04d1403293bebefad3263f3a30293fabaaaa3e0000803ffc7db0c0000000004e02e640ae9ce3bedf22263f570f1e3f5555b53e0000000063a893c00000e03f6c6ec040bf05f8be3857273fdbd7143f5555b53e0000803f2101cdc0000000002101cd40e8eb08bf9fe4283f9f24073f0000c03e00000000628ca9c00000e03f628ca940dddc10bf001d2d3f4284f13e0000c03e0000803f5202e6c000000000f87db04031e715bf5f5d2f3fdaebdd3eabaaca3e000000002a22bbc00000e03fad978f401f6b19bffaea313f3d69cb3eabaaca3e0000803ffe13fbc000000000c4f5904056c01dbf1962323f87efbb3e5555d53e00000000d2c8cbc00000e03f604f6b40fe5e21bf0579323fd1d8ae3e5555d53e0000803ff4ec05c10000000024e55d40581628bf0c54323fa413943e0000e03e00000000b4b8d9c00000e03fc65d3440546d2bbf8d9c323f4d55823e0000e03e0000803f47050cc100000000d6121640c03a30bfb9fe323f6695453eabaaea3e00000000fcdce2c00000e03fb126f33f2bea31bf9223333ff54e293eabaaea3e0000803f49b80fc100000000565e973fd6e534bf23f2323f3ee8e03d5555f53e00000000ba51e9c00000e03f7cbc753f163037bf6e11313f9404c83d5555f53e0000803fc3f510c1000000004a9d54b5d0e439bf12d52f3f20fcfc3c0000003f0000000028d8edc00000e03fa96c2eb5d6073dbf65922c3f6667973c0000003f0000803f48b80fc100000000635e97bf2f873dbf28452b3f214286bd5555053f00000000034deec00000e03fbbfb7abf1e813ebf4a4d293fcfd2c0bd5555053f0000803f46050cc100000000e41216c0afdb3abf1004293f094535beabaa0a3f0000000057a6e8c00000e03f825af9bf8d4a38bf3f1e293f9c0e5abeabaa0a3f0000803ff3ec05c1000000002ae55dc0bf3f32bf7476293fe3108ebe0000103f0000000012f4ddc00000e03f4adf37c09a1c30bf1f11293fc31a9abe0000103f0000803ffe13fbc000000000c2f590c056b729bf4375283fcbcdb6be5555153f000000008a04d1c00000e03f565a71c0d83e29bff733263fe78bc0be5555153f0000803f4c02e6c000000000ff7db0c028ba1fbf1202253f1f3ce2beabaa1a3f000000002019c1c00000e03f642b94c02fe01cbf160a233fc288efbeabaa1a3f0000803f1e01cdc0000000002301cdc091660fbf5a99223f922308bf0000203f000000008b9bacc00000e03f8f9bacc09d0506bf4095233fe94510bf0000203f0000803ffd7db0c0000000004d02e6c03ae6eebe3cc3243f3d4f1bbf5555253f00000000346793c00000e03f7719c0c0babbd8be984d273f8da120bf5555253f0000803fc1f590c000000000ff13fbc04dc5c1be6f6c283f79ae26bfabaa2a3f00000000ef6070c00000e03f902cd0c0daa8adbea63e2a3f3d552abfabaa2a3f0000803f1ee55dc000000000f4ec05c1ab3395bea0e72a3f4a642fbf0000303f00000000c92d37c00000e03fdc1dddc0b7f781be22112c3fdf0f32bf0000303f0000803fd81216c00000000047050cc117664cbe98892c3f3f1636bf5555353f00000000bbf6f6bf0000e03fa16be6c04e7727bed6582d3f0eab37bf5555353f0000803f495e97bf0000000049b80fc1e79ed9bd4da82d3fac1d3abfabaa3a3f000000000b8d78bf0000e03ff3fdebc03b9d94bd1e142e3f38c83abfabaa3a3f0000803f4d03e83300000000c3f510c1f94950bc3f332e3f03903bbf0000403f00000000ac56be330000e03f28d8edc0c0e0943c682d2e3fe48d3bbf0000403f0000803f6e5e973f0000000048b80fc166ffa43dee182e3fac8c3abf5555453f00000000598d783f0000e03f02feebc019c6de3d7c9e2d3f6e0e3abf5555453f0000803fea1216400000000046050cc12771313ec0582d3f071537bfabaa4a3f00000000cafaf63f0000e03f4b6fe6c073364c3e44752c3fd72c36bfabaa4a3f0000803f31e55d4000000000f2ec05c1f3b2873e3a072c3f090731bf0000503f00000000bf3537400000e03f6327ddc0b453943e1ad02a3fa4aa2fbf0000503f0000803fc1f5904000000000ff13fbc0afa5b53ebf432a3f9b3728bf5555553f00000000ef6070400000e03f902cd0c0e425c03eee61283f1d3127bf5555553f0000803ffe7db040000000004d02e6c03cdce03e8d6a273f93b11dbfabaa5a3f000000001b5f93400000e03fe80ec0c05dc9eb3ed70d253fd42f1cbfabaa5a3f0000803f2501cd40000000001c01cdc05119063f4a1a243f239c0fbf0000603f000000002150ac400000e03f1a50acc0093a0e3f3130243f1b7607bf0000603f0000803f4f02e64000000000fb7db0c088a81a3fdc1a253f8da4efbe5555653f00000000bb12c0400000e03f066293c09309213f906c283fb200d4be5555653f0000803f0114fb4000000000bef590c0c188263fbc622a3fe24ebbbeabaa6a3f00000000afd2ce400000e03f87d16ec0fb102a3faa942e3f15a79cbeabaa6a3f0000803ff3ec0541000000002ae55dc0f52b2c3f3aa1303f990989be0000703f000000000a60d9400000e03f571434c093752d3fd2fc333f02fe5cbe0000703f0000803f47050c4100000000d21216c0d0b62e3fc75a353ff03c38be5555753f00000000b0e8e0400000e03f740ef1bfeca82f3f32a1353fa07324be5555753f0000803f49b80f41000000003d5e97bf50a9323f98e1343fe1beefbdabaa7a3f00000000c496e8400000e03f69f774bf2eef353ffcd0313febb3e4bdabaa7a3f0000803fc3f51041000000004a9dd43527e2373fa8e4303fc637a6bd0000803f0000000028d8ed400000e03fa96cae3564013a3f7af82c3f4964ffbd0000803f0000803f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0.875, z: 0}
+    m_Extent: {x: 9.06, y: 0.875, z: 9.06}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1256725721
 GameObject:
   m_ObjectHideFlags: 0
@@ -24596,6 +24611,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "...\uC74C?"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24606,6 +24622,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC8C4\uC1A1\uD55C\uB370, \uB204\uAD6C\uC2DC\uC8E0?"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24616,6 +24633,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "...\uC0C1\uB2F4\uC0AC"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24626,6 +24644,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC0C1\uB2F4\uC0AC\uB77C...\uC798\uC740 \uBAA8\uB974\uACA0\uC9C0\uB9CC...
         \uAF64 \uB192\uC740 \uC218\uC900\uC758 \uC758\uC2DD\uC744 \n\uC720\uC9C0\uD558\uACE0
         \uACC4\uC2DC\uB294 \uAC83 \uAC19\uAD70\uC694."
@@ -24638,6 +24657,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uBB50.. \uBC29\uD574\uB9CC \uC548 \uB41C\uB2E4\uBA74\uC57C \uBC1C\uC774
         \uAC00\uB294 \uB370\uB85C \uB9C8\uC74C\uAECF \uB3CC\uC544\uB2E4\uB2C8\uC154\uB3C4
         \uB429\uB2C8\uB2E4."
@@ -24650,6 +24670,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "...\uADF8\uAC74 \uADF8\uB807\uACE0, \uACE7 \uC0C8\uB85C\uC6B4 \uC8FC\uAE30\uAC00
         \uC2DC\uC791\uB420 \uAC83 \uAC19\uB124\uC694."
       basicdelay: 0.05
@@ -24661,6 +24682,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC5B4\uB5BB\uC2B5\uB2C8\uAE4C? \uC0C8 \uC8FC\uAE30\uB97C \uB9DE\uC774\uD558\uBA70
         \uC790\uC544\uAC00 \uC0AC\uB77D\uC0AC\uB77D \uC800\uBA70\uC838 \uAC00\uB294
         \uAE30\uBD84\uC740. "
@@ -24673,6 +24695,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uC0C8\uB85C\uC6B4 \uC8FC\uAE30?"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24683,6 +24706,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB2F9\uC2E0\uC740 \uAE30\uC5B5\uB098\uC9C0 \uC54A\uACA0\uC9C0\uB9CC,
         \uC544\uB9C8 \uC218\uB3C4 \uC5C6\uC774 \uB9CE\uC740 \uC8FC\uAE30\uB97C \uBC18\uBCF5\uD588\uACA0\uC8E0."
       basicdelay: 0.05
@@ -24694,6 +24718,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC800\uB3C4 \uB2F9\uC2E0\uC774 \uC5EC\uAE30 \uC628 \uAE30\uC5B5\uC740
         \uC0C8\uAE30\uACE0 \uC788\uC9C0 \uC54A\uC9C0\uB9CC... \uC544\uB9C8 \n\uD56D\uC0C1
         \uB611\uAC19\uC774 \uC5EC\uAE38 \uCC3E\uC544\uC624\uACE0, \uAC19\uC740 \uB300\uD654\uB97C
@@ -24707,6 +24732,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uC0C8\uAE34\uB2E4\uACE0?"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24717,6 +24743,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC5D0\uCE6D\uC73C\uB85C \uAE30\uC5B5\uC744 \uC9C1\uC811 \uB1CC\uC5D0
         \uC0C8\uAE30\uC8E0. \uD658\uC6D0\uC18D\uC5D0\uC11C \uC720\uC77C\uD558\uAC8C\uB098\uB9C8
         \n\uB2E4\uC74C \uC8FC\uAE30\uB85C \uAC00\uC838\uAC08 \uC218 \uC788\uB294\uAC83\uB4E4\uC785\uB2C8\uB2E4."
@@ -24729,6 +24756,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC0C8\uAE38 \uC218 \uC788\uB294 \uCD1D\uB7C9\uC740 \uADF8\uB9AC
         \uD06C\uC9C0 \uC54A\uC9C0\uB9CC... \uAE30\uC5B5\uC744 \uC758\uC874\uD560
         \uC218 \uC788\uB2E4\uBA74.."
@@ -24741,6 +24769,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC774\uB807\uAC8C \uC0DD\uAC01\uD558\uB2C8 \uC800\uB294 \uC544\uBB34\uAC83\uB3C4
         \uC544\uB2CC\uAC83\uAC19\uB124\uC694."
       basicdelay: 0.05
@@ -24752,6 +24781,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC9C0\uAE08 \uC774\uB807\uAC8C \uBA40\uCA61\uD55C\uAC83\uCC98\uB7FC
         \uBCF4\uC5EC\uB3C4, \uACB0\uAD6D \uC81C \uB1CC\uC5D0 \uC0C8\uACA8\uC9C4 \n\uC5D0\uCE6D\uC774
         \uC81C \uC815\uCCB4\uC131\uC744 \uD615\uC131\uD558\uACE0\uC788\uB2E4\uB294
@@ -24765,6 +24795,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC774\uBBF8 \uD658\uC6D0\uC18D\uC5D0 \uC0BC\uCF1C\uC9C4 \uC9C4\uC9DC
         \uC800\uB294 \uC0C8\uACA8\uC9C4 \uC5D0\uCE6D\uC5D0 \uB530\uB77C \n\uBC18\uBCF5\uC791\uC5C5\uB9CC\uC744
         \uD558\uB294 \uAECD\uB370\uAE30\uCC98\uB7FC \uB290\uAEF4\uC9C0\uB294\uAD70\uC694...."
@@ -24777,6 +24808,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uAC74 \uADF8\uB807\uACE0, \uC2DC\uAC04\uC774 \uC5BC\uB9C8
         \uB0A8\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
       basicdelay: 0.05
@@ -24788,6 +24820,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC800\uB294 \uC0C1\uB2F4\uC0AC...\uB2D8\uC774 \uB204\uAD70\uC9C0\uB294
         \uC54C \uC218 \uC5C6\uACA0\uC9C0\uB9CC, \uBD80\uB514 \uB0A8\uC740 \uC2DC\uAC04\uC744
         \uB354 \uC758\uBBF8\uC788\uAC8C \uC4F0\uC138\uC694"
@@ -24800,6 +24833,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC800\uB294 \uC774 \uC790\uB9AC\uC5D0\uC11C \uBAA8\uB450\uB97C
         \uC704\uD55C \uD574\uACB0\uCC45\uC744 \uCC3E\uC744\uD14C\uB2C8... \uADF8\uB7EC\uB2C8,
         \n\uB0B4\uC77C\uC758 \uD574\uB97C \uB9DE\uC774\uD558\uAE30 \uC704\uD55C \uC900\uBE44\uB97C
@@ -24813,6 +24847,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC544\uB9C8 \uB2F9\uC2E0\uC758 \uB0B4\uC77C\uC740 \uD55C \uC8FC\uAE30\uAC00
         \uBC18\uBCF5\uB418\uAE30\uB3C4 \uC804\uC5D0 \uCC3E\uC544\uC62C\uAC81\uB2C8\uB2E4."
       basicdelay: 0.05
@@ -24824,6 +24859,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uAE30\uC5B5\uC740... <shake=0.3,15>\uBABB\uD558\uACA0\uC9C0\uB9CC.</shake>"
       basicdelay: 0.05
       dotdelay: 0.25
@@ -24838,6 +24874,7 @@ MonoBehaviour:
     enemyvoice: 
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: ...
       basicdelay: 0.5
       dotdelay: 0.3
@@ -24852,6 +24889,7 @@ MonoBehaviour:
     enemyvoice: player_chat
     dialogueLines:
     - target: 0
+      objectname: 
       dialogue: ...
       basicdelay: 0.5
       dotdelay: 0.3
@@ -24862,6 +24900,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<shake=0.3,15>\uC774\uB7F4 \uC904 \uC54C\uC558\uC73C\uBA74...</shake>"
       basicdelay: 0.03
       dotdelay: 0.3
@@ -24872,6 +24911,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<function=cutscene1>  <color=red><shake=0.5,15>\u25A0\u25A0\u25A0\u25A0\u25A0
         \u25A0\u25A0\u25A0\u25A0 \n\u25A0\u25A0\u25A0\u25A0 \u25A0\u25A0, \u25A0\u25A0\u25A0</shake></color> "
       basicdelay: 0.5
@@ -24887,6 +24927,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "...\uC624\uC168\uAD70\uC694."
       basicdelay: 0.1
       dotdelay: 0.3
@@ -24897,6 +24938,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
       basicdelay: 0.1
       dotdelay: 0.3
@@ -24907,6 +24949,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC8FC\uAE30\uAC00 \uC57D\uAC04 \uB290\uB824\uC9C4\uAC8C \uB290\uAEF4\uC9C0\uC2DC\uB098\uC694?"
       basicdelay: 0.1
       dotdelay: 0.3
@@ -24917,6 +24960,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC774\uB860\uB300\uB85C\uB77C\uBA74 \uC8FC\uAE30\uB294 \uC644\uC804\uD788
         \uC0AC\uB77C\uC838\uC57C\uD588\uB294\uB370...."
       basicdelay: 0.1
@@ -24928,6 +24972,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB531 <color=red>\uD55C\uAC00\uC9C0</color> \uBD80\uC871\uD55C\uAC8C
         \uC788\uB354\uAD70\uC694."
       basicdelay: 0.1
@@ -24939,6 +24984,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "<shake=0.5,10>\uADF8\uAC8C \uBB50\uC9C0...?</shake>"
       basicdelay: 0.1
       dotdelay: 0.3
@@ -24949,6 +24995,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "...\uC8C4\uC1A1\uD558\uAC8C \uB410\uC2B5\uB2C8\uB2E4.<function=trapal_start>"
       basicdelay: 0.1
       dotdelay: 0.3
@@ -24963,6 +25010,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "<color=red>\uC774\uB807\uAC8C \uB05D\uB0BC \uC218\uB294 \uC5C6\uC9C0.</color>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -24973,6 +25021,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC5ED\uC2DC <color=red>\uC21C\uD658</color>\uC740 \uC6B0\uB9AC
         \uBAA8\uB450\uC5D0\uAC8C \n\uD544\uC694\uD588\uB358\uAC83\uC774\uB77C\uACE0."
       basicdelay: 0.07
@@ -24984,6 +25033,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uB807\uAC8C \uB9D0\uD558\uB358 \uAE30\uC5B5\uC774 \uC774\uB807\uAC8C\uB098
         \uC120\uBA85\uD55C\uB370 \uB9D0\uC774\uC57C.."
       basicdelay: 0.07
@@ -24995,6 +25045,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uB7FC, \uC81C\uB300\uB85C \uAC00\uBCFC\uAE4C\uC694, <color=red>\uC0C1\uB2F4\uC0AC\uB2D8</color>."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25005,6 +25056,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<color=red>\uC774 \uC9C0\uAE0B\uC9C0\uAE0B\uD55C \uC21C\uD658\uB3C4...
         \uC54C \uC218 \uC5C6\uB294 \uC5D0\uCE6D\uB3C4...</color>"
       basicdelay: 0.07
@@ -25016,6 +25068,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC800\uD76C \uBAA8\uB450 \uC790\uC2E0\uC758 \uC138\uACC4\uB97C
         \uC704\uD55C \uB9C8\uC74C\uC740 \uAC19\uC796\uC544\uC694."
       basicdelay: 0.07
@@ -25027,6 +25080,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "...\uC544\uB2D9\uB2C8\uAE4C?<function=trapal_start>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25041,6 +25095,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 0
+      objectname: 
       dialogue: ...
       basicdelay: 0.08
       dotdelay: 0.15
@@ -25051,6 +25106,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC74C?"
       basicdelay: 0.08
       dotdelay: 0.15
@@ -25061,6 +25117,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC5EC\uAE30 \uC678\uBD80\uC778\uC774 \uCD9C\uC785\uD55C\uB2E4\uB294
         \uBCF4\uACE0\uB294 \uBC1B\uC740\uC801 \uC5C6\uB294\uB370..."
       basicdelay: 0.08
@@ -25072,6 +25129,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC5B4\uB5BB\uAC8C \uB4E4\uC5B4\uC654\uB294\uC9C0\uB294 \uBAA8\uB974\uACA0\uC9C0\uB9CC...<function=start>"
       basicdelay: 0.08
       dotdelay: 0.15
@@ -25086,6 +25144,7 @@ MonoBehaviour:
     enemyvoice: description_chat
     dialogueLines:
     - target: 0
+      objectname: 
       dialogue: "\uC73D<camerashake=10,0.1>...."
       basicdelay: 0.05
       dotdelay: 0.025
@@ -25096,6 +25155,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "(\uBA38\uB9AC\uAC00 \uC544\uD504\uB2E4.)"
       basicdelay: 0.01
       dotdelay: 0.03
@@ -25106,6 +25166,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC2DC\uC124\uC740 \uBB34\uC2A8\uAE30\uBD84\uC774\uC9C0?"
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25116,6 +25177,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB2F9\uC2E0\uC744 \uB9CC\uB4E4\uC5B4\uB0B4\uAE30 \uC704\uD55C \uD76C\uC0DD\uC744
         \uAC00\uCE58\uAC00 \uC788\uC5C8\uB098?"
       basicdelay: 0.03
@@ -25127,6 +25189,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uBB3C\uC5B4\uBCF4\uACE0\uC2F6\uC5B4\uC11C \uBBF8\uCE58\uB294\uC904
         \uC54C\uC558\uC5B4 \uAD8C\uB9AC\uC758 \uD53C\uC870\uBB3C\uC544."
       basicdelay: 0.03
@@ -25138,6 +25201,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uBB34\uC2A8..."
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25148,6 +25212,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<camerashake=10,0.1><color=red>\uC544\uB2C8.</color>"
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25158,6 +25223,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<shake=20,0.1><color=red>\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8..\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8..\n\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\n\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8.\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8\uC544\uB2C8</color></shake>"
       basicdelay: 0.0015
       dotdelay: 0.01
@@ -25168,6 +25234,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<shake=0.2,15><color=red>>\uB10C \uC601\uC6D0\uC744 \uB5A0\uB3CC\uC544\uB2E4\uB2D0\uAC70\uC57C.</color></shake>"
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25178,6 +25245,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<shake=0.2,15><color=red>\uC544\uBB34\uAC83\uB3C4 \uC758\uBBF8\uAC00\uC5C6\uC5B4</color></shake>"
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25188,6 +25256,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<shake=0.2,15><color=red><camerashake=10,0.1>\uC544\uBB34\uAC83\uB3C4
         \uC758\uBBF8\uAC00 \uC5C6\uC5C8\uB358\uAC70\uB77C\uACE0...</color></shake>"
       basicdelay: 0.03
@@ -25199,6 +25268,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uC544\uBB34\uAC83\uB3C4...<function=success>"
       basicdelay: 0.03
       dotdelay: 0.2
@@ -25213,6 +25283,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uBC18\uBCF5\uD558\uC9C0 \uC54A\uC73C\uB824\uBA74..."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25223,6 +25294,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC801\uC5B4\uB3C4...\uD558\uB098\uC758 \uC138\uACC4\uC120\uB9CC\uC774\uB77C\uB3C4...<function=trapal_die1>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25237,6 +25309,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uAC70\uC218\uC790 \uC81C\uC555 \uC2E4\uD328... \uD6C4\uD1F4\uD55C\uB2E4..<function=indexer_disappear>"
       basicdelay: 0.08
       dotdelay: 0.2
@@ -25251,6 +25324,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uAC74... \uC7A0\uC2DC\uB9CC\uC694..<function=Animation1>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25261,6 +25335,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uD655\uC2E4\uD788... \uD655\uC2E4\uD788 \uC81C\uAC00 \uCC3E\uB358
         \uD30C\uC77C\uC774\uAD70\uC694."
       basicdelay: 0.07
@@ -25272,6 +25347,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uAC10\uC0AC\uD569\uB2C8\uB2E4. \uC0AC\uB840\uB294... \uC544\uB2C8...
         \uB2F9\uC2E0 \uB355\uBD84\uC785\uB2C8\uB2E4.\n\uBAA8\uB450\uB97C \uB300\uC2E0\uD574
         \uAC10\uC0AC\uB4DC\uB9BD\uB2C8\uB2E4."
@@ -25284,6 +25360,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<color=red>\uB0B4\uC77C\uC774 \uBA38\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.<function=Animation4></color>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25298,6 +25375,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "<shake=0.2,15>...\uC544\uC544</shake>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25308,6 +25386,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC65C \uC81C\uAC8C \uC774\uB7F0 \uC808\uB9DD\uC744 \uC548\uACA8
         \uC8FC\uC2ED\uB2C8\uAE4C...?"
       basicdelay: 0.07
@@ -25319,6 +25398,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC81C\uAC00 \uBD88\uC548\uC815\uD55C\uAC83\uC744 \uC54C\uACE0\uB3C4..."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25329,6 +25409,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC774\uBC88 \uC21C\uD658\uC740 \uC5C6\uB358\uAC78\uB85C \uD558\uACA0\uC2B5\uB2C8\uB2E4..<function=Animation2>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25343,6 +25424,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uAC74...\uC790\uC138\uD788 \uBD10\uB3C4 \uB420\uAE4C\uC694...?<function=Animation3>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25353,6 +25435,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: ...
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25363,6 +25446,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC774\uAC74...\uB098\uBA38\uC9C0\uC758..."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25373,6 +25457,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uB798, \uC774\uB807\uAC8C \uB9CC\uB4E4\uC5C8\uC5C8\uC9C0.<function=Animation5>"
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25387,6 +25472,7 @@ MonoBehaviour:
     enemyvoice: player_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uC5EC\uAE30\uC5D0\uB294 \uC544\uBB34\uAC83\uB3C4 \uC5C6\uB2E4."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25397,6 +25483,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uAC04\uAC04\uD788 \uD0C0\uC778\uC758 \uBAA8\uC2B5\uC774 \uBE44\uCE58\uB294
         \uAC70\uC6B8 \uBA87\uAC1C\uB9CC \uBCF4\uC778\uB2E4."
       basicdelay: 0.07
@@ -25408,6 +25495,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB0B4\uAC00 \uB204\uAD6C\uC778\uC9C0\uB3C4 \uBAA8\uB974\uACA0\uB2E4."
       basicdelay: 0.07
       dotdelay: 0.3
@@ -25422,6 +25510,7 @@ MonoBehaviour:
     enemyvoice: player_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uADF8 \uBCF5\uC7A5\uC740...."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25432,6 +25521,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: ...
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25442,6 +25532,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC0C1\uD669 \uC790\uCCB4\uAC00 \uC758\uBBF8\uC2EC\uC7A5\uD558\uAD70."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25452,6 +25543,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uB2F9\uC2E0\uC740...\uB204\uAD6C\uC9C0..?"
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25462,6 +25554,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: ...
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25472,6 +25565,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uC2DC\uD5D8\uD574\uBCFC \uAC00\uCE58\uB294 \uC788\uACA0\uC5B4..<function=Animation1>"
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25486,6 +25580,7 @@ MonoBehaviour:
     enemyvoice: player_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uC5ED\uC2DC...\uC774\uBC88 \uC0C1\uB2F4\uC740 \uB0B4\uAC00..."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25496,6 +25591,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uC5ED\uC2DC \uBB54\uAC00 \uC54C\uACE0\uC788\uAD70."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25506,6 +25602,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB2F9\uC2E0\uB3C4...\uACE7 \uC54C\uAC8C\uB420\uAC70\uC57C."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25516,6 +25613,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB098\uB3C4 \uC54C\uACE0\uC2F6\uC5B4\uC11C \uC54C\uAC8C\uB41C\uAC8C
         \uC544\uB2C8\uAC70\uB4E0. \uD558\uD558..."
       basicdelay: 0.07
@@ -25527,6 +25625,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uD558..\uD558\uD558.."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25537,6 +25636,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 0
+      objectname: 
       dialogue: "\uB10C...\uB300\uCCB4 \uBB50\uC9C0...?"
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25547,6 +25647,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB098\uB294..."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25557,6 +25658,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB098\uB294 \uAC00\uC9DC\uC57C."
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25567,6 +25669,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB2F9\uC2E0\uC744 \uC704\uD574 \uB9CC\uB4E4\uC5B4\uC9C4 \uADF8\uB7F4\uB4EF\uD55C
         \uBAA8\uC870\uD488."
       basicdelay: 0.07
@@ -25578,6 +25681,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uADF8\uB7EC\uB2C8 \uB9DD\uC124\uC774\uC9C0\uB9C8.<function=cutScene2ray>"
       basicdelay: 0.07
       dotdelay: 0.15
@@ -25588,6 +25692,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB2E4\uC2DC \uB0A0 \uB9CC\uB098\uAC8C \uB418\uBA74... \uC9C4\uC2EC\uC73C\uB85C
         \uC0C1\uB300 \uD560 \uC218 \uC788\uACA0\uC9C0."
       basicdelay: 0.07
@@ -25599,6 +25704,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB05D\uAE4C\uC9C0<function=CutScene2End>... \uAC08 \uC218 \uC788\uAE30\uB97C..."
       basicdelay: 0.1
       dotdelay: 0.2
@@ -25613,6 +25719,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uD558\uD544...\uC774\uB7F0 \uC911\uC694\uD55C \uC2DC\uAE30\uC5D0..."
       basicdelay: 0.1
       dotdelay: 0.3
@@ -25623,6 +25730,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "<color=red>\uC5EC\uAE30\uC11C \uAEBC\uC838.</color> <function=trapal_start>"
       basicdelay: 0.1
       dotdelay: 0.3
@@ -25637,6 +25745,7 @@ MonoBehaviour:
     enemyvoice: trapal_chat
     dialogueLines:
     - target: 1
+      objectname: 
       dialogue: "\uC774\uB807\uAC8C \uB05D\uB0BC\uC218\uB294 \uC5C6\uC5B4..."
       basicdelay: 0.1
       dotdelay: 0.3
@@ -25647,6 +25756,7 @@ MonoBehaviour:
       gotoanswer: 0
       answerindex: 0
     - target: 1
+      objectname: 
       dialogue: "\uB04A\uC5B4\uB0B4\uC57C\uB9CC..\uD55C\uB2E4\uBA74..<function=trapal_start>"
       basicdelay: 0.1
       dotdelay: 0.3
@@ -25654,6 +25764,58 @@ MonoBehaviour:
       end: 1
       end_lookplayer: 1
       end_letterboxin: 1
+      gotoanswer: 0
+      answerindex: 0
+  - dialoguename: communicators
+    playervoice: player_chat
+    enemyvoice: trapal_chat
+    dialogueLines:
+    - target: 1
+      objectname: communicator
+      dialogue: "\uC7A0\uAE50.<function=communicator2_cigarette>"
+      basicdelay: 0.1
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      objectname: communicator
+      dialogue: "\uB354 \uC774\uC0C1 \uB2E4\uAC00\uC624\uC9C0 \uB9C8\uB77C."
+      basicdelay: 0.1
+      dotdelay: 0.3
+      cantskip: 0
+      end: 1
+      end_lookplayer: 1
+      end_letterboxin: 1
+      gotoanswer: 0
+      answerindex: 0
+  - dialoguename: communicator_ready
+    playervoice: player_chat
+    enemyvoice: trapal_chat
+    dialogueLines:
+    - target: 1
+      objectname: communicator
+      dialogue: "...\uBB34\uC5B4.<function=communicator_cigarette>"
+      basicdelay: 0.1
+      dotdelay: 0.3
+      cantskip: 0
+      end: 0
+      end_lookplayer: 0
+      end_letterboxin: 0
+      gotoanswer: 0
+      answerindex: 0
+    - target: 1
+      objectname: communicator2
+      dialogue: ...<function=communicator_throw>
+      basicdelay: 0.1
+      dotdelay: 0.3
+      cantskip: 0
+      end: 1
+      end_lookplayer: 0
+      end_letterboxin: 0
       gotoanswer: 0
       answerindex: 0
   answers:
@@ -28378,7 +28540,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011113183}
-  m_Mesh: {fileID: 445615660}
+  m_Mesh: {fileID: 1246423022}
 --- !u!4 &2011113188
 Transform:
   m_ObjectHideFlags: 0

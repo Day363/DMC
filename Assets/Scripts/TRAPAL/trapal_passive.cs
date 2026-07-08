@@ -53,7 +53,7 @@ public class trapal_passive : MonoBehaviour
     private void OnEnable()
     {
         boss_hpbar.OnHitCalled += Deny;
-        playerhit.OnHitCalled += Onhit;
+        playerhit.OnPlayerHitCalled += Onhit;
         trapal_lazer1.OnLazerHitCalled += Lazer1_Hit;
         trapal_certain_eye.OnDie += Certain24plus;
 
@@ -236,7 +236,7 @@ public class trapal_passive : MonoBehaviour
         }
     }
 
-    public void Onhit()
+    public void Onhit(GameObject enemy)
     {
         Certain();
         WhenHitplayer();

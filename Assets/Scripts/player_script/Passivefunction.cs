@@ -53,6 +53,7 @@ public class Passivefunction : MonoBehaviour
         playerstatus.OnStackApplied += WhenStackAddCertain;
         playerstatus.OnStackRemoved += WhenStackRemoveCertain;
         boss_hpbar.OnStackApplied += WhenBossApplyStack;
+        playerattackdamage.Onhit += Communicator_Scar;
     }
 
     public void Start()
@@ -104,6 +105,16 @@ public class Passivefunction : MonoBehaviour
             }
             
 
+        }
+    }
+
+    public void Communicator_Scar(GameObject enemy)
+    {
+        playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "ÀüÈç-Àü´ÞÀÚ");
+        if (instance.currentStack >= 5)
+        {
+            GetComponent<playerstatus>().RemoveStack(instance.stackData, 5);
+            enemy.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[23], 5);
         }
     }
 

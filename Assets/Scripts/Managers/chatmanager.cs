@@ -13,6 +13,7 @@ public enum Chattarget {Player, Enemy}
 public class Dialogue
 {
     public Chattarget target;
+    public string objectname;
 
     [TextArea(5, 10)]
     public string dialogue;
@@ -127,6 +128,9 @@ public class chatmanager : MonoBehaviour
 
             var line = currentdialogues.dialogueLines[chatnumber];
 
+            GameObject currentenemy = battalemanager.Instance.currentenemys.Find(obj => obj.name == currentdialogues.dialogueLines[chatnumber].objectname);
+            enemychatbox = currentenemy.GetComponent<boss_hpbar>().chatbox;
+
             if (line.target == Chattarget.Enemy)
             {
                 currentchatco = StartCoroutine(Chat(line, enemychatbox));
@@ -154,10 +158,13 @@ public class chatmanager : MonoBehaviour
         currentdialogues = dialogues[i];
         chating = true;
         playerchatbox.SetActive(true);
-        if (enemychatbox != null)
+
+        foreach (GameObject enemy in battalemanager.Instance.currentenemys)
         {
-            enemychatbox.SetActive(true);
+            enemy.GetComponent<boss_hpbar>().chatbox.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            enemy.GetComponent<boss_hpbar>().chatbox.SetActive(true);
         }
+        
         if (currentdialogues.dialogueLines[chatnumber].target == Chattarget.Enemy)
         {
             curvoice = currentdialogues.enemyvoice;
@@ -165,6 +172,10 @@ public class chatmanager : MonoBehaviour
             {
                 StopCoroutine(currentchatco);
             }
+
+            GameObject currentenemy = battalemanager.Instance.currentenemys.Find(obj => obj.name == currentdialogues.dialogueLines[chatnumber].objectname);
+            enemychatbox = currentenemy.GetComponent<boss_hpbar>().chatbox;
+
             currentchatco = StartCoroutine(Chat(currentdialogues.dialogueLines[chatnumber], enemychatbox));
             chatnumber++;
         }
@@ -265,7 +276,7 @@ public class chatmanager : MonoBehaviour
             tmp.maxVisibleCharacters = visible;
 
             char c = GetPrintedCharAtIndex(tmp, visible - 1);
-            SoundPlay(c, curvoice);
+            //SoundPlay(c, curvoice);
 
             if (shaker != null)
                 shaker.CheckEvents(visible);
@@ -277,7 +288,7 @@ public class chatmanager : MonoBehaviour
             yield return new WaitForSeconds(wait);
         }
 
-        whilesaying = false;
+        
 
         if (chat.gotoanswer)
         {
@@ -300,11 +311,17 @@ public class chatmanager : MonoBehaviour
             playerchatbox.SetActive(false);
             if (enemychatbox != null)
             {
-                enemychatbox.SetActive(false);
+                foreach (GameObject enemy in battalemanager.Instance.currentenemys)
+                {
+                    enemy.GetComponent<boss_hpbar>().chatbox.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+                    enemy.GetComponent<boss_hpbar>().chatbox.SetActive(false);
+                }
             }
 
             OnchatEnd?.Invoke();
         }
+
+        whilesaying = false;
     }
 
     char GetPrintedCharAtIndex(TMP_Text t, int visibleIndex)
@@ -314,14 +331,14 @@ public class chatmanager : MonoBehaviour
         return ci.character;
     }
 
-    public void SoundPlay(char i, string sound)
-    {
-        if (char.IsWhiteSpace(i)) return;
-        if (IsPunctuation(i)) return; 
+    //public void SoundPlay(char i, string sound)
+    //{
+    //    if (char.IsWhiteSpace(i)) return;
+    //    if (IsPunctuation(i)) return; 
 
-        if (sound != null)
-        GetComponent<soundmanager>().SoundPlay(sound);
-    }
+    //    if (sound != null)
+    //    GetComponent<soundmanager>().SoundPlay(sound);
+    //}
 
     bool IsPunctuation(char c)
     {

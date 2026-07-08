@@ -52,7 +52,11 @@ public class counselfunctionmanager : MonoBehaviour
             { "indexer_disappear", IndexerDisappear },
             { "cutscene1", CutScene1 },
             { "cutScene2ray", CutScene2Ray },
-            { "CutScene2End", CutScene2End }
+            { "CutScene2End", CutScene2End },
+            { "communicator_throw",  Communicator_throw},
+            { "communicator_cigarette", Communicator_cigarette},
+            { "communicator2_cigarette", Communicator2_cigarette}
+
         };
     }
 
@@ -148,5 +152,23 @@ public class counselfunctionmanager : MonoBehaviour
     public void CutScene2End()
     {
         OnCutSceneEnd?.Invoke();
+    }
+
+    public void Communicator_throw()
+    {
+        GameObject currentenemy = battalemanager.Instance.currentenemys.Find(obj => obj.name == "communicator2");
+        currentenemy.GetComponent<Animator>().SetTrigger("catch");
+    }
+
+    public void Communicator_cigarette()
+    {
+        GameObject currentenemy = battalemanager.Instance.currentenemys.Find(obj => obj.name == "communicator");
+        currentenemy.GetComponent<Animator>().SetTrigger("smoke");
+    }
+
+    public void Communicator2_cigarette()
+    {
+        GameObject currentenemy = battalemanager.Instance.currentenemys.Find(obj => obj.name == "communicator2");
+        currentenemy.GetComponent<Animator>().SetTrigger("cigarette");
     }
 }

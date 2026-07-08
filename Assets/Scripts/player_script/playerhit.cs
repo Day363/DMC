@@ -9,7 +9,8 @@ using static DefenseSkill;
 
 public class playerhit : MonoBehaviour
 {
-    public static event Action OnHitCalled;
+    public static event Action<GameObject> OnPlayerHitCalled;
+    public static event Action<GameObject> OnPlayerEvasionCalled;
 
     public GameObject cammanager;
     public GameObject gamemanager;
@@ -79,7 +80,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnHitCalled?.Invoke();
+            OnPlayerHitCalled?.Invoke(enemy);
 
             int culdam = damage;
 
@@ -99,6 +100,8 @@ public class playerhit : MonoBehaviour
                         GameObject currenttext = Instantiate(evasiontext, transform.position, Quaternion.identity);
                         currenttext.transform.localPosition = transform.position;
                         attackCore.DefenseSkillUiDecrease();
+
+                        OnPlayerEvasionCalled?.Invoke(enemy);
 
                         return;
                     }
@@ -166,7 +169,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnHitCalled?.Invoke();
+            OnPlayerHitCalled?.Invoke(enemy);
 
             int culdam = damage;
 
@@ -253,7 +256,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnHitCalled?.Invoke();
+            OnPlayerHitCalled?.Invoke(enemy);
 
             int culdam = damage;
 
@@ -340,7 +343,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnHitCalled?.Invoke();
+            OnPlayerHitCalled?.Invoke(enemy);
 
             int culdam = damage;
 

@@ -900,6 +900,13 @@ public class skillfunction : MonoBehaviour
 
     }
 
+    public void Communicator_StandUp()
+    {
+        uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
+        GetComponent<afterimagetest>().EndGenerate();
+        GetComponent<PlayerMove>().canmove = true;
+    }
+
 
     public void ExecuteCommand(List<string> commands)
     {

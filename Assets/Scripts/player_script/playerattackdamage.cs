@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class playerattackdamage : MonoBehaviour
 {
+    public static Action<GameObject> Onhit;
+
     public bool canattack = true;
     public bool canjump = false;
 
@@ -22,6 +25,12 @@ public class playerattackdamage : MonoBehaviour
     {
         player = battalemanager.Instance.player;
         playerskillmove.Whenattackend += DamagepercentplusZero;
+    }
+
+
+    public void Onhit_(Collider2D collision)
+    {
+        Onhit?.Invoke(collision.gameObject);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

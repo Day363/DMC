@@ -66,6 +66,7 @@ public class boss_hpbar : MonoBehaviour
     public GameObject canvas;
     public Slider balancebarint;
     public Slider healthbarint;
+    public GameObject chatbox;
 
 
 
@@ -79,6 +80,7 @@ public class boss_hpbar : MonoBehaviour
 
     public float collapsefloat;
 
+    //코어 변수
     public int attackpower;
 
     public float maxhealth;
@@ -100,9 +102,21 @@ public class boss_hpbar : MonoBehaviour
     public float bleeddamageincrease;
     public float bleeddamageincreaseCore = 1;
 
-    //public float height;
-    //public float height2;
-    //public float side;
+
+    //
+
+    //페시브(전투 내내) 변수 or 기타
+    public float passive_balancedamagedecrease; //받는 균형피해 감소
+    public float passive_balancedamagedecreaseCore = 0;
+
+    public float passive_damageplus;
+    public float passive_damageplusCore = 0;
+
+    public float passive_calculationPlus;
+    public float passive_calculationPlusCore = 0;
+    //
+
+
 
     public bool iscollapse;
     public bool canhit = true;
@@ -267,7 +281,7 @@ public class boss_hpbar : MonoBehaviour
         healthbarint.maxValue = maxhealth * 2;
         currentbalance = 0;
         attackcore_ = attackcore.attackcoreInstance.gameObject;
-        CycleDecision();
+        
     }
 
     //완전 새 스텍일떄만 작동
@@ -294,6 +308,15 @@ public class boss_hpbar : MonoBehaviour
                     if (activeStacks.Find(s => s.stackData.effectName == "출혈") != null)
                     {
                         damageplus += 0.2f;
+                    }
+                }
+                if (stack.stackData.effectName == "고조")
+                {
+                    if (stack.currentStack == 100)
+                    {
+                        BalanceHeal(100f);
+                        RemoveStack(stack.stackData, 100);
+                        RemoveStack(battalemanager.Instance.stackdatas[24], 3);
                     }
                 }
             }
@@ -382,11 +405,18 @@ public class boss_hpbar : MonoBehaviour
     public void BalanceDamage(float balance)
     {
         currentbalance += (balance += (balance * (playerstatus.instance.balancedamageplus + playerstatus.instance.r_compulsion_balancedamageincrease)));
+        currentbalance = currentbalance *(1 - passive_balancedamagedecrease);
         BalanceCheck();
         if (currentbalance >= maxbalance - maxbalanceminus)
         {
             BalanceCollapse();
         }
+    }
+
+    public void BalanceHeal(float balance)
+    {
+        currentbalance += balance;
+        BalanceCheck();
     }
 
     public void BalanceCollapse()
@@ -683,7 +713,7 @@ public class boss_hpbar : MonoBehaviour
     public void CycleDecision()
     {
         currentattacknumber = 0;
-        decisionedcycle = UnityEngine.Random.Range(mincycle, maxcycle);
+        decisionedcycle = UnityEngine.Random.Range(mincycle, maxcycle + 1);
         maxfocus = decisionedcycle;
         currentfocus = maxfocus;
 
@@ -695,14 +725,20 @@ public class boss_hpbar : MonoBehaviour
 
         List<EnemySkills> tempList = new List<EnemySkills>(phase[currentphase].skills);
 
-        int count = Mathf.Min(decisionedcycle, tempList.Count);
+        int lastRandomIndex = -1;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < decisionedcycle; i++)
         {
-            int randomIndex = UnityEngine.Random.Range(0, tempList.Count);
+            int randomIndex;
+
+            do
+            {
+                randomIndex = UnityEngine.Random.Range(0, tempList.Count);
+            }
+            while (tempList.Count > 1 && randomIndex == lastRandomIndex);
 
             currentenemySkills.Add(tempList[randomIndex]);
-            tempList.RemoveAt(randomIndex);
+            lastRandomIndex = randomIndex;
         }
     }
 
@@ -723,7 +759,6 @@ public class boss_hpbar : MonoBehaviour
 
     public void BattleStart()
     {
-        battalemanager.Instance.currentenemys.Add(gameObject);
         uimanager.Instance.EnemyStatesSet(gameObject);
 
         GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
@@ -733,5 +768,7 @@ public class boss_hpbar : MonoBehaviour
         targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().maxValue = maxbalance;
         targetObj.GetComponent<enemystateui>().balancebar.GetComponent<Slider>().value = currentbalance;
         targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
+
+        CycleDecision();
     }
 }

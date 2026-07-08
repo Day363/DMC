@@ -153,7 +153,7 @@ public class playerstatus : MonoBehaviour
 
         instance = this;
 
-        playerhit.OnHitCalled += WhenHit;
+        playerhit.OnPlayerHitCalled += WhenHit;
 
         //numbercount.GetComponent<TMP_Text>().text = battalemanager.Instance.number.ToString();
         //numberimage.GetComponent<Image>().sprite = battalemanager.Instance.numberimage;
@@ -304,7 +304,7 @@ public class playerstatus : MonoBehaviour
         }
     }
 
-    public void WhenHit()
+    public void WhenHit(GameObject enemy)
     {
         r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
         if (have_forgotten && forgotten_cycle == 0)

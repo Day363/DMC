@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class soundmanager : MonoBehaviour
 {
@@ -40,6 +41,10 @@ public class soundmanager : MonoBehaviour
     public void SoundPlay(string name)
     {
         StringAudioPair sounddata = StringAudioPairData(name);
+        if (sounddata == null)
+        {
+            return;
+        }
         if (sounddata.soundvariation == soundvariation.BGM)
         {
             bgmsoundplayer.volume = sounddata.volume;

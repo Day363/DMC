@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,19 @@ public class communicator : MonoBehaviour
     public GameObject wind;
     public GameObject effectpos;
     public GameObject effectpos2;
+    public GameObject counselcam;
+    public GameObject smokeeffect;
+
+    public GameObject communicator2;
 
     public float moveSpeed;
     public float stopDistance;
 
     public bool walk;
+    public bool firstmet;
+    public bool ready;
+    public bool attackready;
+    public bool trigger;
 
     Rigidbody2D rb;
     Animator animator;
@@ -26,11 +35,47 @@ public class communicator : MonoBehaviour
         
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        StartWalk();
+        animator.speed = 0.75f;
+        //StartWalk();
     }
 
     public void FixedUpdate()
     {
+        if (trigger && firstmet && !attackready && ready && transform.position.x < player.transform.position.x + 24)
+        {
+            attackready = true;
+            battalemanager.Instance.Battlestart();
+            AttackAndWithNextAttack();
+            communicator2.GetComponent<communicator2>().AttackAndWithNextAttack();
+        }
+
+        if (firstmet && !ready && transform.position.x < player.transform.position.x + 4)
+        {
+            ready = true;
+            counselcam.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+            battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookCounsel(counselcam);
+            uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            player.GetComponent<PlayerMove>().canmove = false;
+            player.GetComponent<PlayerMove>().Stop();
+            battalemanager.Instance.gameObject.GetComponent<chatmanager>().CallDialogue(18);
+        }
+
+        if (!firstmet && Vector2.Distance(gameObject.transform.position, player.transform.position) < 13)
+        {
+            battalemanager.Instance.currentenemys.Add(gameObject);
+            battalemanager.Instance.currentenemys.Add(communicator2);
+
+
+            firstmet = true;
+            counselcam.transform.position = new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0);
+            battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookCounsel(counselcam);
+            uimanager.Instance.letterbox.GetComponent<letterboxin>().PlayLetterboxIn();
+            player.GetComponent<PlayerMove>().canmove = false;
+            player.GetComponent<PlayerMove>().Stop();
+            battalemanager.Instance.gameObject.GetComponent<chatmanager>().CallDialogue(17);
+
+        }
+
         if (!walk) return;
 
         LookPlayer();
@@ -47,15 +92,23 @@ public class communicator : MonoBehaviour
             rb.velocity = new Vector2(0f, rb.velocity.y);
             EndWalk();
         }
+
+        
+    }
+
+    public void Smokeoff()
+    {
+        smokeeffect.SetActive(false);
+        
     }
 
     public void SmokeChance()
     {
         
-        if (Random.Range(0, 75) == 0)
-        {
-            animator.SetTrigger("smoke");
-        }
+        //if (Random.Range(0, 75) == 0)
+        //{
+        //    animator.SetTrigger("smoke");
+        //}
     }
 
     IEnumerator TestAttackReady()
@@ -67,23 +120,7 @@ public class communicator : MonoBehaviour
 
     public void AttackAndWithNextAttack()
     {
-        int i = Random.Range(0, 4);
-        if (i == 0)
-        {
-            animator.SetTrigger("attack1");
-        }
-        else if (i == 1)
-        {
-            animator.SetTrigger("attack2");
-        }
-        else if (i == 2)
-        {
-            animator.SetTrigger("attack3");
-        }
-        else if (i == 3)
-        {
-            animator.SetTrigger("attack4");
-        }
+        GetComponent<boss_hpbar>().Attack();
     }
 
     public void StartWalk()

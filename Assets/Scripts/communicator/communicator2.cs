@@ -8,6 +8,7 @@ public class communicator2 : MonoBehaviour
 {
     public static Action OnDissolve;
 
+    public GameObject communicator;
     public GameObject player;
     public GameObject wind;
     public GameObject effectpos;
@@ -19,6 +20,9 @@ public class communicator2 : MonoBehaviour
     public GameObject plainslash;
     public GameObject plainprephep;
     public GameObject mainslashcore;
+    public GameObject playerpos;
+    public GameObject campos;
+    public GameObject smokeeffect;
     public int direction = 1;
 
     GameObject curslash;
@@ -27,6 +31,7 @@ public class communicator2 : MonoBehaviour
     public float stopDistance;
 
     public bool walk;
+    public bool playerfix;
 
     Rigidbody2D rb;
     Animator animator;
@@ -36,11 +41,19 @@ public class communicator2 : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        StartWalk();
+        //StartWalk();
     }
 
     public void FixedUpdate()
     {
+        if (playerfix)
+        {
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            rb.MovePosition(playerpos.transform.position);
+        }
+
+
         if (!walk) return;
 
         LookPlayer();
@@ -59,13 +72,86 @@ public class communicator2 : MonoBehaviour
         }
     }
 
+    public void Smokeoff()
+    {
+        smokeeffect.SetActive(false);
+    }
+
+    public void Camvib()
+    {
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CamVibration1();
+    }
+
+    public void ThrowCam()
+    {
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookCounsel(campos);
+    }
+
+    public void PlayerFix()
+    {
+        if (direction == 1)
+        {
+            transform.position = new Vector3(player.transform.position.x + 1.5f,  transform.position.y, 0);
+        }
+        else if (direction == -1)
+        {
+            transform.position = new Vector3(player.transform.position.x - 1.5f, transform.position.y, 0);
+        }
+        
+
+        playerfix = true;
+        player.GetComponent<Animator>().SetTrigger("caught");
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "enemy";
+        player.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        player.GetComponent<PlayerMove>().canmove = false;
+    }
+
+    public void Throw()
+    {
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookCounsel(campos);
+        player.GetComponent<PlayerMove>().canmove = false;
+        playerfix = false;
+        player.GetComponent<Animator>().SetTrigger("caught2");
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero; 
+        rb.AddForce(Vector2.left * 500f, ForceMode2D.Impulse);
+
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "player";
+        player.GetComponent<SpriteRenderer>().sortingOrder = 1;
+    }
+
+    public void ThrowEnd()
+    {
+        communicator.GetComponent<Animator>().SetTrigger("ready");
+        GetComponent<Animator>().SetTrigger("ready");
+        StartCoroutine(LookPlayerCam());
+    }
+
+    IEnumerator LookPlayerCam()
+    {
+        yield return new WaitForSeconds(4f);
+        communicator.GetComponent<communicator>().trigger = true;
+        player.GetComponent<Animator>().SetTrigger("standup");
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().LookPlayer();
+    }
+
+    public void PlayerAfterImage()
+    {
+        player.GetComponent<afterimagetest>().StartGenerate();
+    }
+
+    public void PlayerAfterImageEnd()
+    {
+        player.GetComponent<afterimagetest>().EndGenerate();
+    }
+
     public void SmokeChance()
     {
 
-        if (UnityEngine.Random.Range(0, 75) == 0)
-        {
-            animator.SetTrigger("cigarette");
-        }
+        //if (UnityEngine.Random.Range(0, 75) == 0)
+        //{
+        //    animator.SetTrigger("cigarette");
+        //}
     }
 
     public void StartWalk()
@@ -172,6 +258,19 @@ public class communicator2 : MonoBehaviour
         }
     }
 
+    public void MoveLittlebackTo()
+    {
+        //BoxTrue();
+        if (direction == 1)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.right, ForceMode2D.Impulse);
+        }
+        else if (direction == -1)
+        {
+            GetComponent<Rigidbody2D>().AddForce(30f * Vector2.left, ForceMode2D.Impulse);
+        }
+    }
+
     public void Disappear()
     {
         DOTween.Kill("communicatorappear");
@@ -203,44 +302,12 @@ public class communicator2 : MonoBehaviour
 
     public void AttackAndWithNextAttack()
     {
-        int i = UnityEngine.Random.Range(0, 4);
-        if (i == 0)
-        {
-            animator.SetTrigger("attack1");
-        }
-        else if (i == 1)
-        {
-            animator.SetTrigger("attack2");
-        }
-        else if (i == 2)
-        {
-            animator.SetTrigger("attack3");
-        }
-        else if (i == 3)
-        {
-            animator.SetTrigger("attack4");
-        }
+        GetComponent<boss_hpbar>().Attack();
     }
 
     public void AttackAndWithNextAttackPhase2()
     {
-        int i = UnityEngine.Random.Range(0, 4);
-        if (i == 0)
-        {
-            animator.SetTrigger("phase2_attack1");
-        }
-        else if (i == 1)
-        {
-            animator.SetTrigger("phase2_attack2");
-        }
-        else if (i == 2)
-        {
-            animator.SetTrigger("phase2_attack3");
-        }
-        else if (i == 3)
-        {
-            animator.SetTrigger("phase2_attack4");
-        }
+        GetComponent<boss_hpbar>().Attack();
     }
 
     public void PlainSlashTween()
