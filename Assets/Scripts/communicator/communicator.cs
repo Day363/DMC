@@ -1,7 +1,9 @@
+using DG.Tweening;
 using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 using static UnityEngine.InputManagerEntry;
 
@@ -15,8 +17,10 @@ public class communicator : MonoBehaviour
     public GameObject effectpos2;
     public GameObject counselcam;
     public GameObject smokeeffect;
+    public GameObject eyeeffect;
 
     public GameObject communicator2;
+    public GameObject slashcore2;
 
     public float moveSpeed;
     public float stopDistance;
@@ -236,4 +240,31 @@ public class communicator : MonoBehaviour
         curwind2.transform.localScale = new Vector3(1.5f, 1.5f, 1);
         curwind2.transform.localPosition = Vector3.zero;
     }
+
+    public void Focus1()
+    {
+        GameObject currenteffect = Instantiate(eyeeffect, effectpos.transform);
+        currenteffect.transform.localPosition = Vector3.zero;
+    }
+
+    
+
+    public void Communicator1_slashCoreTrigger()
+    {
+        boss_hpbar.StackInstance playerStackInstance1 = GetComponent<boss_hpbar>().activeStacks.Find(s => s.stackData.effectName == "구심회력");
+        if (playerStackInstance1 != null)
+        {
+            StartCoroutine(SlashcoreOn());
+        }
+    }
+
+    IEnumerator SlashcoreOn()
+    {
+        slashcore2.SetActive(true);
+        Debug.Log("ON");
+        yield return new WaitForSeconds(0.1f);
+        slashcore2.SetActive(false);
+        Debug.Log("OFF");
+    }
+
 }

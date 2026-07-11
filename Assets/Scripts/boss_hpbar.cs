@@ -1,11 +1,13 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System;
-using DG.Tweening;
+using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
+using static DefenseSkill;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class boss_hpbar : MonoBehaviour
 {
@@ -14,9 +16,19 @@ public class boss_hpbar : MonoBehaviour
         slash, penetrate, blow, fix
     };
 
+    public enum EnemyDefenseType
+    {
+        defense, evasion, counter
+    };
+
+    public enum EnemyCounterType
+    {
+        slash, penetrate, blow, fix
+    };
+
     public static event Action OnHitCalled;
     public static event Action OnPenetrationHitCalled;
-    public static event Action Die;
+    public static event Action<GameObject> Die;
     public static event Action OnCycleEnd;
     public static event Action OnCollusion;
     public static event Action OnCollusionSolve;
@@ -41,6 +53,35 @@ public class boss_hpbar : MonoBehaviour
     public float maxfocus;
     public float currentfocus;
 
+    public bool defense;
+    public bool evasion;
+    public bool counter;
+    public EnemyDefenses currentdefense;
+    public GameObject defenseskillui;
+    public GameObject defenseskillView;
+    public float defenseskilluiposX;
+    public float defenseskilluiposY;
+
+    [System.Serializable]
+    public class EnemyDefenses
+    {
+        public string defensename;
+        public EnemyDefenseType enemyDefenseType;
+        public EnemyCounterType enemyCounterType;
+        public string animationtrigger;
+        public float calculation;
+        public GameObject skillprephep;
+    }
+
+    [System.Serializable]
+    public class EnemyFocusSkill
+    {
+        public string focuskillname;
+        public string animationtrigger;
+        public int focusspend;
+    }
+
+
     [System.Serializable]
     public class EnemySkills
     {
@@ -53,11 +94,13 @@ public class boss_hpbar : MonoBehaviour
     public class EnemySkillPhase
     {
         public List<EnemySkills> skills;
+        public EnemyDefenses defense;
     }
 
     public List<EnemySkillPhase> phase;
 
     public List<EnemySkills> currentenemySkills;
+    public List<EnemyDefenses> currentenemyDefenses;
 
 
     public GameObject balancebar;
@@ -76,6 +119,8 @@ public class boss_hpbar : MonoBehaviour
     public GameObject damagetext;
     public GameObject bleedtext;
     public GameObject balanceeffect;
+    public GameObject evasiontext;
+    public GameObject defenseskilluiprephep;
     //
 
     public float collapsefloat;
@@ -479,8 +524,75 @@ public class boss_hpbar : MonoBehaviour
 
     public void Damage(int damage, bool damNotion = true)
     {
+        DefenseUiPosition(battalemanager.Instance.player);
+
+        defense = false;
+        evasion = false;
+        counter = false;
+
+        if (currentenemyDefenses.Count > 0)
+        {
+            currentdefense = currentenemyDefenses[0];
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.defense)
+                defense = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.evasion)
+                evasion = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
+                counter = true;
+        }
+
         if (canhit)
         {
+            float totaldamage = damage;
+
+            if (currentdefense != null)
+            {
+                if (defense)
+                {
+                    int damdecrease = (int)(currentdefense.calculation * attackpower);
+                    totaldamage = Mathf.Max(1, damage - damdecrease);
+                }
+                else if (evasion)
+                {
+                    int evasioncal = (int)(currentdefense.calculation * attackpower);
+
+                    if (damage <= evasioncal)
+                    {
+                        GameObject currenttext = Instantiate(evasiontext, transform.position, Quaternion.identity);
+                        currenttext.transform.localPosition = transform.position;
+
+                        DefenseSkillUiDecrease();
+
+                        return;
+                    }
+
+                    totaldamage = (int)(damage * 1.2f);
+                }
+                else if (counter)
+                {
+                    if (currentdefense.enemyCounterType == EnemyCounterType.slash)
+                        battalemanager.Instance.player.GetComponent<playerhit>().SlashHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.penetrate)
+                        battalemanager.Instance.player.GetComponent<playerhit>().PenetrateHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.blow)
+                        battalemanager.Instance.player.GetComponent<playerhit>().BlowHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.fix)
+                        battalemanager.Instance.player.GetComponent<playerhit>().Hit((int)(currentdefense.calculation * attackpower), gameObject);
+
+                    if (currentdefense.skillprephep != null)
+                    {
+                        GameObject currentprephep = Instantiate(currentdefense.skillprephep, transform);
+                        currentprephep.transform.position = Vector2.zero;
+                    }
+
+                }
+
+                DefenseSkillUiDecrease();
+            }
+
             HitSound();
             OnHitCalled?.Invoke();
 
@@ -491,7 +603,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = damage * damageplus;
+            totaldamage = totaldamage * damageplus;
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -529,8 +641,77 @@ public class boss_hpbar : MonoBehaviour
 
     public void SlashDamage(int damage)
     {
+        DefenseUiPosition(battalemanager.Instance.player);
+
+        defense = false;
+        evasion = false;
+        counter = false;
+
+        if (currentenemyDefenses.Count > 0)
+        {
+            currentdefense = currentenemyDefenses[0];
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.defense)
+                defense = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.evasion)
+                evasion = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
+                counter = true;
+        }
+
         if (canhit)
         {
+            float totaldamage = damage;
+
+            if (currentdefense != null)
+            {
+                if (defense)
+                {
+                    int damdecrease = (int)(currentdefense.calculation * attackpower);
+                    totaldamage = Mathf.Max(1, damage - damdecrease);
+                }
+                else if (evasion)
+                {
+                    int evasioncal = (int)(currentdefense.calculation * attackpower);
+
+                    if (damage <= evasioncal)
+                    {
+                        GameObject currenttext = Instantiate(evasiontext, transform.position, Quaternion.identity);
+                        currenttext.transform.localPosition = transform.position;
+
+                        DefenseSkillUiDecrease();
+
+                        return;
+                    }
+
+                    totaldamage = (int)(damage * 1.2f);
+                }
+                else if (counter)
+                {
+                    if (currentdefense.enemyCounterType == EnemyCounterType.slash)
+                        battalemanager.Instance.player.GetComponent<playerhit>().SlashHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.penetrate)
+                        battalemanager.Instance.player.GetComponent<playerhit>().PenetrateHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.blow)
+                        battalemanager.Instance.player.GetComponent<playerhit>().BlowHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.fix)
+                        battalemanager.Instance.player.GetComponent<playerhit>().Hit((int)(currentdefense.calculation * attackpower), gameObject);
+
+                    if (currentdefense.skillprephep != null)
+                    {
+                        GameObject currentprephep = Instantiate(currentdefense.skillprephep, transform);
+                        currentprephep.transform.position = Vector2.zero;
+                    }
+
+                }
+
+                DefenseSkillUiDecrease();
+            }
+
+
+
             HitSound();
             OnHitCalled?.Invoke();
 
@@ -541,7 +722,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = (damage * slashtolerance) * damageplus;
+            totaldamage = (damage * slashtolerance) * damageplus;
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -573,9 +754,76 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        DefenseUiPosition(battalemanager.Instance.player);
+
+        defense = false;
+        evasion = false;
+        counter = false;
+
+        if (currentenemyDefenses.Count > 0)
+        {
+            currentdefense = currentenemyDefenses[0];
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.defense)
+                defense = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.evasion)
+                evasion = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
+                counter = true;
+        }
+
         //Debug.Log(damage);
         if (canhit)
         {
+            float totaldamage = damage;
+
+            if (currentdefense != null)
+            {
+                if (defense)
+                {
+                    int damdecrease = (int)(currentdefense.calculation * attackpower);
+                    totaldamage = Mathf.Max(1, damage - damdecrease);
+                }
+                else if (evasion)
+                {
+                    int evasioncal = (int)(currentdefense.calculation * attackpower);
+
+                    if (damage <= evasioncal)
+                    {
+                        GameObject currenttext = Instantiate(evasiontext, transform.position, Quaternion.identity);
+                        currenttext.transform.localPosition = transform.position;
+
+                        DefenseSkillUiDecrease();
+
+                        return;
+                    }
+
+                    totaldamage = (int)(damage * 1.2f);
+                }
+                else if (counter)
+                {
+                    if (currentdefense.enemyCounterType == EnemyCounterType.slash)
+                        battalemanager.Instance.player.GetComponent<playerhit>().SlashHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.penetrate)
+                        battalemanager.Instance.player.GetComponent<playerhit>().PenetrateHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.blow)
+                        battalemanager.Instance.player.GetComponent<playerhit>().BlowHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.fix)
+                        battalemanager.Instance.player.GetComponent<playerhit>().Hit((int)(currentdefense.calculation * attackpower), gameObject);
+
+                    if (currentdefense.skillprephep != null)
+                    {
+                        GameObject currentprephep = Instantiate(currentdefense.skillprephep, transform);
+                        currentprephep.transform.position = Vector2.zero;
+                    }
+
+                }
+
+                DefenseSkillUiDecrease();
+            }
+
             HitSound();
             OnHitCalled?.Invoke();
             OnPenetrationHitCalled?.Invoke();
@@ -587,7 +835,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = (damage * penetratetolerance) * damageplus;
+            totaldamage = (damage * penetratetolerance) * damageplus;
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -619,8 +867,75 @@ public class boss_hpbar : MonoBehaviour
 
     public void BlowDamage(int damage)
     {
+        DefenseUiPosition(battalemanager.Instance.player);
+
+        defense = false;
+        evasion = false;
+        counter = false;
+
+        if (currentenemyDefenses.Count > 0)
+        {
+            currentdefense = currentenemyDefenses[0];
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.defense)
+                defense = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.evasion)
+                evasion = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
+                counter = true;
+        }
+
         if (canhit)
         {
+            float totaldamage = damage;
+
+            if (currentdefense != null)
+            {
+                if (defense)
+                {
+                    int damdecrease = (int)(currentdefense.calculation * attackpower);
+                    totaldamage = Mathf.Max(1, damage - damdecrease);
+                }
+                else if (evasion)
+                {
+                    int evasioncal = (int)(currentdefense.calculation * attackpower);
+
+                    if (damage <= evasioncal)
+                    {
+                        GameObject currenttext = Instantiate(evasiontext, transform.position, Quaternion.identity);
+                        currenttext.transform.localPosition = transform.position;
+
+                        DefenseSkillUiDecrease();
+
+                        return;
+                    }
+
+                    totaldamage = (int)(damage * 1.2f);
+                }
+                else if (counter)
+                {
+                    if (currentdefense.enemyCounterType == EnemyCounterType.slash)
+                        battalemanager.Instance.player.GetComponent<playerhit>().SlashHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.penetrate)
+                        battalemanager.Instance.player.GetComponent<playerhit>().PenetrateHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.blow)
+                        battalemanager.Instance.player.GetComponent<playerhit>().BlowHit((int)(currentdefense.calculation * attackpower), gameObject);
+                    else if (currentdefense.enemyCounterType == EnemyCounterType.fix)
+                        battalemanager.Instance.player.GetComponent<playerhit>().Hit((int)(currentdefense.calculation * attackpower), gameObject);
+
+                    if (currentdefense.skillprephep != null)
+                    {
+                        GameObject currentprephep = Instantiate(currentdefense.skillprephep, transform);
+                        currentprephep.transform.position = Vector2.zero;
+                    }
+
+                }
+
+                DefenseSkillUiDecrease();
+            }
+
             HitSound();
             Redemisson();
 
@@ -629,7 +944,7 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            float totaldamage = (damage * blowtolerance) * damageplus;
+            totaldamage = (damage * blowtolerance) * damageplus;
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -680,7 +995,7 @@ public class boss_hpbar : MonoBehaviour
             GetComponent<Animator>().SetTrigger("dying");
             died = true;
         }
-        Die?.Invoke();
+        Die?.Invoke(gameObject);
         float worldlightintensity = worldlight.GetComponent<Light2D>().intensity;
         Light2D worldlightLight2D = worldlight.GetComponent<Light2D>();
         worldlightLight2D.color = new Color(1, 0, 0, 1);
@@ -708,6 +1023,7 @@ public class boss_hpbar : MonoBehaviour
     public void PhaseUp()
     {
         currentphase++;
+        CycleDecision();
     }
 
     public void CycleDecision()
@@ -740,6 +1056,165 @@ public class boss_hpbar : MonoBehaviour
             currentenemySkills.Add(tempList[randomIndex]);
             lastRandomIndex = randomIndex;
         }
+
+        DefenseSkillArrey();
+    }
+
+    public void DefenseSkillArrey()
+    {
+        Debug.Log("dkajb");
+        currentenemyDefenses.Clear();
+
+        for (int i = 0; i < decisionedcycle; i++)
+        {
+            currentenemyDefenses.Add(phase[currentphase].defense);
+        }
+
+        DefenseSkillUiSet();
+    }
+
+    public void DefenseSkillUiSet()
+    {
+        for (int i = defenseskillui.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(defenseskillui.transform.GetChild(i).gameObject);
+        }
+
+        foreach (EnemyDefenses defenseSkill in currentenemyDefenses)
+        {
+            GameObject currentdefenseui = Instantiate(defenseskilluiprephep, defenseskillui.transform);
+            currentdefenseui.GetComponent<TMP_Text>().text = $"[{defenseSkill.defensename}]";
+        }
+
+        DefenseSkilluiAlphaToZero(defenseskillui);
+    }
+
+    private Tween defenseSkillFadeDelayTween;
+    private Tween DefenseSkilluiAlphaToZeroEnemy;
+
+    public void DefenseSkilluiAlpha(GameObject parent)
+    {
+        DOTween.Kill(DefenseSkilluiAlphaToZeroEnemy);
+
+        if (defenseSkillFadeDelayTween != null && defenseSkillFadeDelayTween.IsActive())
+            defenseSkillFadeDelayTween.Kill();
+
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            Color color = tt.color;
+
+            if (i >= 4)
+            {
+                color.a = 0f;
+            }
+            else
+            {
+                color.a = 1f - (i * 0.25f);
+            }
+
+            tt.color = color;
+        }
+
+        defenseSkillFadeDelayTween = DOVirtual.DelayedCall(1.5f, () =>
+        {
+            if (parent != null)
+                DefenseSkilluiAlphaToZeroTween(parent);
+        });
+    }
+
+    public void DefenseSkilluiAlphaToZeroTween(GameObject parent)
+    {
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            DefenseSkilluiAlphaToZeroEnemy = tt.DOFade(0, 1.5f);
+        }
+    }
+
+    public void DefenseSkilluiAlphaToZero(GameObject parent)
+    {
+        int childCount = parent.transform.childCount;
+
+        for (int i = 0; i < childCount; i++)
+        {
+            TMP_Text tt = parent.transform.GetChild(i).GetComponent<TMP_Text>();
+            if (tt == null) continue;
+
+            DefenseSkilluiAlphaToZeroEnemy = tt.DOFade(0, 0f);
+        }
+    }
+
+    private Tween currentTween;
+    private Transform currentRemovingUi;
+
+    public void DefenseSkillUiDecrease()
+    {
+        if (currentenemyDefenses.Count > 0)
+            currentenemyDefenses.RemoveAt(0);
+        if (defenseskillui.transform.childCount == 0)
+            return;
+
+        if (currentTween != null)
+        {
+            currentTween.Kill();
+            currentTween = null;
+        }
+        if (currentRemovingUi != null)
+        {
+            currentRemovingUi.SetSiblingIndex(defenseskillui.transform.childCount - 1);
+            Destroy(currentRemovingUi.gameObject);
+            currentRemovingUi = null;
+        }
+
+        if (defenseskillui.transform.childCount == 0)
+            return;
+
+        Transform currentui = defenseskillui.transform.GetChild(0);
+        TMP_Text text = currentui.GetComponent<TMP_Text>();
+        currentRemovingUi = currentui;
+
+        currentTween = DOTween.Sequence()
+        .SetUpdate(true)
+        .Join(text.DOFade(0, 0.45f))
+        .Join(currentui.DOScaleY(0, 0.5f))
+        .Join(currentui.DOLocalMoveX(currentui.localPosition.x - 30f, 0.45f))
+        .OnComplete(() =>
+        {
+            if (currentui != null)
+                Destroy(currentui.gameObject);
+            currentTween = null;
+            currentRemovingUi = null;
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(
+             defenseskillui.GetComponent<RectTransform>());
+            DefenseSkilluiAlpha(defenseskillui);
+        });
+
+        DefenseSkilluiAlpha(defenseskillui);
+    }
+
+    public void DefenseUiPosition(GameObject player)
+    {
+        if (transform.position.x < player.transform.position.x)
+        {
+            RectTransform defenseskilluiRectTransform = defenseskillView.GetComponent<RectTransform>();
+            defenseskilluiRectTransform.localPosition = new Vector3(-defenseskilluiposX, defenseskilluiposY, 0);
+        }
+        else if (transform.position.x > player.transform.position.x)
+        {
+            RectTransform defenseskilluiRectTransform = defenseskillView.GetComponent<RectTransform>();
+            defenseskilluiRectTransform.localPosition = new Vector3(defenseskilluiposX, defenseskilluiposY, 0);
+        }
+
     }
 
     public void Attack()
@@ -754,6 +1229,7 @@ public class boss_hpbar : MonoBehaviour
         {
             currentattacknumber = 0;
             CycleEnd();
+            DefenseSkillArrey();
         }
     }
 

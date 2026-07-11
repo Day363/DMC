@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
+using System.Linq;
 
 public class CameraManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class CameraManager : MonoBehaviour
     public GameObject smallpointcam;
     public GameObject skillcam;
     public GameObject counselcam;
+    public GameObject groupcam;
+    public GameObject targetgroup;
 
     public Coroutine skillcamvib;
 
@@ -124,6 +127,38 @@ public class CameraManager : MonoBehaviour
         maincam = skillcam;
         skillcam.GetComponent<CinemachineVirtualCamera>().Follow = target.transform;
         GetComponent<Animator>().SetTrigger("skillcam");
+    }
+
+    public void GroupCam(GameObject target1, GameObject target2)
+    {
+        CinemachineTargetGroup group = targetgroup.GetComponent<CinemachineTargetGroup>();
+
+        var targets = group.m_Targets.ToList();
+
+        if (!targets.Exists(t => t.target == target1.transform))
+        {
+            targets.Add(new CinemachineTargetGroup.Target
+            {
+                target = target1.transform,
+                weight = 1f,
+                radius = 1f
+            });
+        }
+
+        if (!targets.Exists(t => t.target == target2.transform))
+        {
+            targets.Add(new CinemachineTargetGroup.Target
+            {
+                target = target2.transform,
+                weight = 1f,
+                radius = 1f
+            });
+        }
+
+        group.m_Targets = targets.ToArray();
+
+        maincam = groupcam;
+        GetComponent<Animator>().SetTrigger("groupcam");
     }
 
     public void ShakeCamera(float strength, float duration)

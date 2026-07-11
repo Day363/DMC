@@ -35,10 +35,13 @@ public class communicator2 : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
+    boss_hpbar bh;
+
+    
 
     void Start()
     {
-
+        bh = GetComponent<boss_hpbar>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         //StartWalk();
@@ -53,6 +56,7 @@ public class communicator2 : MonoBehaviour
             rb.MovePosition(playerpos.transform.position);
         }
 
+        
 
         if (!walk) return;
 
@@ -337,6 +341,7 @@ public class communicator2 : MonoBehaviour
     public void MainSlashCoreOn()
     {
         mainslashcore.SetActive(true);
+        bh.ApplyStack(battalemanager.Instance.stackdatas[25], 1);
     }
 
     public void Phase2()

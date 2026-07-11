@@ -24,7 +24,7 @@ public class fragment_script : MonoBehaviour
             {
                 if (hit.CompareTag("Player"))
                 {
-                    hit.transform.GetComponent<playerstatus>().BalanceDamage(balancedamage);
+                    hit.transform.GetComponent<playerstatus>().BalanceDamage(gameObject, balancedamage);
                 }
                 if (hit.CompareTag("client"))
                 {
@@ -36,7 +36,7 @@ public class fragment_script : MonoBehaviour
         {
             if (GetComponent<normal_enemy_hp>().currenthitobjcet.CompareTag("playerattack"))
             {
-                GetComponent<normal_enemy_hp>().currenthitobjcet.GetComponent<playerattackdamage>().player.GetComponent<playerstatus>().BalanceDamage(healbalance);
+                GetComponent<normal_enemy_hp>().currenthitobjcet.GetComponent<playerattackdamage>().player.GetComponent<playerstatus>().BalanceDamage(gameObject, healbalance);
             }
             else if (GetComponent<normal_enemy_hp>().currenthitobjcet.CompareTag("enemyattack"))
             {

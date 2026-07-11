@@ -66,7 +66,7 @@ public class counseler0_counsel : MonoBehaviour
         }
     }
 
-    public void Cutscene()
+    public void Cutscene(GameObject enemy, float dam)
     {
         if (battalemanager.Instance.player.GetComponent<playerstatus>().lifecount == 1 && battalemanager.Instance.player.GetComponent<playerstatus>().currentbalance > battalemanager.Instance.player.GetComponent<playerstatus>().maxbalance / 2)
         {

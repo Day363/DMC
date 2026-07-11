@@ -236,7 +236,7 @@ public class trapal_passive : MonoBehaviour
         }
     }
 
-    public void Onhit(GameObject enemy)
+    public void Onhit(GameObject enemy, int dam)
     {
         Certain();
         WhenHitplayer();

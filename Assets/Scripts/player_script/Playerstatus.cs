@@ -10,7 +10,7 @@ public class playerstatus : MonoBehaviour
 {
     public static playerstatus instance;
 
-    public static Action OnHit;
+    public static Action<GameObject, float> OnHit;
 
     public enum GroundType
     {
@@ -64,8 +64,20 @@ public class playerstatus : MonoBehaviour
     public float damageincreaseCore_c = 0;
 
     //
+
+
     //실시간 체크(스텍의 효과가 순환 시작이나 끝 같은 특정한 트리거가 없으며 업데이트 할떄마다 이 수치를 조정해야함)
+
     //
+
+
+    //적 페시브용 변수
+    public float enemypassive_slash_tolerance_up = 0;
+    public float enemypassive_penetration_tolerance_up = 0;
+    public float enemypassive_blow_tolerance_up = 0;
+    //
+
+
     //효과용 변수
 
     public float backdelay = 0.4f;
@@ -304,7 +316,7 @@ public class playerstatus : MonoBehaviour
         }
     }
 
-    public void WhenHit(GameObject enemy)
+    public void WhenHit(GameObject enemy, int dam)
     {
         r_compulsion_balancedamageincrease = r_compulsion_balancedamageincreaseCore;
         if (have_forgotten && forgotten_cycle == 0)
@@ -465,7 +477,7 @@ public class playerstatus : MonoBehaviour
                 {
                     Debug.Log("adqf");
                     float bleeddam = stack.currentStack * (bleeddamagedecrease - r_bleeddamagedecrease);
-                    BalanceDamage(bleeddam);
+                    BalanceDamage(null, bleeddam);
                     GameObject curbleedtext = Instantiate(bleedtext, transform.position, Quaternion.identity);
                     curbleedtext.transform.GetChild(0).GetComponent<TMP_Text>().text = bleeddam.ToString("F0");
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
@@ -589,15 +601,16 @@ public class playerstatus : MonoBehaviour
         uimanager.Instance.playerbalance.GetComponent<Slider>().value = currentbalance;
     }
 
-    public void BalanceDamage(float balance)
+    public void BalanceDamage(GameObject enemy, float balance)
     {
-        OnHit?.Invoke();
+        
         //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
         float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
+        OnHit?.Invoke(enemy, totaldamage);
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -617,15 +630,16 @@ public class playerstatus : MonoBehaviour
         //딜
     }
 
-    public void SlashDamage(float balance)
+    public void SlashDamage(GameObject enemy, float balance)
     {
-        OnHit?.Invoke();
+        
         //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
 
-        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * slash_tolerance;
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (slash_tolerance + enemypassive_slash_tolerance_up);
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
+        OnHit?.Invoke(enemy, totaldamage);
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -634,14 +648,62 @@ public class playerstatus : MonoBehaviour
         }
     }
 
-    public void PenetrateDamage(float balance)
+    public void PenetrateDamage(GameObject enemy, float balance)
     {
-        OnHit?.Invoke();
+        
         //Debug.Log("ADada");
         GetComponent<Passivefunction>().PlayerHit();
         PenetrationHit();
 
-        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * penetration_tolerance;
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (penetration_tolerance + enemypassive_penetration_tolerance_up);
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
+        OnHit?.Invoke(enemy, totaldamage);
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
+
+    public void BlowDamage(GameObject enemy, float balance)
+    {
+        
+        //Debug.Log("ADada");
+        GetComponent<Passivefunction>().PlayerHit();
+
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (blow_tolerance + enemypassive_blow_tolerance_up);
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
+        OnHit?.Invoke(enemy, totaldamage);
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
+
+    //추가피해, 가하는 피해량 비례피혜의 무한순환을 방지함
+    public void AdditionalBalanceDamage(GameObject enemy, float balance)
+    {
+        float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
+        
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
+
+    public void AdditionalSlashDamage(GameObject enemy, float balance)
+    {
+
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (slash_tolerance + enemypassive_slash_tolerance_up);
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
         BalanceCheck();
@@ -652,13 +714,24 @@ public class playerstatus : MonoBehaviour
         }
     }
 
-    public void BlowDamage(float balance)
+    public void AdditionalPenetrateDamage(GameObject enemy, float balance)
     {
-        OnHit?.Invoke();
-        //Debug.Log("ADada");
-        GetComponent<Passivefunction>().PlayerHit();
+        
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (penetration_tolerance + enemypassive_penetration_tolerance_up);
+        int absorbtion = WhenHitAbsorbtion((int)totaldamage);
+        currentbalance += totaldamage - absorbtion;
+        BalanceCheck();
+        if (currentbalance >= maxbalance)
+        {
+            currentbalance = 0;
+            BalanceCollapse();
+        }
+    }
 
-        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * blow_tolerance;
+    public void AdditionalBlowDamage(GameObject enemy, float balance)
+    {
+
+        float totaldamage = (balance * (damagedecrease + damagedecreaserealtime)) * (blow_tolerance + enemypassive_blow_tolerance_up);
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
         BalanceCheck();

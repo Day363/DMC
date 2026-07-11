@@ -173,7 +173,7 @@ public class disabled_counsel : MonoBehaviour
         gamemanager.SetActive(false);
     }
 
-    public void WhenDie()
+    public void WhenDie(GameObject enemy)
     {
 
     }

@@ -1622,7 +1622,14 @@ public class attackcore : MonoBehaviour
                     //iscycle = true;
                     CycleReplace();
                     StartCycle();
-                    DefenseSkillArrey(lastlist[listnumber]);
+                    if (listnumber >= lastlist.Count)
+                    {
+                        DefenseSkillArrey(lastlist[0]);
+                    }
+                    else if (listnumber < lastlist.Count)
+                    {
+                        DefenseSkillArrey(lastlist[listnumber]);
+                    }   
                 }
 
                 if (listnumber >= lastlist.Count)
@@ -1705,7 +1712,14 @@ public class attackcore : MonoBehaviour
                         //iscycle = true;
                         CycleReplace();
                         StartCycle();
-                        DefenseSkillArrey(lastlist[listnumber]);
+                        if (listnumber >= lastlist.Count)
+                        {
+                            DefenseSkillArrey(lastlist[0]);
+                        }
+                        else if (listnumber < lastlist.Count)
+                        {
+                            DefenseSkillArrey(lastlist[listnumber]);
+                        }
                     }
 
                     if (listnumber == lastlist.Count)

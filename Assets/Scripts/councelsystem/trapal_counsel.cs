@@ -243,7 +243,7 @@ public class trapal_counsel : MonoBehaviour
         letterbox.GetComponent<letterboxin>().PlayLetterboxOut();
     }
 
-    public void GoTo2Phase()
+    public void GoTo2Phase(GameObject enemy)
     {
         if (!phase2)
         {

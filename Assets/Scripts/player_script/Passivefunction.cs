@@ -110,6 +110,7 @@ public class Passivefunction : MonoBehaviour
 
     public void Communicator_Scar(GameObject enemy)
     {
+        Debug.Log("ÀüÈçÀü´Þ");
         playerstatus.StackInstance instance = playerStackHandler.activeStacks.Find(s => s.stackData.effectName == "ÀüÈç-Àü´ÞÀÚ");
         if (instance.currentStack >= 5)
         {

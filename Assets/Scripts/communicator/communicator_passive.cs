@@ -5,6 +5,7 @@ using UnityEngine;
 public class communicator_passive : MonoBehaviour
 {
     public int howmuchcalculationplusyoushoot = 0;
+    public GameObject effect1;
 
     public void Start()
     {
@@ -26,8 +27,11 @@ public class communicator_passive : MonoBehaviour
                 player.GetComponent<playerstatus>().RemoveStack(playerStackInstance.stackData, 3);
                 enemy.GetComponent<boss_hpbar>().ApplyStack(battalemanager.Instance.stackdatas[24], 1);
 
+                GameObject currenteffect = Instantiate(effect1, battalemanager.Instance.player.transform);
+                currenteffect.transform.localPosition = Vector3.zero;
+
                 playerstatus.StackInstance playerStackInstance1 = player.GetComponent<playerstatus>().activeStacks.Find(s => s.stackData.effectName == "ÀüÈç-Àü´ÞÀÚ");
-                player.GetComponent<playerstatus>().BalanceDamage(playerStackInstance1.currentStack);
+                player.GetComponent<playerstatus>().BalanceDamage(gameObject, playerStackInstance1.currentStack);
             }
         }
         
@@ -42,7 +46,7 @@ public class communicator_passive : MonoBehaviour
         }
     }
 
-    public void WhenPlayerHit(GameObject enemy)
+    public void WhenPlayerHit(GameObject enemy, int dam)
     {
         if (enemy == gameObject)
         {

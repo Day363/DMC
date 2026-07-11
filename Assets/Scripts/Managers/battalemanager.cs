@@ -9,6 +9,8 @@ public class battalemanager : MonoBehaviour
     public static battalemanager Instance { get; private set; }
     public static event Action WhenDataSave;
 
+    public static event Action WhenBattleStart;
+
 
     public GameObject player;
     public GameObject attackcore;
@@ -61,6 +63,8 @@ public class battalemanager : MonoBehaviour
 
     public void Battlestart()
     {
+        WhenBattleStart?.Invoke();
+
         attackcore.GetComponent<attackcore>().SetCronometer();
         foreach (GameObject currentenemy in currentenemys)
         {

@@ -9,7 +9,7 @@ using static DefenseSkill;
 
 public class playerhit : MonoBehaviour
 {
-    public static event Action<GameObject> OnPlayerHitCalled;
+    public static event Action<GameObject, int> OnPlayerHitCalled;
     public static event Action<GameObject> OnPlayerEvasionCalled;
 
     public GameObject cammanager;
@@ -80,7 +80,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnPlayerHitCalled?.Invoke(enemy);
+            
 
             int culdam = damage;
 
@@ -134,7 +134,8 @@ public class playerhit : MonoBehaviour
             RedEmisson();
             currenthitstop = StartCoroutine(HitStop());
 
-            GetComponent<playerstatus>().BalanceDamage(culdam);
+            GetComponent<playerstatus>().BalanceDamage(enemy, culdam);
+            OnPlayerHitCalled?.Invoke(enemy, culdam);
             Hitcamera();
         }
     }
@@ -169,7 +170,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnPlayerHitCalled?.Invoke(enemy);
+            
 
             int culdam = damage;
 
@@ -221,7 +222,8 @@ public class playerhit : MonoBehaviour
             RedEmisson();
             currenthitstop = StartCoroutine(HitStop());
 
-            GetComponent<playerstatus>().SlashDamage(culdam);
+            GetComponent<playerstatus>().SlashDamage(enemy, culdam);
+            OnPlayerHitCalled?.Invoke(enemy, culdam);
             Hitcamera();
         }
     }
@@ -256,7 +258,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnPlayerHitCalled?.Invoke(enemy);
+            
 
             int culdam = damage;
 
@@ -308,7 +310,8 @@ public class playerhit : MonoBehaviour
             RedEmisson();
             currenthitstop = StartCoroutine(HitStop());
 
-            GetComponent<playerstatus>().PenetrateDamage(culdam);
+            GetComponent<playerstatus>().PenetrateDamage(enemy, culdam);
+            OnPlayerHitCalled?.Invoke(enemy, culdam);
             Hitcamera();
         }
     }
@@ -343,7 +346,7 @@ public class playerhit : MonoBehaviour
 
         if (canhit)
         {
-            OnPlayerHitCalled?.Invoke(enemy);
+            
 
             int culdam = damage;
 
@@ -395,7 +398,8 @@ public class playerhit : MonoBehaviour
             RedEmisson();
             currenthitstop = StartCoroutine(HitStop());
 
-            GetComponent<playerstatus>().BlowDamage(culdam);
+            GetComponent<playerstatus>().BlowDamage(enemy, culdam);
+            OnPlayerHitCalled?.Invoke(enemy, culdam);
             Hitcamera();
         }
     }
