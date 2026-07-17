@@ -29,9 +29,10 @@ public class boss_hpbar : MonoBehaviour
     public static event Action OnHitCalled;
     public static event Action OnPenetrationHitCalled;
     public static event Action<GameObject> Die;
-    public static event Action OnCycleEnd;
+    public static event Action<GameObject> OnCycleEnd;
     public static event Action OnCollusion;
     public static event Action OnCollusionSolve;
+    public static event Action<GameObject, int> OnCycleDesicion;
 
     public GameObject worldlight;
     public GameObject playerlight;
@@ -98,6 +99,7 @@ public class boss_hpbar : MonoBehaviour
     }
 
     public List<EnemySkillPhase> phase;
+    public List<EnemyFocusSkill> focusskills;
 
     public List<EnemySkills> currentenemySkills;
     public List<EnemyDefenses> currentenemyDefenses;
@@ -105,10 +107,15 @@ public class boss_hpbar : MonoBehaviour
 
     public GameObject balancebar;
     public GameObject healthbar;
+    public GameObject barrierbar;
+    public GameObject focusbar;
+    public GameObject focusbar_background;
+    public GameObject focusbar_fillarea;
     public GameObject stackbar;
     public GameObject canvas;
     public Slider balancebarint;
     public Slider healthbarint;
+    public Slider focusbarint;
     public GameObject chatbox;
 
 
@@ -133,6 +140,8 @@ public class boss_hpbar : MonoBehaviour
     public float maxbalance;
     public float currentbalance;
     public float maxbalanceminus;
+    public float currentbarrier;
+    public float maxbarrier;
 
     public float slashtolerance;
     public float penetratetolerance;
@@ -362,6 +371,10 @@ public class boss_hpbar : MonoBehaviour
                         BalanceHeal(100f);
                         RemoveStack(stack.stackData, 100);
                         RemoveStack(battalemanager.Instance.stackdatas[24], 3);
+                        if (TryGetComponent<communicator_passive>(out communicator_passive cp))
+                        {
+                            cp.Focus1();
+                        }
                     }
                 }
             }
@@ -382,7 +395,7 @@ public class boss_hpbar : MonoBehaviour
     {
         Debug.Log("dkjjAE");
 
-        OnCycleEnd?.Invoke();
+        OnCycleEnd?.Invoke(gameObject);
 
         if (activeStacks.Count > 0)
         {
@@ -394,7 +407,8 @@ public class boss_hpbar : MonoBehaviour
                 {
                     float bleeddam = stack.currentStack * (bleeddamageincrease + playerstatus.instance.r_enemybleeddamageincrease);
                     Damage((int)bleeddam, false);
-                    GameObject curbleedtext = Instantiate(bleedtext,damagepos.transform.position, Quaternion.identity);
+                    GameObject curbleedtext = Instantiate(bleedtext,damagepos.transform);
+                    curbleedtext.transform.localPosition = Vector3.zero;
                     curbleedtext.transform.GetChild(0).GetComponent<TMP_Text>().text = bleeddam.ToString("F0");
                     RemoveStack(stack.stackData, (int)Math.Truncate(stack.currentStack * (2f / 3f)));
                     if (stack.currentStack == 1)
@@ -445,6 +459,12 @@ public class boss_hpbar : MonoBehaviour
 
         targetObj.GetComponent<enemystateui>().healthbar.GetComponent<Slider>().maxValue = maxhealth * 2;
         targetObj.GetComponent<enemystateui>().healthbar.GetComponent<Slider>().value = maxhealth - currenthealth;
+    }
+
+    public void Heal(int amount)
+    {
+        currenthealth = Mathf.Max(currenthealth + amount, maxhealth);
+        HeathCheck();
     }
 
     public void BalanceDamage(float balance)
@@ -603,7 +623,16 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            totaldamage = totaldamage * damageplus;
+
+            totaldamage *= blowtolerance;
+            totaldamage *= damageplus;
+
+            if (currentbarrier > 0)
+            {
+                totaldamage = Mathf.Max(totaldamage - currentbarrier, 0);
+                BarrierCheck();
+            }
+
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -615,7 +644,7 @@ public class boss_hpbar : MonoBehaviour
             if (damNotion)
             {
                 {
-                    GameObject damt = Instantiate(damagetext);
+                    GameObject damt = Instantiate(damagetext, damagepos.transform);
                     damagetext damtdamagetext = damt.GetComponent<damagetext>();
                     if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
                     {
@@ -626,7 +655,7 @@ public class boss_hpbar : MonoBehaviour
                         damtdamagetext.wherexpos = -1;
                     }
                     damtdamagetext.fix = true;
-                    damt.transform.position = damagepos.transform.position;
+                    damt.transform.localPosition = Vector3.zero;
                     damtdamagetext.damage = (int)totaldamage;
                 }
             }
@@ -722,7 +751,17 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            totaldamage = (damage * slashtolerance) * damageplus;
+
+
+            totaldamage *= blowtolerance;
+            totaldamage *= damageplus;
+
+            if (currentbarrier > 0)
+            {
+                totaldamage = Mathf.Max(totaldamage - currentbarrier, 0);
+                BarrierCheck();
+            }
+
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -731,7 +770,7 @@ public class boss_hpbar : MonoBehaviour
             {
                 BalanceDamage(damage * 0.1f);
             }
-            GameObject damt = Instantiate(damagetext);
+            GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -742,7 +781,7 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.slash = true;
-            damt.transform.position = damagepos.transform.position;
+            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -835,7 +874,16 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            totaldamage = (damage * penetratetolerance) * damageplus;
+
+            totaldamage *= blowtolerance;
+            totaldamage *= damageplus;
+
+            if (currentbarrier > 0)
+            {
+                totaldamage = Mathf.Max(totaldamage - currentbarrier, 0);
+                BarrierCheck();
+            }
+
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -844,7 +892,7 @@ public class boss_hpbar : MonoBehaviour
             {
                 BalanceDamage(damage * 0.1f);
             }
-            GameObject damt = Instantiate(damagetext);
+            GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -855,7 +903,7 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.penetarte = true;
-            damt.transform.position = damagepos.transform.position;
+            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -944,7 +992,16 @@ public class boss_hpbar : MonoBehaviour
 
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
-            totaldamage = (damage * blowtolerance) * damageplus;
+
+            totaldamage *= blowtolerance;
+            totaldamage *= damageplus;
+
+            if (currentbarrier > 0)
+            {
+                totaldamage = Mathf.Max(totaldamage - currentbarrier, 0);
+                BarrierCheck();
+            }
+
             currenthealth -= totaldamage;
 
             HeathCheck();
@@ -953,7 +1010,7 @@ public class boss_hpbar : MonoBehaviour
             {
                 BalanceDamage(damage * 0.1f);
             }
-            GameObject damt = Instantiate(damagetext);
+            GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -964,7 +1021,7 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.blow = true;
-            damt.transform.position = damagepos.transform.position;
+            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -972,6 +1029,23 @@ public class boss_hpbar : MonoBehaviour
             }
         }
         
+    }
+
+    public void barrierAdd(int amount)
+    {
+        currentbarrier += amount;
+        barrierbar.GetComponent<Slider>().value = currentbarrier;
+    }
+
+    public void barrierMinus(int amount)
+    {
+        currentbarrier = Mathf.Max(currentbarrier - amount, 0);
+        barrierbar.GetComponent<Slider>().value = currentbarrier;
+    }
+
+    public void BarrierCheck()
+    {
+        barrierbar.GetComponent<Slider>().value = currentbarrier;
     }
 
     public void Dead()
@@ -1013,11 +1087,32 @@ public class boss_hpbar : MonoBehaviour
         battalemanager.Instance.currentenemys.Remove(gameObject);
     }
 
+    
     public void FocusUpdate()
     {
         GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
 
         targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().value = currentfocus;
+        focusbarint.value = currentfocus;
+
+        StartCoroutine(FocusBarUi());
+    }
+
+    public Tween enemyfocusbartween1;
+    public Tween enemyfocusbartween2;
+
+    IEnumerator FocusBarUi()
+    {
+        DOTween.Kill(enemyfocusbartween1);
+        DOTween.Kill(enemyfocusbartween2);
+        focusbar_background.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        focusbar_fillarea.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+
+        yield return new WaitForSeconds(1.5f);
+
+        Color targetColor = new Color(255, 255, 255, 0);
+        enemyfocusbartween1 = focusbar_background.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart);
+        enemyfocusbartween2 = focusbar_fillarea.GetComponent<Image>().DOColor(targetColor, 1.5f).SetEase(Ease.OutQuart);
     }
 
     public void PhaseUp()
@@ -1028,14 +1123,22 @@ public class boss_hpbar : MonoBehaviour
 
     public void CycleDecision()
     {
+        currentcycle++;
+        OnCycleDesicion?.Invoke(gameObject, currentcycle);
+
         currentattacknumber = 0;
         decisionedcycle = UnityEngine.Random.Range(mincycle, maxcycle + 1);
         maxfocus = decisionedcycle;
         currentfocus = maxfocus;
+        maxbarrier = maxhealth;
+        barrierbar.GetComponent<Slider>().maxValue = maxbarrier;
 
         GameObject targetObj = uimanager.Instance.enemystatessets.Find(x => x.GetComponent<enemystateui>().enemy == gameObject);
 
         targetObj.GetComponent<enemystateui>().focusbar.GetComponent<Slider>().maxValue = currentfocus;
+
+        focusbarint.maxValue = maxfocus;
+        focusbarint.value = currentfocus;
 
         currentenemySkills.Clear();
 
@@ -1246,5 +1349,17 @@ public class boss_hpbar : MonoBehaviour
         targetObj.GetComponent<enemystateui>().stackbar.GetComponent<boss_stackUIManager>().RefreshUI(this);
 
         CycleDecision();
+    }
+
+    public void UseFocusSkill(int index)
+    {
+        EnemyFocusSkill currentfocusskill = focusskills[index];
+        if (currentfocusskill.focusspend <= currentfocus)
+        {
+            currentfocus = currentfocus - currentfocusskill.focusspend;
+            FocusUpdate();
+
+            GetComponent<Animator>().SetTrigger(currentfocusskill.animationtrigger);
+        }
     }
 }

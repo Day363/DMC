@@ -13,6 +13,7 @@ public class testslashcontrol : MonoBehaviour
     public GameObject hitbox1;
     public GameObject hitbox2;
     public GameObject piercehitbox;
+    public GameObject pincers_hitbox;
 
     private Coroutine curcoroutine;
     private Coroutine curcoroutine2;
@@ -51,6 +52,11 @@ public class testslashcontrol : MonoBehaviour
         curcoroutine2 = StartCoroutine(PiercehitBox_co(values));
     }
 
+    public void Pincershitbox()
+    {
+        curcoroutine2 = StartCoroutine(Pincershitbox_co());
+    }
+
     IEnumerator PiercehitBox_co(float calulation1)
     {
         piercehitbox.SetActive(true);
@@ -62,6 +68,18 @@ public class testslashcontrol : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         piercehitbox.GetComponent<BoxCollider2D>().enabled = false;
         piercehitbox.GetComponent<enemyattack>().hit = false;
+    }
+
+    IEnumerator Pincershitbox_co()
+    {
+        pincers_hitbox.SetActive(true);
+
+        pincers_hitbox.GetComponent<BoxCollider2D>().enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        pincers_hitbox.GetComponent<communicator2_pincers_hitbox>().hit = true;
+        yield return new WaitForSeconds(0.5f);
+        pincers_hitbox.GetComponent<BoxCollider2D>().enabled = false;
+        pincers_hitbox.GetComponent<communicator2_pincers_hitbox>().hit = false;
     }
 
     IEnumerator HitBoxActive(float calulation1, float calulation2)

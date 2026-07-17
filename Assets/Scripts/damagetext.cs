@@ -41,7 +41,7 @@ public class damagetext : MonoBehaviour
             transform.localScale = new Vector3(damage / 100, damage / 100, 1);
         }
 
-        float posx = transform.position.x;
+        float posx = transform.localPosition.x;
         if (wherexpos == -1)
         {
             posx += Random.Range(0.5f, 2f);
@@ -50,7 +50,7 @@ public class damagetext : MonoBehaviour
         {
             posx += Random.Range(-0.5f, -2f);
         }
-        transform.DOMoveX(posx, 2f).SetEase(Ease.OutQuart);
+        transform.DOLocalMoveX(posx, 2f).SetEase(Ease.OutQuart);
 
         if (slash)
         {

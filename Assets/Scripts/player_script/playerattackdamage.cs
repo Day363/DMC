@@ -9,6 +9,7 @@ public class playerattackdamage : MonoBehaviour
 
     public bool canattack = true;
     public bool canjump = false;
+    public bool canparry;
 
     public GameObject player;
     public float damagenum;

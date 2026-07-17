@@ -51,6 +51,10 @@ public class communicator : MonoBehaviour
             battalemanager.Instance.Battlestart();
             AttackAndWithNextAttack();
             communicator2.GetComponent<communicator2>().AttackAndWithNextAttack();
+            communicator2.GetComponent<communicator2>().battlestart = true;
+            communicator2.GetComponent<communicator2>().xstop = (int)(communicator2.transform.position.x + 75);
+            communicator2.GetComponent<communicator2>().minusxstop = (int)(communicator2.transform.position.x - 75);
+            communicator2.GetComponent<communicator2>().SpawnWall();
         }
 
         if (firstmet && !ready && transform.position.x < player.transform.position.x + 4)
@@ -247,7 +251,24 @@ public class communicator : MonoBehaviour
         currenteffect.transform.localPosition = Vector3.zero;
     }
 
-    
+    public void Focus1_2()
+    {
+        boss_hpbar bh = GetComponent<boss_hpbar>();
+        bh.barrierAdd((int)((bh.maxhealth - bh.currenthealth) * 0.35f));
+        GetComponent<communicator_passive>().focus1trigger = true;
+    }
+
+    public void CamVib()
+    {
+        battalemanager.Instance.cameramanager.GetComponent<CameraManager>().CamVibration0_5();
+    }
+
+    public void Helpattack()
+    {
+        animator.speed = 1;
+        animator.SetTrigger("helpattack");
+        
+    }
 
     public void Communicator1_slashCoreTrigger()
     {

@@ -232,7 +232,7 @@ public class indexer0_script : MonoBehaviour
 
     
 
-    public void RainShoot()
+    public void RainShoot(GameObject enenmy)
     {
         raindex.GetComponent<indexer_line_core>().Shoot();
     }
