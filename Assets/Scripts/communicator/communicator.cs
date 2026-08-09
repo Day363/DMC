@@ -24,6 +24,7 @@ public class communicator : MonoBehaviour
 
     public float moveSpeed;
     public float stopDistance;
+    public int focus3int;
 
     public bool walk;
     public bool firstmet;
@@ -36,7 +37,7 @@ public class communicator : MonoBehaviour
 
     void Start()
     {
-        
+        boss_hpbar.OnCycleEnd += Focus3Trigger;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         animator.speed = 0.75f;
@@ -256,6 +257,27 @@ public class communicator : MonoBehaviour
         boss_hpbar bh = GetComponent<boss_hpbar>();
         bh.barrierAdd((int)((bh.maxhealth - bh.currenthealth) * 0.35f));
         GetComponent<communicator_passive>().focus1trigger = true;
+    }
+
+    public void Focus3Trigger(GameObject enemy)
+    {
+        if (enemy == gameObject)
+        {
+            if ((GetComponent<boss_hpbar>().currenthealth < GetComponent<boss_hpbar>().maxhealth / 2) && communicator2.GetComponent<boss_hpbar>().died)
+            {
+                focus3int++;
+                if (focus3int == 3)
+                {
+                    focus3int = 0;
+                    Focus3();
+                }
+            }
+        }
+    }
+
+    public void Focus3()
+    {
+        GetComponent<boss_hpbar>().UseFocusSkill(1);
     }
 
     public void CamVib()
