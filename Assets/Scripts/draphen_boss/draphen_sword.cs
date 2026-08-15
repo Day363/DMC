@@ -16,10 +16,10 @@ public class draphen_sword : MonoBehaviour
     public void Handle()
     {
         parts2.GetComponent<draphen_parts>().turn = false;
-        parts2.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
-
-
+        parts2.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
     }
+
+        
 
     public void AllStop()
     {
@@ -35,11 +35,11 @@ public class draphen_sword : MonoBehaviour
     IEnumerator Move()
     {
         yield return new WaitForSeconds(1.1f);
-        parts3.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
-        parts4.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
-        parts5.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
-        parts6.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
-        parts7.transform.DORotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
+        parts3.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
+        parts4.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
+        parts5.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
+        parts6.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
+        parts7.transform.DOLocalRotate(new Vector3(0, 0, -90), 1).SetEase(Ease.OutQuart);
 
     }
 }

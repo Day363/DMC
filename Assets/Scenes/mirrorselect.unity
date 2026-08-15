@@ -1941,6 +1941,7 @@ MonoBehaviour:
   fuckcinemachine: 0
   resetRotation: 0
   killcam: 0
+  firstlookplayer: 0
   braincam: {fileID: 519420028}
   Gamemanager: {fileID: 0}
   killcamsize: 0
@@ -1954,6 +1955,8 @@ MonoBehaviour:
   smallpointcam: {fileID: 475224696}
   skillcam: {fileID: 1925774574}
   counselcam: {fileID: 1865303742}
+  groupcam: {fileID: 0}
+  targetgroup: {fileID: 0}
   returnAmplitudeGain: 0
   returnFrequencyGain: 0
 --- !u!114 &373801468
@@ -3359,18 +3362,42 @@ MonoBehaviour:
   currentattacknumber: 0
   maxfocus: 0
   currentfocus: 0
+  defense: 0
+  evasion: 0
+  counter: 0
+  currentdefense:
+    defensename: 
+    enemyDefenseType: 0
+    enemyCounterType: 0
+    animationtrigger: 
+    calculation: 0
+    skillprephep: {fileID: 0}
+  defenseskillui: {fileID: 0}
+  defenseskillView: {fileID: 0}
+  defenseskilluiposX: 0
+  defenseskilluiposY: 0
   phase: []
+  focusskills: []
   currentenemySkills: []
+  currentenemyDefenses: []
   balancebar: {fileID: 1425506570}
   healthbar: {fileID: 0}
+  barrierbar: {fileID: 0}
+  focusbar: {fileID: 0}
+  focusbar_background: {fileID: 0}
+  focusbar_fillarea: {fileID: 0}
   stackbar: {fileID: 2089652178}
   canvas: {fileID: 1415738663}
   balancebarint: {fileID: 1425506571}
   healthbarint: {fileID: 0}
+  focusbarint: {fileID: 0}
+  chatbox: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
   balanceeffect: {fileID: 0}
+  evasiontext: {fileID: 0}
+  defenseskilluiprephep: {fileID: 0}
   collapsefloat: 5
   attackpower: 0
   maxhealth: 10000
@@ -3378,6 +3405,8 @@ MonoBehaviour:
   maxbalance: 150
   currentbalance: 0
   maxbalanceminus: 0
+  currentbarrier: 0
+  maxbarrier: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -3388,6 +3417,12 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 0
   bleeddamageincreaseCore: 1
+  passive_balancedamagedecrease: 0
+  passive_balancedamagedecreaseCore: 0
+  passive_damageplus: 0
+  passive_damageplusCore: 0
+  passive_calculationPlus: 0
+  passive_calculationPlusCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -4801,7 +4836,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 159806315
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bbcc29cb920537c4194227863366b3a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5374,18 +5409,42 @@ MonoBehaviour:
   currentattacknumber: 0
   maxfocus: 0
   currentfocus: 0
+  defense: 0
+  evasion: 0
+  counter: 0
+  currentdefense:
+    defensename: 
+    enemyDefenseType: 0
+    enemyCounterType: 0
+    animationtrigger: 
+    calculation: 0
+    skillprephep: {fileID: 0}
+  defenseskillui: {fileID: 0}
+  defenseskillView: {fileID: 0}
+  defenseskilluiposX: 0
+  defenseskilluiposY: 0
   phase: []
+  focusskills: []
   currentenemySkills: []
+  currentenemyDefenses: []
   balancebar: {fileID: 1880885219}
   healthbar: {fileID: 0}
+  barrierbar: {fileID: 0}
+  focusbar: {fileID: 0}
+  focusbar_background: {fileID: 0}
+  focusbar_fillarea: {fileID: 0}
   stackbar: {fileID: 559132543}
   canvas: {fileID: 1256725721}
   balancebarint: {fileID: 1880885220}
   healthbarint: {fileID: 0}
+  focusbarint: {fileID: 0}
+  chatbox: {fileID: 0}
   hitsound: 
   damagetext: {fileID: 6108860678287211811, guid: c293f8e9c818da843a2573e30694b288, type: 3}
   bleedtext: {fileID: 0}
   balanceeffect: {fileID: 0}
+  evasiontext: {fileID: 0}
+  defenseskilluiprephep: {fileID: 0}
   collapsefloat: 5
   attackpower: 0
   maxhealth: 10000
@@ -5393,6 +5452,8 @@ MonoBehaviour:
   maxbalance: 150
   currentbalance: 0
   maxbalanceminus: 0
+  currentbarrier: 0
+  maxbarrier: 0
   slashtolerance: 1
   penetratetolerance: 1
   blowtolerance: 1
@@ -5403,6 +5464,12 @@ MonoBehaviour:
   damageplusCore: 1
   bleeddamageincrease: 1
   bleeddamageincreaseCore: 1
+  passive_balancedamagedecrease: 0
+  passive_balancedamagedecreaseCore: 0
+  passive_damageplus: 0
+  passive_damageplusCore: 0
+  passive_calculationPlus: 0
+  passive_calculationPlusCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -7447,7 +7514,7 @@ PrefabInstance:
       objectReference: {fileID: 1676781304}
     - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
       propertyPath: scenename
-      value: trapal_outer
+      value: draphen
       objectReference: {fileID: 0}
     - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
       propertyPath: attackcore

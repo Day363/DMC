@@ -13,6 +13,7 @@ public class afterimagetest : MonoBehaviour
     public float fadetime;
     public bool follow;
     public Color color;
+    public bool reversesclaex;
 
     public SpriteRenderer sr;
 
@@ -45,10 +46,18 @@ public class afterimagetest : MonoBehaviour
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2d))
         {
             currentimage.transform.localScale = transform.localScale;
+            if (reversesclaex)
+            {
+                currentimage.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 0);
+            }
         }
         else
         {
             currentimage.transform.localScale = transform.parent.localScale;
+            if (reversesclaex)
+            {
+                currentimage.transform.localScale = new Vector3(-transform.parent.localScale.x, transform.parent.localScale.y, 0);
+            }
         }
             
         currentimage.GetComponent<SpriteRenderer>().sprite = sr.sprite;

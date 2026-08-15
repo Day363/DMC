@@ -18,7 +18,7 @@ public class boss_hpbar : MonoBehaviour
 
     public enum EnemyDefenseType
     {
-        defense, evasion, counter
+        defense, evasion, counter, immobility
     };
 
     public enum EnemyCounterType
@@ -30,9 +30,14 @@ public class boss_hpbar : MonoBehaviour
     public static event Action OnPenetrationHitCalled;
     public static event Action<GameObject> Die;
     public static event Action<GameObject> OnCycleEnd;
+    public static event Action<GameObject> OnCircumStart;
     public static event Action OnCollusion;
     public static event Action OnCollusionSolve;
     public static event Action<GameObject, int> OnCycleDesicion;
+    public static event Action<GameObject> Onevasion;
+    public static event Action<GameObject> OnevasionFail;
+    public static event Action<GameObject> OnImmotalityWorked;
+    public static event Action<GameObject> OnDefenseSkillArrey;
 
     public GameObject worldlight;
     public GameObject playerlight;
@@ -57,6 +62,7 @@ public class boss_hpbar : MonoBehaviour
     public bool defense;
     public bool evasion;
     public bool counter;
+    public bool immobility;
     public EnemyDefenses currentdefense;
     public GameObject defenseskillui;
     public GameObject defenseskillView;
@@ -89,13 +95,16 @@ public class boss_hpbar : MonoBehaviour
         public string skillname;
         public List<EnemyAttackType> enemyAttackTypes;
         public string animationtrigger;
+
+        public bool only;
+        public bool notinclude;
     }
 
     [System.Serializable]
     public class EnemySkillPhase
     {
         public List<EnemySkills> skills;
-        public EnemyDefenses defense;
+        public List<EnemyDefenses> defense;
     }
 
     public List<EnemySkillPhase> phase;
@@ -150,7 +159,7 @@ public class boss_hpbar : MonoBehaviour
     public float penetratetoleranceCore;
     public float blowtoleranceCore;
 
-    public float damageplus;
+    public float damageplus; //가하는 피해량 증가
     public float damageplusCore = 1;
 
     public float bleeddamageincrease;
@@ -163,11 +172,25 @@ public class boss_hpbar : MonoBehaviour
     public float passive_balancedamagedecrease; //받는 균형피해 감소
     public float passive_balancedamagedecreaseCore = 0;
 
-    public float passive_damageplus;
+    public float passive_balancedamageincrease; //받는 균형피해 증가
+    public float passive_balancedamageincreaseCore = 0;
+
+    public float passive_damageplus; //가하는 피해량 증가
     public float passive_damageplusCore = 0;
 
     public float passive_calculationPlus;
     public float passive_calculationPlusCore = 0;
+
+    public float passive_recieveDamageUp; //받는 피해량 증가
+    public float passive_recieveDamageUpCore = 0;
+    //
+
+    //효과(스텍) 용
+    public float effect_slashcalculationIncrease; //참격 공격 계수 증가
+    public float effect_slashcalculationIncreaseCore = 0;
+
+    public float effect_slashdamageincrease; //참격 공격 피해량 증가
+    public float effect_slashdamageincreaseCore = 0;
     //
 
 
@@ -338,11 +361,13 @@ public class boss_hpbar : MonoBehaviour
         
     }
 
-    //완전 새 스텍일떄만 작동
+   
     public void WhenStackAdd()
     {
         bleeddamageincrease = bleeddamageincreaseCore;
         damageplus = damageplusCore;
+        effect_slashcalculationIncrease = effect_slashcalculationIncreaseCore;
+        effect_slashdamageincrease = effect_slashdamageincreaseCore;
 
         if (activeStacks.Count > 0)
         {
@@ -376,6 +401,14 @@ public class boss_hpbar : MonoBehaviour
                             cp.Focus1();
                         }
                     }
+                }
+                if (stack.stackData.effectName == "첨예")
+                {
+                    effect_slashcalculationIncrease += (0.5f * stack.currentStack);
+                }
+                if (stack.stackData.effectName == "참격 피해량 증가 II")
+                {
+                    effect_slashdamageincrease += 0.2f;
                 }
             }
         }
@@ -426,6 +459,11 @@ public class boss_hpbar : MonoBehaviour
                 {
                     RemoveStack(stack.stackData, 1);
                 }
+
+                if (stack.stackData.effectName == "참격 피해량 증가 II")
+                {
+                    RemoveStack(stack.stackData, 1);
+                }
             }
         }
         
@@ -469,7 +507,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void BalanceDamage(float balance)
     {
-        currentbalance += (balance += (balance * (playerstatus.instance.balancedamageplus + playerstatus.instance.r_compulsion_balancedamageincrease)));
+        currentbalance += (balance += (balance * (playerstatus.instance.balancedamageplus + playerstatus.instance.r_compulsion_balancedamageincrease + passive_balancedamageincrease)));
         currentbalance = currentbalance *(1 - passive_balancedamagedecrease);
         BalanceCheck();
         if (currentbalance >= maxbalance - maxbalanceminus)
@@ -544,11 +582,14 @@ public class boss_hpbar : MonoBehaviour
 
     public void Damage(int damage, bool damNotion = true)
     {
+        bool balanceDefense = false;
+
         DefenseUiPosition(battalemanager.Instance.player);
 
         defense = false;
         evasion = false;
         counter = false;
+        immobility = false;
 
         if (currentenemyDefenses.Count > 0)
         {
@@ -562,6 +603,9 @@ public class boss_hpbar : MonoBehaviour
 
             if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
                 counter = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.immobility)
+                immobility = true;
         }
 
         if (canhit)
@@ -586,10 +630,12 @@ public class boss_hpbar : MonoBehaviour
 
                         DefenseSkillUiDecrease();
 
+                        Onevasion?.Invoke(gameObject);
                         return;
                     }
 
                     totaldamage = (int)(damage * 1.2f);
+                    OnevasionFail?.Invoke(gameObject);
                 }
                 else if (counter)
                 {
@@ -609,6 +655,10 @@ public class boss_hpbar : MonoBehaviour
                     }
 
                 }
+                else if (immobility)
+                {
+                    balanceDefense = true;
+                }
 
                 DefenseSkillUiDecrease();
             }
@@ -625,7 +675,7 @@ public class boss_hpbar : MonoBehaviour
                 return;
 
             totaldamage *= blowtolerance;
-            totaldamage *= damageplus;
+            totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
             {
@@ -639,7 +689,12 @@ public class boss_hpbar : MonoBehaviour
 
             if (!iscollapse)
             {
-                BalanceDamage(damage * 0.1f);
+                if (!balanceDefense)
+                {
+                    BalanceDamage(damage * 0.1f);
+                    OnImmotalityWorked?.Invoke(gameObject);
+                }
+                
             }
             if (damNotion)
             {
@@ -670,11 +725,14 @@ public class boss_hpbar : MonoBehaviour
 
     public void SlashDamage(int damage)
     {
+        bool balanceDefense = false;
+
         DefenseUiPosition(battalemanager.Instance.player);
 
         defense = false;
         evasion = false;
         counter = false;
+        immobility = false;
 
         if (currentenemyDefenses.Count > 0)
         {
@@ -688,6 +746,9 @@ public class boss_hpbar : MonoBehaviour
 
             if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
                 counter = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.immobility)
+                immobility = true;
         }
 
         if (canhit)
@@ -712,10 +773,12 @@ public class boss_hpbar : MonoBehaviour
 
                         DefenseSkillUiDecrease();
 
+                        Onevasion?.Invoke(gameObject);
                         return;
                     }
 
                     totaldamage = (int)(damage * 1.2f);
+                    OnevasionFail?.Invoke(gameObject);
                 }
                 else if (counter)
                 {
@@ -734,6 +797,10 @@ public class boss_hpbar : MonoBehaviour
                         currentprephep.transform.position = Vector2.zero;
                     }
 
+                }
+                else if (immobility)
+                {
+                    balanceDefense = true;
                 }
 
                 DefenseSkillUiDecrease();
@@ -754,7 +821,7 @@ public class boss_hpbar : MonoBehaviour
 
 
             totaldamage *= blowtolerance;
-            totaldamage *= damageplus;
+            totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
             {
@@ -768,7 +835,11 @@ public class boss_hpbar : MonoBehaviour
 
             if (!iscollapse)
             {
-                BalanceDamage(damage * 0.1f);
+                if (!balanceDefense)
+                {
+                    BalanceDamage(damage * 0.1f);
+                    OnImmotalityWorked?.Invoke(gameObject);
+                }
             }
             GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -793,11 +864,14 @@ public class boss_hpbar : MonoBehaviour
 
     public void PenetrateDamage(int damage)
     {
+        bool balanceDefense = false;
+
         DefenseUiPosition(battalemanager.Instance.player);
 
         defense = false;
         evasion = false;
         counter = false;
+        immobility = false;
 
         if (currentenemyDefenses.Count > 0)
         {
@@ -811,6 +885,9 @@ public class boss_hpbar : MonoBehaviour
 
             if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
                 counter = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.immobility)
+                immobility = true;
         }
 
         //Debug.Log(damage);
@@ -836,10 +913,12 @@ public class boss_hpbar : MonoBehaviour
 
                         DefenseSkillUiDecrease();
 
+                        Onevasion?.Invoke(gameObject);
                         return;
                     }
 
                     totaldamage = (int)(damage * 1.2f);
+                    OnevasionFail?.Invoke(gameObject);
                 }
                 else if (counter)
                 {
@@ -859,6 +938,10 @@ public class boss_hpbar : MonoBehaviour
                     }
 
                 }
+                else if (immobility)
+                {
+                    balanceDefense = true;
+                }
 
                 DefenseSkillUiDecrease();
             }
@@ -876,7 +959,7 @@ public class boss_hpbar : MonoBehaviour
                 return;
 
             totaldamage *= blowtolerance;
-            totaldamage *= damageplus;
+            totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
             {
@@ -890,7 +973,11 @@ public class boss_hpbar : MonoBehaviour
 
             if (!iscollapse)
             {
-                BalanceDamage(damage * 0.1f);
+                if (!balanceDefense)
+                {
+                    BalanceDamage(damage * 0.1f);
+                    OnImmotalityWorked?.Invoke(gameObject);
+                }
             }
             GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -915,11 +1002,14 @@ public class boss_hpbar : MonoBehaviour
 
     public void BlowDamage(int damage)
     {
+        bool balanceDefense = false;
+
         DefenseUiPosition(battalemanager.Instance.player);
 
         defense = false;
         evasion = false;
         counter = false;
+        immobility = false;
 
         if (currentenemyDefenses.Count > 0)
         {
@@ -933,6 +1023,9 @@ public class boss_hpbar : MonoBehaviour
 
             if (currentdefense.enemyDefenseType == EnemyDefenseType.counter)
                 counter = true;
+
+            if (currentdefense.enemyDefenseType == EnemyDefenseType.immobility)
+                immobility = true;
         }
 
         if (canhit)
@@ -957,10 +1050,12 @@ public class boss_hpbar : MonoBehaviour
 
                         DefenseSkillUiDecrease();
 
+                        Onevasion?.Invoke(gameObject);
                         return;
                     }
 
                     totaldamage = (int)(damage * 1.2f);
+                    OnevasionFail?.Invoke(gameObject);
                 }
                 else if (counter)
                 {
@@ -980,6 +1075,10 @@ public class boss_hpbar : MonoBehaviour
                     }
 
                 }
+                else if (immobility)
+                {
+                    balanceDefense = true;
+                }
 
                 DefenseSkillUiDecrease();
             }
@@ -994,7 +1093,7 @@ public class boss_hpbar : MonoBehaviour
                 return;
 
             totaldamage *= blowtolerance;
-            totaldamage *= damageplus;
+            totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
             {
@@ -1008,7 +1107,11 @@ public class boss_hpbar : MonoBehaviour
 
             if (!iscollapse)
             {
-                BalanceDamage(damage * 0.1f);
+                if (!balanceDefense)
+                {
+                    BalanceDamage(damage * 0.1f);
+                    OnImmotalityWorked?.Invoke(gameObject);
+                }
             }
             GameObject damt = Instantiate(damagetext, damagepos.transform);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
@@ -1123,6 +1226,8 @@ public class boss_hpbar : MonoBehaviour
 
     public void CycleDecision()
     {
+        OnCircumStart?.Invoke(gameObject);
+
         currentcycle++;
         OnCycleDesicion?.Invoke(gameObject, currentcycle);
 
@@ -1144,10 +1249,15 @@ public class boss_hpbar : MonoBehaviour
 
         List<EnemySkills> tempList = new List<EnemySkills>(phase[currentphase].skills);
 
+        tempList.RemoveAll(skill => skill.notinclude);
+
         int lastRandomIndex = -1;
 
         for (int i = 0; i < decisionedcycle; i++)
         {
+            if (tempList.Count == 0)
+                break;
+
             int randomIndex;
 
             do
@@ -1156,8 +1266,20 @@ public class boss_hpbar : MonoBehaviour
             }
             while (tempList.Count > 1 && randomIndex == lastRandomIndex);
 
-            currentenemySkills.Add(tempList[randomIndex]);
-            lastRandomIndex = randomIndex;
+            EnemySkills selectedSkill = tempList[randomIndex];
+
+            currentenemySkills.Add(selectedSkill);
+
+            if (selectedSkill.only)
+            {
+                tempList.RemoveAt(randomIndex);
+
+                lastRandomIndex = -1;
+            }
+            else
+            {
+                lastRandomIndex = randomIndex;
+            }
         }
 
         DefenseSkillArrey();
@@ -1170,9 +1292,10 @@ public class boss_hpbar : MonoBehaviour
 
         for (int i = 0; i < decisionedcycle; i++)
         {
-            currentenemyDefenses.Add(phase[currentphase].defense);
+            currentenemyDefenses.Add(phase[currentphase].defense[0]);
         }
 
+        OnDefenseSkillArrey?.Invoke(gameObject);
         DefenseSkillUiSet();
     }
 
@@ -1361,5 +1484,17 @@ public class boss_hpbar : MonoBehaviour
 
             GetComponent<Animator>().SetTrigger(currentfocusskill.animationtrigger);
         }
+    }
+
+    public void HealFocus(int i)
+    {
+        currentfocus = currentfocus + i;
+        FocusUpdate();
+    }
+
+    public void DecreaseFocus(int i)
+    {
+        currentfocus = currentfocus - i;
+        FocusUpdate();
     }
 }

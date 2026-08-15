@@ -11,6 +11,7 @@ public class playerstatus : MonoBehaviour
     public static playerstatus instance;
 
     public static Action<GameObject, float> OnHit;
+    public static Action<GameObject, float> OnHitFixDamage;
 
     public enum GroundType
     {
@@ -611,6 +612,7 @@ public class playerstatus : MonoBehaviour
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
         OnHit?.Invoke(enemy, totaldamage);
+        OnHitFixDamage?.Invoke(enemy, totaldamage);
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {
@@ -691,7 +693,8 @@ public class playerstatus : MonoBehaviour
         float totaldamage = balance * (damagedecrease + damagedecreaserealtime);
         int absorbtion = WhenHitAbsorbtion((int)totaldamage);
         currentbalance += totaldamage - absorbtion;
-        
+
+        OnHitFixDamage?.Invoke(enemy, totaldamage);
         BalanceCheck();
         if (currentbalance >= maxbalance)
         {

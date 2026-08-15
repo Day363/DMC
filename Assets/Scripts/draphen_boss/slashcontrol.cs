@@ -5,6 +5,7 @@ using UnityEngine;
 public class slashcontrol : MonoBehaviour
 {
     public arceffectlossdraphen slash1_1;
+    public arceffectlossdraphen slash1_2;
     
 
     public void Slash1()
@@ -12,13 +13,15 @@ public class slashcontrol : MonoBehaviour
         slash1_1.Decrease();
     }
 
+    public void Slash2()
+    {
+        slash1_2.Decrease();
+    }
+
     public void Active()
     {
         slash1_1.Increase();
     }
 
-    public void SlashSharpDown()
-    {
-
-    }
+    
 }

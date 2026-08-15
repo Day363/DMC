@@ -331,4 +331,22 @@ public class CameraManager : MonoBehaviour
         maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
         CamStable();
     }
+
+    public void AnyCamVib(CinemachineVirtualCamera cam)
+    {
+        StartCoroutine(AnyCamVib_co(cam));
+    }
+
+    IEnumerator AnyCamVib_co(CinemachineVirtualCamera cam)
+    {
+        CinemachineVirtualCamera maincamCinemachineVirtualCamera = cam;
+        CinemachineBasicMultiChannelPerlin maincamCinemachineBasicMultiChannelPerlin = maincamCinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 12;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.1f);
+        maincamCinemachineBasicMultiChannelPerlin.m_AmplitudeGain = returnAmplitudeGain;
+        maincamCinemachineBasicMultiChannelPerlin.m_FrequencyGain = returnFrequencyGain;
+        CamStable();
+    }
+
 }

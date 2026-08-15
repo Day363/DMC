@@ -6,6 +6,7 @@ using UnityEngine;
 public class enemyattack : MonoBehaviour
 {
     public static Action<GameObject, GameObject> Onhit;
+    public static Action<GameObject, GameObject> OnParryed;
 
     public bool canattack = true;
     public GameObject player;
@@ -26,6 +27,9 @@ public class enemyattack : MonoBehaviour
     public bool friendly_hit = false;
 
     public bool hit = false;
+
+    public bool hittoanimation;
+    public string animationtrigger;
 
     [System.Serializable]
     public class StackCell
@@ -85,6 +89,14 @@ public class enemyattack : MonoBehaviour
         }
     }
 
+    public void Animation()
+    {
+        if (hittoanimation)
+        {
+            enemy.GetComponent<Animator>().SetTrigger(animationtrigger);
+        }
+    }
+
     public void StackAdd()
     {
         if (stackcells.Count > 0)
@@ -107,11 +119,19 @@ public class enemyattack : MonoBehaviour
     public int Damcalcualtion() //속성별 스텟은 이밖에서
     {
         int finaldam;
+        float slashcalculationincrease = 0;
+        float slashdamageincrease = 0;
 
         boss_hpbar bh = enemy.GetComponent<boss_hpbar>();
 
-        finaldam = (int)((bh.attackpower * (calculation + bh.passive_calculationPlus)) *
-                         (1 + bh.passive_damageplus));
+        if (slash == true)
+        {
+            slashcalculationincrease += bh.effect_slashcalculationIncrease;
+            slashdamageincrease += bh.effect_slashdamageincrease;
+        }
+
+        finaldam = (int)((bh.attackpower * (calculation + bh.passive_calculationPlus + slashcalculationincrease)) *
+                         (1 + bh.passive_damageplus + slashdamageincrease));
 
         return finaldam;
     }
@@ -228,6 +248,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().Hit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (slash)
@@ -245,6 +266,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().SlashHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (penetrate)
@@ -262,6 +284,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().PenetrateHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (blow)
@@ -279,6 +302,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().BlowHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                     }
@@ -299,6 +323,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().Hit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (slash)
@@ -315,6 +340,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().SlashHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (penetrate)
@@ -331,6 +357,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().PenetrateHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (blow)
@@ -347,6 +374,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().BlowHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                     }
@@ -361,6 +389,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().Hit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (slash)
@@ -369,6 +398,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().SlashHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (penetrate)
@@ -377,6 +407,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().PenetrateHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (blow)
@@ -385,6 +416,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().BlowHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
 
@@ -397,6 +429,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().Hit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (slash)
@@ -404,6 +437,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().SlashHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (penetrate)
@@ -411,6 +445,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().PenetrateHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                         if (blow)
@@ -418,6 +453,7 @@ public class enemyattack : MonoBehaviour
                             player.GetComponent<playerhit>().BlowHit(Damcalcualtion(), enemy);
                             StackAdd();
                             Effect();
+                            Animation();
                             Onhit_();
                         }
                     }
