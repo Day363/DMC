@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
 
     public Rigidbody2D rigid;
 
+    public float knockbackDecay = 10f;
+    public Vector3 knockback = Vector3.zero;
+
     void Awake()
     {
         if (canmove)
@@ -85,8 +88,6 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        //maxSpeed = GetComponent<playerhealth>().speed;
-
         if (canmove)
         {
             if (GetComponent<Rigidbody2D>().velocity.normalized.x == 0)
@@ -103,20 +104,12 @@ public class PlayerMove : MonoBehaviour
 
         if (canmove)
         {
+            rigid.velocity = new Vector3(GetComponent<playerinput>().h * GetComponent<playerstatus>().speed, rigid.velocity.y, 0);
 
-            rigid.AddForce(Vector2.right * GetComponent<playerinput>().h * 3, ForceMode2D.Impulse);
-
-            if (rigid.velocity.x > GetComponent<playerstatus>().speed)
-            {
-                rigid.velocity = new Vector2(GetComponent<playerstatus>().speed, rigid.velocity.y);
-            }
-
-            else if (rigid.velocity.x < GetComponent<playerstatus>().speed * (-1))
-            {
-                rigid.velocity = new Vector2(GetComponent<playerstatus>().speed * (-1), rigid.velocity.y);
-            }
         }
     }
+
+   
 
     void OnCollisionEnter2D(Collision2D collision2D)
     {

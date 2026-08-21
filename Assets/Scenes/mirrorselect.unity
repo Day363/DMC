@@ -1893,6 +1893,10 @@ MonoBehaviour:
     m_ParentHash: 756556552
   - m_Hash: -92504164
     m_ParentHash: 756556552
+  - m_Hash: 2094086399
+    m_ParentHash: 756556552
+  - m_Hash: -2011535867
+    m_ParentHash: 756556552
 --- !u!95 &373801465
 Animator:
   serializedVersion: 5
@@ -3365,6 +3369,7 @@ MonoBehaviour:
   defense: 0
   evasion: 0
   counter: 0
+  immobility: 0
   currentdefense:
     defensename: 
     enemyDefenseType: 0
@@ -3419,10 +3424,18 @@ MonoBehaviour:
   bleeddamageincreaseCore: 1
   passive_balancedamagedecrease: 0
   passive_balancedamagedecreaseCore: 0
+  passive_balancedamageincrease: 0
+  passive_balancedamageincreaseCore: 0
   passive_damageplus: 0
   passive_damageplusCore: 0
   passive_calculationPlus: 0
   passive_calculationPlusCore: 0
+  passive_recieveDamageUp: 0
+  passive_recieveDamageUpCore: 0
+  effect_slashcalculationIncrease: 0
+  effect_slashcalculationIncreaseCore: 0
+  effect_slashdamageincrease: 0
+  effect_slashdamageincreaseCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -5412,6 +5425,7 @@ MonoBehaviour:
   defense: 0
   evasion: 0
   counter: 0
+  immobility: 0
   currentdefense:
     defensename: 
     enemyDefenseType: 0
@@ -5466,10 +5480,18 @@ MonoBehaviour:
   bleeddamageincreaseCore: 1
   passive_balancedamagedecrease: 0
   passive_balancedamagedecreaseCore: 0
+  passive_balancedamageincrease: 0
+  passive_balancedamageincreaseCore: 0
   passive_damageplus: 0
   passive_damageplusCore: 0
   passive_calculationPlus: 0
   passive_calculationPlusCore: 0
+  passive_recieveDamageUp: 0
+  passive_recieveDamageUpCore: 0
+  effect_slashcalculationIncrease: 0
+  effect_slashcalculationIncreaseCore: 0
+  effect_slashdamageincrease: 0
+  effect_slashdamageincreaseCore: 0
   iscollapse: 0
   canhit: 1
   killcut: 0
@@ -7492,6 +7514,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1372841273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2732459861749828292, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_Name
+      value: counseler_5_mirror (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 361018434}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: fadeout
+      value: 
+      objectReference: {fileID: 1676781304}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: scenename
+      value: trapal_outer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: attackcore
+      value: 
+      objectReference: {fileID: 361018433}
+    - target: {fileID: 3232440537880954148, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: cammanager
+      value: 
+      objectReference: {fileID: 373801462}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0326166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149783298639303010, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e1759badac76b843a1209c64f7b81ee, type: 3}
 --- !u!1001 &1384812213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10073,3 +10172,4 @@ SceneRoots:
   - {fileID: 993772879}
   - {fileID: 1686278958}
   - {fileID: 1384812213}
+  - {fileID: 1372841273}

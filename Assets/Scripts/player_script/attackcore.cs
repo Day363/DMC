@@ -1957,5 +1957,10 @@ public class attackcore : MonoBehaviour
         }
     }
 
-    
+    public void DecreaseFocus(int i)
+    {
+        currentfocus -= i;
+        currentfocus = Mathf.Clamp(currentfocus, 0f, player.GetComponent<playerstatus>().focusbar.maxValue);
+        playerplayerstatus.focusbar.value = currentfocus;
+    }
 }

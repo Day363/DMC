@@ -68,6 +68,7 @@ public class testslashcontrol : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         piercehitbox.GetComponent<BoxCollider2D>().enabled = false;
         piercehitbox.GetComponent<enemyattack>().hit = false;
+        piercehitbox.SetActive(false);
     }
 
     IEnumerator Pincershitbox_co()
@@ -80,6 +81,7 @@ public class testslashcontrol : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         pincers_hitbox.GetComponent<BoxCollider2D>().enabled = false;
         pincers_hitbox.GetComponent<communicator2_pincers_hitbox>().hit = false;
+        pincers_hitbox.SetActive(false);
     }
 
     IEnumerator HitBoxActive(float calulation1, float calulation2)
@@ -118,7 +120,13 @@ public class testslashcontrol : MonoBehaviour
             hitbox2.GetComponent<PolygonCollider2D>().enabled = false;
             hitbox2.GetComponent<enemyattack>().hit = false;
         }
-            
+
+        hitbox1.SetActive(false);
+        if (hitbox2 != null)
+        {
+            hitbox2.SetActive(false);
+        }
+
 
     }
 }

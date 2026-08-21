@@ -142,6 +142,12 @@ public class cutscenemanager : MonoBehaviour
         DOTween.To(() => camerasize, x => camerasize = x, 8f, time).SetEase(Ease.OutQuart).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
+    public void CameraZoomOut15utFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 15f, time).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
     public void CameraZoomOut20utFree(float time)
     {
         DOTween.Kill("CameraZoom");
@@ -152,6 +158,12 @@ public class cutscenemanager : MonoBehaviour
     {
         DOTween.Kill("CameraZoom");
         DOTween.To(() => camerasize, x => camerasize = x, 2f, time).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Late).SetId("CameraZoom");
+    }
+
+    public void CameraZoomInTo1_OutFree(float time)
+    {
+        DOTween.Kill("CameraZoom");
+        DOTween.To(() => camerasize, x => camerasize = x, 1f, time).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Late).SetId("CameraZoom");
     }
 
     public void CamVib1()

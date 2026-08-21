@@ -239,6 +239,7 @@ public class boss_hpbar : MonoBehaviour
 
     public void ApplyStack(Stack newStack, int amount)
     {
+        Debug.Log("ApplyStack");
         StackInstance existing = activeStacks.Find(s => s.stackData == newStack);
 
         if (existing != null)
@@ -674,7 +675,7 @@ public class boss_hpbar : MonoBehaviour
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
 
-            totaldamage *= blowtolerance;
+            
             totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
@@ -691,7 +692,10 @@ public class boss_hpbar : MonoBehaviour
             {
                 if (!balanceDefense)
                 {
-                    BalanceDamage(damage * 0.1f);
+                    BalanceDamage(damage * 0.1f); 
+                }
+                else if (balanceDefense)
+                {
                     OnImmotalityWorked?.Invoke(gameObject);
                 }
                 
@@ -699,7 +703,7 @@ public class boss_hpbar : MonoBehaviour
             if (damNotion)
             {
                 {
-                    GameObject damt = Instantiate(damagetext, damagepos.transform);
+                    GameObject damt = Instantiate(damagetext, damagepos.transform.position, Quaternion.identity);
                     damagetext damtdamagetext = damt.GetComponent<damagetext>();
                     if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
                     {
@@ -710,7 +714,6 @@ public class boss_hpbar : MonoBehaviour
                         damtdamagetext.wherexpos = -1;
                     }
                     damtdamagetext.fix = true;
-                    damt.transform.localPosition = Vector3.zero;
                     damtdamagetext.damage = (int)totaldamage;
                 }
             }
@@ -820,7 +823,7 @@ public class boss_hpbar : MonoBehaviour
                 return;
 
 
-            totaldamage *= blowtolerance;
+            totaldamage *= slashtolerance;
             totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
@@ -838,10 +841,13 @@ public class boss_hpbar : MonoBehaviour
                 if (!balanceDefense)
                 {
                     BalanceDamage(damage * 0.1f);
+                }
+                else if (balanceDefense)
+                {
                     OnImmotalityWorked?.Invoke(gameObject);
                 }
             }
-            GameObject damt = Instantiate(damagetext, damagepos.transform);
+            GameObject damt = Instantiate(damagetext, damagepos.transform.position, Quaternion.identity);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -852,7 +858,6 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.slash = true;
-            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -958,7 +963,7 @@ public class boss_hpbar : MonoBehaviour
             if (maxhealth == 0 || currenthealth <= 0)
                 return;
 
-            totaldamage *= blowtolerance;
+            totaldamage *= penetratetolerance;
             totaldamage *= (damageplus + passive_recieveDamageUp);
 
             if (currentbarrier > 0)
@@ -976,10 +981,13 @@ public class boss_hpbar : MonoBehaviour
                 if (!balanceDefense)
                 {
                     BalanceDamage(damage * 0.1f);
+                }
+                else if (balanceDefense)
+                {
                     OnImmotalityWorked?.Invoke(gameObject);
                 }
             }
-            GameObject damt = Instantiate(damagetext, damagepos.transform);
+            GameObject damt = Instantiate(damagetext, damagepos.transform.position, Quaternion.identity);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -990,7 +998,6 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.penetarte = true;
-            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -1110,10 +1117,13 @@ public class boss_hpbar : MonoBehaviour
                 if (!balanceDefense)
                 {
                     BalanceDamage(damage * 0.1f);
+                }
+                else if (balanceDefense)
+                {
                     OnImmotalityWorked?.Invoke(gameObject);
                 }
             }
-            GameObject damt = Instantiate(damagetext, damagepos.transform);
+            GameObject damt = Instantiate(damagetext, damagepos.transform.position, Quaternion.identity);
             damagetext damtdamagetext = damt.GetComponent<damagetext>();
             if (gammanager.GetComponent<battalemanager>().player.transform.position.x - gameObject.transform.position.x > 0)
             {
@@ -1124,7 +1134,6 @@ public class boss_hpbar : MonoBehaviour
                 damtdamagetext.wherexpos = -1;
             }
             damtdamagetext.blow = true;
-            damt.transform.localPosition = Vector3.zero;
             damtdamagetext.damage = (int)totaldamage;
             if (currenthealth <= 0)
             {
@@ -1206,8 +1215,15 @@ public class boss_hpbar : MonoBehaviour
 
     IEnumerator FocusBarUi()
     {
-        DOTween.Kill(enemyfocusbartween1);
-        DOTween.Kill(enemyfocusbartween2);
+        if (enemyfocusbartween1 != null)
+        {
+            DOTween.Kill(enemyfocusbartween1);
+        }
+        if (enemyfocusbartween2 != null)
+        {
+            DOTween.Kill(enemyfocusbartween2);
+        }
+        
         focusbar_background.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         focusbar_fillarea.GetComponent<Image>().color = new Color(255, 255, 255, 255);
 
