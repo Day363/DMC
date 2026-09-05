@@ -28,7 +28,7 @@ public class enemybullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().velocity = transform.right * bulletspeed;
+        GetComponent<Rigidbody2D>().velocity = transform.up * bulletspeed;
     }
 
     IEnumerator DestroySelf()

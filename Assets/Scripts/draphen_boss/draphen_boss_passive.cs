@@ -8,6 +8,7 @@ using Cinemachine;
 public class draphen_boss_passive : MonoBehaviour
 {
     public GameObject player;
+    public GameObject effect;
 
     public bool outofsharp;
 
@@ -66,6 +67,11 @@ public class draphen_boss_passive : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("sheathing");
         }
+    }
+
+    public void Effect1()
+    {
+        GameObject cureffect = Instantiate(effect, effectpos.transform.position, Quaternion.identity);
     }
 
     public void UsePassive1()
@@ -164,7 +170,7 @@ public class draphen_boss_passive : MonoBehaviour
     {
         if (enemy == gameObject && passive4_3)
         {
-            player.GetComponent<playerstatus>().ApplyStack(battalemanager.Instance.stackdatas[28], (int)dam);
+            player.GetComponent<playerstatus>().ApplyStack(battalemanager.Instance.stackdatas[29], (int)dam);
         }
     }
 
@@ -195,6 +201,8 @@ public class draphen_boss_passive : MonoBehaviour
         {
             return;
         }
+
+        Effect1();
 
         if (used[0] && used[1] && used[2] && used[3] && used[4])
         {

@@ -13,7 +13,11 @@ public class draphen_script : MonoBehaviour
     public GameObject player;
     public GameObject boss;
     public GameObject fadeout;
+    public Sprite debristexture;
+    public GameObject destroyEffect;
 
+    public GameObject effectpos;
+    public GameObject debris;
     public GameObject fbutton;
     public bool whilein;
     public bool trigger = true;
@@ -46,6 +50,12 @@ public class draphen_script : MonoBehaviour
             GetComponent<PlayableDirector>().Play();
             battalemanager.Instance.currentenemys.Add(boss);
         }
+    }
+
+    public void Debris_Destroy()
+    {
+        debris.GetComponent<SpriteRenderer>().sprite = debristexture;
+        GameObject cureffect = Instantiate(destroyEffect, effectpos.transform.position, Quaternion.identity);
     }
 
     public void PlayerThrow()

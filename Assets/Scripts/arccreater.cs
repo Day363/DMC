@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -8,49 +6,93 @@ public class arccreater : MonoBehaviour
 {
     public float innerRadius = 0.5f;
     public float outerRadius = 1.0f;
+
     [Range(0, 360)]
     public float angle = 180f;
+
     public int segments = 30;
 
-    MeshFilter meshFilter;
+    private MeshFilter meshFilter;
+    private Mesh arcMesh;
+
+    // 이전에 생성에 사용한 값
+    private float lastInnerRadius;
+    private float lastOuterRadius;
+    private float lastAngle;
+    private int lastSegments;
 
     void Awake()
     {
         Init();
         Generate();
+        SaveValues();
     }
 
     void OnEnable()
     {
         Init();
         Generate();
+        SaveValues();
     }
 
     void OnValidate()
     {
         Init();
         Generate();
+        SaveValues();
+    }
+
+    void Update()
+    {
+        // Animator가 Inspector 값을 변경하면
+        // 여기서 값의 변화를 감지해서 메쉬를 다시 생성
+        if (innerRadius != lastInnerRadius ||
+            outerRadius != lastOuterRadius ||
+            angle != lastAngle ||
+            segments != lastSegments)
+        {
+            Generate();
+            SaveValues();
+        }
     }
 
     void Init()
     {
         meshFilter = GetComponent<MeshFilter>();
 
-        if (meshFilter.sharedMesh == null)
+        // 이미 이 스크립트가 생성한 Mesh가 있으면 재사용
+        if (arcMesh != null)
         {
-            meshFilter.sharedMesh = new Mesh();
-            meshFilter.sharedMesh.name = "Arc Mesh";
+            meshFilter.sharedMesh = arcMesh;
+            return;
         }
+
+        // 항상 이 오브젝트 전용 Mesh 생성
+        arcMesh = new Mesh();
+        arcMesh.name = "Arc Mesh (" + gameObject.name + ")";
+
+        meshFilter.sharedMesh = arcMesh;
     }
 
     void Generate()
     {
-        if (segments < 2) segments = 2;
-        if (innerRadius < 0) innerRadius = 0;
+        if (meshFilter == null)
+            return;
+
+        if (arcMesh == null)
+            Init();
+
+        if (segments < 2)
+            segments = 2;
+
+        if (innerRadius < 0)
+            innerRadius = 0;
+
         if (outerRadius <= innerRadius)
             outerRadius = innerRadius + 0.01f;
 
-        Mesh mesh = meshFilter.sharedMesh;
+        Mesh mesh = arcMesh;
+
         mesh.Clear();
 
         int vertCount = (segments + 1) * 2;
@@ -71,18 +113,18 @@ public class arccreater : MonoBehaviour
             float sin = Mathf.Sin(a);
 
             // Outer
-            vertices[i * 2] =
-                new Vector3(
-                    cos * outerRadius,
-                    sin * outerRadius,
-                    0);
+            vertices[i * 2] = new Vector3(
+                cos * outerRadius,
+                sin * outerRadius,
+                0
+            );
 
             // Inner
-            vertices[i * 2 + 1] =
-                new Vector3(
-                    cos * innerRadius,
-                    sin * innerRadius,
-                    0);
+            vertices[i * 2 + 1] = new Vector3(
+                cos * innerRadius,
+                sin * innerRadius,
+                0
+            );
 
             float t = (float)i / segments;
 
@@ -113,9 +155,29 @@ public class arccreater : MonoBehaviour
         mesh.RecalculateBounds();
     }
 
+    void SaveValues()
+    {
+        lastInnerRadius = innerRadius;
+        lastOuterRadius = outerRadius;
+        lastAngle = angle;
+        lastSegments = segments;
+    }
+
+    void OnDestroy()
+    {
+        if (arcMesh != null)
+        {
+            if (Application.isPlaying)
+                Destroy(arcMesh);
+            else
+                DestroyImmediate(arcMesh);
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         MeshFilter mf = GetComponent<MeshFilter>();
+
         if (mf == null || mf.sharedMesh == null)
             return;
 
@@ -128,13 +190,18 @@ public class arccreater : MonoBehaviour
         {
             Vector3 a =
                 transform.TransformPoint(
-                    verts[tris[i]]);
+                    verts[tris[i]]
+                );
+
             Vector3 b =
                 transform.TransformPoint(
-                    verts[tris[i + 1]]);
+                    verts[tris[i + 1]]
+                );
+
             Vector3 c =
                 transform.TransformPoint(
-                    verts[tris[i + 2]]);
+                    verts[tris[i + 2]]
+                );
 
             Gizmos.DrawLine(a, b);
             Gizmos.DrawLine(b, c);

@@ -21,6 +21,7 @@ public class draphen_boss : MonoBehaviour
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boss_hpbar.OnCollusionSolve += NextAttack2;
     }
 
     public void OnEnable()
@@ -146,5 +147,13 @@ public class draphen_boss : MonoBehaviour
     public void NextAttack()
     {
         GetComponent<boss_hpbar>().Attack();
+    }
+    public void NextAttack2()
+    {
+        if (!GetComponent<draphen_boss_passive>().canuseblacksun)
+        {
+            GetComponent<boss_hpbar>().Attack();
+        }
+        
     }
 }

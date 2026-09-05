@@ -18,6 +18,6 @@ public class windeffectloss : MonoBehaviour
         mat.DOFade(0, time).SetEase(Ease.OutQuad);
         mat.DOOffset(new Vector2(1, 0), time).SetEase(Ease.OutQuart);
 
-        transform.DOScale(new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, 1f), time).SetEase(Ease.OutQuad);
+        transform.DOScale(new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, 1f), time).SetEase(Ease.OutQuart);
     }
 }

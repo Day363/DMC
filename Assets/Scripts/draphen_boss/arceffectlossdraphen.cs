@@ -49,23 +49,23 @@ public class arceffectlossdraphen : MonoBehaviour
 
         if (offset)
         {
-            mat.DOOffset(new Vector2(1, 0), time).SetEase(Ease.OutQuart);
+            mat.DOOffset(new Vector2(1, 0), time);//.SetEase(Ease.OutQuart);
             if (fade)
             {
-                mat.DOFade(0, time).SetEase(Ease.OutQuad);
+                mat.DOFade(0, time);//.SetEase(Ease.OutQuad);
             }
         }
         if (tiling)
         {
-            mat.DOTiling(new Vector2(10, 0.98f), time).SetEase(Ease.OutQuart);
+            mat.DOTiling(new Vector2(10, 0.98f), time);//.SetEase(Ease.OutQuart);
             if (fade)
             {
-                mat.DOFade(0, time).SetEase(Ease.OutQuad);
+                mat.DOFade(0, time);//.SetEase(Ease.OutQuad);
             }
         }
         if (scale)
         {
-            transform.DOScale(new Vector3(-2f, 2f, 1), time).SetEase(Ease.OutQuart);
+            transform.DOScale(new Vector3(-2f, 2f, 1), time);//.SetEase(Ease.OutQuart);
         }
     }
 
